@@ -5244,13 +5244,15 @@ function updateDokkaiMicScore() {
 
     <!-- Drawing Canvas (Kana & Kanji mode) -->
     <div id="mw-canvas-wrap" style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-      <div style="position:relative;display:inline-block;">
-        <!-- Guide lines -->
-        <canvas id="mw-guide" width="280" height="280" style="position:absolute;top:0;left:0;border-radius:16px;"></canvas>
-        <!-- Drawing canvas -->
-        <canvas id="mw-canvas" width="280" height="280" style="border:2.5px solid var(--teal2);border-radius:16px;background:var(--card);cursor:crosshair;touch-action:none;display:block;"></canvas>
-        <!-- Ghost character overlay -->
-        <div id="mw-ghost" style="position:absolute;top:0;left:0;width:280px;height:280px;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans JP';font-size:180px;font-weight:900;color:rgba(100,100,100,0.08);pointer-events:none;user-select:none;border-radius:16px;"></div>
+      <div style="position:relative;display:inline-block;width:280px;height:280px;">
+        <!-- Background box (bottom) -->
+        <div style="position:absolute;top:0;left:0;width:280px;height:280px;border-radius:16px;background:var(--card);border:2.5px solid var(--teal2);z-index:0;"></div>
+        <!-- Ghost character overlay (pointer-events none) -->
+        <div id="mw-ghost" style="position:absolute;top:0;left:0;width:280px;height:280px;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans JP';font-size:180px;font-weight:900;color:rgba(100,100,100,0.12);pointer-events:none;user-select:none;border-radius:16px;z-index:1;"></div>
+        <!-- Guide lines (pointer-events none) -->
+        <canvas id="mw-guide" width="280" height="280" style="position:absolute;top:0;left:0;border-radius:16px;pointer-events:none;z-index:2;"></canvas>
+        <!-- Drawing canvas TOP LAYER receives all events -->
+        <canvas id="mw-canvas" width="280" height="280" style="position:absolute;top:0;left:0;border-radius:16px;background:transparent;cursor:crosshair;touch-action:none;display:block;z-index:3;"></canvas>
       </div>
       <div style="display:flex;gap:10px;">
         <button onclick="clearMenulisCanvas()" style="padding:8px 20px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:var(--ink);cursor:pointer;font-family:'DM Sans',sans-serif;">🗑️ Hapus</button>
@@ -5402,14 +5404,6 @@ function nextMenulisChar() {
     loadMenulisChar();
 }
 
-function clearMenulisCanvas() {
-    var canvas = document.getElementById('mw-canvas');
-    if (!canvas) return;
-    var ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    document.getElementById('mw-feedback').textContent = '';
-}
-
 function toggleMenulisGhost() {
     var ghost = document.getElementById('mw-ghost');
     var checked = document.getElementById('mw-ghost-toggle').checked;
@@ -5468,57 +5462,61 @@ function updateMwScore() {
     document.getElementById('mw-score-total').textContent = mwScore.correct + mwScore.wrong;
 }
 
+// ── Canvas drawing state ──────────────────
 function initMenulisCanvas() {
     var c = document.getElementById('mw-canvas');
     if (!c) return;
 
-    var newC = c.cloneNode(true);
-    c.parentNode.replaceChild(newC, c);
-    c = newC;
-
-    var ctx = c.getContext('2d');
-    var drawing = false;
-
-    ctx.strokeStyle = '#1a2a4a';
-    ctx.lineWidth = 5;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-
+    // Draw guide lines
     var guide = document.getElementById('mw-guide');
     if (guide) {
         var gctx = guide.getContext('2d');
-        gctx.clearRect(0,0,280,280);
-        gctx.strokeStyle = 'rgba(100,150,200,0.2)';
+        gctx.clearRect(0, 0, 280, 280);
+        gctx.strokeStyle = 'rgba(100,150,200,0.25)';
         gctx.lineWidth = 1;
-        gctx.setLineDash([4,4]);
-        gctx.beginPath(); gctx.moveTo(140,0); gctx.lineTo(140,280); gctx.stroke();
-        gctx.beginPath(); gctx.moveTo(0,140); gctx.lineTo(280,140); gctx.stroke();
+        gctx.setLineDash([5, 5]);
+        gctx.beginPath(); gctx.moveTo(140, 0);  gctx.lineTo(140, 280); gctx.stroke();
+        gctx.beginPath(); gctx.moveTo(0, 140);  gctx.lineTo(280, 140); gctx.stroke();
         gctx.setLineDash([]);
-        gctx.strokeStyle = 'rgba(100,150,200,0.15)';
-        gctx.strokeRect(1,1,278,278);
+        gctx.strokeStyle = 'rgba(100,150,200,0.18)';
+        gctx.strokeRect(1, 1, 278, 278);
     }
+
+    // Clear canvas
+    var ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, c.width, c.height);
+
+    // Setup stroke style
+    ctx.strokeStyle = '#1a2a4a';
+    ctx.lineWidth   = 5;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+
+    var drawing = false;
 
     function getPos(e) {
-        var r = c.getBoundingClientRect();
-        var sx = c.width / r.width;
-        var sy = c.height / r.height;
+        var r   = c.getBoundingClientRect();
+        var scaleX = c.width  / r.width;
+        var scaleY = c.height / r.height;
         var src = e.touches ? e.touches[0] : e;
-        return { x: (src.clientX - r.left) * sx, y: (src.clientY - r.top) * sy };
+        return {
+            x: (src.clientX - r.left) * scaleX,
+            y: (src.clientY - r.top)  * scaleY
+        };
     }
 
-    function start(e) {
+    function onStart(e) {
         e.preventDefault();
         drawing = true;
         ctx.strokeStyle = '#1a2a4a';
-        ctx.lineWidth = 5;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
+        ctx.lineWidth   = 5;
+        ctx.lineCap     = 'round';
+        ctx.lineJoin    = 'round';
         var p = getPos(e);
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
     }
-
-    function move(e) {
+    function onMove(e) {
         e.preventDefault();
         if (!drawing) return;
         var p = getPos(e);
@@ -5527,27 +5525,42 @@ function initMenulisCanvas() {
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
     }
-
-    function end(e) {
-        if (!drawing) return;
+    function onEnd(e) {
         drawing = false;
         ctx.beginPath();
     }
 
-    c.addEventListener('mousedown', start);
-    c.addEventListener('mousemove', move);
-    c.addEventListener('mouseup', end);
-    c.addEventListener('mouseleave', end);
-    c.addEventListener('touchstart', start, {passive:false});
-    c.addEventListener('touchmove', move, {passive:false});
-    c.addEventListener('touchend', end, {passive:false});
+    // Remove all old listeners by replacing node
+    var fresh = c.cloneNode(false);  // shallow clone keeps no listeners
+    c.parentNode.replaceChild(fresh, c);
+    c = fresh;
+    // Must re-get context on new node
+    ctx = c.getContext('2d');
+    ctx.strokeStyle = '#1a2a4a';
+    ctx.lineWidth   = 5;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+
+    c.addEventListener('mousedown',  onStart);
+    c.addEventListener('mousemove',  onMove);
+    c.addEventListener('mouseup',    onEnd);
+    c.addEventListener('mouseleave', onEnd);
+    c.addEventListener('touchstart', onStart, {passive: false});
+    c.addEventListener('touchmove',  onMove,  {passive: false});
+    c.addEventListener('touchend',   onEnd,   {passive: false});
 }
 
-// Init menulis when page loads
+function clearMenulisCanvas() {
+    var c = document.getElementById('mw-canvas');
+    if (c) c.getContext('2d').clearRect(0, 0, c.width, c.height);
+    var fb = document.getElementById('mw-feedback');
+    if (fb) fb.textContent = '';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     setMenulisMode('kana');
-    initMenulisCanvas();
-});
+    setTimeout(initMenulisCanvas, 100);
+});;
 </script>
 
 <!-- 60 HARI PAGE -->
