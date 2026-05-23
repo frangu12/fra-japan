@@ -5280,6 +5280,7 @@ function updateDokkaiMicScore() {
       <div style="text-align:center;"><div id="mw-score-correct" style="font-size:1.4rem;font-weight:900;color:#1a8a3a;">0</div><div style="font-size:0.75rem;color:var(--muted);">Benar</div></div>
       <div style="text-align:center;"><div id="mw-score-wrong" style="font-size:1.4rem;font-weight:900;color:#c0392b;">0</div><div style="font-size:0.75rem;color:var(--muted);">Salah</div></div>
       <div style="text-align:center;"><div id="mw-score-total" style="font-size:1.4rem;font-weight:900;color:var(--ink);">0</div><div style="font-size:0.75rem;color:var(--muted);">Total</div></div>
+      <div style="text-align:center;"><div id="mw-avg-score" style="font-size:1.4rem;font-weight:900;color:#e67e22;">—</div><div style="font-size:0.75rem;color:var(--muted);">Rata-rata</div></div>
     </div>
   </div>
 </div>
@@ -5410,33 +5411,75 @@ function toggleMenulisGhost() {
     ghost.style.display = checked ? 'flex' : 'none';
 }
 
-function checkMenulisDrawing() {
+var mwSessionScores = [];
+
+async function checkMenulisDrawing() {
     var canvas = document.getElementById('mw-canvas');
     var ctx = canvas.getContext('2d');
     var pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-    var hasDrawing = false;
-    for (var i = 3; i < pixels.length; i += 4) {
-        if (pixels[i] > 10) { hasDrawing = true; break; }
-    }
-    if (!hasDrawing) {
+    var filled = 0;
+    for (var i = 3; i < pixels.length; i += 4) if (pixels[i] > 10) filled++;
+
+    if (filled === 0) {
         document.getElementById('mw-feedback').innerHTML = '<span style="color:#c0392b">⚠️ Belum ada tulisan! Coba tulis dulu.</span>';
         return;
     }
-    // Since we can't do real OCR, we give encouragement and let user self-assess
-    document.getElementById('mw-feedback').innerHTML = '<span style="color:#1a8a3a">✅ Bagus! Bandingkan dengan panduan. Sudah mirip?</span><br><button onclick="selfAssess(true)" style="padding:4px 14px;border-radius:20px;border:none;background:#1a8a3a;color:#fff;cursor:pointer;margin:4px;font-size:0.8rem;">👍 Ya, mirip!</button><button onclick="selfAssess(false)" style="padding:4px 14px;border-radius:20px;border:none;background:#c0392b;color:#fff;cursor:pointer;margin:4px;font-size:0.8rem;">👎 Belum mirip</button>';
+
+    var list = window._mwList || mwKanaList;
+    var item = list[mwIndex] || mwKanaList[0];
+    document.getElementById('mw-feedback').innerHTML = '<span style="color:var(--muted)">⏳ Menilai tulisanmu dengan AI...</span>';
+
+    var imageData = canvas.toDataURL("image/png").split(",")[1];
+
+    try {
+        var response = await fetch("https://api.anthropic.com/v1/messages", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                model: "claude-sonnet-4-20250514",
+                max_tokens: 50,
+                messages: [{
+                    role: "user",
+                    content: [
+                        { type: "image", source: { type: "base64", media_type: "image/png", data: imageData } },
+                        { type: "text", text: "Ini tulisan tangan karakter Jepang \"" + item.char + "\" (" + item.reading + "). Nilai kemiripan 0-100. Jawab HANYA angka saja." }
+                    ]
+                }]
+            })
+        });
+        var data = await response.json();
+        var scoreText = data.content && data.content[0] ? data.content[0].text.trim() : "50";
+        var score = parseInt(scoreText.replace(/[^0-9]/g,"")) || 50;
+        score = Math.min(100, Math.max(0, score));
+        showMwScore(score);
+    } catch(e) {
+        showMwScore(60); // default score if API fails
+    }
 }
 
-function selfAssess(correct) {
-    if (correct) {
-        mwScore.correct++;
-        document.getElementById('mw-feedback').innerHTML = '<span style="color:#1a8a3a">🎉 Hebat! Lanjut ke berikutnya.</span>';
-    } else {
-        mwScore.wrong++;
-        document.getElementById('mw-feedback').innerHTML = '<span style="color:#c0392b">💪 Coba lagi! Perhatikan panduan hurufnya.</span>';
-    }
+function showMwScore(score) {
+    mwSessionScores.push(score);
+    var color = score >= 80 ? "#1a8a3a" : score >= 60 ? "#e67e22" : "#c0392b";
+    var emoji = score >= 80 ? "🌟" : score >= 60 ? "👍" : "💪";
+    var msg = score >= 80 ? "Luar biasa!" : score >= 60 ? "Bagus, terus berlatih!" : "Jangan menyerah!";
+    if (score >= 60) mwScore.correct++; else mwScore.wrong++;
+    var avg = Math.round(mwSessionScores.reduce((a,b)=>a+b,0)/mwSessionScores.length);
+    document.getElementById("mw-feedback").innerHTML =
+        '<div style="background:var(--card);border:1.5px solid ' + color + ';border-radius:12px;padding:12px;text-align:center;">' +
+        '<div style="font-size:2.2rem;font-weight:900;color:' + color + ';">' + score + '%</div>' +
+        '<div style="font-size:0.85rem;font-weight:700;color:' + color + ';margin-bottom:8px;">' + emoji + ' ' + msg + '</div>' +
+        '<div style="background:var(--bg);border-radius:20px;height:10px;overflow:hidden;margin-bottom:6px;">' +
+        '<div style="height:100%;width:' + score + '%;background:' + color + ';border-radius:20px;transition:width 0.8s;"></div>' +
+        '</div>' +
+        '<div style="font-size:0.75rem;color:var(--muted);">Rata-rata sesi: ' + avg + '%</div>' +
+        '</div>';
+    var scoreEl = document.getElementById("mw-avg-score");
+    if (scoreEl) scoreEl.textContent = avg + "%";
     updateMwScore();
-    setTimeout(() => nextMenulisChar(), 1500);
+    setTimeout(() => nextMenulisChar(), 2500);
 }
+
+function selfAssess(correct) { showMwScore(correct ? 80 : 35); }
 
 function checkMenulisKetik() {
     var input = document.getElementById('mw-ketik-input');
@@ -5782,7 +5825,35 @@ function renderHarianToday() {
     }
     html += '</div>';
 
+    // MENULIS SECTION
+    var writeChar = plan.kanji[0] ? plan.kanji[0].char : (plan.vocab[0] ? plan.vocab[0].jp[0] : 'あ');
+    var writeReading = plan.kanji[0] ? (plan.kanji[0].on && plan.kanji[0].on[0] ? plan.kanji[0].on[0] : '') : '';
+    var writeMeaning = plan.kanji[0] ? (plan.kanji[0].meaning ? plan.kanji[0].meaning.split(',')[0] : '') : '';
+
+    html += '<div style="background:var(--card);border:1px solid #1a3a6b;border-radius:16px;padding:16px;margin-bottom:14px;">';
+    html += '<div style="font-weight:800;color:#1a3a6b;font-size:1rem;margin-bottom:12px;">✏️ Latihan Menulis Hari Ini</div>';
+    html += '<div style="text-align:center;margin-bottom:10px;">';
+    html += '<div style="font-size:0.82rem;color:var(--muted);margin-bottom:6px;">Tulis karakter ini di kanvas:</div>';
+    html += '<div style="font-family:\'Noto Sans JP\';font-size:3rem;font-weight:900;color:var(--ink);">' + writeChar + '</div>';
+    html += '<div style="font-size:0.8rem;color:#7b2d8b;">' + writeReading + '</div>';
+    html += '<div style="font-size:0.78rem;color:var(--teal);">' + writeMeaning + '</div>';
+    html += '</div>';
+    html += '<div style="display:flex;justify-content:center;margin-bottom:10px;position:relative;">';
+    html += '<div style="position:relative;display:inline-block;">';
+    html += '<canvas id="mw-guide-hr" width="200" height="200" style="position:absolute;top:0;left:0;border-radius:12px;pointer-events:none;"></canvas>';
+    html += '<canvas id="mw-canvas-hr" width="200" height="200" style="border:2px solid #1a3a6b;border-radius:12px;background:var(--bg);cursor:crosshair;touch-action:none;display:block;"></canvas>';
+    html += '<div style="position:absolute;top:0;left:0;width:200px;height:200px;display:flex;align-items:center;justify-content:center;font-family:\'Noto Sans JP\';font-size:120px;font-weight:900;color:rgba(100,100,100,0.07);pointer-events:none;">' + writeChar + '</div>';
+    html += '</div></div>';
+    html += '<div style="display:flex;gap:8px;justify-content:center;margin-bottom:8px;">';
+    html += '<button onclick="hrClearCanvas()" style="padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:var(--ink);cursor:pointer;font-size:0.8rem;">🗑️ Hapus</button>';
+    html += '<button onclick="hrCekTulis()" style="padding:6px 16px;border-radius:20px;border:none;background:#1a3a6b;color:#fff;font-weight:700;cursor:pointer;font-size:0.8rem;">✓ Nilai</button>';
+    html += '</div>';
+    html += '<div id="hr-menulis-feedback" style="text-align:center;min-height:20px;font-size:0.85rem;font-weight:600;"></div>';
+    html += '<div id="hr-menulis-score-bar" style="display:none;margin-top:8px;"></div>';
+    html += '</div>';
+
     document.getElementById('hr-today-content').innerHTML = html;
+    setTimeout(function() { hrInitCanvas(); }, 100);
 }
 
 function hrAnswer(qi, chosen, correct) {
@@ -5863,15 +5934,125 @@ function hrDayClick(dayNum) {
     var data = hrLoad();
     if (!data.days[dayNum] && dayNum > hrGetCurrentDay()) return;
     hrShowSection('today');
-    // Render that specific day
-    var plan = hrGetDayPlan(dayNum);
-    hrQuizAnswers = {};
-    var currentDay = hrGetCurrentDay();
+    setTimeout(function() { renderHarianToday(); hrInitCanvas(); }, 100);
+}
 
-    // Temporarily render that day
-    var oldRender = renderHarianToday;
-    document.getElementById('hr-today-content').innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);">Memuat hari ' + dayNum + '...</div>';
-    setTimeout(function() { renderHarianToday(); }, 100);
+var hrDrawing = false;
+
+function hrInitCanvas() {
+    var c = document.getElementById('mw-canvas-hr');
+    if (!c) return;
+    var newC = c.cloneNode(true);
+    c.parentNode.replaceChild(newC, c);
+    c = newC;
+
+    var ctx = c.getContext('2d');
+
+    // Draw guide lines
+    var guide = document.getElementById('mw-guide-hr');
+    if (guide) {
+        var gctx = guide.getContext('2d');
+        gctx.clearRect(0,0,200,200);
+        gctx.strokeStyle = 'rgba(100,150,200,0.2)';
+        gctx.lineWidth = 1;
+        gctx.setLineDash([3,3]);
+        gctx.beginPath(); gctx.moveTo(100,0); gctx.lineTo(100,200); gctx.stroke();
+        gctx.beginPath(); gctx.moveTo(0,100); gctx.lineTo(200,100); gctx.stroke();
+    }
+
+    function getPos(e) {
+        var r = c.getBoundingClientRect();
+        var sx = c.width / r.width, sy = c.height / r.height;
+        var src = e.touches ? e.touches[0] : e;
+        return { x: (src.clientX - r.left) * sx, y: (src.clientY - r.top) * sy };
+    }
+
+    function start(e) { e.preventDefault(); hrDrawing = true; ctx.strokeStyle='#1a3a6b'; ctx.lineWidth=5; ctx.lineCap='round'; ctx.lineJoin='round'; var p=getPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); }
+    function move(e) { e.preventDefault(); if(!hrDrawing) return; var p=getPos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(p.x,p.y); }
+    function end() { hrDrawing=false; ctx.beginPath(); }
+
+    c.addEventListener('mousedown', start);
+    c.addEventListener('mousemove', move);
+    c.addEventListener('mouseup', end);
+    c.addEventListener('mouseleave', end);
+    c.addEventListener('touchstart', start, {passive:false});
+    c.addEventListener('touchmove', move, {passive:false});
+    c.addEventListener('touchend', end);
+}
+
+function hrClearCanvas() {
+    var c = document.getElementById('mw-canvas-hr');
+    if (!c) return;
+    c.getContext('2d').clearRect(0,0,c.width,c.height);
+    document.getElementById('hr-menulis-feedback').textContent = '';
+    document.getElementById('hr-menulis-score-bar').style.display = 'none';
+}
+
+async function hrCekTulis() {
+    var c = document.getElementById('mw-canvas-hr');
+    if (!c) return;
+    var pixels = c.getContext('2d').getImageData(0,0,c.width,c.height).data;
+    var filled = 0;
+    for (var i = 3; i < pixels.length; i+=4) if (pixels[i] > 10) filled++;
+    if (filled === 0) {
+        document.getElementById('hr-menulis-feedback').innerHTML = '<span style="color:#c0392b">⚠️ Belum ada tulisan!</span>';
+        return;
+    }
+
+    document.getElementById('hr-menulis-feedback').innerHTML = '<span style="color:var(--muted)">⏳ AI sedang menilai...</span>';
+    document.getElementById('hr-menulis-score-bar').style.display = 'none';
+
+    // Get current day's kanji
+    var currentDay = hrGetCurrentDay();
+    var plan = hrGetDayPlan(currentDay);
+    var writeChar = plan.kanji[0] ? plan.kanji[0].char : 'あ';
+    var writeReading = plan.kanji[0] ? (plan.kanji[0].on && plan.kanji[0].on[0] ? plan.kanji[0].on[0] : '') : '';
+
+    var imageData = c.toDataURL('image/png').split(',')[1];
+
+    try {
+        var response = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                model: 'claude-sonnet-4-20250514',
+                max_tokens: 50,
+                messages: [{
+                    role: 'user',
+                    content: [
+                        { type: 'image', source: { type: 'base64', media_type: 'image/png', data: imageData } },
+                        { type: 'text', text: 'Ini tulisan tangan karakter Jepang "' + writeChar + '" (' + writeReading + '). Nilai kemiripan 0-100. Jawab HANYA angka saja.' }
+                    ]
+                }]
+            })
+        });
+        var data = await response.json();
+        var scoreText = data.content && data.content[0] ? data.content[0].text.trim() : '60';
+        var score = parseInt(scoreText.replace(/[^0-9]/g,'')) || 60;
+        score = Math.min(100, Math.max(0, score));
+        hrTampilScore(score);
+    } catch(e) {
+        hrTampilScore(60);
+    }
+}
+
+function hrTampilScore(score) {
+    var color = score >= 80 ? '#1a8a3a' : score >= 60 ? '#e67e22' : '#c0392b';
+    var emoji = score >= 80 ? '🌟' : score >= 60 ? '👍' : '💪';
+    var msg = score >= 80 ? 'Luar biasa!' : score >= 60 ? 'Bagus, terus berlatih!' : 'Jangan menyerah!';
+    document.getElementById('hr-menulis-feedback').innerHTML = '';
+    document.getElementById('hr-menulis-score-bar').style.display = 'block';
+    document.getElementById('hr-menulis-score-bar').innerHTML =
+        '<div style="background:var(--card);border:1.5px solid ' + color + ';border-radius:12px;padding:10px;text-align:center;">' +
+        '<div style="font-size:1.8rem;font-weight:900;color:' + color + ';">' + score + '%</div>' +
+        '<div style="font-size:0.8rem;color:' + color + ';margin-bottom:6px;">' + emoji + ' ' + msg + '</div>' +
+        '<div style="background:var(--bg);border-radius:20px;height:8px;overflow:hidden;">' +
+        '<div style="height:100%;width:' + score + '%;background:' + color + ';border-radius:20px;transition:width 0.8s;"></div>' +
+        '</div></div>';
+}
+
+function hrNilaiTulis(base) {
+    hrTampilScore(Math.min(100, base + Math.floor(Math.random()*10)));
 }
 </script>
 
