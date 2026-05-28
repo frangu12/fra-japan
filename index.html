@@ -96,6 +96,19 @@
   .option-btn.correct{background:#e8f7f0;border-color:var(--teal2);color:var(--teal);font-weight:700;}
   .option-btn.wrong{background:#fdecea;border-color:var(--red);color:var(--red);}
   .option-btn:disabled{cursor:default;}
+  .quiz-typing-wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .quiz-typing-input{flex:1;min-width:180px;border:2.5px solid var(--border);border-radius:12px;padding:14px 18px;font-size:1.05rem;font-family:'DM Sans','Noto Sans JP',sans-serif;color:var(--ink);background:var(--card);transition:all .25s;}
+  .quiz-typing-input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px rgba(26,107,107,0.12);}
+  .quiz-typing-input.typing-correct{border-color:var(--teal2);background:#e8f7f0;color:var(--teal);font-weight:700;}
+  .quiz-typing-input.typing-wrong{border-color:var(--red);background:#fdecea;color:var(--red);}
+  .quiz-typing-input:disabled{opacity:0.7;cursor:default;}
+  .quiz-typing-submit{padding:14px 24px;border-radius:12px;border:none;background:var(--teal);color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all .2s;white-space:nowrap;}
+  .quiz-typing-submit:hover{background:var(--teal2);transform:translateY(-1px);}
+  .quiz-typing-submit:disabled{background:#aaa;cursor:default;transform:none;}
+  .quiz-typing-hint{text-align:center;font-size:0.75rem;color:var(--muted);margin-top:10px;opacity:0.65;}
+  .quiz-typing-hint kbd{display:inline-block;background:var(--border);color:var(--ink);padding:1px 7px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:700;border:1px solid #ccc;}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+  .shake{animation:shake .4s ease;}
   .quiz-feedback{margin-top:14px;padding:12px 18px;border-radius:11px;font-size:0.88rem;display:none;text-align:left;}
   .quiz-feedback.show{display:block;animation:slideIn .2s;}
   .quiz-feedback.correct-fb{background:#e8f7f0;border:1.5px solid var(--teal2);color:var(--teal);}
@@ -833,7 +846,7 @@
     <div class="settings-bar">
       <div><label>Level</label><br><select id="q-level"><option value="all">Semua</option><option value="N5">N5</option><option value="N4">N4</option><option value="N3">N3</option></select></div>
       <div><label>Kategori</label><br><select id="q-category"><option value="all">Semua</option><option value="verbs">Kata Kerja</option><option value="nouns">Kata Benda</option><option value="adjectives">Kata Sifat</option><option value="adverbs">Kata Keterangan</option><option value="numbers">Angka/Waktu</option><option value="daily">Sehari-hari</option><option value="grammar">Tata Bahasa</option><option value="counter">Kata Bilangan</option></select></div>
-      <div><label>Tipe</label><br><select id="q-type"><option value="jp-id">Jepang → Indonesia</option><option value="id-jp">Indonesia → Jepang</option><option value="reading">Baca Hiragana</option><option value="speaking">Bicara (Mic) — Tes Pelafalan</option><option value="mixed">Acak</option></select></div>
+      <div><label>Tipe</label><br><select id="q-type"><option value="jp-id">Jepang → Indonesia</option><option value="id-jp">Indonesia → Jepang</option><option value="reading">Baca Hiragana</option><option value="typing-jpid">✍️ Ketik Jawaban (JP→ID)</option><option value="typing-idjp">✍️ Ketik Jawaban (ID→JP)</option><option value="typing-reading">✍️ Ketik Bacaan (Kanji→Hiragana)</option><option value="speaking">Bicara (Mic) — Tes Pelafalan</option><option value="mixed">Acak</option></select></div>
       <div><label>Jumlah: <span class="range-val" id="q-num-display">10</span></label><br><input type="range" id="q-num" min="5" max="50" step="5" value="10" oninput="document.getElementById('q-num-display').textContent=this.value"></div>
       <button class="btn btn-red" onclick="startQuiz()">Mulai Quiz →</button>
     </div>
@@ -922,6 +935,11 @@
     <div class="jlpt-badges">
       <button class="jlpt-badge n5 active-badge" id="jlpt-btn-n5" onclick="setJlptLevel('N5')">N5 — Pemula (65 soal)</button>
       <button class="jlpt-badge n4" id="jlpt-btn-n4" onclick="setJlptLevel('N4')">N4 — Dasar (68 soal)</button>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;">
+        <span style="font-size:0.75rem;color:var(--muted);font-weight:600;">Mode Jawab:</span>
+        <button class="inner-tab" id="jlpt-mode-multiple" onclick="jlptQuizMode='multiple';renderJlptQuestions()" style="padding:4px 10px">Pilihan Ganda</button>
+        <button class="inner-tab" id="jlpt-mode-typing" onclick="jlptQuizMode='typing';renderJlptQuestions()" style="padding:4px 10px">✍️ Ketik Jawaban</button>
     </div>
   </div>
   <div class="jlpt-section-wrap" id="jlpt-questions-wrap"></div>
@@ -1067,6 +1085,9 @@
       <div class="choukai-score-item"><div class="csn" id="ck-wrong" style="color:var(--red)">0</div><div class="csl">Salah</div></div>
       <div class="choukai-score-item"><div class="csn" id="ck-pct" style="color:#7b2d8b">—</div><div class="csl">Akurasi</div></div>
       <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <span style="font-size:0.75rem;color:var(--muted);font-weight:600;">Mode Jawab:</span>
+        <button class="inner-tab" id="ck-mode-multiple" onclick="ckQuizMode='multiple';renderChoukai()" style="padding:4px 10px">Pilihan Ganda</button>
+        <button class="inner-tab" id="ck-mode-typing" onclick="ckQuizMode='typing';renderChoukai()" style="padding:4px 10px">✍️ Ketik</button>
         <button class="choukai-id-toggle on" id="ck-id-toggle" onclick="toggleChoukaId()">
           <div class="toggle-switch"></div><span>🇮🇩 Terjemahan</span>
         </button>
@@ -1111,6 +1132,7 @@
   <div class="dokkai-wrap">
     <div class="dokkai-mode-bar">
       <button class="dokkai-mode-btn active" id="dk-mode-pilihan" onclick="setDokkaiMode('pilihan')">📝 Pilihan Ganda</button>
+      <button class="dokkai-mode-btn" id="dk-mode-typing" onclick="setDokkaiMode('typing')">✍️ Ketik Jawaban</button>
       <button class="dokkai-mode-btn" id="dk-mode-mic" onclick="setDokkaiMode('mic')">🎤 Jawab Suara</button>
     </div>
     <div class="dokkai-score-bar">
@@ -1694,6 +1716,7 @@ let masteredSet = new Set();
 let currentKanjiIdx = null;
 let currentJlptLevel = 'N5';
 let jlptSelections = {};
+let jlptQuizMode = 'multiple';
 let submitted = false;
 
 function rubyWrap(text, reading) {
@@ -2119,15 +2142,57 @@ function renderQuestion() {
                 <div id="mic-result" style="margin-top:15px; font-size:0.9rem; color:var(--muted);">Klik mic dan ucapkan jawabannya</div>
             </div>`;
         return;
+    } else if (q.qType === 'typing-jpid' || q.qType === 'typing-idjp' || q.qType === 'typing-reading') {
+        // TYPING MODE
+        if(q.qType === 'typing-jpid') {
+            qText.innerHTML = rubyWrap(q.jp, q.reading);
+            qRead.innerHTML = `<button class="speak-btn" onclick="speakText('${q.jp}')">🔊</button> <span style="font-size:0.8rem;color:var(--muted)">Ketik artinya dalam Bahasa Indonesia</span>`;
+        } else if(q.qType === 'typing-idjp') {
+            qText.textContent = q.id;
+            qRead.innerHTML = '<span style="font-size:0.8rem;color:var(--muted)">Ketik dalam huruf Jepang (hiragana/katakana/kanji)</span>';
+        } else {
+            qText.textContent = q.jp;
+            qRead.innerHTML = '<span style="font-size:0.8rem;color:var(--muted)">Ketik cara bacanya dalam hiragana</span>';
+        }
+        opts.innerHTML = `
+            <div style="grid-column:1/-1;">
+                <div class="quiz-typing-wrap">
+                    <input type="text" id="quiz-typing-input" class="quiz-typing-input"
+                        placeholder="${q.qType==='typing-jpid' ? 'Ketik arti dalam Bahasa Indonesia...' : (q.qType==='typing-idjp' ? 'Ketik dalam bahasa Jepang...' : 'Ketik bacaan hiragana...')}"
+                        autocomplete="off">
+                    <button class="quiz-typing-submit" id="quiz-typing-submit" onclick="checkTypingAnswer()">Periksa ✓</button>
+                </div>
+                <div class="quiz-typing-hint">Tekan <kbd>Enter</kbd> untuk memeriksa jawaban</div>
+            </div>`;
+        setTimeout(() => {
+            const inp = document.getElementById('quiz-typing-input');
+            if(inp) {
+                inp.focus();
+                inp.addEventListener('keydown', function(e) {
+                    if(e.key === 'Enter') {
+                        e.preventDefault();
+                        if(!inp.disabled) checkTypingAnswer();
+                        else {
+                            const nb = document.getElementById('btn-next');
+                            if(nb && !nb.classList.contains('hidden')) nb.click();
+                        }
+                    }
+                });
+            }
+        }, 100);
+        return;
     }
     
-    options.forEach(opt => {
+    options.forEach((opt, idx) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.innerHTML = opt;
         btn.onclick = () => checkAnswer(btn, opt, correctAnswer, q);
         opts.appendChild(btn);
     });
+    
+    let hintEl = document.getElementById('quiz-kb-hint');
+    if (hintEl) hintEl.style.display = 'none';
 }
 
 function generateOptions(correctStr, type) {
@@ -2302,6 +2367,68 @@ function nextQuestion() {
     renderQuestion();
 }
 
+// ═══════════════════════════════════
+// TYPING ANSWER CHECK FOR QUIZ
+// ═══════════════════════════════════
+function checkTypingAnswer() {
+    const inp = document.getElementById('quiz-typing-input');
+    const submitBtn = document.getElementById('quiz-typing-submit');
+    if(!inp || inp.disabled) return;
+    
+    const typed = inp.value.trim();
+    if(!typed) { inp.classList.add('shake'); setTimeout(()=>inp.classList.remove('shake'), 400); inp.focus(); return; }
+    
+    inp.disabled = true;
+    if(submitBtn) submitBtn.disabled = true;
+    
+    const q = qQuestions[qCurrent];
+    let correctRaw, isCorrect = false;
+    
+    if(q.qType === 'typing-jpid') {
+        correctRaw = q.id;
+        const t = typed.toLowerCase();
+        const c = correctRaw.toLowerCase();
+        // Exact, contains, or comma/slash separated match
+        isCorrect = t === c || c.includes(t) || t.includes(c)
+            || c.split(/[,\/、]/).some(p => p.trim().toLowerCase() === t)
+            || c.split(/[,\/、]/).some(p => t.includes(p.trim().toLowerCase()));
+    } else if(q.qType === 'typing-idjp') {
+        correctRaw = q.jp;
+        const t = typed.replace(/\s/g,'');
+        const c = correctRaw.replace(/\s/g,'');
+        const r = (q.reading||'').replace(/\s/g,'');
+        isCorrect = t === c || t === r;
+    } else if(q.qType === 'typing-reading') {
+        correctRaw = q.reading;
+        const t = typed.replace(/\s/g,'');
+        const c = correctRaw.replace(/\s/g,'');
+        isCorrect = t === c;
+    }
+    
+    const fb = document.getElementById('q-feedback');
+    const fben = document.getElementById('fb-en');
+    const fbnote = document.getElementById('fb-note');
+    fb.classList.add('show');
+    
+    if(isCorrect) {
+        inp.classList.add('typing-correct');
+        fb.className = 'quiz-feedback show correct-fb';
+        fben.textContent = '✅ Benar! Hebat!';
+        qCorrect++;
+    } else {
+        inp.classList.add('typing-wrong');
+        fb.className = 'quiz-feedback show wrong-fb';
+        fben.textContent = '❌ Salah!';
+        qWrong++;
+    }
+    
+    let hint = q.qType === 'typing-jpid' ? q.id : (q.qType === 'typing-idjp' ? q.jp + ' (' + q.reading + ')' : q.reading);
+    fbnote.innerHTML = `Jawaban yang benar: <strong>${hint}</strong><br><span style="opacity:0.8;font-size:0.75rem">${q.example ? q.example.replace('\\n',' - ') : ''}</span>`;
+    
+    document.getElementById('q-score-text').textContent = `✅ ${qCorrect}   ❌ ${qWrong}`;
+    document.getElementById('btn-next').classList.remove('hidden');
+}
+
 function showQuizResult() {
     document.getElementById('quiz-area').classList.add('hidden');
     document.getElementById('quiz-result').classList.remove('hidden');
@@ -2356,17 +2483,29 @@ function renderJlptQuestions() {
         
         section.qs.forEach((q, qIdx) => {
             const globalQIdx = `${sIdx}-${qIdx}`;
+            
+            let optsHtml = '';
+            if (jlptQuizMode === 'typing') {
+                optsHtml = `
+                    <div class="quiz-typing-wrap" style="margin-top:10px;">
+                        <input type="text" id="jlpt-typing-${globalQIdx}" class="quiz-typing-input" placeholder="Ketik jawaban..." autocomplete="off" oninput="answerJlptTyping('${globalQIdx}', ${q.correct}, this.value, '${q.options[q.correct].replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">
+                    </div>
+                `;
+            } else {
+                optsHtml = q.options.map((opt, oIdx) => `
+                    <button class="jlpt-opt" id="opt-${globalQIdx}-${oIdx}" onclick="selectJlptOpt('${globalQIdx}', ${oIdx}, ${q.correct})">
+                        <div class="opt-num">${oIdx + 1}</div>
+                        ${opt}
+                    </button>
+                `).join('');
+            }
+            
             html += `
             <div class="jlpt-q-card" id="qcard-${globalQIdx}">
                 <div class="jlpt-q-num">Soal ${qIdx + 1}</div>
                 <div class="jlpt-q-text">${q.text}</div>
                 <div class="jlpt-options">
-                    ${q.options.map((opt, oIdx) => `
-                        <button class="jlpt-opt" id="opt-${globalQIdx}-${oIdx}" onclick="selectJlptOpt('${globalQIdx}', ${oIdx}, ${q.correct})">
-                            <div class="opt-num">${oIdx + 1}</div>
-                            ${opt}
-                        </button>
-                    `).join('')}
+                    ${optsHtml}
                 </div>
                 <div class="jlpt-explanation" id="exp-${globalQIdx}">${q.exp}</div>
             </div>`;
@@ -2375,6 +2514,13 @@ function renderJlptQuestions() {
     
     wrap.innerHTML = html;
     updateJlptProgress();
+    
+    const mBtn = document.getElementById('jlpt-mode-multiple');
+    const tBtn = document.getElementById('jlpt-mode-typing');
+    if (mBtn && tBtn) {
+        mBtn.classList.toggle('active', jlptQuizMode === 'multiple');
+        tBtn.classList.toggle('active', jlptQuizMode === 'typing');
+    }
 }
 
 // Sangat disederhanakan untuk contoh. Di aplikasi nyata, ini akan mengambil dari database JLPT khusus.
@@ -2471,6 +2617,21 @@ function selectJlptOpt(qIdx, oIdx, correctIdx) {
     updateJlptProgress();
 }
 
+function answerJlptTyping(qIdx, correctIdx, typedVal, correctStr) {
+    if(submitted) return;
+    
+    if (typedVal.trim() === '') {
+        delete jlptSelections[qIdx];
+    } else {
+        const c = correctStr.replace(/[。、！？\s]/g,'').toLowerCase();
+        const t = typedVal.replace(/[。、！？\s]/g,'').toLowerCase();
+        const isCorrect = t === c || c.includes(t) || t.includes(c);
+        jlptSelections[qIdx] = { selected: -1, correct: correctIdx, isTypingCorrect: isCorrect, typedText: typedVal };
+    }
+    
+    updateJlptProgress();
+}
+
 function updateJlptProgress() {
     const totalQs = document.querySelectorAll('.jlpt-q-card').length;
     const answered = Object.keys(jlptSelections).length;
@@ -2504,20 +2665,37 @@ function submitJlpt() {
         
         const card = document.getElementById(`qcard-${qIdx}`);
         const exp = document.getElementById(`exp-${qIdx}`);
-        const opts = document.querySelectorAll(`[id^="opt-${qIdx}-"]`);
+        let isCorrect = false;
+        if (jlptQuizMode === 'typing') {
+            const inp = document.getElementById(`jlpt-typing-${qIdx}`);
+            if (inp) {
+                inp.disabled = true;
+                isCorrect = data.isTypingCorrect;
+                if (isCorrect) inp.classList.add('typing-correct');
+                else inp.classList.add('typing-wrong');
+            }
+        } else {
+            const opts = document.querySelectorAll(`[id^="opt-${qIdx}-"]`);
+            opts.forEach(opt => opt.disabled = true);
+            isCorrect = data.selected === data.correct;
+            
+            if(data.selected !== undefined) {
+                const selBtn = document.getElementById(`opt-${qIdx}-${data.selected}`);
+                if (selBtn) selBtn.classList.add(isCorrect ? 'opt-correct-reveal' : 'opt-wrong-reveal');
+            }
+            if (!isCorrect) {
+                const corBtn = document.getElementById(`opt-${qIdx}-${data.correct}`);
+                if (corBtn) corBtn.classList.add('opt-correct-reveal');
+            }
+        }
         
-        opts.forEach(opt => opt.disabled = true);
-        
-        if (data.selected === data.correct) {
+        if (isCorrect) {
             totalCorrect++;
             secStats[sIdx]++;
             card.classList.add('revealed-correct');
-            document.getElementById(`opt-${qIdx}-${data.selected}`).classList.add('opt-correct-reveal');
             exp.classList.add('show', 'exp-correct');
         } else {
             card.classList.add('revealed-wrong');
-            document.getElementById(`opt-${qIdx}-${data.selected}`).classList.add('opt-wrong-reveal');
-            document.getElementById(`opt-${qIdx}-${data.correct}`).classList.add('opt-correct-reveal'); // show correct
             exp.classList.add('show', 'exp-wrong');
         }
     }
@@ -3918,7 +4096,8 @@ const choukaData = {
 let ckLevel = 'N5';
 let ckStats = { total: 0, correct: 0, wrong: 0 };
 let ckAnswered = {}; // key: "level-qidx-optidx"
-let ckCurrentUtterance = null;
+let ckAnsweredText = {};
+let ckQuizMode = 'multiple';let ckCurrentUtterance = null;
 let ckRepeatMap = {};
 let ckSpeedMap = {};
 let ckShowId = true; // toggle bahasa Indonesia
@@ -4003,25 +4182,50 @@ function renderChoukai() {
     updateChoukaScore();
     // Apply current translation toggle state
     applyIdToggle();
+    
+    // Update Mode Toggle UI
+    const mBtn = document.getElementById('ck-mode-multiple');
+    const tBtn = document.getElementById('ck-mode-typing');
+    if (mBtn && tBtn) {
+        mBtn.classList.toggle('active', ckQuizMode === 'multiple');
+        tBtn.classList.toggle('active', ckQuizMode === 'typing');
+    }
 }
 
 function renderChoukaQuestion(sectionId, qi, qi2, q) {
     const key = `${ckLevel}-${qi}-${qi2}`;
     const answered = ckAnswered[key];
     
-    let optsHtml = q.opts.map((opt, oi) => {
-        let cls = 'choukai-opt';
-        let disabled = '';
-        if (answered !== undefined) {
-            disabled = 'disabled';
-            if (oi === q.ans) cls += ' correct-reveal';
-            else if (oi === answered && oi !== q.ans) cls += ' wrong-reveal';
-        }
-        return `<button class="${cls}" ${disabled} onclick="answerChoukai('${sectionId}', ${qi}, ${qi2}, ${oi})">
-            <span class="opt-circle">${['①','②','③','④'][oi]}</span>
-            <span>${opt} <em class="ck-id" style="font-size:0.72rem;opacity:0.7">— ${q.optsTr[oi]}</em></span>
-        </button>`;
-    }).join('');
+    let optsHtml = '';
+    
+    if (ckQuizMode === 'typing') {
+        const correctJp = q.opts[q.ans];
+        const correctId = q.optsTr[q.ans];
+        const disabled = answered !== undefined ? 'disabled' : '';
+        const val = answered !== undefined ? (ckAnsweredText[key] || '') : '';
+        const inputCls = answered !== undefined ? (answered === q.ans ? 'typing-correct' : 'typing-wrong') : '';
+        optsHtml = `
+            <div class="quiz-typing-wrap" style="margin-top:10px;">
+                <input type="text" id="ck-typing-${key}" class="quiz-typing-input ${inputCls}" placeholder="Ketik jawaban (bahasa Jepang/Indonesia)..." autocomplete="off" value="${val}" ${disabled} onkeydown="if(event.key==='Enter') answerChoukaiTyping('${sectionId}', ${qi}, ${qi2})">
+                <button class="quiz-typing-submit" ${disabled} onclick="answerChoukaiTyping('${sectionId}', ${qi}, ${qi2})">Periksa ✓</button>
+            </div>
+            <div class="quiz-typing-hint" style="text-align:left;margin-top:6px;">Tekan <kbd>Enter</kbd> untuk periksa</div>
+        `;
+    } else {
+        optsHtml = q.opts.map((opt, oi) => {
+            let cls = 'choukai-opt';
+            let disabled = '';
+            if (answered !== undefined) {
+                disabled = 'disabled';
+                if (oi === q.ans) cls += ' correct-reveal';
+                else if (oi === answered && oi !== q.ans) cls += ' wrong-reveal';
+            }
+            return `<button class="${cls}" ${disabled} onclick="answerChoukai('${sectionId}', ${qi}, ${qi2}, ${oi})">
+                <span class="opt-circle">${['①','②','③','④'][oi]}</span>
+                <span>${opt} <em class="ck-id" style="font-size:0.72rem;opacity:0.7">— ${q.optsTr[oi]}</em></span>
+            </button>`;
+        }).join('');
+    }
     
     const feedbackCls = answered !== undefined ? (answered === q.ans ? 'fb-ok show' : 'fb-ng show') : '';
     const feedbackText = answered !== undefined ? (answered === q.ans ? `✅ Benar! ${q.exp}` : `❌ Salah. Jawaban yang benar: ${q.opts[q.ans]} <span class="ck-id">(${q.optsTr[q.ans]})</span>. ${q.exp}`) : '';
@@ -4036,6 +4240,49 @@ function renderChoukaQuestion(sectionId, qi, qi2, q) {
         <div class="choukai-options">${optsHtml}</div>
         <div class="choukai-feedback ${feedbackCls}" id="ck-fb-${ckLevel}-${qi}-${qi2}">${feedbackText}</div>
     </div>`;
+}
+
+function answerChoukaiTyping(sectionId, qi, qi2) {
+    const key = `${ckLevel}-${qi}-${qi2}`;
+    if (ckAnswered[key] !== undefined) return;
+    
+    const inp = document.getElementById(`ck-typing-${key}`);
+    if(!inp || inp.disabled) return;
+    
+    const typed = inp.value.trim().toLowerCase();
+    if(!typed) { inp.classList.add('shake'); setTimeout(()=>inp.classList.remove('shake'), 400); inp.focus(); return; }
+    
+    const data = choukaData[ckLevel][qi];
+    const q = data.questions[qi2];
+    
+    const cJp = q.opts[q.ans].replace(/[。、！？\s]/g,'').toLowerCase();
+    const cId = q.optsTr[q.ans].toLowerCase();
+    const t = typed.replace(/[。、！？\s]/g,'');
+    
+    const isCorrect = (t === cJp || cJp.includes(t) || t.includes(cJp)) || (t === cId.replace(/\s/g,'') || cId.includes(typed) || typed.includes(cId));
+    
+    ckAnswered[key] = isCorrect ? q.ans : -1;
+    ckAnsweredText[key] = inp.value;
+    ckStats.total++;
+    if (isCorrect) ckStats.correct++;
+    else ckStats.wrong++;
+    
+    updateChoukaScore();
+    
+    const qzone = document.getElementById(`${sectionId}-qzone`);
+    if (qzone) {
+        qzone.innerHTML = data.questions.map((qObj, idx2) => renderChoukaQuestion(sectionId, qi, idx2, qObj)).join('');
+    }
+    
+    const allAnswered = data.questions.every((_, i) => ckAnswered[`${ckLevel}-${qi}-${i}`] !== undefined);
+    if (allAnswered) {
+        const allCorrect = data.questions.every((qq, i) => ckAnswered[`${ckLevel}-${qi}-${i}`] === qq.ans);
+        const card = document.getElementById(sectionId);
+        if (card) {
+            card.classList.add(allCorrect ? 'done-correct' : 'done-wrong');
+            revealScript(sectionId);
+        }
+    }
 }
 
 function revealScript(sectionId) {
@@ -4233,6 +4480,7 @@ let kanaFcFlipped = false;
 let kanaQuizList = [];
 let kanaQuizIndex = 0;
 let kanaQuizStats = { correct: 0, wrong: 0 };
+let kanaQuizMode = 'multiple';
 let kanaQuizAnswered = false;
 
 function setKanaScript(sc) {
@@ -4464,6 +4712,11 @@ function renderKanaQuizSetup(container) {
         <div class="qs"><div class="qsn" id="kq-wrong" style="color:var(--red)">0</div><div class="qsl">Salah</div></div>
         <div class="qs"><div class="qsn" id="kq-pct" style="color:#c47a00">—</div><div class="qsl">Akurasi</div></div>
       </div>
+      <div style="text-align:center; margin-bottom:12px;">
+        <span style="font-size:0.75rem;color:var(--muted);margin-right:8px;font-weight:600;">Mode Jawab:</span>
+        <button class="inner-tab ${kanaQuizMode==='multiple'?'active':''}" onclick="kanaQuizMode='multiple';renderKanaQuizQuestion()">Pilihan Ganda</button>
+        <button class="inner-tab ${kanaQuizMode==='typing'?'active':''}" onclick="kanaQuizMode='typing';renderKanaQuizQuestion()">✍️ Ketik</button>
+      </div>
       <div id="kana-quiz-area"></div>
     </div>`;
     startKanaQuiz();
@@ -4495,21 +4748,54 @@ function renderKanaQuizQuestion() {
         return;
     }
     const ch = kanaQuizList[kanaQuizIndex];
-    // Generate 3 wrong options
-    const others = list.filter(x => x.r !== ch.r);
-    const shuffled = [...others].sort(() => Math.random() - 0.5).slice(0, 3);
-    const opts = [...shuffled, ch].sort(() => Math.random() - 0.5);
+    let contentHtml = '';
+    
+    if (kanaQuizMode === 'typing') {
+        contentHtml = `
+            <div class="kana-quiz-hint">Ketik romajinya</div>
+            <div class="quiz-typing-wrap" style="margin: 16px 0;">
+                <input type="text" id="kq-typing-input" class="quiz-typing-input" placeholder="Ketik romaji..." autocomplete="off">
+                <button class="quiz-typing-submit" id="kq-typing-submit" onclick="checkKanaTypingAnswer('${ch.r}', '${ch.c}')">Periksa ✓</button>
+            </div>
+            <div class="quiz-typing-hint" style="margin-bottom:12px;">Tekan <kbd>Enter</kbd> untuk periksa</div>`;
+        setTimeout(() => {
+            const inp = document.getElementById('kq-typing-input');
+            if(inp) {
+                inp.focus();
+                inp.addEventListener('keydown', function(e) {
+                    if(e.key === 'Enter') {
+                        e.preventDefault();
+                        if(!inp.disabled) checkKanaTypingAnswer(ch.r, ch.c);
+                        else {
+                            const nb = document.getElementById('btn-kq-next');
+                            if(nb) nb.click();
+                        }
+                    }
+                });
+            }
+        }, 100);
+    } else {
+        // Generate 3 wrong options
+        const others = list.filter(x => x.r !== ch.r);
+        const shuffled = [...others].sort(() => Math.random() - 0.5).slice(0, 3);
+        const opts = [...shuffled, ch].sort(() => Math.random() - 0.5);
+        contentHtml = `
+            <div class="kana-quiz-hint">Pilih romaji yang benar</div>
+            <div class="kana-quiz-options">
+                ${opts.map(o => `<button class="kana-quiz-opt" onclick="answerKanaQuiz(this,'${o.r}','${ch.r}','${ch.c}')">${o.r}</button>`).join('')}
+            </div>`;
+    }
 
     area.innerHTML = `
     <div class="kana-progress"><div class="kana-progress-fill" style="width:${(kanaQuizIndex/kanaQuizList.length*100).toFixed(1)}%"></div></div>
     <div class="kana-quiz-card">
       <div style="font-size:0.72rem;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;">${kanaQuizIndex+1} / ${kanaQuizList.length}</div>
       <div class="kana-quiz-char">${ch.c}</div>
-      <div class="kana-quiz-hint">Pilih romaji yang benar</div>
-      <div class="kana-quiz-options">
-        ${opts.map(o => `<button class="kana-quiz-opt" onclick="answerKanaQuiz(this,'${o.r}','${ch.r}','${ch.c}')">${o.r}</button>`).join('')}
-      </div>
+      ${contentHtml}
       <div class="kana-quiz-feedback" id="kq-feedback"></div>
+      <div style="text-align:center;margin-top:10px;">
+          <button class="btn btn-teal hidden" id="btn-kq-next" onclick="kanaQuizIndex++;renderKanaQuizQuestion()">Soal Berikutnya →</button>
+      </div>
     </div>`;
 }
 
@@ -4520,23 +4806,50 @@ function answerKanaQuiz(btn, chosen, correct, char) {
         if (b.textContent.trim() === correct) b.classList.add('correct');
         else if (b === btn && chosen !== correct) b.classList.add('wrong');
     });
+    showKanaQuizFeedback(chosen === correct, correct, char);
+}
+
+function checkKanaTypingAnswer(correct, char) {
+    const inp = document.getElementById('kq-typing-input');
+    const submitBtn = document.getElementById('kq-typing-submit');
+    if(!inp || inp.disabled) return;
+    
+    const typed = inp.value.trim().toLowerCase();
+    if(!typed) { inp.classList.add('shake'); setTimeout(()=>inp.classList.remove('shake'), 400); inp.focus(); return; }
+    
+    inp.disabled = true;
+    if(submitBtn) submitBtn.disabled = true;
+    
+    const isCorrect = typed === correct.toLowerCase();
+    
+    if(isCorrect) inp.classList.add('typing-correct');
+    else inp.classList.add('typing-wrong');
+    
+    showKanaQuizFeedback(isCorrect, correct, char);
+}
+
+function showKanaQuizFeedback(isCorrect, correct, char) {
     const fb = document.getElementById('kq-feedback');
-    const isCorrect = chosen === correct;
     if (isCorrect) { kanaQuizStats.correct++; }
     else { kanaQuizStats.wrong++; }
     fb.className = `kana-quiz-feedback show ${isCorrect ? 'ok' : 'ng'}`;
-    fb.textContent = isCorrect ? `✅ Benar! ${char} = ${correct}` : `❌ Salah. ${char} dibaca "${correct}", bukan "${chosen}".`;
-
-    // Update score
-    const t = kanaQuizStats.correct + kanaQuizStats.wrong;
+    fb.textContent = isCorrect ? `✅ Benar! ${char} = ${correct}` : `❌ Salah. ${char} dibaca "${correct}".`;
+    
     document.getElementById('kq-correct').textContent = kanaQuizStats.correct;
     document.getElementById('kq-wrong').textContent = kanaQuizStats.wrong;
-    document.getElementById('kq-pct').textContent = t > 0 ? Math.round(kanaQuizStats.correct / t * 100) + '%' : '—';
-
+    const total = kanaQuizStats.correct + kanaQuizStats.wrong;
+    document.getElementById('kq-pct').textContent = total > 0 ? Math.round(kanaQuizStats.correct / total * 100) + '%' : '—';
+    
     speakText(char);
-    kanaQuizIndex++;
-    setTimeout(() => renderKanaQuizQuestion(), 1400);
+    
+    // Auto advance to next question after 1.2s delay
+    setTimeout(() => {
+        kanaQuizIndex++;
+        renderKanaQuizQuestion();
+    }, 1200);
 }
+
+
 const dokkaiData = {
     N5: [
         {
@@ -4811,6 +5124,7 @@ const dokkaiData = {
 let dkLevel = 'N5';
 let dkStats = { total: 0, correct: 0, wrong: 0 };
 let dkAnswered = {};
+let dkAnsweredText = {};
 let dkShowId = true;
 
 function toggleDokkaiId() {
@@ -4879,19 +5193,34 @@ function renderDokkaiQuestion(sectionId, qi, qi2, q) {
     const key = `${dkLevel}-${qi}-${qi2}`;
     const answered = dkAnswered[key];
     
-    let optsHtml = q.opts.map((opt, oi) => {
-        let cls = 'dokkai-opt';
-        let disabled = '';
-        if (answered !== undefined) {
-            disabled = 'disabled';
-            if (oi === q.ans) cls += ' correct-reveal';
-            else if (oi === answered && oi !== q.ans) cls += ' wrong-reveal';
-        }
-        return `<button class="${cls}" ${disabled} onclick="answerDokkai('${sectionId}', ${qi}, ${qi2}, ${oi})">
-            <span class="opt-circle">${['①','②','③','④'][oi]}</span>
-            <span>${opt}<em class="dk-id" style="font-size:0.72rem;opacity:0.65;display:block;font-family:'DM Sans',sans-serif;font-style:italic;">${q.optsTr[oi]}</em></span>
-        </button>`;
-    }).join('');
+    let optsHtml = '';
+    
+    if (dkMode === 'typing') {
+        const disabled = answered !== undefined ? 'disabled' : '';
+        const val = answered !== undefined ? (dkAnsweredText[key] || '') : '';
+        const inputCls = answered !== undefined ? (answered === q.ans ? 'typing-correct' : 'typing-wrong') : '';
+        optsHtml = `
+            <div class="quiz-typing-wrap" style="margin-top:10px;">
+                <input type="text" id="dk-typing-${key}" class="quiz-typing-input ${inputCls}" placeholder="Ketik jawaban (bahasa Jepang/Indonesia)..." autocomplete="off" value="${val}" ${disabled} onkeydown="if(event.key==='Enter') answerDokkaiTyping('${sectionId}', ${qi}, ${qi2})">
+                <button class="quiz-typing-submit" ${disabled} onclick="answerDokkaiTyping('${sectionId}', ${qi}, ${qi2})">Periksa ✓</button>
+            </div>
+            <div class="quiz-typing-hint" style="text-align:left;margin-top:6px;">Tekan <kbd>Enter</kbd> untuk periksa</div>
+        `;
+    } else {
+        optsHtml = q.opts.map((opt, oi) => {
+            let cls = 'dokkai-opt';
+            let disabled = '';
+            if (answered !== undefined) {
+                disabled = 'disabled';
+                if (oi === q.ans) cls += ' correct-reveal';
+                else if (oi === answered && oi !== q.ans) cls += ' wrong-reveal';
+            }
+            return `<button class="${cls}" ${disabled} onclick="answerDokkai('${sectionId}', ${qi}, ${qi2}, ${oi})">
+                <span class="opt-circle">${['①','②','③','④'][oi]}</span>
+                <span>${opt}<em class="dk-id" style="font-size:0.72rem;opacity:0.65;display:block;font-family:'DM Sans',sans-serif;font-style:italic;">${q.optsTr[oi]}</em></span>
+            </button>`;
+        }).join('');
+    }
     
     const feedbackCls = answered !== undefined ? (answered === q.ans ? 'fb-ok show' : 'fb-ng show') : '';
     const feedbackText = answered !== undefined
@@ -4910,6 +5239,39 @@ function renderDokkaiQuestion(sectionId, qi, qi2, q) {
         <div class="dokkai-options">${optsHtml}</div>
         <div class="dokkai-feedback ${feedbackCls}" id="dk-fb-${dkLevel}-${qi}-${qi2}">${feedbackText}</div>
     </div>`;
+}
+
+function answerDokkaiTyping(sectionId, qi, qi2) {
+    const key = `${dkLevel}-${qi}-${qi2}`;
+    if (dkAnswered[key] !== undefined) return;
+    
+    const inp = document.getElementById(`dk-typing-${key}`);
+    if(!inp || inp.disabled) return;
+    
+    const typed = inp.value.trim().toLowerCase();
+    if(!typed) { inp.classList.add('shake'); setTimeout(()=>inp.classList.remove('shake'), 400); inp.focus(); return; }
+    
+    const data = dokkaiData[dkLevel][qi];
+    const q = data.questions[qi2];
+    
+    const cJp = q.opts[q.ans].replace(/[。、！？\s]/g,'').toLowerCase();
+    const cId = q.optsTr[q.ans].toLowerCase();
+    const t = typed.replace(/[。、！？\s]/g,'');
+    
+    const isCorrect = (t === cJp || cJp.includes(t) || t.includes(cJp)) || (t === cId.replace(/\s/g,'') || cId.includes(typed) || typed.includes(cId));
+    
+    dkAnswered[key] = isCorrect ? q.ans : -1;
+    dkAnsweredText[key] = inp.value;
+    dkStats.total++;
+    if (isCorrect) dkStats.correct++;
+    else dkStats.wrong++;
+    
+    updateDokkaiScore();
+    
+    const qzone = document.getElementById(`${sectionId}-qzone`);
+    if (qzone) {
+        qzone.innerHTML = data.questions.map((qObj, idx2) => renderDokkaiQuestion(sectionId, qi, idx2, qObj)).join('');
+    }
 }
 
 function answerDokkai(sectionId, qi, qi2, selectedOpt) {
@@ -4966,8 +5328,9 @@ function setDokkaiMode(m) {
     // Reset score when switching modes
     dkStats = { total: 0, correct: 0, wrong: 0 };
     dkAnswered = {};
+    dkAnsweredText = {};
     stopMic();
-    if (m === 'pilihan') renderDokkai();
+    if (m === 'pilihan' || m === 'typing') renderDokkai();
     else if (m === 'mic') renderDokkaiMic();
 }
 
