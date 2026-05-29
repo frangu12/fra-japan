@@ -144,6 +144,27 @@
   .inner-tab.active{background:var(--ink);color:var(--rice);border-color:var(--ink);}
   .range-val{font-weight:700;color:var(--red);font-size:0.95rem;min-width:28px;text-align:center;}
   .hidden{display:none!important;}
+  
+  /* TIMER & STOPWATCH */
+  .timer-panel{background:linear-gradient(135deg,var(--ink),#2a1010);border-radius:14px;padding:16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 4px 16px rgba(26,10,10,0.15);}
+  .timer-display{display:flex;align-items:center;gap:12px;flex:1;min-width:200px;}
+  .timer-icon{font-size:1.6rem;}
+  .timer-time{font-family:'Noto Sans JP','DM Sans',monospace;font-size:2rem;font-weight:900;color:var(--gold);letter-spacing:2px;min-width:120px;text-align:center;}
+  .timer-time.warning{color:#e67e22;animation:pulse 0.6s infinite;}
+  .timer-time.danger{color:var(--red);animation:pulse 0.4s infinite;}
+  .timer-mode{font-size:0.78rem;color:#a09090;text-transform:uppercase;letter-spacing:1px;font-weight:600;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
+  .timer-controls{display:flex;gap:8px;flex-wrap:wrap;}
+  .timer-btn{padding:8px 14px;border:none;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:0.5px;}
+  .timer-start{background:var(--teal);color:#fff;}.timer-start:hover{background:var(--teal2);transform:translateY(-1px);}
+  .timer-pause{background:#e67e22;color:#fff;}.timer-pause:hover{background:#d46e1a;transform:translateY(-1px);}
+  .timer-stop{background:var(--red);color:#fff;}.timer-stop:hover{background:var(--red2);transform:translateY(-1px);}
+  .timer-reset{background:var(--border);color:var(--ink);}.timer-reset:hover{background:#d4d4c4;transform:translateY(-1px);}
+  .timer-mode-toggle{padding:8px 12px;border:1.5px solid var(--gold);background:rgba(212,160,23,0.08);color:var(--gold);border-radius:8px;font-size:0.75rem;cursor:pointer;font-weight:600;transition:all .2s;font-family:'DM Sans',sans-serif;}
+  .timer-mode-toggle:hover{background:rgba(212,160,23,0.16);}
+  .timer-stats{display:flex;gap:12px;font-size:0.75rem;color:#a09090;}
+  .timer-stat-item{display:flex;align-items:center;gap:4px;}
+  
   footer{text-align:center;padding:24px;color:var(--muted);font-size:0.76rem;border-top:1px solid var(--border);margin-top:32px;}
 
   /* ═══ CHOUKAI PAGE ═══ */
@@ -857,11 +878,30 @@
         <span id="q-progress-text">Soal 1 dari 10</span>
         <div style="display:flex;align-items:center;gap:10px;">
           <span id="q-score-text">✅ 0 &nbsp; ❌ 0</span>
-          <button onclick="if(confirm('Keluar dari quiz?')){ document.getElementById('quiz-area').classList.add('hidden'); document.getElementById('quiz-setup').classList.remove('hidden'); }" style="padding:4px 12px;border-radius:20px;border:1.5px solid #c0392b;background:#fdecea;color:#c0392b;font-size:0.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;">✕ Stop</button>
+          <button onclick="if(confirm('Keluar dari quiz?')){ stopTimer(); document.getElementById('quiz-area').classList.add('hidden'); document.getElementById('quiz-setup').classList.remove('hidden'); }" style="padding:4px 12px;border-radius:20px;border:1.5px solid #c0392b;background:#fdecea;color:#c0392b;font-size:0.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;">✕ Stop</button>
         </div>
       </div>
       <div class="progress-bar"><div class="progress-bar-fill" id="q-progress-fill" style="width:0%"></div></div>
     </div>
+    
+    <!-- Timer Panel -->
+    <div class="timer-panel">
+      <div class="timer-display">
+        <div class="timer-icon">⏱️</div>
+        <div>
+          <div class="timer-time" id="timer-display">00:00</div>
+          <div class="timer-mode" id="timer-mode-label">Stopwatch</div>
+        </div>
+      </div>
+      <div class="timer-controls">
+        <button class="timer-btn timer-start" onclick="startTimer()">▶ Mulai</button>
+        <button class="timer-btn timer-pause" onclick="pauseTimer()" style="display:none;" id="pause-btn">⏸ Jeda</button>
+        <button class="timer-btn timer-stop" onclick="stopTimer()">⏹ Henti</button>
+        <button class="timer-btn timer-reset" onclick="resetTimer()">↺ Reset</button>
+        <button class="timer-mode-toggle" onclick="toggleTimerMode()">Ubah Mode</button>
+      </div>
+    </div>
+    
     <div class="quiz-card">
       <div class="quiz-badge" id="q-badge">N5</div>
       <div class="quiz-question" id="q-question"></div>
@@ -942,6 +982,25 @@
         <button class="inner-tab" id="jlpt-mode-typing" onclick="jlptQuizMode='typing';renderJlptQuestions()" style="padding:4px 10px">✍️ Ketik Jawaban</button>
     </div>
   </div>
+  
+  <!-- Timer Panel for JLPT -->
+  <div class="timer-panel" style="margin:20px auto;max-width:1100px;">
+    <div class="timer-display">
+      <div class="timer-icon">⏱️</div>
+      <div>
+        <div class="timer-time" id="jlpt-timer-display">00:00</div>
+        <div class="timer-mode" id="jlpt-timer-mode-label">Stopwatch</div>
+      </div>
+    </div>
+    <div class="timer-controls">
+      <button class="timer-btn timer-start" onclick="startJlptTimer()">▶ Mulai</button>
+      <button class="timer-btn timer-pause" onclick="pauseJlptTimer()" style="display:none;" id="jlpt-pause-btn">⏸ Jeda</button>
+      <button class="timer-btn timer-stop" onclick="stopJlptTimer()">⏹ Henti</button>
+      <button class="timer-btn timer-reset" onclick="resetJlptTimer()">↺ Reset</button>
+      <button class="timer-mode-toggle" onclick="toggleJlptTimerMode()">Ubah Mode</button>
+    </div>
+  </div>
+  
   <div class="jlpt-section-wrap" id="jlpt-questions-wrap"></div>
   <div class="jlpt-submit-bar">
     <div class="jsb-left">
@@ -1719,6 +1778,95 @@ let jlptSelections = {};
 let jlptQuizMode = 'multiple';
 let submitted = false;
 
+// JLPT Timer variables
+let jlptTimerInterval = null;
+let jlptTimerSeconds = 0;
+let jlptIsTimerRunning = false;
+let jlptTimerMode = 'stopwatch';
+let jlptTimerDuration = 3600; // 1 jam default
+
+function initJlptTimer() {
+    jlptTimerSeconds = 0;
+    jlptIsTimerRunning = false;
+    jlptTimerMode = 'stopwatch';
+    updateJlptTimerDisplay();
+    document.getElementById('jlpt-timer-mode-label').textContent = 'Stopwatch';
+    document.getElementById('jlpt-pause-btn').style.display = 'none';
+    document.querySelector('.timer-panel .timer-start').style.display = 'block';
+}
+
+function startJlptTimer() {
+    if (jlptIsTimerRunning) return;
+    jlptIsTimerRunning = true;
+    document.querySelectorAll('.timer-panel .timer-start')[0].style.display = 'none';
+    document.getElementById('jlpt-pause-btn').style.display = 'block';
+    
+    jlptTimerInterval = setInterval(() => {
+        jlptTimerSeconds++;
+        updateJlptTimerDisplay();
+        
+        if (jlptTimerMode === 'timer') {
+            const remaining = jlptTimerDuration - jlptTimerSeconds;
+            if (remaining <= 0) {
+                stopJlptTimer();
+                alert('Waktu ujian habis! ⏰');
+            }
+        }
+    }, 1000);
+}
+
+function pauseJlptTimer() {
+    if (!jlptIsTimerRunning) return;
+    jlptIsTimerRunning = false;
+    clearInterval(jlptTimerInterval);
+    document.querySelectorAll('.timer-panel .timer-start')[0].style.display = 'block';
+    document.getElementById('jlpt-pause-btn').style.display = 'none';
+}
+
+function stopJlptTimer() {
+    jlptIsTimerRunning = false;
+    clearInterval(jlptTimerInterval);
+    document.querySelectorAll('.timer-panel .timer-start')[0].style.display = 'block';
+    document.getElementById('jlpt-pause-btn').style.display = 'none';
+}
+
+function resetJlptTimer() {
+    stopJlptTimer();
+    jlptTimerSeconds = 0;
+    updateJlptTimerDisplay();
+}
+
+function toggleJlptTimerMode() {
+    stopJlptTimer();
+    resetJlptTimer();
+    
+    if (jlptTimerMode === 'stopwatch') {
+        jlptTimerMode = 'timer';
+        jlptTimerSeconds = 0;
+        jlptTimerDuration = 3600; // 1 jam
+        document.getElementById('jlpt-timer-mode-label').textContent = 'Timer (1 jam)';
+    } else {
+        jlptTimerMode = 'stopwatch';
+        document.getElementById('jlpt-timer-mode-label').textContent = 'Stopwatch';
+    }
+    updateJlptTimerDisplay();
+}
+
+function updateJlptTimerDisplay() {
+    let displaySeconds = jlptTimerSeconds;
+    
+    if (jlptTimerMode === 'timer') {
+        displaySeconds = Math.max(0, jlptTimerDuration - jlptTimerSeconds);
+    }
+    
+    const minutes = Math.floor(displaySeconds / 60);
+    const seconds = displaySeconds % 60;
+    const timeStr = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+    
+    const timerDisplay = document.getElementById('jlpt-timer-display');
+    timerDisplay.textContent = timeStr;
+}
+
 function rubyWrap(text, reading) {
     if (!reading || text === reading) return text;
     const hasKanji = /[\u4e00-\u9faf]/.test(text);
@@ -2075,6 +2223,115 @@ function shuffleFlashcards() {
 }
 
 // ════════════════════════
+// TIMER & STOPWATCH
+// ════════════════════════
+let timerInterval = null;
+let timerSeconds = 0;
+let isTimerRunning = false;
+let timerMode = 'stopwatch'; // 'stopwatch' atau 'timer'
+let timerDuration = 300; // 5 menit default untuk timer mode
+
+function initTimer() {
+    timerSeconds = 0;
+    isTimerRunning = false;
+    timerMode = 'stopwatch';
+    updateTimerDisplay();
+    document.getElementById('timer-mode-label').textContent = 'Stopwatch';
+    document.getElementById('pause-btn').style.display = 'none';
+    document.querySelector('.timer-start').style.display = 'block';
+}
+
+function startTimer() {
+    if (isTimerRunning) return;
+    isTimerRunning = true;
+    document.querySelector('.timer-start').style.display = 'none';
+    document.getElementById('pause-btn').style.display = 'block';
+    
+    timerInterval = setInterval(() => {
+        timerSeconds++;
+        updateTimerDisplay();
+        
+        if (timerMode === 'timer') {
+            const remaining = timerDuration - timerSeconds;
+            if (remaining <= 10 && remaining > 0) {
+                const timerDisplay = document.getElementById('timer-display');
+                timerDisplay.classList.add('warning');
+            }
+            if (remaining <= 0) {
+                stopTimer();
+                alert('Waktu habis! ⏰');
+            }
+        }
+    }, 1000);
+}
+
+function pauseTimer() {
+    if (!isTimerRunning) return;
+    isTimerRunning = false;
+    clearInterval(timerInterval);
+    document.querySelector('.timer-start').style.display = 'block';
+    document.getElementById('pause-btn').style.display = 'none';
+}
+
+function stopTimer() {
+    isTimerRunning = false;
+    clearInterval(timerInterval);
+    document.querySelector('.timer-start').style.display = 'block';
+    document.getElementById('pause-btn').style.display = 'none';
+}
+
+function resetTimer() {
+    stopTimer();
+    timerSeconds = 0;
+    updateTimerDisplay();
+    document.getElementById('timer-display').classList.remove('warning', 'danger');
+}
+
+function toggleTimerMode() {
+    stopTimer();
+    resetTimer();
+    
+    if (timerMode === 'stopwatch') {
+        timerMode = 'timer';
+        timerSeconds = 0;
+        timerDuration = 300; // 5 menit
+        document.getElementById('timer-mode-label').textContent = 'Timer (5 menit)';
+    } else {
+        timerMode = 'stopwatch';
+        document.getElementById('timer-mode-label').textContent = 'Stopwatch';
+    }
+    updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+    let displaySeconds = timerSeconds;
+    
+    if (timerMode === 'timer') {
+        displaySeconds = Math.max(0, timerDuration - timerSeconds);
+    }
+    
+    const minutes = Math.floor(displaySeconds / 60);
+    const seconds = displaySeconds % 60;
+    const timeStr = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+    
+    const timerDisplay = document.getElementById('timer-display');
+    timerDisplay.textContent = timeStr;
+    
+    if (timerMode === 'timer') {
+        const remaining = timerDuration - timerSeconds;
+        if (remaining <= 0) {
+            timerDisplay.classList.add('danger');
+            timerDisplay.classList.remove('warning');
+        } else if (remaining <= 10) {
+            timerDisplay.classList.add('warning');
+            timerDisplay.classList.remove('danger');
+        } else {
+            timerDisplay.classList.remove('warning', 'danger');
+        }
+    }
+}
+
+// ════════════════════════
 // QUIZ
 // ════════════════════════
 let qQuestions=[],qCurrent=0,qCorrect=0,qWrong=0,isMicMode=false,recognition=null;
@@ -2095,6 +2352,7 @@ function startQuiz() {
     document.getElementById('quiz-setup').classList.add('hidden');
     document.getElementById('quiz-result').classList.add('hidden');
     document.getElementById('quiz-area').classList.remove('hidden');
+    initTimer();
     renderQuestion();
 }
 
@@ -2430,6 +2688,7 @@ function checkTypingAnswer() {
 }
 
 function showQuizResult() {
+    stopTimer();
     document.getElementById('quiz-area').classList.add('hidden');
     document.getElementById('quiz-result').classList.remove('hidden');
     
@@ -2445,6 +2704,7 @@ function showQuizResult() {
 }
 
 function backToSetup() {
+    stopTimer();
     document.getElementById('quiz-result').classList.add('hidden');
     document.getElementById('quiz-setup').classList.remove('hidden');
 }
@@ -2651,6 +2911,7 @@ function updateJlptProgress() {
 }
 
 function submitJlpt() {
+    stopJlptTimer();
     if(!confirm("Kumpulkan jawaban sekarang?")) return;
     submitted = true;
     
@@ -2734,6 +2995,7 @@ function showJlptResult(correct, total, secStats, secTotals) {
 }
 
 function closeResultModal() {
+    stopJlptTimer();
     document.getElementById('jlpt-result-overlay').classList.remove('show');
 }
 
@@ -4483,6 +4745,115 @@ let kanaQuizStats = { correct: 0, wrong: 0 };
 let kanaQuizMode = 'multiple';
 let kanaQuizAnswered = false;
 
+// Kana Timer variables
+let kanaTimerInterval = null;
+let kanaTimerSeconds = 0;
+let kanaIsTimerRunning = false;
+let kanaTimerMode = 'stopwatch';
+let kanaTimerDuration = 600; // 10 menit default
+
+function initKanaTimer() {
+    kanaTimerSeconds = 0;
+    kanaIsTimerRunning = false;
+    kanaTimerMode = 'stopwatch';
+    updateKanaTimerDisplay();
+    document.getElementById('kana-timer-mode-label').textContent = 'Stopwatch';
+    document.getElementById('kana-pause-btn').style.display = 'none';
+    document.querySelectorAll('.timer-panel .timer-start').forEach((btn, idx) => {
+        if (idx === 3) btn.style.display = 'block'; // Kana timer is the 4th timer panel
+    });
+}
+
+function startKanaTimer() {
+    if (kanaIsTimerRunning) return;
+    kanaIsTimerRunning = true;
+    document.querySelectorAll('.timer-panel .timer-start')[3].style.display = 'none';
+    document.getElementById('kana-pause-btn').style.display = 'block';
+    
+    kanaTimerInterval = setInterval(() => {
+        kanaTimerSeconds++;
+        updateKanaTimerDisplay();
+        
+        if (kanaTimerMode === 'timer') {
+            const remaining = kanaTimerDuration - kanaTimerSeconds;
+            if (remaining <= 10 && remaining > 0) {
+                const timerDisplay = document.getElementById('kana-timer-display');
+                timerDisplay.classList.add('warning');
+            }
+            if (remaining <= 0) {
+                stopKanaTimer();
+                alert('Waktu kuis kana habis! ⏰');
+            }
+        }
+    }, 1000);
+}
+
+function pauseKanaTimer() {
+    if (!kanaIsTimerRunning) return;
+    kanaIsTimerRunning = false;
+    clearInterval(kanaTimerInterval);
+    document.querySelectorAll('.timer-panel .timer-start')[3].style.display = 'block';
+    document.getElementById('kana-pause-btn').style.display = 'none';
+}
+
+function stopKanaTimer() {
+    kanaIsTimerRunning = false;
+    clearInterval(kanaTimerInterval);
+    document.querySelectorAll('.timer-panel .timer-start')[3].style.display = 'block';
+    document.getElementById('kana-pause-btn').style.display = 'none';
+}
+
+function resetKanaTimer() {
+    stopKanaTimer();
+    kanaTimerSeconds = 0;
+    updateKanaTimerDisplay();
+    document.getElementById('kana-timer-display').classList.remove('warning', 'danger');
+}
+
+function toggleKanaTimerMode() {
+    stopKanaTimer();
+    resetKanaTimer();
+    
+    if (kanaTimerMode === 'stopwatch') {
+        kanaTimerMode = 'timer';
+        kanaTimerSeconds = 0;
+        kanaTimerDuration = 600; // 10 menit
+        document.getElementById('kana-timer-mode-label').textContent = 'Timer (10 menit)';
+    } else {
+        kanaTimerMode = 'stopwatch';
+        document.getElementById('kana-timer-mode-label').textContent = 'Stopwatch';
+    }
+    updateKanaTimerDisplay();
+}
+
+function updateKanaTimerDisplay() {
+    let displaySeconds = kanaTimerSeconds;
+    
+    if (kanaTimerMode === 'timer') {
+        displaySeconds = Math.max(0, kanaTimerDuration - kanaTimerSeconds);
+    }
+    
+    const minutes = Math.floor(displaySeconds / 60);
+    const seconds = displaySeconds % 60;
+    const timeStr = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+    
+    const timerDisplay = document.getElementById('kana-timer-display');
+    timerDisplay.textContent = timeStr;
+    
+    if (kanaTimerMode === 'timer') {
+        const remaining = kanaTimerDuration - kanaTimerSeconds;
+        if (remaining <= 0) {
+            timerDisplay.classList.add('danger');
+            timerDisplay.classList.remove('warning');
+        } else if (remaining <= 10) {
+            timerDisplay.classList.add('warning');
+            timerDisplay.classList.remove('danger');
+        } else {
+            timerDisplay.classList.remove('warning', 'danger');
+        }
+    }
+}
+
 function setKanaScript(sc) {
     kanaScript = sc;
     ['hira','kata','both'].forEach(k => document.getElementById(`kana-btn-${k}`).classList.remove('active'));
@@ -4717,6 +5088,25 @@ function renderKanaQuizSetup(container) {
         <button class="inner-tab ${kanaQuizMode==='multiple'?'active':''}" onclick="kanaQuizMode='multiple';renderKanaQuizQuestion()">Pilihan Ganda</button>
         <button class="inner-tab ${kanaQuizMode==='typing'?'active':''}" onclick="kanaQuizMode='typing';renderKanaQuizQuestion()">✍️ Ketik</button>
       </div>
+      
+      <!-- Timer Panel for Kana Quiz -->
+      <div class="timer-panel" style="margin-bottom:16px;">
+        <div class="timer-display">
+          <div class="timer-icon">⏱️</div>
+          <div>
+            <div class="timer-time" id="kana-timer-display">00:00</div>
+            <div class="timer-mode" id="kana-timer-mode-label">Stopwatch</div>
+          </div>
+        </div>
+        <div class="timer-controls">
+          <button class="timer-btn timer-start" onclick="startKanaTimer()">▶ Mulai</button>
+          <button class="timer-btn timer-pause" onclick="pauseKanaTimer()" style="display:none;" id="kana-pause-btn">⏸ Jeda</button>
+          <button class="timer-btn timer-stop" onclick="stopKanaTimer()">⏹ Henti</button>
+          <button class="timer-btn timer-reset" onclick="resetKanaTimer()">↺ Reset</button>
+          <button class="timer-mode-toggle" onclick="toggleKanaTimerMode()">Ubah Mode</button>
+        </div>
+      </div>
+      
       <div id="kana-quiz-area"></div>
     </div>`;
     startKanaQuiz();
@@ -4728,6 +5118,7 @@ function startKanaQuiz() {
     kanaQuizList = [...list].sort(() => Math.random() - 0.5);
     kanaQuizIndex = 0;
     kanaQuizStats = { correct: 0, wrong: 0 };
+    initKanaTimer();
     renderKanaQuizQuestion();
 }
 
@@ -4736,6 +5127,7 @@ function renderKanaQuizQuestion() {
     if (!area) return;
     const list = getFlatKanaList();
     if (kanaQuizIndex >= kanaQuizList.length) {
+        stopKanaTimer();
         const total = kanaQuizStats.correct + kanaQuizStats.wrong;
         const pct = total > 0 ? Math.round(kanaQuizStats.correct / total * 100) : 0;
         area.innerHTML = `
@@ -6143,6 +6535,24 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
 
+    <!-- Timer Panel for Harian -->
+    <div class="timer-panel" style="margin-bottom:20px;">
+      <div class="timer-display">
+        <div class="timer-icon">⏱️</div>
+        <div>
+          <div class="timer-time" id="harian-timer-display">00:00</div>
+          <div class="timer-mode" id="harian-timer-mode-label">Stopwatch</div>
+        </div>
+      </div>
+      <div class="timer-controls">
+        <button class="timer-btn timer-start" onclick="startHarianTimer()">▶ Mulai</button>
+        <button class="timer-btn timer-pause" onclick="pauseHarianTimer()" style="display:none;" id="harian-pause-btn">⏸ Jeda</button>
+        <button class="timer-btn timer-stop" onclick="stopHarianTimer()">⏹ Henti</button>
+        <button class="timer-btn timer-reset" onclick="resetHarianTimer()">↺ Reset</button>
+        <button class="timer-mode-toggle" onclick="toggleHarianTimerMode()">Ubah Mode</button>
+      </div>
+    </div>
+
     <!-- Day Grid -->
     <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;justify-content:center;">
       <button id="hr-btn-today" onclick="hrShowSection('today')" style="padding:8px 20px;border-radius:20px;border:2px solid #c0392b;background:#c0392b;color:#fff;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">📅 Hari Ini</button>
@@ -6168,6 +6578,95 @@ document.addEventListener('DOMContentLoaded', function() {
 
 var hrCurrentSection = 'today';
 var HR_KEY = 'hr60_progress';
+
+// Harian Timer variables
+var harianTimerInterval = null;
+var harianTimerSeconds = 0;
+var harianIsTimerRunning = false;
+var harianTimerMode = 'stopwatch';
+var harianTimerDuration = 1800; // 30 menit default
+
+function initHarianTimer() {
+    harianTimerSeconds = 0;
+    harianIsTimerRunning = false;
+    harianTimerMode = 'stopwatch';
+    updateHarianTimerDisplay();
+    document.getElementById('harian-timer-mode-label').textContent = 'Stopwatch';
+    document.getElementById('harian-pause-btn').style.display = 'none';
+    document.querySelectorAll('.timer-panel .timer-start')[2].style.display = 'block';
+}
+
+function startHarianTimer() {
+    if (harianIsTimerRunning) return;
+    harianIsTimerRunning = true;
+    document.querySelectorAll('.timer-panel .timer-start')[2].style.display = 'none';
+    document.getElementById('harian-pause-btn').style.display = 'block';
+    
+    harianTimerInterval = setInterval(() => {
+        harianTimerSeconds++;
+        updateHarianTimerDisplay();
+        
+        if (harianTimerMode === 'timer') {
+            const remaining = harianTimerDuration - harianTimerSeconds;
+            if (remaining <= 0) {
+                stopHarianTimer();
+                alert('Waktu latihan sehari harian habis! ⏰');
+            }
+        }
+    }, 1000);
+}
+
+function pauseHarianTimer() {
+    if (!harianIsTimerRunning) return;
+    harianIsTimerRunning = false;
+    clearInterval(harianTimerInterval);
+    document.querySelectorAll('.timer-panel .timer-start')[2].style.display = 'block';
+    document.getElementById('harian-pause-btn').style.display = 'none';
+}
+
+function stopHarianTimer() {
+    harianIsTimerRunning = false;
+    clearInterval(harianTimerInterval);
+    document.querySelectorAll('.timer-panel .timer-start')[2].style.display = 'block';
+    document.getElementById('harian-pause-btn').style.display = 'none';
+}
+
+function resetHarianTimer() {
+    stopHarianTimer();
+    harianTimerSeconds = 0;
+    updateHarianTimerDisplay();
+}
+
+function toggleHarianTimerMode() {
+    stopHarianTimer();
+    resetHarianTimer();
+    
+    if (harianTimerMode === 'stopwatch') {
+        harianTimerMode = 'timer';
+        harianTimerSeconds = 0;
+        harianTimerDuration = 1800; // 30 menit
+        document.getElementById('harian-timer-mode-label').textContent = 'Timer (30 menit)';
+    } else {
+        harianTimerMode = 'stopwatch';
+        document.getElementById('harian-timer-mode-label').textContent = 'Stopwatch';
+    }
+    updateHarianTimerDisplay();
+}
+
+function updateHarianTimerDisplay() {
+    let displaySeconds = harianTimerSeconds;
+    
+    if (harianTimerMode === 'timer') {
+        displaySeconds = Math.max(0, harianTimerDuration - harianTimerSeconds);
+    }
+    
+    const minutes = Math.floor(displaySeconds / 60);
+    const seconds = displaySeconds % 60;
+    const timeStr = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+    
+    const timerDisplay = document.getElementById('harian-timer-display');
+    timerDisplay.textContent = timeStr;
+}
 
 // Load/save progress
 function hrLoad() {
