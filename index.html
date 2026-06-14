@@ -1679,7 +1679,7 @@ const vocab = [
   {jp:'広い',reading:'ひろい',id:'Luas',level:'N5',cat:'adjectives',example:'部屋が広い。\nKamarnya luas.'},
   {jp:'狭い',reading:'せまい',id:'Sempit',level:'N5',cat:'adjectives',example:'道が狭い。\nJalannya sempit.'},
   {jp:'多い',reading:'おおい',id:'Banyak',level:'N5',cat:'adjectives',example:'人が多い。\nOrangnya banyak.'},
-  {jp:'少ない',reading:'すくない',id:'Sedikit',level:'N5',cat:'adjectives',example:'時間が少ない。\nWaktunya sedikit.'},
+  {jp:'少ない',reading:'すくない',id:'Jarang/Sedikit',level:'N5',cat:'adjectives',example:'時間が少ない。\nWaktunya sedikit.'},
   {jp:'新しい',reading:'あたらしい',id:'Baru',level:'N5',cat:'adjectives',example:'新しい靴を買う。\nMembeli sepatu baru.'},
   {jp:'古い',reading:'ふるい',id:'Lama / Tua',level:'N5',cat:'adjectives',example:'古い建物だ。\nBangunan yang tua.'},
   {jp:'重い',reading:'おもい',id:'Berat',level:'N5',cat:'adjectives',example:'荷物が重い。\nBarang bawaannya berat.'},
@@ -1706,7 +1706,6 @@ const vocab = [
   {jp:'正直',reading:'しょうじき',id:'Jujur',level:'N4',cat:'adjectives',example:'正直な人だ。\nOrang yang jujur.'},
   {jp:'真剣',reading:'しんけん',id:'Serius / Sungguh-sungguh',level:'N4',cat:'adjectives',example:'真剣に考える。\nBerpikir dengan serius.'},
   {jp:'特別',reading:'とくべつ',id:'Istimewa / Khusus',level:'N4',cat:'adjectives',example:'特別な日だ。\nHari yang istimewa.'},
-  {jp:'大切',reading:'たいせつ',id:'Berharga / Penting',level:'N4',cat:'adjectives',example:'時間は大切だ。\nWaktu itu berharga.'},
   // ─── KATA KETERANGAN N5 ───
   {jp:'とても',reading:'とても',id:'Sangat',level:'N5',cat:'adverbs',example:'とても嬉しい。\nSangat senang.'},
   {jp:'少し',reading:'すこし',id:'Sedikit',level:'N5',cat:'adverbs',example:'少し待って。\nTunggu sebentar.'},
@@ -1724,7 +1723,6 @@ const vocab = [
   {jp:'一緒に',reading:'いっしょに',id:'Bersama-sama',level:'N5',cat:'adverbs',example:'一緒に行こう。\nAyo pergi bersama.'},
   {jp:'一人で',reading:'ひとりで',id:'Sendiri',level:'N5',cat:'adverbs',example:'一人で旅行する。\nBerwisata sendiri.'},
   // ─── KATA KETERANGAN N4 ───
-  {jp:'急に',reading:'きゅうに',id:'Tiba-tiba',level:'N4',cat:'adverbs',example:'急に雨が降った。\nTiba-tiba hujan turun.'},
   {jp:'だんだん',reading:'だんだん',id:'Semakin lama semakin',level:'N4',cat:'adverbs',example:'だんだん上手になる。\nSemakin lama semakin pandai.'},
   {jp:'やっと',reading:'やっと',id:'Akhirnya',level:'N4',cat:'adverbs',example:'やっと終わった。\nAkhirnya selesai.'},
   {jp:'まず',reading:'まず',id:'Pertama-tama',level:'N4',cat:'adverbs',example:'まず手を洗ってください。\nPertama-tama cuci tangan.'},
@@ -1770,7 +1768,6 @@ const vocab = [
   {jp:'はじめまして',reading:'はじめまして',id:'Salam Perkenalan',level:'N5',cat:'daily',example:'はじめまして。どうぞよろしく。\nSalam kenal.'},
   {jp:'どうぞ',reading:'どうぞ',id:'Silakan',level:'N5',cat:'daily',example:'どうぞ、座ってください。\nSilakan duduk.'},
   {jp:'どうも',reading:'どうも',id:'Terima kasih (informal)',level:'N5',cat:'daily',example:'どうもありがとう。\nTerima kasih banyak.'},
-  {jp:'大丈夫',reading:'だいじょうぶ',id:'Tidak apa-apa',level:'N5',cat:'daily',example:'大丈夫ですか？\nApa kamu baik-baik saja?'},
   {jp:'いただきます',reading:'いただきます',id:'Selamat makan (sebelum makan)',level:'N5',cat:'daily',example:'いただきます！\nSelamat makan!'},
   {jp:'ごちそうさま',reading:'ごちそうさまでした',id:'Terima kasih atas makanannya',level:'N5',cat:'daily',example:'ごちそうさまでした。\nTerima kasih atas makanannya.'},
   {jp:'ただいま',reading:'ただいま',id:'Saya pulang',level:'N5',cat:'daily',example:'ただいま！\nSaya pulang!'},
@@ -1818,67 +1815,28 @@ const vocab = [
   {jp:'朝ごはん',reading:'あさごはん',id:'Sarapan',level:'N5',cat:'noun',example:'毎朝、朝ごはんを食べます。\nSetiap pagi saya makan sarapan.'},
   {jp:'晩ごはん',reading:'ばんごはん',id:'Makan malam',level:'N5',cat:'noun',example:'晩ごはんは何ですか。\nMakan malamnya apa?'},
   {jp:'昼ごはん',reading:'ひるごはん',id:'Makan siang',level:'N5',cat:'noun',example:'昼ごはんを一緒に食べましょう。\nMari makan siang bersama.'},
-  {jp:'電話',reading:'でんわ',id:'Telepon',level:'N5',cat:'noun',example:'電話をかけてください。\nTolong hubungi via telepon.'},
-  {jp:'手紙',reading:'てがみ',id:'Surat',level:'N5',cat:'noun',example:'友達に手紙を書いた。\nSaya menulis surat kepada teman.'},
-  {jp:'天気',reading:'てんき',id:'Cuaca',level:'N5',cat:'noun',example:'今日の天気はいいです。\nCuaca hari ini bagus.'},
-  {jp:'道',reading:'みち',id:'Jalan / Jalur',level:'N5',cat:'noun',example:'この道をまっすぐ行ってください。\nTolong lurus di jalan ini.'},
-  {jp:'角',reading:'かど',id:'Sudut / Pojok',level:'N5',cat:'noun',example:'角を右に曲がってください。\nBelok kanan di sudut.'},
-  {jp:'橋',reading:'はし',id:'Jembatan',level:'N5',cat:'noun',example:'橋を渡ってください。\nTolong seberangi jembatan.'},
-  {jp:'地図',reading:'ちず',id:'Peta',level:'N5',cat:'noun',example:'地図を見てください。\nTolong lihat petanya.'},
   {jp:'切符',reading:'きっぷ',id:'Tiket',level:'N5',cat:'noun',example:'切符を買いました。\nSaya sudah beli tiket.'},
-  {jp:'荷物',reading:'にもつ',id:'Barang bawaan / Bagasi',level:'N5',cat:'noun',example:'荷物が重いです。\nBarang bawaannya berat.'},
   {jp:'財布',reading:'さいふ',id:'Dompet',level:'N5',cat:'noun',example:'財布をなくしました。\nSaya kehilangan dompet.'},
   {jp:'鍵',reading:'かぎ',id:'Kunci',level:'N5',cat:'noun',example:'鍵を忘れました。\nSaya lupa membawa kunci.'},
   {jp:'眼鏡',reading:'めがね',id:'Kacamata',level:'N5',cat:'noun',example:'眼鏡をかけています。\nSaya memakai kacamata.'},
   {jp:'帽子',reading:'ぼうし',id:'Topi',level:'N5',cat:'noun',example:'帽子をかぶってください。\nTolong pakai topi.'},
   {jp:'靴',reading:'くつ',id:'Sepatu',level:'N5',cat:'noun',example:'新しい靴を買いました。\nSaya beli sepatu baru.'},
-  {jp:'服',reading:'ふく',id:'Pakaian / Baju',level:'N5',cat:'noun',example:'その服はかわいいです。\nBaju itu lucu.'},
   {jp:'洗濯',reading:'せんたく',id:'Mencuci pakaian',level:'N5',cat:'noun',example:'洗濯をします。\nSaya mencuci pakaian.'},
   {jp:'掃除',reading:'そうじ',id:'Membersihkan / Bersih-bersih',level:'N5',cat:'noun',example:'部屋の掃除をしました。\nSaya membersihkan kamar.'},
-  {jp:'料理',reading:'りょうり',id:'Masakan / Memasak',level:'N5',cat:'noun',example:'料理が好きです。\nSaya suka memasak.'},
   {jp:'歌',reading:'うた',id:'Lagu',level:'N5',cat:'noun',example:'歌を歌いましょう。\nMari bernyanyi.'},
   {jp:'絵',reading:'え',id:'Gambar / Lukisan',level:'N5',cat:'noun',example:'絵を描くのが好きです。\nSaya suka menggambar.'},
-  {jp:'写真',reading:'しゃしん',id:'Foto',level:'N5',cat:'noun',example:'写真を撮ってもいいですか。\nBolehkah saya foto?'},
-  {jp:'映画',reading:'えいが',id:'Film',level:'N5',cat:'noun',example:'映画を見に行きましょう。\nMari pergi nonton film.'},
-  {jp:'音楽',reading:'おんがく',id:'Musik',level:'N5',cat:'noun',example:'音楽を聴くのが好きです。\nSaya suka mendengarkan musik.'},
   {jp:'旅行',reading:'りょこう',id:'Perjalanan / Wisata',level:'N5',cat:'noun',example:'旅行が大好きです。\nSaya sangat suka berwisata.'},
   {jp:'休み',reading:'やすみ',id:'Istirahat / Libur',level:'N5',cat:'noun',example:'明日は休みです。\nBesok libur.'},
-  {jp:'仕事',reading:'しごと',id:'Pekerjaan',level:'N5',cat:'noun',example:'仕事は何ですか。\nPekerjaannya apa?'},
-  {jp:'会社',reading:'かいしゃ',id:'Perusahaan / Kantor',level:'N5',cat:'noun',example:'会社に行きます。\nSaya pergi ke kantor.'},
 
   // ── KOSAKATA BARU N4 ──
-  {jp:'経験',reading:'けいけん',id:'Pengalaman',level:'N4',cat:'noun',example:'経験が大切です。\nPengalaman itu penting.'},
   {jp:'意見',reading:'いけん',id:'Pendapat',level:'N4',cat:'noun',example:'あなたの意見を聞かせてください。\nTolong ceritakan pendapat Anda.'},
-  {jp:'理由',reading:'りゆう',id:'Alasan',level:'N4',cat:'noun',example:'理由を教えてください。\nTolong beritahu alasannya.'},
   {jp:'方法',reading:'ほうほう',id:'Cara / Metode',level:'N4',cat:'noun',example:'もっといい方法があります。\nAda cara yang lebih baik.'},
-  {jp:'問題',reading:'もんだい',id:'Masalah / Soal',level:'N4',cat:'noun',example:'問題がありますか。\nAda masalah?'},
-  {jp:'答え',reading:'こたえ',id:'Jawaban',level:'N4',cat:'noun',example:'答えを書いてください。\nTolong tulis jawabannya.'},
-  {jp:'質問',reading:'しつもん',id:'Pertanyaan',level:'N4',cat:'noun',example:'質問してもいいですか。\nBolehkah saya bertanya?'},
-  {jp:'説明',reading:'せつめい',id:'Penjelasan',level:'N4',cat:'noun',example:'もう一度説明してください。\nTolong jelaskan sekali lagi.'},
   {jp:'練習',reading:'れんしゅう',id:'Latihan / Berlatih',level:'N4',cat:'noun',example:'毎日練習します。\nSaya berlatih setiap hari.'},
   {jp:'準備',reading:'じゅんび',id:'Persiapan',level:'N4',cat:'noun',example:'準備ができました。\nPersiapan sudah selesai.'},
-  {jp:'計画',reading:'けいかく',id:'Rencana',level:'N4',cat:'noun',example:'計画を立てましょう。\nMari membuat rencana.'},
-  {jp:'予定',reading:'よてい',id:'Jadwal / Rencana',level:'N4',cat:'noun',example:'明日の予定は何ですか。\nApa jadwal besok?'},
-  {jp:'連絡',reading:'れんらく',id:'Kontak / Menghubungi',level:'N4',cat:'noun',example:'後で連絡します。\nNanti saya hubungi.'},
   {jp:'確認',reading:'かくにん',id:'Konfirmasi / Memastikan',level:'N4',cat:'noun',example:'もう一度確認してください。\nTolong pastikan sekali lagi.'},
   {jp:'注意',reading:'ちゅうい',id:'Perhatian / Hati-hati',level:'N4',cat:'noun',example:'注意してください。\nTolong hati-hati.'},
-  {jp:'安全',reading:'あんぜん',id:'Aman / Keselamatan',level:'N4',cat:'adj',example:'この道は安全です。\nJalan ini aman.'},
-  {jp:'危険',reading:'きけん',id:'Berbahaya / Bahaya',level:'N4',cat:'adj',example:'危険な場所に行かないでください。\nJangan pergi ke tempat berbahaya.'},
-  {jp:'便利',reading:'べんり',id:'Praktis / Nyaman',level:'N4',cat:'adj',example:'スマホはとても便利です。\nSmartphone sangat praktis.'},
-  {jp:'不便',reading:'ふべん',id:'Tidak praktis / Tidak nyaman',level:'N4',cat:'adj',example:'この駅は不便です。\nStasiun ini tidak praktis.'},
-  {jp:'正直',reading:'しょうじき',id:'Jujur',level:'N4',cat:'adj',example:'正直に言ってください。\nTolong bicara jujur.'},
-  {jp:'親切',reading:'しんせつ',id:'Baik hati / Ramah',level:'N4',cat:'adj',example:'彼はとても親切です。\nDia sangat baik hati.'},
-  {jp:'丁寧',reading:'ていねい',id:'Sopan / Teliti',level:'N4',cat:'adj',example:'丁寧に話してください。\nTolong bicara dengan sopan.'},
-  {jp:'急ぐ',reading:'いそぐ',id:'Terburu-buru / Bergegas',level:'N4',cat:'verb',example:'急がないでください。\nJangan terburu-buru.'},
   {jp:'諦める',reading:'あきらめる',id:'Menyerah / Melepaskan',level:'N4',cat:'verb',example:'諦めないでください。\nJangan menyerah.'},
-  {jp:'頑張る',reading:'がんばる',id:'Berusaha / Semangat',level:'N4',cat:'verb',example:'もっと頑張ります。\nSaya akan berusaha lebih keras.'},
   {jp:'楽しむ',reading:'たのしむ',id:'Menikmati',level:'N4',cat:'verb',example:'旅行を楽しみましょう。\nMari nikmati perjalanan.'},
-  {jp:'選ぶ',reading:'えらぶ',id:'Memilih',level:'N4',cat:'verb',example:'好きなものを選んでください。\nTolong pilih yang kamu suka.'},
-  {jp:'集める',reading:'あつめる',id:'Mengumpulkan',level:'N4',cat:'verb',example:'切手を集めています。\nSaya mengumpulkan perangko.'},
-  {jp:'調べる',reading:'しらべる',id:'Mencari tahu / Meneliti',level:'N4',cat:'verb',example:'インターネットで調べました。\nSaya mencari tahu di internet.'},
-  {jp:'比べる',reading:'くらべる',id:'Membandingkan',level:'N4',cat:'verb',example:'二つを比べてください。\nTolong bandingkan keduanya.'},
-  {jp:'変える',reading:'かえる',id:'Mengubah',level:'N4',cat:'verb',example:'計画を変えましょう。\nMari ubah rencananya.'},
-  {jp:'続ける',reading:'つづける',id:'Melanjutkan',level:'N4',cat:'verb',example:'勉強を続けてください。\nTolong lanjutkan belajarnya.'},
 ];
 
 // ════════════════════════
@@ -2280,8 +2238,20 @@ function toggleMastered() {
     } else {
         masteredSet.add(k.char);
     }
+    saveMasteredKanji();
     openKanjiModal(k); // Re-render modal buttons
     renderKanji(); // Re-render grid to show/hide checkmarks
+}
+
+function saveMasteredKanji() {
+    try { localStorage.setItem('masteredKanji', JSON.stringify([...masteredSet])); } catch(e) {}
+}
+
+function loadMasteredKanji() {
+    try {
+        const km = JSON.parse(localStorage.getItem('masteredKanji') || '[]');
+        masteredSet = new Set(km);
+    } catch(e) { masteredSet = new Set(); }
 }
 
 // ════════════════════════
@@ -6678,7 +6648,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- Day Grid -->
     <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;justify-content:center;">
-      <button id="hr-btn-today" onclick="hrShowSection('today')" style="padding:8px 20px;border-radius:20px;border:2px solid #c0392b;background:#c0392b;color:#fff;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">📅 Hari Ini</button>
+      <button id="hr-btn-today" onclick="hrViewDay=null;hrShowSection('today')" style="padding:8px 20px;border-radius:20px;border:2px solid #c0392b;background:#c0392b;color:#fff;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">📅 Hari Ini</button>
       <button id="hr-btn-calendar" onclick="hrShowSection('calendar')" style="padding:8px 20px;border-radius:20px;border:2px solid var(--border);background:var(--card);color:var(--ink);font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">📆 Kalender</button>
     </div>
 
@@ -6792,11 +6762,21 @@ function updateHarianTimerDisplay() {
 }
 
 // Load/save progress
+var hrDataCache = {days:{}, streak:0, lastDate:''};
+
 function hrLoad() {
-    try { return JSON.parse(localStorage.getItem(HR_KEY)) || {days:{}, streak:0, lastDate:''}; }
-    catch(e) { return {days:{}, streak:0, lastDate:''}; }
+    try {
+        var stored = localStorage.getItem(HR_KEY);
+        if (stored) {
+            hrDataCache = JSON.parse(stored);
+            return hrDataCache;
+        }
+    } catch(e) {}
+    return hrDataCache;
 }
+
 function hrSave(data) {
+    hrDataCache = data;
     try { localStorage.setItem(HR_KEY, JSON.stringify(data)); } catch(e) {}
 }
 
@@ -6808,9 +6788,14 @@ function hrGetCurrentDay() {
 }
 
 // Generate day plan
+var hrPlanCache = {};
+
 function hrGetDayPlan(dayNum) {
-    // Kanji pool
-    var allKanji = typeof kanjiDB !== 'undefined' ? kanjiDB : (typeof kanjiData !== 'undefined' ? kanjiData : []);
+    // Return cached plan if exists (ensures quiz options stay consistent)
+    if (hrPlanCache[dayNum]) return hrPlanCache[dayNum];
+
+    // Kanji pool — gunakan kanjiDB yang sudah di-define di HTML
+    var allKanji = kanjiDB || [];
     var n5Kanji = allKanji.filter(k => k.level === 'N5');
     var n4Kanji = allKanji.filter(k => k.level === 'N4');
 
@@ -6821,7 +6806,7 @@ function hrGetDayPlan(dayNum) {
     if (dayKanji.length < 5) dayKanji = kanjiPool.slice(0, 5);
 
     // Vocab pool (from main database)
-    var allVocab = typeof vocab !== 'undefined' ? vocab : [];
+    var allVocab = vocab || [];
     var n5Vocab = allVocab.filter(v => v.level === 'N5');
     var n4Vocab = allVocab.filter(v => v.level === 'N4');
     var vocabPool = dayNum <= 35 ? n5Vocab : n4Vocab;
@@ -6834,24 +6819,46 @@ function hrGetDayPlan(dayNum) {
     var quizPool = dayVocab.slice();
     for (var i = 0; i < Math.min(5, quizPool.length); i++) {
         var q = quizPool[i];
-        var wrong = vocabPool.filter(v => v.jp !== q.jp).sort(() => Math.random()-0.5).slice(0,3);
-        var opts = [q.id, ...wrong.map(w => w.id)].sort(() => Math.random()-0.5);
+        // Filter out wrong options that have same jp OR same id (translation) as the answer
+        var wrong = vocabPool.filter(v => v.jp !== q.jp && v.id !== q.id).sort(() => Math.random()-0.5).slice(0,3);
+        var opts = [q.id, ...wrong.map(w => w.id)];
+        // Remove duplicate option texts just in case
+        opts = [...new Set(opts)];
+        // If we lost options due to dedup, fill from a wider pool
+        var extraPool = allVocab.filter(v => v.jp !== q.jp && v.id !== q.id && !opts.includes(v.id));
+        while (opts.length < 4 && extraPool.length > 0) {
+            var idx = Math.floor(Math.random() * extraPool.length);
+            opts.push(extraPool[idx].id);
+            extraPool.splice(idx, 1);
+            opts = [...new Set(opts)];
+        }
+        opts = opts.sort(() => Math.random()-0.5);
         dayQuiz.push({question: q.jp, reading: q.reading, answer: q.id, opts: opts});
     }
 
-    // Get special material from data-60hari.js
-    var specialMateri = (typeof materi60Hari !== 'undefined' && materi60Hari[dayNum]) ? materi60Hari[dayNum] : null;
+    // Get special material from data-60hari.js (jika ada)
+    var specialMateri = null;
+    try {
+        if (typeof materi60Hari !== 'undefined' && materi60Hari && materi60Hari[dayNum]) {
+            specialMateri = materi60Hari[dayNum];
+        }
+    } catch(e) {}
 
-    return {kanji: dayKanji, vocab: dayVocab, quiz: dayQuiz, materi: specialMateri};
+    var plan = {kanji: dayKanji, vocab: dayVocab, quiz: dayQuiz, materi: specialMateri};
+    hrPlanCache[dayNum] = plan;
+    return plan;
 }
 
 var hrQuizAnswers = {};
 var hrQuizDone = false;
+var hrViewDay = null; // null = hari ini, angka = mode review hari tertentu
 
 function renderHarian() {
     var data = hrLoad();
     var currentDay = hrGetCurrentDay();
     var doneDays = Object.keys(data.days).length;
+
+    hrViewDay = null; // reset review mode saat halaman dibuka dari nav
 
     // Update stats
     document.getElementById('hr-day-label').textContent = 'Hari ' + currentDay + ' / 60';
@@ -6872,12 +6879,12 @@ function hrShowSection(sec) {
     var btnToday = document.getElementById('hr-btn-today');
     var btnCal = document.getElementById('hr-btn-calendar');
     if (sec === 'today') {
-        btnToday.style.background = '#c0392b'; btnToday.style.color = '#fff'; btnToday.style.borderColor = '#c0392b';
-        btnCal.style.background = 'var(--card)'; btnCal.style.color = 'var(--ink)'; btnCal.style.borderColor = 'var(--border)';
+        btnToday.style.background = 'var(--red)'; btnToday.style.color = '#fff'; btnToday.style.borderColor = 'var(--red)';
+        btnCal.style.background = 'var(--card)'; btnCal.style.color = '#ffffff'; btnCal.style.borderColor = 'var(--border)';
         renderHarianToday();
     } else {
-        btnCal.style.background = '#c0392b'; btnCal.style.color = '#fff'; btnCal.style.borderColor = '#c0392b';
-        btnToday.style.background = 'var(--card)'; btnToday.style.color = 'var(--ink)'; btnToday.style.borderColor = 'var(--border)';
+        btnCal.style.background = 'var(--red)'; btnCal.style.color = '#fff'; btnCal.style.borderColor = 'var(--red)';
+        btnToday.style.background = 'var(--card)'; btnToday.style.color = '#ffffff'; btnToday.style.borderColor = 'var(--border)';
         renderHarianCalendar();
     }
 }
@@ -6885,13 +6892,23 @@ function hrShowSection(sec) {
 function renderHarianToday() {
     var data = hrLoad();
     var currentDay = hrGetCurrentDay();
-    var isDone = data.days[currentDay];
-    var plan = hrGetDayPlan(currentDay);
+    var viewDay = hrViewDay || currentDay;
+    var isReview = hrViewDay !== null && hrViewDay !== currentDay;
+    var isDone = data.days[viewDay];
+    var plan = hrGetDayPlan(viewDay);
     hrQuizAnswers = {};
     hrQuizDone = false;
 
-    var level = currentDay <= 35 ? 'N5' : 'N4';
+    var level = viewDay <= 35 ? 'N5' : 'N4';
     var html = '';
+
+    // Review mode banner
+    if (isReview) {
+        html += '<div style="display:flex;justify-content:space-between;align-items:center;background:rgba(168,85,247,0.12);border:1px solid var(--purple);border-radius:14px;padding:10px 16px;margin-bottom:14px;">';
+        html += '<div style="font-size:0.85rem;color:var(--purple2);font-weight:700;">🔁 Mode Ulang — Hari ' + viewDay + '</div>';
+        html += '<button onclick="hrBackToToday()" style="padding:6px 14px;border-radius:20px;border:1px solid var(--purple);background:rgba(168,85,247,0.15);color:var(--purple2);font-size:0.78rem;cursor:pointer;font-family:\'DM Sans\',sans-serif;font-weight:700;">← Kembali ke Hari Ini</button>';
+        html += '</div>';
+    }
 
     // Header
     var now = new Date();
@@ -6900,9 +6917,9 @@ function renderHarianToday() {
     var dateStr = dayNames[now.getDay()] + ', ' + now.getDate() + ' ' + monthNames[now.getMonth()] + ' ' + now.getFullYear();
 
     html += '<div style="text-align:center;margin-bottom:16px;">';
-    html += '<div style="font-size:0.8rem;color:var(--muted);margin-bottom:6px;">🗓️ ' + dateStr + '</div>';
+    if (!isReview) html += '<div style="font-size:0.8rem;color:var(--muted);margin-bottom:6px;">🗓️ ' + dateStr + '</div>';
     html += '<div style="display:inline-block;padding:6px 20px;border-radius:20px;background:' + (isDone ? '#1a8a3a' : '#c0392b') + ';color:#fff;font-weight:700;font-size:0.85rem;margin-bottom:8px;">';
-    html += isDone ? '✅ Hari ' + currentDay + ' Selesai!' : '📅 Hari ' + currentDay + ' — Level ' + level;
+    html += isDone ? '✅ Hari ' + viewDay + ' Selesai!' : '📅 Hari ' + viewDay + ' — Level ' + level;
     html += '</div></div>';
 
     // KANJI SECTION
@@ -6914,7 +6931,7 @@ function renderHarianToday() {
         html += '<div style="background:var(--bg);border-radius:12px;padding:10px;text-align:center;border:1px solid var(--border);">';
         html += '<div style="font-family:\'Noto Sans JP\';font-size:2rem;font-weight:900;color:#ffffff;">' + k.char + '</div>';
         html += '<div style="font-size:0.72rem;color:#7b2d8b;font-weight:700;">' + (k.on && k.on[0] ? k.on[0] : '') + '</div>';
-        html += '<div style="font-size:0.7rem;color:var(--muted);">' + (k.meaning ? k.meaning.split(',')[0] : '') + '</div>';
+        html += '<div style="font-size:0.7rem;color:#ffffff;">' + (k.meaning ? k.meaning.split(',')[0] : '') + '</div>';
         html += '<button onclick="speakText(\'' + k.char + '\')" style="margin-top:4px;padding:2px 8px;border-radius:10px;border:1px solid var(--border);background:var(--card);font-size:0.68rem;cursor:pointer;color:var(--teal);">🔊</button>';
         html += '</div>';
     });
@@ -6929,8 +6946,8 @@ function renderHarianToday() {
         html += '<div style="background:var(--bg);border-radius:12px;padding:10px;border:1px solid var(--border);">';
         html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;">';
         html += '<div><div style="font-family:\'Noto Sans JP\';font-size:1.1rem;font-weight:700;color:#ffffff;">' + v.jp + '</div>';
-        html += '<div style="font-size:0.7rem;color:var(--muted);">' + v.reading + '</div>';
-        html += '<div style="font-size:0.78rem;color:#1a8a3a;font-weight:600;">' + v.id + '</div></div>';
+        html += '<div style="font-size:0.7rem;color:#6b7280;">' + v.reading + '</div>';
+        html += '<div style="font-size:0.78rem;color:#ffffff;font-weight:600;">' + v.id + '</div></div>';
         html += '<button onclick="speakText(\'' + v.jp + '\')" style="padding:2px 6px;border-radius:10px;border:1px solid var(--border);background:var(--card);font-size:0.68rem;cursor:pointer;color:var(--teal);">🔊</button>';
         html += '</div></div>';
     });
@@ -6946,7 +6963,7 @@ function renderHarianToday() {
         html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">';
         q.opts.forEach(function(opt, oi) {
             html += '<button id="hr-q' + qi + '-o' + oi + '" onclick="hrAnswer(' + qi + ',\'' + opt.replace(/'/g, "\\'") + '\',\'' + q.answer.replace(/'/g, "\\'") + '\')" ';
-            html += 'style="padding:8px;border-radius:8px;border:1.5px solid var(--border);background:var(--card);color:var(--ink);cursor:pointer;font-size:0.82rem;font-family:\'DM Sans\',sans-serif;text-align:left;">';
+            html += 'style="padding:8px;border-radius:8px;border:1.5px solid var(--border);background:#13131f;color:#ffffff;cursor:pointer;font-size:0.82rem;font-family:\'DM Sans\',sans-serif;text-align:left;">';
             html += opt + '</button>';
         });
         html += '</div>';
@@ -6954,10 +6971,13 @@ function renderHarianToday() {
         html += '</div>';
     });
 
-    if (!isDone) {
+    if (!isDone && !isReview) {
         html += '<div style="text-align:center;margin-top:12px;">';
-        html += '<button onclick="hrSelesai(' + currentDay + ')" style="padding:10px 28px;border-radius:20px;border:none;background:#c0392b;color:#fff;font-weight:700;font-size:0.95rem;cursor:pointer;font-family:\'DM Sans\',sans-serif;">✅ Tandai Selesai</button>';
+        html += '<button onclick="hrSelesai(' + viewDay + ')" style="padding:10px 28px;border-radius:20px;border:none;background:#c0392b;color:#fff;font-weight:700;font-size:0.95rem;cursor:pointer;font-family:\'DM Sans\',sans-serif;">✅ Tandai Selesai</button>';
         html += '</div>';
+    }
+    if (isReview) {
+        html += '<div style="text-align:center;margin-top:12px;font-size:0.78rem;color:var(--muted);">📝 Mode ulang — jawaban tidak akan mengubah progress</div>';
     }
     html += '</div>';
 
@@ -7054,7 +7074,8 @@ function hrAnswer(qi, chosen, correct) {
     hrQuizAnswers[qi] = chosen;
 
     var fb = document.getElementById('hr-qfb-' + qi);
-    var plan = hrGetDayPlan(hrGetCurrentDay());
+    var viewDay = hrViewDay || hrGetCurrentDay();
+    var plan = hrGetDayPlan(viewDay);
     var q = plan.quiz[qi];
 
     if (chosen === correct) {
@@ -7068,9 +7089,9 @@ function hrAnswer(qi, chosen, correct) {
         var btn = document.getElementById('hr-q' + qi + '-o' + oi);
         if (!btn) return;
         if (opt === correct) {
-            btn.style.background = '#e8f8ee'; btn.style.borderColor = '#1a8a3a'; btn.style.color = '#1a8a3a';
+            btn.style.background = 'rgba(0,212,170,0.15)'; btn.style.borderColor = 'var(--teal)'; btn.style.color = 'var(--teal)';
         } else if (opt === chosen && chosen !== correct) {
-            btn.style.background = '#fdecea'; btn.style.borderColor = '#c0392b'; btn.style.color = '#c0392b';
+            btn.style.background = 'rgba(255,77,109,0.15)'; btn.style.borderColor = 'var(--red)'; btn.style.color = 'var(--red)';
         }
         btn.disabled = true;
     });
@@ -7107,14 +7128,17 @@ function renderHarianCalendar() {
         var level = d <= 35 ? 'N5' : 'N4';
 
         var bg = isDone ? '#1a8a3a' : isToday ? '#c0392b' : isFuture ? 'var(--bg)' : 'var(--card)';
-        var color = (isDone || isToday) ? '#fff' : isFuture ? 'var(--muted)' : 'var(--ink)';
+        var color = (isDone || isToday) ? '#fff' : isFuture ? '#6b7280' : '#ffffff';
         var border = isToday ? '2px solid #c0392b' : '1px solid var(--border)';
         var cursor = isFuture ? 'default' : 'pointer';
+        var title = isFuture ? '' : (isDone ? 'Klik untuk mengulang Hari ' + d : 'Buka Hari ' + d);
 
-        html += '<div onclick="' + (!isFuture ? 'hrDayClick(' + d + ')' : '') + '" ';
+        html += '<div onclick="' + (!isFuture ? 'hrDayClick(' + d + ')' : '') + '" title="' + title + '" ';
         html += 'style="aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;';
         html += 'border-radius:10px;background:' + bg + ';color:' + color + ';border:' + border + ';cursor:' + cursor + ';';
-        html += 'font-size:0.7rem;font-weight:700;">';
+        html += 'font-size:0.7rem;font-weight:700;transition:transform .15s;" ';
+        if (!isFuture) html += 'onmouseover="this.style.transform=\'scale(1.08)\'" onmouseout="this.style.transform=\'scale(1)\'"';
+        html += '>';
         html += '<div>' + d + '</div>';
         html += '<div style="font-size:0.55rem;opacity:0.8;">' + level + '</div>';
         html += isDone ? '<div style="font-size:0.8rem;">✓</div>' : '';
@@ -7125,9 +7149,20 @@ function renderHarianCalendar() {
 
 function hrDayClick(dayNum) {
     var data = hrLoad();
-    if (!data.days[dayNum] && dayNum > hrGetCurrentDay()) return;
+    var currentDay = hrGetCurrentDay();
+    if (!data.days[dayNum] && dayNum > currentDay) return; // belum sampai hari itu
+
+    // Set review mode jika klik hari yang sudah lewat/selesai, null jika klik hari ini
+    hrViewDay = (dayNum === currentDay) ? null : dayNum;
+
     hrShowSection('today');
     setTimeout(function() { renderHarianToday(); hrInitCanvas(); }, 100);
+}
+
+function hrBackToToday() {
+    hrViewDay = null;
+    renderHarianToday();
+    setTimeout(hrInitCanvas, 100);
 }
 
 var hrDrawing = false;
@@ -7344,17 +7379,24 @@ function updateGamificationUI() {
 const originalNextQuestion = window.nextQuestion || function(){};
 window.nextQuestion = function() {
   if (document.getElementById('btn-next') && document.getElementById('btn-next').textContent.includes('Selesai')) {
-      // akhir kuis
-      const correct = document.querySelectorAll('.fb-correct').length || Math.floor(Math.random()*5)+1; // fallback
-      addExp(correct * 5, 'Menyelesaikan Kuis');
+      // akhir kuis — gunakan skor sebenarnya dari qCorrect
+      const correct = (typeof qCorrect !== 'undefined') ? qCorrect : 0;
+      if (correct > 0) addExp(correct * 5, `Menyelesaikan Kuis (${correct} benar)`);
   }
   originalNextQuestion();
 };
 
 const originalToggleMastered = window.toggleMastered || function(){};
 window.toggleMastered = function() {
+  // Cek state SEBELUM toggle untuk tahu apakah kanji baru ditandai mastered
+  var wasNotMastered = false;
+  if (currentKanjiIdx !== null && typeof kanjiDB !== 'undefined') {
+    var k = kanjiDB[currentKanjiIdx];
+    wasNotMastered = k && !masteredSet.has(k.char);
+  }
   originalToggleMastered();
-  addExp(10, 'Menguasai Kanji Baru');
+  // Hanya beri EXP saat kanji BARU ditandai sebagai mastered (bukan saat di-unmark)
+  if (wasNotMastered) addExp(10, 'Menguasai Kanji Baru');
 };
 
 
@@ -7374,7 +7416,6 @@ const kaiwaSentences = [
   { jp: 'こんばんは', romaji: 'Konbanwa', meaning: 'Selamat malam' }
 ];
 let kaiwaIndex = 0;
-let recognition = null;
 
 function loadKaiwaSentence() {
   if (kaiwaIndex >= kaiwaSentences.length) kaiwaIndex = 0;
@@ -7507,6 +7548,7 @@ window.loadFlashcards = function() {
 
 // INITIALIZATION
 document.addEventListener('DOMContentLoaded', function() {
+  loadMasteredKanji();
   loadProgress();
   loadSrsData();
   loadKaiwaSentence();
