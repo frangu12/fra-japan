@@ -67,19 +67,22 @@
   .section-sub{font-size:0.82rem;color:#6b7280;margin-bottom:20px;}
 
   /* CAT GRID */
-  .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:32px;}
-  .cat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 12px 15px;text-align:center;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;}
-  .cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(0,212,170,0.05));opacity:0;transition:opacity .22s;}
-  .cat-card:hover{border-color:var(--purple);transform:translateY(-3px);box-shadow:var(--glow-purple);}
-  .cat-card:hover::before{opacity:1;}
-  .cat-card .icon{font-size:1.8rem;margin-bottom:8px;}
-  .cat-card .jp{font-size:1rem;font-family:'Noto Sans JP',sans-serif;font-weight:700;color:var(--rice);}
-  .cat-card .id{font-size:0.7rem;color:#ffffff;margin-top:2px;}
-  .cat-card .count{font-size:0.65rem;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:10px;padding:2px 8px;display:inline-block;margin-top:6px;color:var(--purple2);}
+      .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px;}
+  @media(max-width:768px){.cat-grid{grid-template-columns:1fr;}}
+  .cat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;text-align:left;position:relative;display:flex;flex-direction:column;gap:14px;transition:all .2s;}
+  .cat-card:hover{border-color:rgba(168,85,247,0.4);box-shadow:0 8px 24px rgba(0,0,0,0.2);}
+  .cat-info-top{display:flex;align-items:center;gap:14px;}
+  .cat-info-top .icon{font-size:1.4rem;font-family:'Noto Sans JP',sans-serif;font-weight:700;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid;flex-shrink:0;}
+  .cat-info-top .texts{flex:1;min-width:0;}
+  .cat-info-top .jp{font-size:1rem;font-weight:700;color:var(--rice);line-height:1.2;margin-bottom:2px;}
+  .cat-info-top .id{font-size:0.8rem;color:#9ca3af;}
+  .cat-actions{display:flex;gap:8px;}
+  .cat-actions button{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#d1d5db;font-size:0.75rem;font-weight:600;padding:8px 4px;border-radius:8px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px;}
+  .cat-actions button:hover{background:rgba(168,85,247,0.15);border-color:var(--purple);color:#fff;}
 
   /* QUICK GRID */
   .quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  @media(max-width:600px){.quick-grid{grid-template-columns:1fr;}}
+  @media(max-width:600px){.quick-grid{grid-template-columns:1fr;} .cat-grid{grid-template-columns:1fr;}}
   .quick-card{background:var(--card);border-radius:16px;padding:18px 16px;border:1px solid var(--border);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;}
   .quick-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(168,85,247,0.06),transparent);opacity:0;transition:opacity .2s;}
   .quick-card:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:var(--glow-teal);}
@@ -98,50 +101,104 @@
   .btn-gold{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#0d0d1a;font-weight:800;}.btn-gold:hover{opacity:0.9;transform:translateY(-1px);}
   .btn-outline{background:none;border:1.5px solid var(--border);color:var(--rice);}.btn-outline:hover{border-color:var(--purple);color:var(--purple);}
 
-  /* QUIZ */
-  .quiz-wrap{max-width:660px;margin:0 auto;padding:24px 16px;}
-  .progress-bar-wrap{margin-bottom:20px;}
-  .progress-info{display:flex;justify-content:space-between;font-size:0.78rem;color:#6b7280;margin-bottom:6px;}
-  .progress-bar{height:5px;background:var(--border);border-radius:10px;overflow:hidden;}
+  /* QUIZ — redesigned */
+  .quiz-wrap{max-width:640px;margin:0 auto;padding:20px 16px;}
+
+  /* Setup card */
+  .quiz-setup-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px 20px;margin-bottom:0;}
+  .quiz-setup-title{text-align:center;margin-bottom:20px;}
+  .quiz-setup-title h2{font-size:1.4rem;font-weight:900;margin-bottom:4px;}
+  .quiz-setup-title p{font-size:0.8rem;color:var(--muted);}
+  .quiz-options-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+  .quiz-option-group{display:flex;flex-direction:column;gap:5px;}
+  .quiz-option-group label{font-size:0.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;}
+  .quiz-option-group select,.quiz-option-group input[type=range]{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:8px 12px;font-size:0.85rem;background:var(--bg2);color:var(--rice);font-family:'DM Sans',sans-serif;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .2s;}
+  .quiz-option-group select:focus,.quiz-option-group input[type=range]:focus{outline:none;border-color:var(--purple);}
+  .quiz-option-group input[type=range]{padding:4px 0;accent-color:var(--purple);}
+  .quiz-range-val{font-size:1.1rem;font-weight:900;color:var(--purple);}
+  .quiz-toggles{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+  .quiz-toggle-chip{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;border:1.5px solid var(--border);background:var(--bg2);cursor:pointer;font-size:0.75rem;font-weight:600;color:var(--muted);transition:all .18s;user-select:none;}
+  .quiz-toggle-chip.on{border-color:var(--purple);background:rgba(168,85,247,0.12);color:var(--purple2);}
+  .quiz-toggle-chip .chip-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .18s;flex-shrink:0;}
+  .quiz-toggle-chip.on .chip-dot{background:var(--purple);}
+  .quiz-start-btn{width:100%;padding:14px;border-radius:14px;border:none;background:linear-gradient(135deg,var(--purple),var(--teal));color:#fff;font-family:'DM Sans',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;transition:all .2s;letter-spacing:.5px;}
+  .quiz-start-btn:hover{opacity:0.9;transform:translateY(-1px);box-shadow:0 6px 24px rgba(168,85,247,0.35);}
+
+  /* Progress bar */
+  .progress-bar-wrap{margin-bottom:16px;}
+  .progress-info{display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:#6b7280;margin-bottom:6px;}
+  .progress-bar{height:6px;background:var(--border);border-radius:10px;overflow:hidden;}
   .progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--teal));border-radius:10px;transition:width .4s ease;}
-  .quiz-card{background:var(--card);border-radius:20px;padding:32px 26px;box-shadow:0 8px 40px rgba(0,0,0,0.3);text-align:center;border:1px solid var(--border);animation:slideIn .3s ease;}
+
+  /* Quiz card */
+  .quiz-card{background:var(--card);border-radius:20px;padding:28px 24px;box-shadow:0 8px 40px rgba(0,0,0,0.3);text-align:center;border:1px solid var(--border);}
   @keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  .quiz-badge{display:inline-block;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:20px;padding:3px 14px;font-size:0.7rem;color:var(--purple2);margin-bottom:16px;letter-spacing:1px;text-transform:uppercase;font-weight:700;}
-  .quiz-question{font-size:clamp(1.8rem,6vw,3.2rem);font-family:'Noto Sans JP',sans-serif;font-weight:900;color:var(--rice);margin-bottom:8px;line-height:1.3;}
-  .quiz-reading{font-size:0.88rem;color:#6b7280;margin-bottom:22px;font-family:'Noto Sans JP',sans-serif;}
-  .options-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
-  .option-btn{background:#13131f;border:1.5px solid var(--border);border-radius:13px;padding:13px 10px;font-size:0.88rem;font-family:'DM Sans','Noto Sans JP',sans-serif;color:var(--rice);cursor:pointer;transition:all .18s;text-align:center;line-height:1.4;}
-  .option-btn:hover:not(:disabled){border-color:var(--purple);background:rgba(168,85,247,0.1);}
-  .option-btn.correct{background:rgba(0,212,170,0.15);border-color:var(--teal);color:var(--teal);font-weight:700;}
-  .option-btn.wrong{background:rgba(255,77,109,0.15);border-color:var(--red);color:var(--red);}
+  .quiz-card{animation:slideIn .3s ease;}
+  .quiz-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+  .quiz-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:20px;padding:3px 12px;font-size:0.68rem;color:var(--purple2);letter-spacing:1px;text-transform:uppercase;font-weight:700;}
+  .quiz-bookmark-btn{background:none;border:none;cursor:pointer;font-size:1.1rem;opacity:0.45;transition:all .2s;padding:4px;}
+  .quiz-bookmark-btn.bookmarked{opacity:1;filter:drop-shadow(0 0 6px #fbbf24);}
+  .quiz-question{font-size:clamp(1.9rem,7vw,3.4rem);font-family:'Noto Sans JP',sans-serif;font-weight:900;color:var(--rice);margin-bottom:8px;line-height:1.25;}
+  .quiz-reading{font-size:0.88rem;color:#6b7280;margin-bottom:20px;font-family:'Noto Sans JP',sans-serif;min-height:22px;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .options-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}
+  .option-btn{background:var(--bg2);border:1.5px solid var(--border);border-radius:13px;padding:14px 10px;font-size:0.88rem;font-family:'DM Sans','Noto Sans JP',sans-serif;color:var(--rice);cursor:pointer;transition:all .18s;text-align:center;line-height:1.4;position:relative;overflow:hidden;}
+  .option-btn::before{content:attr(data-letter);position:absolute;top:6px;left:9px;font-size:0.6rem;font-weight:800;color:var(--muted);opacity:0.6;}
+  .option-btn:hover:not(:disabled){border-color:var(--purple);background:rgba(168,85,247,0.08);transform:translateY(-1px);}
+  .option-btn.correct{background:rgba(0,212,170,0.12);border-color:var(--teal);color:var(--teal);font-weight:700;}
+  .option-btn.correct::after{content:'✓';position:absolute;top:6px;right:9px;font-size:0.75rem;color:var(--teal);}
+  .option-btn.wrong{background:rgba(255,77,109,0.1);border-color:var(--red);color:var(--red);}
+  .option-btn.wrong::after{content:'✗';position:absolute;top:6px;right:9px;font-size:0.75rem;color:var(--red);}
   .option-btn:disabled{cursor:default;}
-  .quiz-typing-wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
-  .quiz-typing-input{flex:1;min-width:180px;border:1.5px solid var(--border);border-radius:12px;padding:14px 18px;font-size:1.05rem;font-family:'DM Sans','Noto Sans JP',sans-serif;color:var(--rice);background:#13131f;transition:all .25s;}
-  .quiz-typing-input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px rgba(26,107,107,0.12);}
-  .quiz-typing-input.typing-correct{border-color:var(--teal2);background:#e8f7f0;color:var(--teal);font-weight:700;}
-  .quiz-typing-input.typing-wrong{border-color:var(--red);background:#fdecea;color:var(--red);}
+
+  /* Typing */
+  .quiz-typing-wrap{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap;}
+  .quiz-typing-input{flex:1;min-width:180px;border:1.5px solid var(--border);border-radius:12px;padding:13px 16px;font-size:1.05rem;font-family:'DM Sans','Noto Sans JP',sans-serif;color:var(--rice);background:var(--bg2);transition:all .25s;}
+  .quiz-typing-input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,212,170,0.1);}
+  .quiz-typing-input.typing-correct{border-color:var(--teal2);background:rgba(0,212,170,0.08);color:var(--teal);font-weight:700;}
+  .quiz-typing-input.typing-wrong{border-color:var(--red);background:rgba(255,77,109,0.08);color:var(--red);}
   .quiz-typing-input:disabled{opacity:0.7;cursor:default;}
-  .quiz-typing-submit{padding:14px 24px;border-radius:12px;border:none;background:var(--teal);color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all .2s;white-space:nowrap;}
+  .quiz-typing-submit{padding:13px 22px;border-radius:12px;border:none;background:var(--teal);color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.92rem;cursor:pointer;transition:all .2s;white-space:nowrap;}
   .quiz-typing-submit:hover{background:var(--teal2);transform:translateY(-1px);}
-  .quiz-typing-submit:disabled{background:#aaa;cursor:default;transform:none;}
-  .quiz-typing-hint{text-align:center;font-size:0.75rem;color:var(--muted);margin-top:10px;opacity:0.65;}
-  .quiz-typing-hint kbd{display:inline-block;background:var(--border);color:var(--ink);padding:1px 7px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:700;border:1px solid #ccc;}
-  @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
-  .shake{animation:shake .4s ease;}
-  .quiz-feedback{margin-top:14px;padding:12px 18px;border-radius:11px;font-size:0.88rem;display:none;text-align:left;}
+  .quiz-typing-submit:disabled{background:#555;cursor:default;transform:none;}
+  .quiz-typing-hint{text-align:center;font-size:0.73rem;color:var(--muted);margin-top:8px;opacity:0.6;}
+  .quiz-typing-hint kbd{display:inline-block;background:var(--border);color:var(--rice);padding:1px 6px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:0.68rem;font-weight:700;}
+
+  /* Feedback */
+  @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+  .shake{animation:shake .35s ease;}
+  .quiz-feedback{margin-top:12px;padding:12px 16px;border-radius:12px;font-size:0.85rem;display:none;text-align:left;border-left:3px solid transparent;}
   .quiz-feedback.show{display:block;animation:slideIn .2s;}
-  .quiz-feedback.correct-fb{background:#e8f7f0;border:1.5px solid var(--teal2);color:var(--teal);}
-  .quiz-feedback.wrong-fb{background:#fdecea;border:1.5px solid var(--red);color:var(--red);}
-  .quiz-feedback .fb-en{font-weight:700;margin-bottom:3px;}
-  .quiz-feedback .fb-note{font-size:0.8rem;opacity:0.85;}
-  .quiz-actions{display:flex;justify-content:center;gap:10px;margin-top:18px;}
-  .result-card{background:var(--card);border-radius:18px;padding:40px 30px;text-align:center;box-shadow:0 8px 36px rgba(26,10,10,0.12);border:1.5px solid var(--border);max-width:460px;margin:0 auto;}
-  .result-emoji{font-size:3.5rem;margin-bottom:14px;}
-  .result-score{font-size:3rem;font-weight:900;color:var(--red);font-family:'Playfair Display',serif;}
-  .result-label{font-size:0.82rem;color:var(--muted);margin-bottom:18px;}
-  .result-breakdown{display:flex;justify-content:center;gap:24px;margin-bottom:24px;}
-  .rb{text-align:center;}.rb .rnum{font-size:1.4rem;font-weight:700;}
-  .rb .rlbl{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+  .quiz-feedback.correct-fb{background:rgba(0,212,170,0.08);border-left-color:var(--teal);color:var(--teal);}
+  .quiz-feedback.wrong-fb{background:rgba(255,77,109,0.08);border-left-color:var(--red);color:var(--red2);}
+  .quiz-feedback .fb-en{font-weight:700;margin-bottom:2px;color:var(--rice);}
+  .quiz-feedback .fb-note{font-size:0.79rem;opacity:0.8;}
+  .quiz-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px;}
+  .quiz-actions-right{display:flex;gap:8px;}
+  .quiz-skip-btn{background:none;border:1.5px solid var(--border);border-radius:10px;padding:8px 14px;font-size:0.75rem;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;transition:all .18s;}
+  .quiz-skip-btn:hover{border-color:var(--muted);color:var(--rice);}
+
+  /* Result */
+  .result-card{background:var(--card);border-radius:20px;padding:36px 28px;text-align:center;border:1px solid var(--border);max-width:460px;margin:0 auto;}
+  .result-emoji{font-size:3.5rem;margin-bottom:12px;}
+  .result-score{font-size:3.2rem;font-weight:900;background:linear-gradient(135deg,var(--purple),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-family:'Playfair Display',serif;}
+  .result-label{font-size:0.8rem;color:var(--muted);margin-bottom:20px;}
+  .result-breakdown{display:flex;justify-content:center;gap:0;margin-bottom:24px;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+  .rb{flex:1;text-align:center;padding:14px 8px;border-right:1px solid var(--border);}
+  .rb:last-child{border-right:none;}
+  .rb .rnum{font-size:1.5rem;font-weight:900;}
+  .rb .rlbl{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:2px;}
+  .result-missed{margin-bottom:20px;max-height:180px;overflow-y:auto;}
+  .result-missed h4{font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;}
+  .missed-item{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;background:rgba(255,77,109,0.06);border-radius:8px;margin-bottom:5px;font-size:0.82rem;}
+  .missed-jp{font-family:'Noto Sans JP',sans-serif;font-weight:700;color:var(--rice);}
+  .missed-id{color:var(--muted);}
+
+  /* Bookmark panel */
+  .quiz-bookmark-panel{background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);border-radius:14px;padding:14px 16px;margin-bottom:14px;display:none;}
+  .quiz-bookmark-panel.show{display:block;}
+  .quiz-bookmark-panel h4{font-size:0.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;font-weight:700;}
+  .bookmark-list{display:flex;flex-wrap:wrap;gap:6px;}
+  .bookmark-tag{background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);border-radius:8px;padding:4px 10px;font-size:0.78rem;font-family:'Noto Sans JP',sans-serif;color:var(--rice);}
 
   /* FLASHCARD */
   .fc-wrap{max-width:620px;margin:0 auto;padding:28px 18px;}
@@ -477,7 +534,8 @@
   @media(max-width:480px){
     .cat-grid{grid-template-columns:repeat(2,1fr);}
     .options-grid{grid-template-columns:1fr;}
-    .quiz-card{padding:24px 16px;}
+    .quiz-card{padding:20px 14px;}
+    .quiz-options-grid{grid-template-columns:1fr;}
     .settings-bar{flex-direction:column;align-items:flex-start;}
     .kanji-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));}
     .km-char{font-size:4rem;}
@@ -844,16 +902,130 @@
   <div class="section">
     <div class="section-title">Pilih <span>Kategori</span></div>
     <div class="section-sub">Klik kategori untuk mulai belajar</div>
-    <div class="cat-grid">
-      <div class="cat-card" onclick="showPage('kanji');setKanjiFilter('N5')"><div class="icon">🈵</div><div class="jp">漢字 N5</div><div class="id">100 Kanji Wajib</div><div class="count">100 kanji</div></div>
-      <div class="cat-card" onclick="showPage('kanji');setKanjiFilter('N4')"><div class="icon">🈶</div><div class="jp">漢字 N4</div><div class="id">188 Kanji Total</div><div class="count">88 kanji</div></div>
-      <div class="cat-card" onclick="startFromCategory('verbs')"><div class="icon">🏃</div><div class="jp">動詞</div><div class="id">Kata Kerja</div><div class="count" id="cnt-verbs">kata</div></div>
-      <div class="cat-card" onclick="startFromCategory('nouns')"><div class="icon">📦</div><div class="jp">名詞</div><div class="id">Kata Benda</div><div class="count" id="cnt-nouns">kata</div></div>
-      <div class="cat-card" onclick="startFromCategory('adjectives')"><div class="icon">✨</div><div class="jp">形容詞</div><div class="id">Kata Sifat</div><div class="count" id="cnt-adj">kata</div></div>
-      <div class="cat-card" onclick="startFromCategory('adverbs')"><div class="icon">⚡</div><div class="jp">副詞</div><div class="id">Kata Keterangan</div><div class="count" id="cnt-adv">kata</div></div>
-      <div class="cat-card" onclick="startFromCategory('daily')"><div class="icon">🏠</div><div class="jp">日常</div><div class="id">Sehari-hari</div><div class="count" id="cnt-daily">kata</div></div>
-      <div class="cat-card" onclick="showPage('kamus')"><div class="icon">📚</div><div class="jp">辞書</div><div class="id">Kamus Kosakata</div><div class="count" id="cnt-dict">500+ kata</div></div>
-      <div class="cat-card" onclick="startFromCategory('all')"><div class="icon">🎯</div><div class="jp">全部</div><div class="id">Semua Kategori</div><div class="count" id="cnt-all">kata</div></div>
+            <div class="cat-grid">
+      <!-- N5 -->
+      <div class="cat-card">
+        <div class="cat-info-top">
+          <div class="icon" style="background:rgba(168,85,247,0.1);border-color:rgba(168,85,247,0.2);">🔰</div>
+          <div class="texts">
+            <div class="jp">漢字 N5</div>
+            <div class="id">100 Kanji Dasar Wajib</div>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <button onclick="showPage('kanji');setKanjiFilter('N5')">📚 Belajar Kanji N5</button>
+        </div>
+      </div>
+
+      <!-- N4 -->
+      <div class="cat-card">
+        <div class="cat-info-top">
+          <div class="icon" style="background:rgba(96,165,250,0.1);border-color:rgba(96,165,250,0.2);">⛩️</div>
+          <div class="texts">
+            <div class="jp">漢字 N4</div>
+            <div class="id">188 Kanji Lanjutan</div>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <button onclick="showPage('kanji');setKanjiFilter('N4')">📚 Belajar Kanji N4</button>
+        </div>
+      </div>
+
+      <!-- Verbs -->
+      <div class="cat-card">
+        <div class="cat-info-top">
+          <div class="icon" style="background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.2);">🏃</div>
+          <div class="texts">
+            <div class="jp">動詞 (Kata Kerja)</div>
+            <div class="id"><span id="cnt-verbs">120</span> kata</div>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <button onclick="setKamusFilter('cat', 'verbs'); showPage('kamus');">📚 Kamus</button>
+          <button onclick="document.getElementById('q-category').value='verbs'; showPage('quiz');">⚡ Quiz</button>
+          <button onclick="document.getElementById('fc-category').value='verbs'; showPage('flashcard');">🃏 Flash</button>
+        </div>
+      </div>
+
+      <!-- Nouns -->
+      <div class="cat-card">
+        <div class="cat-info-top">
+          <div class="icon" style="background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.2);">📦</div>
+          <div class="texts">
+            <div class="jp">名詞 (Kata Benda)</div>
+            <div class="id"><span id="cnt-nouns">150</span> kata</div>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <button onclick="setKamusFilter('cat', 'nouns'); showPage('kamus');">📚 Kamus</button>
+          <button onclick="document.getElementById('q-category').value='nouns'; showPage('quiz');">⚡ Quiz</button>
+          <button onclick="document.getElementById('fc-category').value='nouns'; showPage('flashcard');">🃏 Flash</button>
+        </div>
+      </div>
+
+      <!-- Adjectives -->
+      <div class="cat-card">
+        <div class="cat-info-top">
+          <div class="icon" style="background:rgba(244,114,182,0.1);border-color:rgba(244,114,182,0.2);">✨</div>
+          <div class="texts">
+            <div class="jp">形容詞 (Kata Sifat)</div>
+            <div class="id"><span id="cnt-adj">80</span> kata</div>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <button onclick="setKamusFilter('cat', 'adjectives'); showPage('kamus');">📚 Kamus</button>
+          <button onclick="document.getElementById('q-category').value='adjectives'; showPage('quiz');">⚡ Quiz</button>
+          <button onclick="document.getElementById('fc-category').value='adjectives'; showPage('flashcard');">🃏 Flash</button>
+        </div>
+      </div>
+
+      <!-- Adverbs -->
+      <div class="cat-card">
+        <div class="cat-info-top">
+          <div class="icon" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.2);">⚡</div>
+          <div class="texts">
+            <div class="jp">副詞 (Keterangan)</div>
+            <div class="id"><span id="cnt-adv">30</span> kata</div>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <button onclick="setKamusFilter('cat', 'adverbs'); showPage('kamus');">📚 Kamus</button>
+          <button onclick="document.getElementById('q-category').value='adverbs'; showPage('quiz');">⚡ Quiz</button>
+          <button onclick="document.getElementById('fc-category').value='adverbs'; showPage('flashcard');">🃏 Flash</button>
+        </div>
+      </div>
+
+      <!-- Daily -->
+      <div class="cat-card">
+        <div class="cat-info-top">
+          <div class="icon" style="background:rgba(251,146,60,0.1);border-color:rgba(251,146,60,0.2);">☕</div>
+          <div class="texts">
+            <div class="jp">日常 (Sehari-hari)</div>
+            <div class="id"><span id="cnt-daily">50</span> kata</div>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <button onclick="setKamusFilter('cat', 'daily'); showPage('kamus');">📚 Kamus</button>
+          <button onclick="document.getElementById('q-category').value='daily'; showPage('quiz');">⚡ Quiz</button>
+          <button onclick="document.getElementById('fc-category').value='daily'; showPage('flashcard');">🃏 Flash</button>
+        </div>
+      </div>
+
+      <!-- All -->
+      <div class="cat-card">
+        <div class="cat-info-top">
+          <div class="icon" style="background:rgba(251,113,133,0.1);border-color:rgba(251,113,133,0.2);">🌟</div>
+          <div class="texts">
+            <div class="jp">全部 (Semua Kategori)</div>
+            <div class="id"><span id="cnt-all">500+</span> kata total</div>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <button onclick="setKamusFilter('cat', 'all'); showPage('kamus');">📚 Kamus</button>
+          <button onclick="document.getElementById('q-category').value='all'; showPage('quiz');">⚡ Quiz</button>
+          <button onclick="document.getElementById('fc-category').value='all'; showPage('flashcard');">🃏 Flash</button>
+        </div>
+      </div>
     </div>
     <div class="section-title">Mulai <span>Cepat</span></div>
     <div class="section-sub">Langsung mulai tanpa pilih-pilih dulu</div>
@@ -906,74 +1078,156 @@
 
 <!-- QUIZ -->
 <div id="page-quiz" class="page">
-  <div id="quiz-setup" class="section">
-    <div class="section-title">⚡ Quiz <span>Interaktif</span></div>
-    <div class="section-sub">Uji kemampuanmu</div>
-    <div class="settings-bar">
-      <div><label>Level</label><br><select id="q-level"><option value="all">Semua</option><option value="N5">N5</option><option value="N4">N4</option><option value="N3">N3</option></select></div>
-      <div><label>Kategori</label><br><select id="q-category"><option value="all">Semua</option><option value="verbs">Kata Kerja</option><option value="nouns">Kata Benda</option><option value="adjectives">Kata Sifat</option><option value="adverbs">Kata Keterangan</option><option value="numbers">Angka/Waktu</option><option value="daily">Sehari-hari</option><option value="grammar">Tata Bahasa</option><option value="counter">Kata Bilangan</option></select></div>
-      <div><label>Tipe</label><br><select id="q-type"><option value="jp-id">Jepang → Indonesia</option><option value="id-jp">Indonesia → Jepang</option><option value="reading">Baca Hiragana</option><option value="typing-jpid">✍️ Ketik Jawaban (JP→ID)</option><option value="typing-idjp">✍️ Ketik Jawaban (ID→JP)</option><option value="typing-reading">✍️ Ketik Bacaan (Kanji→Hiragana)</option><option value="speaking">Bicara (Mic) — Tes Pelafalan</option><option value="mixed">Acak</option></select></div>
-      <div><label>Jumlah: <span class="range-val" id="q-num-display">10</span></label><br><input type="range" id="q-num" min="5" max="50" step="5" value="10" oninput="document.getElementById('q-num-display').textContent=this.value"></div>
-      <button class="btn btn-red" onclick="startQuiz()">Mulai Quiz →</button>
+  <div class="quiz-wrap">
+
+  <!-- SETUP -->
+  <div id="quiz-setup">
+    <div class="quiz-setup-card">
+      <div class="quiz-setup-title">
+        <h2>⚡ Quiz <span style="background:linear-gradient(90deg,var(--purple),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Interaktif</span></h2>
+        <p>Pilih opsi lalu mulai quiz</p>
+      </div>
+
+      <div class="quiz-options-grid">
+        <div class="quiz-option-group">
+          <label>🎓 Level</label>
+          <select id="q-level">
+            <option value="all">Semua Level</option>
+            <option value="N5">N5 — Pemula</option>
+            <option value="N4">N4 — Dasar</option>
+          </select>
+        </div>
+        <div class="quiz-option-group">
+          <label>📂 Kategori</label>
+          <select id="q-category">
+            <option value="all">Semua Kategori</option>
+            <option value="verbs">Kata Kerja</option>
+            <option value="nouns">Kata Benda</option>
+            <option value="adjectives">Kata Sifat</option>
+            <option value="adverbs">Kata Keterangan</option>
+            <option value="numbers">Angka / Waktu</option>
+            <option value="daily">Sehari-hari</option>
+            <option value="grammar">Tata Bahasa</option>
+            <option value="counter">Kata Bilangan</option>
+          </select>
+        </div>
+        <div class="quiz-option-group">
+          <label>🔀 Tipe Soal</label>
+          <select id="q-type">
+            <option value="jp-id">🇯🇵 → 🇮🇩 Jepang ke Indonesia</option>
+            <option value="id-jp">🇮🇩 → 🇯🇵 Indonesia ke Jepang</option>
+            <option value="reading">📖 Baca Hiragana</option>
+            <option value="typing-jpid">✍️ Ketik Arti (JP→ID)</option>
+            <option value="typing-idjp">✍️ Ketik Jepang (ID→JP)</option>
+            <option value="typing-reading">✍️ Ketik Bacaan (Kanji→Hira)</option>
+            <option value="speaking">🎤 Bicara — Tes Pelafalan</option>
+            <option value="mixed">🎲 Acak Semua</option>
+          </select>
+        </div>
+        <div class="quiz-option-group">
+          <label>🔢 Jumlah Soal: <span class="quiz-range-val" id="q-num-display">10</span></label>
+          <input type="range" id="q-num" min="5" max="50" step="5" value="10" oninput="document.getElementById('q-num-display').textContent=this.value">
+        </div>
+      </div>
+
+      <!-- Toggle opsi tambahan -->
+      <div class="quiz-toggles">
+        <div class="quiz-toggle-chip" id="chip-shuffle" onclick="toggleQuizChip('shuffle')" title="Acak urutan soal">
+          <span class="chip-dot"></span> 🔀 Acak Soal
+        </div>
+        <div class="quiz-toggle-chip" id="chip-romaji" onclick="toggleQuizChip('romaji')" title="Tampilkan romaji di soal">
+          <span class="chip-dot"></span> ローマ字 Romaji
+        </div>
+        <div class="quiz-toggle-chip" id="chip-timer" onclick="toggleQuizChip('timer')" title="Aktifkan timer otomatis">
+          <span class="chip-dot"></span> ⏱ Timer Otomatis
+        </div>
+        <div class="quiz-toggle-chip" id="chip-sound" onclick="toggleQuizChip('sound')" title="Putar audio otomatis di tiap soal">
+          <span class="chip-dot"></span> 🔊 Auto Audio
+        </div>
+        <div class="quiz-toggle-chip" id="chip-strict" onclick="toggleQuizChip('strict')" title="Mode ketat: salah langsung lanjut tanpa lihat jawaban">
+          <span class="chip-dot"></span> ⚡ Mode Ketat
+        </div>
+      </div>
+
+      <button class="quiz-start-btn" onclick="startQuiz()">Mulai Quiz →</button>
     </div>
   </div>
-  <div id="quiz-area" class="hidden quiz-wrap">
+
+  <!-- QUIZ AREA -->
+  <div id="quiz-area" class="hidden">
+
+    <!-- Progress -->
     <div class="progress-bar-wrap">
       <div class="progress-info">
-        <span id="q-progress-text">Soal 1 dari 10</span>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <span id="q-score-text">✅ 0 &nbsp; ❌ 0</span>
-          <button onclick="stopQuiz()" style="padding:4px 12px;border-radius:20px;border:1.5px solid var(--red);background:rgba(255,77,109,0.15);color:var(--red);font-size:0.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;">✕ Stop</button>
+        <span id="q-progress-text" style="font-weight:700;color:var(--rice);">Soal 1 dari 10</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span id="q-score-text" style="color:var(--muted);">✅ 0 &nbsp;❌ 0</span>
+          <button onclick="stopQuiz()" style="padding:4px 10px;border-radius:20px;border:1.5px solid var(--red);background:rgba(255,77,109,0.1);color:var(--red);font-size:0.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;">✕ Berhenti</button>
         </div>
       </div>
       <div class="progress-bar"><div class="progress-bar-fill" id="q-progress-fill" style="width:0%"></div></div>
     </div>
-    
-    <!-- Timer Panel -->
-    <div class="timer-panel">
-      <div class="timer-display">
-        <div class="timer-icon">⏱️</div>
-        <div>
-          <div class="timer-time" id="timer-display">00:00</div>
-          <div class="timer-mode" id="timer-mode-label">Stopwatch</div>
-        </div>
-      </div>
-      <div class="timer-controls">
-        <button class="timer-btn timer-start" onclick="startTimer()">▶ Mulai</button>
-        <button class="timer-btn timer-pause" onclick="pauseTimer()" style="display:none;" id="pause-btn">⏸ Jeda</button>
-        <button class="timer-btn timer-stop" onclick="stopTimer()">⏹ Henti</button>
-        <button class="timer-btn timer-reset" onclick="resetTimer()">↺ Reset</button>
-        <button class="timer-mode-toggle" onclick="toggleTimerMode()">Ubah Mode</button>
-      </div>
+
+    <!-- Timer (compact, hanya muncul kalau chip-timer aktif) -->
+    <div id="quiz-timer-row" style="display:none;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:8px 16px;display:none;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <span style="font-size:0.75rem;color:var(--muted);">⏱ Waktu</span>
+      <span id="timer-display" style="font-size:1.1rem;font-weight:900;color:var(--gold);font-family:'DM Sans',sans-serif;">00:00</span>
+      <span id="timer-mode-label" style="font-size:0.7rem;color:var(--muted);">Stopwatch</span>
     </div>
-    
+    <!-- hidden pause btn for JS compat -->
+    <button id="pause-btn" style="display:none;" onclick="pauseTimer()"></button>
+
+    <!-- Bookmark panel -->
+    <div id="quiz-bookmark-panel" class="quiz-bookmark-panel">
+      <h4>⭐ Soal Dibookmark</h4>
+      <div id="bookmark-list" class="bookmark-list"></div>
+    </div>
+
+    <!-- Card soal -->
     <div class="quiz-card">
-      <div class="quiz-badge" id="q-badge">N5</div>
+      <div class="quiz-card-top">
+        <div class="quiz-badge" id="q-badge">N5</div>
+        <button class="quiz-bookmark-btn" id="q-bookmark-btn" onclick="toggleBookmark()" title="Bookmark soal ini">☆</button>
+      </div>
       <div class="quiz-question" id="q-question"></div>
       <div class="quiz-reading" id="q-reading"></div>
       <div class="options-grid" id="q-options"></div>
       <div class="quiz-feedback" id="q-feedback"><div class="fb-en" id="fb-en"></div><div class="fb-note" id="fb-note"></div></div>
-      <div class="quiz-actions"><button class="btn btn-outline hidden" id="btn-next" onclick="nextQuestion()">Soal Berikutnya →</button></div>
-    </div>
-  </div>
-  <div id="quiz-result" class="hidden">
-    <div class="quiz-wrap">
-      <div class="result-card">
-        <div class="result-emoji" id="res-emoji">🎉</div>
-        <div class="result-score" id="res-score">8/10</div>
-        <div class="result-label">Skor Akhir</div>
-        <div class="result-breakdown">
-          <div class="rb"><div class="rnum" style="color:var(--teal)" id="res-correct">8</div><div class="rlbl">Benar</div></div>
-          <div class="rb"><div class="rnum" style="color:var(--red)" id="res-wrong">2</div><div class="rlbl">Salah</div></div>
-          <div class="rb"><div class="rnum" id="res-pct">80%</div><div class="rlbl">Akurasi</div></div>
-        </div>
-        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-          <button class="btn btn-red" onclick="startQuiz()">Ulangi</button>
-          <button class="btn btn-outline" onclick="backToSetup()">Pengaturan</button>
+      <div class="quiz-actions">
+        <button class="quiz-skip-btn" id="btn-skip" onclick="skipQuestion()">⏭ Lewati</button>
+        <div class="quiz-actions-right">
+          <button class="btn btn-outline hidden" id="btn-next" onclick="nextQuestion()">Berikutnya →</button>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- RESULT -->
+  <div id="quiz-result" class="hidden">
+    <div class="result-card">
+      <div class="result-emoji" id="res-emoji">🎉</div>
+      <div class="result-score" id="res-score">8/10</div>
+      <div class="result-label">Skor Akhir</div>
+      <div class="result-breakdown">
+        <div class="rb"><div class="rnum" style="color:var(--teal)" id="res-correct">8</div><div class="rlbl">✅ Benar</div></div>
+        <div class="rb"><div class="rnum" style="color:var(--red)" id="res-wrong">2</div><div class="rlbl">❌ Salah</div></div>
+        <div class="rb"><div class="rnum" id="res-pct">80%</div><div class="rlbl">Akurasi</div></div>
+        <div class="rb"><div class="rnum" id="res-skipped" style="color:var(--muted)">0</div><div class="rlbl">Dilewati</div></div>
+      </div>
+      <!-- Daftar soal yang salah -->
+      <div class="result-missed" id="result-missed-wrap" style="display:none;">
+        <h4>📝 Perlu Diulang</h4>
+        <div id="result-missed-list"></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-red" onclick="startQuiz()">🔁 Ulangi</button>
+        <button class="btn btn-outline" onclick="retryWrong()" id="btn-retry-wrong" style="display:none;">❌ Latih Yang Salah</button>
+        <button class="btn btn-outline" onclick="backToSetup()">⚙️ Pengaturan</button>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- .quiz-wrap -->
 </div>
 
 <!-- FLASHCARD -->
@@ -2464,6 +2718,68 @@ const vocab = [
   {jp:'注意',reading:'ちゅうい',id:'Perhatian / Hati-hati',level:'N4',cat:'noun',example:'注意してください。\nTolong hati-hati.'},
   {jp:'諦める',reading:'あきらめる',id:'Menyerah / Melepaskan',level:'N4',cat:'verb',example:'諦めないでください。\nJangan menyerah.'},
   {jp:'楽しむ',reading:'たのしむ',id:'Menikmati',level:'N4',cat:'verb',example:'旅行を楽しみましょう。\nMari nikmati perjalanan.'},
+  // 📚 KOSAKATA TAMBAHAN JLPT N5 (Batch Baru: Keluarga, Warna, Posisi, Waktu, dll) 📚
+  {jp:'家族',reading:'かぞく',id:'Keluarga',level:'N5',cat:'nouns',example:'私の家族です。\nIni keluarga saya.'},
+  {jp:'父',reading:'ちち',id:'Ayah (sendiri)',level:'N5',cat:'nouns',example:'父は会社員です。\nAyah saya adalah pegawai kantor.'},
+  {jp:'母',reading:'はは',id:'Ibu (sendiri)',level:'N5',cat:'nouns',example:'母は家にいます。\nIbu ada di rumah.'},
+  {jp:'兄',reading:'あに',id:'Kakak laki-laki',level:'N5',cat:'nouns',example:'兄は大学生です。\nKakak laki-laki saya mahasiswa.'},
+  {jp:'姉',reading:'あね',id:'Kakak perempuan',level:'N5',cat:'nouns',example:'姉は二十歳です。\nKakak perempuan saya umur 20 tahun.'},
+  {jp:'弟',reading:'おとうと',id:'Adik laki-laki',level:'N5',cat:'nouns',example:'弟がいます。\nSaya punya adik laki-laki.'},
+  {jp:'妹',reading:'いもうと',id:'Adik perempuan',level:'N5',cat:'nouns',example:'妹は可愛いです。\nAdik perempuan saya lucu.'},
+  {jp:'赤',reading:'あか',id:'Merah',level:'N5',cat:'nouns',example:'赤いりんご\nApel merah'},
+  {jp:'青',reading:'あお',id:'Biru',level:'N5',cat:'nouns',example:'青い空\nLangit biru'},
+  {jp:'白',reading:'しろ',id:'Putih',level:'N5',cat:'nouns',example:'白い犬\nAnjing putih'},
+  {jp:'黒',reading:'くろ',id:'Hitam',level:'N5',cat:'nouns',example:'黒い猫\nKucing hitam'},
+  {jp:'黄色',reading:'きいろ',id:'Kuning',level:'N5',cat:'nouns',example:'黄色のシャツ\nKemeja kuning'},
+  {jp:'茶色',reading:'ちゃいろ',id:'Cokelat',level:'N5',cat:'nouns',example:'茶色の靴\nSepatu cokelat'},
+  {jp:'上',reading:'うえ',id:'Atas',level:'N5',cat:'nouns',example:'机の上\nDi atas meja'},
+  {jp:'下',reading:'した',id:'Bawah',level:'N5',cat:'nouns',example:'ベッドの下\nDi bawah kasur'},
+  {jp:'前',reading:'まえ',id:'Depan',level:'N5',cat:'nouns',example:'駅の前\nDi depan stasiun'},
+  {jp:'後ろ',reading:'うしろ',id:'Belakang',level:'N5',cat:'nouns',example:'家の後ろ\nDi belakang rumah'},
+  {jp:'右',reading:'みぎ',id:'Kanan',level:'N5',cat:'nouns',example:'右に曲がる\nBelok kanan'},
+  {jp:'左',reading:'ひだり',id:'Kiri',level:'N5',cat:'nouns',example:'左を見て\nLihat kiri'},
+  {jp:'中',reading:'なか',id:'Dalam',level:'N5',cat:'nouns',example:'鞄の中\nDi dalam tas'},
+  {jp:'外',reading:'そと',id:'Luar',level:'N5',cat:'nouns',example:'外は寒いです。\nDi luar dingin.'},
+  {jp:'隣',reading:'となり',id:'Sebelah',level:'N5',cat:'nouns',example:'隣の人\nOrang sebelah'},
+  {jp:'近く',reading:'ちかく',id:'Dekat',level:'N5',cat:'nouns',example:'近くのスーパー\nSupermarket dekat sini'},
+  {jp:'空',reading:'そら',id:'Langit',level:'N5',cat:'nouns',example:'空が青いです。\nLangit biru.'},
+  {jp:'雨',reading:'あめ',id:'Hujan',level:'N5',cat:'nouns',example:'雨が降っています。\nSedang turun hujan.'},
+  {jp:'雪',reading:'ゆき',id:'Salju',level:'N5',cat:'nouns',example:'雪が白いです。\nSalju putih.'},
+  {jp:'風',reading:'かぜ',id:'Angin',level:'N5',cat:'nouns',example:'風が強いです。\nAnginnya kencang.'},
+  {jp:'花',reading:'はな',id:'Bunga',level:'N5',cat:'nouns',example:'花が綺麗です。\nBunganya indah.'},
+  {jp:'山',reading:'やま',id:'Gunung',level:'N5',cat:'nouns',example:'高い山\nGunung yang tinggi'},
+  {jp:'川',reading:'かわ',id:'Sungai',level:'N5',cat:'nouns',example:'川で泳ぐ\nBerenang di sungai'},
+  {jp:'海',reading:'うみ',id:'Laut',level:'N5',cat:'nouns',example:'海へ行く\nPergi ke laut'},
+  {jp:'電車',reading:'でんしゃ',id:'Kereta',level:'N5',cat:'nouns',example:'電車に乗る\nNaik kereta'},
+  {jp:'車',reading:'くるま',id:'Mobil',level:'N5',cat:'nouns',example:'車を買いました。\nSaya membeli mobil.'},
+  {jp:'自転車',reading:'じてんしゃ',id:'Sepeda',level:'N5',cat:'nouns',example:'自転車で学校へ行く\nKe sekolah naik sepeda'},
+  {jp:'飛行機',reading:'ひこうき',id:'Pesawat',level:'N5',cat:'nouns',example:'飛行機で旅行する\nJalan-jalan naik pesawat'},
+  {jp:'船',reading:'ふね',id:'Kapal',level:'N5',cat:'nouns',example:'大きい船\nKapal besar'},
+  {jp:'駅',reading:'えき',id:'Stasiun',level:'N5',cat:'nouns',example:'駅で待つ\nMenunggu di stasiun'},
+  {jp:'家',reading:'いえ',id:'Rumah',level:'N5',cat:'nouns',example:'家に帰る\nPulang ke rumah'},
+  {jp:'学校',reading:'がっこう',id:'Sekolah',level:'N5',cat:'nouns',example:'学校へ行く\nPergi ke sekolah'},
+  {jp:'会社',reading:'かいしゃ',id:'Perusahaan',level:'N5',cat:'nouns',example:'会社で働く\nBekerja di perusahaan'},
+  {jp:'病院',reading:'びょういん',id:'Rumah Sakit',level:'N5',cat:'nouns',example:'病院へ行く\nPergi ke rumah sakit'},
+  {jp:'銀行',reading:'ぎんこう',id:'Bank',level:'N5',cat:'nouns',example:'銀行でお金を下ろす\nTarik uang di bank'},
+  {jp:'郵便局',reading:'ゆうびんきょく',id:'Kantor Pos',level:'N5',cat:'nouns',example:'郵便局はどこですか。\nKantor pos di mana?'},
+  {jp:'今',reading:'いま',id:'Sekarang',level:'N5',cat:'nouns',example:'今は何時ですか。\nSekarang jam berapa?'},
+  {jp:'今日',reading:'きょう',id:'Hari ini',level:'N5',cat:'nouns',example:'今日は暑いです。\nHari ini panas.'},
+  {jp:'明日',reading:'あした',id:'Besok',level:'N5',cat:'nouns',example:'明日は休みです。\nBesok libur.'},
+  {jp:'昨日',reading:'きのう',id:'Kemarin',level:'N5',cat:'nouns',example:'昨日は雨でした。\nKemarin hujan.'},
+  {jp:'朝',reading:'あさ',id:'Pagi',level:'N5',cat:'nouns',example:'朝ごはんを食べる\nMakan sarapan pagi'},
+  {jp:'昼',reading:'ひる',id:'Siang',level:'N5',cat:'nouns',example:'昼休み\nIstirahat siang'},
+  {jp:'夜',reading:'よる',id:'Malam',level:'N5',cat:'nouns',example:'夜に寝る\nTidur di malam hari'},
+  {jp:'起きる',reading:'おきる',id:'Bangun',level:'N5',cat:'verbs',example:'朝６時に起きる。\nBangun jam 6 pagi.'},
+  {jp:'寝る',reading:'ねる',id:'Tidur',level:'N5',cat:'verbs',example:'早く寝てください。\nTolong cepat tidur.'},
+  {jp:'働く',reading:'はたらく',id:'Bekerja',level:'N5',cat:'verbs',example:'会社で働く。\nBekerja di perusahaan.'},
+  {jp:'休む',reading:'やすむ',id:'Istirahat / Libur',level:'N5',cat:'verbs',example:'学校を休む。\nLibur/absen sekolah.'},
+  {jp:'終わる',reading:'おわる',id:'Selesai',level:'N5',cat:'verbs',example:'仕事が終わりました。\nPekerjaan sudah selesai.'},
+  {jp:'会う',reading:'あう',id:'Bertemu',level:'N5',cat:'verbs',example:'友達に会う。\nBertemu teman.'},
+  {jp:'切る',reading:'きる',id:'Memotong',level:'N5',cat:'verbs',example:'紙を切る。\nMemotong kertas.'},
+  {jp:'貸す',reading:'かす',id:'Meminjamkan',level:'N5',cat:'verbs',example:'本を貸す。\nMeminjamkan buku.'},
+  {jp:'借りる',reading:'かりる',id:'Meminjam',level:'N5',cat:'verbs',example:'ペンを借りる。\nMeminjam pena.'},
+  {jp:'教える',reading:'おしえる',id:'Mengajar / Memberitahu',level:'N5',cat:'verbs',example:'日本語を教える。\nMengajar bahasa Jepang.'},
+  {jp:'習う',reading:'ならう',id:'Belajar (dari guru)',level:'N5',cat:'verbs',example:'ピアノを習う。\nBelajar piano (les).'}
 ];
 
 // ════════════════════════
@@ -3108,6 +3424,16 @@ function updateTimerDisplay() {
 // QUIZ
 // ════════════════════════
 let qQuestions=[],qCurrent=0,qCorrect=0,qWrong=0,isMicMode=false,recognition=null;
+let quizOptions = { shuffle: false, romaji: false, timer: false, sound: false, strict: false };
+
+function toggleQuizChip(opt) {
+    quizOptions[opt] = !quizOptions[opt];
+    const chip = document.getElementById('chip-' + opt);
+    if (chip) {
+        if (quizOptions[opt]) chip.classList.add('on');
+        else chip.classList.remove('on');
+    }
+}
 
 function startQuiz() {
     const lv = document.getElementById('q-level').value;
@@ -3118,14 +3444,16 @@ function startQuiz() {
     let pool = getFilteredVocab(lv, cat);
     if(pool.length < 4) { alert("Kosakata tidak cukup untuk quiz di kategori ini."); return; }
     
-    shuffle(pool);
+    if (quizOptions.shuffle) shuffle(pool);
     qQuestions = pool.slice(0, Math.min(num, pool.length)).map(v => ({...v, qType: type === 'mixed' ? ['jp-id','id-jp','reading'][Math.floor(Math.random()*3)] : type}));
     
     qCurrent=0; qCorrect=0; qWrong=0;
     document.getElementById('quiz-setup').classList.add('hidden');
     document.getElementById('quiz-result').classList.add('hidden');
     document.getElementById('quiz-area').classList.remove('hidden');
-    initTimer();
+    
+    if (quizOptions.timer) initTimer();
+    
     renderQuestion();
 }
 
@@ -3151,7 +3479,7 @@ function renderQuestion() {
     
     if(q.qType === 'jp-id') {
         qText.innerHTML = rubyWrap(q.jp, q.reading);
-        qRead.innerHTML = `<button class="speak-btn" onclick="speakText('${q.jp}')">🔊</button>`;
+        qRead.innerHTML = `<button class="speak-btn" onclick="speakText('${q.jp}')">🔊</button>` + (quizOptions.romaji ? ` <span style="font-size:0.8rem;color:var(--muted)">${q.reading}</span>` : '');
         correctAnswer = q.id;
         options = generateOptions(correctAnswer, 'id');
     } else if (q.qType === 'id-jp') {
@@ -3224,6 +3552,10 @@ function renderQuestion() {
     
     let hintEl = document.getElementById('quiz-kb-hint');
     if (hintEl) hintEl.style.display = 'none';
+
+    if (quizOptions.sound && !isMicMode) {
+        speakText(q.qType === 'jp-id' || q.qType === 'reading' || q.qType.startsWith('typing-') ? q.jp : correctAnswer);
+    }
 }
 
 function generateOptions(correctStr, type) {
@@ -3267,6 +3599,13 @@ function checkAnswer(btn, selected, correct, q) {
     fbnote.innerHTML = `Jawaban: <strong>${hint}</strong><br><span style="opacity:0.8;font-size:0.75rem">${q.example.replace('\n', ' - ')}</span>`;
     
     document.getElementById('btn-next').classList.remove('hidden');
+
+    if (quizOptions.strict && selected !== correct) {
+        setTimeout(() => {
+            const btnNext = document.getElementById('btn-next');
+            if (btnNext) btnNext.click();
+        }, 1200);
+    }
 }
 
 // ═══════════════════════════════════
