@@ -3140,14 +3140,26 @@ function toggleFurigana() {
 // HOME STATS
 // ════════════════════════
 function initHomeStats() {
-    document.getElementById('stat-vocab').textContent = vocab.length + "+";
-    document.getElementById('cnt-verbs').textContent = vocab.filter(v => v.cat === 'verbs').length + " kata";
-    document.getElementById('cnt-nouns').textContent = vocab.filter(v => v.cat === 'nouns').length + " kata";
-    document.getElementById('cnt-adj').textContent = vocab.filter(v => v.cat === 'adjectives').length + " kata";
-    document.getElementById('cnt-adv').textContent = vocab.filter(v => v.cat === 'adverbs').length + " kata";
-    document.getElementById('cnt-daily').textContent = vocab.filter(v => v.cat === 'daily').length + " kata";
-    document.getElementById('cnt-dict').textContent = vocab.length + "+ kata";
-    document.getElementById('cnt-all').textContent = vocab.length + " kata";
+    var statVocab = document.getElementById('stat-vocab');
+    if(statVocab) statVocab.textContent = vocab.length + "+";
+
+    var cntVerbs = document.getElementById('cnt-verbs');
+    if(cntVerbs) cntVerbs.textContent = vocab.filter(v => v.cat === 'verbs').length;
+
+    var cntNouns = document.getElementById('cnt-nouns');
+    if(cntNouns) cntNouns.textContent = vocab.filter(v => v.cat === 'nouns').length;
+
+    var cntAdj = document.getElementById('cnt-adj');
+    if(cntAdj) cntAdj.textContent = vocab.filter(v => v.cat === 'adjectives').length;
+
+    var cntAdv = document.getElementById('cnt-adv');
+    if(cntAdv) cntAdv.textContent = vocab.filter(v => v.cat === 'adverbs').length;
+
+    var cntDaily = document.getElementById('cnt-daily');
+    if(cntDaily) cntDaily.textContent = vocab.filter(v => v.cat === 'daily').length;
+
+    var cntAll = document.getElementById('cnt-all');
+    if(cntAll) cntAll.textContent = vocab.length + "+";
 }
 
 function startFromCategory(cat) {
