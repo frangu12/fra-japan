@@ -48,48 +48,75 @@
   .furigana-off ruby rt{opacity:0;visibility:hidden;}
   .page{display:none;}.page.active{display:block;}
 
-  /* HERO */
-  .hero{text-align:center;padding:48px 20px 40px;background:linear-gradient(160deg,#0d0d1a 0%,#1a0d2e 50%,#0d1a2e 100%);color:var(--rice);position:relative;overflow:hidden;}
-  .hero::before{content:'日';position:absolute;font-size:320px;font-weight:900;color:rgba(168,85,247,0.04);top:-60px;right:-40px;font-family:'Noto Sans JP',sans-serif;pointer-events:none;}
-  .hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(168,85,247,0.08) 0%,transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(0,212,170,0.06) 0%,transparent 60%);pointer-events:none;}
-  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,3.5rem);font-weight:900;line-height:1.1;margin-bottom:14px;position:relative;}
-  .hero h1 em{background:linear-gradient(90deg,var(--purple),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
-  .hero p{font-size:0.95rem;color:#9ca3af;max-width:520px;margin:0 auto 28px;position:relative;}
-  .stats-row{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;position:relative;}
-  .stat{text-align:center;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;padding:12px 20px;}
-  .stat .num{font-size:1.8rem;font-weight:900;background:linear-gradient(90deg,var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  .stat .lbl{font-size:0.68rem;color:#6b7280;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+  /* HERO — redesign */
+  .hero{text-align:center;padding:36px 20px 32px;background:linear-gradient(160deg,#0a0a18 0%,#16092a 45%,#0a1828 100%);color:var(--rice);position:relative;overflow:hidden;}
+  .hero::before{content:'語';position:absolute;font-size:280px;font-weight:900;color:rgba(168,85,247,0.05);top:-40px;right:-20px;font-family:'Noto Sans JP',sans-serif;pointer-events:none;line-height:1;}
+  .hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 60%,rgba(168,85,247,0.1) 0%,transparent 55%),radial-gradient(ellipse at 80% 30%,rgba(0,212,170,0.07) 0%,transparent 55%);pointer-events:none;}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:20px;padding:4px 14px;font-size:0.72rem;color:var(--purple2);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:14px;position:relative;}
+  .hero h1{font-family:'Noto Sans JP',sans-serif;font-size:clamp(1.7rem,5vw,2.8rem);font-weight:900;line-height:1.15;margin-bottom:10px;position:relative;}
+  .hero h1 .h1-jp{display:block;font-size:clamp(2.2rem,7vw,4rem);background:linear-gradient(90deg,var(--purple),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:4px;}
+  .hero p{font-size:0.88rem;color:#9ca3af;max-width:460px;margin:0 auto 24px;position:relative;line-height:1.7;}
+  .hero-cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;position:relative;}
+  .hero-cta-btn{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:12px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.88rem;cursor:pointer;border:none;transition:all .2s;}
+  .hero-cta-btn.primary{background:linear-gradient(135deg,var(--purple),var(--teal));color:#fff;box-shadow:0 4px 20px rgba(168,85,247,0.35);}
+  .hero-cta-btn.primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(168,85,247,0.45);}
+  .hero-cta-btn.secondary{background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.15);color:var(--rice);}
+  .hero-cta-btn.secondary:hover{background:rgba(255,255,255,0.1);border-color:var(--teal);}
+  .stats-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;position:relative;}
+  .stat{text-align:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:12px 18px;min-width:90px;}
+  .stat .num{font-size:1.6rem;font-weight:900;background:linear-gradient(90deg,var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .stat .lbl{font-size:0.63rem;color:#6b7280;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
 
   /* SECTION */
-  .section{padding:28px 16px;max-width:1100px;margin:0 auto;}
-  .section-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--rice);margin-bottom:4px;}
+  .section{padding:24px 16px;max-width:1100px;margin:0 auto;}
+  .section-header{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+  .section-icon{font-size:1.3rem;}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--rice);margin-bottom:0;}
   .section-title span{background:linear-gradient(90deg,var(--purple),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  .section-sub{font-size:0.82rem;color:#6b7280;margin-bottom:20px;}
+  .section-sub{font-size:0.78rem;color:#6b7280;margin-bottom:18px;padding-left:2px;}
 
-  /* CAT GRID */
-      .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px;}
-  @media(max-width:768px){.cat-grid{grid-template-columns:1fr;}}
-  .cat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;text-align:left;position:relative;display:flex;flex-direction:column;gap:14px;transition:all .2s;}
-  .cat-card:hover{border-color:rgba(168,85,247,0.4);box-shadow:0 8px 24px rgba(0,0,0,0.2);}
-  .cat-info-top{display:flex;align-items:center;gap:14px;}
-  .cat-info-top .icon{font-size:1.4rem;font-family:'Noto Sans JP',sans-serif;font-weight:700;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid;flex-shrink:0;}
-  .cat-info-top .texts{flex:1;min-width:0;}
-  .cat-info-top .jp{font-size:1rem;font-weight:700;color:var(--rice);line-height:1.2;margin-bottom:2px;}
-  .cat-info-top .id{font-size:0.8rem;color:#9ca3af;}
-  .cat-actions{display:flex;gap:8px;}
-  .cat-actions button{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#d1d5db;font-size:0.75rem;font-weight:600;padding:8px 4px;border-radius:8px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px;}
-  .cat-actions button:hover{background:rgba(168,85,247,0.15);border-color:var(--purple);color:#fff;}
+  /* HOME FEATURE GRID — 4 big cards at top */
+  .home-feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+  @media(max-width:700px){.home-feature-grid{grid-template-columns:repeat(2,1fr);}}
+  .hfeat-card{border-radius:16px;padding:18px 14px;cursor:pointer;transition:all .22s;display:flex;flex-direction:column;align-items:flex-start;gap:8px;position:relative;overflow:hidden;border:1.5px solid transparent;}
+  .hfeat-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,0.3);}
+  .hfeat-card .hfeat-icon{font-size:2rem;line-height:1;margin-bottom:2px;}
+  .hfeat-card .hfeat-kanji{font-family:'Noto Sans JP',sans-serif;font-size:2.2rem;font-weight:900;line-height:1;opacity:0.15;position:absolute;bottom:8px;right:12px;pointer-events:none;}
+  .hfeat-card h3{font-size:0.88rem;font-weight:800;color:#fff;line-height:1.25;margin:0;}
+  .hfeat-card p{font-size:0.7rem;opacity:0.7;color:#e2e8f0;margin:0;line-height:1.5;}
+  .hfeat-card.fc-purple{background:linear-gradient(135deg,#2d1b69,#1e1040);border-color:rgba(168,85,247,0.3);}
+  .hfeat-card.fc-purple:hover{border-color:var(--purple);}
+  .hfeat-card.fc-teal{background:linear-gradient(135deg,#0f3d35,#092a22);border-color:rgba(0,212,170,0.25);}
+  .hfeat-card.fc-teal:hover{border-color:var(--teal);}
+  .hfeat-card.fc-blue{background:linear-gradient(135deg,#1a2d5a,#0f1e40);border-color:rgba(59,130,246,0.25);}
+  .hfeat-card.fc-blue:hover{border-color:var(--blue);}
+  .hfeat-card.fc-gold{background:linear-gradient(135deg,#3a2a0a,#251c04);border-color:rgba(251,191,36,0.25);}
+  .hfeat-card.fc-gold:hover{border-color:var(--gold);}
 
-  /* QUICK GRID */
-  .quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  @media(max-width:600px){.quick-grid{grid-template-columns:1fr;} .cat-grid{grid-template-columns:1fr;}}
-  .quick-card{background:var(--card);border-radius:16px;padding:18px 16px;border:1px solid var(--border);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;}
-  .quick-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(168,85,247,0.06),transparent);opacity:0;transition:opacity .2s;}
-  .quick-card:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:var(--glow-teal);}
-  .quick-card:hover::before{opacity:1;}
-  .quick-card .qicon{font-size:2rem;flex-shrink:0;}
-  .quick-card h3{font-size:0.95rem;font-weight:700;margin-bottom:3px;color:var(--rice);}
-  .quick-card p{font-size:0.75rem;color:#6b7280;}
+  /* CAT GRID — vocab categories */
+  .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px;}
+  @media(max-width:900px){.cat-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:480px){.cat-grid{grid-template-columns:repeat(2,1fr);}}
+  .cat-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:14px 12px;text-align:center;position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .2s;cursor:default;}
+  .cat-card:hover{border-color:rgba(168,85,247,0.35);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.25);}
+  .cat-card .cat-emoji{font-size:2rem;line-height:1;}
+  .cat-card .cat-jp{font-family:'Noto Sans JP',sans-serif;font-size:0.82rem;font-weight:700;color:var(--rice);line-height:1.2;}
+  .cat-card .cat-id{font-size:0.68rem;color:#9ca3af;font-weight:500;}
+  .cat-card .cat-count{font-size:1.1rem;font-weight:900;background:linear-gradient(90deg,var(--purple),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .cat-actions{display:flex;gap:5px;width:100%;}
+  .cat-actions button{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#d1d5db;font-size:0.65rem;font-weight:700;padding:6px 2px;border-radius:7px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:3px;}
+  .cat-actions button:hover{background:rgba(168,85,247,0.18);border-color:var(--purple);color:#fff;}
+
+  /* MODULE GRID — all features */
+  .module-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  @media(max-width:500px){.module-grid{grid-template-columns:1fr;}}
+  .mod-card{background:var(--card);border-radius:14px;padding:14px 16px;border:1.5px solid var(--border);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;}
+  .mod-card::after{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;border-radius:0 14px 14px 0;background:var(--mod-accent,var(--purple));opacity:0;transition:opacity .2s;}
+  .mod-card:hover{border-color:var(--mod-accent,var(--purple));transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.3);}
+  .mod-card:hover::after{opacity:1;}
+  .mod-icon-wrap{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;background:var(--mod-bg,rgba(168,85,247,0.12));border:1px solid var(--mod-border,rgba(168,85,247,0.2));}
+  .mod-card h3{font-size:0.9rem;font-weight:700;margin-bottom:2px;color:var(--rice);}
+  .mod-card p{font-size:0.72rem;color:#6b7280;line-height:1.4;}
 
   /* SETTINGS */
   .settings-bar{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:20px;}
@@ -890,155 +917,208 @@
 
 <!-- HOME -->
 <div id="page-home" class="page active">
+
+  <!-- HERO -->
   <div class="hero">
-    <h1>Belajar Bahasa<br><em>Jepang</em> Sekarang</h1>
-    <p>Quiz interaktif, flashcard, dan kamus kanji lengkap N5 & N4 untuk persiapan JLPT</p>
+    <div class="hero-badge">🇯🇵 &nbsp;JLPT N5 · N4 · Belajar Bahasa Jepang</div>
+    <h1>
+      Kuasai Bahasa Jepang
+      <span class="h1-jp">日本語 道場</span>
+    </h1>
+    <p>Platform belajar interaktif dengan quiz, flashcard, kanji, kamus, dan simulasi JLPT — semua dalam satu tempat.</p>
+    <div class="hero-cta-row">
+      <button class="hero-cta-btn primary" onclick="showPage('quiz')">⚡ Mulai Quiz Sekarang</button>
+      <button class="hero-cta-btn secondary" onclick="showPage('harian')">🔥 Program 60 Hari</button>
+    </div>
     <div class="stats-row">
       <div class="stat"><div class="num" id="stat-vocab">500+</div><div class="lbl">Kosakata</div></div>
-      <div class="stat"><div class="num">188</div><div class="lbl">Kanji N5+N4</div></div>
+      <div class="stat"><div class="num">188</div><div class="lbl">Kanji</div></div>
       <div class="stat"><div class="num">133</div><div class="lbl">Soal JLPT</div></div>
+      <div class="stat"><div class="num">60</div><div class="lbl">Hari Program</div></div>
     </div>
   </div>
+
   <div class="section">
-    <div class="section-title">Pilih <span>Kategori</span></div>
-    <div class="section-sub">Klik kategori untuk mulai belajar</div>
-            <div class="cat-grid">
-      <!-- N5 -->
-      <div class="cat-card">
-        <div class="cat-info-top">
-          <div class="icon" style="background:rgba(168,85,247,0.1);border-color:rgba(168,85,247,0.2);">🔰</div>
-          <div class="texts">
-            <div class="jp">漢字 N5</div>
-            <div class="id">100 Kanji Dasar Wajib</div>
-          </div>
-        </div>
-        <div class="cat-actions">
-          <button onclick="showPage('kanji');setKanjiFilter('N5')">📚 Belajar Kanji N5</button>
-        </div>
-      </div>
 
-      <!-- N4 -->
-      <div class="cat-card">
-        <div class="cat-info-top">
-          <div class="icon" style="background:rgba(96,165,250,0.1);border-color:rgba(96,165,250,0.2);">⛩️</div>
-          <div class="texts">
-            <div class="jp">漢字 N4</div>
-            <div class="id">188 Kanji Lanjutan</div>
-          </div>
-        </div>
-        <div class="cat-actions">
-          <button onclick="showPage('kanji');setKanjiFilter('N4')">📚 Belajar Kanji N4</button>
-        </div>
+    <!-- 4 FITUR UTAMA -->
+    <div class="section-header"><span class="section-icon">🚀</span><div class="section-title">Fitur <span>Unggulan</span></div></div>
+    <div class="section-sub">Mulai dari sini untuk belajar paling efektif</div>
+    <div class="home-feature-grid">
+      <div class="hfeat-card fc-purple" onclick="showPage('quiz')">
+        <div class="hfeat-icon">⚡</div>
+        <h3>Quiz Interaktif</h3>
+        <p>Pilihan ganda & ketik jawaban, shuffle, timer otomatis</p>
+        <div class="hfeat-kanji">問</div>
       </div>
-
-      <!-- Verbs -->
-      <div class="cat-card">
-        <div class="cat-info-top">
-          <div class="icon" style="background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.2);">🏃</div>
-          <div class="texts">
-            <div class="jp">動詞 (Kata Kerja)</div>
-            <div class="id"><span id="cnt-verbs">120</span> kata</div>
-          </div>
-        </div>
-        <div class="cat-actions">
-          <button onclick="setKamusFilter('cat', 'verbs'); showPage('kamus');">📚 Kamus</button>
-          <button onclick="document.getElementById('q-category').value='verbs'; showPage('quiz');">⚡ Quiz</button>
-          <button onclick="document.getElementById('fc-category').value='verbs'; showPage('flashcard');">🃏 Flash</button>
-        </div>
+      <div class="hfeat-card fc-teal" onclick="showPage('flashcard')">
+        <div class="hfeat-icon">🃏</div>
+        <h3>Flashcard</h3>
+        <p>Hafal kosakata dengan kartu balik & spaced repetition</p>
+        <div class="hfeat-kanji">覚</div>
       </div>
-
-      <!-- Nouns -->
-      <div class="cat-card">
-        <div class="cat-info-top">
-          <div class="icon" style="background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.2);">📦</div>
-          <div class="texts">
-            <div class="jp">名詞 (Kata Benda)</div>
-            <div class="id"><span id="cnt-nouns">150</span> kata</div>
-          </div>
-        </div>
-        <div class="cat-actions">
-          <button onclick="setKamusFilter('cat', 'nouns'); showPage('kamus');">📚 Kamus</button>
-          <button onclick="document.getElementById('q-category').value='nouns'; showPage('quiz');">⚡ Quiz</button>
-          <button onclick="document.getElementById('fc-category').value='nouns'; showPage('flashcard');">🃏 Flash</button>
-        </div>
+      <div class="hfeat-card fc-blue" onclick="showPage('kanji')">
+        <div class="hfeat-icon">漢</div>
+        <h3>Kamus Kanji</h3>
+        <p>188 kanji N5+N4 lengkap onyomi, kunyomi & contoh</p>
+        <div class="hfeat-kanji">字</div>
       </div>
-
-      <!-- Adjectives -->
-      <div class="cat-card">
-        <div class="cat-info-top">
-          <div class="icon" style="background:rgba(244,114,182,0.1);border-color:rgba(244,114,182,0.2);">✨</div>
-          <div class="texts">
-            <div class="jp">形容詞 (Kata Sifat)</div>
-            <div class="id"><span id="cnt-adj">80</span> kata</div>
-          </div>
-        </div>
-        <div class="cat-actions">
-          <button onclick="setKamusFilter('cat', 'adjectives'); showPage('kamus');">📚 Kamus</button>
-          <button onclick="document.getElementById('q-category').value='adjectives'; showPage('quiz');">⚡ Quiz</button>
-          <button onclick="document.getElementById('fc-category').value='adjectives'; showPage('flashcard');">🃏 Flash</button>
-        </div>
-      </div>
-
-      <!-- Adverbs -->
-      <div class="cat-card">
-        <div class="cat-info-top">
-          <div class="icon" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.2);">⚡</div>
-          <div class="texts">
-            <div class="jp">副詞 (Keterangan)</div>
-            <div class="id"><span id="cnt-adv">30</span> kata</div>
-          </div>
-        </div>
-        <div class="cat-actions">
-          <button onclick="setKamusFilter('cat', 'adverbs'); showPage('kamus');">📚 Kamus</button>
-          <button onclick="document.getElementById('q-category').value='adverbs'; showPage('quiz');">⚡ Quiz</button>
-          <button onclick="document.getElementById('fc-category').value='adverbs'; showPage('flashcard');">🃏 Flash</button>
-        </div>
-      </div>
-
-      <!-- Daily -->
-      <div class="cat-card">
-        <div class="cat-info-top">
-          <div class="icon" style="background:rgba(251,146,60,0.1);border-color:rgba(251,146,60,0.2);">☕</div>
-          <div class="texts">
-            <div class="jp">日常 (Sehari-hari)</div>
-            <div class="id"><span id="cnt-daily">50</span> kata</div>
-          </div>
-        </div>
-        <div class="cat-actions">
-          <button onclick="setKamusFilter('cat', 'daily'); showPage('kamus');">📚 Kamus</button>
-          <button onclick="document.getElementById('q-category').value='daily'; showPage('quiz');">⚡ Quiz</button>
-          <button onclick="document.getElementById('fc-category').value='daily'; showPage('flashcard');">🃏 Flash</button>
-        </div>
-      </div>
-
-      <!-- All -->
-      <div class="cat-card">
-        <div class="cat-info-top">
-          <div class="icon" style="background:rgba(251,113,133,0.1);border-color:rgba(251,113,133,0.2);">🌟</div>
-          <div class="texts">
-            <div class="jp">全部 (Semua Kategori)</div>
-            <div class="id"><span id="cnt-all">500+</span> kata total</div>
-          </div>
-        </div>
-        <div class="cat-actions">
-          <button onclick="setKamusFilter('cat', 'all'); showPage('kamus');">📚 Kamus</button>
-          <button onclick="document.getElementById('q-category').value='all'; showPage('quiz');">⚡ Quiz</button>
-          <button onclick="document.getElementById('fc-category').value='all'; showPage('flashcard');">🃏 Flash</button>
-        </div>
+      <div class="hfeat-card fc-gold" onclick="showPage('jlpt')">
+        <div class="hfeat-icon">🎌</div>
+        <h3>Simulasi JLPT</h3>
+        <p>133 soal bergaya ujian resmi JLPT 2024 N5 & N4</p>
+        <div class="hfeat-kanji">試</div>
       </div>
     </div>
-    <div class="section-title">Mulai <span>Cepat</span></div>
-    <div class="section-sub">Langsung mulai tanpa pilih-pilih dulu</div>
-    <div class="quick-grid">
-      <div class="quick-card" onclick="showPage('kanji')"><div class="qicon">漢</div><div><h3>Kamus Kanji</h3><p>100 kanji N5 + 88 kanji N4, lengkap onyomi, kunyomi & contoh</p></div></div>
-      <div class="quick-card" onclick="showPage('kamus')" style="border-color:#fff3cd;"><div class="qicon">📚</div><div><h3>Kamus Kosakata</h3><p>500+ kata N5 & N4 dengan contoh kalimat lengkap</p></div></div>
-      <div class="quick-card" onclick="showPage('quiz')"><div class="qicon">⚡</div><div><h3>Quiz Cepat</h3><p>Soal acak dari semua level</p></div></div>
-      <div class="quick-card" onclick="setJlptLevel('N5');showPage('jlpt')" style="border-color:#e8f7f0;"><div class="qicon">🎌</div><div><h3>JLPT 2024 — N5</h3><p>65 soal bergaya ujian resmi</p></div></div>
-      <div class="quick-card" onclick="setJlptLevel('N4');showPage('jlpt')" style="border-color:#e8f0ff;"><div class="qicon">📋</div><div><h3>JLPT 2024 — N4</h3><p>68 soal bergaya ujian resmi</p></div></div>
-      <div class="quick-card" onclick="showPage('choukai')" style="border-color:#f0e8ff;"><div class="qicon">🎧</div><div><h3>Choukai — 聴解</h3><p>Latihan mendengarkan N5 & N4 dengan audio TTS</p></div></div>
-      <div class="quick-card" onclick="showPage('dokkai')" style="border-color:#dcfce7;"><div class="qicon">📖</div><div><h3>Dokkai — 読解</h3><p>Latihan membaca teks N5 & N4, pahami & jawab soal</p></div></div>
-      <div class="quick-card" onclick="showPage('kana')" style="border-color:#fff3e0;"><div class="qicon">あ</div><div><h3>Hiragana & Katakana</h3><p>Pelajari 46+46 karakter kana dasar dengan quiz & suara</p></div></div>
+
+    <!-- KOSAKATA PER KATEGORI -->
+    <div class="section-header"><span class="section-icon">📖</span><div class="section-title">Kosakata per <span>Kategori</span></div></div>
+    <div class="section-sub">Pilih kategori lalu langsung ke Kamus, Quiz, atau Flashcard</div>
+    <div class="cat-grid">
+
+      <div class="cat-card">
+        <div class="cat-emoji">🏃</div>
+        <div class="cat-jp">動詞</div>
+        <div class="cat-id">Kata Kerja</div>
+        <div class="cat-count"><span id="cnt-verbs">120</span> kata</div>
+        <div class="cat-actions">
+          <button onclick="setKamusFilter('cat','verbs');showPage('kamus');">📚</button>
+          <button onclick="document.getElementById('q-category').value='verbs';showPage('quiz');">⚡</button>
+          <button onclick="document.getElementById('fc-category').value='verbs';showPage('flashcard');">🃏</button>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-emoji">📦</div>
+        <div class="cat-jp">名詞</div>
+        <div class="cat-id">Kata Benda</div>
+        <div class="cat-count"><span id="cnt-nouns">150</span> kata</div>
+        <div class="cat-actions">
+          <button onclick="setKamusFilter('cat','nouns');showPage('kamus');">📚</button>
+          <button onclick="document.getElementById('q-category').value='nouns';showPage('quiz');">⚡</button>
+          <button onclick="document.getElementById('fc-category').value='nouns';showPage('flashcard');">🃏</button>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-emoji">✨</div>
+        <div class="cat-jp">形容詞</div>
+        <div class="cat-id">Kata Sifat</div>
+        <div class="cat-count"><span id="cnt-adj">80</span> kata</div>
+        <div class="cat-actions">
+          <button onclick="setKamusFilter('cat','adjectives');showPage('kamus');">📚</button>
+          <button onclick="document.getElementById('q-category').value='adjectives';showPage('quiz');">⚡</button>
+          <button onclick="document.getElementById('fc-category').value='adjectives';showPage('flashcard');">🃏</button>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-emoji">💨</div>
+        <div class="cat-jp">副詞</div>
+        <div class="cat-id">Kata Keterangan</div>
+        <div class="cat-count"><span id="cnt-adv">30</span> kata</div>
+        <div class="cat-actions">
+          <button onclick="setKamusFilter('cat','adverbs');showPage('kamus');">📚</button>
+          <button onclick="document.getElementById('q-category').value='adverbs';showPage('quiz');">⚡</button>
+          <button onclick="document.getElementById('fc-category').value='adverbs';showPage('flashcard');">🃏</button>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-emoji">☕</div>
+        <div class="cat-jp">日常</div>
+        <div class="cat-id">Percakapan Harian</div>
+        <div class="cat-count"><span id="cnt-daily">50</span> kata</div>
+        <div class="cat-actions">
+          <button onclick="setKamusFilter('cat','daily');showPage('kamus');">📚</button>
+          <button onclick="document.getElementById('q-category').value='daily';showPage('quiz');">⚡</button>
+          <button onclick="document.getElementById('fc-category').value='daily';showPage('flashcard');">🃏</button>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-emoji">🔰</div>
+        <div class="cat-jp">漢字 N5</div>
+        <div class="cat-id">100 Kanji Dasar</div>
+        <div class="cat-count">100 kanji</div>
+        <div class="cat-actions">
+          <button onclick="showPage('kanji');setKanjiFilter('N5')" style="flex:1;background:rgba(168,85,247,0.12);border-color:rgba(168,85,247,0.3);color:var(--purple2);font-size:0.65rem;font-weight:700;padding:6px 2px;border-radius:7px;cursor:pointer;">📚 Belajar</button>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-emoji">⛩️</div>
+        <div class="cat-jp">漢字 N4</div>
+        <div class="cat-id">88 Kanji Lanjutan</div>
+        <div class="cat-count">88 kanji</div>
+        <div class="cat-actions">
+          <button onclick="showPage('kanji');setKanjiFilter('N4')" style="flex:1;background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.3);color:var(--blue2);font-size:0.65rem;font-weight:700;padding:6px 2px;border-radius:7px;cursor:pointer;">📚 Belajar</button>
+        </div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-emoji">🌟</div>
+        <div class="cat-jp">全部</div>
+        <div class="cat-id">Semua Kategori</div>
+        <div class="cat-count"><span id="cnt-all">500+</span> kata</div>
+        <div class="cat-actions">
+          <button onclick="setKamusFilter('cat','all');showPage('kamus');">📚</button>
+          <button onclick="document.getElementById('q-category').value='all';showPage('quiz');">⚡</button>
+          <button onclick="document.getElementById('fc-category').value='all';showPage('flashcard');">🃏</button>
+        </div>
+      </div>
+
     </div>
+
+    <!-- SEMUA MODUL -->
+    <div class="section-header"><span class="section-icon">🎯</span><div class="section-title">Semua <span>Modul</span></div></div>
+    <div class="section-sub">Eksplorasi semua fitur yang tersedia</div>
+    <div class="module-grid">
+      <div class="mod-card" style="--mod-accent:var(--purple);--mod-bg:rgba(168,85,247,0.1);--mod-border:rgba(168,85,247,0.2);" onclick="showPage('kamus')">
+        <div class="mod-icon-wrap">📚</div>
+        <div><h3>Kamus Kosakata</h3><p>500+ kata N5 & N4 dengan contoh kalimat & terjemahan</p></div>
+      </div>
+      <div class="mod-card" style="--mod-accent:var(--teal);--mod-bg:rgba(0,212,170,0.1);--mod-border:rgba(0,212,170,0.2);" onclick="showPage('choukai')">
+        <div class="mod-icon-wrap">🎧</div>
+        <div><h3>Choukai — 聴解</h3><p>Latihan mendengarkan N5 & N4 dengan audio TTS</p></div>
+      </div>
+      <div class="mod-card" style="--mod-accent:#22d3ee;--mod-bg:rgba(34,211,238,0.1);--mod-border:rgba(34,211,238,0.2);" onclick="showPage('dokkai')">
+        <div class="mod-icon-wrap">📝</div>
+        <div><h3>Dokkai — 読解</h3><p>Latihan membaca teks N5 & N4, pahami & jawab soal</p></div>
+      </div>
+      <div class="mod-card" style="--mod-accent:#f59e0b;--mod-bg:rgba(245,158,11,0.1);--mod-border:rgba(245,158,11,0.2);" onclick="showPage('kana')">
+        <div class="mod-icon-wrap">あ</div>
+        <div><h3>Hiragana & Katakana</h3><p>Pelajari 46+46 karakter kana dasar dengan quiz & suara</p></div>
+      </div>
+      <div class="mod-card" style="--mod-accent:#f472b6;--mod-bg:rgba(244,114,182,0.1);--mod-border:rgba(244,114,182,0.2);" onclick="showPage('menulis')">
+        <div class="mod-icon-wrap">✏️</div>
+        <div><h3>Latihan Menulis</h3><p>Kanvas menulis kanji & kana dengan panduan stroke</p></div>
+      </div>
+      <div class="mod-card" style="--mod-accent:#fb923c;--mod-bg:rgba(251,146,60,0.1);--mod-border:rgba(251,146,60,0.2);" onclick="showPage('harian')">
+        <div class="mod-icon-wrap">🔥</div>
+        <div><h3>Program 60 Hari</h3><p>Jadwal belajar terstruktur dari N5 sampai N4</p></div>
+      </div>
+      <div class="mod-card" style="--mod-accent:var(--blue);--mod-bg:rgba(59,130,246,0.1);--mod-border:rgba(59,130,246,0.2);" onclick="showPage('minna')">
+        <div class="mod-icon-wrap">📖</div>
+        <div><h3>Minna no Nihongo</h3><p>Materi pelajaran berdasarkan buku Minna no Nihongo</p></div>
+      </div>
+      <div class="mod-card" style="--mod-accent:#a78bfa;--mod-bg:rgba(167,139,250,0.1);--mod-border:rgba(167,139,250,0.2);" onclick="showPage('kaiwa')">
+        <div class="mod-icon-wrap">🎤</div>
+        <div><h3>Kaiwa — 会話</h3><p>Latihan percakapan interaktif dengan mikrofon</p></div>
+      </div>
+      <div class="mod-card" style="--mod-accent:var(--teal2);--mod-bg:rgba(52,211,153,0.1);--mod-border:rgba(52,211,153,0.2);" onclick="showPage('dashboard')">
+        <div class="mod-icon-wrap">📊</div>
+        <div><h3>Dasbor Progress</h3><p>Pantau XP, streak, dan statistik belajar kamu</p></div>
+      </div>
+      <div class="mod-card" style="--mod-accent:var(--gold);--mod-bg:rgba(251,191,36,0.1);--mod-border:rgba(251,191,36,0.2);" onclick="setJlptLevel('N5');showPage('jlpt')">
+        <div class="mod-icon-wrap">🎌</div>
+        <div><h3>JLPT N5 — Simulasi</h3><p>65 soal bergaya ujian resmi JLPT 2024</p></div>
+      </div>
+      <div class="mod-card" style="--mod-accent:#818cf8;--mod-bg:rgba(129,140,248,0.1);--mod-border:rgba(129,140,248,0.2);" onclick="setJlptLevel('N4');showPage('jlpt')">
+        <div class="mod-icon-wrap">📋</div>
+        <div><h3>JLPT N4 — Simulasi</h3><p>68 soal bergaya ujian resmi JLPT 2024</p></div>
+      </div>
+    </div>
+    <div style="height:16px;"></div>
   </div>
 </div>
 
