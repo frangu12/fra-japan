@@ -107,6 +107,29 @@
   .cat-actions button{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#d1d5db;font-size:0.65rem;font-weight:700;padding:6px 2px;border-radius:7px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:3px;}
   .cat-actions button:hover{background:rgba(168,85,247,0.18);border-color:var(--purple);color:#fff;}
 
+  /* WORD OF THE DAY */
+  .wotd-card{display:grid;grid-template-columns:1fr 1fr;gap:0;background:linear-gradient(135deg,#1a0d35 0%,#0d1f35 100%);border:1.5px solid rgba(168,85,247,0.35);border-radius:20px;overflow:hidden;position:relative;}
+  @media(max-width:580px){.wotd-card{grid-template-columns:1fr;}}
+  .wotd-left{padding:22px 20px;display:flex;flex-direction:column;gap:5px;position:relative;z-index:1;}
+  .wotd-right{padding:22px 20px;background:rgba(0,0,0,0.2);border-left:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden;}
+  .wotd-level-badge{display:inline-flex;align-items:center;width:fit-content;background:rgba(168,85,247,0.2);border:1px solid rgba(168,85,247,0.4);color:var(--purple2);border-radius:8px;padding:2px 10px;font-size:0.68rem;font-weight:800;letter-spacing:1px;margin-bottom:4px;}
+  .wotd-jp{font-family:'Noto Sans JP',sans-serif;font-size:2.8rem;font-weight:900;color:#fff;line-height:1;margin-bottom:2px;}
+  .wotd-reading{font-family:'Noto Sans JP',sans-serif;font-size:1rem;color:var(--teal);font-weight:600;}
+  .wotd-romaji{font-size:0.75rem;color:#9ca3af;letter-spacing:2px;font-weight:500;}
+  .wotd-id{font-size:1.15rem;font-weight:800;color:var(--gold);margin-top:4px;}
+  .wotd-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+  .wotd-btn{padding:7px 14px;border-radius:9px;border:1.5px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:#e2e8f0;font-size:0.75rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;}
+  .wotd-btn:hover{border-color:var(--teal);background:rgba(0,212,170,0.15);color:var(--teal);}
+  .wotd-btn.wotd-btn-quiz{background:rgba(168,85,247,0.15);border-color:rgba(168,85,247,0.4);color:var(--purple2);}
+  .wotd-btn.wotd-btn-quiz:hover{background:rgba(168,85,247,0.3);}
+  .wotd-example-label{font-size:0.65rem;color:#6b7280;letter-spacing:1px;text-transform:uppercase;font-weight:700;}
+  .wotd-example-jp{font-family:'Noto Sans JP',sans-serif;font-size:0.92rem;color:#e2e8f0;line-height:1.7;font-weight:500;}
+  .wotd-example-id{font-size:0.78rem;color:#9ca3af;line-height:1.6;font-style:italic;}
+  .wotd-kanji-bg{position:absolute;bottom:-20px;right:-10px;font-family:'Noto Sans JP',sans-serif;font-size:7rem;font-weight:900;color:rgba(255,255,255,0.03);pointer-events:none;line-height:1;z-index:0;}
+  .wotd-streak{display:flex;align-items:center;gap:5px;margin-top:auto;padding-top:10px;font-size:0.75rem;color:#6b7280;font-weight:600;}
+  .wotd-streak span:first-child{font-size:1rem;}
+  #wotd-streak-num{color:var(--gold);font-size:0.9rem;font-weight:900;}
+
   /* MODULE GRID — all features */
   .module-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
   @media(max-width:500px){.module-grid{grid-template-columns:1fr;}}
@@ -962,10 +985,38 @@
 
   <div class="section">
 
-    <!-- 4 FITUR UTAMA -->
+    <!-- KATA HARI INI -->
+    <div id="wotd-section" style="margin-bottom:24px;">
+      <div class="section-header"><span class="section-icon">🌅</span><div class="section-title">Kata <span>Hari Ini</span></div></div>
+      <div class="section-sub" id="wotd-datestr">Memuat...</div>
+      <div class="wotd-card" id="wotd-card">
+        <div class="wotd-left">
+          <div class="wotd-level-badge" id="wotd-level">N5</div>
+          <div class="wotd-jp" id="wotd-jp">食べる</div>
+          <div class="wotd-reading" id="wotd-reading">たべる</div>
+          <div class="wotd-romaji" id="wotd-romaji">ta · be · ru</div>
+          <div class="wotd-id" id="wotd-id">Makan</div>
+          <div class="wotd-actions">
+            <button class="wotd-btn" onclick="wotdSpeak()">🔊 Dengar</button>
+            <button class="wotd-btn wotd-btn-quiz" onclick="wotdStartQuiz()">⚡ Quiz kata ini</button>
+          </div>
+        </div>
+        <div class="wotd-right">
+          <div class="wotd-example-label">Contoh kalimat:</div>
+          <div class="wotd-example-jp" id="wotd-ex-jp"></div>
+          <div class="wotd-example-id" id="wotd-ex-id"></div>
+          <div class="wotd-kanji-bg" id="wotd-kanji-bg">食</div>
+          <div class="wotd-streak">
+            <span>🔥</span>
+            <span id="wotd-streak-num">0</span>
+            <span>hari berturut-turut</span>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="section-header"><span class="section-icon">🚀</span><div class="section-title">Fitur <span>Unggulan</span></div></div>
     <div class="section-sub">Mulai dari sini untuk belajar paling efektif</div>
-    <div class="home-feature-grid">
+    <!-- 4 FITUR UTAMA -->
       <div class="hfeat-card fc-purple" onclick="showPage('quiz')">
         <div class="hfeat-icon">⚡</div>
         <h3>Quiz Interaktif</h3>
@@ -3316,6 +3367,85 @@ function initHomeStats() {
 
     var cntAll = document.getElementById('cnt-all');
     if(cntAll) cntAll.textContent = vocab.length + "+";
+
+    initWordOfTheDay();
+}
+
+function initWordOfTheDay() {
+    // Pilih kata berdasarkan tanggal (deterministik, ganti tiap hari)
+    const today = new Date();
+    const dateKey = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+    const dayIndex = Math.abs(today.getFullYear()*10000 + (today.getMonth()+1)*100 + today.getDate()) % vocab.length;
+    const word = vocab[dayIndex];
+    if(!word) return;
+
+    // Format tanggal Indonesia
+    const hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][today.getDay()];
+    const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'][today.getMonth()];
+    const dateStr = `${hari}, ${today.getDate()} ${bulan} ${today.getFullYear()}`;
+
+    // Romaji dari reading (spasi tiap karakter dengan titik)
+    function readingToRomaji(r) {
+        const map = {'あ':'a','い':'i','う':'u','え':'e','お':'o','か':'ka','き':'ki','く':'ku','け':'ke','こ':'ko','さ':'sa','し':'shi','す':'su','せ':'se','そ':'so','た':'ta','ち':'chi','つ':'tsu','て':'te','と':'to','な':'na','に':'ni','ぬ':'nu','ね':'ne','の':'no','は':'ha','ひ':'hi','ふ':'fu','へ':'he','ほ':'ho','ま':'ma','み':'mi','む':'mu','め':'me','も':'mo','や':'ya','ゆ':'yu','よ':'yo','ら':'ra','り':'ri','る':'ru','れ':'re','ろ':'ro','わ':'wa','を':'wo','ん':'n','が':'ga','ぎ':'gi','ぐ':'gu','げ':'ge','ご':'go','ざ':'za','じ':'ji','ず':'zu','ぜ':'ze','ぞ':'zo','だ':'da','で':'de','ど':'do','ば':'ba','び':'bi','ぶ':'bu','べ':'be','ぼ':'bo','ぱ':'pa','ぴ':'pi','ぷ':'pu','ぺ':'pe','ぽ':'po'};
+        return [...r].map(c => map[c] || c).join(' · ');
+    }
+
+    // Streak logic — cek apakah sudah lihat hari ini
+    const streakKey = 'wotd_streak';
+    const lastSeenKey = 'wotd_last_seen';
+    let streak = parseInt(localStorage.getItem(streakKey)||'0');
+    const lastSeen = localStorage.getItem(lastSeenKey)||'';
+    const yesterday = new Date(today); yesterday.setDate(yesterday.getDate()-1);
+    const yesterdayKey = `${yesterday.getFullYear()}-${yesterday.getMonth()+1}-${yesterday.getDate()}`;
+
+    if(lastSeen === dateKey) {
+        // Sudah lihat hari ini, streak tetap
+    } else if(lastSeen === yesterdayKey) {
+        // Kemarin lihat, streak +1
+        streak++;
+        localStorage.setItem(streakKey, streak);
+        localStorage.setItem(lastSeenKey, dateKey);
+    } else {
+        // Putus atau baru pertama
+        streak = 1;
+        localStorage.setItem(streakKey, streak);
+        localStorage.setItem(lastSeenKey, dateKey);
+    }
+
+    // Parse contoh kalimat (format: "JP\nID")
+    let exJp = '', exId = '';
+    if(word.example) {
+        const lines = word.example.split('\n');
+        exJp = lines[0] || '';
+        exId = lines[1] || '';
+    }
+
+    // Isi elemen
+    document.getElementById('wotd-datestr').textContent = dateStr;
+    document.getElementById('wotd-level').textContent = word.level || 'N5';
+    document.getElementById('wotd-jp').textContent = word.jp;
+    document.getElementById('wotd-reading').textContent = word.reading;
+    document.getElementById('wotd-romaji').textContent = readingToRomaji(word.reading);
+    document.getElementById('wotd-id').textContent = word.id;
+    document.getElementById('wotd-ex-jp').textContent = exJp;
+    document.getElementById('wotd-ex-id').textContent = exId;
+    document.getElementById('wotd-kanji-bg').textContent = word.jp[0] || '語';
+    document.getElementById('wotd-streak-num').textContent = streak;
+
+    // Simpan word untuk fungsi speak & quiz
+    window._wotdWord = word;
+}
+
+function wotdSpeak() {
+    if(window._wotdWord) speakText(window._wotdWord.jp);
+}
+
+function wotdStartQuiz() {
+    if(!window._wotdWord) return;
+    // Set quiz ke kata ini (filter by level & cari kategorinya)
+    document.getElementById('q-category').value = window._wotdWord.cat || 'all';
+    document.getElementById('q-level').value = window._wotdWord.level || 'all';
+    showPage('quiz');
 }
 
 function startFromCategory(cat) {
