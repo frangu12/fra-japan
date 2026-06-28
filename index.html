@@ -188,6 +188,28 @@
   .quiz-typing-submit:hover{background:var(--teal2);transform:translateY(-1px);}
   .quiz-typing-submit:disabled{background:#555;cursor:default;transform:none;}
   .quiz-typing-hint{text-align:center;font-size:0.73rem;color:var(--muted);margin-top:8px;opacity:0.6;}
+
+  /* HIRAGANA 100 CARD MODE */
+  .h100-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;}
+  @media(max-width:500px){.h100-grid{grid-template-columns:1fr;}}
+  .h100-card{background:#f5f0e8;border-radius:18px;padding:20px 16px 16px;position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:160px;border:2px solid transparent;transition:all .2s;cursor:default;}
+  .h100-card.correct{border-color:#4caf50;background:#efffef;}
+  .h100-card.wrong{border-color:#e53935;background:#fff0f0;}
+  .h100-qnum{position:absolute;top:8px;left:10px;font-size:0.65rem;color:#888;font-weight:700;letter-spacing:0.5px;}
+  .h100-word{font-family:'Noto Sans JP',sans-serif;font-size:3rem;font-weight:900;color:#1a1a1a;line-height:1;margin:8px 0 4px;}
+  .h100-romaji{display:flex;gap:6px;font-size:0.9rem;color:#555;letter-spacing:2px;font-weight:600;}
+  .h100-romaji span{padding:2px 4px;border-bottom:2px solid #ccc;}
+  .h100-meaning{display:flex;align-items:center;gap:5px;font-size:0.78rem;color:#c0392b;font-weight:700;margin-top:4px;}
+  .h100-meaning::before{content:'';width:16px;height:3px;background:#c0392b;border-radius:2px;display:inline-block;}
+  .h100-emoji{position:absolute;bottom:10px;right:12px;font-size:1.8rem;opacity:0.85;}
+  .h100-answer-area{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;background:var(--card);border-radius:16px;border:1.5px solid var(--border);}
+  .h100-answer-area p{font-size:0.85rem;color:var(--muted);text-align:center;margin:0;}
+  .h100-options{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+  .h100-opt{padding:10px 20px;border-radius:10px;border:1.5px solid var(--border);background:rgba(255,255,255,0.05);color:var(--rice);font-family:'Noto Sans JP',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;}
+  .h100-opt:hover{border-color:var(--purple);background:rgba(168,85,247,0.15);}
+  .h100-opt.correct{border-color:var(--teal);background:rgba(0,212,170,0.2);color:var(--teal);}
+  .h100-opt.wrong{border-color:var(--red);background:rgba(255,77,109,0.15);color:var(--red);}
+  .h100-opt:disabled{cursor:default;}
   .quiz-typing-hint kbd{display:inline-block;background:var(--border);color:var(--rice);padding:1px 6px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:0.68rem;font-weight:700;}
 
   /* Feedback */
@@ -1197,6 +1219,7 @@
             <option value="jp-id">🇯🇵 → 🇮🇩 Jepang ke Indonesia</option>
             <option value="id-jp">🇮🇩 → 🇯🇵 Indonesia ke Jepang</option>
             <option value="reading">📖 Baca Hiragana</option>
+            <option value="hiragana100">🃏 Ulangan Membaca Hiragana (Bergambar)</option>
             <option value="typing-jpid">✍️ Ketik Arti (JP→ID)</option>
             <option value="typing-idjp">✍️ Ketik Jepang (ID→JP)</option>
             <option value="typing-reading">✍️ Ketik Bacaan (Kanji→Hira)</option>
@@ -3637,6 +3660,10 @@ function renderQuestion() {
         qRead.innerHTML = '';
         correctAnswer = q.reading;
         options = generateOptions(correctAnswer, 'reading');
+    } else if (q.qType === 'hiragana100') {
+        // HIRAGANA 100 CARD MODE — tampilkan 4 kartu, tebak artinya
+        renderHiragana100Question(q);
+        return;
     } else if (isMicMode) {
         qText.textContent = q.id;
         qRead.innerHTML = `Ucapkan dalam bahasa Jepang: <strong>${q.jp}</strong>`;
@@ -3702,6 +3729,154 @@ function renderQuestion() {
         speakText(q.qType === 'jp-id' || q.qType === 'reading' || q.qType.startsWith('typing-') ? q.jp : correctAnswer);
     }
 }
+
+// ─── HIRAGANA 100 CARD MODE ───────────────────────────────────────────────
+const H100_EMOJIS = {
+    verbs: ['🏃','🍳','📝','🚶','💪','🛌','🏊','✈️','🎵','🍽️'],
+    nouns: ['📦','🏠','🌸','🐶','🎒','⛩️','🍱','🚗','📚','🌍'],
+    adjectives: ['✨','🔥','❄️','🌟','💫','🎨','🌈','⚡','🍀','🪷'],
+    adverbs: ['💨','⏱️','🔄','📍','🔢','⚖️','🎯','🌀','🔁','🗓️'],
+    daily: ['☕','🛒','👋','🏪','💬','🕐','📞','🎉','🤝','💡'],
+    default: ['🌸','⛩️','🎌','🍣','🎎','🗾','🌺','🎋','🏯','🎐']
+};
+
+function getH100Emoji(item) {
+    const pool = H100_EMOJIS[item.cat] || H100_EMOJIS.default;
+    // deterministic per word
+    let h = 0; for(let c of item.jp) h = (h*31 + c.charCodeAt(0)) & 0xffff;
+    return pool[h % pool.length];
+}
+
+function romajiBlocks(reading) {
+    // Split reading into syllable blocks separated by spaces for display
+    if(!reading) return '';
+    return reading.split('').map((c,i) => `<span>${c}</span>`).join('');
+}
+
+function renderHiragana100Question(currentQ) {
+    const q = currentQ;
+    // Pick 3 wrong distractors from vocab
+    let pool = shuffle([...vocab].filter(v => v.reading !== q.reading));
+    let wrong3 = pool.slice(0,3);
+    let allCards = shuffle([q, ...wrong3]);
+
+    const opts = document.getElementById('q-options');
+    opts.style.display = 'block';
+
+    // Build romaji spaced blocks from reading
+    function toRomajiDisplay(reading) {
+        // Group hiragana into syllable chunks: simple approach, split by characters
+        const hiraToRoma = {
+            'あ':'a','い':'i','う':'u','え':'e','お':'o',
+            'か':'ka','き':'ki','く':'ku','け':'ke','こ':'ko',
+            'さ':'sa','し':'shi','す':'su','せ':'se','そ':'so',
+            'た':'ta','ち':'chi','つ':'tsu','て':'te','と':'to',
+            'な':'na','に':'ni','ぬ':'nu','ね':'ne','の':'no',
+            'は':'ha','ひ':'hi','ふ':'fu','へ':'he','ほ':'ho',
+            'ま':'ma','み':'mi','む':'mu','め':'me','も':'mo',
+            'や':'ya','ゆ':'yu','よ':'yo',
+            'ら':'ra','り':'ri','る':'ru','れ':'re','ろ':'ro',
+            'わ':'wa','を':'wo','ん':'n',
+            'が':'ga','ぎ':'gi','ぐ':'gu','げ':'ge','ご':'go',
+            'ざ':'za','じ':'ji','ず':'zu','ぜ':'ze','ぞ':'zo',
+            'だ':'da','ぢ':'ji','づ':'zu','で':'de','ど':'do',
+            'ば':'ba','び':'bi','ぶ':'bu','べ':'be','ぼ':'bo',
+            'ぱ':'pa','ぴ':'pi','ぷ':'pu','ぺ':'pe','ぽ':'po',
+            'きゃ':'kya','きゅ':'kyu','きょ':'kyo',
+            'しゃ':'sha','しゅ':'shu','しょ':'sho',
+            'ちゃ':'cha','ちゅ':'chu','ちょ':'cho',
+            'にゃ':'nya','にゅ':'nyu','にょ':'nyo',
+            'ひゃ':'hya','ひゅ':'hyu','ひょ':'hyo',
+            'みゃ':'mya','みゅ':'myu','みょ':'myo',
+            'りゃ':'rya','りゅ':'ryu','りょ':'ryo',
+            'ぎゃ':'gya','ぎゅ':'gyu','ぎょ':'gyo',
+            'じゃ':'ja','じゅ':'ju','じょ':'jo',
+            'びゃ':'bya','びゅ':'byu','びょ':'byo',
+            'ぴゃ':'pya','ぴゅ':'pyu','ぴょ':'pyo',
+            'っ':'·','ー':'-','〜':'~'
+        };
+        let parts = [];
+        let chars = [...reading];
+        for(let i=0;i<chars.length;i++) {
+            let two = chars[i]+(chars[i+1]||'');
+            if(hiraToRoma[two] && two.length===2 && chars[i+1]==='ゃ'||chars[i+1]==='ゅ'||chars[i+1]==='ょ') {
+                parts.push(hiraToRoma[two]||two); i++;
+            } else {
+                parts.push(hiraToRoma[chars[i]]||chars[i]);
+            }
+        }
+        return parts;
+    }
+
+    // Build 4 cards HTML
+    const labels = ['Q1','Q2','Q3','Q4'];
+    let cardsHTML = allCards.map((item, idx) => {
+        const emoji = getH100Emoji(item);
+        const roma = toRomajiDisplay(item.reading);
+        const romaHTML = roma.map(r=>`<span>${r}</span>`).join('&nbsp;');
+        const isCorrect = item.jp === q.jp;
+        return `
+        <div class="h100-card" id="h100-card-${idx}" data-correct="${isCorrect}">
+            <div class="h100-qnum">${labels[idx]}</div>
+            <div class="h100-word">${item.jp}</div>
+            <div class="h100-romaji">${romaHTML}</div>
+            <div class="h100-meaning">${item.id}</div>
+            <div class="h100-emoji">${emoji}</div>
+        </div>`;
+    }).join('');
+
+    opts.innerHTML = `
+        <div class="h100-grid">
+            ${cardsHTML}
+            <div class="h100-answer-area">
+                <p>Pilih kartu yang menampilkan kata: <strong style="color:var(--teal);font-size:1.05rem;">${q.jp}</strong> (${q.id})</p>
+                <div class="h100-options" id="h100-opts">
+                    ${allCards.map((item,idx)=>`<button class="h100-opt" onclick="checkH100Answer(${idx},'${item.jp}','${q.jp}')">${labels[idx]}</button>`).join('')}
+                </div>
+            </div>
+        </div>`;
+
+    // update question display area
+    document.getElementById('q-question').textContent = '🃏 Pilih kartu yang tepat';
+    document.getElementById('q-reading').innerHTML = `<span style="font-size:0.8rem;color:var(--muted)">Lihat 4 kartu di bawah, lalu klik label kartu yang benar</span>`;
+
+    document.getElementById('btn-next').classList.add('hidden');
+    document.getElementById('q-feedback').className = 'quiz-feedback';
+}
+
+function checkH100Answer(idx, selectedJp, correctJp) {
+    const isCorrect = selectedJp === correctJp;
+    const fb = document.getElementById('q-feedback');
+    const q = qQuestions[qCurrent];
+
+    // Disable all buttons
+    document.querySelectorAll('.h100-opt').forEach(b => b.disabled = true);
+
+    // Highlight cards
+    document.querySelectorAll('.h100-card').forEach((card, i) => {
+        if(card.dataset.correct === 'true') card.classList.add('correct');
+        else if(i === idx && !isCorrect) card.classList.add('wrong');
+    });
+    // Highlight chosen option
+    const optBtns = document.querySelectorAll('.h100-opt');
+    optBtns[idx].classList.add(isCorrect ? 'correct' : 'wrong');
+    const correctIdx = [...document.querySelectorAll('.h100-card')].findIndex(c => c.dataset.correct === 'true');
+    if(!isCorrect) optBtns[correctIdx].classList.add('correct');
+
+    if(isCorrect) {
+        qCorrect++;
+        fb.className = 'quiz-feedback correct';
+        fb.innerHTML = `✅ Benar! <strong>${q.jp}</strong> = <em>${q.id}</em>`;
+    } else {
+        qWrong++;
+        fb.className = 'quiz-feedback wrong';
+        fb.innerHTML = `❌ Salah. Jawaban benar: Kartu ${['Q1','Q2','Q3','Q4'][correctIdx]} — <strong>${q.jp}</strong> = <em>${q.id}</em>`;
+    }
+    document.getElementById('q-score-text').textContent = `✅ ${qCorrect}   ❌ ${qWrong}`;
+    document.getElementById('btn-next').classList.remove('hidden');
+    if (quizOptions.sound) speakText(q.jp);
+}
+// ─────────────────────────────────────────────────────────────────────────────
 
 function generateOptions(correctStr, type) {
     let pool = [...vocab];
