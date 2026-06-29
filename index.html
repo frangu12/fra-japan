@@ -141,6 +141,73 @@
   .mod-card h3{font-size:0.9rem;font-weight:700;margin-bottom:2px;color:var(--rice);}
   .mod-card p{font-size:0.72rem;color:#6b7280;line-height:1.4;}
 
+  /* ── SRS / FUKUSHUU ───────────────────────────────── */
+  .srs-wrap{max-width:600px;margin:0 auto;padding:20px 16px 80px;}
+  /* Dashboard bar */
+  .srs-dash{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px;}
+  .srs-dash-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 8px;text-align:center;}
+  .srs-dash-num{font-size:1.4rem;font-weight:900;}
+  .srs-dash-lbl{font-size:0.6rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.8px;margin-top:2px;}
+  .srs-dash-num.due{color:var(--purple2);}
+  .srs-dash-num.new{color:var(--teal);}
+  .srs-dash-num.learned{color:var(--gold);}
+  .srs-dash-num.streak{color:var(--red);}
+  /* Empty state */
+  .srs-empty{text-align:center;padding:60px 20px;color:#6b7280;}
+  .srs-empty .srs-empty-icon{font-size:4rem;margin-bottom:12px;}
+  .srs-empty h3{font-size:1.1rem;color:var(--rice);margin-bottom:8px;}
+  .srs-empty p{font-size:0.82rem;line-height:1.6;}
+  /* Progress bar */
+  .srs-progress-wrap{margin-bottom:16px;}
+  .srs-progress-info{display:flex;justify-content:space-between;font-size:0.72rem;color:#6b7280;margin-bottom:5px;}
+  .srs-progress-bar{height:5px;background:rgba(255,255,255,0.07);border-radius:99px;overflow:hidden;}
+  .srs-progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--teal));border-radius:99px;transition:width .4s;}
+  /* Flashcard */
+  .srs-card-scene{perspective:1000px;width:100%;margin-bottom:18px;}
+  .srs-card{width:100%;min-height:260px;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer;border-radius:22px;}
+  .srs-card.flipped{transform:rotateY(180deg);}
+  .srs-card-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 24px;gap:6px;}
+  .srs-front{background:linear-gradient(145deg,#1e0f40,#0f2040);border:1.5px solid rgba(168,85,247,0.3);}
+  .srs-back{background:linear-gradient(145deg,#0f2a1e,#0a1a30);border:1.5px solid rgba(0,212,170,0.3);transform:rotateY(180deg);}
+  .srs-card-level{font-size:0.65rem;font-weight:800;letter-spacing:1.5px;color:var(--purple2);background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:8px;padding:2px 10px;margin-bottom:4px;}
+  .srs-card-jp{font-family:'Noto Sans JP',sans-serif;font-size:3rem;font-weight:900;color:#fff;line-height:1.1;text-align:center;}
+  .srs-card-hint{font-size:0.75rem;color:#6b7280;margin-top:6px;}
+  .srs-card-reading{font-family:'Noto Sans JP',sans-serif;font-size:1.1rem;color:var(--teal);font-weight:600;}
+  .srs-card-id{font-size:1.4rem;font-weight:800;color:var(--gold);}
+  .srs-card-cat{font-size:0.65rem;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+  .srs-card-example{font-size:0.78rem;color:#9ca3af;text-align:center;line-height:1.6;margin-top:8px;border-top:1px solid rgba(255,255,255,0.06);padding-top:10px;max-width:100%;}
+  .srs-card-speak{background:none;border:1px solid rgba(255,255,255,0.15);color:#9ca3af;border-radius:8px;padding:5px 12px;font-size:0.75rem;cursor:pointer;margin-top:6px;transition:all .2s;}
+  .srs-card-speak:hover{border-color:var(--teal);color:var(--teal);}
+  /* Rating buttons */
+  .srs-ratings{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
+  .srs-btn{padding:12px 6px;border-radius:12px;border:1.5px solid;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.78rem;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:3px;background:rgba(0,0,0,0.2);}
+  .srs-btn:hover{transform:translateY(-2px);filter:brightness(1.15);}
+  .srs-btn.again{border-color:rgba(239,68,68,0.5);color:#f87171;}
+  .srs-btn.again:hover{background:rgba(239,68,68,0.15);}
+  .srs-btn.hard{border-color:rgba(251,146,60,0.5);color:#fb923c;}
+  .srs-btn.hard:hover{background:rgba(251,146,60,0.15);}
+  .srs-btn.good{border-color:rgba(59,130,246,0.5);color:var(--blue2);}
+  .srs-btn.good:hover{background:rgba(59,130,246,0.15);}
+  .srs-btn.easy{border-color:rgba(0,212,170,0.5);color:var(--teal);}
+  .srs-btn.easy:hover{background:rgba(0,212,170,0.15);}
+  .srs-btn .srs-btn-interval{font-size:0.62rem;font-weight:500;opacity:0.7;}
+  .srs-btn-row-hint{text-align:center;font-size:0.7rem;color:#4b5563;margin-bottom:14px;}
+  /* Setup screen */
+  .srs-setup{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:20px;}
+  .srs-setup h3{font-size:1rem;font-weight:700;color:var(--rice);margin-bottom:14px;}
+  .srs-setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  @media(max-width:400px){.srs-setup-grid{grid-template-columns:1fr;}}
+  .srs-setup label{font-size:0.72rem;color:#6b7280;font-weight:600;display:block;margin-bottom:4px;}
+  .srs-setup select{width:100%;background:var(--bg2);border:1px solid var(--border);color:var(--rice);border-radius:8px;padding:7px 10px;font-size:0.82rem;font-family:'DM Sans',sans-serif;}
+  .srs-start-btn{width:100%;padding:13px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--purple),var(--teal));color:#fff;font-family:'DM Sans',sans-serif;font-weight:800;font-size:0.95rem;cursor:pointer;transition:all .2s;}
+  .srs-start-btn:hover{opacity:0.9;transform:translateY(-1px);}
+  /* Congrats */
+  .srs-congrats{text-align:center;padding:40px 20px;background:var(--card);border-radius:20px;border:1.5px solid var(--border);}
+  .srs-congrats-icon{font-size:4rem;margin-bottom:12px;}
+  .srs-congrats h3{font-size:1.2rem;color:var(--rice);font-weight:800;margin-bottom:8px;}
+  .srs-congrats p{font-size:0.82rem;color:#9ca3af;margin-bottom:20px;}
+  /* ─────────────────────────────────────────────────── */
+
   /* SETTINGS */
   .settings-bar{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:20px;}
   .settings-bar label{font-size:0.75rem;color:#6b7280;font-weight:500;}
@@ -955,6 +1022,7 @@
   <button class="bnav-item" id="bnav-dokkai" onclick="showPage('dokkai')"><span class="bnav-icon">📝</span>Dokkai</button>
   <button class="bnav-item" id="bnav-kana" onclick="showPage('kana')"><span class="bnav-icon">あ</span>Kana</button>
   <button class="bnav-item" id="bnav-menulis" onclick="showPage('menulis')"><span class="bnav-icon">✏️</span>Menulis</button>
+  <button class="bnav-item" id="bnav-fukushuu" onclick="showPage('fukushuu')"><span class="bnav-icon">🔁</span>SRS</button>
   <button class="bnav-item" id="bnav-harian" onclick="showPage('harian')"><span class="bnav-icon">🔥</span>60 Hari</button>
   <button class="bnav-item" id="bnav-dashboard" onclick="showPage('dashboard')"><span class="bnav-icon">📊</span>Dasbor</button>
   <button class="bnav-item" id="bnav-kaiwa" onclick="showPage('kaiwa')"><span class="bnav-icon">🎤</span>Kaiwa</button>
@@ -1178,6 +1246,10 @@
         <div class="mod-icon-wrap">🎤</div>
         <div><h3>Kaiwa — 会話</h3><p>Latihan percakapan interaktif dengan mikrofon</p></div>
       </div>
+      <div class="mod-card" style="--mod-accent:var(--purple2);--mod-bg:rgba(167,139,250,0.1);--mod-border:rgba(167,139,250,0.2);" onclick="showPage('fukushuu')">
+        <div class="mod-icon-wrap">🔁</div>
+        <div><h3>Fukushuu SRS — 復習</h3><p>Spaced repetition seperti Anki — kartu susah muncul lebih sering</p></div>
+      </div>
       <div class="mod-card" style="--mod-accent:var(--teal2);--mod-bg:rgba(52,211,153,0.1);--mod-border:rgba(52,211,153,0.2);" onclick="showPage('dashboard')">
         <div class="mod-icon-wrap">📊</div>
         <div><h3>Dasbor Progress</h3><p>Pantau XP, streak, dan statistik belajar kamu</p></div>
@@ -1192,6 +1264,122 @@
       </div>
     </div>
     <div style="height:16px;"></div>
+  </div>
+</div>
+
+<!-- SRS / FUKUSHUU PAGE -->
+<div id="page-fukushuu" class="page">
+  <div class="srs-wrap">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+      <div>
+        <div class="section-title">🔁 Fukushuu — <span>復習</span></div>
+        <div class="section-sub">Sistem pengulangan berbasis ingatan (Spaced Repetition)</div>
+      </div>
+      <button onclick="showSrsSetup()" style="background:none;border:1px solid var(--border);color:#9ca3af;border-radius:9px;padding:6px 12px;font-size:0.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;">⚙️ Atur</button>
+    </div>
+
+    <!-- Stats dashboard -->
+    <div class="srs-dash">
+      <div class="srs-dash-item"><div class="srs-dash-num due" id="srs-stat-due">0</div><div class="srs-dash-lbl">Due</div></div>
+      <div class="srs-dash-item"><div class="srs-dash-num new" id="srs-stat-new">0</div><div class="srs-dash-lbl">Baru</div></div>
+      <div class="srs-dash-item"><div class="srs-dash-num learned" id="srs-stat-learned">0</div><div class="srs-dash-lbl">Dipelajari</div></div>
+      <div class="srs-dash-item"><div class="srs-dash-num streak" id="srs-stat-streak">0🔥</div><div class="srs-dash-lbl">Streak</div></div>
+    </div>
+
+    <!-- Setup panel (hidden by default) -->
+    <div id="srs-setup-panel" style="display:none;margin-bottom:16px;">
+      <div class="srs-setup">
+        <h3>⚙️ Pengaturan Sesi</h3>
+        <div class="srs-setup-grid">
+          <div><label>Level</label><select id="srs-level"><option value="all">Semua</option><option value="N5">N5</option><option value="N4">N4</option></select></div>
+          <div><label>Kategori</label><select id="srs-cat"><option value="all">Semua</option><option value="verbs">Kata Kerja</option><option value="nouns">Kata Benda</option><option value="adjectives">Kata Sifat</option><option value="adverbs">Kata Keterangan</option><option value="daily">Sehari-hari</option></select></div>
+          <div><label>Kartu baru per sesi</label><select id="srs-new-per-day"><option value="5">5</option><option value="10" selected>10</option><option value="20">20</option><option value="30">30</option></select></div>
+          <div><label>Maks review per sesi</label><select id="srs-max-review"><option value="20">20</option><option value="30" selected>30</option><option value="50">50</option><option value="100">100</option></select></div>
+        </div>
+        <button class="srs-start-btn" onclick="startSrsSession()">🔁 Mulai Sesi Review</button>
+      </div>
+    </div>
+
+    <!-- Review area -->
+    <div id="srs-review-area" style="display:none;">
+      <div class="srs-progress-wrap">
+        <div class="srs-progress-info">
+          <span id="srs-prog-text">0 / 0</span>
+          <span id="srs-prog-remain" style="color:var(--purple2)"></span>
+        </div>
+        <div class="srs-progress-bar"><div class="srs-progress-fill" id="srs-prog-fill" style="width:0%"></div></div>
+      </div>
+
+      <div class="srs-card-scene">
+        <div class="srs-card" id="srs-card" onclick="flipSrsCard()">
+          <div class="srs-card-face srs-front">
+            <div class="srs-card-level" id="srs-card-level">N5</div>
+            <div class="srs-card-jp" id="srs-card-jp">食べる</div>
+            <div class="srs-card-hint">👆 Ketuk untuk lihat arti</div>
+          </div>
+          <div class="srs-card-face srs-back">
+            <div class="srs-card-level" id="srs-card-level-b">N5</div>
+            <div class="srs-card-reading" id="srs-card-reading">たべる</div>
+            <div class="srs-card-id" id="srs-card-id">Makan</div>
+            <div class="srs-card-cat" id="srs-card-cat">verbs</div>
+            <div class="srs-card-example" id="srs-card-example"></div>
+            <button class="srs-card-speak" onclick="event.stopPropagation();srsSpeakCurrent()">🔊 Dengar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="srs-btn-row-hint" id="srs-flip-hint">Ketuk kartu dulu untuk melihat pilihan penilaian</div>
+      <div class="srs-ratings" id="srs-ratings" style="opacity:0.3;pointer-events:none;">
+        <button class="srs-btn again" onclick="rateSrsCard('again')">
+          😵 Lagi<div class="srs-btn-interval" id="srs-int-again">&lt;1m</div>
+        </button>
+        <button class="srs-btn hard" onclick="rateSrsCard('hard')">
+          😓 Susah<div class="srs-btn-interval" id="srs-int-hard">1 hari</div>
+        </button>
+        <button class="srs-btn good" onclick="rateSrsCard('good')">
+          🙂 Oke<div class="srs-btn-interval" id="srs-int-good">3 hari</div>
+        </button>
+        <button class="srs-btn easy" onclick="rateSrsCard('easy')">
+          😄 Mudah<div class="srs-btn-interval" id="srs-int-easy">7 hari</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty / done state -->
+    <div id="srs-empty" style="display:none;">
+      <div class="srs-empty">
+        <div class="srs-empty-icon">🎉</div>
+        <h3>Semua kartu sudah direview!</h3>
+        <p>Tidak ada kartu yang jatuh tempo hari ini.<br>Kembali lagi besok untuk sesi berikutnya.</p>
+        <button class="srs-start-btn" style="max-width:260px;margin:16px auto 0;display:block;" onclick="showSrsSetup()">⚙️ Mulai Sesi Baru</button>
+      </div>
+    </div>
+
+    <!-- Congrats -->
+    <div id="srs-congrats" style="display:none;">
+      <div class="srs-congrats">
+        <div class="srs-congrats-icon">🏆</div>
+        <h3>Sesi Selesai!</h3>
+        <p id="srs-congrats-msg">Kamu telah mereview semua kartu hari ini.</p>
+        <div class="srs-dash" style="margin-bottom:16px;">
+          <div class="srs-dash-item"><div class="srs-dash-num" style="color:var(--teal)" id="srs-res-easy">0</div><div class="srs-dash-lbl">😄 Mudah</div></div>
+          <div class="srs-dash-item"><div class="srs-dash-num" style="color:var(--blue2)" id="srs-res-good">0</div><div class="srs-dash-lbl">🙂 Oke</div></div>
+          <div class="srs-dash-item"><div class="srs-dash-num" style="color:#fb923c" id="srs-res-hard">0</div><div class="srs-dash-lbl">😓 Susah</div></div>
+          <div class="srs-dash-item"><div class="srs-dash-num" style="color:var(--red)" id="srs-res-again">0</div><div class="srs-dash-lbl">😵 Lagi</div></div>
+        </div>
+        <button class="srs-start-btn" onclick="startSrsSession()">🔁 Mulai Lagi</button>
+      </div>
+    </div>
+
+    <!-- Start prompt -->
+    <div id="srs-start-prompt">
+      <div class="srs-empty">
+        <div class="srs-empty-icon">🧠</div>
+        <h3>Selamat datang di Fukushuu!</h3>
+        <p>Review kartu dengan sistem spaced repetition — kartu yang susah muncul lebih sering, yang mudah makin jarang.<br><br>Nilai tiap kartu: <strong style="color:var(--red)">Lagi</strong> · <strong style="color:#fb923c">Susah</strong> · <strong style="color:var(--blue2)">Oke</strong> · <strong style="color:var(--teal)">Mudah</strong></p>
+        <button class="srs-start-btn" style="max-width:260px;margin:20px auto 0;display:block;" onclick="startSrsSession()">▶ Mulai Sesi</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -3286,6 +3474,7 @@ function showPage(pageId) {
     if (pageId === 'kana') renderKana();
     if (pageId === 'menulis') { setMenulisMode(mwMode || 'kana'); setTimeout(initMenulisCanvas, 100); }
     if (pageId === 'harian') { renderHarian(); }
+    if (pageId === 'fukushuu') { initSrsPage(); }
     // Stop mic when navigating away from a page
     if (!['dokkai','kana','choukai'].includes(pageId)) stopMic();
 
@@ -3442,11 +3631,321 @@ function wotdSpeak() {
 
 function wotdStartQuiz() {
     if(!window._wotdWord) return;
-    // Set quiz ke kata ini (filter by level & cari kategorinya)
     document.getElementById('q-category').value = window._wotdWord.cat || 'all';
     document.getElementById('q-level').value = window._wotdWord.level || 'all';
     showPage('quiz');
 }
+
+// ══════════════════════════════════════════════════════════════════
+// SRS ENGINE — FUKUSHUU (復習)
+// Algoritma: SM-2 sederhana dengan 4 rating
+// Data disimpan di localStorage key: 'srs_cards'
+// Format per kartu: { jp, interval, due, ease, reps }
+// ══════════════════════════════════════════════════════════════════
+
+const SRS_KEY = 'srs_cards';
+const SRS_STREAK_KEY = 'srs_streak';
+const SRS_LAST_KEY = 'srs_last_session';
+
+// Interval (hari) per rating, berdasarkan reps & ease
+const SRS_INTERVALS = {
+    again: 0,       // muncul lagi dalam sesi yang sama
+    hard:  1,       // besok
+    good:  3,       // 3 hari
+    easy:  7        // 7 hari
+};
+
+let srsAllCards = {};       // { jp: {interval, due, ease, reps} }
+let srsQueue = [];          // kartu yang akan direview sesi ini
+let srsCurrentIdx = 0;
+let srsFlipped = false;
+let srsAgainQueue = [];     // kartu "again" dimasukkan kembali
+let srsSessionStats = { again:0, hard:0, good:0, easy:0 };
+let srsTotalSession = 0;
+
+function srsLoad() {
+    try { srsAllCards = JSON.parse(localStorage.getItem(SRS_KEY) || '{}'); } catch(e) { srsAllCards = {}; }
+}
+
+function srsSave() {
+    localStorage.setItem(SRS_KEY, JSON.stringify(srsAllCards));
+}
+
+function srsGetToday() {
+    const d = new Date();
+    return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+}
+
+function srsDatePlus(days) {
+    const d = new Date();
+    d.setDate(d.getDate() + days);
+    return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+}
+
+function srsIsDue(card) {
+    return card.due <= srsGetToday();
+}
+
+function srsGetPool(level, cat) {
+    return vocab.filter(v => {
+        if(level !== 'all' && v.level !== level) return false;
+        if(cat !== 'all' && v.cat !== cat) return false;
+        return true;
+    });
+}
+
+function srsGetStats(level, cat) {
+    const pool = srsGetPool(level, cat);
+    const today = srsGetToday();
+    let due = 0, newCards = 0, learned = 0;
+    pool.forEach(v => {
+        const c = srsAllCards[v.jp];
+        if(!c) { newCards++; }
+        else {
+            learned++;
+            if(c.due <= today) due++;
+        }
+    });
+    return { due, newCards, learned };
+}
+
+function initSrsPage() {
+    srsLoad();
+    updateSrsDash();
+    // Show start prompt if no active session
+    document.getElementById('srs-start-prompt').style.display = 'block';
+    document.getElementById('srs-review-area').style.display = 'none';
+    document.getElementById('srs-empty').style.display = 'none';
+    document.getElementById('srs-congrats').style.display = 'none';
+    document.getElementById('srs-setup-panel').style.display = 'none';
+}
+
+function updateSrsDash() {
+    const level = document.getElementById('srs-level')?.value || 'all';
+    const cat = document.getElementById('srs-cat')?.value || 'all';
+    const stats = srsGetStats(level, cat);
+    document.getElementById('srs-stat-due').textContent = stats.due;
+    document.getElementById('srs-stat-new').textContent = stats.newCards;
+    document.getElementById('srs-stat-learned').textContent = stats.learned;
+
+    // Streak
+    let streak = parseInt(localStorage.getItem(SRS_STREAK_KEY)||'0');
+    document.getElementById('srs-stat-streak').textContent = streak + '🔥';
+}
+
+function showSrsSetup() {
+    const panel = document.getElementById('srs-setup-panel');
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    document.getElementById('srs-start-prompt').style.display = 'none';
+    document.getElementById('srs-review-area').style.display = 'none';
+    document.getElementById('srs-congrats').style.display = 'none';
+    document.getElementById('srs-empty').style.display = 'none';
+    updateSrsDash();
+}
+
+function startSrsSession() {
+    srsLoad();
+    const level = document.getElementById('srs-level').value;
+    const cat = document.getElementById('srs-cat').value;
+    const newPerDay = parseInt(document.getElementById('srs-new-per-day').value);
+    const maxReview = parseInt(document.getElementById('srs-max-review').value);
+    const today = srsGetToday();
+    const pool = srsGetPool(level, cat);
+
+    // Pisahkan: due reviews & new cards
+    let dueCards = [], newCards = [];
+    pool.forEach(v => {
+        const c = srsAllCards[v.jp];
+        if(!c) newCards.push(v);
+        else if(c.due <= today) dueCards.push(v);
+    });
+
+    // Shuffle keduanya
+    shuffle(dueCards); shuffle(newCards);
+
+    // Batasi
+    dueCards = dueCards.slice(0, maxReview);
+    newCards = newCards.slice(0, newPerDay);
+
+    srsQueue = [...dueCards, ...newCards];
+    srsAgainQueue = [];
+    srsCurrentIdx = 0;
+    srsFlipped = false;
+    srsSessionStats = { again:0, hard:0, good:0, easy:0 };
+    srsTotalSession = srsQueue.length;
+
+    // Update streak
+    const lastSession = localStorage.getItem(SRS_LAST_KEY) || '';
+    const yesterday = new Date(); yesterday.setDate(yesterday.getDate()-1);
+    const yKey = `${yesterday.getFullYear()}-${yesterday.getMonth()+1}-${yesterday.getDate()}`;
+    let streak = parseInt(localStorage.getItem(SRS_STREAK_KEY)||'0');
+    if(lastSession === today) { /* sudah session hari ini, jaga streak */ }
+    else if(lastSession === yKey) { streak++; localStorage.setItem(SRS_STREAK_KEY, streak); }
+    else { streak = 1; localStorage.setItem(SRS_STREAK_KEY, streak); }
+    localStorage.setItem(SRS_LAST_KEY, today);
+
+    document.getElementById('srs-setup-panel').style.display = 'none';
+    document.getElementById('srs-start-prompt').style.display = 'none';
+    document.getElementById('srs-congrats').style.display = 'none';
+
+    if(srsQueue.length === 0) {
+        document.getElementById('srs-empty').style.display = 'block';
+        document.getElementById('srs-review-area').style.display = 'none';
+        updateSrsDash();
+        return;
+    }
+
+    document.getElementById('srs-review-area').style.display = 'block';
+    document.getElementById('srs-empty').style.display = 'none';
+    renderSrsCard();
+    updateSrsDash();
+}
+
+function renderSrsCard() {
+    // Ambil dari srsQueue dulu, kalau habis ambil dari srsAgainQueue
+    let card;
+    if(srsCurrentIdx < srsQueue.length) {
+        card = srsQueue[srsCurrentIdx];
+    } else if(srsAgainQueue.length > 0) {
+        // rotasi again queue
+        srsQueue = [...srsQueue, ...srsAgainQueue];
+        srsAgainQueue = [];
+        card = srsQueue[srsCurrentIdx];
+    } else {
+        // Selesai
+        showSrsCongrats();
+        return;
+    }
+
+    srsFlipped = false;
+    const el = document.getElementById('srs-card');
+    el.classList.remove('flipped');
+
+    // Front
+    document.getElementById('srs-card-level').textContent = card.level || 'N5';
+    document.getElementById('srs-card-jp').textContent = card.jp;
+
+    // Back
+    document.getElementById('srs-card-level-b').textContent = card.level || 'N5';
+    document.getElementById('srs-card-reading').textContent = card.reading || '';
+    document.getElementById('srs-card-id').textContent = card.id || '';
+    document.getElementById('srs-card-cat').textContent = (card.cat || '').toUpperCase();
+    const exEl = document.getElementById('srs-card-example');
+    if(card.example) {
+        const lines = card.example.split('\n');
+        exEl.innerHTML = `<span style="font-family:'Noto Sans JP',sans-serif;">${lines[0]||''}</span><br><span style="color:#6b7280;font-size:0.72rem;">${lines[1]||''}</span>`;
+    } else { exEl.textContent = ''; }
+
+    // Interval hints berdasarkan reps kartu ini
+    const c = srsAllCards[card.jp];
+    const reps = c ? c.reps : 0;
+    const ease = c ? c.ease : 2.5;
+    document.getElementById('srs-int-again').textContent = '<1m';
+    document.getElementById('srs-int-hard').textContent = '1 hari';
+    document.getElementById('srs-int-good').textContent = reps < 2 ? '3 hari' : Math.round(3 * ease) + ' hari';
+    document.getElementById('srs-int-easy').textContent = reps < 2 ? '7 hari' : Math.round(7 * ease) + ' hari';
+
+    // Lock rating buttons until flipped
+    const ratings = document.getElementById('srs-ratings');
+    ratings.style.opacity = '0.3';
+    ratings.style.pointerEvents = 'none';
+    document.getElementById('srs-flip-hint').textContent = 'Ketuk kartu dulu untuk melihat pilihan penilaian';
+
+    // Progress
+    const total = srsTotalSession + srsAgainQueue.length;
+    const done = srsCurrentIdx;
+    const pct = total > 0 ? Math.round(done/total*100) : 0;
+    document.getElementById('srs-prog-fill').style.width = pct + '%';
+    document.getElementById('srs-prog-text').textContent = `${done} / ${Math.max(total, srsCurrentIdx)}`;
+    const remaining = srsQueue.length - srsCurrentIdx + srsAgainQueue.length;
+    document.getElementById('srs-prog-remain').textContent = `Sisa: ${remaining} kartu`;
+}
+
+function flipSrsCard() {
+    if(srsFlipped) return;
+    srsFlipped = true;
+    document.getElementById('srs-card').classList.add('flipped');
+    const ratings = document.getElementById('srs-ratings');
+    ratings.style.opacity = '1';
+    ratings.style.pointerEvents = 'auto';
+    document.getElementById('srs-flip-hint').textContent = 'Seberapa mudah kamu mengingat kata ini?';
+    // Speak on flip
+    const card = srsQueue[srsCurrentIdx];
+    if(card) speakText(card.jp);
+}
+
+function rateSrsCard(rating) {
+    if(!srsFlipped) return; // harus flip dulu
+    const card = srsQueue[srsCurrentIdx];
+    if(!card) return;
+
+    srsSessionStats[rating]++;
+
+    if(rating === 'again') {
+        // Masukkan kembali di akhir queue sesi ini
+        srsAgainQueue.push(card);
+        // Tetap tandai due hari ini (tidak update interval)
+        if(!srsAllCards[card.jp]) {
+            srsAllCards[card.jp] = { interval:0, due: srsGetToday(), ease:2.5, reps:0 };
+        }
+    } else {
+        const existing = srsAllCards[card.jp] || { interval:0, ease:2.5, reps:0 };
+        let { interval, ease, reps } = existing;
+        reps++;
+
+        // Update ease factor
+        const easeBonus = { hard: -0.15, good: 0, easy: 0.15 };
+        ease = Math.max(1.3, Math.min(3.0, ease + (easeBonus[rating] || 0)));
+
+        // Hitung interval baru
+        if(reps <= 1) {
+            interval = SRS_INTERVALS[rating];
+        } else {
+            if(rating === 'hard') interval = Math.max(1, Math.round(interval * 1.2));
+            else if(rating === 'good') interval = Math.round(interval * ease);
+            else if(rating === 'easy') interval = Math.round(interval * ease * 1.3);
+            interval = Math.max(SRS_INTERVALS[rating], interval);
+        }
+
+        srsAllCards[card.jp] = {
+            interval,
+            due: srsDatePlus(interval),
+            ease,
+            reps
+        };
+    }
+
+    srsSave();
+    srsCurrentIdx++;
+
+    // Animasi ganti kartu
+    const el = document.getElementById('srs-card');
+    el.style.transition = 'opacity .15s';
+    el.style.opacity = '0';
+    setTimeout(() => {
+        el.style.opacity = '1';
+        renderSrsCard();
+    }, 150);
+}
+
+function srsSpeakCurrent() {
+    const card = srsQueue[srsCurrentIdx];
+    if(card) speakText(card.jp);
+}
+
+function showSrsCongrats() {
+    document.getElementById('srs-review-area').style.display = 'none';
+    document.getElementById('srs-congrats').style.display = 'block';
+    document.getElementById('srs-res-easy').textContent = srsSessionStats.easy;
+    document.getElementById('srs-res-good').textContent = srsSessionStats.good;
+    document.getElementById('srs-res-hard').textContent = srsSessionStats.hard;
+    document.getElementById('srs-res-again').textContent = srsSessionStats.again;
+    const total = Object.values(srsSessionStats).reduce((a,b)=>a+b,0);
+    document.getElementById('srs-congrats-msg').textContent =
+        `Kamu mereview ${total} kartu. Bagus! Kembali besok untuk menjaga streak.`;
+    updateSrsDash();
+}
+// ══════════════════════════════════════════════════════════════════
 
 function startFromCategory(cat) {
     document.getElementById('q-category').value = cat;
