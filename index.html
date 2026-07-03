@@ -795,6 +795,13 @@
   .kamus-no-result{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);}
   .kamus-no-result .nr-icon{font-size:3rem;margin-bottom:12px;}
   .kamus-no-result p{font-size:0.9rem;}
+  .kamus-hira-header{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:10px 4px 6px;margin-top:8px;}
+  .kamus-hira-header:first-child{margin-top:0;}
+  .kamus-hira-badge{font-family:'Noto Sans JP',sans-serif;font-size:1.4rem;font-weight:900;width:46px;height:46px;min-width:46px;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--teal));display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 3px 12px rgba(168,85,247,0.3);}
+  .kamus-hira-label{display:flex;flex-direction:column;gap:1px;}
+  .kamus-hira-label .hira-row-jp{font-family:'Noto Sans JP',sans-serif;font-size:0.88rem;color:#9ca3af;font-weight:600;letter-spacing:3px;}
+  .kamus-hira-label .hira-row-count{font-size:0.65rem;color:#4b5563;font-weight:500;}
+  .kamus-hira-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(168,85,247,0.3),transparent);}
 
   /* KAMUS DETAIL MODAL */
   .kamus-modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,5,5,0.80);z-index:400;align-items:center;justify-content:center;padding:16px;}
@@ -1754,6 +1761,7 @@
       <input class="kamus-search" type="text" id="kamus-search" placeholder="Cari kata Jepang, romaji, atau artinya..." oninput="renderKamus()">
     </div>
     <select class="kamus-sort" id="kamus-sort" onchange="renderKamus()">
+      <option value="hiragana" selected>あいうえお順 (Hiragana)</option>
       <option value="default">Urutan Default</option>
       <option value="jp-asc">A→Z (Jepang)</option>
       <option value="id-asc">A→Z (Indonesia)</option>
@@ -2211,7 +2219,6 @@ const kanjiDB = [
 // VOCAB DATABASE — N5 & N4 JLPT (diperluas 500+ kata)
 // ══════════════════════════════════════════════════════════
 const vocab = [
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 7 (PRONOUNS, QUESTIONS, KATAKANA) ───
   {jp:'何',reading:'なに / なん',id:'Apa',level:'N5',cat:'nouns',example:'これは何ですか。\nIni apa?'},
   {jp:'誰',reading:'だれ',id:'Siapa',level:'N5',cat:'nouns',example:'あの人は誰ですか。\nOrang itu siapa?'},
   {jp:'どなた',reading:'どなた',id:'Siapa (Sopan)',level:'N5',cat:'nouns',example:'あちらはどなたですか。\nBeliau itu siapa?'},
@@ -2252,9 +2259,6 @@ const vocab = [
   {jp:'スリッパ',reading:'すりっぱ',id:'Sandal Kamar',level:'N5',cat:'nouns',example:'スリッパを履く。\nMemakai sandal kamar.'},
   {jp:'ストーブ',reading:'すとーぶ',id:'Pemanas Ruangan',level:'N5',cat:'nouns',example:'ストーブをつける。\nMenyalakan pemanas ruangan.'},
   {jp:'ワイシャツ',reading:'わいしゃつ',id:'Kemeja Formal (Putih)',level:'N5',cat:'nouns',example:'ワイシャツを着る。\nMemakai kemeja formal.'},
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 7 (END) ───
-
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 6 (NUMBERS, DATES, COUNTERS) ───
   {jp:'一',reading:'いち',id:'Satu',level:'N5',cat:'nouns',example:'一番（いちばん）\nNomor satu.'},
   {jp:'二',reading:'に',id:'Dua',level:'N5',cat:'nouns',example:'二つ（ふたつ）\nDua buah.'},
   {jp:'三',reading:'さん',id:'Tiga',level:'N5',cat:'nouns',example:'三個（さんこ）\nTiga buah (kecil).'},
@@ -2277,7 +2281,6 @@ const vocab = [
   {jp:'七つ',reading:'ななつ',id:'Tujuh (buah)',level:'N5',cat:'nouns',example:'七つの海。\nTujuh lautan.'},
   {jp:'八つ',reading:'やっつ',id:'Delapan (buah)',level:'N5',cat:'nouns',example:'箱が八つある。\nAda delapan buah kotak.'},
   {jp:'九つ',reading:'ここのつ',id:'Sembilan (buah)',level:'N5',cat:'nouns',example:'九つの鍵。\nSembilan buah kunci.'},
-  {jp:'十',reading:'とお',id:'Sepuluh (buah)',level:'N5',cat:'nouns',example:'十（とお）数える。\nMenghitung sampai sepuluh.'},
   {jp:'一人',reading:'ひとり',id:'Satu Orang',level:'N5',cat:'nouns',example:'一人で行く。\nPergi sendirian.'},
   {jp:'二人',reading:'ふたり',id:'Dua Orang',level:'N5',cat:'nouns',example:'二人で食べる。\nMakan berdua.'},
   {jp:'三人',reading:'さんにん',id:'Tiga Orang',level:'N5',cat:'nouns',example:'三人家族です。\nKeluarga tiga orang.'},
@@ -2309,9 +2312,6 @@ const vocab = [
   {jp:'一歳',reading:'いっさい',id:'Umur 1 Tahun',level:'N5',cat:'nouns',example:'子供は一歳です。\nAnak saya berumur satu tahun.'},
   {jp:'二歳',reading:'にさい',id:'Umur 2 Tahun',level:'N5',cat:'nouns',example:'犬は二歳です。\nAnjingnya berumur dua tahun.'},
   {jp:'二十歳',reading:'はたち',id:'Umur 20 Tahun',level:'N5',cat:'nouns',example:'今年、二十歳になります。\nTahun ini, saya berumur 20 tahun.'},
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 6 (END) ───
-
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 5 (ADVERBS, EXPRESSIONS, NOUNS) ───
   {jp:'後で',reading:'あとで',id:'Nanti',level:'N5',cat:'adjectives',example:'後で電話します。\nNanti saya akan menelepon.'},
   {jp:'あまり',reading:'あまり',id:'Tidak begitu',level:'N5',cat:'adjectives',example:'あまり美味しくない。\nTidak begitu enak.'},
   {jp:'いつも',reading:'いつも',id:'Selalu',level:'N5',cat:'adjectives',example:'いつも元気です。\nSelalu bersemangat/sehat.'},
@@ -2380,9 +2380,6 @@ const vocab = [
   {jp:'テープ',reading:'てーぷ',id:'Pita / Kaset Tape',level:'N5',cat:'nouns',example:'テープを聞く。\nMendengarkan kaset tape.'},
   {jp:'テニス',reading:'てにす',id:'Tenis',level:'N5',cat:'nouns',example:'テニスをする。\nBermain tenis.'},
   {jp:'橋',reading:'はし',id:'Jembatan',level:'N5',cat:'nouns',example:'橋を渡る。\nMenyeberang jembatan.'},
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 5 (END) ───
-
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 4 (H - W) ───
   {jp:'箱',reading:'はこ',id:'Kotak',level:'N5',cat:'nouns',example:'箱を開ける。\nMembuka kotak.'},
   {jp:'箸',reading:'はし',id:'Sumpit',level:'N5',cat:'nouns',example:'箸で食べる。\nMakan dengan sumpit.'},
   {jp:'鼻',reading:'はな',id:'Hidung',level:'N5',cat:'nouns',example:'鼻が高い。\nHidungnya mancung.'},
@@ -2391,11 +2388,7 @@ const vocab = [
   {jp:'ハンカチ',reading:'はんかち',id:'Sapu Tangan',level:'N5',cat:'nouns',example:'ハンカチで手を拭く。\nMengusap tangan dengan sapu tangan.'},
   {jp:'半分',reading:'はんぶん',id:'Separuh / Setengah',level:'N5',cat:'nouns',example:'半分に切る。\nMemotong menjadi dua bagian.'},
   {jp:'人',reading:'ひと',id:'Orang',level:'N5',cat:'nouns',example:'人がたくさんいる。\nAda banyak orang.'},
-  {jp:'一つ',reading:'ひとつ',id:'Satu buah',level:'N5',cat:'nouns',example:'りんごを一つください。\nMinta apelnya satu.'},
-  {jp:'一月',reading:'いちがつ',id:'Januari',level:'N5',cat:'nouns',example:'一月に雪が降る。\nBulan Januari turun salju.'},
-  {jp:'二月',reading:'にがつ',id:'Februari',level:'N5',cat:'nouns',example:'二月は寒いです。\nBulan Februari dingin.'},
   {jp:'暇',reading:'ひま',id:'Waktu Luang',level:'N5',cat:'adjectives',example:'今日は暇です。\nHari ini saya luang.'},
-  {jp:'百',reading:'ひゃく',id:'Seratus',level:'N5',cat:'nouns',example:'百円ショップ。\nToko 100 yen.'},
   {jp:'病気',reading:'びょうき',id:'Penyakit / Sakit',level:'N5',cat:'nouns',example:'病気になります。\nMenjadi sakit.'},
   {jp:'昼',reading:'ひる',id:'Siang',level:'N5',cat:'nouns',example:'昼から雨が降る。\nDari sore akan turun hujan.'},
   {jp:'昼ご飯',reading:'ひるごはん',id:'Makan Siang',level:'N5',cat:'nouns',example:'昼ご飯を食べましょう。\nMari makan siang.'},
@@ -2404,9 +2397,7 @@ const vocab = [
   {jp:'プール',reading:'ぷーる',id:'Kolam Renang',level:'N5',cat:'nouns',example:'プールで泳ぎます。\nBerenang di kolam renang.'},
   {jp:'フォーク',reading:'ふぉーく',id:'Garpu',level:'N5',cat:'nouns',example:'フォークで食べる。\nMakan menggunakan garpu.'},
   {jp:'服',reading:'ふく',id:'Pakaian',level:'N5',cat:'nouns',example:'新しい服を買う。\nMembeli pakaian baru.'},
-  {jp:'二つ',reading:'ふたつ',id:'Dua buah',level:'N5',cat:'nouns',example:'みかんを二つ食べる。\nMakan dua buah jeruk.'},
   {jp:'豚肉',reading:'ぶたにく',id:'Daging Babi',level:'N5',cat:'nouns',example:'豚肉の料理。\nMasakan daging babi.'},
-  {jp:'二日',reading:'ふつか',id:'Tanggal Dua / Dua Hari',level:'N5',cat:'nouns',example:'二日かかります。\nMemakan waktu dua hari.'},
   {jp:'太い',reading:'ふとい',id:'Tebal / Gemuk (benda)',level:'N5',cat:'adjectives',example:'太いペンで書く。\nMenulis dengan pena tebal.'},
   {jp:'冬',reading:'ふゆ',id:'Musim Dingin',level:'N5',cat:'nouns',example:'冬は雪が降ります。\nMusim dingin turun salju.'},
   {jp:'文章',reading:'ぶんしょう',id:'Kalimat / Karangan',level:'N5',cat:'nouns',example:'文章を書きます。\nMenulis karangan/kalimat.'},
@@ -2433,34 +2424,26 @@ const vocab = [
   {jp:'毎日',reading:'まいにち',id:'Setiap Hari',level:'N5',cat:'nouns',example:'毎日勉強します。\nSetiap hari belajar.'},
   {jp:'毎年',reading:'まいとし',id:'Setiap Tahun',level:'N5',cat:'nouns',example:'毎年旅行に行く。\nPergi berwisata setiap tahun.'},
   {jp:'毎晩',reading:'まいばん',id:'Setiap Malam',level:'N5',cat:'nouns',example:'毎晩テレビを見る。\nMenonton TV setiap malam.'},
-  {jp:'まだ',reading:'まだ',id:'Belum / Masih',level:'N5',cat:'nouns',example:'まだ終わっていません。\nMasih belum selesai.'},
   {jp:'町',reading:'まち',id:'Kota',level:'N5',cat:'nouns',example:'静かな町です。\nKota yang tenang.'},
   {jp:'まっすぐ',reading:'まっすぐ',id:'Lurus',level:'N5',cat:'nouns',example:'まっすぐ行ってください。\nSilakan jalan lurus.'},
   {jp:'マッチ',reading:'まっち',id:'Korek Api',level:'N5',cat:'nouns',example:'マッチで火をつける。\nMenyalakan api dengan korek.'},
   {jp:'丸い',reading:'まるい',id:'Bulat',level:'N5',cat:'adjectives',example:'丸い形。\nBentuk yang bulat.'},
-  {jp:'万',reading:'まん',id:'Sepuluh Ribu',level:'N5',cat:'nouns',example:'一万円。\nSepuluh ribu yen.'},
   {jp:'万年筆',reading:'まんねんひつ',id:'Pena Tinta (Fountain Pen)',level:'N5',cat:'nouns',example:'万年筆で書く。\nMenulis dengan pena tinta.'},
   {jp:'短かい',reading:'みじかい',id:'Pendek',level:'N5',cat:'adjectives',example:'短い髪。\nRambut pendek.'},
-  {jp:'三日',reading:'みっか',id:'Tanggal Tiga / Tiga Hari',level:'N5',cat:'nouns',example:'三日かかります。\nMemakan waktu tiga hari.'},
-  {jp:'三つ',reading:'みっつ',id:'Tiga buah',level:'N5',cat:'nouns',example:'りんごを三つ食べる。\nMakan tiga buah apel.'},
   {jp:'緑',reading:'みどり',id:'Hijau',level:'N5',cat:'nouns',example:'緑のシャツ。\nKemeja hijau.'},
   {jp:'皆さん',reading:'みなさん',id:'Semuanya (Orang)',level:'N5',cat:'nouns',example:'皆さん、おはようございます。\nSemuanya, selamat pagi.'},
   {jp:'南',reading:'みなみ',id:'Selatan',level:'N5',cat:'nouns',example:'南へ行く。\nPergi ke selatan.'},
   {jp:'みんな',reading:'みんな',id:'Semua',level:'N5',cat:'nouns',example:'みんなで歌う。\nBernyanyi bersama semuanya.'},
-  {jp:'六日',reading:'むいか',id:'Tanggal Enam / Enam Hari',level:'N5',cat:'nouns',example:'六日間に旅行する。\nBerwisata selama enam hari.'},
   {jp:'向こう',reading:'むこう',id:'Di sana / Seberang',level:'N5',cat:'nouns',example:'向こうに山が見える。\nDi seberang terlihat gunung.'},
-  {jp:'六つ',reading:'むっつ',id:'Enam buah',level:'N5',cat:'nouns',example:'卵を六つ買う。\nMembeli enam butir telur.'},
   {jp:'村',reading:'むら',id:'Desa',level:'N5',cat:'nouns',example:'小さな村。\nDesa yang kecil.'},
   {jp:'メートル',reading:'めーとる',id:'Meter',level:'N5',cat:'nouns',example:'百メートル走る。\nBerlari seratus meter.'},
   {jp:'眼鏡',reading:'めがね',id:'Kacamata',level:'N5',cat:'nouns',example:'眼鏡をかける。\nMemakai kacamata.'},
-  {jp:'もう',reading:'もう',id:'Sudah / Lagi',level:'N5',cat:'nouns',example:'もう終わりました。\nSudah selesai.'},
   {jp:'もしもし',reading:'もしもし',id:'Halo (Telepon)',level:'N5',cat:'nouns',example:'もしもし、田中です。\nHalo, ini Tanaka.'},
   {jp:'もっと',reading:'もっと',id:'Lebih',level:'N5',cat:'nouns',example:'もっと勉強してください。\nTolong lebih banyak belajar.'},
   {jp:'物',reading:'もの',id:'Barang',level:'N5',cat:'nouns',example:'これは私の物です。\nIni adalah barang milik saya.'},
   {jp:'門',reading:'もん',id:'Gerbang',level:'N5',cat:'nouns',example:'学校の門。\nGerbang sekolah.'},
   {jp:'問題',reading:'もんだい',id:'Masalah / Pertanyaan',level:'N5',cat:'nouns',example:'問題がありますか。\nApakah ada pertanyaan/masalah?'},
   {jp:'八百屋',reading:'やおや',id:'Toko Sayuran',level:'N5',cat:'nouns',example:'八百屋で野菜を買う。\nMembeli sayuran di toko sayur.'},
-  {jp:'八つ',reading:'やっつ',id:'Delapan buah',level:'N5',cat:'nouns',example:'梨を八つ買いました。\nMembeli delapan buah pir.'},
   {jp:'夕方',reading:'ゆうがた',id:'Sore',level:'N5',cat:'nouns',example:'夕方に雨が降る。\nTurun hujan di sore hari.'},
   {jp:'夕飯',reading:'ゆうはん',id:'Makan Malam',level:'N5',cat:'nouns',example:'夕飯を食べます。\nMakan malam.'},
   {jp:'郵便局',reading:'ゆうびんきょく',id:'Kantor Pos',level:'N5',cat:'nouns',example:'郵便局はどこですか。\nKantor pos ada di mana?'},
@@ -2468,12 +2451,8 @@ const vocab = [
   {jp:'有名',reading:'ゆうめい',id:'Terkenal',level:'N5',cat:'adjectives',example:'有名な人。\nOrang terkenal.'},
   {jp:'雪',reading:'ゆき',id:'Salju',level:'N5',cat:'nouns',example:'雪が降る。\nTurun salju.'},
   {jp:'ゆっくりと',reading:'ゆっくりと',id:'Dengan Perlahan',level:'N5',cat:'nouns',example:'ゆっくりと歩く。\nBerjalan dengan perlahan.'},
-  {jp:'八日',reading:'ようか',id:'Tanggal Delapan / Delapan Hari',level:'N5',cat:'nouns',example:'八日かかります。\nMemakan waktu delapan hari.'},
   {jp:'洋服',reading:'ようふく',id:'Pakaian Barat',level:'N5',cat:'nouns',example:'洋服を着る。\nMemakai pakaian barat.'},
-  {jp:'よく',reading:'よく',id:'Sering / Dengan Baik',level:'N5',cat:'nouns',example:'よく分かりました。\nSudah mengerti dengan baik.'},
   {jp:'横',reading:'よこ',id:'Samping',level:'N5',cat:'nouns',example:'私の横に座ってください。\nSilakan duduk di samping saya.'},
-  {jp:'四日',reading:'よっか',id:'Tanggal Empat / Empat Hari',level:'N5',cat:'nouns',example:'四日目に帰る。\nPulang pada hari keempat.'},
-  {jp:'四つ',reading:'よっつ',id:'Empat buah',level:'N5',cat:'nouns',example:'椅子が四つあります。\nAda empat buah kursi.'},
   {jp:'夜',reading:'よる',id:'Malam',level:'N5',cat:'nouns',example:'夜遅くに帰る。\nPulang larut malam.'},
   {jp:'弱い',reading:'よわい',id:'Lemah',level:'N5',cat:'adjectives',example:'彼は体が弱い。\nDia fisiknya lemah.'},
   {jp:'来月',reading:'らいげつ',id:'Bulan Depan',level:'N5',cat:'nouns',example:'来月、日本へ行く。\nBulan depan pergi ke Jepang.'},
@@ -2489,8 +2468,6 @@ const vocab = [
   {jp:'レストラン',reading:'れすとらん',id:'Restoran',level:'N5',cat:'nouns',example:'レストランで食事する。\nMakan di restoran.'},
   {jp:'練習',reading:'れんしゅう',id:'Latihan',level:'N5',cat:'nouns',example:'漢字の練習をする。\nBerlatih kanji.'},
   {jp:'私',reading:'わたし',id:'Saya',level:'N5',cat:'nouns',example:'私は学生です。\nSaya adalah siswa.'},
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 4 (END) ───
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 3 (NOUNS & TIME) ───
   {jp:'挨拶',reading:'あいさつ',id:'Salam',level:'N5',cat:'nouns',example:'朝の挨拶をする。\nMemberi salam di pagi hari.'},
   {jp:'秋',reading:'あき',id:'Musim Gugur',level:'N5',cat:'nouns',example:'秋は涼しいです。\nMusim gugur terasa sejuk.'},
   {jp:'朝',reading:'あさ',id:'Pagi',level:'N5',cat:'nouns',example:'朝早く起きます。\nBangun pagi awal.'},
@@ -2502,8 +2479,6 @@ const vocab = [
   {jp:'飴',reading:'あめ',id:'Permen',level:'N5',cat:'nouns',example:'飴を一つください。\nMinta permennya satu.'},
   {jp:'池',reading:'いけ',id:'Kolam',level:'N5',cat:'nouns',example:'池に魚がいます。\nAda ikan di kolam.'},
   {jp:'医者',reading:'いしゃ',id:'Dokter',level:'N5',cat:'nouns',example:'医者になります。\nMenjadi dokter.'},
-  {jp:'一',reading:'いち',id:'Satu',level:'N5',cat:'nouns',example:'一つ買います。\nMembeli satu.'},
-  {jp:'一日',reading:'いちにち',id:'Satu hari',level:'N5',cat:'nouns',example:'一日中、雨でした。\nSepanjang hari hujan.'},
   {jp:'一番',reading:'いちばん',id:'Paling / Nomor satu',level:'N5',cat:'nouns',example:'日本で一番高い山。\nGunung tertinggi di Jepang.'},
   {jp:'一緒',reading:'いっしょ',id:'Bersama',level:'N5',cat:'nouns',example:'一緒に行きましょう。\nMari pergi bersama.'},
   {jp:'今',reading:'いま',id:'Sekarang',level:'N5',cat:'nouns',example:'今は何時ですか。\nSekarang jam berapa?'},
@@ -2619,9 +2594,6 @@ const vocab = [
   {jp:'歯',reading:'は',id:'Gigi',level:'N5',cat:'nouns',example:'歯を磨く。\nMenyikat gigi.'},
   {jp:'パーティー',reading:'ぱーてぃー',id:'Pesta',level:'N5',cat:'nouns',example:'パーティーに行く。\nPergi ke pesta.'},
   {jp:'灰皿',reading:'はいざら',id:'Asbak',level:'N5',cat:'nouns',example:'灰皿はありますか。\nApakah ada asbak?'},
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 3 (END) ───
-
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 2 (NOUNS) ───
   {jp:'家族',reading:'かぞく',id:'Keluarga',level:'N5',cat:'nouns',example:'家族は4人です。\nKeluarga ada 4 orang.'},
   {jp:'母',reading:'はは',id:'Ibu (sendiri)',level:'N5',cat:'nouns',example:'母は料理が上手です。\nIbu pandai memasak.'},
   {jp:'父',reading:'ちち',id:'Ayah (sendiri)',level:'N5',cat:'nouns',example:'父は会社員です。\nAyah adalah pegawai perusahaan.'},
@@ -2672,8 +2644,6 @@ const vocab = [
   {jp:'友達',reading:'ともだち',id:'Teman',level:'N5',cat:'nouns',example:'友達と遊びます。\nBermain bersama teman.'},
   {jp:'仕事',reading:'しごと',id:'Pekerjaan',level:'N5',cat:'nouns',example:'仕事を始めます。\nMulai bekerja.'},
   {jp:'名前',reading:'なまえ',id:'Nama',level:'N5',cat:'nouns',example:'名前は何ですか。\nNamanya siapa?'},
-  
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 2 (ADJECTIVES) ───
   {jp:'暑い',reading:'あつい',id:'Panas (cuaca)',level:'N5',cat:'adjectives',example:'今日は暑いです。\nHari ini panas.'},
   {jp:'寒い',reading:'さむい',id:'Dingin (cuaca)',level:'N5',cat:'adjectives',example:'冬は寒いです。\nMusim dingin itu dingin.'},
   {jp:'高い',reading:'たかい',id:'Tinggi / Mahal',level:'N5',cat:'adjectives',example:'この本は高いです。\nBuku ini mahal.'},
@@ -2704,7 +2674,6 @@ const vocab = [
   {jp:'静か',reading:'しずか',id:'Tenang / Sepi',level:'N5',cat:'adjectives',example:'静かな町です。\nKota yang tenang.'},
   {jp:'賑やか',reading:'にぎやか',id:'Ramai',level:'N5',cat:'adjectives',example:'賑やかなお祭りです。\nFestival yang ramai.'},
   {jp:'綺麗',reading:'きれい',id:'Cantik / Bersih',level:'N5',cat:'adjectives',example:'綺麗な花ですね。\nBunga yang cantik ya.'},
-  {jp:'有名',reading:'ゆうめい',id:'Terkenal',level:'N5',cat:'adjectives',example:'有名な歌手です。\nPenyanyi terkenal.'},
   {jp:'親切',reading:'しんせつ',id:'Ramah / Baik',level:'N5',cat:'adjectives',example:'親切な人に会いました。\nBertemu orang yang ramah.'},
   {jp:'便利',reading:'べんり',id:'Praktis',level:'N5',cat:'adjectives',example:'スマートフォンは便利です。\nSmartphone sangat praktis.'},
   {jp:'不便',reading:'ふべん',id:'Tidak praktis',level:'N5',cat:'adjectives',example:'ここは交通が不便です。\nLalu lintas di sini tidak praktis.'},
@@ -2712,10 +2681,7 @@ const vocab = [
   {jp:'好き',reading:'すき',id:'Suka',level:'N5',cat:'adjectives',example:'りんごが好きです。\nSaya suka apel.'},
   {jp:'嫌い',reading:'きらい',id:'Benci / Tidak suka',level:'N5',cat:'adjectives',example:'虫が嫌いです。\nSaya benci serangga.'},
   {jp:'上手',reading:'じょうず',id:'Pintar / Mahir',level:'N5',cat:'adjectives',example:'日本語が上手ですね。\nBahasa Jepangnya mahir ya.'},
-  {jp:'下手',reading:'へた',id:'Tidak mahir',level:'N5',cat:'adjectives',example:'歌が下手です。\nSaya tidak mahir bernyanyi.'},
   {jp:'大丈夫',reading:'だいじょうぶ',id:'Tidak apa-apa',level:'N5',cat:'adjectives',example:'大丈夫ですか。\nApakah kamu baik-baik saja?'},
-
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 2 (VERBS) ───
   {jp:'会う',reading:'あう',id:'Bertemu',level:'N5',cat:'verbs',example:'友達に会う。\nBertemu teman.'},
   {jp:'開く',reading:'あく',id:'Terbuka',level:'N5',cat:'verbs',example:'ドアが開く。\nPintu terbuka.'},
   {jp:'開ける',reading:'あける',id:'Membuka',level:'N5',cat:'verbs',example:'窓を開ける。\nMembuka jendela.'},
@@ -2800,8 +2766,6 @@ const vocab = [
   {jp:'忘れる',reading:'わすれる',id:'Lupa',level:'N5',cat:'verbs',example:'宿題を忘れる。\nLupa pekerjaan rumah.'},
   {jp:'渡す',reading:'わたす',id:'Menyerahkan',level:'N5',cat:'verbs',example:'手紙を渡す。\nMenyerahkan surat.'},
   {jp:'渡る',reading:'わたる',id:'Menyeberang',level:'N5',cat:'verbs',example:'道を渡る。\nMenyeberang jalan.'},
-  // ─── KOSAKATA TAMBAHAN JLPT N5 BATCH 2 (END) ───
-  // ─── KOSAKATA TAMBAHAN JLPT N5 ───
   {jp:'勉強',reading:'べんきょう',id:'Belajar',level:'N5',cat:'nouns',example:'毎日日本語の勉強をします。\nSaya belajar bahasa Jepang setiap hari.'},
   {jp:'学校',reading:'がっこう',id:'Sekolah',level:'N5',cat:'nouns',example:'学校へ行きます。\nPergi ke sekolah.'},
   {jp:'先生',reading:'せんせい',id:'Guru',level:'N5',cat:'nouns',example:'あの人は日本語の先生です。\nOrang itu adalah guru bahasa Jepang.'},
@@ -2812,11 +2776,9 @@ const vocab = [
   {jp:'古い',reading:'ふるい',id:'Lama / Kuno',level:'N5',cat:'adjectives',example:'これは古い本です。\nIni adalah buku lama.'},
   {jp:'わかる',reading:'わかる',id:'Mengerti',level:'N5',cat:'verbs',example:'日本語がわかりますか。\nApakah kamu mengerti bahasa Jepang?'},
   {jp:'買う',reading:'かう',id:'Membeli',level:'N5',cat:'verbs',example:'スーパーでリンゴを買う。\nMembeli apel di supermarket.'},
-  // ─── KATA KERJA N5 TAMBAHAN ───
   {jp:'起きる',reading:'おきる',id:'Bangun',level:'N5',cat:'verbs',example:'朝早く起きる。\nBangun pagi-pagi.'},
   {jp:'寝る',reading:'ねる',id:'Tidur',level:'N5',cat:'verbs',example:'夜10時に寝る。\nTidur jam 10 malam.'},
   {jp:'走る',reading:'はしる',id:'Berlari',level:'N5',cat:'verbs',example:'公園を走る。\nBerlari di taman.'},
-  // ─── KATA KERJA N5 ───
   {jp:'食べる',reading:'たべる',id:'Makan',level:'N5',cat:'verbs',example:'私は毎日ご飯を食べる。\nSaya makan nasi setiap hari.'},
   {jp:'飲む',reading:'のむ',id:'Minum',level:'N5',cat:'verbs',example:'水を飲む。\nMinum air.'},
   {jp:'行く',reading:'いく',id:'Pergi',level:'N5',cat:'verbs',example:'学校に行く。\nPergi ke sekolah.'},
@@ -2826,58 +2788,24 @@ const vocab = [
   {jp:'話す',reading:'はなす',id:'Berbicara',level:'N5',cat:'verbs',example:'日本語を話す。\nBerbicara bahasa Jepang.'},
   {jp:'書く',reading:'かく',id:'Menulis',level:'N5',cat:'verbs',example:'手紙を書く。\nMenulis surat.'},
   {jp:'読む',reading:'よむ',id:'Membaca',level:'N5',cat:'verbs',example:'本を読む。\nMembaca buku.'},
-  {jp:'買う',reading:'かう',id:'Membeli',level:'N5',cat:'verbs',example:'りんごを買う。\nMembeli apel.'},
-  {jp:'帰る',reading:'かえる',id:'Pulang',level:'N5',cat:'verbs',example:'家に帰る。\nPulang ke rumah.'},
-  {jp:'起きる',reading:'おきる',id:'Bangun tidur',level:'N5',cat:'verbs',example:'朝6時に起きる。\nBangun pukul 6.'},
-  {jp:'寝る',reading:'ねる',id:'Tidur',level:'N5',cat:'verbs',example:'10時に寝る。\nTidur pukul 10.'},
-  {jp:'待つ',reading:'まつ',id:'Menunggu',level:'N5',cat:'verbs',example:'バスを待つ。\nMenunggu bus.'},
-  {jp:'会う',reading:'あう',id:'Bertemu',level:'N5',cat:'verbs',example:'友達に会う。\nBertemu teman.'},
   {jp:'あります',reading:'あります',id:'Ada (benda mati)',level:'N5',cat:'verbs',example:'机の上に本があります。\nAda buku di atas meja.'},
   {jp:'います',reading:'います',id:'Ada (makhluk hidup)',level:'N5',cat:'verbs',example:'猫が部屋にいます。\nAda kucing di kamar.'},
-  {jp:'する',reading:'する',id:'Melakukan',level:'N5',cat:'verbs',example:'運動をする。\nBerolahraga.'},
   {jp:'分かる',reading:'わかる',id:'Mengerti / Paham',level:'N5',cat:'verbs',example:'日本語が分かる。\nMengerti bahasa Jepang.'},
-  {jp:'使う',reading:'つかう',id:'Menggunakan',level:'N5',cat:'verbs',example:'パソコンを使う。\nMenggunakan komputer.'},
-  {jp:'開ける',reading:'あける',id:'Membuka',level:'N5',cat:'verbs',example:'窓を開ける。\nMembuka jendela.'},
-  {jp:'閉める',reading:'しめる',id:'Menutup',level:'N5',cat:'verbs',example:'ドアを閉める。\nMenutup pintu.'},
-  {jp:'入る',reading:'はいる',id:'Masuk',level:'N5',cat:'verbs',example:'部屋に入る。\nMasuk ke kamar.'},
-  {jp:'出る',reading:'でる',id:'Keluar',level:'N5',cat:'verbs',example:'家を出る。\nKeluar dari rumah.'},
-  {jp:'貸す',reading:'かす',id:'Meminjamkan',level:'N5',cat:'verbs',example:'お金を貸す。\nMeminjamkan uang.'},
-  {jp:'借りる',reading:'かりる',id:'Meminjam',level:'N5',cat:'verbs',example:'本を借りる。\nMeminjam buku.'},
   {jp:'教える',reading:'おしえる',id:'Mengajar / Memberitahu',level:'N5',cat:'verbs',example:'数学を教える。\nMengajar matematika.'},
   {jp:'もらう',reading:'もらう',id:'Menerima',level:'N5',cat:'verbs',example:'プレゼントをもらう。\nMenerima hadiah.'},
   {jp:'あげる',reading:'あげる',id:'Memberikan',level:'N5',cat:'verbs',example:'花をあげる。\nMemberikan bunga.'},
-  {jp:'知る',reading:'しる',id:'Mengetahui',level:'N5',cat:'verbs',example:'名前を知る。\nMengetahui nama.'},
-  {jp:'作る',reading:'つくる',id:'Membuat',level:'N5',cat:'verbs',example:'ケーキを作る。\nMembuat kue.'},
-  {jp:'泳ぐ',reading:'およぐ',id:'Berenang',level:'N5',cat:'verbs',example:'海で泳ぐ。\nBerenang di laut.'},
-  {jp:'歩く',reading:'あるく',id:'Berjalan kaki',level:'N5',cat:'verbs',example:'公園を歩く。\nBerjalan di taman.'},
-  {jp:'走る',reading:'はしる',id:'Berlari',level:'N5',cat:'verbs',example:'毎朝走る。\nBerlari setiap pagi.'},
-  {jp:'乗る',reading:'のる',id:'Naik kendaraan',level:'N5',cat:'verbs',example:'電車に乗る。\nNaik kereta.'},
-  {jp:'降りる',reading:'おりる',id:'Turun kendaraan',level:'N5',cat:'verbs',example:'バスを降りる。\nTurun dari bus.'},
   {jp:'切る',reading:'きる',id:'Memotong',level:'N5',cat:'verbs',example:'紙を切る。\nMemotong kertas.'},
-  {jp:'洗う',reading:'あらう',id:'Mencuci',level:'N5',cat:'verbs',example:'手を洗う。\nMencuci tangan.'},
   {jp:'着る',reading:'きる',id:'Mengenakan baju',level:'N5',cat:'verbs',example:'コートを着る。\nMemakai mantel.'},
-  {jp:'脱ぐ',reading:'ぬぐ',id:'Melepas baju',level:'N5',cat:'verbs',example:'靴を脱ぐ。\nMelepas sepatu.'},
-  {jp:'置く',reading:'おく',id:'Meletakkan',level:'N5',cat:'verbs',example:'本を机に置く。\nMeletakkan buku di meja.'},
-  {jp:'持つ',reading:'もつ',id:'Memegang / Membawa',level:'N5',cat:'verbs',example:'かばんを持つ。\nMembawa tas.'},
   {jp:'聞こえる',reading:'きこえる',id:'Terdengar',level:'N5',cat:'verbs',example:'音楽が聞こえる。\nTerdengar musik.'},
   {jp:'見える',reading:'みえる',id:'Terlihat',level:'N5',cat:'verbs',example:'山が見える。\nTerlihat gunung.'},
-  {jp:'住む',reading:'すむ',id:'Tinggal / Berdomisili',level:'N5',cat:'verbs',example:'東京に住む。\nTinggal di Tokyo.'},
-  // ─── KATA KERJA N4 ───
-  {jp:'覚える',reading:'おぼえる',id:'Menghafal',level:'N4',cat:'verbs',example:'単語を覚える。\nMenghafal kosakata.'},
-  {jp:'忘れる',reading:'わすれる',id:'Melupakan',level:'N4',cat:'verbs',example:'名前を忘れる。\nMelupakan nama.'},
-  {jp:'働く',reading:'はたらく',id:'Bekerja',level:'N4',cat:'verbs',example:'会社で働く。\nBekerja di perusahaan.'},
-  {jp:'急ぐ',reading:'いそぐ',id:'Terburu-buru',level:'N4',cat:'verbs',example:'急いで来てください。\nTolong datang cepat.'},
   {jp:'調べる',reading:'しらべる',id:'Menyelidiki / Mencari tahu',level:'N4',cat:'verbs',example:'インターネットで調べる。\nMencari tahu lewat internet.'},
   {jp:'始める',reading:'はじめる',id:'Memulai',level:'N4',cat:'verbs',example:'仕事を始める。\nMemulai pekerjaan.'},
-  {jp:'終わる',reading:'おわる',id:'Selesai / Berakhir',level:'N4',cat:'verbs',example:'授業が終わる。\nPelajaran selesai.'},
   {jp:'決める',reading:'きめる',id:'Memutuskan',level:'N4',cat:'verbs',example:'計画を決める。\nMemutuskan rencana.'},
   {jp:'変える',reading:'かえる',id:'Mengubah',level:'N4',cat:'verbs',example:'予定を変える。\nMengubah jadwal.'},
   {jp:'続ける',reading:'つづける',id:'Melanjutkan',level:'N4',cat:'verbs',example:'勉強を続ける。\nMelanjutkan belajar.'},
   {jp:'集める',reading:'あつめる',id:'Mengumpulkan',level:'N4',cat:'verbs',example:'切手を集める。\nMengumpulkan perangko.'},
-  {jp:'送る',reading:'おくる',id:'Mengirim',level:'N4',cat:'verbs',example:'メールを送る。\nMengirim email.'},
   {jp:'受ける',reading:'うける',id:'Menerima / Mengikuti',level:'N4',cat:'verbs',example:'試験を受ける。\nMengikuti ujian.'},
   {jp:'伝える',reading:'つたえる',id:'Menyampaikan',level:'N4',cat:'verbs',example:'気持ちを伝える。\nMenyampaikan perasaan.'},
-  {jp:'答える',reading:'こたえる',id:'Menjawab',level:'N4',cat:'verbs',example:'質問に答える。\nMenjawab pertanyaan.'},
   {jp:'選ぶ',reading:'えらぶ',id:'Memilih',level:'N4',cat:'verbs',example:'好きな色を選ぶ。\nMemilih warna favorit.'},
   {jp:'比べる',reading:'くらべる',id:'Membandingkan',level:'N4',cat:'verbs',example:'値段を比べる。\nMembandingkan harga.'},
   {jp:'考える',reading:'かんがえる',id:'Berpikir / Mempertimbangkan',level:'N4',cat:'verbs',example:'よく考える。\nBerpikir baik-baik.'},
@@ -2890,166 +2818,71 @@ const vocab = [
   {jp:'下がる',reading:'さがる',id:'Turun',level:'N4',cat:'verbs',example:'値段が下がる。\nHarga turun.'},
   {jp:'増える',reading:'ふえる',id:'Bertambah',level:'N4',cat:'verbs',example:'人口が増える。\nPenduduk bertambah.'},
   {jp:'減る',reading:'へる',id:'Berkurang',level:'N4',cat:'verbs',example:'お金が減る。\nUang berkurang.'},
-  {jp:'止まる',reading:'とまる',id:'Berhenti',level:'N4',cat:'verbs',example:'電車が止まる。\nKereta berhenti.'},
-  {jp:'動く',reading:'うごく',id:'Bergerak',level:'N4',cat:'verbs',example:'ロボットが動く。\nRobot bergerak.'},
   {jp:'倒れる',reading:'たおれる',id:'Terjatuh / Roboh',level:'N4',cat:'verbs',example:'木が倒れる。\nPohon tumbang.'},
   {jp:'引っ越す',reading:'ひっこす',id:'Pindah rumah',level:'N4',cat:'verbs',example:'大阪に引っ越す。\nPindah ke Osaka.'},
   {jp:'連れる',reading:'つれる',id:'Membawa seseorang',level:'N4',cat:'verbs',example:'子供を連れる。\nMembawa anak.'},
   {jp:'迎える',reading:'むかえる',id:'Menjemput',level:'N4',cat:'verbs',example:'駅で友達を迎える。\nMenjemput teman di stasiun.'},
-  {jp:'頼む',reading:'たのむ',id:'Meminta / Memesan',level:'N4',cat:'verbs',example:'手伝いを頼む。\nMeminta bantuan.'},
   {jp:'断る',reading:'ことわる',id:'Menolak',level:'N4',cat:'verbs',example:'誘いを断る。\nMenolak ajakan.'},
   {jp:'驚く',reading:'おどろく',id:'Terkejut',level:'N4',cat:'verbs',example:'サプライズに驚く。\nTerkejut dengan kejutan.'},
-  {jp:'困る',reading:'こまる',id:'Kesulitan / Bingung',level:'N4',cat:'verbs',example:'お金がなくて困る。\nKesulitan karena tidak punya uang.'},
   {jp:'急に',reading:'きゅうに',id:'Tiba-tiba',level:'N4',cat:'verbs',example:'急に雨が降る。\nTiba-tiba hujan turun.'},
   {jp:'習う',reading:'ならう',id:'Belajar dari guru',level:'N4',cat:'verbs',example:'ピアノを習う。\nBelajar piano dari guru.'},
   {jp:'練習する',reading:'れんしゅうする',id:'Berlatih',level:'N4',cat:'verbs',example:'毎日練習する。\nBerlatih setiap hari.'},
-  // ─── KATA BENDA N5 ───
-  {jp:'学校',reading:'がっこう',id:'Sekolah',level:'N5',cat:'nouns',example:'学校に行く。\nPergi ke sekolah.'},
-  {jp:'先生',reading:'せんせい',id:'Guru',level:'N5',cat:'nouns',example:'先生は優しい。\nGurunya baik.'},
-  {jp:'友達',reading:'ともだち',id:'Teman',level:'N5',cat:'nouns',example:'友達と遊ぶ。\nBermain dengan teman.'},
-  {jp:'家族',reading:'かぞく',id:'Keluarga',level:'N5',cat:'nouns',example:'家族が大好き。\nSaya suka keluarga.'},
-  {jp:'時間',reading:'じかん',id:'Waktu',level:'N5',cat:'nouns',example:'時間がない。\nTidak ada waktu.'},
-  {jp:'電車',reading:'でんしゃ',id:'Kereta Listrik',level:'N5',cat:'nouns',example:'電車で行く。\nPergi dengan kereta.'},
-  {jp:'お金',reading:'おかね',id:'Uang',level:'N5',cat:'nouns',example:'お金がない。\nTidak punya uang.'},
-  {jp:'天気',reading:'てんき',id:'Cuaca',level:'N5',cat:'nouns',example:'今日の天気はいい。\nCuacanya bagus.'},
-  {jp:'名前',reading:'なまえ',id:'Nama',level:'N5',cat:'nouns',example:'名前は何ですか？\nSiapa namamu?'},
-  {jp:'言葉',reading:'ことば',id:'Kata / Bahasa',level:'N5',cat:'nouns',example:'優しい言葉をかける。\nMengucapkan kata-kata yang baik.'},
-  {jp:'仕事',reading:'しごと',id:'Pekerjaan',level:'N5',cat:'nouns',example:'仕事が忙しい。\nPekerjaannya sibuk.'},
-  {jp:'会社',reading:'かいしゃ',id:'Perusahaan',level:'N5',cat:'nouns',example:'会社に行く。\nPergi ke perusahaan.'},
-  {jp:'部屋',reading:'へや',id:'Kamar',level:'N5',cat:'nouns',example:'部屋を掃除する。\nMembersihkan kamar.'},
-  {jp:'外',reading:'そと',id:'Luar',level:'N5',cat:'nouns',example:'外で遊ぶ。\nBermain di luar.'},
-  {jp:'中',reading:'なか',id:'Dalam / Tengah',level:'N5',cat:'nouns',example:'箱の中に何がある？\nAda apa di dalam kotak?'},
-  {jp:'前',reading:'まえ',id:'Depan / Sebelum',level:'N5',cat:'nouns',example:'駅の前で待つ。\nMenunggu di depan stasiun.'},
-  {jp:'後ろ',reading:'うしろ',id:'Belakang',level:'N5',cat:'nouns',example:'後ろを見る。\nMelihat ke belakang.'},
-  {jp:'右',reading:'みぎ',id:'Kanan',level:'N5',cat:'nouns',example:'右に曲がる。\nBelok kanan.'},
-  {jp:'左',reading:'ひだり',id:'Kiri',level:'N5',cat:'nouns',example:'左に曲がる。\nBelok kiri.'},
   {jp:'電話',reading:'でんわ',id:'Telepon',level:'N5',cat:'nouns',example:'電話する。\nMenelepon.'},
-  {jp:'映画',reading:'えいが',id:'Film',level:'N5',cat:'nouns',example:'映画を見る。\nMenonton film.'},
   {jp:'音楽',reading:'おんがく',id:'Musik',level:'N5',cat:'nouns',example:'音楽を聞く。\nMendengarkan musik.'},
-  {jp:'本',reading:'ほん',id:'Buku',level:'N5',cat:'nouns',example:'本を読む。\nMembaca buku.'},
-  {jp:'写真',reading:'しゃしん',id:'Foto',level:'N5',cat:'nouns',example:'写真を撮る。\nMengambil foto.'},
-  {jp:'手紙',reading:'てがみ',id:'Surat',level:'N5',cat:'nouns',example:'手紙を書く。\nMenulis surat.'},
-  {jp:'新聞',reading:'しんぶん',id:'Koran',level:'N5',cat:'nouns',example:'新聞を読む。\nMembaca koran.'},
-  {jp:'雑誌',reading:'ざっし',id:'Majalah',level:'N5',cat:'nouns',example:'雑誌を買う。\nMembeli majalah.'},
   {jp:'食べ物',reading:'たべもの',id:'Makanan',level:'N5',cat:'nouns',example:'食べ物が好き。\nSuka makanan.'},
-  {jp:'飲み物',reading:'のみもの',id:'Minuman',level:'N5',cat:'nouns',example:'飲み物を買う。\nMembeli minuman.'},
-  {jp:'料理',reading:'りょうり',id:'Masakan',level:'N5',cat:'nouns',example:'日本料理を食べる。\nMakan masakan Jepang.'},
-  {jp:'レストラン',reading:'レストラン',id:'Restoran',level:'N5',cat:'nouns',example:'レストランに行く。\nPergi ke restoran.'},
-  {jp:'スーパー',reading:'スーパー',id:'Supermarket',level:'N5',cat:'nouns',example:'スーパーで買い物する。\nBelanja di supermarket.'},
-  {jp:'病院',reading:'びょういん',id:'Rumah Sakit',level:'N4',cat:'nouns',example:'病院に行く。\nPergi ke rumah sakit.'},
-  {jp:'駅',reading:'えき',id:'Stasiun',level:'N4',cat:'nouns',example:'駅で待つ。\nMenunggu di stasiun.'},
-  {jp:'銀行',reading:'ぎんこう',id:'Bank',level:'N5',cat:'nouns',example:'銀行でお金を下ろす。\nMenarik uang di bank.'},
-  {jp:'郵便局',reading:'ゆうびんきょく',id:'Kantor Pos',level:'N5',cat:'nouns',example:'郵便局で手紙を出す。\nMengirim surat di kantor pos.'},
-  {jp:'図書館',reading:'としょかん',id:'Perpustakaan',level:'N5',cat:'nouns',example:'図書館で勉強する。\nBelajar di perpustakaan.'},
-  {jp:'公園',reading:'こうえん',id:'Taman',level:'N5',cat:'nouns',example:'公園で遊ぶ。\nBermain di taman.'},
   {jp:'空港',reading:'くうこう',id:'Bandara',level:'N5',cat:'nouns',example:'空港に行く。\nPergi ke bandara.'},
   {jp:'海',reading:'うみ',id:'Laut / Pantai',level:'N5',cat:'nouns',example:'海で泳ぐ。\nBerenang di laut.'},
   {jp:'山',reading:'やま',id:'Gunung',level:'N5',cat:'nouns',example:'山に登る。\nMendaki gunung.'},
-  // ─── KATA BENDA N4 ───
-  {jp:'意味',reading:'いみ',id:'Arti / Makna',level:'N4',cat:'nouns',example:'この言葉の意味は何ですか？\nApa arti kata ini?'},
   {jp:'理由',reading:'りゆう',id:'Alasan',level:'N4',cat:'nouns',example:'理由を教えてください。\nTolong beritahu alasannya.'},
   {jp:'計画',reading:'けいかく',id:'Rencana',level:'N4',cat:'nouns',example:'旅行の計画を立てる。\nMembuat rencana perjalanan.'},
   {jp:'予定',reading:'よてい',id:'Jadwal / Rencana',level:'N4',cat:'nouns',example:'今週の予定は何ですか？\nApa jadwal minggu ini?'},
   {jp:'機会',reading:'きかい',id:'Kesempatan',level:'N4',cat:'nouns',example:'いい機会だ。\nIni kesempatan yang baik.'},
-  {jp:'問題',reading:'もんだい',id:'Masalah / Soal',level:'N4',cat:'nouns',example:'問題がある。\nAda masalah.'},
   {jp:'答え',reading:'こたえ',id:'Jawaban',level:'N4',cat:'nouns',example:'答えを書く。\nMenulis jawaban.'},
-  {jp:'質問',reading:'しつもん',id:'Pertanyaan',level:'N4',cat:'nouns',example:'質問があります。\nAda pertanyaan.'},
   {jp:'説明',reading:'せつめい',id:'Penjelasan',level:'N4',cat:'nouns',example:'説明を聞く。\nMendengarkan penjelasan.'},
   {jp:'経験',reading:'けいけん',id:'Pengalaman',level:'N4',cat:'nouns',example:'いい経験になる。\nJadi pengalaman yang baik.'},
   {jp:'生活',reading:'せいかつ',id:'Kehidupan / Cara hidup',level:'N4',cat:'nouns',example:'毎日の生活を楽しむ。\nMenikmati kehidupan sehari-hari.'},
   {jp:'社会',reading:'しゃかい',id:'Masyarakat',level:'N4',cat:'nouns',example:'社会のために働く。\nBekerja untuk masyarakat.'},
   {jp:'文化',reading:'ぶんか',id:'Budaya',level:'N4',cat:'nouns',example:'日本文化を学ぶ。\nMempelajari budaya Jepang.'},
-  {jp:'地図',reading:'ちず',id:'Peta',level:'N4',cat:'nouns',example:'地図を見る。\nMelihat peta.'},
-  {jp:'道',reading:'みち',id:'Jalan',level:'N4',cat:'nouns',example:'道に迷う。\nTersesat di jalan.'},
-  {jp:'橋',reading:'はし',id:'Jembatan',level:'N4',cat:'nouns',example:'橋を渡る。\nMenyeberangi jembatan.'},
   {jp:'角',reading:'かど',id:'Sudut / Tikungan',level:'N4',cat:'nouns',example:'角を曲がる。\nBelok di tikungan.'},
   {jp:'信号',reading:'しんごう',id:'Lampu lalu lintas',level:'N4',cat:'nouns',example:'信号が赤だ。\nLampu merah.'},
-  {jp:'荷物',reading:'にもつ',id:'Barang bawaan',level:'N4',cat:'nouns',example:'荷物が重い。\nBarang bawaannya berat.'},
   {jp:'値段',reading:'ねだん',id:'Harga',level:'N4',cat:'nouns',example:'値段が高い。\nHarganya mahal.'},
   {jp:'割引',reading:'わりびき',id:'Diskon',level:'N4',cat:'nouns',example:'割引があります。\nAda diskon.'},
   {jp:'予約',reading:'よやく',id:'Reservasi / Pemesanan',level:'N4',cat:'nouns',example:'ホテルを予約する。\nMemesan hotel.'},
   {jp:'連絡',reading:'れんらく',id:'Kontak / Kabar',level:'N4',cat:'nouns',example:'連絡してください。\nTolong hubungi saya.'},
   {jp:'場所',reading:'ばしょ',id:'Tempat',level:'N4',cat:'nouns',example:'待ち合わせの場所を決める。\nMenentukan tempat pertemuan.'},
-  {jp:'服',reading:'ふく',id:'Pakaian',level:'N4',cat:'nouns',example:'新しい服を買う。\nMembeli pakaian baru.'},
-  {jp:'薬',reading:'くすり',id:'Obat',level:'N4',cat:'nouns',example:'薬を飲む。\nMinum obat.'},
-  {jp:'病気',reading:'びょうき',id:'Penyakit / Sakit',level:'N4',cat:'nouns',example:'病気になる。\nJatuh sakit.'},
-  {jp:'医者',reading:'いしゃ',id:'Dokter',level:'N4',cat:'nouns',example:'医者に行く。\nPergi ke dokter.'},
   {jp:'体',reading:'からだ',id:'Tubuh / Badan',level:'N4',cat:'nouns',example:'体が痛い。\nBadan sakit.'},
   {jp:'気持ち',reading:'きもち',id:'Perasaan',level:'N4',cat:'nouns',example:'気持ちが分かる。\nMengerti perasaannya.'},
-  // ─── KATA SIFAT N5 ───
-  {jp:'大きい',reading:'おおきい',id:'Besar',level:'N5',cat:'adjectives',example:'大きい犬だ。\nAnjing yang besar.'},
-  {jp:'小さい',reading:'ちいさい',id:'Kecil',level:'N5',cat:'adjectives',example:'小さい猫だ。\nKucing yang kecil.'},
-  {jp:'良い',reading:'いい',id:'Baik / Bagus',level:'N5',cat:'adjectives',example:'天気がいい。\nCuacanya bagus.'},
-  {jp:'悪い',reading:'わるい',id:'Buruk / Jelek',level:'N5',cat:'adjectives',example:'天気が悪い。\nCuacanya buruk.'},
-  {jp:'難しい',reading:'むずかしい',id:'Sulit',level:'N5',cat:'adjectives',example:'試験が難しい。\nUjiannya sulit.'},
-  {jp:'易しい',reading:'やさしい',id:'Mudah',level:'N5',cat:'adjectives',example:'問題が易しい。\nSoalnya mudah.'},
-  {jp:'楽しい',reading:'たのしい',id:'Menyenangkan',level:'N5',cat:'adjectives',example:'パーティーが楽しい。\nPestanya menyenangkan.'},
   {jp:'おいしい',reading:'おいしい',id:'Enak / Lezat',level:'N5',cat:'adjectives',example:'このラーメンはおいしい。\nRamen ini enak.'},
   {jp:'まずい',reading:'まずい',id:'Tidak enak',level:'N5',cat:'adjectives',example:'この料理はまずい。\nMasakan ini tidak enak.'},
   {jp:'かわいい',reading:'かわいい',id:'Lucu / Imut',level:'N5',cat:'adjectives',example:'赤ちゃんがかわいい。\nBayinya lucu.'},
   {jp:'きれい',reading:'きれい',id:'Cantik / Bersih',level:'N5',cat:'adjectives',example:'花がきれいだ。\nBunganya cantik.'},
-  {jp:'暑い',reading:'あつい',id:'Panas (cuaca)',level:'N5',cat:'adjectives',example:'今日は暑い。\nHari ini panas.'},
-  {jp:'寒い',reading:'さむい',id:'Dingin (cuaca)',level:'N5',cat:'adjectives',example:'冬は寒い。\nMusim dingin dingin.'},
   {jp:'熱い',reading:'あつい',id:'Panas (benda)',level:'N5',cat:'adjectives',example:'お茶が熱い。\nTehnya panas.'},
   {jp:'冷たい',reading:'つめたい',id:'Dingin (benda)',level:'N5',cat:'adjectives',example:'水が冷たい。\nAirnya dingin.'},
-  {jp:'高い',reading:'たかい',id:'Tinggi / Mahal',level:'N5',cat:'adjectives',example:'山が高い。\nGunungnya tinggi.'},
-  {jp:'低い',reading:'ひくい',id:'Rendah',level:'N5',cat:'adjectives',example:'椅子が低い。\nKursinya rendah.'},
-  {jp:'安い',reading:'やすい',id:'Murah',level:'N5',cat:'adjectives',example:'このシャツは安い。\nKemeja ini murah.'},
-  {jp:'長い',reading:'ながい',id:'Panjang',level:'N5',cat:'adjectives',example:'髪が長い。\nRambutnya panjang.'},
-  {jp:'短い',reading:'みじかい',id:'Pendek',level:'N5',cat:'adjectives',example:'袖が短い。\nLengannya pendek.'},
-  {jp:'広い',reading:'ひろい',id:'Luas',level:'N5',cat:'adjectives',example:'部屋が広い。\nKamarnya luas.'},
-  {jp:'狭い',reading:'せまい',id:'Sempit',level:'N5',cat:'adjectives',example:'道が狭い。\nJalannya sempit.'},
   {jp:'多い',reading:'おおい',id:'Banyak',level:'N5',cat:'adjectives',example:'人が多い。\nOrangnya banyak.'},
   {jp:'少ない',reading:'すくない',id:'Jarang/Sedikit',level:'N5',cat:'adjectives',example:'時間が少ない。\nWaktunya sedikit.'},
-  {jp:'新しい',reading:'あたらしい',id:'Baru',level:'N5',cat:'adjectives',example:'新しい靴を買う。\nMembeli sepatu baru.'},
-  {jp:'古い',reading:'ふるい',id:'Lama / Tua',level:'N5',cat:'adjectives',example:'古い建物だ。\nBangunan yang tua.'},
-  {jp:'重い',reading:'おもい',id:'Berat',level:'N5',cat:'adjectives',example:'荷物が重い。\nBarang bawaannya berat.'},
-  {jp:'軽い',reading:'かるい',id:'Ringan',level:'N5',cat:'adjectives',example:'このかばんは軽い。\nTas ini ringan.'},
-  {jp:'忙しい',reading:'いそがしい',id:'Sibuk',level:'N5',cat:'adjectives',example:'今日は忙しい。\nHari ini sibuk.'},
-  {jp:'暇',reading:'ひま',id:'Senggang / Kosong',level:'N5',cat:'adjectives',example:'今日は暇だ。\nHari ini senggang.'},
-  // ─── KATA SIFAT N4 ───
   {jp:'悲しい',reading:'かなしい',id:'Sedih',level:'N4',cat:'adjectives',example:'別れが悲しい。\nPerpisahannya menyedihkan.'},
   {jp:'うれしい',reading:'うれしい',id:'Senang / Gembira',level:'N4',cat:'adjectives',example:'プレゼントがうれしい。\nSenang menerima hadiah.'},
   {jp:'怖い',reading:'こわい',id:'Menakutkan / Takut',level:'N4',cat:'adjectives',example:'お化けが怖い。\nHantu itu menakutkan.'},
-  {jp:'痛い',reading:'いたい',id:'Sakit / Nyeri',level:'N4',cat:'adjectives',example:'頭が痛い。\nKepalanya sakit.'},
   {jp:'恥ずかしい',reading:'はずかしい',id:'Malu',level:'N4',cat:'adjectives',example:'間違えて恥ずかしい。\nMalu karena salah.'},
   {jp:'寂しい',reading:'さびしい',id:'Kesepian / Sepi',level:'N4',cat:'adjectives',example:'一人で寂しい。\nKesepian sendiri.'},
   {jp:'眠い',reading:'ねむい',id:'Mengantuk',level:'N4',cat:'adjectives',example:'とても眠い。\nSangat mengantuk.'},
   {jp:'丁寧',reading:'ていねい',id:'Sopan / Teliti',level:'N4',cat:'adjectives',example:'丁寧に話す。\nBerbicara dengan sopan.'},
-  {jp:'親切',reading:'しんせつ',id:'Baik hati / Ramah',level:'N4',cat:'adjectives',example:'親切な人だ。\nOrang yang baik hati.'},
-  {jp:'便利',reading:'べんり',id:'Praktis / Nyaman',level:'N4',cat:'adjectives',example:'スマホは便利だ。\nSmartphone itu praktis.'},
-  {jp:'不便',reading:'ふべん',id:'Tidak praktis',level:'N4',cat:'adjectives',example:'交通が不便だ。\nTransportasinya tidak praktis.'},
   {jp:'安全',reading:'あんぜん',id:'Aman',level:'N4',cat:'adjectives',example:'ここは安全だ。\nDi sini aman.'},
   {jp:'危険',reading:'きけん',id:'Berbahaya',level:'N4',cat:'adjectives',example:'ここは危険だ。\nDi sini berbahaya.'},
   {jp:'大切',reading:'たいせつ',id:'Penting / Berharga',level:'N4',cat:'adjectives',example:'健康が大切だ。\nKesehatan itu penting.'},
-  {jp:'大丈夫',reading:'だいじょうぶ',id:'Tidak apa-apa / Oke',level:'N4',cat:'adjectives',example:'大丈夫ですか？\nApa kamu baik-baik saja?'},
   {jp:'複雑',reading:'ふくざつ',id:'Rumit / Kompleks',level:'N4',cat:'adjectives',example:'問題が複雑だ。\nMasalahnya rumit.'},
   {jp:'正直',reading:'しょうじき',id:'Jujur',level:'N4',cat:'adjectives',example:'正直な人だ。\nOrang yang jujur.'},
   {jp:'真剣',reading:'しんけん',id:'Serius / Sungguh-sungguh',level:'N4',cat:'adjectives',example:'真剣に考える。\nBerpikir dengan serius.'},
   {jp:'特別',reading:'とくべつ',id:'Istimewa / Khusus',level:'N4',cat:'adjectives',example:'特別な日だ。\nHari yang istimewa.'},
-  // ─── KATA KETERANGAN N5 ───
-  {jp:'とても',reading:'とても',id:'Sangat',level:'N5',cat:'adverbs',example:'とても嬉しい。\nSangat senang.'},
-  {jp:'少し',reading:'すこし',id:'Sedikit',level:'N5',cat:'adverbs',example:'少し待って。\nTunggu sebentar.'},
-  {jp:'もう',reading:'もう',id:'Sudah',level:'N5',cat:'adverbs',example:'もう食べた。\nSudah makan.'},
-  {jp:'まだ',reading:'まだ',id:'Masih / Belum',level:'N5',cat:'adverbs',example:'まだ寝ていない。\nBelum tidur.'},
-  {jp:'いつも',reading:'いつも',id:'Selalu',level:'N5',cat:'adverbs',example:'いつも笑顔だ。\nSelalu tersenyum.'},
   {jp:'たいてい',reading:'たいてい',id:'Biasanya',level:'N5',cat:'adverbs',example:'たいてい7時に起きる。\nBiasanya bangun jam 7.'},
   {jp:'ときどき',reading:'ときどき',id:'Kadang-kadang',level:'N5',cat:'adverbs',example:'ときどき映画を見る。\nKadang-kadang menonton film.'},
-  {jp:'あまり',reading:'あまり',id:'Tidak terlalu (+ negatif)',level:'N5',cat:'adverbs',example:'あまり食べない。\nTidak terlalu banyak makan.'},
   {jp:'ぜんぜん',reading:'ぜんぜん',id:'Sama sekali tidak',level:'N5',cat:'adverbs',example:'ぜんぜん分からない。\nSama sekali tidak mengerti.'},
   {jp:'だいたい',reading:'だいたい',id:'Kira-kira / Umumnya',level:'N5',cat:'adverbs',example:'だいたい30分かかる。\nKira-kira membutuhkan 30 menit.'},
-  {jp:'もっと',reading:'もっと',id:'Lebih (lagi)',level:'N5',cat:'adverbs',example:'もっとゆっくり話して。\nBicara lebih pelan lagi.'},
   {jp:'はやく',reading:'はやく',id:'Cepat / Segera',level:'N5',cat:'adverbs',example:'はやく来て。\nCepat datang.'},
   {jp:'ゆっくり',reading:'ゆっくり',id:'Pelan-pelan / Santai',level:'N5',cat:'adverbs',example:'ゆっくり話してください。\nTolong bicara pelan-pelan.'},
-  {jp:'一緒に',reading:'いっしょに',id:'Bersama-sama',level:'N5',cat:'adverbs',example:'一緒に行こう。\nAyo pergi bersama.'},
   {jp:'一人で',reading:'ひとりで',id:'Sendiri',level:'N5',cat:'adverbs',example:'一人で旅行する。\nBerwisata sendiri.'},
-  // ─── KATA KETERANGAN N4 ───
-  {jp:'だんだん',reading:'だんだん',id:'Semakin lama semakin',level:'N4',cat:'adverbs',example:'だんだん上手になる。\nSemakin lama semakin pandai.'},
   {jp:'やっと',reading:'やっと',id:'Akhirnya',level:'N4',cat:'adverbs',example:'やっと終わった。\nAkhirnya selesai.'},
   {jp:'まず',reading:'まず',id:'Pertama-tama',level:'N4',cat:'adverbs',example:'まず手を洗ってください。\nPertama-tama cuci tangan.'},
-  {jp:'それから',reading:'それから',id:'Setelah itu / Lalu',level:'N4',cat:'adverbs',example:'朝ごはんを食べた。それから学校へ行った。\nMakan pagi. Lalu pergi ke sekolah.'},
-  {jp:'しかし',reading:'しかし',id:'Namun / Tetapi',level:'N4',cat:'adverbs',example:'頑張った。しかし失敗した。\nSudah berusaha. Namun gagal.'},
-  {jp:'だから',reading:'だから',id:'Jadi / Oleh karena itu',level:'N4',cat:'adverbs',example:'雨だから、傘を持った。\nKarena hujan, membawa payung.'},
   {jp:'もしも',reading:'もしも',id:'Seandainya / Jika',level:'N4',cat:'adverbs',example:'もしも時間があれば、来てください。\nSeandainya ada waktu, tolong datang.'},
   {jp:'なるべく',reading:'なるべく',id:'Sebisa mungkin',level:'N4',cat:'adverbs',example:'なるべく早く来てください。\nTolong datang secepat mungkin.'},
   {jp:'ぜひ',reading:'ぜひ',id:'Pasti / Tentu saja (harapan kuat)',level:'N4',cat:'adverbs',example:'ぜひ来てください。\nPasti datanglah.'},
@@ -3058,48 +2891,16 @@ const vocab = [
   {jp:'どんどん',reading:'どんどん',id:'Terus-terusan / Makin',level:'N4',cat:'adverbs',example:'どんどん上手になる。\nSemakin pandai terus.'},
   {jp:'ちゃんと',reading:'ちゃんと',id:'Dengan benar / Sungguh-sungguh',level:'N4',cat:'adverbs',example:'ちゃんと宿題をする。\nMengerjakan PR dengan benar.'},
   {jp:'きっと',reading:'きっと',id:'Pasti / Tentu',level:'N4',cat:'adverbs',example:'きっと大丈夫だ。\nPasti tidak apa-apa.'},
-  // ─── ANGKA & WAKTU N5 ───
-  {jp:'今日',reading:'きょう',id:'Hari ini',level:'N5',cat:'numbers',example:'今日は晴れだ。\nHari ini cerah.'},
-  {jp:'明日',reading:'あした',id:'Besok',level:'N5',cat:'numbers',example:'明日また来る。\nBesok datang lagi.'},
-  {jp:'昨日',reading:'きのう',id:'Kemarin',level:'N5',cat:'numbers',example:'昨日は雨だった。\nKemarin hujan.'},
   {jp:'今週',reading:'こんしゅう',id:'Minggu ini',level:'N5',cat:'numbers',example:'今週は忙しい。\nMinggu ini sibuk.'},
-  {jp:'来週',reading:'らいしゅう',id:'Minggu depan',level:'N5',cat:'numbers',example:'来週また会おう。\nAyo bertemu lagi minggu depan.'},
-  {jp:'先週',reading:'せんしゅう',id:'Minggu lalu',level:'N5',cat:'numbers',example:'先週テストがあった。\nMinggu lalu ada ulangan.'},
   {jp:'今月',reading:'こんげつ',id:'Bulan ini',level:'N5',cat:'numbers',example:'今月は忙しい。\nBulan ini sibuk.'},
-  {jp:'来月',reading:'らいげつ',id:'Bulan depan',level:'N5',cat:'numbers',example:'来月旅行する。\nBulan depan berwisata.'},
   {jp:'今年',reading:'ことし',id:'Tahun ini',level:'N5',cat:'numbers',example:'今年は楽しい。\nTahun ini menyenangkan.'},
-  {jp:'来年',reading:'らいねん',id:'Tahun depan',level:'N5',cat:'numbers',example:'来年日本に行く。\nTahun depan pergi ke Jepang.'},
-  {jp:'午前',reading:'ごぜん',id:'Pagi (AM)',level:'N5',cat:'numbers',example:'午前10時に起きる。\nBangun pukul 10 pagi.'},
-  {jp:'午後',reading:'ごご',id:'Sore / Siang (PM)',level:'N5',cat:'numbers',example:'午後3時に会う。\nBertemu pukul 3 sore.'},
-  {jp:'朝',reading:'あさ',id:'Pagi',level:'N5',cat:'numbers',example:'朝ごはんを食べる。\nMakan pagi.'},
-  {jp:'昼',reading:'ひる',id:'Siang',level:'N5',cat:'numbers',example:'昼ご飯を食べる。\nMakan siang.'},
-  {jp:'夜',reading:'よる',id:'Malam',level:'N5',cat:'numbers',example:'夜遅く寝る。\nTidur larut malam.'},
-  {jp:'毎日',reading:'まいにち',id:'Setiap hari',level:'N5',cat:'numbers',example:'毎日勉強する。\nBelajar setiap hari.'},
-  {jp:'毎朝',reading:'まいあさ',id:'Setiap pagi',level:'N5',cat:'numbers',example:'毎朝ジョギングする。\nJoging setiap pagi.'},
-  {jp:'毎週',reading:'まいしゅう',id:'Setiap minggu',level:'N5',cat:'numbers',example:'毎週日曜日に休む。\nIstirahat setiap Minggu.'},
-  {jp:'半分',reading:'はんぶん',id:'Setengah',level:'N5',cat:'numbers',example:'半分食べた。\nSudah makan setengah.'},
   {jp:'～時間',reading:'じかん',id:'...jam (durasi)',level:'N5',cat:'numbers',example:'3時間勉強した。\nBelajar selama 3 jam.'},
-  // ─── SEHARI-HARI N5 ───
-  {jp:'おはよう',reading:'おはようございます',id:'Selamat Pagi',level:'N5',cat:'daily',example:'おはようございます！\nSelamat pagi!'},
-  {jp:'こんにちは',reading:'こんにちは',id:'Halo / Selamat Siang',level:'N5',cat:'daily',example:'こんにちは！\nHalo!'},
-  {jp:'こんばんは',reading:'こんばんは',id:'Selamat Malam',level:'N5',cat:'daily',example:'こんばんは！\nSelamat malam!'},
-  {jp:'ありがとう',reading:'ありがとう',id:'Terima Kasih',level:'N5',cat:'daily',example:'ありがとうございます。\nTerima kasih.'},
-  {jp:'すみません',reading:'すみません',id:'Permisi / Maaf',level:'N5',cat:'daily',example:'すみません。\nPermisi.'},
-  {jp:'ごめんなさい',reading:'ごめんなさい',id:'Minta Maaf',level:'N5',cat:'daily',example:'ごめんなさい。\nMaafkan saya.'},
-  {jp:'はじめまして',reading:'はじめまして',id:'Salam Perkenalan',level:'N5',cat:'daily',example:'はじめまして。どうぞよろしく。\nSalam kenal.'},
-  {jp:'どうぞ',reading:'どうぞ',id:'Silakan',level:'N5',cat:'daily',example:'どうぞ、座ってください。\nSilakan duduk.'},
   {jp:'どうも',reading:'どうも',id:'Terima kasih (informal)',level:'N5',cat:'daily',example:'どうもありがとう。\nTerima kasih banyak.'},
-  {jp:'いただきます',reading:'いただきます',id:'Selamat makan (sebelum makan)',level:'N5',cat:'daily',example:'いただきます！\nSelamat makan!'},
-  {jp:'ごちそうさま',reading:'ごちそうさまでした',id:'Terima kasih atas makanannya',level:'N5',cat:'daily',example:'ごちそうさまでした。\nTerima kasih atas makanannya.'},
-  {jp:'ただいま',reading:'ただいま',id:'Saya pulang',level:'N5',cat:'daily',example:'ただいま！\nSaya pulang!'},
-  {jp:'おかえり',reading:'おかえりなさい',id:'Selamat datang (di rumah)',level:'N5',cat:'daily',example:'おかえりなさい！\nSelamat datang kembali!'},
   {jp:'行ってきます',reading:'いってきます',id:'Saya pergi dulu',level:'N5',cat:'daily',example:'行ってきます！\nSaya pergi dulu!'},
   {jp:'行ってらっしゃい',reading:'いってらっしゃい',id:'Hati-hati di jalan',level:'N5',cat:'daily',example:'行ってらっしゃい！\nHati-hati di jalan!'},
   {jp:'おやすみ',reading:'おやすみなさい',id:'Selamat Tidur',level:'N5',cat:'daily',example:'おやすみなさい。\nSelamat tidur.'},
-  {jp:'さようなら',reading:'さようなら',id:'Selamat Tinggal',level:'N5',cat:'daily',example:'さようなら。\nSelamat tinggal.'},
   {jp:'元気ですか',reading:'げんきですか',id:'Apa kabar?',level:'N5',cat:'daily',example:'お元気ですか？\nApa kabar?'},
   {jp:'元気です',reading:'げんきです',id:'Baik-baik saja',level:'N5',cat:'daily',example:'はい、元気です。\nYa, baik-baik saja.'},
-  // ─── SEHARI-HARI N4 ───
   {jp:'頑張る',reading:'がんばる',id:'Berjuang / Semangat',level:'N4',cat:'daily',example:'頑張ってください！\nSemangat!'},
   {jp:'お疲れ様',reading:'おつかれさまでした',id:'Terima kasih atas kerja kerasnya',level:'N4',cat:'daily',example:'お疲れ様でした。\nTerima kasih atas kerja kerasnya.'},
   {jp:'よろしく',reading:'よろしくおねがいします',id:'Tolong bantuannya / Salam kenal',level:'N4',cat:'daily',example:'よろしくお願いします。\nTolong bantuannya.'},
@@ -3110,12 +2911,6 @@ const vocab = [
   {jp:'どういう意味',reading:'どういういみ',id:'Apa artinya?',level:'N4',cat:'daily',example:'どういう意味ですか？\nApa artinya?'},
   {jp:'気をつけて',reading:'きをつけて',id:'Hati-hati',level:'N4',cat:'daily',example:'気をつけてください。\nTolong hati-hati.'},
   {jp:'お世話になります',reading:'おせわになります',id:'Terima kasih atas bantuannya (formal)',level:'N4',cat:'daily',example:'いつもお世話になります。\nSelalu terima kasih atas bantuannya.'},
-  // ─── KATA BILANGAN / COUNTER N5 ───
-  {jp:'一つ',reading:'ひとつ',id:'Satu (buah umum)',level:'N5',cat:'counter',example:'リンゴを一つください。\nTolong satu apel.'},
-  {jp:'二つ',reading:'ふたつ',id:'Dua (buah umum)',level:'N5',cat:'counter',example:'ケーキを二つ買う。\nMembeli dua kue.'},
-  {jp:'三つ',reading:'みっつ',id:'Tiga (buah umum)',level:'N5',cat:'counter',example:'鉛筆を三つ持つ。\nMembawa tiga pensil.'},
-  {jp:'一人',reading:'ひとり',id:'Satu orang',level:'N5',cat:'counter',example:'一人で行く。\nPergi sendiri.'},
-  {jp:'二人',reading:'ふたり',id:'Dua orang',level:'N5',cat:'counter',example:'二人で食べる。\nMakan berdua.'},
   {jp:'～枚',reading:'まい',id:'...lembar (kertas, kain)',level:'N5',cat:'counter',example:'紙 を3枚ください。\nTolong 3 lembar kertas.'},
   {jp:'～本',reading:'ほん',id:'...batang (benda panjang)',level:'N5',cat:'counter',example:'鉛筆を2本買う。\nMembeli 2 batang pensil.'},
   {jp:'～冊',reading:'さつ',id:'...buah (buku)',level:'N5',cat:'counter',example:'本を5冊読む。\nMembaca 5 buku.'},
@@ -3131,148 +2926,35 @@ const vocab = [
   {jp:'～週間',reading:'しゅうかん',id:'...minggu (durasi)',level:'N4',cat:'counter',example:'2週間日本にいる。\nBerada di Jepang selama 2 minggu.'},
   {jp:'～ヶ月',reading:'かげつ',id:'...bulan (durasi)',level:'N4',cat:'counter',example:'3ヶ月勉強した。\nBelajar selama 3 bulan.'},
   {jp:'～年間',reading:'ねんかん',id:'...tahun (durasi)',level:'N4',cat:'counter',example:'5年間働いた。\nBekerja selama 5 tahun.'},
-
-  // ── KOSAKATA BARU N5 ──
   {jp:'朝ごはん',reading:'あさごはん',id:'Sarapan',level:'N5',cat:'noun',example:'毎朝、朝ごはんを食べます。\nSetiap pagi saya makan sarapan.'},
   {jp:'晩ごはん',reading:'ばんごはん',id:'Makan malam',level:'N5',cat:'noun',example:'晩ごはんは何ですか。\nMakan malamnya apa?'},
   {jp:'昼ごはん',reading:'ひるごはん',id:'Makan siang',level:'N5',cat:'noun',example:'昼ごはんを一緒に食べましょう。\nMari makan siang bersama.'},
-  {jp:'切符',reading:'きっぷ',id:'Tiket',level:'N5',cat:'noun',example:'切符を買いました。\nSaya sudah beli tiket.'},
   {jp:'財布',reading:'さいふ',id:'Dompet',level:'N5',cat:'noun',example:'財布をなくしました。\nSaya kehilangan dompet.'},
-  {jp:'鍵',reading:'かぎ',id:'Kunci',level:'N5',cat:'noun',example:'鍵を忘れました。\nSaya lupa membawa kunci.'},
-  {jp:'眼鏡',reading:'めがね',id:'Kacamata',level:'N5',cat:'noun',example:'眼鏡をかけています。\nSaya memakai kacamata.'},
-  {jp:'帽子',reading:'ぼうし',id:'Topi',level:'N5',cat:'noun',example:'帽子をかぶってください。\nTolong pakai topi.'},
   {jp:'靴',reading:'くつ',id:'Sepatu',level:'N5',cat:'noun',example:'新しい靴を買いました。\nSaya beli sepatu baru.'},
   {jp:'洗濯',reading:'せんたく',id:'Mencuci pakaian',level:'N5',cat:'noun',example:'洗濯をします。\nSaya mencuci pakaian.'},
-  {jp:'掃除',reading:'そうじ',id:'Membersihkan / Bersih-bersih',level:'N5',cat:'noun',example:'部屋の掃除をしました。\nSaya membersihkan kamar.'},
   {jp:'歌',reading:'うた',id:'Lagu',level:'N5',cat:'noun',example:'歌を歌いましょう。\nMari bernyanyi.'},
-  {jp:'絵',reading:'え',id:'Gambar / Lukisan',level:'N5',cat:'noun',example:'絵を描くのが好きです。\nSaya suka menggambar.'},
   {jp:'旅行',reading:'りょこう',id:'Perjalanan / Wisata',level:'N5',cat:'noun',example:'旅行が大好きです。\nSaya sangat suka berwisata.'},
   {jp:'休み',reading:'やすみ',id:'Istirahat / Libur',level:'N5',cat:'noun',example:'明日は休みです。\nBesok libur.'},
-
-  // ── KOSAKATA BARU N4 ──
   {jp:'意見',reading:'いけん',id:'Pendapat',level:'N4',cat:'noun',example:'あなたの意見を聞かせてください。\nTolong ceritakan pendapat Anda.'},
   {jp:'方法',reading:'ほうほう',id:'Cara / Metode',level:'N4',cat:'noun',example:'もっといい方法があります。\nAda cara yang lebih baik.'},
-  {jp:'練習',reading:'れんしゅう',id:'Latihan / Berlatih',level:'N4',cat:'noun',example:'毎日練習します。\nSaya berlatih setiap hari.'},
-  {jp:'準備',reading:'じゅんび',id:'Persiapan',level:'N4',cat:'noun',example:'準備ができました。\nPersiapan sudah selesai.'},
   {jp:'確認',reading:'かくにん',id:'Konfirmasi / Memastikan',level:'N4',cat:'noun',example:'もう一度確認してください。\nTolong pastikan sekali lagi.'},
   {jp:'注意',reading:'ちゅうい',id:'Perhatian / Hati-hati',level:'N4',cat:'noun',example:'注意してください。\nTolong hati-hati.'},
   {jp:'諦める',reading:'あきらめる',id:'Menyerah / Melepaskan',level:'N4',cat:'verb',example:'諦めないでください。\nJangan menyerah.'},
   {jp:'楽しむ',reading:'たのしむ',id:'Menikmati',level:'N4',cat:'verb',example:'旅行を楽しみましょう。\nMari nikmati perjalanan.'},
-  // 📚 KOSAKATA TAMBAHAN JLPT N5 (Batch Baru: Keluarga, Warna, Posisi, Waktu, dll) 📚
-  {jp:'家族',reading:'かぞく',id:'Keluarga',level:'N5',cat:'nouns',example:'私の家族です。\nIni keluarga saya.'},
-  {jp:'父',reading:'ちち',id:'Ayah (sendiri)',level:'N5',cat:'nouns',example:'父は会社員です。\nAyah saya adalah pegawai kantor.'},
-  {jp:'母',reading:'はは',id:'Ibu (sendiri)',level:'N5',cat:'nouns',example:'母は家にいます。\nIbu ada di rumah.'},
-  {jp:'兄',reading:'あに',id:'Kakak laki-laki',level:'N5',cat:'nouns',example:'兄は大学生です。\nKakak laki-laki saya mahasiswa.'},
-  {jp:'姉',reading:'あね',id:'Kakak perempuan',level:'N5',cat:'nouns',example:'姉は二十歳です。\nKakak perempuan saya umur 20 tahun.'},
-  {jp:'弟',reading:'おとうと',id:'Adik laki-laki',level:'N5',cat:'nouns',example:'弟がいます。\nSaya punya adik laki-laki.'},
-  {jp:'妹',reading:'いもうと',id:'Adik perempuan',level:'N5',cat:'nouns',example:'妹は可愛いです。\nAdik perempuan saya lucu.'},
   {jp:'赤',reading:'あか',id:'Merah',level:'N5',cat:'nouns',example:'赤いりんご\nApel merah'},
   {jp:'青',reading:'あお',id:'Biru',level:'N5',cat:'nouns',example:'青い空\nLangit biru'},
   {jp:'白',reading:'しろ',id:'Putih',level:'N5',cat:'nouns',example:'白い犬\nAnjing putih'},
-  {jp:'黒',reading:'くろ',id:'Hitam',level:'N5',cat:'nouns',example:'黒い猫\nKucing hitam'},
   {jp:'黄色',reading:'きいろ',id:'Kuning',level:'N5',cat:'nouns',example:'黄色のシャツ\nKemeja kuning'},
-  {jp:'茶色',reading:'ちゃいろ',id:'Cokelat',level:'N5',cat:'nouns',example:'茶色の靴\nSepatu cokelat'},
   {jp:'上',reading:'うえ',id:'Atas',level:'N5',cat:'nouns',example:'机の上\nDi atas meja'},
-  {jp:'下',reading:'した',id:'Bawah',level:'N5',cat:'nouns',example:'ベッドの下\nDi bawah kasur'},
-  {jp:'前',reading:'まえ',id:'Depan',level:'N5',cat:'nouns',example:'駅の前\nDi depan stasiun'},
-  {jp:'後ろ',reading:'うしろ',id:'Belakang',level:'N5',cat:'nouns',example:'家の後ろ\nDi belakang rumah'},
-  {jp:'右',reading:'みぎ',id:'Kanan',level:'N5',cat:'nouns',example:'右に曲がる\nBelok kanan'},
-  {jp:'左',reading:'ひだり',id:'Kiri',level:'N5',cat:'nouns',example:'左を見て\nLihat kiri'},
-  {jp:'中',reading:'なか',id:'Dalam',level:'N5',cat:'nouns',example:'鞄の中\nDi dalam tas'},
-  {jp:'外',reading:'そと',id:'Luar',level:'N5',cat:'nouns',example:'外は寒いです。\nDi luar dingin.'},
   {jp:'隣',reading:'となり',id:'Sebelah',level:'N5',cat:'nouns',example:'隣の人\nOrang sebelah'},
   {jp:'近く',reading:'ちかく',id:'Dekat',level:'N5',cat:'nouns',example:'近くのスーパー\nSupermarket dekat sini'},
   {jp:'空',reading:'そら',id:'Langit',level:'N5',cat:'nouns',example:'空が青いです。\nLangit biru.'},
-  {jp:'雨',reading:'あめ',id:'Hujan',level:'N5',cat:'nouns',example:'雨が降っています。\nSedang turun hujan.'},
-  {jp:'雪',reading:'ゆき',id:'Salju',level:'N5',cat:'nouns',example:'雪が白いです。\nSalju putih.'},
-  {jp:'風',reading:'かぜ',id:'Angin',level:'N5',cat:'nouns',example:'風が強いです。\nAnginnya kencang.'},
-  {jp:'花',reading:'はな',id:'Bunga',level:'N5',cat:'nouns',example:'花が綺麗です。\nBunganya indah.'},
-  {jp:'山',reading:'やま',id:'Gunung',level:'N5',cat:'nouns',example:'高い山\nGunung yang tinggi'},
-  {jp:'川',reading:'かわ',id:'Sungai',level:'N5',cat:'nouns',example:'川で泳ぐ\nBerenang di sungai'},
-  {jp:'海',reading:'うみ',id:'Laut',level:'N5',cat:'nouns',example:'海へ行く\nPergi ke laut'},
-  {jp:'電車',reading:'でんしゃ',id:'Kereta',level:'N5',cat:'nouns',example:'電車に乗る\nNaik kereta'},
-  {jp:'車',reading:'くるま',id:'Mobil',level:'N5',cat:'nouns',example:'車を買いました。\nSaya membeli mobil.'},
-  {jp:'自転車',reading:'じてんしゃ',id:'Sepeda',level:'N5',cat:'nouns',example:'自転車で学校へ行く\nKe sekolah naik sepeda'},
-  {jp:'飛行機',reading:'ひこうき',id:'Pesawat',level:'N5',cat:'nouns',example:'飛行機で旅行する\nJalan-jalan naik pesawat'},
   {jp:'船',reading:'ふね',id:'Kapal',level:'N5',cat:'nouns',example:'大きい船\nKapal besar'},
-  {jp:'駅',reading:'えき',id:'Stasiun',level:'N5',cat:'nouns',example:'駅で待つ\nMenunggu di stasiun'},
-  {jp:'家',reading:'いえ',id:'Rumah',level:'N5',cat:'nouns',example:'家に帰る\nPulang ke rumah'},
-  {jp:'学校',reading:'がっこう',id:'Sekolah',level:'N5',cat:'nouns',example:'学校へ行く\nPergi ke sekolah'},
-  {jp:'会社',reading:'かいしゃ',id:'Perusahaan',level:'N5',cat:'nouns',example:'会社で働く\nBekerja di perusahaan'},
-  {jp:'病院',reading:'びょういん',id:'Rumah Sakit',level:'N5',cat:'nouns',example:'病院へ行く\nPergi ke rumah sakit'},
-  {jp:'銀行',reading:'ぎんこう',id:'Bank',level:'N5',cat:'nouns',example:'銀行でお金を下ろす\nTarik uang di bank'},
-  {jp:'郵便局',reading:'ゆうびんきょく',id:'Kantor Pos',level:'N5',cat:'nouns',example:'郵便局はどこですか。\nKantor pos di mana?'},
-  {jp:'今',reading:'いま',id:'Sekarang',level:'N5',cat:'nouns',example:'今は何時ですか。\nSekarang jam berapa?'},
-  {jp:'今日',reading:'きょう',id:'Hari ini',level:'N5',cat:'nouns',example:'今日は暑いです。\nHari ini panas.'},
-  {jp:'明日',reading:'あした',id:'Besok',level:'N5',cat:'nouns',example:'明日は休みです。\nBesok libur.'},
-  {jp:'昨日',reading:'きのう',id:'Kemarin',level:'N5',cat:'nouns',example:'昨日は雨でした。\nKemarin hujan.'},
-  {jp:'朝',reading:'あさ',id:'Pagi',level:'N5',cat:'nouns',example:'朝ごはんを食べる\nMakan sarapan pagi'},
-  {jp:'昼',reading:'ひる',id:'Siang',level:'N5',cat:'nouns',example:'昼休み\nIstirahat siang'},
-  {jp:'夜',reading:'よる',id:'Malam',level:'N5',cat:'nouns',example:'夜に寝る\nTidur di malam hari'},
-  {jp:'起きる',reading:'おきる',id:'Bangun',level:'N5',cat:'verbs',example:'朝６時に起きる。\nBangun jam 6 pagi.'},
-  {jp:'寝る',reading:'ねる',id:'Tidur',level:'N5',cat:'verbs',example:'早く寝てください。\nTolong cepat tidur.'},
-  {jp:'働く',reading:'はたらく',id:'Bekerja',level:'N5',cat:'verbs',example:'会社で働く。\nBekerja di perusahaan.'},
-  {jp:'休む',reading:'やすむ',id:'Istirahat / Libur',level:'N5',cat:'verbs',example:'学校を休む。\nLibur/absen sekolah.'},
-  {jp:'終わる',reading:'おわる',id:'Selesai',level:'N5',cat:'verbs',example:'仕事が終わりました。\nPekerjaan sudah selesai.'},
-  {jp:'会う',reading:'あう',id:'Bertemu',level:'N5',cat:'verbs',example:'友達に会う。\nBertemu teman.'},
-  {jp:'切る',reading:'きる',id:'Memotong',level:'N5',cat:'verbs',example:'紙を切る。\nMemotong kertas.'},
-  {jp:'貸す',reading:'かす',id:'Meminjamkan',level:'N5',cat:'verbs',example:'本を貸す。\nMeminjamkan buku.'},
-  {jp:'借りる',reading:'かりる',id:'Meminjam',level:'N5',cat:'verbs',example:'ペンを借りる。\nMeminjam pena.'},
-  {jp:'教える',reading:'おしえる',id:'Mengajar / Memberitahu',level:'N5',cat:'verbs',example:'日本語を教える。\nMengajar bahasa Jepang.'},
-  {jp:'習う',reading:'ならう',id:'Belajar (dari guru)',level:'N5',cat:'verbs',example:'ピアノを習う。\nBelajar piano (les).'},
-  // 📚 KOSAKATA TAMBAHAN JLPT N5 (Batch 2: Benda, Makanan, Sifat, Tubuh) 📚
-  {jp:'鉛筆',reading:'えんぴつ',id:'Pensil',level:'N5',cat:'nouns',example:'鉛筆で書く。\nMenulis dengan pensil.'},
-  {jp:'辞書',reading:'じしょ',id:'Kamus',level:'N5',cat:'nouns',example:'辞書を引く。\nMencari di kamus.'},
   {jp:'鞄',reading:'かばん',id:'Tas',level:'N5',cat:'nouns',example:'新しい鞄\nTas baru'},
-  {jp:'靴',reading:'くつ',id:'Sepatu',level:'N5',cat:'nouns',example:'靴を履く。\nMemakai sepatu.'},
-  {jp:'時計',reading:'とけい',id:'Jam',level:'N5',cat:'nouns',example:'時計を見る。\nMelihat jam.'},
-  {jp:'傘',reading:'かさ',id:'Payung',level:'N5',cat:'nouns',example:'傘をさす。\nMemakai payung.'},
-  {jp:'帽子',reading:'ぼうし',id:'Topi',level:'N5',cat:'nouns',example:'帽子を被る。\nMemakai topi.'},
-  {jp:'眼鏡',reading:'めがね',id:'Kacamata',level:'N5',cat:'nouns',example:'眼鏡をかける。\nMemakai kacamata.'},
-  {jp:'水',reading:'みず',id:'Air',level:'N5',cat:'nouns',example:'水を飲む。\nMinum air.'},
-  {jp:'お茶',reading:'おちゃ',id:'Teh',level:'N5',cat:'nouns',example:'お茶をどうぞ。\nSilakan tehnya.'},
-  {jp:'ご飯',reading:'ごはん',id:'Nasi / Makanan',level:'N5',cat:'nouns',example:'ご飯を食べる。\nMakan nasi.'},
-  {jp:'肉',reading:'にく',id:'Daging',level:'N5',cat:'nouns',example:'肉が好きです。\nSuka daging.'},
-  {jp:'魚',reading:'さかな',id:'Ikan',level:'N5',cat:'nouns',example:'魚が美味しいです。\nIkannya enak.'},
   {jp:'パン',reading:'ぱん',id:'Roti',level:'N5',cat:'nouns',example:'パンを買う。\nMembeli roti.'},
-  {jp:'野菜',reading:'やさい',id:'Sayuran',level:'N5',cat:'nouns',example:'野菜を食べる。\nMakan sayuran.'},
-  {jp:'果物',reading:'くだもの',id:'Buah-buahan',level:'N5',cat:'nouns',example:'果物はおいしい。\nBuahnya enak.'},
   {jp:'頭',reading:'あたま',id:'Kepala',level:'N5',cat:'nouns',example:'頭が痛い。\nSakit kepala.'},
-  {jp:'目',reading:'め',id:'Mata',level:'N5',cat:'nouns',example:'目がきれい。\nMatanya indah.'},
-  {jp:'耳',reading:'みみ',id:'Telinga',level:'N5',cat:'nouns',example:'耳が痛い。\nSakit telinga.'},
-  {jp:'口',reading:'くち',id:'Mulut',level:'N5',cat:'nouns',example:'口を開ける。\nMembuka mulut.'},
-  {jp:'手',reading:'て',id:'Tangan',level:'N5',cat:'nouns',example:'手を洗う。\nMencuci tangan.'},
-  {jp:'足',reading:'あし',id:'Kaki',level:'N5',cat:'nouns',example:'足が長い。\nKakinya panjang.'},
-  {jp:'医者',reading:'いしゃ',id:'Dokter',level:'N5',cat:'nouns',example:'医者になる。\nMenjadi dokter.'},
-  {jp:'学生',reading:'がくせい',id:'Siswa / Mahasiswa',level:'N5',cat:'nouns',example:'私は学生です。\nSaya seorang pelajar.'},
-  {jp:'先生',reading:'せんせい',id:'Guru',level:'N5',cat:'nouns',example:'先生に聞く。\nBertanya pada guru.'},
   {jp:'男',reading:'おとこ',id:'Laki-laki',level:'N5',cat:'nouns',example:'男の人\nOrang laki-laki'},
-  {jp:'女',reading:'おんな',id:'Perempuan',level:'N5',cat:'nouns',example:'女の人\nOrang perempuan'},
-  {jp:'子供',reading:'こども',id:'Anak-anak',level:'N5',cat:'nouns',example:'子供が遊ぶ。\nAnak bermain.'},
-  {jp:'新しい',reading:'あたらしい',id:'Baru',level:'N5',cat:'adjectives',example:'新しい車\nMobil baru'},
-  {jp:'古い',reading:'ふるい',id:'Lama / Tua',level:'N5',cat:'adjectives',example:'古い本\nBuku lama'},
-  {jp:'高い',reading:'たかい',id:'Tinggi / Mahal',level:'N5',cat:'adjectives',example:'高い山\nGunung yang tinggi'},
-  {jp:'安い',reading:'やすい',id:'Murah',level:'N5',cat:'adjectives',example:'安い服\nBaju murah'},
-  {jp:'大きい',reading:'おおきい',id:'Besar',level:'N5',cat:'adjectives',example:'大きい声\nSuara besar'},
-  {jp:'小さい',reading:'ちいさい',id:'Kecil',level:'N5',cat:'adjectives',example:'小さい犬\nAnjing kecil'},
-  {jp:'暑い',reading:'あつい',id:'Panas (cuaca)',level:'N5',cat:'adjectives',example:'今日は暑い。\nHari ini panas.'},
-  {jp:'寒い',reading:'さむい',id:'Dingin (cuaca)',level:'N5',cat:'adjectives',example:'冬は寒い。\nMusim dingin itu dingin.'},
-  {jp:'冷たい',reading:'つめたい',id:'Dingin (benda)',level:'N5',cat:'adjectives',example:'冷たい水\nAir dingin'},
-  {jp:'難しい',reading:'むずかしい',id:'Sulit',level:'N5',cat:'adjectives',example:'テストが難しい。\nUjiannya sulit.'},
-  {jp:'易しい',reading:'やさしい',id:'Mudah',level:'N5',cat:'adjectives',example:'易しい問題\nSoal yang mudah'},
-  {jp:'美味しい',reading:'おいしい',id:'Enak',level:'N5',cat:'adjectives',example:'ケーキが美味しい。\nKuenya enak.'},
-  {jp:'忙しい',reading:'いそがしい',id:'Sibuk',level:'N5',cat:'adjectives',example:'毎日忙しい。\nSetiap hari sibuk.'},
-  {jp:'行く',reading:'いく',id:'Pergi',level:'N5',cat:'verbs',example:'日本へ行く。\nPergi ke Jepang.'},
-  {jp:'来る',reading:'くる',id:'Datang',level:'N5',cat:'verbs',example:'友達が来る。\nTeman datang.'},
-  {jp:'帰る',reading:'かえる',id:'Pulang',level:'N5',cat:'verbs',example:'家へ帰る。\nPulang ke rumah.'},
-  {jp:'食べる',reading:'たべる',id:'Makan',level:'N5',cat:'verbs',example:'ご飯を食べる。\nMakan nasi.'},
-  {jp:'飲む',reading:'のむ',id:'Minum',level:'N5',cat:'verbs',example:'水を飲む。\nMinum air.'},
-  {jp:'見る',reading:'みる',id:'Melihat',level:'N5',cat:'verbs',example:'映画を見る。\nMenonton film.'},
-  {jp:'聞く',reading:'きく',id:'Mendengar / Bertanya',level:'N5',cat:'verbs',example:'音楽を聞く。\nMendengarkan musik.'},
-  {jp:'読む',reading:'よむ',id:'Membaca',level:'N5',cat:'verbs',example:'本を読む。\nMembaca buku.'},
-  {jp:'書く',reading:'かく',id:'Menulis',level:'N5',cat:'verbs',example:'手紙を書く。\nMenulis surat.'},
-  {jp:'買う',reading:'かう',id:'Membeli',level:'N5',cat:'verbs',example:'靴を買う。\nMembeli sepatu.'},
-  {jp:'話す',reading:'はなす',id:'Berbicara',level:'N5',cat:'verbs',example:'日本語を話す。\nBerbicara bahasa Jepang.'}
+  {jp:'女',reading:'おんな',id:'Perempuan',level:'N5',cat:'nouns',example:'女の人\nOrang perempuan'}
 ];
 
 // ════════════════════════
@@ -6070,6 +5752,7 @@ function renderKamus() {
     // Sorting
     if (sort === 'jp-asc') result.sort((a,b) => a.reading.localeCompare(b.reading));
     if (sort === 'id-asc') result.sort((a,b) => a.id.localeCompare(b.id));
+    if (sort === 'hiragana') result.sort((a,b) => a.reading.localeCompare(b.reading, 'ja'));
     
     // Update stats
     document.getElementById('kamus-count-label').innerHTML = `Menampilkan <strong>${result.length}</strong> kata`;
@@ -6096,41 +5779,43 @@ function renderKamus() {
     }
 
     const fragment = document.createDocumentFragment();
-    
-    result.forEach((v, index) => {
-        const isFav = kamusFavorites.has(getWordId(v));
-        const colorClass = `cat-color-${v.cat}`;
-        
-        const card = document.createElement('div');
-        card.className = 'kamus-card';
-        card.innerHTML = `
-            <div class="kamus-card-header" onclick="openKamusModal(${vocab.indexOf(v)})">
-                <div>
-                    <div class="kamus-card-jp">${v.jp}</div>
-                    <div class="kamus-card-reading">${v.reading}</div>
+
+    if (sort === 'hiragana') {
+        // Group by あいうえお row
+        const groups = {};
+        result.forEach(v => {
+            const grp = getHiraGroup(v.reading);
+            if (!groups[grp.key]) groups[grp.key] = { label: grp, words: [] };
+            groups[grp.key].words.push(v);
+        });
+        // Sort groups by hiragana order
+        const ORDER = ['あ','い','う','え','お','か','き','く','け','こ','さ','し','す','せ','そ','た','ち','つ','て','と','な','に','ぬ','ね','の','は','ひ','ふ','へ','ほ','ま','み','む','め','も','や','ゆ','よ','ら','り','る','れ','ろ','わ','を','ん','その他'];
+        const sortedKeys = Object.keys(groups).sort((a,b) => {
+            const ai = ORDER.indexOf(a), bi = ORDER.indexOf(b);
+            return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+        });
+        sortedKeys.forEach(key => {
+            const grp = groups[key];
+            // Group header
+            const header = document.createElement('div');
+            header.className = 'kamus-hira-header';
+            header.innerHTML = `
+                <div class="kamus-hira-badge">${grp.label.first}</div>
+                <div class="kamus-hira-label">
+                    <div class="hira-row-jp">${grp.label.row}</div>
+                    <div class="hira-row-count">${grp.words.length} kata</div>
                 </div>
-                <div class="kamus-card-badges">
-                    <span class="kamus-lv-badge ${v.level.toLowerCase()}">${v.level}</span>
-                    <span class="kamus-cat-badge ${colorClass}">${getCatName(v.cat)}</span>
-                </div>
-            </div>
-            <div class="kamus-card-meaning" onclick="openKamusModal(${vocab.indexOf(v)})">${v.id}</div>
-            <div class="kamus-card-divider"></div>
-            <div class="kamus-card-example" onclick="openKamusModal(${vocab.indexOf(v)})">
-                <div class="ex-jp">${rubyWrap(v.example.split('\n')[0], '')}</div>
-                <div class="ex-id">${v.example.split('\n')[1] || ''}</div>
-            </div>
-            <div class="kamus-card-footer">
-                <div style="display:flex;gap:8px">
-                    <button class="speak-btn" onclick="speakText('${v.jp}'); event.stopPropagation();">🔊 Suara</button>
-                    <button class="speak-btn" style="background:#f0fdf4;border-color:#1a8a3a;color:#1a8a3a;" id="kamus-mic-${vocab.indexOf(v)}" onclick="kamusMicPractice(${vocab.indexOf(v)}, event)">🎤 Latih</button>
-                </div>
-                <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavFromCard('${getWordId(v)}', event)">${isFav ? '❤️' : '♡'}</button>
-            </div>
-            <div id="kamus-mic-status-${vocab.indexOf(v)}" style="display:none;padding:6px 18px 10px;font-size:0.8rem;border-top:1px dashed var(--border);"></div>
-        `;
-        fragment.appendChild(card);
-    });
+                <div class="kamus-hira-line"></div>`;
+            fragment.appendChild(header);
+            grp.words.forEach(v => {
+                fragment.appendChild(buildKamusCard(v));
+            });
+        });
+    } else {
+        result.forEach(v => {
+            fragment.appendChild(buildKamusCard(v));
+        });
+    }
 
     if (isTruncated) {
         const moreCard = document.createElement('div');
@@ -6142,8 +5827,100 @@ function renderKamus() {
         moreCard.innerHTML = "Menampilkan 150 kata pertama. Gunakan pencarian untuk mencari kata spesifik.";
         fragment.appendChild(moreCard);
     }
-    
+
     grid.appendChild(fragment);
+}
+
+function buildKamusCard(v) {
+    const isFav = kamusFavorites.has(getWordId(v));
+    const colorClass = `cat-color-${v.cat}`;
+    const idx = vocab.indexOf(v);
+    const card = document.createElement('div');
+    card.className = 'kamus-card';
+    card.innerHTML = `
+        <div class="kamus-card-header" onclick="openKamusModal(${idx})">
+            <div>
+                <div class="kamus-card-jp">${v.jp}</div>
+                <div class="kamus-card-reading">${v.reading}</div>
+            </div>
+            <div class="kamus-card-badges">
+                <span class="kamus-lv-badge ${v.level.toLowerCase()}">${v.level}</span>
+                <span class="kamus-cat-badge ${colorClass}">${getCatName(v.cat)}</span>
+            </div>
+        </div>
+        <div class="kamus-card-meaning" onclick="openKamusModal(${idx})">${v.id}</div>
+        <div class="kamus-card-divider"></div>
+        <div class="kamus-card-example" onclick="openKamusModal(${idx})">
+            <div class="ex-jp">${rubyWrap(v.example.split('\n')[0], '')}</div>
+            <div class="ex-id">${v.example.split('\n')[1] || ''}</div>
+        </div>
+        <div class="kamus-card-footer">
+            <div style="display:flex;gap:8px">
+                <button class="speak-btn" onclick="speakText('${v.jp}'); event.stopPropagation();">🔊 Suara</button>
+                <button class="speak-btn" style="background:#f0fdf4;border-color:#1a8a3a;color:#1a8a3a;" id="kamus-mic-${idx}" onclick="kamusMicPractice(${idx}, event)">🎤 Latih</button>
+            </div>
+            <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavFromCard('${getWordId(v)}', event)">${isFav ? '❤️' : '♡'}</button>
+        </div>
+        <div id="kamus-mic-status-${idx}" style="display:none;padding:6px 18px 10px;font-size:0.8rem;border-top:1px dashed var(--border);"></div>
+    `;
+    return card;
+}
+
+// Mapping huruf pertama reading ke grup あいうえお
+function getHiraGroup(reading) {
+    const first = reading ? reading[0] : '';
+    const ROWS = [
+        { chars: ['あ','ぁ'], key:'あ', row:'あ行', first:'あ' },
+        { chars: ['い','ぃ'], key:'い', row:'い行', first:'い' },
+        { chars: ['う','ぅ'], key:'う', row:'う行', first:'う' },
+        { chars: ['え','ぇ'], key:'え', row:'え行', first:'え' },
+        { chars: ['お','ぉ'], key:'お', row:'お行', first:'お' },
+        { chars: ['か','が','ヵ'], key:'か', row:'か行 (が含む)', first:'か' },
+        { chars: ['き','ぎ'], key:'き', row:'き行', first:'き' },
+        { chars: ['く','ぐ'], key:'く', row:'く行', first:'く' },
+        { chars: ['け','げ','ヶ'], key:'け', row:'け行', first:'け' },
+        { chars: ['こ','ご'], key:'こ', row:'こ行', first:'こ' },
+        { chars: ['さ','ざ'], key:'さ', row:'さ行', first:'さ' },
+        { chars: ['し','じ'], key:'し', row:'し行', first:'し' },
+        { chars: ['す','ず'], key:'す', row:'す行', first:'す' },
+        { chars: ['せ','ぜ'], key:'せ', row:'せ行', first:'せ' },
+        { chars: ['そ','ぞ'], key:'そ', row:'そ行', first:'そ' },
+        { chars: ['た','だ'], key:'た', row:'た行', first:'た' },
+        { chars: ['ち','ぢ'], key:'ち', row:'ち行', first:'ち' },
+        { chars: ['つ','づ','っ'], key:'つ', row:'つ行', first:'つ' },
+        { chars: ['て','で'], key:'て', row:'て行', first:'て' },
+        { chars: ['と','ど'], key:'と', row:'と行', first:'と' },
+        { chars: ['な'], key:'な', row:'な行', first:'な' },
+        { chars: ['に'], key:'に', row:'に行', first:'に' },
+        { chars: ['ぬ'], key:'ぬ', row:'ぬ行', first:'ぬ' },
+        { chars: ['ね'], key:'ね', row:'ね行', first:'ね' },
+        { chars: ['の'], key:'の', row:'の行', first:'の' },
+        { chars: ['は','ば','ぱ'], key:'は', row:'は行 (ば・ぱ含む)', first:'は' },
+        { chars: ['ひ','び','ぴ'], key:'ひ', row:'ひ行', first:'ひ' },
+        { chars: ['ふ','ぶ','ぷ'], key:'ふ', row:'ふ行', first:'ふ' },
+        { chars: ['へ','べ','ぺ'], key:'へ', row:'へ行', first:'へ' },
+        { chars: ['ほ','ぼ','ぽ'], key:'ほ', row:'ほ行', first:'ほ' },
+        { chars: ['ま'], key:'ま', row:'ま行', first:'ま' },
+        { chars: ['み'], key:'み', row:'み行', first:'み' },
+        { chars: ['む'], key:'む', row:'む行', first:'む' },
+        { chars: ['め'], key:'め', row:'め行', first:'め' },
+        { chars: ['も'], key:'も', row:'も行', first:'も' },
+        { chars: ['や','ゃ'], key:'や', row:'や行', first:'や' },
+        { chars: ['ゆ','ゅ'], key:'ゆ', row:'ゆ行', first:'ゆ' },
+        { chars: ['よ','ょ'], key:'よ', row:'よ行', first:'よ' },
+        { chars: ['ら'], key:'ら', row:'ら行', first:'ら' },
+        { chars: ['り'], key:'り', row:'り行', first:'り' },
+        { chars: ['る'], key:'る', row:'る行', first:'る' },
+        { chars: ['れ'], key:'れ', row:'れ行', first:'れ' },
+        { chars: ['ろ'], key:'ろ', row:'ろ行', first:'ろ' },
+        { chars: ['わ','ゎ'], key:'わ', row:'わ行', first:'わ' },
+        { chars: ['を'], key:'を', row:'を行', first:'を' },
+        { chars: ['ん'], key:'ん', row:'ん行', first:'ん' },
+    ];
+    for(const row of ROWS) {
+        if(row.chars.includes(first)) return row;
+    }
+    return { key:'その他', row:'その他', first: first || '？' };
 }
 
 function kamusMicPractice(index, event) {
