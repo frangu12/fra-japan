@@ -192,8 +192,11 @@
   .hf-rad-char{font-family:'Noto Sans JP','Yu Gothic','Meiryo','Hiragino Sans','MS Gothic',sans-serif;font-size:4.5rem;font-weight:900;color:#fff;line-height:1;text-shadow:0 2px 20px rgba(168,85,247,0.4);}
   .hf-rad-badge{background:rgba(168,85,247,0.2);border:1px solid rgba(168,85,247,0.4);color:var(--purple2);border-radius:8px;padding:3px 12px;font-size:0.72rem;font-weight:800;letter-spacing:1px;}
   .hf-rad-reading-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
-  .hf-rad-on{font-family:'Noto Sans JP',sans-serif;font-size:0.85rem;color:#5eead4;font-weight:700;background:rgba(94,234,212,0.1);border:1px solid rgba(94,234,212,0.25);border-radius:8px;padding:3px 10px;}
-  .hf-rad-kun{font-family:'Noto Sans JP',sans-serif;font-size:0.85rem;color:#fb923c;font-weight:700;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);border-radius:8px;padding:3px 10px;}
+  .hf-rad-reading-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+  .hf-rad-on{font-family:'Noto Sans JP','Yu Gothic','Meiryo',sans-serif;font-size:0.85rem;color:#5eead4;font-weight:700;background:rgba(94,234,212,0.08);border:1px solid rgba(94,234,212,0.25);border-radius:8px;padding:4px 10px;display:inline-flex;align-items:center;gap:6px;}
+  .hf-rad-kun{font-family:'Noto Sans JP','Yu Gothic','Meiryo',sans-serif;font-size:0.85rem;color:#fb923c;font-weight:700;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.25);border-radius:8px;padding:4px 10px;display:inline-flex;align-items:center;gap:6px;}
+  .hf-read-speak{background:none;border:none;cursor:pointer;font-size:0.75rem;padding:0;opacity:0.6;transition:opacity .15s;line-height:1;}
+  .hf-read-speak:hover{opacity:1;}
   .hf-rad-meaning{font-size:1.15rem;font-weight:800;color:var(--gold);margin-bottom:16px;}
   .hf-rad-formula-label,.hf-rad-section-label{font-size:0.68rem;color:#6b7280;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:8px;margin-top:14px;}
   .hf-rad-formula{display:flex;align-items:center;justify-content:center;gap:14px;background:rgba(0,0,0,0.2);border-radius:14px;padding:14px 10px;margin-bottom:4px;flex-wrap:wrap;}
@@ -205,12 +208,18 @@
   .hf-rad-comp-lbl{font-size:0.68rem;color:#9ca3af;margin-top:4px;}
   .hf-rad-op{font-size:1.4rem;color:#6b7280;font-weight:900;}
   .hf-rad-examples{display:flex;flex-direction:column;gap:6px;}
-  .hf-rad-ex-item{display:flex;align-items:baseline;gap:8px;background:rgba(255,255,255,0.04);border-radius:9px;padding:8px 12px;}
+  .hf-rad-ex-item{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border-radius:9px;padding:8px 12px;}
   .hf-rad-ex-jp{font-family:'Noto Sans JP',sans-serif;font-size:0.95rem;color:#e2e8f0;font-weight:600;}
   .hf-rad-ex-read{font-size:0.72rem;color:#5eead4;font-family:'Noto Sans JP',sans-serif;}
   .hf-rad-ex-roma{font-size:0.72rem;color:#6b7280;}
   .hf-rad-ex-id{font-size:0.75rem;color:var(--gold);margin-left:auto;}
   .hf-rad-mnemonic{background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);border-radius:12px;padding:12px 14px;font-size:0.82rem;color:#fde68a;line-height:1.7;font-style:italic;}
+  .hf-rad-sentence-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;}
+  .hf-rad-sentence-box .hf-sent-speak{padding:5px 10px;border-radius:7px;border:1.5px solid rgba(168,85,247,0.4);background:rgba(168,85,247,0.08);color:var(--purple2);font-size:0.72rem;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:'DM Sans',sans-serif;font-weight:700;}
+  .hf-rad-sentence-box .hf-sent-speak:hover{background:rgba(168,85,247,0.2);}
+  .hf-sent-texts{display:flex;flex-direction:column;gap:4px;}
+  .hf-sent-jp{font-family:'Noto Sans JP','Yu Gothic','Meiryo',sans-serif;font-size:0.95rem;color:#e2e8f0;line-height:1.7;font-weight:500;}
+  .hf-sent-id{font-size:0.78rem;color:#fbbf24;font-style:italic;}
   .hf-rad-stroke-row{display:flex;align-items:center;gap:8px;margin-top:14px;}
   .hf-rad-stroke-label{font-size:0.72rem;color:#6b7280;}
   .hf-rad-stroke-val{background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:8px;padding:2px 12px;color:var(--purple2);font-weight:800;font-size:0.85rem;}
@@ -726,9 +735,11 @@
   .km-level-badge{text-align:center;margin-bottom:16px;}
   .km-section{margin-bottom:14px;}
   .km-section h4{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;font-weight:700;}
-  .km-reading{font-family:'Noto Sans JP',sans-serif;font-size:1rem;color:#ffffff;background:#1a1a2e;border-radius:8px;padding:6px 12px;display:inline-block;margin-right:6px;margin-bottom:4px;}
+  .km-reading{font-family:'Noto Sans JP','Yu Gothic','Meiryo',sans-serif;font-size:1rem;background:#1a1a2e;border-radius:10px;padding:5px 10px;display:inline-flex;align-items:center;gap:7px;margin-right:6px;margin-bottom:6px;}
   .km-reading-on{color:#5eead4;border:1px solid rgba(94,234,212,0.35);background:rgba(94,234,212,0.08);}
   .km-reading-kun{color:#fb923c;border:1px solid rgba(251,146,60,0.35);background:rgba(251,146,60,0.08);}
+  .km-read-speak{background:none;border:none;cursor:pointer;font-size:0.8rem;padding:0;line-height:1;opacity:0.6;transition:opacity .15s;}
+  .km-read-speak:hover{opacity:1;}
   .km-meaning-list{font-size:0.9rem;color:#ffffff;font-weight:600;}
   .km-examples{list-style:none;}
   .km-examples li{font-family:'Noto Sans JP',sans-serif;font-size:0.88rem;color:#ffffff;padding:6px 0;border-bottom:1px solid var(--border);line-height:1.6;}
@@ -1457,8 +1468,8 @@
           <div class="hf-rad-badge" id="hf-rad-badge">N5</div>
         </div>
         <div class="hf-rad-reading-row">
-          <div class="hf-rad-on" id="hf-rad-on"></div>
-          <div class="hf-rad-kun" id="hf-rad-kun"></div>
+        <div class="hf-rad-reading-row" id="hf-rad-on"></div>
+        <div class="hf-rad-reading-row" id="hf-rad-kun"></div>
         </div>
         <div class="hf-rad-meaning" id="hf-rad-meaning">Matahari, Hari</div>
 
@@ -1474,11 +1485,19 @@
         <div class="hf-rad-section-label">🌉 Jembatan Ingatan</div>
         <div class="hf-rad-mnemonic" id="hf-rad-mnemonic"></div>
 
+        <!-- Contoh kalimat -->
+        <div class="hf-rad-section-label">💬 Contoh Kalimat</div>
+        <div id="hf-rad-sentence"></div>
+
         <!-- Coretan -->
         <div class="hf-rad-stroke-row">
           <span class="hf-rad-stroke-label">✏️ Jumlah coretan:</span>
           <span class="hf-rad-stroke-val" id="hf-rad-strokes">4</span>
-          <button onclick="hfSpeak()" style="margin-left:auto;padding:6px 14px;border-radius:9px;border:1.5px solid rgba(0,212,170,0.4);background:rgba(0,212,170,0.08);color:var(--teal);font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 Dengar</button>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
+          <button onclick="hfSpeak('on')" style="display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9px;border:1.5px solid rgba(94,234,212,0.4);background:rgba(94,234,212,0.08);color:#5eead4;font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 On'yomi</button>
+          <button onclick="hfSpeak('kun')" style="display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9px;border:1.5px solid rgba(251,146,60,0.4);background:rgba(251,146,60,0.08);color:#fb923c;font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 Kun'yomi</button>
+          <button onclick="hfSpeak('example')" style="display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9px;border:1.5px solid rgba(168,85,247,0.4);background:rgba(168,85,247,0.08);color:var(--purple2);font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 Contoh</button>
         </div>
       </div>
 
@@ -1638,11 +1657,6 @@
     <div class="km-char" id="km-char">日</div>
     <div class="km-level-badge" id="km-level-badge"></div>
     <div class="km-stroke" id="km-stroke"></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px;">
-      <button onclick="kmSpeak('on')" style="display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9px;border:1.5px solid rgba(94,234,212,0.4);background:rgba(94,234,212,0.08);color:#5eead4;font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 On'yomi</button>
-      <button onclick="kmSpeak('kun')" style="display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9px;border:1.5px solid rgba(251,146,60,0.4);background:rgba(251,146,60,0.08);color:#fb923c;font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 Kun'yomi</button>
-      <button onclick="kmSpeak('example')" style="display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9px;border:1.5px solid rgba(168,85,247,0.4);background:rgba(168,85,247,0.08);color:var(--purple2);font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 Contoh</button>
-    </div>
     <div class="km-section"><h4 style="color:#5eead4;">音読み (On'yomi) <span style="font-size:0.65rem;color:#6b7280;font-weight:500;">— Katakana</span></h4><div id="km-on"></div></div>
     <div class="km-section"><h4 style="color:#fb923c;">訓読み (Kun'yomi) <span style="font-size:0.65rem;color:#6b7280;font-weight:500;">— Hiragana</span></h4><div id="km-kun"></div></div>
     <div class="km-section"><h4>Arti</h4><div class="km-meaning-list" id="km-meaning"></div></div>
@@ -2219,146 +2233,174 @@
 // KANJI DATABASE — N5 (80) + N4 (88) = 168 total
 // ═══════════════════════════════════════════════
 const kanjiDB = [
-  {char:'一',level:'N5',strokes:1,on:['イチ','イツ'],kun:['ひと','ひとつ'],meaning:'Satu',examples:[{word:'一つ',read:'ひとつ',meaning:'Satu buah'},{word:'一人',read:'ひとり',meaning:'Satu orang'},{word:'一日',read:'ついたち',meaning:'Tanggal satu'}]},
-  {char:'二',level:'N5',strokes:2,on:['ニ','ジ'],kun:['ふた','ふたつ'],meaning:'Dua',examples:[{word:'二つ',read:'ふたつ',meaning:'Dua buah'},{word:'二人',read:'ふたり',meaning:'Dua orang'},{word:'二日',read:'ふつか',meaning:'Tanggal dua / Dua hari'}]},
-  {char:'三',level:'N5',strokes:3,on:['サン'],kun:['み','みっつ'],meaning:'Tiga',examples:[{word:'三つ',read:'みっつ',meaning:'Tiga buah'},{word:'三人',read:'さんにん',meaning:'Tiga orang'},{word:'三日',read:'みっか',meaning:'Tanggal tiga / Tiga hari'}]},
-  {char:'四',level:'N5',strokes:5,on:['シ'],kun:['よ','よん','よっつ'],meaning:'Empat',examples:[{word:'四つ',read:'よっつ',meaning:'Empat buah'},{word:'四人',read:'よにん',meaning:'Empat orang'},{word:'四日',read:'よっか',meaning:'Tanggal empat'}]},
-  {char:'五',level:'N5',strokes:4,on:['ゴ'],kun:['いつ','いつつ'],meaning:'Lima',examples:[{word:'五つ',read:'いつつ',meaning:'Lima buah'},{word:'五人',read:'ごにん',meaning:'Lima orang'},{word:'五日',read:'いつか',meaning:'Tanggal lima'}]},
-  {char:'上',level:'N5',strokes:3,on:['ジョウ'],kun:['うえ','あがる'],meaning:'Atas',examples:[{word:'上',read:'うえ',meaning:'Atas'},{word:'上がる',read:'あがる',meaning:'Naik'},{word:'上手',read:'じょうず',meaning:'Pintar / Mahir'}]},
-  {char:'下',level:'N5',strokes:3,on:['カ','ゲ'],kun:['した','さがる'],meaning:'Bawah',examples:[{word:'下',read:'した',meaning:'Bawah'},{word:'下がる',read:'さがる',meaning:'Turun'},{word:'下手',read:'へた',meaning:'Kurang mahir'}]},
-  {char:'大',level:'N5',strokes:3,on:['ダイ','タイ'],kun:['おお','おおきい'],meaning:'Besar',examples:[{word:'大きい',read:'おおきい',meaning:'Besar'},{word:'大学',read:'だいがく',meaning:'Universitas'},{word:'大人',read:'おとな',meaning:'Orang dewasa'}]},
-  {char:'小',level:'N5',strokes:3,on:['ショウ'],kun:['ちい','ちいさい','こ'],meaning:'Kecil',examples:[{word:'小さい',read:'ちいさい',meaning:'Kecil'},{word:'小学校',read:'しょうがっこう',meaning:'Sekolah Dasar'},{word:'小川',read:'おがわ',meaning:'Sungai kecil'}]},
-  {char:'中',level:'N5',strokes:4,on:['チュウ'],kun:['なか'],meaning:'Tengah, Dalam',examples:[{word:'中',read:'なか',meaning:'Tengah / Dalam'},{word:'中学校',read:'ちゅうがっこう',meaning:'SMP'},{word:'一日中',read:'いちにちじゅう',meaning:'Sepanjang hari'}]},
-  {char:'男',level:'N5',strokes:7,on:['ダン','ナン'],kun:['おとこ'],meaning:'Laki-laki',examples:[{word:'男の人',read:'おとこのひと',meaning:'Orang laki-laki'},{word:'男子',read:'だんし',meaning:'Anak laki-laki'},{word:'長男',read:'ちょうなん',meaning:'Anak sulung laki-laki'}]},
-  {char:'女',level:'N5',strokes:3,on:['ジョ','ニョ'],kun:['おんな','め'],meaning:'Perempuan',examples:[{word:'女の人',read:'おんなのひと',meaning:'Orang perempuan'},{word:'女子',read:'じょし',meaning:'Anak perempuan'},{word:'彼女',read:'かのじょ',meaning:'Dia (pr) / Pacar'}]},
-  {char:'子',level:'N5',strokes:3,on:['シ','ス'],kun:['こ'],meaning:'Anak',examples:[{word:'子供',read:'こども',meaning:'Anak-anak'},{word:'男の子',read:'おとこのこ',meaning:'Anak laki-laki'},{word:'女の子',read:'おんなのこ',meaning:'Anak perempuan'}]},
-  {char:'日',level:'N5',strokes:4,on:['ニチ','ジツ'],kun:['ひ','か'],meaning:'Hari, Matahari',examples:[{word:'日本',read:'にほん',meaning:'Jepang'},{word:'今日',read:'きょう',meaning:'Hari ini'},{word:'日曜日',read:'にちようび',meaning:'Minggu'}]},
-  {char:'月',level:'N5',strokes:4,on:['ゲツ','ガツ'],kun:['つき'],meaning:'Bulan, Rembulan',examples:[{word:'月曜日',read:'げつようび',meaning:'Senin'},{word:'来月',read:'らいげつ',meaning:'Bulan depan'},{word:'月見',read:'つきみ',meaning:'Melihat bulan'}]},
-  {char:'火',level:'N5',strokes:4,on:['カ'],kun:['ひ'],meaning:'Api',examples:[{word:'火曜日',read:'かようび',meaning:'Selasa'},{word:'火山',read:'かざん',meaning:'Gunung berapi'},{word:'花火',read:'はなび',meaning:'Kembang api'}]},
-  {char:'水',level:'N5',strokes:4,on:['スイ'],kun:['みず'],meaning:'Air',examples:[{word:'水曜日',read:'すいようび',meaning:'Rabu'},{word:'水道',read:'すいどう',meaning:'Saluran air'},{word:'飲み水',read:'のみみず',meaning:'Air minum'}]},
-  {char:'木',level:'N5',strokes:4,on:['モク','ボク'],kun:['き'],meaning:'Pohon, Kayu',examples:[{word:'木曜日',read:'もくようび',meaning:'Kamis'},{word:'木材',read:'もくざい',meaning:'Kayu bahan'},{word:'木々',read:'きぎ',meaning:'Pohon-pohon'}]},
-  {char:'金',level:'N5',strokes:8,on:['キン','コン'],kun:['かね','かな'],meaning:'Emas, Uang',examples:[{word:'金曜日',read:'きんようび',meaning:'Jumat'},{word:'お金',read:'おかね',meaning:'Uang'},{word:'金色',read:'きんいろ',meaning:'Warna emas'}]},
-  {char:'土',level:'N5',strokes:3,on:['ド','ト'],kun:['つち'],meaning:'Tanah',examples:[{word:'土曜日',read:'どようび',meaning:'Sabtu'},{word:'土地',read:'とち',meaning:'Tanah/lahan'},{word:'土台',read:'どだい',meaning:'Pondasi'}]},
-  {char:'山',level:'N5',strokes:3,on:['サン'],kun:['やま'],meaning:'Gunung',examples:[{word:'山登り',read:'やまのぼり',meaning:'Mendaki gunung'},{word:'富士山',read:'ふじさん',meaning:'Gunung Fuji'},{word:'山川',read:'やまかわ',meaning:'Gunung dan sungai'}]},
-  {char:'川',level:'N5',strokes:3,on:['セン'],kun:['かわ'],meaning:'Sungai',examples:[{word:'川辺',read:'かわべ',meaning:'Tepi sungai'},{word:'小川',read:'おがわ',meaning:'Sungai kecil'},{word:'川下',read:'かわしも',meaning:'Hilir sungai'}]},
-  {char:'田',level:'N5',strokes:5,on:['デン'],kun:['た'],meaning:'Sawah, Ladang',examples:[{word:'田んぼ',read:'たんぼ',meaning:'Sawah'},{word:'田舎',read:'いなか',meaning:'Pedesaan'},{word:'水田',read:'すいでん',meaning:'Sawah basah'}]},
-  {char:'人',level:'N5',strokes:2,on:['ジン','ニン'],kun:['ひと'],meaning:'Orang, Manusia',examples:[{word:'人間',read:'にんげん',meaning:'Manusia'},{word:'外国人',read:'がいこくじん',meaning:'Orang asing'},{word:'一人',read:'ひとり',meaning:'Sendiri/satu orang'}]},
-  {char:'口',level:'N5',strokes:3,on:['コウ','ク'],kun:['くち'],meaning:'Mulut',examples:[{word:'入口',read:'いりぐち',meaning:'Pintu masuk'},{word:'出口',read:'でぐち',meaning:'Pintu keluar'},{word:'口調',read:'くちょう',meaning:'Nada bicara'}]},
-  {char:'手',level:'N5',strokes:4,on:['シュ'],kun:['て'],meaning:'Tangan',examples:[{word:'手紙',read:'てがみ',meaning:'Surat'},{word:'握手',read:'あくしゅ',meaning:'Jabat tangan'},{word:'手伝い',read:'てつだい',meaning:'Bantuan'}]},
-  {char:'足',level:'N5',strokes:7,on:['ソク'],kun:['あし','た'],meaning:'Kaki, Cukup',examples:[{word:'足音',read:'あしおと',meaning:'Suara langkah kaki'},{word:'満足',read:'まんぞく',meaning:'Kepuasan'},{word:'足りる',read:'たりる',meaning:'Cukup'}]},
-  {char:'目',level:'N5',strokes:5,on:['モク','ボク'],kun:['め'],meaning:'Mata',examples:[{word:'目標',read:'もくひょう',meaning:'Target/tujuan'},{word:'注目',read:'ちゅうもく',meaning:'Perhatian'},{word:'目玉',read:'めだま',meaning:'Bola mata'}]},
-  {char:'耳',level:'N5',strokes:6,on:['ジ'],kun:['みみ'],meaning:'Telinga',examples:[{word:'耳鳴り',read:'みみなり',meaning:'Telinga berdenging'},{word:'耳元',read:'みみもと',meaning:'Dekat telinga'},{word:'中耳炎',read:'ちゅうじえん',meaning:'Radang telinga tengah'}]},
-  {char:'力',level:'N5',strokes:2,on:['リョク','リキ'],kun:['ちから'],meaning:'Kekuatan, Tenaga',examples:[{word:'力強い',read:'ちからづよい',meaning:'Kuat'},{word:'努力',read:'どりょく',meaning:'Usaha/kerja keras'},{word:'電力',read:'でんりょく',meaning:'Tenaga listrik'}]},
-  {char:'気',level:'N5',strokes:6,on:['キ','ケ'],kun:[''],meaning:'Udara, Semangat, Perasaan',examples:[{word:'天気',read:'てんき',meaning:'Cuaca'},{word:'気持ち',read:'きもち',meaning:'Perasaan'},{word:'元気',read:'げんき',meaning:'Sehat/bersemangat'}]},
-  {char:'大',level:'N5',strokes:3,on:['ダイ','タイ'],kun:['おお'],meaning:'Besar',examples:[{word:'大学',read:'だいがく',meaning:'Universitas'},{word:'大切',read:'たいせつ',meaning:'Penting/berharga'},{word:'大きい',read:'おおきい',meaning:'Besar'}]},
-  {char:'小',level:'N5',strokes:3,on:['ショウ'],kun:['ちい','こ','お'],meaning:'Kecil',examples:[{word:'小学校',read:'しょうがっこう',meaning:'Sekolah dasar'},{word:'小説',read:'しょうせつ',meaning:'Novel'},{word:'小さい',read:'ちいさい',meaning:'Kecil'}]},
-  {char:'中',level:'N5',strokes:4,on:['チュウ'],kun:['なか'],meaning:'Tengah, Dalam',examples:[{word:'中学校',read:'ちゅうがっこう',meaning:'SMP'},{word:'中心',read:'ちゅうしん',meaning:'Pusat'},{word:'中国',read:'ちゅうごく',meaning:'China'}]},
-  {char:'上',level:'N5',strokes:3,on:['ジョウ','ショウ'],kun:['うえ','うわ','かみ','あ','のぼ'],meaning:'Atas',examples:[{word:'上手',read:'じょうず',meaning:'Pandai/terampil'},{word:'以上',read:'いじょう',meaning:'Lebih dari/di atas'},{word:'上がる',read:'あがる',meaning:'Naik'}]},
-  {char:'下',level:'N5',strokes:3,on:['カ','ゲ'],kun:['した','しも','もと','さ','くだ','お'],meaning:'Bawah',examples:[{word:'地下',read:'ちか',meaning:'Bawah tanah'},{word:'下手',read:'へた',meaning:'Tidak pandai'},{word:'下がる',read:'さがる',meaning:'Turun'}]},
-  {char:'左',level:'N5',strokes:5,on:['サ'],kun:['ひだり'],meaning:'Kiri',examples:[{word:'左折',read:'させつ',meaning:'Belok kiri'},{word:'左右',read:'さゆう',meaning:'Kiri kanan'},{word:'左手',read:'ひだりて',meaning:'Tangan kiri'}]},
-  {char:'右',level:'N5',strokes:5,on:['ウ','ユウ'],kun:['みぎ'],meaning:'Kanan',examples:[{word:'右折',read:'うせつ',meaning:'Belok kanan'},{word:'右側',read:'みぎがわ',meaning:'Sisi kanan'},{word:'右手',read:'みぎて',meaning:'Tangan kanan'}]},
-  {char:'本',level:'N5',strokes:5,on:['ホン'],kun:['もと'],meaning:'Buku, Asal',examples:[{word:'日本',read:'にほん',meaning:'Jepang'},{word:'本当',read:'ほんとう',meaning:'Benar-benar'},{word:'基本',read:'きほん',meaning:'Dasar'}]},
-  {char:'文',level:'N5',strokes:4,on:['ブン','モン'],kun:['ふみ'],meaning:'Tulisan, Kalimat',examples:[{word:'文章',read:'ぶんしょう',meaning:'Tulisan/paragraf'},{word:'文化',read:'ぶんか',meaning:'Budaya'},{word:'文字',read:'もじ',meaning:'Huruf'}]},
+  {char:'一',level:'N5',strokes:1,on:['イチ','イツ'],kun:['ひと','ひとつ'],meaning:'Satu',examples:[{word:'一つ',read:'ひとつ',meaning:'Satu buah'},{word:'一人',read:'ひとり',meaning:'Satu orang'},{word:'一日',read:'ついたち',meaning:'Tanggal satu'}],sentence:{jp:'一つのりんごを食べました。',id:'Saya makan satu apel.'}},
+  {char:'二',level:'N5',strokes:2,on:['ニ','ジ'],kun:['ふた','ふたつ'],meaning:'Dua',examples:[{word:'二つ',read:'ふたつ',meaning:'Dua buah'},{word:'二人',read:'ふたり',meaning:'Dua orang'},{word:'二日',read:'ふつか',meaning:'Tanggal dua / Dua hari'}],sentence:{jp:'二人で映画を見ました。',id:'Kami berdua menonton film.'}},
+  {char:'三',level:'N5',strokes:3,on:['サン'],kun:['み','みっつ'],meaning:'Tiga',examples:[{word:'三つ',read:'みっつ',meaning:'Tiga buah'},{word:'三人',read:'さんにん',meaning:'Tiga orang'},{word:'三日',read:'みっか',meaning:'Tanggal tiga / Tiga hari'}],sentence:{jp:'三日後に会いましょう。',id:'Mari bertemu tiga hari lagi.'}},
+  {char:'四',level:'N5',strokes:5,on:['シ'],kun:['よ','よん','よっつ'],meaning:'Empat',examples:[{word:'四つ',read:'よっつ',meaning:'Empat buah'},{word:'四人',read:'よにん',meaning:'Empat orang'},{word:'四日',read:'よっか',meaning:'Tanggal empat'}],sentence:{jp:'四時に起きました。',id:'Saya bangun jam empat.'}},
+  {char:'五',level:'N5',strokes:4,on:['ゴ'],kun:['いつ','いつつ'],meaning:'Lima',examples:[{word:'五つ',read:'いつつ',meaning:'Lima buah'},{word:'五人',read:'ごにん',meaning:'Lima orang'},{word:'五日',read:'いつか',meaning:'Tanggal lima'}],sentence:{jp:'五分待ってください。',id:'Tolong tunggu lima menit.'}},
+  {char:'上',level:'N5',strokes:3,on:['ジョウ'],kun:['うえ','あがる'],meaning:'Atas',examples:[{word:'上',read:'うえ',meaning:'Atas'},{word:'上がる',read:'あがる',meaning:'Naik'},{word:'上手',read:'じょうず',meaning:'Pintar / Mahir'}],sentence:{jp:'テーブルの上に本があります。',id:'Ada buku di atas meja.'}},
+  {char:'下',level:'N5',strokes:3,on:['カ','ゲ'],kun:['した','さがる'],meaning:'Bawah',examples:[{word:'下',read:'した',meaning:'Bawah'},{word:'下がる',read:'さがる',meaning:'Turun'},{word:'下手',read:'へた',meaning:'Kurang mahir'}],sentence:{jp:'椅子の下に猫がいます。',id:'Ada kucing di bawah kursi.'}},
+  {char:'大',level:'N5',strokes:3,on:['ダイ','タイ'],kun:['おお','おおきい'],meaning:'Besar',examples:[{word:'大きい',read:'おおきい',meaning:'Besar'},{word:'大学',read:'だいがく',meaning:'Universitas'},{word:'大人',read:'おとな',meaning:'Orang dewasa'}],sentence:{jp:'この荷物は大きすぎます。',id:'Barang bawaan ini terlalu besar.'}},
+  {char:'小',level:'N5',strokes:3,on:['ショウ'],kun:['ちい','ちいさい','こ'],meaning:'Kecil',examples:[{word:'小さい',read:'ちいさい',meaning:'Kecil'},{word:'小学校',read:'しょうがっこう',meaning:'Sekolah Dasar'},{word:'小川',read:'おがわ',meaning:'Sungai kecil'}],sentence:{jp:'小さい猫がいます。',id:'Ada kucing kecil.'}},
+  {char:'中',level:'N5',strokes:4,on:['チュウ'],kun:['なか'],meaning:'Tengah, Dalam',examples:[{word:'中',read:'なか',meaning:'Tengah / Dalam'},{word:'中学校',read:'ちゅうがっこう',meaning:'SMP'},{word:'一日中',read:'いちにちじゅう',meaning:'Sepanjang hari'}],sentence:{jp:'かばんの中に何がありますか。',id:'Apa yang ada di dalam tas?'}},
+  {char:'男',level:'N5',strokes:7,on:['ダン','ナン'],kun:['おとこ'],meaning:'Laki-laki',examples:[{word:'男の人',read:'おとこのひと',meaning:'Orang laki-laki'},{word:'男子',read:'だんし',meaning:'Anak laki-laki'},{word:'長男',read:'ちょうなん',meaning:'Anak sulung laki-laki'}],sentence:{jp:'あの男の人は先生です。',id:'Pria itu adalah guru.'}},
+  {char:'女',level:'N5',strokes:3,on:['ジョ','ニョ'],kun:['おんな','め'],meaning:'Perempuan',examples:[{word:'女の人',read:'おんなのひと',meaning:'Orang perempuan'},{word:'女子',read:'じょし',meaning:'Anak perempuan'},{word:'彼女',read:'かのじょ',meaning:'Dia (pr) / Pacar'}],sentence:{jp:'女の子が歌っています。',id:'Anak perempuan itu sedang bernyanyi.'}},
+  {char:'子',level:'N5',strokes:3,on:['シ','ス'],kun:['こ'],meaning:'Anak',examples:[{word:'子供',read:'こども',meaning:'Anak-anak'},{word:'男の子',read:'おとこのこ',meaning:'Anak laki-laki'},{word:'女の子',read:'おんなのこ',meaning:'Anak perempuan'}],sentence:{jp:'子供たちが遊んでいます。',id:'Anak-anak sedang bermain.'}},
+  {char:'日',level:'N5',strokes:4,on:['ニチ','ジツ'],kun:['ひ','か'],meaning:'Hari, Matahari',examples:[{word:'日本',read:'にほん',meaning:'Jepang'},{word:'今日',read:'きょう',meaning:'Hari ini'},{word:'日曜日',read:'にちようび',meaning:'Minggu'}],sentence:{jp:'今日は天気がいいです。',id:'Cuaca hari ini bagus.'}},
+  {char:'月',level:'N5',strokes:4,on:['ゲツ','ガツ'],kun:['つき'],meaning:'Bulan, Rembulan',examples:[{word:'月曜日',read:'げつようび',meaning:'Senin'},{word:'来月',read:'らいげつ',meaning:'Bulan depan'},{word:'月見',read:'つきみ',meaning:'Melihat bulan'}],sentence:{jp:'来月、日本へ行きます。',id:'Bulan depan saya pergi ke Jepang.'}},
+  {char:'火',level:'N5',strokes:4,on:['カ'],kun:['ひ'],meaning:'Api',examples:[{word:'火曜日',read:'かようび',meaning:'Selasa'},{word:'火山',read:'かざん',meaning:'Gunung berapi'},{word:'花火',read:'はなび',meaning:'Kembang api'}],sentence:{jp:'火曜日に試験があります。',id:'Ada ujian hari Selasa.'}},
+  {char:'水',level:'N5',strokes:4,on:['スイ'],kun:['みず'],meaning:'Air',examples:[{word:'水曜日',read:'すいようび',meaning:'Rabu'},{word:'水道',read:'すいどう',meaning:'Saluran air'},{word:'飲み水',read:'のみみず',meaning:'Air minum'}],sentence:{jp:'水を一杯ください。',id:'Tolong berikan satu gelas air.'}},
+  {char:'木',level:'N5',strokes:4,on:['モク','ボク'],kun:['き'],meaning:'Pohon, Kayu',examples:[{word:'木曜日',read:'もくようび',meaning:'Kamis'},{word:'木材',read:'もくざい',meaning:'Kayu bahan'},{word:'木々',read:'きぎ',meaning:'Pohon-pohon'}],sentence:{jp:'公園に大きい木があります。',id:'Ada pohon besar di taman.'}},
+  {char:'金',level:'N5',strokes:8,on:['キン','コン'],kun:['かね','かな'],meaning:'Emas, Uang',examples:[{word:'金曜日',read:'きんようび',meaning:'Jumat'},{word:'お金',read:'おかね',meaning:'Uang'},{word:'金色',read:'きんいろ',meaning:'Warna emas'}],sentence:{jp:'お金が足りません。',id:'Uang saya tidak cukup.'}},
+  {char:'土',level:'N5',strokes:3,on:['ド','ト'],kun:['つち'],meaning:'Tanah',examples:[{word:'土曜日',read:'どようび',meaning:'Sabtu'},{word:'土地',read:'とち',meaning:'Tanah/lahan'},{word:'土台',read:'どだい',meaning:'Pondasi'}],sentence:{jp:'土曜日は休みです。',id:'Hari Sabtu libur.'}},
+  {char:'山',level:'N5',strokes:3,on:['サン'],kun:['やま'],meaning:'Gunung',examples:[{word:'山登り',read:'やまのぼり',meaning:'Mendaki gunung'},{word:'富士山',read:'ふじさん',meaning:'Gunung Fuji'},{word:'山川',read:'やまかわ',meaning:'Gunung dan sungai'}],sentence:{jp:'富士山は高いです。',id:'Gunung Fuji tinggi.'}},
+  {char:'川',level:'N5',strokes:3,on:['セン'],kun:['かわ'],meaning:'Sungai',examples:[{word:'川辺',read:'かわべ',meaning:'Tepi sungai'},{word:'小川',read:'おがわ',meaning:'Sungai kecil'},{word:'川下',read:'かわしも',meaning:'Hilir sungai'}],sentence:{jp:'川の近くに住んでいます。',id:'Saya tinggal dekat sungai.'}},
+  {char:'田',level:'N5',strokes:5,on:['デン'],kun:['た'],meaning:'Sawah, Ladang',examples:[{word:'田んぼ',read:'たんぼ',meaning:'Sawah'},{word:'田舎',read:'いなか',meaning:'Pedesaan'},{word:'水田',read:'すいでん',meaning:'Sawah basah'}],sentence:{jp:'田んぼで米を作ります。',id:'Menanam padi di sawah.'}},
+  {char:'人',level:'N5',strokes:2,on:['ジン','ニン'],kun:['ひと'],meaning:'Orang, Manusia',examples:[{word:'人間',read:'にんげん',meaning:'Manusia'},{word:'外国人',read:'がいこくじん',meaning:'Orang asing'},{word:'一人',read:'ひとり',meaning:'Sendiri/satu orang'}],sentence:{jp:'あの人はだれですか。',id:'Siapakah orang itu?'}},
+  {char:'口',level:'N5',strokes:3,on:['コウ','ク'],kun:['くち'],meaning:'Mulut',examples:[{word:'入口',read:'いりぐち',meaning:'Pintu masuk'},{word:'出口',read:'でぐち',meaning:'Pintu keluar'},{word:'口調',read:'くちょう',meaning:'Nada bicara'}],sentence:{jp:'入口はどこですか。',id:'Di mana pintu masuknya?'}},
+  {char:'手',level:'N5',strokes:4,on:['シュ'],kun:['て'],meaning:'Tangan',examples:[{word:'手紙',read:'てがみ',meaning:'Surat'},{word:'握手',read:'あくしゅ',meaning:'Jabat tangan'},{word:'手伝い',read:'てつだい',meaning:'Bantuan'}],sentence:{jp:'手を洗ってください。',id:'Tolong cuci tangan.'}},
+  {char:'足',level:'N5',strokes:7,on:['ソク'],kun:['あし','た'],meaning:'Kaki, Cukup',examples:[{word:'足音',read:'あしおと',meaning:'Suara langkah kaki'},{word:'満足',read:'まんぞく',meaning:'Kepuasan'},{word:'足りる',read:'たりる',meaning:'Cukup'}],sentence:{jp:'足が痛いです。',id:'Kaki saya sakit.'}},
+  {char:'目',level:'N5',strokes:5,on:['モク','ボク'],kun:['め'],meaning:'Mata',examples:[{word:'目標',read:'もくひょう',meaning:'Target/tujuan'},{word:'注目',read:'ちゅうもく',meaning:'Perhatian'},{word:'目玉',read:'めだま',meaning:'Bola mata'}],sentence:{jp:'目が疲れました。',id:'Mata saya lelah.'}},
+  {char:'耳',level:'N5',strokes:6,on:['ジ'],kun:['みみ'],meaning:'Telinga',examples:[{word:'耳鳴り',read:'みみなり',meaning:'Telinga berdenging'},{word:'耳元',read:'みみもと',meaning:'Dekat telinga'},{word:'中耳炎',read:'ちゅうじえん',meaning:'Radang telinga tengah'}],sentence:{jp:'耳が聞こえません。',id:'Telinga saya tidak bisa mendengar.'}},
+  {char:'力',level:'N5',strokes:2,on:['リョク','リキ'],kun:['ちから'],meaning:'Kekuatan, Tenaga',examples:[{word:'力強い',read:'ちからづよい',meaning:'Kuat'},{word:'努力',read:'どりょく',meaning:'Usaha/kerja keras'},{word:'電力',read:'でんりょく',meaning:'Tenaga listrik'}],sentence:{jp:'もっと力を入れてください。',id:'Tolong masukkan lebih banyak tenaga.'}},
+  {char:'気',level:'N5',strokes:6,on:['キ','ケ'],kun:[''],meaning:'Udara, Semangat, Perasaan',examples:[{word:'天気',read:'てんき',meaning:'Cuaca'},{word:'気持ち',read:'きもち',meaning:'Perasaan'},{word:'元気',read:'げんき',meaning:'Sehat/bersemangat'}],sentence:{jp:'元気ですか。',id:'Apa kabar?'}},
+  {char:'大',level:'N5',strokes:3,on:['ダイ','タイ'],kun:['おお'],meaning:'Besar',examples:[{word:'大学',read:'だいがく',meaning:'Universitas'},{word:'大切',read:'たいせつ',meaning:'Penting/berharga'},{word:'大きい',read:'おおきい',meaning:'Besar'}],sentence:{jp:'この荷物は大きすぎます。',id:'Barang bawaan ini terlalu besar.'}},
+  {char:'小',level:'N5',strokes:3,on:['ショウ'],kun:['ちい','こ','お'],meaning:'Kecil',examples:[{word:'小学校',read:'しょうがっこう',meaning:'Sekolah dasar'},{word:'小説',read:'しょうせつ',meaning:'Novel'},{word:'小さい',read:'ちいさい',meaning:'Kecil'}],sentence:{jp:'小さい猫がいます。',id:'Ada kucing kecil.'}},
+  {char:'中',level:'N5',strokes:4,on:['チュウ'],kun:['なか'],meaning:'Tengah, Dalam',examples:[{word:'中学校',read:'ちゅうがっこう',meaning:'SMP'},{word:'中心',read:'ちゅうしん',meaning:'Pusat'},{word:'中国',read:'ちゅうごく',meaning:'China'}],sentence:{jp:'かばんの中に何がありますか。',id:'Apa yang ada di dalam tas?'}},
+  {char:'上',level:'N5',strokes:3,on:['ジョウ','ショウ'],kun:['うえ','うわ','かみ','あ','のぼ'],meaning:'Atas',examples:[{word:'上手',read:'じょうず',meaning:'Pandai/terampil'},{word:'以上',read:'いじょう',meaning:'Lebih dari/di atas'},{word:'上がる',read:'あがる',meaning:'Naik'}],sentence:{jp:'テーブルの上に本があります。',id:'Ada buku di atas meja.'}},
+  {char:'下',level:'N5',strokes:3,on:['カ','ゲ'],kun:['した','しも','もと','さ','くだ','お'],meaning:'Bawah',examples:[{word:'地下',read:'ちか',meaning:'Bawah tanah'},{word:'下手',read:'へた',meaning:'Tidak pandai'},{word:'下がる',read:'さがる',meaning:'Turun'}],sentence:{jp:'椅子の下に猫がいます。',id:'Ada kucing di bawah kursi.'}},
+  {char:'左',level:'N5',strokes:5,on:['サ'],kun:['ひだり'],meaning:'Kiri',examples:[{word:'左折',read:'させつ',meaning:'Belok kiri'},{word:'左右',read:'さゆう',meaning:'Kiri kanan'},{word:'左手',read:'ひだりて',meaning:'Tangan kiri'}],sentence:{jp:'左の建物が学校です。',id:'Gedung di sebelah kiri adalah sekolah.'}},
+  {char:'右',level:'N5',strokes:5,on:['ウ','ユウ'],kun:['みぎ'],meaning:'Kanan',examples:[{word:'右折',read:'うせつ',meaning:'Belok kanan'},{word:'右側',read:'みぎがわ',meaning:'Sisi kanan'},{word:'右手',read:'みぎて',meaning:'Tangan kanan'}],sentence:{jp:'右に曲がってください。',id:'Tolong belok kanan.'}},
+  {char:'本',level:'N5',strokes:5,on:['ホン'],kun:['もと'],meaning:'Buku, Asal',examples:[{word:'日本',read:'にほん',meaning:'Jepang'},{word:'本当',read:'ほんとう',meaning:'Benar-benar'},{word:'基本',read:'きほん',meaning:'Dasar'}],sentence:{jp:'図書館で本を借りました。',id:'Saya meminjam buku di perpustakaan.'}},
+  {char:'文',level:'N5',strokes:4,on:['ブン','モン'],kun:['ふみ'],meaning:'Tulisan, Kalimat',examples:[{word:'文章',read:'ぶんしょう',meaning:'Tulisan/paragraf'},{word:'文化',read:'ぶんか',meaning:'Budaya'},{word:'文字',read:'もじ',meaning:'Huruf'}],sentence:{jp:'文化祭に参加しました。',id:'Saya ikut festival budaya.'}},
   {char:'字',level:'N5',strokes:6,on:['ジ'],kun:['あざ'],meaning:'Huruf, Karakter',examples:[{word:'文字',read:'もじ',meaning:'Huruf'},{word:'漢字',read:'かんじ',meaning:'Kanji'},{word:'数字',read:'すうじ',meaning:'Angka'}]},
-  {char:'学',level:'N5',strokes:8,on:['ガク'],kun:['まな'],meaning:'Belajar, Ilmu',examples:[{word:'学校',read:'がっこう',meaning:'Sekolah'},{word:'大学',read:'だいがく',meaning:'Universitas'},{word:'学生',read:'がくせい',meaning:'Murid/mahasiswa'}]},
-  {char:'校',level:'N5',strokes:10,on:['コウ'],kun:[''],meaning:'Sekolah',examples:[{word:'学校',read:'がっこう',meaning:'Sekolah'},{word:'高校',read:'こうこう',meaning:'SMA'},{word:'校長',read:'こうちょう',meaning:'Kepala sekolah'}]},
-  {char:'先',level:'N5',strokes:6,on:['セン'],kun:['さき'],meaning:'Dulu, Ujung',examples:[{word:'先生',read:'せんせい',meaning:'Guru'},{word:'先週',read:'せんしゅう',meaning:'Minggu lalu'},{word:'先月',read:'せんげつ',meaning:'Bulan lalu'}]},
-  {char:'生',level:'N5',strokes:5,on:['セイ','ショウ'],kun:['い','う','は','き','なま'],meaning:'Hidup, Lahir',examples:[{word:'学生',read:'がくせい',meaning:'Pelajar'},{word:'先生',read:'せんせい',meaning:'Guru'},{word:'生まれる',read:'うまれる',meaning:'Lahir'}]},
-  {char:'年',level:'N5',strokes:6,on:['ネン'],kun:['とし'],meaning:'Tahun',examples:[{word:'今年',read:'ことし',meaning:'Tahun ini'},{word:'来年',read:'らいねん',meaning:'Tahun depan'},{word:'年齢',read:'ねんれい',meaning:'Usia'}]},
-  {char:'時',level:'N5',strokes:10,on:['ジ'],kun:['とき'],meaning:'Waktu, Jam',examples:[{word:'時間',read:'じかん',meaning:'Waktu/jam'},{word:'時代',read:'じだい',meaning:'Zaman/era'},{word:'時々',read:'ときどき',meaning:'Kadang-kadang'}]},
-  {char:'間',level:'N5',strokes:12,on:['カン','ケン'],kun:['あいだ','ま'],meaning:'Antara, Ruang',examples:[{word:'時間',read:'じかん',meaning:'Waktu'},{word:'人間',read:'にんげん',meaning:'Manusia'},{word:'間違い',read:'まちがい',meaning:'Kesalahan'}]},
-  {char:'分',level:'N5',strokes:4,on:['ブン','フン','ブ'],kun:['わ'],meaning:'Menit, Bagian',examples:[{word:'十分',read:'じゅっぷん',meaning:'Sepuluh menit'},{word:'自分',read:'じぶん',meaning:'Diri sendiri'},{word:'半分',read:'はんぶん',meaning:'Setengah'}]},
-  {char:'何',level:'N5',strokes:7,on:['カ'],kun:['なに','なん'],meaning:'Apa, Berapa',examples:[{word:'何時',read:'なんじ',meaning:'Jam berapa'},{word:'何人',read:'なんにん',meaning:'Berapa orang'},{word:'何日',read:'なんにち',meaning:'Tanggal/hari berapa'}]},
-  {char:'一',level:'N5',strokes:1,on:['イチ','イツ'],kun:['ひと'],meaning:'Satu',examples:[{word:'一つ',read:'ひとつ',meaning:'Satu (buah)'},{word:'一人',read:'ひとり',meaning:'Satu orang'},{word:'一番',read:'いちばん',meaning:'Nomor satu/paling'}]},
-  {char:'二',level:'N5',strokes:2,on:['ニ'],kun:['ふた'],meaning:'Dua',examples:[{word:'二つ',read:'ふたつ',meaning:'Dua (buah)'},{word:'二人',read:'ふたり',meaning:'Dua orang'},{word:'二月',read:'にがつ',meaning:'Februari'}]},
-  {char:'三',level:'N5',strokes:3,on:['サン'],kun:['み'],meaning:'Tiga',examples:[{word:'三つ',read:'みっつ',meaning:'Tiga (buah)'},{word:'三月',read:'さんがつ',meaning:'Maret'},{word:'三角',read:'さんかく',meaning:'Segitiga'}]},
-  {char:'四',level:'N5',strokes:5,on:['シ'],kun:['よ','よん'],meaning:'Empat',examples:[{word:'四つ',read:'よっつ',meaning:'Empat (buah)'},{word:'四月',read:'しがつ',meaning:'April'},{word:'四角',read:'しかく',meaning:'Persegi'}]},
-  {char:'五',level:'N5',strokes:4,on:['ゴ'],kun:['いつ'],meaning:'Lima',examples:[{word:'五つ',read:'いつつ',meaning:'Lima (buah)'},{word:'五月',read:'ごがつ',meaning:'Mei'},{word:'五感',read:'ごかん',meaning:'Lima indera'}]},
-  {char:'六',level:'N5',strokes:4,on:['ロク'],kun:['む'],meaning:'Enam',examples:[{word:'六つ',read:'むっつ',meaning:'Enam (buah)'},{word:'六月',read:'ろくがつ',meaning:'Juni'},{word:'六角',read:'ろっかく',meaning:'Segi enam'}]},
-  {char:'七',level:'N5',strokes:2,on:['シチ'],kun:['なな'],meaning:'Tujuh',examples:[{word:'七つ',read:'ななつ',meaning:'Tujuh (buah)'},{word:'七月',read:'しちがつ',meaning:'Juli'},{word:'七夕',read:'たなばた',meaning:'Festival Tanabata'}]},
-  {char:'八',level:'N5',strokes:2,on:['ハチ'],kun:['や'],meaning:'Delapan',examples:[{word:'八つ',read:'やっつ',meaning:'Delapan (buah)'},{word:'八月',read:'はちがつ',meaning:'Agustus'},{word:'八百屋',read:'やおや',meaning:'Toko sayur'}]},
-  {char:'九',level:'N5',strokes:2,on:['ク','キュウ'],kun:['ここの'],meaning:'Sembilan',examples:[{word:'九つ',read:'ここのつ',meaning:'Sembilan (buah)'},{word:'九月',read:'くがつ',meaning:'September'},{word:'九州',read:'きゅうしゅう',meaning:'Kyushu'}]},
-  {char:'十',level:'N5',strokes:2,on:['ジュウ','ジッ'],kun:['とお'],meaning:'Sepuluh',examples:[{word:'十時',read:'じゅうじ',meaning:'Jam sepuluh'},{word:'十分',read:'じゅっぷん',meaning:'Sepuluh menit'},{word:'十月',read:'じゅうがつ',meaning:'Oktober'}]},
-  {char:'百',level:'N5',strokes:6,on:['ヒャク'],kun:[''],meaning:'Seratus',examples:[{word:'百円',read:'ひゃくえん',meaning:'100 yen'},{word:'三百',read:'さんびゃく',meaning:'300'},{word:'百貨店',read:'ひゃっかてん',meaning:'Departement store'}]},
-  {char:'千',level:'N5',strokes:3,on:['セン'],kun:['ち'],meaning:'Seribu',examples:[{word:'千円',read:'せんえん',meaning:'1000 yen'},{word:'三千',read:'さんぜん',meaning:'3000'},{word:'千代田',read:'ちよだ',meaning:'Chiyoda (kota)'}]},
-  {char:'万',level:'N5',strokes:3,on:['マン','バン'],kun:[''],meaning:'Sepuluh ribu',examples:[{word:'一万円',read:'いちまんえん',meaning:'10.000 yen'},{word:'万年筆',read:'まんねんひつ',meaning:'Pulpen'},{word:'万国',read:'ばんこく',meaning:'Seluruh negara'}]},
-  {char:'円',level:'N5',strokes:4,on:['エン'],kun:['まる'],meaning:'Yen, Bundar',examples:[{word:'千円',read:'せんえん',meaning:'1000 yen'},{word:'円い',read:'まるい',meaning:'Bulat'},{word:'円満',read:'えんまん',meaning:'Harmonis'}]},
-  {char:'語',level:'N5',strokes:14,on:['ゴ'],kun:['かた'],meaning:'Bahasa, Kata',examples:[{word:'日本語',read:'にほんご',meaning:'Bahasa Jepang'},{word:'英語',read:'えいご',meaning:'Bahasa Inggris'},{word:'物語',read:'ものがたり',meaning:'Cerita'}]},
-  {char:'国',level:'N5',strokes:8,on:['コク'],kun:['くに'],meaning:'Negara',examples:[{word:'外国',read:'がいこく',meaning:'Negara asing'},{word:'国語',read:'こくご',meaning:'Bahasa nasional'},{word:'中国',read:'ちゅうごく',meaning:'China'}]},
+  {char:'学',level:'N5',strokes:8,on:['ガク'],kun:['まな'],meaning:'Belajar, Ilmu',examples:[{word:'学校',read:'がっこう',meaning:'Sekolah'},{word:'大学',read:'だいがく',meaning:'Universitas'},{word:'学生',read:'がくせい',meaning:'Murid/mahasiswa'}],sentence:{jp:'大学で日本語を学びました。',id:'Saya belajar bahasa Jepang di universitas.'}},
+  {char:'校',level:'N5',strokes:10,on:['コウ'],kun:[''],meaning:'Sekolah',examples:[{word:'学校',read:'がっこう',meaning:'Sekolah'},{word:'高校',read:'こうこう',meaning:'SMA'},{word:'校長',read:'こうちょう',meaning:'Kepala sekolah'}],sentence:{jp:'学校まで歩いて行きます。',id:'Saya berjalan kaki ke sekolah.'}},
+  {char:'先',level:'N5',strokes:6,on:['セン'],kun:['さき'],meaning:'Dulu, Ujung',examples:[{word:'先生',read:'せんせい',meaning:'Guru'},{word:'先週',read:'せんしゅう',meaning:'Minggu lalu'},{word:'先月',read:'せんげつ',meaning:'Bulan lalu'}],sentence:{jp:'先生に質問しました。',id:'Saya bertanya kepada guru.'}},
+  {char:'生',level:'N5',strokes:5,on:['セイ','ショウ'],kun:['い','う','は','き','なま'],meaning:'Hidup, Lahir',examples:[{word:'学生',read:'がくせい',meaning:'Pelajar'},{word:'先生',read:'せんせい',meaning:'Guru'},{word:'生まれる',read:'うまれる',meaning:'Lahir'}],sentence:{jp:'生まれた日はいつですか。',id:'Kapan hari lahirmu?'}},
+  {char:'年',level:'N5',strokes:6,on:['ネン'],kun:['とし'],meaning:'Tahun',examples:[{word:'今年',read:'ことし',meaning:'Tahun ini'},{word:'来年',read:'らいねん',meaning:'Tahun depan'},{word:'年齢',read:'ねんれい',meaning:'Usia'}],sentence:{jp:'今年は何年ですか。',id:'Sekarang tahun berapa?'}},
+  {char:'時',level:'N5',strokes:10,on:['ジ'],kun:['とき'],meaning:'Waktu, Jam',examples:[{word:'時間',read:'じかん',meaning:'Waktu/jam'},{word:'時代',read:'じだい',meaning:'Zaman/era'},{word:'時々',read:'ときどき',meaning:'Kadang-kadang'}],sentence:{jp:'今何時ですか。',id:'Sekarang jam berapa?'}},
+  {char:'間',level:'N5',strokes:12,on:['カン','ケン'],kun:['あいだ','ま'],meaning:'Antara, Ruang',examples:[{word:'時間',read:'じかん',meaning:'Waktu'},{word:'人間',read:'にんげん',meaning:'Manusia'},{word:'間違い',read:'まちがい',meaning:'Kesalahan'}],sentence:{jp:'二時間かかりました。',id:'Membutuhkan waktu dua jam.'}},
+  {char:'分',level:'N5',strokes:4,on:['ブン','フン','ブ'],kun:['わ'],meaning:'Menit, Bagian',examples:[{word:'十分',read:'じゅっぷん',meaning:'Sepuluh menit'},{word:'自分',read:'じぶん',meaning:'Diri sendiri'},{word:'半分',read:'はんぶん',meaning:'Setengah'}],sentence:{jp:'五分後に出発します。',id:'Kami berangkat lima menit lagi.'}},
+  {char:'何',level:'N5',strokes:7,on:['カ'],kun:['なに','なん'],meaning:'Apa, Berapa',examples:[{word:'何時',read:'なんじ',meaning:'Jam berapa'},{word:'何人',read:'なんにん',meaning:'Berapa orang'},{word:'何日',read:'なんにち',meaning:'Tanggal/hari berapa'}],sentence:{jp:'今日は何を食べますか。',id:'Hari ini makan apa?'}},
+  {char:'一',level:'N5',strokes:1,on:['イチ','イツ'],kun:['ひと'],meaning:'Satu',examples:[{word:'一つ',read:'ひとつ',meaning:'Satu (buah)'},{word:'一人',read:'ひとり',meaning:'Satu orang'},{word:'一番',read:'いちばん',meaning:'Nomor satu/paling'}],sentence:{jp:'一つのりんごを食べました。',id:'Saya makan satu apel.'}},
+  {char:'二',level:'N5',strokes:2,on:['ニ'],kun:['ふた'],meaning:'Dua',examples:[{word:'二つ',read:'ふたつ',meaning:'Dua (buah)'},{word:'二人',read:'ふたり',meaning:'Dua orang'},{word:'二月',read:'にがつ',meaning:'Februari'}],sentence:{jp:'二人で映画を見ました。',id:'Kami berdua menonton film.'}},
+  {char:'三',level:'N5',strokes:3,on:['サン'],kun:['み'],meaning:'Tiga',examples:[{word:'三つ',read:'みっつ',meaning:'Tiga (buah)'},{word:'三月',read:'さんがつ',meaning:'Maret'},{word:'三角',read:'さんかく',meaning:'Segitiga'}],sentence:{jp:'三日後に会いましょう。',id:'Mari bertemu tiga hari lagi.'}},
+  {char:'四',level:'N5',strokes:5,on:['シ'],kun:['よ','よん'],meaning:'Empat',examples:[{word:'四つ',read:'よっつ',meaning:'Empat (buah)'},{word:'四月',read:'しがつ',meaning:'April'},{word:'四角',read:'しかく',meaning:'Persegi'}],sentence:{jp:'四時に起きました。',id:'Saya bangun jam empat.'}},
+  {char:'五',level:'N5',strokes:4,on:['ゴ'],kun:['いつ'],meaning:'Lima',examples:[{word:'五つ',read:'いつつ',meaning:'Lima (buah)'},{word:'五月',read:'ごがつ',meaning:'Mei'},{word:'五感',read:'ごかん',meaning:'Lima indera'}],sentence:{jp:'五分待ってください。',id:'Tolong tunggu lima menit.'}},
+  {char:'六',level:'N5',strokes:4,on:['ロク'],kun:['む'],meaning:'Enam',examples:[{word:'六つ',read:'むっつ',meaning:'Enam (buah)'},{word:'六月',read:'ろくがつ',meaning:'Juni'},{word:'六角',read:'ろっかく',meaning:'Segi enam'}],sentence:{jp:'六人で旅行しました。',id:'Kami berenam pergi wisata.'}},
+  {char:'七',level:'N5',strokes:2,on:['シチ'],kun:['なな'],meaning:'Tujuh',examples:[{word:'七つ',read:'ななつ',meaning:'Tujuh (buah)'},{word:'七月',read:'しちがつ',meaning:'Juli'},{word:'七夕',read:'たなばた',meaning:'Festival Tanabata'}],sentence:{jp:'七時に学校へ行きます。',id:'Saya pergi ke sekolah jam tujuh.'}},
+  {char:'八',level:'N5',strokes:2,on:['ハチ'],kun:['や'],meaning:'Delapan',examples:[{word:'八つ',read:'やっつ',meaning:'Delapan (buah)'},{word:'八月',read:'はちがつ',meaning:'Agustus'},{word:'八百屋',read:'やおや',meaning:'Toko sayur'}],sentence:{jp:'八月は暑いです。',id:'Bulan Agustus panas.'}},
+  {char:'九',level:'N5',strokes:2,on:['ク','キュウ'],kun:['ここの'],meaning:'Sembilan',examples:[{word:'九つ',read:'ここのつ',meaning:'Sembilan (buah)'},{word:'九月',read:'くがつ',meaning:'September'},{word:'九州',read:'きゅうしゅう',meaning:'Kyushu'}],sentence:{jp:'九時に寝ます。',id:'Saya tidur jam sembilan.'}},
+  {char:'十',level:'N5',strokes:2,on:['ジュウ','ジッ'],kun:['とお'],meaning:'Sepuluh',examples:[{word:'十時',read:'じゅうじ',meaning:'Jam sepuluh'},{word:'十分',read:'じゅっぷん',meaning:'Sepuluh menit'},{word:'十月',read:'じゅうがつ',meaning:'Oktober'}],sentence:{jp:'十分後に来てください。',id:'Tolong datang sepuluh menit lagi.'}},
+  {char:'百',level:'N5',strokes:6,on:['ヒャク'],kun:[''],meaning:'Seratus',examples:[{word:'百円',read:'ひゃくえん',meaning:'100 yen'},{word:'三百',read:'さんびゃく',meaning:'300'},{word:'百貨店',read:'ひゃっかてん',meaning:'Departement store'}],sentence:{jp:'百円のお菓子を買いました。',id:'Saya membeli kue seharga 100 yen.'}},
+  {char:'千',level:'N5',strokes:3,on:['セン'],kun:['ち'],meaning:'Seribu',examples:[{word:'千円',read:'せんえん',meaning:'1000 yen'},{word:'三千',read:'さんぜん',meaning:'3000'},{word:'千代田',read:'ちよだ',meaning:'Chiyoda (kota)'}],sentence:{jp:'千人の人が集まりました。',id:'Seribu orang berkumpul.'}},
+  {char:'万',level:'N5',strokes:3,on:['マン','バン'],kun:[''],meaning:'Sepuluh ribu',examples:[{word:'一万円',read:'いちまんえん',meaning:'10.000 yen'},{word:'万年筆',read:'まんねんひつ',meaning:'Pulpen'},{word:'万国',read:'ばんこく',meaning:'Seluruh negara'}],sentence:{jp:'一万円を持っています。',id:'Saya membawa uang 10.000 yen.'}},
+  {char:'円',level:'N5',strokes:4,on:['エン'],kun:['まる'],meaning:'Yen, Bundar',examples:[{word:'千円',read:'せんえん',meaning:'1000 yen'},{word:'円い',read:'まるい',meaning:'Bulat'},{word:'円満',read:'えんまん',meaning:'Harmonis'}],sentence:{jp:'この本は五百円です。',id:'Buku ini seharga 500 yen.'}},
+  {char:'語',level:'N5',strokes:14,on:['ゴ'],kun:['かた'],meaning:'Bahasa, Kata',examples:[{word:'日本語',read:'にほんご',meaning:'Bahasa Jepang'},{word:'英語',read:'えいご',meaning:'Bahasa Inggris'},{word:'物語',read:'ものがたり',meaning:'Cerita'}],sentence:{jp:'日本語は難しいですか。',id:'Apakah bahasa Jepang sulit?'}},
+  {char:'国',level:'N5',strokes:8,on:['コク'],kun:['くに'],meaning:'Negara',examples:[{word:'外国',read:'がいこく',meaning:'Negara asing'},{word:'国語',read:'こくご',meaning:'Bahasa nasional'},{word:'中国',read:'ちゅうごく',meaning:'China'}],sentence:{jp:'どの国から来ましたか。',id:'Kamu datang dari negara mana?'}},
   {char:'私',level:'N5',strokes:7,on:['シ'],kun:['わたし','わたくし'],meaning:'Saya, Pribadi',examples:[{word:'私立',read:'しりつ',meaning:'Swasta'},{word:'私生活',read:'しせいかつ',meaning:'Kehidupan pribadi'},{word:'私鉄',read:'してつ',meaning:'Kereta swasta'}]},
-  {char:'友',level:'N5',strokes:4,on:['ユウ'],kun:['とも'],meaning:'Teman',examples:[{word:'友達',read:'ともだち',meaning:'Teman'},{word:'友人',read:'ゆうじん',meaning:'Teman/sahabat'},{word:'親友',read:'しんゆう',meaning:'Sahabat dekat'}]},
+  {char:'友',level:'N5',strokes:4,on:['ユウ'],kun:['とも'],meaning:'Teman',examples:[{word:'友達',read:'ともだち',meaning:'Teman'},{word:'友人',read:'ゆうじん',meaning:'Teman/sahabat'},{word:'親友',read:'しんゆう',meaning:'Sahabat dekat'}],sentence:{jp:'友達と映画を見ました。',id:'Saya menonton film bersama teman.'}},
   {char:'家',level:'N5',strokes:10,on:['カ','ケ'],kun:['いえ','や'],meaning:'Rumah, Keluarga',examples:[{word:'家族',read:'かぞく',meaning:'Keluarga'},{word:'家庭',read:'かてい',meaning:'Rumah tangga'},{word:'帰る',read:'かえる',meaning:'Pulang'}]},
-  {char:'電',level:'N5',strokes:13,on:['デン'],kun:[''],meaning:'Listrik, Petir',examples:[{word:'電車',read:'でんしゃ',meaning:'Kereta listrik'},{word:'電話',read:'でんわ',meaning:'Telepon'},{word:'電気',read:'でんき',meaning:'Listrik'}]},
-  {char:'車',level:'N5',strokes:7,on:['シャ'],kun:['くるま'],meaning:'Mobil, Kendaraan',examples:[{word:'電車',read:'でんしゃ',meaning:'Kereta listrik'},{word:'自動車',read:'じどうしゃ',meaning:'Mobil'},{word:'車内',read:'しゃない',meaning:'Di dalam kendaraan'}]},
-  {char:'白',level:'N5',strokes:5,on:['ハク','ビャク'],kun:['しろ','しら'],meaning:'Putih',examples:[{word:'白い',read:'しろい',meaning:'Putih'},{word:'白黒',read:'しろくろ',meaning:'Hitam putih'},{word:'白紙',read:'はくし',meaning:'Kertas kosong'}]},
+  {char:'電',level:'N5',strokes:13,on:['デン'],kun:[''],meaning:'Listrik, Petir',examples:[{word:'電車',read:'でんしゃ',meaning:'Kereta listrik'},{word:'電話',read:'でんわ',meaning:'Telepon'},{word:'電気',read:'でんき',meaning:'Listrik'}],sentence:{jp:'電車で学校へ行きます。',id:'Saya pergi ke sekolah naik kereta.'}},
+  {char:'車',level:'N5',strokes:7,on:['シャ'],kun:['くるま'],meaning:'Mobil, Kendaraan',examples:[{word:'電車',read:'でんしゃ',meaning:'Kereta listrik'},{word:'自動車',read:'じどうしゃ',meaning:'Mobil'},{word:'車内',read:'しゃない',meaning:'Di dalam kendaraan'}],sentence:{jp:'車で旅行しました。',id:'Saya wisata menggunakan mobil.'}},
+  {char:'白',level:'N5',strokes:5,on:['ハク','ビャク'],kun:['しろ','しら'],meaning:'Putih',examples:[{word:'白い',read:'しろい',meaning:'Putih'},{word:'白黒',read:'しろくろ',meaning:'Hitam putih'},{word:'白紙',read:'はくし',meaning:'Kertas kosong'}],sentence:{jp:'白いシャツを着ています。',id:'Saya memakai baju putih.'}},
   {char:'黒',level:'N5',strokes:11,on:['コク'],kun:['くろ'],meaning:'Hitam',examples:[{word:'黒い',read:'くろい',meaning:'Hitam'},{word:'黒板',read:'こくばん',meaning:'Papan tulis'},{word:'黒字',read:'くろじ',meaning:'Laba/surplus'}]},
   {char:'赤',level:'N5',strokes:7,on:['セキ','シャク'],kun:['あか'],meaning:'Merah',examples:[{word:'赤い',read:'あかい',meaning:'Merah'},{word:'赤信号',read:'あかしんごう',meaning:'Lampu merah'},{word:'赤ちゃん',read:'あかちゃん',meaning:'Bayi'}]},
   {char:'青',level:'N5',strokes:8,on:['セイ','ショウ'],kun:['あお'],meaning:'Biru, Hijau',examples:[{word:'青い',read:'あおい',meaning:'Biru'},{word:'青信号',read:'あおしんごう',meaning:'Lampu hijau'},{word:'青春',read:'せいしゅん',meaning:'Masa muda'}]},
-  {char:'花',level:'N5',strokes:7,on:['カ'],kun:['はな'],meaning:'Bunga',examples:[{word:'花火',read:'はなび',meaning:'Kembang api'},{word:'花見',read:'はなみ',meaning:'Melihat bunga sakura'},{word:'花束',read:'はなたば',meaning:'Buket bunga'}]},
-  {char:'雨',level:'N5',strokes:8,on:['ウ'],kun:['あめ','あま'],meaning:'Hujan',examples:[{word:'大雨',read:'おおあめ',meaning:'Hujan deras'},{word:'雨傘',read:'あまがさ',meaning:'Payung hujan'},{word:'梅雨',read:'つゆ',meaning:'Musim hujan'}]},
+  {char:'花',level:'N5',strokes:7,on:['カ'],kun:['はな'],meaning:'Bunga',examples:[{word:'花火',read:'はなび',meaning:'Kembang api'},{word:'花見',read:'はなみ',meaning:'Melihat bunga sakura'},{word:'花束',read:'はなたば',meaning:'Buket bunga'}],sentence:{jp:'公園に花が咲いています。',id:'Bunga sedang mekar di taman.'}},
+  {char:'雨',level:'N5',strokes:8,on:['ウ'],kun:['あめ','あま'],meaning:'Hujan',examples:[{word:'大雨',read:'おおあめ',meaning:'Hujan deras'},{word:'雨傘',read:'あまがさ',meaning:'Payung hujan'},{word:'梅雨',read:'つゆ',meaning:'Musim hujan'}],sentence:{jp:'明日は雨が降るそうです。',id:'Katanya besok akan hujan.'}},
   {char:'天',level:'N5',strokes:4,on:['テン'],kun:['あめ','あま'],meaning:'Langit, Surga',examples:[{word:'天気',read:'てんき',meaning:'Cuaca'},{word:'天国',read:'てんごく',meaning:'Surga'},{word:'天才',read:'てんさい',meaning:'Jenius'}]},
-  {char:'空',level:'N5',strokes:8,on:['クウ'],kun:['そら','あ','から'],meaning:'Langit, Kosong',examples:[{word:'空港',read:'くうこう',meaning:'Bandara'},{word:'空気',read:'くうき',meaning:'Udara'},{word:'空っぽ',read:'からっぽ',meaning:'Kosong'}]},
-  {char:'海',level:'N5',strokes:9,on:['カイ'],kun:['うみ'],meaning:'Laut',examples:[{word:'海外',read:'かいがい',meaning:'Luar negeri'},{word:'海岸',read:'かいがん',meaning:'Pantai'},{word:'日本海',read:'にほんかい',meaning:'Laut Jepang'}]},
-  {char:'林',level:'N5',strokes:8,on:['リン'],kun:['はやし'],meaning:'Hutan kecil',examples:[{word:'森林',read:'しんりん',meaning:'Hutan'},{word:'林業',read:'りんぎょう',meaning:'Kehutanan'},{word:'林道',read:'りんどう',meaning:'Jalan hutan'}]},
-  {char:'森',level:'N5',strokes:12,on:['シン'],kun:['もり'],meaning:'Hutan',examples:[{word:'森林',read:'しんりん',meaning:'Hutan'},{word:'森の中',read:'もりのなか',meaning:'Di dalam hutan'},{word:'熱帯雨林',read:'ねったいうりん',meaning:'Hutan hujan tropis'}]},
-  {char:'入',level:'N5',strokes:2,on:['ニュウ','ジュ'],kun:['い','はい'],meaning:'Masuk',examples:[{word:'入口',read:'いりぐち',meaning:'Pintu masuk'},{word:'入学',read:'にゅうがく',meaning:'Masuk sekolah'},{word:'入れる',read:'いれる',meaning:'Memasukkan'}]},
-  {char:'出',level:'N5',strokes:5,on:['シュツ','スイ'],kun:['で','だ'],meaning:'Keluar',examples:[{word:'出口',read:'でぐち',meaning:'Pintu keluar'},{word:'出発',read:'しゅっぱつ',meaning:'Keberangkatan'},{word:'出かける',read:'でかける',meaning:'Pergi keluar'}]},
-  {char:'見',level:'N5',strokes:7,on:['ケン'],kun:['み'],meaning:'Melihat',examples:[{word:'見る',read:'みる',meaning:'Melihat'},{word:'意見',read:'いけん',meaning:'Pendapat'},{word:'花見',read:'はなみ',meaning:'Melihat bunga'}]},
-  {char:'聞',level:'N5',strokes:14,on:['ブン','モン'],kun:['き','きこ'],meaning:'Mendengar, Menanya',examples:[{word:'聞く',read:'きく',meaning:'Mendengar/bertanya'},{word:'新聞',read:'しんぶん',meaning:'Koran'},{word:'見聞',read:'けんぶん',meaning:'Pengetahuan/wawasan'}]},
-  {char:'話',level:'N5',strokes:13,on:['ワ'],kun:['はな','はなし'],meaning:'Berbicara, Cerita',examples:[{word:'話す',read:'はなす',meaning:'Berbicara'},{word:'電話',read:'でんわ',meaning:'Telepon'},{word:'会話',read:'かいわ',meaning:'Percakapan'}]},
-  {char:'読',level:'N5',strokes:14,on:['ドク','トク'],kun:['よ'],meaning:'Membaca',examples:[{word:'読む',read:'よむ',meaning:'Membaca'},{word:'読書',read:'どくしょ',meaning:'Membaca buku'},{word:'音読み',read:'おんよみ',meaning:'Cara baca On'}]},
-  {char:'書',level:'N5',strokes:10,on:['ショ'],kun:['か'],meaning:'Menulis',examples:[{word:'書く',read:'かく',meaning:'Menulis'},{word:'図書館',read:'としょかん',meaning:'Perpustakaan'},{word:'教科書',read:'きょうかしょ',meaning:'Buku pelajaran'}]},
-  {char:'食',level:'N5',strokes:9,on:['ショク','ジキ'],kun:['た','く'],meaning:'Makan, Makanan',examples:[{word:'食べる',read:'たべる',meaning:'Makan'},{word:'食事',read:'しょくじ',meaning:'Makan (kegiatan)'},{word:'食堂',read:'しょくどう',meaning:'Kafetaria'}]},
-  {char:'飲',level:'N5',strokes:12,on:['イン'],kun:['の'],meaning:'Minum',examples:[{word:'飲む',read:'のむ',meaning:'Minum'},{word:'飲み物',read:'のみもの',meaning:'Minuman'},{word:'飲食',read:'いんしょく',meaning:'Makan minum'}]},
-  {char:'買',level:'N5',strokes:12,on:['バイ'],kun:['か'],meaning:'Membeli',examples:[{word:'買う',read:'かう',meaning:'Membeli'},{word:'買い物',read:'かいもの',meaning:'Belanja'},{word:'購買',read:'こうばい',meaning:'Pembelian'}]},
-  {char:'来',level:'N5',strokes:7,on:['ライ'],kun:['く','き','こ'],meaning:'Datang',examples:[{word:'来る',read:'くる',meaning:'Datang'},{word:'来年',read:'らいねん',meaning:'Tahun depan'},{word:'未来',read:'みらい',meaning:'Masa depan'}]},
-  {char:'行',level:'N5',strokes:6,on:['コウ','ギョウ','アン'],kun:['い','ゆ','おこな'],meaning:'Pergi, Melakukan',examples:[{word:'行く',read:'いく',meaning:'Pergi'},{word:'旅行',read:'りょこう',meaning:'Perjalanan'},{word:'行動',read:'こうどう',meaning:'Tindakan'}]},
+  {char:'空',level:'N5',strokes:8,on:['クウ'],kun:['そら','あ','から'],meaning:'Langit, Kosong',examples:[{word:'空港',read:'くうこう',meaning:'Bandara'},{word:'空気',read:'くうき',meaning:'Udara'},{word:'空っぽ',read:'からっぽ',meaning:'Kosong'}],sentence:{jp:'今日は空が青いです。',id:'Hari ini langitnya biru.'}},
+  {char:'海',level:'N5',strokes:9,on:['カイ'],kun:['うみ'],meaning:'Laut',examples:[{word:'海外',read:'かいがい',meaning:'Luar negeri'},{word:'海岸',read:'かいがん',meaning:'Pantai'},{word:'日本海',read:'にほんかい',meaning:'Laut Jepang'}],sentence:{jp:'夏に海へ泳ぎに行きました。',id:'Musim panas kami pergi berenang ke laut.'}},
+  {char:'林',level:'N5',strokes:8,on:['リン'],kun:['はやし'],meaning:'Hutan kecil',examples:[{word:'森林',read:'しんりん',meaning:'Hutan'},{word:'林業',read:'りんぎょう',meaning:'Kehutanan'},{word:'林道',read:'りんどう',meaning:'Jalan hutan'}],sentence:{jp:'林の中を散歩しました。',id:'Saya berjalan-jalan di dalam hutan kecil.'}},
+  {char:'森',level:'N5',strokes:12,on:['シン'],kun:['もり'],meaning:'Hutan',examples:[{word:'森林',read:'しんりん',meaning:'Hutan'},{word:'森の中',read:'もりのなか',meaning:'Di dalam hutan'},{word:'熱帯雨林',read:'ねったいうりん',meaning:'Hutan hujan tropis'}],sentence:{jp:'深い森の中に入りました。',id:'Saya masuk ke dalam hutan yang lebat.'}},
+  {char:'入',level:'N5',strokes:2,on:['ニュウ','ジュ'],kun:['い','はい'],meaning:'Masuk',examples:[{word:'入口',read:'いりぐち',meaning:'Pintu masuk'},{word:'入学',read:'にゅうがく',meaning:'Masuk sekolah'},{word:'入れる',read:'いれる',meaning:'Memasukkan'}],sentence:{jp:'部屋に入ってください。',id:'Tolong masuk ke kamar.'}},
+  {char:'出',level:'N5',strokes:5,on:['シュツ','スイ'],kun:['で','だ'],meaning:'Keluar',examples:[{word:'出口',read:'でぐち',meaning:'Pintu keluar'},{word:'出発',read:'しゅっぱつ',meaning:'Keberangkatan'},{word:'出かける',read:'でかける',meaning:'Pergi keluar'}],sentence:{jp:'何時に出発しますか。',id:'Jam berapa berangkat?'}},
+  {char:'見',level:'N5',strokes:7,on:['ケン'],kun:['み'],meaning:'Melihat',examples:[{word:'見る',read:'みる',meaning:'Melihat'},{word:'意見',read:'いけん',meaning:'Pendapat'},{word:'花見',read:'はなみ',meaning:'Melihat bunga'}],sentence:{jp:'映画を見ました。',id:'Saya menonton film.'}},
+  {char:'聞',level:'N5',strokes:14,on:['ブン','モン'],kun:['き','きこ'],meaning:'Mendengar, Menanya',examples:[{word:'聞く',read:'きく',meaning:'Mendengar/bertanya'},{word:'新聞',read:'しんぶん',meaning:'Koran'},{word:'見聞',read:'けんぶん',meaning:'Pengetahuan/wawasan'}],sentence:{jp:'音楽を聞くのが好きです。',id:'Saya suka mendengarkan musik.'}},
+  {char:'話',level:'N5',strokes:13,on:['ワ'],kun:['はな','はなし'],meaning:'Berbicara, Cerita',examples:[{word:'話す',read:'はなす',meaning:'Berbicara'},{word:'電話',read:'でんわ',meaning:'Telepon'},{word:'会話',read:'かいわ',meaning:'Percakapan'}],sentence:{jp:'先生と話しました。',id:'Saya berbicara dengan guru.'}},
+  {char:'読',level:'N5',strokes:14,on:['ドク','トク'],kun:['よ'],meaning:'Membaca',examples:[{word:'読む',read:'よむ',meaning:'Membaca'},{word:'読書',read:'どくしょ',meaning:'Membaca buku'},{word:'音読み',read:'おんよみ',meaning:'Cara baca On'}],sentence:{jp:'毎日新聞を読みます。',id:'Saya membaca koran setiap hari.'}},
+  {char:'書',level:'N5',strokes:10,on:['ショ'],kun:['か'],meaning:'Menulis',examples:[{word:'書く',read:'かく',meaning:'Menulis'},{word:'図書館',read:'としょかん',meaning:'Perpustakaan'},{word:'教科書',read:'きょうかしょ',meaning:'Buku pelajaran'}],sentence:{jp:'手紙を書きました。',id:'Saya menulis surat.'}},
+  {char:'食',level:'N5',strokes:9,on:['ショク','ジキ'],kun:['た','く'],meaning:'Makan, Makanan',examples:[{word:'食べる',read:'たべる',meaning:'Makan'},{word:'食事',read:'しょくじ',meaning:'Makan (kegiatan)'},{word:'食堂',read:'しょくどう',meaning:'Kafetaria'}],sentence:{jp:'朝ごはんを食べましたか。',id:'Apakah kamu sudah makan pagi?'}},
+  {char:'飲',level:'N5',strokes:12,on:['イン'],kun:['の'],meaning:'Minum',examples:[{word:'飲む',read:'のむ',meaning:'Minum'},{word:'飲み物',read:'のみもの',meaning:'Minuman'},{word:'飲食',read:'いんしょく',meaning:'Makan minum'}],sentence:{jp:'お茶を飲みませんか。',id:'Mau minum teh?'}},
+  {char:'買',level:'N5',strokes:12,on:['バイ'],kun:['か'],meaning:'Membeli',examples:[{word:'買う',read:'かう',meaning:'Membeli'},{word:'買い物',read:'かいもの',meaning:'Belanja'},{word:'購買',read:'こうばい',meaning:'Pembelian'}],sentence:{jp:'スーパーで野菜を買いました。',id:'Saya membeli sayuran di supermarket.'}},
+  {char:'来',level:'N5',strokes:7,on:['ライ'],kun:['く','き','こ'],meaning:'Datang',examples:[{word:'来る',read:'くる',meaning:'Datang'},{word:'来年',read:'らいねん',meaning:'Tahun depan'},{word:'未来',read:'みらい',meaning:'Masa depan'}],sentence:{jp:'友達が来ました。',id:'Teman saya datang.'}},
+  {char:'行',level:'N5',strokes:6,on:['コウ','ギョウ','アン'],kun:['い','ゆ','おこな'],meaning:'Pergi, Melakukan',examples:[{word:'行く',read:'いく',meaning:'Pergi'},{word:'旅行',read:'りょこう',meaning:'Perjalanan'},{word:'行動',read:'こうどう',meaning:'Tindakan'}],sentence:{jp:'明日どこへ行きますか。',id:'Besok kamu pergi ke mana?'}},
   {char:'帰',level:'N5',strokes:10,on:['キ'],kun:['かえ'],meaning:'Pulang, Kembali',examples:[{word:'帰る',read:'かえる',meaning:'Pulang'},{word:'帰国',read:'きこく',meaning:'Kembali ke negara asal'},{word:'帰り道',read:'かえりみち',meaning:'Jalan pulang'}]},
   {char:'休',level:'N5',strokes:6,on:['キュウ'],kun:['やす'],meaning:'Istirahat, Libur',examples:[{word:'休む',read:'やすむ',meaning:'Istirahat'},{word:'休日',read:'きゅうじつ',meaning:'Hari libur'},{word:'休憩',read:'きゅうけい',meaning:'Istirahat sebentar'}]},
-  {char:'会',level:'N5',strokes:6,on:['カイ','エ'],kun:['あ'],meaning:'Bertemu, Pertemuan',examples:[{word:'会社',read:'かいしゃ',meaning:'Perusahaan'},{word:'会議',read:'かいぎ',meaning:'Rapat'},{word:'社会',read:'しゃかい',meaning:'Masyarakat'}]},
-  {char:'社',level:'N5',strokes:7,on:['シャ'],kun:['やしろ'],meaning:'Perusahaan, Kuil',examples:[{word:'会社',read:'かいしゃ',meaning:'Perusahaan'},{word:'社会',read:'しゃかい',meaning:'Masyarakat'},{word:'神社',read:'じんじゃ',meaning:'Kuil Shinto'}]},
-  {char:'名',level:'N5',strokes:6,on:['メイ','ミョウ'],kun:['な'],meaning:'Nama, Terkenal',examples:[{word:'名前',read:'なまえ',meaning:'Nama'},{word:'有名',read:'ゆうめい',meaning:'Terkenal'},{word:'名刺',read:'めいし',meaning:'Kartu nama'}]},
+  {char:'会',level:'N5',strokes:6,on:['カイ','エ'],kun:['あ'],meaning:'Bertemu, Pertemuan',examples:[{word:'会社',read:'かいしゃ',meaning:'Perusahaan'},{word:'会議',read:'かいぎ',meaning:'Rapat'},{word:'社会',read:'しゃかい',meaning:'Masyarakat'}],sentence:{jp:'明日、会議があります。',id:'Besok ada rapat.'}},
+  {char:'社',level:'N5',strokes:7,on:['シャ'],kun:['やしろ'],meaning:'Perusahaan, Kuil',examples:[{word:'会社',read:'かいしゃ',meaning:'Perusahaan'},{word:'社会',read:'しゃかい',meaning:'Masyarakat'},{word:'神社',read:'じんじゃ',meaning:'Kuil Shinto'}],sentence:{jp:'父は会社で働いています。',id:'Ayah bekerja di perusahaan.'}},
+  {char:'名',level:'N5',strokes:6,on:['メイ','ミョウ'],kun:['な'],meaning:'Nama, Terkenal',examples:[{word:'名前',read:'なまえ',meaning:'Nama'},{word:'有名',read:'ゆうめい',meaning:'Terkenal'},{word:'名刺',read:'めいし',meaning:'Kartu nama'}],sentence:{jp:'お名前は何ですか。',id:'Siapa nama Anda?'}},
   {char:'体',level:'N5',strokes:7,on:['タイ','テイ'],kun:['からだ'],meaning:'Tubuh, Badan',examples:[{word:'体育',read:'たいいく',meaning:'Pendidikan jasmani'},{word:'体重',read:'たいじゅう',meaning:'Berat badan'},{word:'体力',read:'たいりょく',meaning:'Kekuatan fisik'}]},
   // N4
-  {char:'悪',level:'N4',strokes:11,on:['アク','オ'],kun:['わる','あ'],meaning:'Jahat, Buruk',examples:[{word:'悪い',read:'わるい',meaning:'Buruk/jahat'},{word:'最悪',read:'さいあく',meaning:'Paling buruk'},{word:'悪化',read:'あっか',meaning:'Memburuk'}]},
-  {char:'安',level:'N4',strokes:6,on:['アン'],kun:['やす'],meaning:'Murah, Aman, Tenang',examples:[{word:'安心',read:'あんしん',meaning:'Tenang/lega'},{word:'安全',read:'あんぜん',meaning:'Aman'},{word:'安い',read:'やすい',meaning:'Murah'}]},
-  {char:'暗',level:'N4',strokes:13,on:['アン'],kun:['くら'],meaning:'Gelap',examples:[{word:'暗い',read:'くらい',meaning:'Gelap'},{word:'暗記',read:'あんき',meaning:'Menghafal'},{word:'暗号',read:'あんごう',meaning:'Kode/sandi'}]},
-  {char:'医',level:'N4',strokes:7,on:['イ'],kun:[''],meaning:'Dokter, Pengobatan',examples:[{word:'医者',read:'いしゃ',meaning:'Dokter'},{word:'医院',read:'いいん',meaning:'Klinik'},{word:'医学',read:'いがく',meaning:'Ilmu kedokteran'}]},
+  {char:'父',level:'N5',strokes:4,on:['フ'],kun:['ちち','とう'],meaning:'Ayah',examples:[{word:'父',read:'ちち',meaning:'Ayah (saya)'},{word:'お父さん',read:'おとうさん',meaning:'Ayah (orang lain)'},{word:'父親',read:'ちちおや',meaning:'Orang tua laki-laki'}],sentence:{jp:'父は毎朝早く起きます。',id:'Ayah bangun pagi setiap hari.'}},
+  {char:'母',level:'N5',strokes:5,on:['ボ'],kun:['はは','かあ'],meaning:'Ibu',examples:[{word:'母',read:'はは',meaning:'Ibu (saya)'},{word:'お母さん',read:'おかあさん',meaning:'Ibu (orang lain)'},{word:'母国',read:'ぼこく',meaning:'Negara asal'}],sentence:{jp:'母は料理が上手です。',id:'Ibu pandai memasak.'}},
+  {char:'前',level:'N5',strokes:9,on:['ゼン'],kun:['まえ'],meaning:'Depan, Sebelum',examples:[{word:'前',read:'まえ',meaning:'Depan'},{word:'午前',read:'ごぜん',meaning:'Pagi hari (AM)'},{word:'名前',read:'なまえ',meaning:'Nama'}],sentence:{jp:'駅の前で待っています。',id:'Saya menunggu di depan stasiun.'}},
+  {char:'後',level:'N5',strokes:9,on:['ゴ','コウ'],kun:['あと','うし','のち'],meaning:'Belakang, Sesudah',examples:[{word:'後',read:'あと',meaning:'Setelah / Belakang'},{word:'午後',read:'ごご',meaning:'Sore hari (PM)'},{word:'後ろ',read:'うしろ',meaning:'Belakang'}],sentence:{jp:'後で電話します。',id:'Saya akan telepon nanti.'}},
+  {char:'外',level:'N5',strokes:5,on:['ガイ','ゲ'],kun:['そと','ほか'],meaning:'Luar',examples:[{word:'外',read:'そと',meaning:'Luar'},{word:'外国',read:'がいこく',meaning:'Luar negeri'},{word:'外国人',read:'がいこくじん',meaning:'Orang asing'}],sentence:{jp:'外は今日とても寒いです。',id:'Di luar hari ini sangat dingin.'}},
+  {char:'北',level:'N5',strokes:5,on:['ホク'],kun:['きた'],meaning:'Utara',examples:[{word:'北',read:'きた',meaning:'Utara'},{word:'北海道',read:'ほっかいどう',meaning:'Hokkaido'},{word:'北口',read:'きたぐち',meaning:'Pintu utara'}],sentence:{jp:'北の方向へ進んでください。',id:'Tolong maju ke arah utara.'}},
+  {char:'南',level:'N5',strokes:9,on:['ナン'],kun:['みなみ'],meaning:'Selatan',examples:[{word:'南',read:'みなみ',meaning:'Selatan'},{word:'南口',read:'みなみぐち',meaning:'Pintu selatan'},{word:'南国',read:'なんごく',meaning:'Negara tropis'}],sentence:{jp:'南の島は暖かいです。',id:'Pulau di selatan hangat.'}},
+  {char:'東',level:'N5',strokes:8,on:['トウ'],kun:['ひがし'],meaning:'Timur',examples:[{word:'東',read:'ひがし',meaning:'Timur'},{word:'東京',read:'とうきょう',meaning:'Tokyo'},{word:'東口',read:'ひがしぐち',meaning:'Pintu timur'}],sentence:{jp:'東京は日本の首都です。',id:'Tokyo adalah ibu kota Jepang.'}},
+  {char:'西',level:'N5',strokes:6,on:['セイ','サイ'],kun:['にし'],meaning:'Barat',examples:[{word:'西',read:'にし',meaning:'Barat'},{word:'関西',read:'かんさい',meaning:'Kansai'},{word:'西口',read:'にしぐち',meaning:'Pintu barat'}],sentence:{jp:'西の空が夕焼けで赤いです。',id:'Langit barat berwarna merah senja.'}},
+  {char:'高',level:'N5',strokes:10,on:['コウ'],kun:['たか','たかい'],meaning:'Tinggi, Mahal',examples:[{word:'高い',read:'たかい',meaning:'Tinggi / Mahal'},{word:'高校',read:'こうこう',meaning:'SMA'},{word:'高山',read:'こうざん',meaning:'Pegunungan tinggi'}],sentence:{jp:'この建物はとても高いです。',id:'Gedung ini sangat tinggi.'}},
+  {char:'安',level:'N5',strokes:6,on:['アン'],kun:['やす','やすい'],meaning:'Murah, Aman, Tenang',examples:[{word:'安い',read:'やすい',meaning:'Murah'},{word:'安心',read:'あんしん',meaning:'Tenang / Lega'},{word:'安全',read:'あんぜん',meaning:'Aman'}],sentence:{jp:'このお店は安くておいしいです。',id:'Toko ini murah dan enak.'}},
+  {char:'多',level:'N5',strokes:6,on:['タ'],kun:['おお','おおい'],meaning:'Banyak',examples:[{word:'多い',read:'おおい',meaning:'Banyak'},{word:'多数',read:'たすう',meaning:'Jumlah banyak'},{word:'多分',read:'たぶん',meaning:'Mungkin'}],sentence:{jp:'今日は人が多いですね。',id:'Hari ini banyak orang ya.'}},
+  {char:'少',level:'N5',strokes:4,on:['ショウ'],kun:['すこ','すくない'],meaning:'Sedikit',examples:[{word:'少し',read:'すこし',meaning:'Sedikit'},{word:'少ない',read:'すくない',meaning:'Sedikit (jumlah)'},{word:'少年',read:'しょうねん',meaning:'Anak laki-laki muda'}],sentence:{jp:'砂糖を少し入れてください。',id:'Tolong masukkan sedikit gula.'}},
+  {char:'長',level:'N5',strokes:8,on:['チョウ'],kun:['なが','ながい'],meaning:'Panjang, Lama, Kepala',examples:[{word:'長い',read:'ながい',meaning:'Panjang'},{word:'社長',read:'しゃちょう',meaning:'Direktur perusahaan'},{word:'身長',read:'しんちょう',meaning:'Tinggi badan'}],sentence:{jp:'この川はとても長いです。',id:'Sungai ini sangat panjang.'}},
+  {char:'新',level:'N5',strokes:13,on:['シン'],kun:['あたら','あたらしい','あら','にい'],meaning:'Baru',examples:[{word:'新しい',read:'あたらしい',meaning:'Baru'},{word:'新幹線',read:'しんかんせん',meaning:'Shinkansen'},{word:'新聞',read:'しんぶん',meaning:'Koran'}],sentence:{jp:'新しいスマホを買いました。',id:'Saya membeli smartphone baru.'}},
+  {char:'古',level:'N5',strokes:5,on:['コ'],kun:['ふる','ふるい'],meaning:'Lama, Kuno',examples:[{word:'古い',read:'ふるい',meaning:'Lama / Kuno'},{word:'古典',read:'こてん',meaning:'Klasik'},{word:'中古',read:'ちゅうこ',meaning:'Bekas / Second'}],sentence:{jp:'この神社はとても古いです。',id:'Kuil ini sangat tua.'}},
+  {char:'毎',level:'N5',strokes:6,on:['マイ'],kun:[''],meaning:'Setiap',examples:[{word:'毎日',read:'まいにち',meaning:'Setiap hari'},{word:'毎週',read:'まいしゅう',meaning:'Setiap minggu'},{word:'毎朝',read:'まいあさ',meaning:'Setiap pagi'}],sentence:{jp:'毎日日本語を練習します。',id:'Saya berlatih bahasa Jepang setiap hari.'}},
+  {char:'週',level:'N5',strokes:11,on:['シュウ'],kun:[''],meaning:'Minggu (waktu)',examples:[{word:'今週',read:'こんしゅう',meaning:'Minggu ini'},{word:'来週',read:'らいしゅう',meaning:'Minggu depan'},{word:'先週',read:'せんしゅう',meaning:'Minggu lalu'}],sentence:{jp:'来週、試験があります。',id:'Minggu depan ada ujian.'}},
+  {char:'今',level:'N5',strokes:4,on:['コン','キン'],kun:['いま'],meaning:'Sekarang, Saat ini',examples:[{word:'今',read:'いま',meaning:'Sekarang'},{word:'今日',read:'きょう',meaning:'Hari ini'},{word:'今年',read:'ことし',meaning:'Tahun ini'}],sentence:{jp:'今どこにいますか。',id:'Sekarang kamu ada di mana?'}},
+  {char:'午',level:'N5',strokes:4,on:['ゴ'],kun:[''],meaning:'Tengah hari, Siang',examples:[{word:'午前',read:'ごぜん',meaning:'Pagi (AM)'},{word:'午後',read:'ごご',meaning:'Sore (PM)'},{word:'正午',read:'しょうご',meaning:'Tepat tengah hari'}],sentence:{jp:'午後三時に会いましょう。',id:'Mari bertemu jam tiga sore.'}},
+  {char:'半',level:'N5',strokes:5,on:['ハン'],kun:['なか'],meaning:'Setengah',examples:[{word:'三時半',read:'さんじはん',meaning:'Jam setengah empat'},{word:'半分',read:'はんぶん',meaning:'Setengah bagian'},{word:'半年',read:'はんとし',meaning:'Setengah tahun'}],sentence:{jp:'三時半に待ち合わせましょう。',id:'Mari janjian jam setengah empat.'}},
+  {char:'駅',level:'N5',strokes:14,on:['エキ'],kun:[''],meaning:'Stasiun',examples:[{word:'駅',read:'えき',meaning:'Stasiun'},{word:'駅前',read:'えきまえ',meaning:'Depan stasiun'},{word:'終点駅',read:'しゅうてんえき',meaning:'Stasiun akhir'}],sentence:{jp:'駅はここから歩いて五分です。',id:'Stasiun berjalan kaki lima menit dari sini.'}},
+  {char:'店',level:'N5',strokes:8,on:['テン'],kun:['みせ'],meaning:'Toko',examples:[{word:'店',read:'みせ',meaning:'Toko'},{word:'本屋',read:'ほんや',meaning:'Toko buku'},{word:'お店',read:'おみせ',meaning:'Toko (sopan)'}],sentence:{jp:'あのお店はいつも混んでいます。',id:'Toko itu selalu ramai.'}},
+  {char:'魚',level:'N5',strokes:11,on:['ギョ'],kun:['さかな','うお'],meaning:'Ikan',examples:[{word:'魚',read:'さかな',meaning:'Ikan'},{word:'金魚',read:'きんぎょ',meaning:'Ikan mas'},{word:'魚屋',read:'さかなや',meaning:'Toko ikan'}],sentence:{jp:'魚が好きなので毎週食べます。',id:'Karena suka ikan, saya makan setiap minggu.'}},
+  {char:'牛',level:'N5',strokes:4,on:['ギュウ'],kun:['うし'],meaning:'Sapi',examples:[{word:'牛',read:'うし',meaning:'Sapi'},{word:'牛乳',read:'ぎゅうにゅう',meaning:'Susu sapi'},{word:'牛肉',read:'ぎゅうにく',meaning:'Daging sapi'}],sentence:{jp:'毎朝牛乳を飲みます。',id:'Setiap pagi saya minum susu sapi.'}},
+  {char:'馬',level:'N5',strokes:10,on:['バ'],kun:['うま','ま'],meaning:'Kuda',examples:[{word:'馬',read:'うま',meaning:'Kuda'},{word:'馬車',read:'ばしゃ',meaning:'Kereta kuda'},{word:'乗馬',read:'じょうば',meaning:'Berkuda'}],sentence:{jp:'馬に乗ったことがありますか。',id:'Pernahkah kamu naik kuda?'}},
+  {char:'立',level:'N5',strokes:5,on:['リツ','リュウ'],kun:['た','たつ'],meaning:'Berdiri',examples:[{word:'立つ',read:'たつ',meaning:'Berdiri'},{word:'立場',read:'たちば',meaning:'Posisi / Sudut pandang'},{word:'国立',read:'こくりつ',meaning:'Nasional / Negeri'}],sentence:{jp:'バスを待ちながら立っています。',id:'Saya berdiri sambil menunggu bus.'}},
+  {char:'開',level:'N5',strokes:12,on:['カイ'],kun:['あ','あける','ひら'],meaning:'Buka, Membuka',examples:[{word:'開ける',read:'あける',meaning:'Membuka'},{word:'開く',read:'ひらく',meaning:'Terbuka'},{word:'開店',read:'かいてん',meaning:'Pembukaan toko'}],sentence:{jp:'窓を開けてもいいですか。',id:'Bolehkah saya membuka jendela?'}},
+  {char:'悪',level:'N4',strokes:11,on:['アク','オ'],kun:['わる','あ'],meaning:'Jahat, Buruk',examples:[{word:'悪い',read:'わるい',meaning:'Buruk/jahat'},{word:'最悪',read:'さいあく',meaning:'Paling buruk'},{word:'悪化',read:'あっか',meaning:'Memburuk'}],sentence:{jp:'今日は気分が悪いです。',id:'Hari ini saya merasa tidak enak badan.'}},
+  {char:'安',level:'N4',strokes:6,on:['アン'],kun:['やす'],meaning:'Murah, Aman, Tenang',examples:[{word:'安心',read:'あんしん',meaning:'Tenang/lega'},{word:'安全',read:'あんぜん',meaning:'Aman'},{word:'安い',read:'やすい',meaning:'Murah'}],sentence:{jp:'このレストランは安いです。',id:'Restoran ini murah.'}},
+  {char:'暗',level:'N4',strokes:13,on:['アン'],kun:['くら'],meaning:'Gelap',examples:[{word:'暗い',read:'くらい',meaning:'Gelap'},{word:'暗記',read:'あんき',meaning:'Menghafal'},{word:'暗号',read:'あんごう',meaning:'Kode/sandi'}],sentence:{jp:'暗い部屋で本を読まないでください。',id:'Jangan membaca buku di ruangan gelap.'}},
+  {char:'医',level:'N4',strokes:7,on:['イ'],kun:[''],meaning:'Dokter, Pengobatan',examples:[{word:'医者',read:'いしゃ',meaning:'Dokter'},{word:'医院',read:'いいん',meaning:'Klinik'},{word:'医学',read:'いがく',meaning:'Ilmu kedokteran'}],sentence:{jp:'医者に診てもらいました。',id:'Saya diperiksa dokter.'}},
   {char:'意',level:'N4',strokes:13,on:['イ'],kun:[''],meaning:'Maksud, Pikiran',examples:[{word:'意味',read:'いみ',meaning:'Arti/makna'},{word:'意見',read:'いけん',meaning:'Pendapat'},{word:'注意',read:'ちゅうい',meaning:'Perhatian/hati-hati'}]},
   {char:'育',level:'N4',strokes:8,on:['イク'],kun:['そだ','はぐく'],meaning:'Mendidik, Tumbuh',examples:[{word:'教育',read:'きょういく',meaning:'Pendidikan'},{word:'体育',read:'たいいく',meaning:'Olahraga/penjas'},{word:'育てる',read:'そだてる',meaning:'Membesarkan'}]},
   {char:'員',level:'N4',strokes:10,on:['イン'],kun:[''],meaning:'Anggota, Staf',examples:[{word:'会員',read:'かいいん',meaning:'Anggota'},{word:'店員',read:'てんいん',meaning:'Pegawai toko'},{word:'社員',read:'しゃいん',meaning:'Karyawan'}]},
   {char:'院',level:'N4',strokes:10,on:['イン'],kun:[''],meaning:'Gedung, Institusi',examples:[{word:'病院',read:'びょういん',meaning:'Rumah sakit'},{word:'大学院',read:'だいがくいん',meaning:'Pascasarjana'},{word:'美容院',read:'びよういん',meaning:'Salon kecantikan'}]},
   {char:'運',level:'N4',strokes:12,on:['ウン'],kun:['はこ'],meaning:'Nasib, Mengangkut',examples:[{word:'運動',read:'うんどう',meaning:'Olahraga'},{word:'運転',read:'うんてん',meaning:'Menyetir'},{word:'運命',read:'うんめい',meaning:'Nasib/takdir'}]},
   {char:'映',level:'N4',strokes:9,on:['エイ'],kun:['うつ','は'],meaning:'Memantul, Film',examples:[{word:'映画',read:'えいが',meaning:'Film'},{word:'映す',read:'うつす',meaning:'Memproyeksikan'},{word:'上映',read:'じょうえい',meaning:'Penayangan film'}]},
-  {char:'駅',level:'N4',strokes:14,on:['エキ'],kun:[''],meaning:'Stasiun',examples:[{word:'駅前',read:'えきまえ',meaning:'Depan stasiun'},{word:'終点駅',read:'しゅうてんえき',meaning:'Stasiun akhir'},{word:'地下鉄駅',read:'ちかてつえき',meaning:'Stasiun metro'}]},
+  {char:'駅',level:'N4',strokes:14,on:['エキ'],kun:[''],meaning:'Stasiun',examples:[{word:'駅前',read:'えきまえ',meaning:'Depan stasiun'},{word:'終点駅',read:'しゅうてんえき',meaning:'Stasiun akhir'},{word:'地下鉄駅',read:'ちかてつえき',meaning:'Stasiun metro'}],sentence:{jp:'駅はここから遠いですか。',id:'Apakah stasiun jauh dari sini?'}},
   {char:'横',level:'N4',strokes:15,on:['オウ'],kun:['よこ'],meaning:'Samping, Horizontal',examples:[{word:'横断',read:'おうだん',meaning:'Menyeberang'},{word:'横断歩道',read:'おうだんほどう',meaning:'Zebra cross'},{word:'横',read:'よこ',meaning:'Samping'}]},
   {char:'屋',level:'N4',strokes:9,on:['オク'],kun:['や'],meaning:'Toko, Atap',examples:[{word:'八百屋',read:'やおや',meaning:'Toko sayur'},{word:'部屋',read:'へや',meaning:'Kamar'},{word:'屋根',read:'やね',meaning:'Atap'}]},
   {char:'温',level:'N4',strokes:12,on:['オン'],kun:['あたた'],meaning:'Hangat, Suhu',examples:[{word:'温度',read:'おんど',meaning:'Suhu'},{word:'温泉',read:'おんせん',meaning:'Onsen/pemandian air panas'},{word:'気温',read:'きおん',meaning:'Suhu udara'}]},
-  {char:'化',level:'N4',strokes:4,on:['カ','ケ'],kun:['ば'],meaning:'Berubah, Transformasi',examples:[{word:'文化',read:'ぶんか',meaning:'Budaya'},{word:'変化',read:'へんか',meaning:'Perubahan'},{word:'化学',read:'かがく',meaning:'Kimia'}]},
+  {char:'化',level:'N4',strokes:4,on:['カ','ケ'],kun:['ば'],meaning:'Berubah, Transformasi',examples:[{word:'文化',read:'ぶんか',meaning:'Budaya'},{word:'変化',read:'へんか',meaning:'Perubahan'},{word:'化学',read:'かがく',meaning:'Kimia'}],sentence:{jp:'日本の文化を勉強しています。',id:'Saya mempelajari budaya Jepang.'}},
   {char:'界',level:'N4',strokes:9,on:['カイ'],kun:[''],meaning:'Dunia, Batas',examples:[{word:'世界',read:'せかい',meaning:'Dunia'},{word:'限界',read:'げんかい',meaning:'Batas'},{word:'業界',read:'ぎょうかい',meaning:'Industri/sektor'}]},
-  {char:'開',level:'N4',strokes:12,on:['カイ'],kun:['あ','ひら'],meaning:'Membuka',examples:[{word:'開く',read:'あく',meaning:'Terbuka'},{word:'開発',read:'かいはつ',meaning:'Pengembangan'},{word:'公開',read:'こうかい',meaning:'Membuka untuk umum'}]},
+  {char:'開',level:'N4',strokes:12,on:['カイ'],kun:['あ','ひら'],meaning:'Membuka',examples:[{word:'開く',read:'あく',meaning:'Terbuka'},{word:'開発',read:'かいはつ',meaning:'Pengembangan'},{word:'公開',read:'こうかい',meaning:'Membuka untuk umum'}],sentence:{jp:'窓を開けてください。',id:'Tolong buka jendelanya.'}},
   {char:'漢',level:'N4',strokes:13,on:['カン'],kun:[''],meaning:'Kanji, Tiongkok',examples:[{word:'漢字',read:'かんじ',meaning:'Huruf kanji'},{word:'漢語',read:'かんご',meaning:'Kata serapan dari China'},{word:'漢方',read:'かんぽう',meaning:'Pengobatan tradisional China'}]},
-  {char:'館',level:'N4',strokes:16,on:['カン'],kun:['やかた'],meaning:'Gedung, Aula',examples:[{word:'図書館',read:'としょかん',meaning:'Perpustakaan'},{word:'体育館',read:'たいいくかん',meaning:'Gym/aula olahraga'},{word:'旅館',read:'りょかん',meaning:'Penginapan Jepang'}]},
+  {char:'館',level:'N4',strokes:16,on:['カン'],kun:['やかた'],meaning:'Gedung, Aula',examples:[{word:'図書館',read:'としょかん',meaning:'Perpustakaan'},{word:'体育館',read:'たいいくかん',meaning:'Gym/aula olahraga'},{word:'旅館',read:'りょかん',meaning:'Penginapan Jepang'}],sentence:{jp:'美術館へ行きました。',id:'Saya pergi ke museum seni.'}},
   {char:'急',level:'N4',strokes:9,on:['キュウ'],kun:['いそ'],meaning:'Terburu-buru, Darurat',examples:[{word:'急ぐ',read:'いそぐ',meaning:'Terburu-buru'},{word:'急行',read:'きゅうこう',meaning:'Kereta ekspres'},{word:'救急車',read:'きゅうきゅうしゃ',meaning:'Ambulans'}]},
-  {char:'近',level:'N4',strokes:7,on:['キン','コン'],kun:['ちか'],meaning:'Dekat',examples:[{word:'近い',read:'ちかい',meaning:'Dekat'},{word:'最近',read:'さいきん',meaning:'Baru-baru ini'},{word:'近所',read:'きんじょ',meaning:'Lingkungan sekitar'}]},
-  {char:'研',level:'N4',strokes:9,on:['ケン'],kun:['と'],meaning:'Meneliti, Mengasah',examples:[{word:'研究',read:'けんきゅう',meaning:'Penelitian'},{word:'研修',read:'けんしゅう',meaning:'Pelatihan'},{word:'研究者',read:'けんきゅうしゃ',meaning:'Peneliti'}]},
+  {char:'近',level:'N4',strokes:7,on:['キン','コン'],kun:['ちか'],meaning:'Dekat',examples:[{word:'近い',read:'ちかい',meaning:'Dekat'},{word:'最近',read:'さいきん',meaning:'Baru-baru ini'},{word:'近所',read:'きんじょ',meaning:'Lingkungan sekitar'}],sentence:{jp:'駅は近いですか。',id:'Apakah stasiunnya dekat?'}},
+  {char:'研',level:'N4',strokes:9,on:['ケン'],kun:['と'],meaning:'Meneliti, Mengasah',examples:[{word:'研究',read:'けんきゅう',meaning:'Penelitian'},{word:'研修',read:'けんしゅう',meaning:'Pelatihan'},{word:'研究者',read:'けんきゅうしゃ',meaning:'Peneliti'}],sentence:{jp:'大学で研究しています。',id:'Saya melakukan penelitian di universitas.'}},
   {char:'交',level:'N4',strokes:6,on:['コウ'],kun:['ま','まじ','か'],meaning:'Persimpangan, Bergaul',examples:[{word:'交通',read:'こうつう',meaning:'Lalu lintas'},{word:'交換',read:'こうかん',meaning:'Pertukaran'},{word:'外交',read:'がいこう',meaning:'Diplomasi'}]},
   {char:'光',level:'N4',strokes:6,on:['コウ'],kun:['ひかり','ひか'],meaning:'Cahaya, Bersinar',examples:[{word:'光る',read:'ひかる',meaning:'Bersinar'},{word:'観光',read:'かんこう',meaning:'Pariwisata'},{word:'光線',read:'こうせん',meaning:'Sinar cahaya'}]},
   {char:'考',level:'N4',strokes:6,on:['コウ'],kun:['かんが'],meaning:'Berpikir',examples:[{word:'考える',read:'かんがえる',meaning:'Berpikir'},{word:'参考',read:'さんこう',meaning:'Referensi'},{word:'考え方',read:'かんがえかた',meaning:'Cara berpikir'}]},
   {char:'合',level:'N4',strokes:6,on:['ゴウ','ガッ','カッ'],kun:['あ'],meaning:'Sesuai, Bergabung',examples:[{word:'合う',read:'あう',meaning:'Cocok/sesuai'},{word:'集合',read:'しゅうごう',meaning:'Berkumpul'},{word:'場合',read:'ばあい',meaning:'Kasus/situasi'}]},
   {char:'困',level:'N4',strokes:7,on:['コン'],kun:['こま'],meaning:'Kesulitan, Bingung',examples:[{word:'困る',read:'こまる',meaning:'Kesulitan/bingung'},{word:'困難',read:'こんなん',meaning:'Kesulitan'},{word:'貧困',read:'ひんこん',meaning:'Kemiskinan'}]},
-  {char:'試',level:'N4',strokes:13,on:['シ'],kun:['こころ','ため'],meaning:'Mencoba, Ujian',examples:[{word:'試験',read:'しけん',meaning:'Ujian'},{word:'試合',read:'しあい',meaning:'Pertandingan'},{word:'試す',read:'ためす',meaning:'Mencoba'}]},
+  {char:'試',level:'N4',strokes:13,on:['シ'],kun:['こころ','ため'],meaning:'Mencoba, Ujian',examples:[{word:'試験',read:'しけん',meaning:'Ujian'},{word:'試合',read:'しあい',meaning:'Pertandingan'},{word:'試す',read:'ためす',meaning:'Mencoba'}],sentence:{jp:'来週、試験があります。',id:'Minggu depan ada ujian.'}},
   {char:'事',level:'N4',strokes:8,on:['ジ','ズ'],kun:['こと'],meaning:'Hal, Kejadian',examples:[{word:'仕事',read:'しごと',meaning:'Pekerjaan'},{word:'大事',read:'だいじ',meaning:'Penting'},{word:'食事',read:'しょくじ',meaning:'Makan'}]},
   {char:'室',level:'N4',strokes:9,on:['シツ'],kun:['むろ'],meaning:'Ruangan, Kamar',examples:[{word:'教室',read:'きょうしつ',meaning:'Ruang kelas'},{word:'寝室',read:'しんしつ',meaning:'Kamar tidur'},{word:'研究室',read:'けんきゅうしつ',meaning:'Ruang penelitian'}]},
   {char:'集',level:'N4',strokes:12,on:['シュウ'],kun:['あつ'],meaning:'Berkumpul, Mengumpulkan',examples:[{word:'集める',read:'あつめる',meaning:'Mengumpulkan'},{word:'集合',read:'しゅうごう',meaning:'Berkumpul'},{word:'文集',read:'ぶんしゅう',meaning:'Kumpulan tulisan'}]},
-  {char:'習',level:'N4',strokes:11,on:['シュウ'],kun:['なら'],meaning:'Berlatih, Belajar',examples:[{word:'習う',read:'ならう',meaning:'Belajar dari guru'},{word:'練習',read:'れんしゅう',meaning:'Latihan'},{word:'予習',read:'よしゅう',meaning:'Belajar sebelumnya'}]},
+  {char:'習',level:'N4',strokes:11,on:['シュウ'],kun:['なら'],meaning:'Berlatih, Belajar',examples:[{word:'習う',read:'ならう',meaning:'Belajar dari guru'},{word:'練習',read:'れんしゅう',meaning:'Latihan'},{word:'予習',read:'よしゅう',meaning:'Belajar sebelumnya'}],sentence:{jp:'毎日ピアノを練習します。',id:'Saya berlatih piano setiap hari.'}},
   {char:'所',level:'N4',strokes:8,on:['ショ'],kun:['ところ'],meaning:'Tempat',examples:[{word:'場所',read:'ばしょ',meaning:'Tempat'},{word:'台所',read:'だいどころ',meaning:'Dapur'},{word:'住所',read:'じゅうしょ',meaning:'Alamat'}]},
   {char:'助',level:'N4',strokes:7,on:['ジョ'],kun:['たす','すけ'],meaning:'Membantu, Pertolongan',examples:[{word:'助ける',read:'たすける',meaning:'Menolong'},{word:'助言',read:'じょげん',meaning:'Saran'},{word:'救助',read:'きゅうじょ',meaning:'Penyelamatan'}]},
-  {char:'乗',level:'N4',strokes:9,on:['ジョウ'],kun:['の'],meaning:'Naik (kendaraan)',examples:[{word:'乗る',read:'のる',meaning:'Naik/menaiki'},{word:'乗り換え',read:'のりかえ',meaning:'Transit/ganti kendaraan'},{word:'乗客',read:'じょうきゃく',meaning:'Penumpang'}]},
+  {char:'乗',level:'N4',strokes:9,on:['ジョウ'],kun:['の'],meaning:'Naik (kendaraan)',examples:[{word:'乗る',read:'のる',meaning:'Naik/menaiki'},{word:'乗り換え',read:'のりかえ',meaning:'Transit/ganti kendaraan'},{word:'乗客',read:'じょうきゃく',meaning:'Penumpang'}],sentence:{jp:'電車に乗りましょう。',id:'Mari naik kereta.'}},
   {char:'信',level:'N4',strokes:9,on:['シン'],kun:[''],meaning:'Percaya, Keyakinan',examples:[{word:'信じる',read:'しんじる',meaning:'Mempercayai'},{word:'自信',read:'じしん',meaning:'Kepercayaan diri'},{word:'信号',read:'しんごう',meaning:'Lampu lalu lintas'}]},
-  {char:'親',level:'N4',strokes:16,on:['シン'],kun:['おや','した'],meaning:'Orang tua, Akrab',examples:[{word:'親切',read:'しんせつ',meaning:'Ramah/baik hati'},{word:'両親',read:'りょうしん',meaning:'Kedua orang tua'},{word:'親友',read:'しんゆう',meaning:'Sahabat dekat'}]},
+  {char:'親',level:'N4',strokes:16,on:['シン'],kun:['おや','した'],meaning:'Orang tua, Akrab',examples:[{word:'親切',read:'しんせつ',meaning:'Ramah/baik hati'},{word:'両親',read:'りょうしん',meaning:'Kedua orang tua'},{word:'親友',read:'しんゆう',meaning:'Sahabat dekat'}],sentence:{jp:'親に感謝しています。',id:'Saya bersyukur kepada orang tua.'}},
   {char:'世',level:'N4',strokes:5,on:['セ','セイ'],kun:['よ'],meaning:'Dunia, Generasi',examples:[{word:'世界',read:'せかい',meaning:'Dunia'},{word:'世紀',read:'せいき',meaning:'Abad'},{word:'世話',read:'せわ',meaning:'Merawat/mengurus'}]},
-  {char:'切',level:'N4',strokes:4,on:['セツ','サイ'],kun:['き','き'],meaning:'Memotong, Penting',examples:[{word:'大切',read:'たいせつ',meaning:'Penting/berharga'},{word:'切る',read:'きる',meaning:'Memotong'},{word:'切符',read:'きっぷ',meaning:'Tiket'}]},
+  {char:'切',level:'N4',strokes:4,on:['セツ','サイ'],kun:['き','き'],meaning:'Memotong, Penting',examples:[{word:'大切',read:'たいせつ',meaning:'Penting/berharga'},{word:'切る',read:'きる',meaning:'Memotong'},{word:'切符',read:'きっぷ',meaning:'Tiket'}],sentence:{jp:'チケットを切ってください。',id:'Tolong potong tiketnya.'}},
   {char:'説',level:'N4',strokes:14,on:['セツ','ゼイ'],kun:['と'],meaning:'Menjelaskan, Teori',examples:[{word:'説明',read:'せつめい',meaning:'Penjelasan'},{word:'小説',read:'しょうせつ',meaning:'Novel'},{word:'伝説',read:'でんせつ',meaning:'Legenda'}]},
   {char:'洗',level:'N4',strokes:9,on:['セン'],kun:['あら'],meaning:'Mencuci',examples:[{word:'洗う',read:'あらう',meaning:'Mencuci'},{word:'洗濯',read:'せんたく',meaning:'Mencuci pakaian'},{word:'洗面所',read:'せんめんじょ',meaning:'Wastafel/kamar mandi'}]},
   {char:'相',level:'N4',strokes:9,on:['ソウ','ショウ'],kun:['あい'],meaning:'Saling, Wajah',examples:[{word:'相談',read:'そうだん',meaning:'Konsultasi'},{word:'首相',read:'しゅしょう',meaning:'Perdana menteri'},{word:'相手',read:'あいて',meaning:'Lawan bicara/pasangan'}]},
@@ -2367,26 +2409,26 @@ const kanjiDB = [
   {char:'代',level:'N4',strokes:5,on:['ダイ','タイ'],kun:['か','しろ'],meaning:'Mengganti, Era',examples:[{word:'時代',read:'じだい',meaning:'Zaman/era'},{word:'代わり',read:'かわり',meaning:'Pengganti'},{word:'現代',read:'げんだい',meaning:'Zaman modern'}]},
   {char:'待',level:'N4',strokes:9,on:['タイ'],kun:['ま'],meaning:'Menunggu',examples:[{word:'待つ',read:'まつ',meaning:'Menunggu'},{word:'期待',read:'きたい',meaning:'Harapan'},{word:'待合室',read:'まちあいしつ',meaning:'Ruang tunggu'}]},
   {char:'地',level:'N4',strokes:6,on:['チ','ジ'],kun:[''],meaning:'Tanah, Wilayah',examples:[{word:'地図',read:'ちず',meaning:'Peta'},{word:'地下',read:'ちか',meaning:'Bawah tanah'},{word:'地震',read:'じしん',meaning:'Gempa bumi'}]},
-  {char:'着',level:'N4',strokes:12,on:['チャク'],kun:['き','つ'],meaning:'Mengenakan, Tiba',examples:[{word:'着る',read:'きる',meaning:'Memakai (baju)'},{word:'到着',read:'とうちゃく',meaning:'Kedatangan/tiba'},{word:'着替え',read:'きがえ',meaning:'Ganti pakaian'}]},
+  {char:'着',level:'N4',strokes:12,on:['チャク'],kun:['き','つ'],meaning:'Mengenakan, Tiba',examples:[{word:'着る',read:'きる',meaning:'Memakai (baju)'},{word:'到着',read:'とうちゃく',meaning:'Kedatangan/tiba'},{word:'着替え',read:'きがえ',meaning:'Ganti pakaian'}],sentence:{jp:'空港に着きました。',id:'Saya sudah tiba di bandara.'}},
   {char:'注',level:'N4',strokes:8,on:['チュウ'],kun:['そそ'],meaning:'Mencurahkan, Perhatian',examples:[{word:'注意',read:'ちゅうい',meaning:'Perhatian/hati-hati'},{word:'注文',read:'ちゅうもん',meaning:'Pesanan'},{word:'注射',read:'ちゅうしゃ',meaning:'Suntikan'}]},
   {char:'低',level:'N4',strokes:7,on:['テイ'],kun:['ひく'],meaning:'Rendah',examples:[{word:'低い',read:'ひくい',meaning:'Rendah'},{word:'低下',read:'ていか',meaning:'Penurunan'},{word:'最低',read:'さいてい',meaning:'Minimum/paling rendah'}]},
   {char:'点',level:'N4',strokes:9,on:['テン'],kun:[''],meaning:'Titik, Nilai',examples:[{word:'点数',read:'てんすう',meaning:'Nilai/skor'},{word:'問題点',read:'もんだいてん',meaning:'Poin masalah'},{word:'観点',read:'かんてん',meaning:'Sudut pandang'}]},
   {char:'都',level:'N4',strokes:11,on:['ト','ツ'],kun:['みやこ'],meaning:'Ibukota, Metropolitan',examples:[{word:'東京都',read:'とうきょうと',meaning:'Prefektur Tokyo'},{word:'都市',read:'とし',meaning:'Kota'},{word:'都合',read:'つごう',meaning:'Kenyamanan/jadwal'}]},
   {char:'度',level:'N4',strokes:9,on:['ド','ト','タク'],kun:['たび'],meaning:'Derajat, Kali',examples:[{word:'温度',read:'おんど',meaning:'Suhu'},{word:'今度',read:'こんど',meaning:'Kali ini/berikutnya'},{word:'態度',read:'たいど',meaning:'Sikap'}]},
   {char:'特',level:'N4',strokes:10,on:['トク'],kun:[''],meaning:'Khusus, Istimewa',examples:[{word:'特別',read:'とくべつ',meaning:'Istimewa/khusus'},{word:'特急',read:'とっきゅう',meaning:'Kereta super ekspres'},{word:'特徴',read:'とくちょう',meaning:'Karakteristik'}]},
-  {char:'道',level:'N4',strokes:12,on:['ドウ','トウ'],kun:['みち'],meaning:'Jalan, Cara',examples:[{word:'道路',read:'どうろ',meaning:'Jalan raya'},{word:'北海道',read:'ほっかいどう',meaning:'Hokkaido'},{word:'道具',read:'どうぐ',meaning:'Alat/perkakas'}]},
+  {char:'道',level:'N4',strokes:12,on:['ドウ','トウ'],kun:['みち'],meaning:'Jalan, Cara',examples:[{word:'道路',read:'どうろ',meaning:'Jalan raya'},{word:'北海道',read:'ほっかいどう',meaning:'Hokkaido'},{word:'道具',read:'どうぐ',meaning:'Alat/perkakas'}],sentence:{jp:'この道はどこへ続きますか。',id:'Jalan ini menuju ke mana?'}},
   {char:'転',level:'N4',strokes:11,on:['テン'],kun:['ころ','まろ'],meaning:'Berputar, Jatuh',examples:[{word:'運転',read:'うんてん',meaning:'Menyetir'},{word:'転ぶ',read:'ころぶ',meaning:'Jatuh/terjatuh'},{word:'転校',read:'てんこう',meaning:'Pindah sekolah'}]},
   {char:'波',level:'N4',strokes:8,on:['ハ'],kun:['なみ'],meaning:'Gelombang, Ombak',examples:[{word:'波',read:'なみ',meaning:'Ombak'},{word:'電波',read:'でんぱ',meaning:'Gelombang elektromagnetik'},{word:'波長',read:'はちょう',meaning:'Panjang gelombang'}]},
   {char:'配',level:'N4',strokes:10,on:['ハイ'],kun:['くば'],meaning:'Mendistribusikan, Khawatir',examples:[{word:'配る',read:'くばる',meaning:'Membagikan'},{word:'心配',read:'しんぱい',meaning:'Khawatir'},{word:'宅配',read:'たくはい',meaning:'Pengiriman ke rumah'}]},
   {char:'反',level:'N4',strokes:4,on:['ハン','タン'],kun:['そ'],meaning:'Berlawanan, Memberontak',examples:[{word:'反対',read:'はんたい',meaning:'Berlawanan/menentang'},{word:'反省',read:'はんせい',meaning:'Introspeksi'},{word:'違反',read:'いはん',meaning:'Pelanggaran'}]},
   {char:'悲',level:'N4',strokes:12,on:['ヒ'],kun:['かな'],meaning:'Sedih',examples:[{word:'悲しい',read:'かなしい',meaning:'Sedih'},{word:'悲劇',read:'ひげき',meaning:'Tragedi'},{word:'悲鳴',read:'ひめい',meaning:'Jeritan'}]},
   {char:'美',level:'N4',strokes:9,on:['ビ','ミ'],kun:['うつく'],meaning:'Indah, Cantik',examples:[{word:'美しい',read:'うつくしい',meaning:'Indah/cantik'},{word:'美術',read:'びじゅつ',meaning:'Seni rupa'},{word:'美容',read:'びよう',meaning:'Kecantikan'}]},
-  {char:'病',level:'N4',strokes:10,on:['ビョウ','ヘイ'],kun:['や'],meaning:'Sakit, Penyakit',examples:[{word:'病院',read:'びょういん',meaning:'Rumah sakit'},{word:'病気',read:'びょうき',meaning:'Sakit/penyakit'},{word:'看病',read:'かんびょう',meaning:'Merawat orang sakit'}]},
+  {char:'病',level:'N4',strokes:10,on:['ビョウ','ヘイ'],kun:['や'],meaning:'Sakit, Penyakit',examples:[{word:'病院',read:'びょういん',meaning:'Rumah sakit'},{word:'病気',read:'びょうき',meaning:'Sakit/penyakit'},{word:'看病',read:'かんびょう',meaning:'Merawat orang sakit'}],sentence:{jp:'病院へ行きました。',id:'Saya pergi ke rumah sakit.'}},
   {char:'部',level:'N4',strokes:11,on:['ブ'],kun:[''],meaning:'Bagian, Departemen',examples:[{word:'部屋',read:'へや',meaning:'Kamar'},{word:'全部',read:'ぜんぶ',meaning:'Semuanya'},{word:'部分',read:'ぶぶん',meaning:'Bagian'}]},
   {char:'歩',level:'N4',strokes:8,on:['ホ','ブ','フ'],kun:['ある','あゆ'],meaning:'Berjalan',examples:[{word:'歩く',read:'あるく',meaning:'Berjalan kaki'},{word:'散歩',read:'さんぽ',meaning:'Jalan-jalan'},{word:'歩道',read:'ほどう',meaning:'Trotoar'}]},
   {char:'用',level:'N4',strokes:5,on:['ヨウ'],kun:['もち'],meaning:'Penggunaan, Urusan',examples:[{word:'使用',read:'しよう',meaning:'Penggunaan'},{word:'用意',read:'ようい',meaning:'Persiapan'},{word:'利用',read:'りよう',meaning:'Pemanfaatan'}]},
   {char:'理',level:'N4',strokes:11,on:['リ'],kun:[''],meaning:'Alasan, Mengatur',examples:[{word:'理由',read:'りゆう',meaning:'Alasan'},{word:'料理',read:'りょうり',meaning:'Masakan'},{word:'心理',read:'しんり',meaning:'Psikologi'}]},
-  {char:'料',level:'N4',strokes:10,on:['リョウ'],kun:[''],meaning:'Bahan, Biaya',examples:[{word:'料理',read:'りょうり',meaning:'Masakan'},{word:'料金',read:'りょうきん',meaning:'Biaya/tarif'},{word:'給料',read:'きゅうりょう',meaning:'Gaji'}]},
+  {char:'料',level:'N4',strokes:10,on:['リョウ'],kun:[''],meaning:'Bahan, Biaya',examples:[{word:'料理',read:'りょうり',meaning:'Masakan'},{word:'料金',read:'りょうきん',meaning:'Biaya/tarif'},{word:'給料',read:'きゅうりょう',meaning:'Gaji'}],sentence:{jp:'料理を作るのが好きです。',id:'Saya suka memasak.'}},
   {char:'旅',level:'N4',strokes:10,on:['リョ'],kun:['たび'],meaning:'Perjalanan',examples:[{word:'旅行',read:'りょこう',meaning:'Perjalanan wisata'},{word:'旅館',read:'りょかん',meaning:'Penginapan Jepang'},{word:'旅人',read:'たびびと',meaning:'Musafir'}]},
   {char:'利',level:'N4',strokes:7,on:['リ'],kun:['き'],meaning:'Keuntungan, Manfaat',examples:[{word:'便利',read:'べんり',meaning:'Praktis/nyaman'},{word:'利用',read:'りよう',meaning:'Pemanfaatan'},{word:'利益',read:'りえき',meaning:'Keuntungan'}]},
 ];
@@ -3855,8 +3897,15 @@ function renderHafalRadikal() {
     document.getElementById('hf-rad-num').textContent = `(${hfRadIndex + 1})`;
     document.getElementById('hf-rad-char').textContent = k.char;
     document.getElementById('hf-rad-badge').textContent = k.level;
-    document.getElementById('hf-rad-on').textContent = '音: ' + (k.on || []).join('、');
-    document.getElementById('hf-rad-kun').textContent = '訓: ' + (k.kun || []).map(r => r.replace('.', '')).join('、');
+    // Reading badges — each with own speak button
+    const onList = (k.on || []).filter(r => r);
+    const kunList = (k.kun || []).filter(r => r);
+    document.getElementById('hf-rad-on').innerHTML = onList.length
+        ? onList.map(r => `<span class="hf-rad-on">音: ${r}<button class="hf-read-speak" onclick="event.stopPropagation();speakText('${r}')">🔊</button></span>`).join('')
+        : '<span style="color:#4b5563;font-size:0.78rem;">—</span>';
+    document.getElementById('hf-rad-kun').innerHTML = kunList.length
+        ? kunList.map(r => { const clean = r.replace('.',''); return `<span class="hf-rad-kun">訓: ${clean}<button class="hf-read-speak" onclick="event.stopPropagation();speakText('${clean.replace(/'/g,"\\'")}')">🔊</button></span>`; }).join('')
+        : '<span style="color:#4b5563;font-size:0.78rem;">—</span>';
     document.getElementById('hf-rad-meaning').textContent = k.meaning || '';
     document.getElementById('hf-rad-strokes').textContent = k.strokes || '?';
 
@@ -3885,6 +3934,7 @@ function renderHafalRadikal() {
     if(k.examples && k.examples.length) {
         examplesEl.innerHTML = k.examples.map(ex =>
             `<div class="hf-rad-ex-item">
+                <button onclick="speakText('${ex.word.replace(/'/g,"\\'")}');event.stopPropagation();" style="padding:4px 8px;border-radius:7px;border:1.5px solid rgba(94,234,212,0.35);background:rgba(94,234,212,0.08);color:#5eead4;font-size:0.72rem;cursor:pointer;white-space:nowrap;flex-shrink:0;">🔊</button>
                 <div class="hf-rad-ex-jp">${ex.word}</div>
                 <div class="hf-rad-ex-read">（${ex.read}）</div>
                 <div class="hf-rad-ex-id">${ex.meaning}</div>
@@ -3898,6 +3948,22 @@ function renderHafalRadikal() {
     const mn = HAFAL_MNEMONICS[k.char] || `Kanji ${k.char} (${k.meaning}) — coba buat cerita sendiri yang menghubungkan bentuk dan arti!`;
     document.getElementById('hf-rad-mnemonic').textContent = `"${mn}"`;
 
+    // Contoh kalimat
+    const sentEl = document.getElementById('hf-rad-sentence');
+    if(k.sentence) {
+        const safeJp = k.sentence.jp.replace(/'/g, "\\'");
+        sentEl.innerHTML = `
+            <div class="hf-rad-sentence-box">
+                <button class="hf-sent-speak" onclick="speakText('${safeJp}')">🔊 Dengar</button>
+                <div class="hf-sent-texts">
+                    <div class="hf-sent-jp">${k.sentence.jp}</div>
+                    <div class="hf-sent-id">${k.sentence.id}</div>
+                </div>
+            </div>`;
+    } else {
+        sentEl.innerHTML = `<div style="font-size:0.78rem;color:#4b5563;padding:4px 0;">Belum ada contoh kalimat.</div>`;
+    }
+
     // Mastered button
     const mastBtn = document.getElementById('hf-rad-mastered-btn');
     mastBtn.className = 'hf-rad-mastered-btn' + (isMastered ? ' mastered' : '');
@@ -3905,9 +3971,6 @@ function renderHafalRadikal() {
 
     // Mini grid
     renderHfMiniGrid();
-
-    // Auto-speak kunyomi/onyomi saat kartu muncul (delay kecil biar render dulu)
-    setTimeout(() => hfSpeak(), 300);
 }
 
 function renderHfMiniGrid() {
@@ -3948,12 +4011,41 @@ function getMasteredSet() {
     try { return new Set(JSON.parse(localStorage.getItem('masteredKanji') || '[]')); } catch(e) { return new Set(); }
 }
 
-function hfSpeak() {
+function hfSpeak(type) {
     const k = hfRadPool[hfRadIndex];
     if(!k) return;
-    // Prioritas: kunyomi pertama → onyomi → char
-    const reading = (k.kun && k.kun[0]) ? k.kun[0].replace('.','') : ((k.on && k.on[0]) ? k.on[0] : k.char);
-    speakText(reading);
+    if(_isMuted) return;
+    if(!('speechSynthesis' in window)) return;
+
+    const on  = k.on  && k.on[0]  ? k.on[0]  : '';
+    const kun = k.kun && k.kun[0] ? k.kun[0].replace('.','') : '';
+    const voice = getVoice();
+
+    let text = '';
+    if(type === 'on')      text = on  || k.char;
+    else if(type === 'kun') text = kun || on || k.char;
+    else if(type === 'example') {
+        const ex = k.examples && k.examples[0];
+        text = ex ? ex.word : k.char;
+    } else {
+        // default: baca kanji + on + kun berurutan
+        const parts = [k.char, on, kun].filter((v, i, arr) => v && arr.indexOf(v) === i);
+        window.speechSynthesis.cancel();
+        parts.forEach((part, i) => {
+            const utt = new SpeechSynthesisUtterance(part);
+            utt.lang = 'ja-JP'; utt.rate = 0.85;
+            if(voice) utt.voice = voice;
+            if(i > 0) { const p = new SpeechSynthesisUtterance(''); p.lang='ja-JP'; p.volume=0; window.speechSynthesis.speak(p); }
+            window.speechSynthesis.speak(utt);
+        });
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'ja-JP'; utt.rate = 0.85;
+    if(voice) utt.voice = voice;
+    window.speechSynthesis.speak(utt);
 }
 
 function kmSpeak(type) {
@@ -4339,8 +4431,12 @@ function openKanjiModal(k) {
     document.getElementById('km-char').textContent = k.char;
     document.getElementById('km-level-badge').innerHTML = `<span class="kc-level ${k.level.toLowerCase()}" style="font-size:0.8rem;padding:3px 10px">${k.level}</span>`;
     document.getElementById('km-stroke').textContent = `${k.strokes} coretan`;
-    document.getElementById('km-on').innerHTML = k.on.map(r => `<span class="km-reading km-reading-on">${r}</span>`).join('');
-    document.getElementById('km-kun').innerHTML = k.kun.map(r => `<span class="km-reading km-reading-kun">${r}</span>`).join('');
+    document.getElementById('km-on').innerHTML = k.on.map(r =>
+        `<span class="km-reading km-reading-on">${r}<button class="km-read-speak" onclick="event.stopPropagation();speakText('${r}')">🔊</button></span>`
+    ).join('');
+    document.getElementById('km-kun').innerHTML = k.kun.filter(r=>r).map(r =>
+        `<span class="km-reading km-reading-kun">${r.replace('.','')}<button class="km-read-speak" onclick="event.stopPropagation();speakText('${r.replace('.','').replace(/'/g,"\\'")}')">🔊</button></span>`
+    ).join('');
     document.getElementById('km-meaning').textContent = k.meaning;
     
     const exList = document.getElementById('km-examples');
