@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>日本語 Dojo — Belajar Bahasa Jepang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -17,7 +19,9 @@
     --glow-teal:0 0 20px rgba(0,212,170,0.3);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'DM Sans','Noto Sans JP',sans-serif;background:var(--bg);color:var(--rice);min-height:100vh;padding-bottom:70px;}
+  body{font-family:'DM Sans','Noto Sans JP','Yu Gothic','Meiryo','Hiragino Sans','MS Gothic',sans-serif;background:var(--bg);color:var(--rice);min-height:100vh;padding-bottom:70px;}
+  /* Fallback font stack untuk kanji saat offline */
+  .nj, [class*="kc-"], [class*="km-char"], [class*="hf-rad-char"], [class*="hf-kanji"], [class*="hfc-char"], [class*="hf-mini-cell"], [class*="hf-rad-comp-char"], [class*="srs-card-jp"], [class*="wotd-jp"], [class*="kamus-card-jp"]{font-family:'Noto Sans JP','Yu Gothic','Meiryo','Hiragino Sans','MS Gothic',sans-serif !important;}
 
   /* TOP NAV — only logo + furigana + voice */
   nav:not(.bottom-nav){background:rgba(13,13,26,0.95);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:8px 20px;min-height:56px;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);gap:10px;}
@@ -142,6 +146,85 @@
   .mod-icon-wrap{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;background:var(--mod-bg,rgba(168,85,247,0.12));border:1px solid var(--mod-border,rgba(168,85,247,0.2));}
   .mod-card h3{font-size:0.9rem;font-weight:700;margin-bottom:2px;color:var(--rice);}
   .mod-card p{font-size:0.72rem;color:#6b7280;line-height:1.4;}
+
+  /* ── HAFAL KANJI ───────────────────────────────────── */
+  .hf-wrap{max-width:720px;margin:0 auto;padding:16px 16px 80px;}
+  .hf-hero{text-align:center;padding:20px 16px 10px;}
+  .hf-hero-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--rice);margin-bottom:4px;}
+  .hf-hero-title span{background:linear-gradient(90deg,var(--purple),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .hf-hero-sub{font-size:0.8rem;color:#6b7280;margin-bottom:16px;}
+  .hf-mode-tabs{display:flex;gap:8px;justify-content:center;margin-bottom:4px;}
+  .hf-tab{padding:9px 24px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:#9ca3af;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer;transition:all .2s;}
+  .hf-tab.active{background:linear-gradient(135deg,var(--purple),var(--teal));border-color:transparent;color:#fff;}
+  .hf-level-row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+  .hf-lv-btn{padding:6px 18px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:#9ca3af;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.78rem;cursor:pointer;transition:all .2s;}
+  .hf-lv-btn.active{background:var(--purple);border-color:var(--purple);color:#fff;}
+
+  /* KATEGORI MODE */
+  .hf-cat-block{margin-bottom:18px;}
+  .hf-cat-header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(0,212,170,0.06));border:1.5px solid rgba(168,85,247,0.25);border-radius:14px;cursor:pointer;transition:all .2s;margin-bottom:1px;}
+  .hf-cat-header:hover{border-color:var(--purple);}
+  .hf-cat-icon{font-size:1.5rem;}
+  .hf-cat-name{font-size:0.95rem;font-weight:800;color:var(--rice);flex:1;}
+  .hf-cat-count{font-size:0.72rem;color:#6b7280;font-weight:600;}
+  .hf-cat-arrow{color:#6b7280;font-size:0.8rem;transition:transform .2s;}
+  .hf-cat-header.open .hf-cat-arrow{transform:rotate(90deg);}
+  .hf-cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;padding:10px 0 4px;display:none;}
+  .hf-cat-grid.open{display:grid;}
+  .hf-kanji-cell{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:10px 8px;text-align:center;cursor:pointer;transition:all .2s;position:relative;}
+  .hf-kanji-cell:hover{border-color:var(--purple);transform:translateY(-2px);}
+  .hf-kanji-cell.mastered{border-color:rgba(0,212,170,0.5);background:rgba(0,212,170,0.06);}
+  .hf-kanji-cell .hfc-char{font-family:'Noto Sans JP','Yu Gothic','Meiryo','Hiragino Sans','MS Gothic',sans-serif;font-size:2rem;font-weight:900;color:#fff;line-height:1;}
+  .hf-kanji-cell .hfc-on{font-size:0.62rem;color:#5eead4;font-weight:700;margin-top:3px;font-family:'Noto Sans JP',sans-serif;}
+  .hf-kanji-cell .hfc-kun{font-size:0.62rem;color:#fb923c;font-weight:600;font-family:'Noto Sans JP',sans-serif;}
+  .hf-kanji-cell .hfc-id{font-size:0.65rem;color:#9ca3af;margin-top:2px;}
+  .hf-kanji-cell .hfc-check{position:absolute;top:4px;right:5px;font-size:0.65rem;color:var(--teal);}
+
+  /* RADIKAL MODE */
+  .hf-rad-prog-wrap{margin-bottom:14px;}
+  .hf-rad-prog-info{display:flex;justify-content:space-between;font-size:0.72rem;color:#6b7280;margin-bottom:5px;}
+  .hf-rad-prog-bar{height:6px;background:rgba(255,255,255,0.06);border-radius:99px;overflow:hidden;}
+  .hf-rad-prog-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--teal));border-radius:99px;transition:width .4s;}
+  .hf-rad-card{background:linear-gradient(145deg,#1a0d35,#0d1f35);border:1.5px solid rgba(168,85,247,0.3);border-radius:22px;padding:22px 20px;position:relative;overflow:hidden;}
+  .hf-rad-card::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 90% 10%,rgba(0,212,170,0.07),transparent 50%);pointer-events:none;}
+  .hf-rad-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .hf-rad-num{font-size:1rem;color:#6b7280;font-weight:700;}
+  .hf-rad-char{font-family:'Noto Sans JP','Yu Gothic','Meiryo','Hiragino Sans','MS Gothic',sans-serif;font-size:4.5rem;font-weight:900;color:#fff;line-height:1;text-shadow:0 2px 20px rgba(168,85,247,0.4);}
+  .hf-rad-badge{background:rgba(168,85,247,0.2);border:1px solid rgba(168,85,247,0.4);color:var(--purple2);border-radius:8px;padding:3px 12px;font-size:0.72rem;font-weight:800;letter-spacing:1px;}
+  .hf-rad-reading-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
+  .hf-rad-on{font-family:'Noto Sans JP',sans-serif;font-size:0.85rem;color:#5eead4;font-weight:700;background:rgba(94,234,212,0.1);border:1px solid rgba(94,234,212,0.25);border-radius:8px;padding:3px 10px;}
+  .hf-rad-kun{font-family:'Noto Sans JP',sans-serif;font-size:0.85rem;color:#fb923c;font-weight:700;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);border-radius:8px;padding:3px 10px;}
+  .hf-rad-meaning{font-size:1.15rem;font-weight:800;color:var(--gold);margin-bottom:16px;}
+  .hf-rad-formula-label,.hf-rad-section-label{font-size:0.68rem;color:#6b7280;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:8px;margin-top:14px;}
+  .hf-rad-formula{display:flex;align-items:center;justify-content:center;gap:14px;background:rgba(0,0,0,0.2);border-radius:14px;padding:14px 10px;margin-bottom:4px;flex-wrap:wrap;}
+  .hf-rad-component{text-align:center;}
+  .hf-rad-comp-char{font-family:'Noto Sans JP','Yu Gothic','Meiryo','Hiragino Sans','MS Gothic',sans-serif;font-size:2.2rem;font-weight:900;line-height:1;}
+  .hf-rad-comp-char.red{color:#ef4444;}
+  .hf-rad-comp-char.blue{color:#60a5fa;}
+  .hf-rad-comp-char.main{color:#fff;}
+  .hf-rad-comp-lbl{font-size:0.68rem;color:#9ca3af;margin-top:4px;}
+  .hf-rad-op{font-size:1.4rem;color:#6b7280;font-weight:900;}
+  .hf-rad-examples{display:flex;flex-direction:column;gap:6px;}
+  .hf-rad-ex-item{display:flex;align-items:baseline;gap:8px;background:rgba(255,255,255,0.04);border-radius:9px;padding:8px 12px;}
+  .hf-rad-ex-jp{font-family:'Noto Sans JP',sans-serif;font-size:0.95rem;color:#e2e8f0;font-weight:600;}
+  .hf-rad-ex-read{font-size:0.72rem;color:#5eead4;font-family:'Noto Sans JP',sans-serif;}
+  .hf-rad-ex-roma{font-size:0.72rem;color:#6b7280;}
+  .hf-rad-ex-id{font-size:0.75rem;color:var(--gold);margin-left:auto;}
+  .hf-rad-mnemonic{background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);border-radius:12px;padding:12px 14px;font-size:0.82rem;color:#fde68a;line-height:1.7;font-style:italic;}
+  .hf-rad-stroke-row{display:flex;align-items:center;gap:8px;margin-top:14px;}
+  .hf-rad-stroke-label{font-size:0.72rem;color:#6b7280;}
+  .hf-rad-stroke-val{background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:8px;padding:2px 12px;color:var(--purple2);font-weight:800;font-size:0.85rem;}
+  .hf-rad-nav{display:flex;gap:8px;margin-top:14px;justify-content:space-between;align-items:center;}
+  .hf-rad-nav-btn{padding:10px 18px;border-radius:12px;border:1.5px solid var(--border);background:var(--card);color:var(--rice);font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer;transition:all .2s;}
+  .hf-rad-nav-btn:hover{border-color:var(--purple);background:rgba(168,85,247,0.1);}
+  .hf-rad-mastered-btn{padding:10px 14px;border-radius:12px;border:1.5px solid rgba(0,212,170,0.4);background:rgba(0,212,170,0.08);color:var(--teal);font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.78rem;cursor:pointer;transition:all .2s;}
+  .hf-rad-mastered-btn.mastered{background:rgba(0,212,170,0.2);border-color:var(--teal);}
+  .hf-mini-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:5px;max-height:200px;overflow-y:auto;padding:4px 0;}
+  .hf-mini-cell{font-family:'Noto Sans JP',sans-serif;font-size:1rem;font-weight:900;text-align:center;padding:8px 4px;border-radius:8px;border:1.5px solid var(--border);background:var(--card);cursor:pointer;color:#e2e8f0;transition:all .15s;}
+  .hf-mini-cell:hover{border-color:var(--purple);}
+  .hf-mini-cell.active{border-color:var(--teal);background:rgba(0,212,170,0.15);color:var(--teal);}
+  .hf-mini-cell.mastered{color:var(--teal);border-color:rgba(0,212,170,0.3);}
+  /* ──────────────────────────────────────────────────── */
 
   /* ── DASHBOARD ────────────────────────────────────── */
   .db-wrap{max-width:760px;margin:0 auto;padding:20px 16px 40px;}
@@ -1085,6 +1168,7 @@
   <button class="bnav-item" id="bnav-kana" onclick="showPage('kana')"><span class="bnav-icon">あ</span>Kana</button>
   <button class="bnav-item" id="bnav-menulis" onclick="showPage('menulis')"><span class="bnav-icon">✏️</span>Menulis</button>
   <button class="bnav-item" id="bnav-fukushuu" onclick="showPage('fukushuu')"><span class="bnav-icon">🔁</span>SRS</button>
+  <button class="bnav-item" id="bnav-hafal" onclick="showPage('hafal')"><span class="bnav-icon">🧠</span>Hafal</button>
   <button class="bnav-item" id="bnav-harian" onclick="showPage('harian')"><span class="bnav-icon">🔥</span>60 Hari</button>
   <button class="bnav-item" id="bnav-dashboard" onclick="showPage('dashboard')"><span class="bnav-icon">📊</span>Dasbor</button>
   <button class="bnav-item" id="bnav-kaiwa" onclick="showPage('kaiwa')"><span class="bnav-icon">🎤</span>Kaiwa</button>
@@ -1329,6 +1413,89 @@
   </div>
 </div>
 
+<!-- HAFAL KANJI PAGE -->
+<div id="page-hafal" class="page">
+  <div class="hf-wrap">
+    <div class="hf-hero">
+      <div class="hf-hero-title">🧠 Hafal <span>Kanji</span></div>
+      <div class="hf-hero-sub">Dua cara belajar: per kategori atau kartu radikal bergambar</div>
+      <div class="hf-mode-tabs">
+        <button class="hf-tab active" id="hf-tab-kategori" onclick="switchHafal('kategori')">📋 Per Kategori</button>
+        <button class="hf-tab" id="hf-tab-radikal" onclick="switchHafal('radikal')">🃏 Kartu Radikal</button>
+      </div>
+    </div>
+
+    <!-- MODE 1: KATEGORI LIST -->
+    <div id="hf-kategori" class="hf-section">
+      <div class="hf-level-row">
+        <button class="hf-lv-btn active" id="hflv-N5" onclick="setHafalLevel('N5')">N5 — 100 Kanji</button>
+        <button class="hf-lv-btn" id="hflv-N4" onclick="setHafalLevel('N4')">N4 — 88 Kanji</button>
+      </div>
+      <div id="hf-cat-list"></div>
+    </div>
+
+    <!-- MODE 2: KARTU RADIKAL -->
+    <div id="hf-radikal" class="hf-section" style="display:none;">
+      <div class="hf-level-row">
+        <button class="hf-lv-btn active" id="hfrlv-N5" onclick="setHafalRadikalLevel('N5')">N5</button>
+        <button class="hf-lv-btn" id="hfrlv-N4" onclick="setHafalRadikalLevel('N4')">N4</button>
+        <button class="hf-lv-btn" id="hfrlv-all" onclick="setHafalRadikalLevel('all')">Semua</button>
+      </div>
+      <!-- Progress bar -->
+      <div class="hf-rad-prog-wrap">
+        <div class="hf-rad-prog-info">
+          <span id="hf-rad-counter">1 / 1</span>
+          <span id="hf-rad-mastered-count" style="color:var(--teal);font-weight:700;"></span>
+        </div>
+        <div class="hf-rad-prog-bar"><div class="hf-rad-prog-fill" id="hf-rad-prog-fill"></div></div>
+      </div>
+      <!-- Card -->
+      <div class="hf-rad-card" id="hf-rad-card">
+        <div class="hf-rad-top">
+          <div class="hf-rad-num" id="hf-rad-num">①</div>
+          <div class="hf-rad-char" id="hf-rad-char">日</div>
+          <div class="hf-rad-badge" id="hf-rad-badge">N5</div>
+        </div>
+        <div class="hf-rad-reading-row">
+          <div class="hf-rad-on" id="hf-rad-on"></div>
+          <div class="hf-rad-kun" id="hf-rad-kun"></div>
+        </div>
+        <div class="hf-rad-meaning" id="hf-rad-meaning">Matahari, Hari</div>
+
+        <!-- Formula -->
+        <div class="hf-rad-formula-label">📐 Formula / Komponen</div>
+        <div class="hf-rad-formula" id="hf-rad-formula"></div>
+
+        <!-- Contoh kata -->
+        <div class="hf-rad-section-label">📝 Contoh Kata</div>
+        <div class="hf-rad-examples" id="hf-rad-examples"></div>
+
+        <!-- Jembatan ingatan -->
+        <div class="hf-rad-section-label">🌉 Jembatan Ingatan</div>
+        <div class="hf-rad-mnemonic" id="hf-rad-mnemonic"></div>
+
+        <!-- Coretan -->
+        <div class="hf-rad-stroke-row">
+          <span class="hf-rad-stroke-label">✏️ Jumlah coretan:</span>
+          <span class="hf-rad-stroke-val" id="hf-rad-strokes">4</span>
+          <button onclick="hfSpeak()" style="margin-left:auto;padding:6px 14px;border-radius:9px;border:1.5px solid rgba(0,212,170,0.4);background:rgba(0,212,170,0.08);color:var(--teal);font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 Dengar</button>
+        </div>
+      </div>
+
+      <!-- Nav buttons -->
+      <div class="hf-rad-nav">
+        <button class="hf-rad-nav-btn" onclick="hfRadNav(-1)">← Sebelumnya</button>
+        <button class="hf-rad-mastered-btn" id="hf-rad-mastered-btn" onclick="toggleHfMastered()">☐ Tandai Dikuasai</button>
+        <button class="hf-rad-nav-btn" onclick="hfRadNav(1)">Berikutnya →</button>
+      </div>
+
+      <!-- Mini grid navigator -->
+      <div class="hf-rad-section-label" style="margin-top:16px;">🗂️ Navigasi Cepat</div>
+      <div class="hf-mini-grid" id="hf-mini-grid"></div>
+    </div>
+  </div>
+</div>
+
 <!-- SRS / FUKUSHUU PAGE -->
 <div id="page-fukushuu" class="page">
   <div class="srs-wrap">
@@ -1471,6 +1638,11 @@
     <div class="km-char" id="km-char">日</div>
     <div class="km-level-badge" id="km-level-badge"></div>
     <div class="km-stroke" id="km-stroke"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px;">
+      <button onclick="kmSpeak('on')" style="display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9px;border:1.5px solid rgba(94,234,212,0.4);background:rgba(94,234,212,0.08);color:#5eead4;font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 On'yomi</button>
+      <button onclick="kmSpeak('kun')" style="display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9px;border:1.5px solid rgba(251,146,60,0.4);background:rgba(251,146,60,0.08);color:#fb923c;font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 Kun'yomi</button>
+      <button onclick="kmSpeak('example')" style="display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9px;border:1.5px solid rgba(168,85,247,0.4);background:rgba(168,85,247,0.08);color:var(--purple2);font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 Contoh</button>
+    </div>
     <div class="km-section"><h4 style="color:#5eead4;">音読み (On'yomi) <span style="font-size:0.65rem;color:#6b7280;font-weight:500;">— Katakana</span></h4><div id="km-on"></div></div>
     <div class="km-section"><h4 style="color:#fb923c;">訓読み (Kun'yomi) <span style="font-size:0.65rem;color:#6b7280;font-weight:500;">— Hiragana</span></h4><div id="km-kun"></div></div>
     <div class="km-section"><h4>Arti</h4><div class="km-meaning-list" id="km-meaning"></div></div>
@@ -1802,7 +1974,11 @@
       <div class="km2-jp" id="km2-jp">食べる</div>
       <div class="km2-reading" id="km2-reading">たべる</div>
       <div class="km2-meaning" id="km2-meaning">Makan</div>
-      <div style="display:flex;gap:6px;margin-top:10px;" id="km2-badges"></div>
+      <div style="display:flex;gap:6px;margin-top:12px;align-items:center;" id="km2-badges"></div>
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <button onclick="speakText(document.getElementById('km2-reading').textContent)" style="display:flex;align-items:center;gap:5px;padding:7px 14px;border-radius:10px;border:1.5px solid rgba(0,212,170,0.4);background:rgba(0,212,170,0.1);color:var(--teal);font-size:0.78rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 Dengar</button>
+        <button onclick="speakKamusExample()" style="display:flex;align-items:center;gap:5px;padding:7px 14px;border-radius:10px;border:1.5px solid rgba(168,85,247,0.4);background:rgba(168,85,247,0.1);color:var(--purple2);font-size:0.78rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 Contoh Kalimat</button>
+      </div>
     </div>
     <div class="kamus-modal-body">
       <div class="kamus-modal-section">
@@ -3255,6 +3431,7 @@ function showPage(pageId) {
     if (pageId === 'menulis') { setMenulisMode(mwMode || 'kana'); setTimeout(initMenulisCanvas, 100); }
     if (pageId === 'harian') { renderHarian(); }
     if (pageId === 'fukushuu') { initSrsPage(); }
+    if (pageId === 'hafal') { initHafalPage(); }
     if (pageId === 'dashboard' && typeof updateGamificationUI === 'function') { updateGamificationUI(); }
     // Stop mic when navigating away from a page
     if (!['dokkai','kana','choukai'].includes(pageId)) stopMic();
@@ -3454,7 +3631,13 @@ function initWordOfTheDay() {
 }
 
 function wotdSpeak() {
-    if(window._wotdWord) speakText(window._wotdWord.jp);
+    if(window._wotdWord) speakText(window._wotdWord.reading);
+}
+
+function speakKamusExample() {
+    // Speak the example sentence of the currently open kamus modal
+    const ex = window._kamusExJp || '';
+    if(ex) speakText(ex);
 }
 
 function wotdStartQuiz() {
@@ -3462,6 +3645,329 @@ function wotdStartQuiz() {
     document.getElementById('q-category').value = window._wotdWord.cat || 'all';
     document.getElementById('q-level').value = window._wotdWord.level || 'all';
     showPage('quiz');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// HAFAL KANJI ENGINE
+// ══════════════════════════════════════════════════════════════════
+
+// Kategori N5 per tema (sesuai foto referensi)
+const HAFAL_CATS_N5 = [
+  { icon:'🔢', name:'数字・お金 — Angka & Uang',      chars:['一','二','三','四','五','六','七','八','九','十','百','千','万','円'] },
+  { icon:'🌤️', name:'曜日・自然 — Hari & Alam',        chars:['日','月','火','水','木','金','土','山','川','花','空','天','気','雨'] },
+  { icon:'🧭', name:'場所・方向 — Tempat & Arah',      chars:['上','下','右','左','外','中','前','後','北','南','東','西'] },
+  { icon:'📏', name:'大きさ・ようす — Ukuran & Sifat', chars:['大','小','高','安','多','少','長','新','古','白'] },
+  { icon:'🧍', name:'からだ — Tubuh',                  chars:['口','目','手','足','耳'] },
+  { icon:'👨‍👩‍👧', name:'人・家族 — Orang & Keluarga',     chars:['人','男','女','子','父','母','友','名','先','生'] },
+  { icon:'🏃', name:'動き・動詞 — Gerakan & Kata Kerja',chars:['行','来','立','話','聞','見','開','書','読','食','飲','入','出','買'] },
+  { icon:'🏫', name:'学校・ことば — Sekolah & Bahasa', chars:['学','校','本','語','何','社','電','国'] },
+  { icon:'⏰', name:'時間 — Waktu',                    chars:['年','時','分','毎','週','今','間','午','半'] },
+  { icon:'🏠', name:'くらし・その他 — Sehari-hari',    chars:['力','車','牛','馬','魚','店','駅','門','雨'] },
+];
+
+const HAFAL_CATS_N4 = [
+  { icon:'🌸', name:'自然・季節 — Alam & Musim',      chars:['春','夏','秋','冬','海','池','林','森','岩','星','空','風','雲','雪'] },
+  { icon:'🏙️', name:'場所・建物 — Tempat & Bangunan', chars:['市','町','村','道','橋','公','園','図','館','堂','寺','神','社'] },
+  { icon:'😊', name:'気持ち・様子 — Perasaan & Keadaan',chars:['好','悪','正','強','弱','早','遅','太','細','暗','明','暑','寒','近','遠'] },
+  { icon:'👔', name:'仕事・社会 — Pekerjaan & Masyarakat',chars:['会','社','員','長','工','場','業','者','主','客','部','教','授','係'] },
+  { icon:'📚', name:'勉強・知識 — Belajar & Pengetahuan',chars:['問','答','題','試','験','習','研','究','計','画','理','科','数','算'] },
+  { icon:'🍽️', name:'食べ物・飲み物 — Makanan & Minuman',chars:['米','肉','野','菜','果','茶','酒','料','理','味','食','飯','汁'] },
+  { icon:'🚆', name:'移動・交通 — Perjalanan & Transportasi',chars:['電','車','船','飛','空','港','切','符','乗','降','発','着'] },
+  { icon:'👪', name:'家族・関係 — Keluarga & Relasi',  chars:['祖','兄','弟','姉','妹','夫','妻','親','族','隣','互'] },
+  { icon:'💊', name:'体・健康 — Tubuh & Kesehatan',    chars:['病','院','薬','医','歯','息','痛','熱','軽','重'] },
+  { icon:'🎌', name:'文化・行事 — Budaya & Acara',     chars:['祭','礼','式','祝','節','文','化','伝','統'] },
+];
+
+// Jembatan ingatan per kanji (mnemonic)
+const HAFAL_MNEMONICS = {
+  '日':'Bayangkan MATAHARI bundar yang bersinar setiap hari. Kotak dengan garis tengah = sinar matahari di tengah cakram.',
+  '月':'Bulan sabit yang terlihat di malam hari. Bentuk melengkung seperti bulan crescent.',
+  '火':'Api yang menyala ke atas. Dua percikan api di kanan-kiri batang utama.',
+  '水':'Air yang mengalir. Garis tengah = aliran utama, cabang di kiri-kanan = percikan air.',
+  '木':'Pohon dengan akar di bawah dan dahan di atas. Bentuk silang dengan kaki = pohon berdiri tegak.',
+  '金':'Emas = logam berharga. Empat garis kecil = kilap cahaya dari logam mulia.',
+  '土':'Tanah = lapisan bumi. Tanda plus (+) di atas garis horizontal = tanah tempat berpijak.',
+  '山':'Gunung dengan tiga puncak. Tiga garis vertikal = tiga puncak pegunungan.',
+  '川':'Sungai yang mengalir. Tiga garis vertikal = aliran air sungai dari hulu ke hilir.',
+  '人':'Dua orang berdiri saling bersandar. Seperti huruf A tanpa palang = siluet orang berjalan.',
+  '口':'Mulut terbuka. Kotak kecil = gambar mulut yang terbuka lebar.',
+  '目':'Mata manusia. Kotak dengan dua garis horizontal = bola mata dengan kelopak.',
+  '手':'Tangan dengan jari. Empat garis kecil di atas = empat jari, garis bawah = telapak.',
+  '足':'Kaki dan telapak kaki. Bagian atas = tulang kering, bawah = telapak kaki.',
+  '耳':'Telinga dengan struktur dalam. Kotak bertingkat = daun telinga.',
+  '大':'Orang besar dengan tangan terentang. Seperti huruf X besar = orang dewasa tegak.',
+  '小':'Tiga titik kecil. Garis vertikal kecil di tengah = sesuatu yang kecil dan tersembunyi.',
+  '一':'Satu garis horizontal. Paling sederhana = angka satu.',
+  '二':'Dua garis horizontal. Dua lapisan = angka dua.',
+  '三':'Tiga garis horizontal = angka tiga.',
+  '子':'Anak kecil yang baru bisa berdiri. Kepala besar di atas, kaki kecil di bawah = bayi.',
+  '女':'Wanita berlutut anggun. Garis miring = seseorang yang membungkuk hormat.',
+  '男':'Sawah + kekuatan = pria yang bekerja di sawah. Kombinasi 田 dan 力.',
+  '父':'Ayah yang bekerja keras. Dua tangan memegang sesuatu dari atas.',
+  '母':'Ibu menyusui. Dua titik di tengah = payudara ibu yang menyusui anaknya.',
+  '学':'Belajar di bawah atap. Bagian atas = atap sekolah, bawah = anak belajar.',
+  '先':'Dahulu / guru. Kaki berjalan ke depan = seseorang yang melangkah lebih dulu.',
+  '生':'Hidup / lahir. Tunas tumbuh dari tanah = kehidupan yang baru berkecambah.',
+  '年':'Tahun. Padi yang dipanen = siklus satu tahun pertanian.',
+  '今':'Sekarang. Segitiga atas = atap, bawah = kita berada di sini sekarang.',
+  '電':'Listrik. Hujan + kilat = 雨+申 → petir saat hujan menghasilkan listrik.',
+  '語':'Bahasa / kata. Kata-kata 言 yang mengalir seperti air 吾.',
+  '食':'Makan. Atap dengan orang dan wadah = berkumpul makan bersama.',
+  '見':'Melihat. Mata 目 di atas kaki 儿 = mata yang diangkat untuk melihat.',
+  '聞':'Mendengar. Telinga 耳 di dalam pintu 門 = mendengarkan dari balik pintu.',
+  '書':'Menulis. Tangan memegang kuas = aksi menulis.',
+  '読':'Membaca. Kata 言 + jual 売 = membeli ilmu dengan membaca.',
+  '行':'Pergi. Persimpangan jalan = titik keberangkatan.',
+  '来':'Datang. Pohon dengan sesuatu di atas = buah matang yang jatuh ke sini.',
+};
+
+// Formula komponen visual per kanji
+const HAFAL_FORMULAS = {
+  '雪': { parts: [{char:'雨',color:'red',lbl:'hujan'}, {op:'+'}, {char:'ヨ',color:'blue',lbl:'sapu'}, {op:'='}, {char:'雪',color:'main',lbl:'salju'}], note:'Hujan yang membeku jadi salju harus disapu' },
+  '雷': { parts: [{char:'雨',color:'red',lbl:'hujan'}, {op:'+'}, {char:'田',color:'blue',lbl:'sawah'}, {op:'='}, {char:'雷',color:'main',lbl:'petir'}], note:'Saat hujan, sawah terbuka paling rawan disambar petir' },
+  '電': { parts: [{char:'雨',color:'red',lbl:'hujan'}, {op:'+'}, {char:'申',color:'blue',lbl:'kilatan'}, {op:'='}, {char:'電',color:'main',lbl:'listrik'}], note:'Kilatan petir saat hujan = sumber listrik alam' },
+  '男': { parts: [{char:'田',color:'red',lbl:'sawah'}, {op:'+'}, {char:'力',color:'blue',lbl:'kekuatan'}, {op:'='}, {char:'男',color:'main',lbl:'pria'}], note:'Pria = kekuatan yang bekerja di sawah' },
+  '明': { parts: [{char:'日',color:'red',lbl:'matahari'}, {op:'+'}, {char:'月',color:'blue',lbl:'bulan'}, {op:'='}, {char:'明',color:'main',lbl:'terang'}], note:'Matahari + bulan = terang benderang' },
+  '岩': { parts: [{char:'山',color:'red',lbl:'gunung'}, {op:'+'}, {char:'石',color:'blue',lbl:'batu'}, {op:'='}, {char:'岩',color:'main',lbl:'batu besar'}], note:'Batu besar dari gunung' },
+  '森': { parts: [{char:'木',color:'red',lbl:'pohon'}, {op:'+'}, {char:'木',color:'blue',lbl:'pohon'}, {op:'+'}, {char:'木',color:'blue',lbl:'pohon'}, {op:'='}, {char:'森',color:'main',lbl:'hutan'}], note:'Banyak pohon = hutan lebat' },
+  '林': { parts: [{char:'木',color:'red',lbl:'pohon'}, {op:'+'}, {char:'木',color:'blue',lbl:'pohon'}, {op:'='}, {char:'林',color:'main',lbl:'kebun pohon'}], note:'Dua pohon = kebun / hutan kecil' },
+  '休': { parts: [{char:'人',color:'red',lbl:'orang'}, {op:'+'}, {char:'木',color:'blue',lbl:'pohon'}, {op:'='}, {char:'休',color:'main',lbl:'istirahat'}], note:'Orang bersandar di pohon = istirahat' },
+  '好': { parts: [{char:'女',color:'red',lbl:'wanita'}, {op:'+'}, {char:'子',color:'blue',lbl:'anak'}, {op:'='}, {char:'好',color:'main',lbl:'suka/baik'}], note:'Wanita memeluk anak = kebahagiaan / menyukai' },
+  '岩': { parts: [{char:'山',color:'red',lbl:'gunung'}, {op:'+'}, {char:'石',color:'blue',lbl:'batu'}, {op:'='}, {char:'岩',color:'main',lbl:'batu besar'}], note:'' },
+};
+
+let hfLevel = 'N5';
+let hfRadLevel = 'N5';
+let hfRadIndex = 0;
+let hfRadPool = [];
+let hfOpenCats = new Set();
+
+function initHafalPage() {
+    hfLevel = 'N5';
+    hfRadLevel = 'N5';
+    hfRadIndex = 0;
+    renderHafalKategori();
+    renderHafalRadikal();
+}
+
+function switchHafal(mode) {
+    document.getElementById('hf-tab-kategori').classList.toggle('active', mode === 'kategori');
+    document.getElementById('hf-tab-radikal').classList.toggle('active', mode === 'radikal');
+    document.getElementById('hf-kategori').style.display = mode === 'kategori' ? 'block' : 'none';
+    document.getElementById('hf-radikal').style.display = mode === 'radikal' ? 'block' : 'none';
+}
+
+function setHafalLevel(lv) {
+    hfLevel = lv;
+    document.getElementById('hflv-N5').classList.toggle('active', lv === 'N5');
+    document.getElementById('hflv-N4').classList.toggle('active', lv === 'N4');
+    hfOpenCats = new Set();
+    renderHafalKategori();
+}
+
+function setHafalRadikalLevel(lv) {
+    hfRadLevel = lv;
+    ['N5','N4','all'].forEach(l => {
+        const btn = document.getElementById('hfrlv-' + l);
+        if(btn) btn.classList.toggle('active', l === lv);
+    });
+    hfRadIndex = 0;
+    renderHafalRadikal();
+}
+
+function getHafalRadPool(lv) {
+    if(lv === 'all') return kanjiDB;
+    return kanjiDB.filter(k => k.level === lv);
+}
+
+function renderHafalKategori() {
+    const cats = hfLevel === 'N5' ? HAFAL_CATS_N5 : HAFAL_CATS_N4;
+    const masteredSet = getMasteredSet();
+    let html = '';
+    cats.forEach((cat, ci) => {
+        const kanjiInCat = cat.chars.map(c => kanjiDB.find(k => k.char === c)).filter(Boolean);
+        const masteredInCat = kanjiInCat.filter(k => masteredSet.has(k.char)).length;
+        const isOpen = hfOpenCats.has(ci);
+        html += `<div class="hf-cat-block">
+            <div class="hf-cat-header ${isOpen ? 'open' : ''}" onclick="toggleHfCat(${ci})">
+                <div class="hf-cat-icon">${cat.icon}</div>
+                <div class="hf-cat-name">${cat.name}</div>
+                <div class="hf-cat-count">${masteredInCat}/${kanjiInCat.length} dikuasai</div>
+                <div class="hf-cat-arrow">▶</div>
+            </div>
+            <div class="hf-cat-grid ${isOpen ? 'open' : ''}" id="hf-cat-grid-${ci}">`;
+        kanjiInCat.forEach(k => {
+            const isMastered = masteredSet.has(k.char);
+            html += `<div class="hf-kanji-cell ${isMastered ? 'mastered' : ''}" onclick="openHfKanji('${k.char}')">
+                ${isMastered ? '<div class="hfc-check">✓</div>' : ''}
+                <div class="hfc-char">${k.char}</div>
+                <div class="hfc-on">${k.on && k.on[0] ? k.on[0] : ''}</div>
+                <div class="hfc-kun">${k.kun && k.kun[0] ? k.kun[0].replace('.','') : ''}</div>
+                <div class="hfc-id">${k.meaning ? k.meaning.split(',')[0] : ''}</div>
+            </div>`;
+        });
+        html += `</div></div>`;
+    });
+    document.getElementById('hf-cat-list').innerHTML = html;
+}
+
+function toggleHfCat(ci) {
+    if(hfOpenCats.has(ci)) hfOpenCats.delete(ci);
+    else hfOpenCats.add(ci);
+    renderHafalKategori();
+}
+
+function openHfKanji(char) {
+    // Find index in radikal pool and switch to radikal mode
+    const pool = getHafalRadPool(hfRadLevel);
+    let idx = pool.findIndex(k => k.char === char);
+    if(idx === -1) {
+        // Switch level to find it
+        const allIdx = kanjiDB.findIndex(k => k.char === char);
+        if(allIdx !== -1) {
+            setHafalRadikalLevel('all');
+            idx = getHafalRadPool('all').findIndex(k => k.char === char);
+        }
+    }
+    if(idx !== -1) {
+        hfRadIndex = idx;
+        renderHafalRadikal();
+        switchHafal('radikal');
+    }
+}
+
+function renderHafalRadikal() {
+    hfRadPool = getHafalRadPool(hfRadLevel);
+    if(!hfRadPool.length) return;
+    hfRadIndex = Math.max(0, Math.min(hfRadIndex, hfRadPool.length - 1));
+    const k = hfRadPool[hfRadIndex];
+    const masteredSet = getMasteredSet();
+    const isMastered = masteredSet.has(k.char);
+
+    // Progress
+    const pct = Math.round((hfRadIndex + 1) / hfRadPool.length * 100);
+    document.getElementById('hf-rad-prog-fill').style.width = pct + '%';
+    document.getElementById('hf-rad-counter').textContent = `${hfRadIndex + 1} / ${hfRadPool.length}`;
+    const masteredCount = hfRadPool.filter(k2 => masteredSet.has(k2.char)).length;
+    document.getElementById('hf-rad-mastered-count').textContent = `✓ ${masteredCount} dikuasai`;
+
+    // Card content
+    document.getElementById('hf-rad-num').textContent = `(${hfRadIndex + 1})`;
+    document.getElementById('hf-rad-char').textContent = k.char;
+    document.getElementById('hf-rad-badge').textContent = k.level;
+    document.getElementById('hf-rad-on').textContent = '音: ' + (k.on || []).join('、');
+    document.getElementById('hf-rad-kun').textContent = '訓: ' + (k.kun || []).map(r => r.replace('.', '')).join('、');
+    document.getElementById('hf-rad-meaning').textContent = k.meaning || '';
+    document.getElementById('hf-rad-strokes').textContent = k.strokes || '?';
+
+    // Formula
+    const formula = HAFAL_FORMULAS[k.char];
+    const formulaEl = document.getElementById('hf-rad-formula');
+    if(formula) {
+        formulaEl.innerHTML = formula.parts.map(p => {
+            if(p.op) return `<div class="hf-rad-op">${p.op}</div>`;
+            return `<div class="hf-rad-component">
+                <div class="hf-rad-comp-char ${p.color}">${p.char}</div>
+                <div class="hf-rad-comp-lbl">(${p.lbl})</div>
+            </div>`;
+        }).join('');
+        if(formula.note) formulaEl.innerHTML += `<div style="grid-column:1/-1;font-size:0.72rem;color:#6b7280;text-align:center;padding-top:6px;font-style:italic;">${formula.note}</div>`;
+    } else {
+        // Default: just show the char with reading
+        formulaEl.innerHTML = `<div class="hf-rad-component">
+            <div class="hf-rad-comp-char main" style="font-size:3rem;">${k.char}</div>
+            <div class="hf-rad-comp-lbl">${(k.on||[])[0] || ''} / ${(k.kun||[])[0]?.replace('.','') || ''}</div>
+        </div>`;
+    }
+
+    // Examples
+    const examplesEl = document.getElementById('hf-rad-examples');
+    if(k.examples && k.examples.length) {
+        examplesEl.innerHTML = k.examples.map(ex =>
+            `<div class="hf-rad-ex-item">
+                <div class="hf-rad-ex-jp">${ex.word}</div>
+                <div class="hf-rad-ex-read">（${ex.read}）</div>
+                <div class="hf-rad-ex-id">${ex.meaning}</div>
+            </div>`
+        ).join('');
+    } else {
+        examplesEl.innerHTML = '<div style="color:#6b7280;font-size:0.8rem;">Tidak ada contoh</div>';
+    }
+
+    // Mnemonic
+    const mn = HAFAL_MNEMONICS[k.char] || `Kanji ${k.char} (${k.meaning}) — coba buat cerita sendiri yang menghubungkan bentuk dan arti!`;
+    document.getElementById('hf-rad-mnemonic').textContent = `"${mn}"`;
+
+    // Mastered button
+    const mastBtn = document.getElementById('hf-rad-mastered-btn');
+    mastBtn.className = 'hf-rad-mastered-btn' + (isMastered ? ' mastered' : '');
+    mastBtn.textContent = isMastered ? '✓ Sudah Dikuasai' : '☐ Tandai Dikuasai';
+
+    // Mini grid
+    renderHfMiniGrid();
+
+    // Auto-speak kunyomi/onyomi saat kartu muncul (delay kecil biar render dulu)
+    setTimeout(() => hfSpeak(), 300);
+}
+
+function renderHfMiniGrid() {
+    const masteredSet = getMasteredSet();
+    document.getElementById('hf-mini-grid').innerHTML = hfRadPool.map((k, i) =>
+        `<div class="hf-mini-cell ${i === hfRadIndex ? 'active' : ''} ${masteredSet.has(k.char) ? 'mastered' : ''}"
+            onclick="hfRadJump(${i})" title="${k.meaning}">${k.char}</div>`
+    ).join('');
+}
+
+function hfRadNav(dir) {
+    hfRadIndex = Math.max(0, Math.min(hfRadIndex + dir, hfRadPool.length - 1));
+    renderHafalRadikal();
+    // scroll card into view
+    document.getElementById('hf-rad-card').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function hfRadJump(i) {
+    hfRadIndex = i;
+    renderHafalRadikal();
+}
+
+function toggleHfMastered() {
+    const k = hfRadPool[hfRadIndex];
+    if(!k) return;
+    let mastered = [];
+    try { mastered = JSON.parse(localStorage.getItem('masteredKanji') || '[]'); } catch(e){}
+    const idx = mastered.indexOf(k.char);
+    if(idx === -1) mastered.push(k.char);
+    else mastered.splice(idx, 1);
+    localStorage.setItem('masteredKanji', JSON.stringify(mastered));
+    renderHafalRadikal();
+    // Also refresh kategori if visible
+    if(document.getElementById('hf-kategori').style.display !== 'none') renderHafalKategori();
+}
+
+function getMasteredSet() {
+    try { return new Set(JSON.parse(localStorage.getItem('masteredKanji') || '[]')); } catch(e) { return new Set(); }
+}
+
+function hfSpeak() {
+    const k = hfRadPool[hfRadIndex];
+    if(!k) return;
+    // Prioritas: kunyomi pertama → onyomi → char
+    const reading = (k.kun && k.kun[0]) ? k.kun[0].replace('.','') : ((k.on && k.on[0]) ? k.on[0] : k.char);
+    speakText(reading);
+}
+
+function kmSpeak(type) {
+    const k = window._currentKanji;
+    if(!k) return;
+    if(type === 'on') {
+        speakText((k.on && k.on[0]) ? k.on[0] : k.char);
+    } else if(type === 'kun') {
+        const kun = (k.kun && k.kun[0]) ? k.kun[0].replace('.','') : ((k.on && k.on[0]) ? k.on[0] : k.char);
+        speakText(kun);
+    } else if(type === 'example') {
+        const ex = k.examples && k.examples[0];
+        speakText(ex ? ex.word : k.char);
+    }
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -3829,6 +4335,7 @@ function renderKanji() {
 
 function openKanjiModal(k) {
     currentKanjiIdx = kanjiDB.findIndex(x => x.char === k.char);
+    window._currentKanji = k;  // simpan untuk kmSpeak
     document.getElementById('km-char').textContent = k.char;
     document.getElementById('km-level-badge').innerHTML = `<span class="kc-level ${k.level.toLowerCase()}" style="font-size:0.8rem;padding:3px 10px">${k.level}</span>`;
     document.getElementById('km-stroke').textContent = `${k.strokes} coretan`;
@@ -5856,7 +6363,7 @@ function buildKamusCard(v) {
         </div>
         <div class="kamus-card-footer">
             <div style="display:flex;gap:8px">
-                <button class="speak-btn" onclick="speakText('${v.jp}'); event.stopPropagation();">🔊 Suara</button>
+                <button class="speak-btn" onclick="speakText('${v.reading}'); event.stopPropagation();">🔊 Suara</button>
                 <button class="speak-btn" style="background:#f0fdf4;border-color:#1a8a3a;color:#1a8a3a;" id="kamus-mic-${idx}" onclick="kamusMicPractice(${idx}, event)">🎤 Latih</button>
             </div>
             <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavFromCard('${getWordId(v)}', event)">${isFav ? '❤️' : '♡'}</button>
@@ -5997,11 +6504,12 @@ function openKamusModal(index) {
     
     // Parse multiple examples if exist (for now we assume 1, but extensible)
     const exParts = v.example.split('\n');
+    window._kamusExJp = exParts[0] || '';
     document.getElementById('km2-examples').innerHTML = `
         <div class="kamus-ex-card">
             <div class="ke-jp">${rubyWrap(exParts[0], '')}</div>
             <div class="ke-id">${exParts[1] || ''}</div>
-            <button class="speak-btn" style="margin-top:6px" onclick="speakText('${exParts[0]}')">🔊 Dengar Kalimat</button>
+            <button class="speak-btn" style="margin-top:6px" onclick="speakKamusExample()">🔊 Dengar Kalimat</button>
         </div>
     `;
     
@@ -8847,9 +9355,11 @@ function renderHarianToday() {
         if (!k) return;
         html += '<div style="background:var(--bg);border-radius:12px;padding:10px;text-align:center;border:1px solid var(--border);">';
         html += '<div style="font-family:\'Noto Sans JP\';font-size:2rem;font-weight:900;color:#ffffff;">' + k.char + '</div>';
-        html += '<div style="font-size:0.72rem;color:#7b2d8b;font-weight:700;">' + (k.on && k.on[0] ? k.on[0] : '') + '</div>';
+        html += '<div style="font-size:0.72rem;color:#5eead4;font-weight:700;">' + (k.on && k.on[0] ? k.on[0] : '') + '</div>';
+        html += '<div style="font-size:0.72rem;color:#fb923c;">' + (k.kun && k.kun[0] ? k.kun[0].replace(".","") : '') + '</div>';
         html += '<div style="font-size:0.7rem;color:#ffffff;">' + (k.meaning ? k.meaning.split(',')[0] : '') + '</div>';
-        html += '<button onclick="speakText(\'' + k.char + '\')" style="margin-top:4px;padding:2px 8px;border-radius:10px;border:1px solid var(--border);background:var(--card);font-size:0.68rem;cursor:pointer;color:var(--teal);">🔊</button>';
+        var kR = (k.kun && k.kun[0]) ? k.kun[0].replace(".","") : (k.on && k.on[0] ? k.on[0] : k.char);
+        html += '<button onclick="speakText(\'' + kR + '\')" style="margin-top:4px;padding:2px 8px;border-radius:10px;border:1px solid rgba(0,212,170,0.3);background:rgba(0,212,170,0.08);font-size:0.68rem;cursor:pointer;color:var(--teal);">🔊</button>';
         html += '</div>';
     });
     html += '</div></div>';
@@ -8865,7 +9375,7 @@ function renderHarianToday() {
         html += '<div><div style="font-family:\'Noto Sans JP\';font-size:1.1rem;font-weight:700;color:#ffffff;">' + v.jp + '</div>';
         html += '<div style="font-size:0.7rem;color:#6b7280;">' + v.reading + '</div>';
         html += '<div style="font-size:0.78rem;color:#ffffff;font-weight:600;">' + v.id + '</div></div>';
-        html += '<button onclick="speakText(\'' + v.jp + '\')" style="padding:2px 6px;border-radius:10px;border:1px solid var(--border);background:var(--card);font-size:0.68rem;cursor:pointer;color:var(--teal);">🔊</button>';
+        html += '<button onclick="speakText(\'' + (v.reading || v.jp) + '\')" style="padding:2px 6px;border-radius:10px;border:1px solid var(--border);background:var(--card);font-size:0.68rem;cursor:pointer;color:var(--teal);">🔊</button>';
         html += '</div></div>';
     });
     html += '</div></div>';
@@ -8949,7 +9459,7 @@ function renderHarianToday() {
             html += '<div><div style="font-family:\'Noto Sans JP\';font-size:1.1rem;font-weight:700;color:#ffffff;">' + v.jp + '</div>';
             html += '<div style="font-size:0.68rem;color:var(--muted);">' + v.reading + '</div>';
             html += '<div style="font-size:0.78rem;color:var(--blue);font-weight:600;">' + v.id + '</div></div>';
-            html += '<button onclick="speakText(\'' + v.jp + '\')" style="padding:2px 6px;border-radius:10px;border:1px solid var(--border);background:var(--card);font-size:0.68rem;cursor:pointer;color:var(--teal);">🔊</button>';
+            html += '<button onclick="speakText(\'' + (v.reading || v.jp) + '\')" style="padding:2px 6px;border-radius:10px;border:1px solid var(--border);background:var(--card);font-size:0.68rem;cursor:pointer;color:var(--teal);">🔊</button>';
             html += '</div></div>';
         });
         html += '</div></div>';
