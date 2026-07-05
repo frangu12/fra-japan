@@ -147,6 +147,95 @@
   .mod-card h3{font-size:0.9rem;font-weight:700;margin-bottom:2px;color:var(--rice);}
   .mod-card p{font-size:0.72rem;color:#6b7280;line-height:1.4;}
 
+  /* ── CATATAN PRIBADI ──────────────────────────────── */
+  .catatan-box{background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 14px;}
+  .catatan-display{font-size:0.85rem;color:#e2e8f0;line-height:1.7;white-space:pre-wrap;min-height:20px;}
+  .catatan-display.empty{color:#4b5563;font-style:italic;}
+  .catatan-input{width:100%;background:rgba(0,0,0,0.2);border:1.5px solid rgba(168,85,247,0.3);border-radius:8px;padding:10px 12px;color:#e2e8f0;font-size:0.85rem;font-family:'DM Sans',sans-serif;line-height:1.6;resize:vertical;}
+  .catatan-input:focus{outline:none;border-color:var(--purple);}
+  .catatan-actions{display:flex;gap:7px;margin-top:8px;flex-wrap:wrap;}
+  .catatan-edit-btn{padding:6px 14px;border-radius:8px;border:1.5px solid rgba(168,85,247,0.4);background:rgba(168,85,247,0.1);color:var(--purple2);font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+  .catatan-edit-btn:hover{background:rgba(168,85,247,0.2);}
+  .catatan-save-btn{padding:6px 14px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--purple),var(--teal));color:#fff;font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;}
+  .catatan-del-btn{padding:6px 14px;border-radius:8px;border:1.5px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.08);color:#f87171;font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;}
+  .catatan-wrap{max-width:720px;margin:0 auto;padding:16px 16px 80px;}
+  .catatan-hero{text-align:center;padding:16px 0 12px;}
+  .catatan-hero-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--rice);margin-bottom:4px;}
+  .catatan-hero-title span{background:linear-gradient(90deg,var(--purple),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .catatan-hero-sub{font-size:0.78rem;color:#6b7280;}
+  .catatan-filter-row{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;}
+  .catatan-filter-btn{padding:6px 16px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:#6b7280;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.78rem;cursor:pointer;transition:all .2s;}
+  .catatan-filter-btn.active{background:rgba(168,85,247,0.15);border-color:rgba(168,85,247,0.4);color:var(--purple2);}
+  .catatan-list{display:flex;flex-direction:column;gap:10px;}
+  .catatan-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;transition:all .2s;}
+  .catatan-card:hover{border-color:rgba(168,85,247,0.3);}
+  .catatan-card-header{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+  .catatan-card-jp{font-family:'Noto Sans JP','Yu Gothic','Meiryo',sans-serif;font-size:1.4rem;font-weight:900;color:#fff;}
+  .catatan-card-read{font-size:0.72rem;color:var(--teal);font-family:'Noto Sans JP',sans-serif;}
+  .catatan-card-id{font-size:0.8rem;color:var(--gold);font-weight:700;flex:1;}
+  .catatan-card-type{font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:6px;background:rgba(168,85,247,0.1);color:var(--purple2);border:1px solid rgba(168,85,247,0.25);}
+  .catatan-card-text{font-size:0.82rem;color:#d1d5db;line-height:1.7;white-space:pre-wrap;background:rgba(0,0,0,0.2);border-radius:8px;padding:10px 12px;margin-bottom:8px;}
+  .catatan-card-footer{display:flex;gap:7px;align-items:center;}
+  .catatan-card-date{font-size:0.65rem;color:#4b5563;flex:1;}
+  .catatan-empty{text-align:center;padding:60px 20px;color:#6b7280;}
+  .catatan-empty h3{font-size:1rem;color:var(--rice);margin-bottom:8px;}
+  .catatan-empty p{font-size:0.8rem;line-height:1.6;}
+  /* ─────────────────────────────────────────────────── */
+
+  /* ── KONJUGASI ─────────────────────────────────────── */
+  .konj-wrap{max-width:720px;margin:0 auto;padding:16px 16px 80px;}
+  .konj-hero{text-align:center;padding:16px 0 12px;}
+  .konj-hero-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--rice);margin-bottom:4px;}
+  .konj-hero-title span{background:linear-gradient(90deg,var(--purple),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .konj-hero-sub{font-size:0.78rem;color:#6b7280;margin-bottom:0;}
+  .konj-search-wrap{display:flex;gap:8px;margin-bottom:14px;}
+  .konj-search{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:10px 14px;font-size:0.85rem;color:var(--rice);font-family:'DM Sans',sans-serif;}
+  .konj-search:focus{outline:none;border-color:var(--purple);}
+  .konj-select{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:10px 12px;font-size:0.82rem;color:var(--rice);font-family:'DM Sans',sans-serif;cursor:pointer;}
+  /* Verb list */
+  .konj-list{display:flex;flex-direction:column;gap:8px;}
+  .konj-verb-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s;}
+  .konj-verb-card:hover{border-color:var(--purple);transform:translateX(4px);}
+  .konj-verb-jp{font-family:'Noto Sans JP','Yu Gothic','Meiryo',sans-serif;font-size:1.3rem;font-weight:900;color:#fff;min-width:70px;}
+  .konj-verb-read{font-family:'Noto Sans JP','Yu Gothic','Meiryo',sans-serif;font-size:0.8rem;color:var(--teal);font-weight:600;}
+  .konj-verb-id{font-size:0.82rem;color:#9ca3af;flex:1;}
+  .konj-verb-badges{display:flex;gap:5px;align-items:center;}
+  .konj-type-sm{font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:6px;}
+  .konj-type-godan{background:rgba(168,85,247,0.15);color:var(--purple2);border:1px solid rgba(168,85,247,0.3);}
+  .konj-type-ichidan{background:rgba(0,212,170,0.12);color:var(--teal);border:1px solid rgba(0,212,170,0.3);}
+  .konj-type-irreg{background:rgba(251,191,36,0.12);color:var(--gold);border:1px solid rgba(251,191,36,0.3);}
+  .konj-lv-sm{font-size:0.6rem;font-weight:700;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,0.06);color:#6b7280;border:1px solid var(--border);}
+  /* Detail panel */
+  .konj-detail-header{background:linear-gradient(135deg,#1e0f40,#0d1f35);border:1.5px solid rgba(168,85,247,0.3);border-radius:18px;padding:18px 18px 14px;margin-bottom:14px;}
+  .konj-back-btn{background:none;border:1px solid rgba(255,255,255,0.15);color:#9ca3af;border-radius:8px;padding:5px 12px;font-size:0.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:10px;}
+  .konj-back-btn:hover{border-color:var(--purple);color:var(--rice);}
+  .konj-detail-verb{margin-bottom:8px;}
+  .konj-detail-jp{font-family:'Noto Sans JP','Yu Gothic','Meiryo',sans-serif;font-size:2.4rem;font-weight:900;color:#fff;line-height:1.1;}
+  .konj-detail-read{font-family:'Noto Sans JP','Yu Gothic','Meiryo',sans-serif;font-size:1rem;color:var(--teal);font-weight:600;margin-top:2px;}
+  .konj-detail-id{font-size:0.88rem;color:var(--gold);font-weight:700;margin-top:2px;}
+  .konj-detail-badges{display:flex;gap:6px;flex-wrap:wrap;}
+  .konj-type-badge{font-size:0.72rem;font-weight:700;padding:3px 12px;border-radius:8px;background:rgba(168,85,247,0.15);color:var(--purple2);border:1px solid rgba(168,85,247,0.3);}
+  .konj-lv-badge{font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:8px;background:rgba(255,255,255,0.06);color:#9ca3af;border:1px solid var(--border);}
+  /* Tabs */
+  .konj-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
+  .konj-tab{padding:7px 16px;border-radius:10px;border:1.5px solid var(--border);background:var(--card);color:#6b7280;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.78rem;cursor:pointer;transition:all .2s;}
+  .konj-tab.active{background:rgba(168,85,247,0.15);border-color:rgba(168,85,247,0.4);color:var(--purple2);}
+  /* Conjugation table */
+  .konj-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden;border:1.5px solid var(--border);}
+  .konj-table thead tr{background:rgba(168,85,247,0.1);}
+  .konj-table th{padding:10px 14px;font-size:0.72rem;font-weight:700;color:var(--purple2);text-align:left;letter-spacing:0.5px;text-transform:uppercase;}
+  .konj-table td{padding:11px 14px;border-top:1px solid rgba(255,255,255,0.05);vertical-align:middle;}
+  .konj-table tr:hover td{background:rgba(255,255,255,0.03);}
+  .konj-row-label{font-size:0.8rem;color:#9ca3af;font-weight:600;white-space:nowrap;}
+  .konj-row-jp{font-family:'Noto Sans JP','Yu Gothic','Meiryo',sans-serif;font-size:1rem;color:#e2e8f0;font-weight:700;}
+  .konj-row-read{font-family:'Noto Sans JP','Yu Gothic','Meiryo',sans-serif;font-size:0.72rem;color:var(--teal);}
+  .konj-row-id{font-size:0.75rem;color:#6b7280;}
+  .konj-row-speak{background:none;border:none;cursor:pointer;font-size:0.8rem;padding:4px 6px;border-radius:6px;color:#6b7280;transition:all .15s;}
+  .konj-row-speak:hover{background:rgba(0,212,170,0.1);color:var(--teal);}
+  .konj-section-divider{background:rgba(0,212,170,0.06);border-top:1px solid rgba(0,212,170,0.15);}
+  .konj-section-divider td{padding:6px 14px;font-size:0.65rem;color:var(--teal);font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+  /* ─────────────────────────────────────────────────── */
+
   /* ── HAFAL KANJI ───────────────────────────────────── */
   .hf-wrap{max-width:720px;margin:0 auto;padding:16px 16px 80px;}
   .hf-hero{text-align:center;padding:20px 16px 10px;}
@@ -1180,7 +1269,9 @@
   <button class="bnav-item" id="bnav-menulis" onclick="showPage('menulis')"><span class="bnav-icon">✏️</span>Menulis</button>
   <button class="bnav-item" id="bnav-fukushuu" onclick="showPage('fukushuu')"><span class="bnav-icon">🔁</span>SRS</button>
   <button class="bnav-item" id="bnav-hafal" onclick="showPage('hafal')"><span class="bnav-icon">🧠</span>Hafal</button>
+  <button class="bnav-item" id="bnav-konjugasi" onclick="showPage('konjugasi')"><span class="bnav-icon">🔄</span>Konjugasi</button>
   <button class="bnav-item" id="bnav-harian" onclick="showPage('harian')"><span class="bnav-icon">🔥</span>60 Hari</button>
+  <button class="bnav-item" id="bnav-catatan" onclick="showPage('catatan')"><span class="bnav-icon">📓</span>Catatan</button>
   <button class="bnav-item" id="bnav-dashboard" onclick="showPage('dashboard')"><span class="bnav-icon">📊</span>Dasbor</button>
   <button class="bnav-item" id="bnav-kaiwa" onclick="showPage('kaiwa')"><span class="bnav-icon">🎤</span>Kaiwa</button>
 </nav>
@@ -1419,8 +1510,65 @@
         <div class="mod-icon-wrap">📋</div>
         <div><h3>JLPT N4 — Simulasi</h3><p>68 soal bergaya ujian resmi JLPT 2024</p></div>
       </div>
+      <div class="mod-card" style="--mod-accent:#f0abfc;--mod-bg:rgba(240,171,252,0.1);--mod-border:rgba(240,171,252,0.2);" onclick="showPage('hafal')">
+        <div class="mod-icon-wrap">🧠</div>
+        <div><h3>Hafal Kanji</h3><p>Kartu radikal + jembatan ingatan + kalimat contoh per kanji</p></div>
+      </div>
+      <div class="mod-card" style="--mod-accent:#34d399;--mod-bg:rgba(52,211,153,0.08);--mod-border:rgba(52,211,153,0.2);" onclick="showPage('konjugasi')">
+        <div class="mod-icon-wrap">🔄</div>
+        <div><h3>Konjugasi Kata Kerja</h3><p>Tabel konjugasi otomatis — Godan, Ichidan, Irregular</p></div>
+      </div>
     </div>
     <div style="height:16px;"></div>
+  </div>
+</div>
+
+<!-- KONJUGASI PAGE -->
+<div id="page-konjugasi" class="page">
+  <div class="konj-wrap">
+    <div class="konj-hero">
+      <div class="konj-hero-title">🔄 Konjugasi <span>動詞</span></div>
+      <div class="konj-hero-sub">Tabel konjugasi otomatis untuk kata kerja N5 & N4</div>
+    </div>
+
+    <!-- Search & Filter -->
+    <div class="konj-search-wrap" id="konj-search-wrap">
+      <input class="konj-search" id="konj-search" type="text" placeholder="🔍 Cari kata kerja (JP / Indonesia)..." oninput="renderKonjList()">
+      <select class="konj-select" id="konj-level" onchange="renderKonjList()">
+        <option value="all">Semua Level</option>
+        <option value="N5">N5</option>
+        <option value="N4">N4</option>
+      </select>
+    </div>
+
+    <!-- Verb list -->
+    <div id="konj-list" class="konj-list"></div>
+
+    <!-- Detail panel -->
+    <div id="konj-detail" class="konj-detail" style="display:none;">
+      <div class="konj-detail-header">
+        <button class="konj-back-btn" onclick="closeKonjDetail()">← Kembali</button>
+        <div class="konj-detail-verb">
+          <div class="konj-detail-jp" id="kd-jp">食べる</div>
+          <div class="konj-detail-read" id="kd-read">たべる</div>
+          <div class="konj-detail-id" id="kd-id">Makan</div>
+        </div>
+        <div class="konj-detail-badges">
+          <span class="konj-type-badge" id="kd-type">Ichidan</span>
+          <span class="konj-lv-badge" id="kd-level">N5</span>
+        </div>
+      </div>
+
+      <!-- Tab group -->
+      <div class="konj-tabs">
+        <button class="konj-tab active" id="ktab-dasar" onclick="switchKonjTab('dasar')">📋 Dasar</button>
+        <button class="konj-tab" id="ktab-sopan" onclick="switchKonjTab('sopan')">🎩 Sopan</button>
+        <button class="konj-tab" id="ktab-negatif" onclick="switchKonjTab('negatif')">❌ Negatif</button>
+        <button class="konj-tab" id="ktab-te" onclick="switchKonjTab('te')">🔗 Bentuk て</button>
+      </div>
+
+      <div id="konj-table-wrap"></div>
+    </div>
   </div>
 </div>
 
@@ -1661,6 +1809,16 @@
     <div class="km-section"><h4 style="color:#fb923c;">訓読み (Kun'yomi) <span style="font-size:0.65rem;color:#6b7280;font-weight:500;">— Hiragana</span></h4><div id="km-kun"></div></div>
     <div class="km-section"><h4>Arti</h4><div class="km-meaning-list" id="km-meaning"></div></div>
     <div class="km-section"><h4>Contoh Kata</h4><ul class="km-examples" id="km-examples"></ul></div>
+    <div class="km-section">
+      <h4>✏️ Catatan Pribadi</h4>
+      <div class="catatan-box" id="km-catatan-box">
+        <div class="catatan-display" id="km-catatan-display"></div>
+        <textarea class="catatan-input" id="km-catatan-input" placeholder="Tulis catatanmu... (mnemonic, cara hafal, cerita ingatan, dll)" rows="3" style="display:none;"></textarea>
+        <div class="catatan-actions" id="km-catatan-actions">
+          <button class="catatan-edit-btn" onclick="toggleKanjiNote()" id="km-catatan-edit-btn">✏️ Tulis Catatan</button>
+        </div>
+      </div>
+    </div>
     <button class="km-mastered-btn not-mastered" id="km-mastered-btn" onclick="toggleMastered()">☑ Tandai Sudah Dikuasai</button>
   </div>
 </div>
@@ -1999,9 +2157,15 @@
         <h4>📝 Contoh Kalimat</h4>
         <div id="km2-examples"></div>
       </div>
-      <div class="kamus-modal-section" id="km2-notes-wrap" style="display:none">
-        <h4>💡 Catatan</h4>
-        <div id="km2-notes" style="font-size:0.85rem;color:#ffffff;background:#000000;border-radius:10px;padding:12px 14px;line-height:1.7;"></div>
+      <div class="kamus-modal-section">
+        <h4>✏️ Catatan Pribadi</h4>
+        <div class="catatan-box" id="km2-catatan-box">
+          <div class="catatan-display" id="km2-catatan-display"></div>
+          <textarea class="catatan-input" id="km2-catatan-input" placeholder="Tulis catatanmu sendiri... (mnemonic, contoh kalimat, tips hafalan, dll)" rows="3" style="display:none;"></textarea>
+          <div class="catatan-actions" id="km2-catatan-actions">
+            <button class="catatan-edit-btn" onclick="toggleKamusNote()" id="km2-catatan-edit-btn">✏️ Tulis Catatan</button>
+          </div>
+        </div>
       </div>
       <div class="kamus-modal-section" id="km2-related-wrap" style="display:none">
         <h4>🔗 Kata Serumpun</h4>
@@ -2106,6 +2270,27 @@
 </div>
 
 <!-- DASHBOARD PAGE -->
+<!-- CATATAN PAGE -->
+<div id="page-catatan" class="page">
+  <div class="catatan-wrap">
+    <div class="catatan-hero">
+      <div class="catatan-hero-title">📓 Catatan <span>Pribadi</span></div>
+      <div class="catatan-hero-sub">Mnemonic & catatan untuk kata dan kanji favoritmu</div>
+    </div>
+    <div class="catatan-filter-row">
+      <button class="catatan-filter-btn active" id="cfilter-all" onclick="setCatatanFilter('all')">Semua</button>
+      <button class="catatan-filter-btn" id="cfilter-vocab" onclick="setCatatanFilter('vocab')">📚 Kosakata</button>
+      <button class="catatan-filter-btn" id="cfilter-kanji" onclick="setCatatanFilter('kanji')">漢 Kanji</button>
+    </div>
+    <div id="catatan-list"></div>
+    <div id="catatan-empty" style="display:none;" class="catatan-empty">
+      <div style="font-size:3rem;margin-bottom:12px;">📓</div>
+      <h3>Belum ada catatan</h3>
+      <p>Buka Kamus atau Kanji, lalu tulis catatan di modal detail kata/kanji tersebut.</p>
+    </div>
+  </div>
+</div>
+
 <div id="page-dashboard" class="page">
   <div class="db-wrap">
 
@@ -3172,7 +3357,43 @@ const vocab = [
   {jp:'パン',reading:'ぱん',id:'Roti',level:'N5',cat:'nouns',example:'パンを買う。\nMembeli roti.'},
   {jp:'頭',reading:'あたま',id:'Kepala',level:'N5',cat:'nouns',example:'頭が痛い。\nSakit kepala.'},
   {jp:'男',reading:'おとこ',id:'Laki-laki',level:'N5',cat:'nouns',example:'男の人\nOrang laki-laki'},
-  {jp:'女',reading:'おんな',id:'Perempuan',level:'N5',cat:'nouns',example:'女の人\nOrang perempuan'}
+  {jp:'女',reading:'おんな',id:'Perempuan',level:'N5',cat:'nouns',example:'女の人\nOrang perempuan'},
+  {jp:'勉強する',reading:'べんきょうする',id:'Belajar',level:'N5',cat:'verbs',example:'毎日日本語を勉強します。\nSaya belajar bahasa Jepang setiap hari.'},
+  {jp:'掃除する',reading:'そうじする',id:'Membersihkan',level:'N5',cat:'verbs',example:'毎週末部屋を掃除します。\nSaya membersihkan kamar setiap akhir minggu.'},
+  {jp:'料理する',reading:'りょうりする',id:'Memasak',level:'N5',cat:'verbs',example:'母は毎日料理します。\nIbu memasak setiap hari.'},
+  {jp:'運転する',reading:'うんてんする',id:'Mengemudi',level:'N5',cat:'verbs',example:'車を運転できますか。\nApakah kamu bisa mengemudi?'},
+  {jp:'踊る',reading:'おどる',id:'Menari',level:'N5',cat:'verbs',example:'パーティーで踊りました。\nSaya menari di pesta.'},
+  {jp:'描く',reading:'かく',id:'Menggambar',level:'N5',cat:'verbs',example:'絵を描くのが好きです。\nSaya suka menggambar.'},
+  {jp:'貼る',reading:'はる',id:'Menempel',level:'N5',cat:'verbs',example:'壁にポスターを貼りました。\nSaya menempel poster di dinding.'},
+  {jp:'壊す',reading:'こわす',id:'Merusak',level:'N5',cat:'verbs',example:'うっかり皿を壊しました。\nTanpa sengaja saya memecahkan piring.'},
+  {jp:'電話する',reading:'でんわする',id:'Menelepon',level:'N5',cat:'verbs',example:'後で電話します。\nSaya akan menelepon nanti.'},
+  {jp:'払う',reading:'はらう',id:'Membayar',level:'N5',cat:'verbs',example:'カードで払えますか。\nApakah bisa bayar dengan kartu?'},
+  {jp:'くれる',reading:'くれる',id:'Memberi (ke saya)',level:'N5',cat:'verbs',example:'友達が本をくれました。\nTeman memberikan buku kepada saya.'},
+  {jp:'思う',reading:'おもう',id:'Merasa / Berpikir',level:'N5',cat:'verbs',example:'日本語は難しいと思います。\nSaya pikir bahasa Jepang sulit.'},
+  {jp:'できる',reading:'できる',id:'Bisa / Mampu',level:'N5',cat:'verbs',example:'日本語が少しできます。\nSaya bisa sedikit bahasa Jepang.'},
+  {jp:'メールする',reading:'めーるする',id:'Mengirim email',level:'N5',cat:'verbs',example:'後でメールします。\nSaya akan kirim email nanti.'},
+  {jp:'会話する',reading:'かいわする',id:'Bercakap-cakap',level:'N5',cat:'verbs',example:'日本人と会話しました。\nSaya bercakap-cakap dengan orang Jepang.'},
+  {jp:'好きだ',reading:'すきだ',id:'Menyukai',level:'N5',cat:'verbs',example:'音楽が好きです。\nSaya suka musik.'},
+  {jp:'嫌いだ',reading:'きらいだ',id:'Tidak suka',level:'N5',cat:'verbs',example:'野菜が嫌いです。\nSaya tidak suka sayuran.'},
+  {jp:'夫',reading:'おっと',id:'Suami',level:'N5',cat:'nouns',example:'夫は会社員です。\nSuami saya karyawan perusahaan.'},
+  {jp:'妻',reading:'つま',id:'Istri',level:'N5',cat:'nouns',example:'妻と一緒に旅行しました。\nSaya berwisata bersama istri.'},
+  {jp:'年齢',reading:'ねんれい',id:'Usia / Umur',level:'N5',cat:'nouns',example:'年齢を聞いてもいいですか。\nBoleh saya bertanya usiamu?'},
+  {jp:'庭',reading:'にわ',id:'Taman / Halaman',level:'N5',cat:'nouns',example:'庭に花を植えました。\nSaya menanam bunga di taman.'},
+  {jp:'バス',reading:'ばす',id:'Bus',level:'N5',cat:'nouns',example:'バスで学校へ行きます。\nSaya pergi ke sekolah naik bus.'},
+  {jp:'動物',reading:'どうぶつ',id:'Hewan / Binatang',level:'N5',cat:'nouns',example:'動物園に動物がたくさんいます。\nDi kebun binatang ada banyak hewan.'},
+  {jp:'かばん',reading:'かばん',id:'Tas',level:'N5',cat:'nouns',example:'かばんの中に何がありますか。\nApa yang ada di dalam tas?'},
+  {jp:'携帯',reading:'けいたい',id:'Ponsel / HP',level:'N5',cat:'nouns',example:'携帯を忘れました。\nSaya lupa membawa HP.'},
+  {jp:'カメラ',reading:'かめら',id:'Kamera',level:'N5',cat:'nouns',example:'カメラで写真を撮りました。\nSaya memotret dengan kamera.'},
+  {jp:'気温',reading:'きおん',id:'Suhu udara',level:'N5',cat:'nouns',example:'今日の気温は何度ですか。\nBerapa suhu hari ini?'},
+  {jp:'店',reading:'みせ',id:'Toko',level:'N5',cat:'nouns',example:'あの店は安くておいしいです。\nToko itu murah dan enak.'},
+  {jp:'厚い',reading:'あつい',id:'Tebal',level:'N5',cat:'adjectives',example:'この本はとても厚いです。\nBuku ini sangat tebal.'},
+  {jp:'薄い',reading:'うすい',id:'Tipis',level:'N5',cat:'adjectives',example:'薄い財布を買いました。\nSaya membeli dompet tipis.'},
+  {jp:'速い',reading:'はやい',id:'Cepat',level:'N5',cat:'adjectives',example:'新幹線はとても速いです。\nShinkansen sangat cepat.'},
+  {jp:'暖かい',reading:'あたたかい',id:'Hangat',level:'N5',cat:'adjectives',example:'春は暖かくて気持ちいいです。\nMusim semi hangat dan menyenangkan.'},
+  {jp:'涼しい',reading:'すずしい',id:'Sejuk',level:'N5',cat:'adjectives',example:'秋になると涼しいです。\nKetika musim gugur tiba, udaranya sejuk.'},
+  {jp:'汚い',reading:'きたない',id:'Kotor',level:'N5',cat:'adjectives',example:'手が汚いので洗います。\nTangan saya kotor jadi saya cuci.'},
+  {jp:'嬉しい',reading:'うれしい',id:'Senang / Gembira',level:'N5',cat:'adjectives',example:'合格して嬉しいです。\nSaya senang karena lulus.'},
+  {jp:'同じ',reading:'おなじ',id:'Sama',level:'N5',cat:'adjectives',example:'二人は同じ学校です。\nKeduanya bersekolah di tempat yang sama.'}
 ];
 
 // ════════════════════════
@@ -3388,6 +3609,10 @@ window.addEventListener('DOMContentLoaded', function() {
             voiceWrap.style.pointerEvents = 'none';
         }
     }
+    // Inisialisasi halaman home langsung saat app dibuka
+    setTimeout(function() {
+        if (typeof initHomeStats === 'function') initHomeStats();
+    }, 100);
 });
 
 function toggleMute() {
@@ -3472,8 +3697,10 @@ function showPage(pageId) {
     if (pageId === 'kana') renderKana();
     if (pageId === 'menulis') { setMenulisMode(mwMode || 'kana'); setTimeout(initMenulisCanvas, 100); }
     if (pageId === 'harian') { renderHarian(); }
+    if (pageId === 'catatan') { initCatatanPage(); }
     if (pageId === 'fukushuu') { initSrsPage(); }
     if (pageId === 'hafal') { initHafalPage(); }
+    if (pageId === 'konjugasi') { initKonjugasi(); }
     if (pageId === 'dashboard' && typeof updateGamificationUI === 'function') { updateGamificationUI(); }
     // Stop mic when navigating away from a page
     if (!['dokkai','kana','choukai'].includes(pageId)) stopMic();
@@ -4063,6 +4290,442 @@ function kmSpeak(type) {
 }
 
 // ══════════════════════════════════════════════════════════════════
+// CATATAN PRIBADI ENGINE
+// Key: 'catatan_vocab_{jp}' atau 'catatan_kanji_{char}'
+// ══════════════════════════════════════════════════════════════════
+
+const CATATAN_KEY = 'catatan_all';
+
+function catatanLoad() {
+    try { return JSON.parse(localStorage.getItem(CATATAN_KEY) || '{}'); } catch(e) { return {}; }
+}
+function catatanSave(data) {
+    localStorage.setItem(CATATAN_KEY, JSON.stringify(data));
+}
+function catatanGetKey(type, id) { return `${type}__${id}`; }
+
+// ── Kamus modal notes ─────────────────────────────────────────────
+let _kamusNoteEditing = false;
+let _kamusNoteKey = '';
+
+function loadKamusNote(jp) {
+    _kamusNoteKey = catatanGetKey('vocab', jp);
+    const data = catatanLoad();
+    const note = data[_kamusNoteKey];
+    const display = document.getElementById('km2-catatan-display');
+    const input = document.getElementById('km2-catatan-input');
+    const editBtn = document.getElementById('km2-catatan-edit-btn');
+    _kamusNoteEditing = false;
+    input.style.display = 'none';
+    input.value = note ? note.text : '';
+    if(note && note.text) {
+        display.className = 'catatan-display';
+        display.textContent = note.text;
+        editBtn.textContent = '✏️ Edit';
+        document.getElementById('km2-catatan-actions').innerHTML = `
+            <button class="catatan-edit-btn" onclick="toggleKamusNote()">✏️ Edit</button>
+            <button class="catatan-del-btn" onclick="deleteKamusNote()">🗑️ Hapus</button>`;
+    } else {
+        display.className = 'catatan-display empty';
+        display.textContent = 'Belum ada catatan untuk kata ini.';
+        document.getElementById('km2-catatan-actions').innerHTML = `
+            <button class="catatan-edit-btn" onclick="toggleKamusNote()">✏️ Tulis Catatan</button>`;
+    }
+}
+
+function toggleKamusNote() {
+    _kamusNoteEditing = !_kamusNoteEditing;
+    const input = document.getElementById('km2-catatan-input');
+    const display = document.getElementById('km2-catatan-display');
+    input.style.display = _kamusNoteEditing ? 'block' : 'none';
+    display.style.display = _kamusNoteEditing ? 'none' : 'block';
+    if(_kamusNoteEditing) {
+        input.focus();
+        document.getElementById('km2-catatan-actions').innerHTML = `
+            <button class="catatan-save-btn" onclick="saveKamusNote()">💾 Simpan</button>
+            <button class="catatan-del-btn" onclick="cancelKamusNote()">✕ Batal</button>`;
+    }
+}
+
+function saveKamusNote() {
+    const text = document.getElementById('km2-catatan-input').value.trim();
+    const data = catatanLoad();
+    if(text) {
+        const jp = document.getElementById('km2-jp').textContent;
+        const read = document.getElementById('km2-reading').textContent;
+        const id = document.getElementById('km2-meaning').textContent;
+        data[_kamusNoteKey] = { text, jp, read, id, type:'vocab', date: new Date().toLocaleDateString('id-ID') };
+    } else {
+        delete data[_kamusNoteKey];
+    }
+    catatanSave(data);
+    loadKamusNote(document.getElementById('km2-jp').textContent);
+    _kamusNoteEditing = false;
+}
+
+function cancelKamusNote() {
+    _kamusNoteEditing = false;
+    loadKamusNote(document.getElementById('km2-jp').textContent);
+}
+
+function deleteKamusNote() {
+    const data = catatanLoad();
+    delete data[_kamusNoteKey];
+    catatanSave(data);
+    loadKamusNote(document.getElementById('km2-jp').textContent);
+}
+
+// ── Kanji modal notes ─────────────────────────────────────────────
+let _kanjiNoteEditing = false;
+let _kanjiNoteKey = '';
+
+function loadKanjiNote(char) {
+    _kanjiNoteKey = catatanGetKey('kanji', char);
+    const data = catatanLoad();
+    const note = data[_kanjiNoteKey];
+    const display = document.getElementById('km-catatan-display');
+    const input = document.getElementById('km-catatan-input');
+    _kanjiNoteEditing = false;
+    input.style.display = 'none';
+    input.value = note ? note.text : '';
+    if(note && note.text) {
+        display.className = 'catatan-display';
+        display.textContent = note.text;
+        document.getElementById('km-catatan-actions').innerHTML = `
+            <button class="catatan-edit-btn" onclick="toggleKanjiNote()">✏️ Edit</button>
+            <button class="catatan-del-btn" onclick="deleteKanjiNote()">🗑️ Hapus</button>`;
+    } else {
+        display.className = 'catatan-display empty';
+        display.textContent = 'Belum ada catatan untuk kanji ini.';
+        document.getElementById('km-catatan-actions').innerHTML = `
+            <button class="catatan-edit-btn" onclick="toggleKanjiNote()">✏️ Tulis Catatan</button>`;
+    }
+}
+
+function toggleKanjiNote() {
+    _kanjiNoteEditing = !_kanjiNoteEditing;
+    const input = document.getElementById('km-catatan-input');
+    const display = document.getElementById('km-catatan-display');
+    input.style.display = _kanjiNoteEditing ? 'block' : 'none';
+    display.style.display = _kanjiNoteEditing ? 'none' : 'block';
+    if(_kanjiNoteEditing) {
+        input.focus();
+        document.getElementById('km-catatan-actions').innerHTML = `
+            <button class="catatan-save-btn" onclick="saveKanjiNote()">💾 Simpan</button>
+            <button class="catatan-del-btn" onclick="cancelKanjiNote()">✕ Batal</button>`;
+    }
+}
+
+function saveKanjiNote() {
+    const text = document.getElementById('km-catatan-input').value.trim();
+    const data = catatanLoad();
+    const k = window._currentKanji;
+    if(text && k) {
+        data[_kanjiNoteKey] = { text, jp:k.char, read:(k.kun&&k.kun[0])||'', id:k.meaning, type:'kanji', date: new Date().toLocaleDateString('id-ID') };
+    } else {
+        delete data[_kanjiNoteKey];
+    }
+    catatanSave(data);
+    loadKanjiNote(k.char);
+    _kanjiNoteEditing = false;
+}
+
+function cancelKanjiNote() {
+    _kanjiNoteEditing = false;
+    if(window._currentKanji) loadKanjiNote(window._currentKanji.char);
+}
+
+function deleteKanjiNote() {
+    const data = catatanLoad();
+    delete data[_kanjiNoteKey];
+    catatanSave(data);
+    if(window._currentKanji) loadKanjiNote(window._currentKanji.char);
+}
+
+// ── Halaman Catatan ───────────────────────────────────────────────
+let _catatanFilter = 'all';
+
+function initCatatanPage() {
+    _catatanFilter = 'all';
+    ['all','vocab','kanji'].forEach(f => document.getElementById('cfilter-'+f)?.classList.toggle('active', f === _catatanFilter));
+    renderCatatanList();
+}
+
+function setCatatanFilter(f) {
+    _catatanFilter = f;
+    ['all','vocab','kanji'].forEach(x => document.getElementById('cfilter-'+x)?.classList.toggle('active', x === f));
+    renderCatatanList();
+}
+
+function renderCatatanList() {
+    const data = catatanLoad();
+    let entries = Object.values(data);
+    if(_catatanFilter !== 'all') entries = entries.filter(e => e.type === _catatanFilter);
+    const list = document.getElementById('catatan-list');
+    const empty = document.getElementById('catatan-empty');
+    if(!entries.length) {
+        list.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+    }
+    empty.style.display = 'none';
+    list.innerHTML = entries.map((note, i) => `
+        <div class="catatan-card">
+            <div class="catatan-card-header">
+                <div>
+                    <div class="catatan-card-jp">${note.jp}</div>
+                    <div class="catatan-card-read">${note.read || ''}</div>
+                </div>
+                <div class="catatan-card-id">${note.id || ''}</div>
+                <span class="catatan-card-type">${note.type === 'kanji' ? '漢 Kanji' : '📚 Vocab'}</span>
+            </div>
+            <div class="catatan-card-text">${note.text}</div>
+            <div class="catatan-card-footer">
+                <span class="catatan-card-date">📅 ${note.date || ''}</span>
+                <button class="catatan-edit-btn" style="font-size:0.7rem;" onclick="editCatatanFromList('${note.type}__${note.jp}')">✏️ Edit</button>
+                <button class="catatan-del-btn" style="font-size:0.7rem;" onclick="deleteCatatanFromList('${note.type}__${note.jp}')">🗑️</button>
+            </div>
+        </div>`).join('');
+}
+
+function deleteCatatanFromList(key) {
+    if(!confirm('Hapus catatan ini?')) return;
+    const data = catatanLoad();
+    delete data[key];
+    catatanSave(data);
+    renderCatatanList();
+}
+
+function editCatatanFromList(key) {
+    const data = catatanLoad();
+    const note = data[key];
+    if(!note) return;
+    const newText = prompt('Edit catatan:', note.text);
+    if(newText === null) return;
+    if(newText.trim()) {
+        data[key].text = newText.trim();
+        data[key].date = new Date().toLocaleDateString('id-ID');
+    } else {
+        delete data[key];
+    }
+    catatanSave(data);
+    renderCatatanList();
+}
+// ══════════════════════════════════════════════════════════════════
+
+// ══════════════════════════════════════════════════════════════════
+// KONJUGASI ENGINE — 動詞活用
+// Mendukung: Godan (u-verb), Ichidan (ru-verb), Irregular (する・くる)
+// ══════════════════════════════════════════════════════════════════
+
+let konjCurrentVerb = null;
+let konjCurrentTab = 'dasar';
+
+function initKonjugasi() {
+    closeKonjDetail();
+    renderKonjList();
+}
+
+// ── Deteksi tipe kata kerja ──────────────────────────────────────
+function detectVerbType(jp, reading) {
+    if(jp === 'する' || jp.endsWith('する')) return 'suru';
+    if(jp === 'くる' || jp === '来る') return 'kuru';
+    // Ichidan: reading ends with いる or える (eru/iru)
+    const r = reading || jp;
+    if(r.endsWith('いる') || r.endsWith('える') ||
+       r.endsWith('きる') || r.endsWith('ぎる') || r.endsWith('にる') ||
+       r.endsWith('びる') || r.endsWith('みる') || r.endsWith('りる') ||
+       r.endsWith('ちる') || r.endsWith('でる') || r.endsWith('ける') ||
+       r.endsWith('げる') || r.endsWith('ねる') || r.endsWith('べる') ||
+       r.endsWith('める') || r.endsWith('れる') || r.endsWith('せる') ||
+       r.endsWith('てる') || r.endsWith('じる') || r.endsWith('ぜる')) {
+        // Beberapa godan yang berakhiran eru/iru
+        const godanExceptions = ['ある','いる','える','きる','しる','へる','かえる','はいる','はしる','きこえる','みえる','よる','さがる','のる','ふる','まいる','いじる'];
+        if(!godanExceptions.some(ex => (reading||'').endsWith(ex.slice(-2)) && godanExceptions.includes(reading))) {
+            return 'ichidan';
+        }
+    }
+    return 'godan';
+}
+
+// ── Stem builder ─────────────────────────────────────────────────
+function getStems(reading, type) {
+    if(!reading) return {};
+    const base = reading.slice(0, -1); // hilangkan huruf terakhir (u)
+    const last = reading.slice(-1);
+
+    const godanMap = {
+        'う':{ a:'わ', i:'い', te:'って', ta:'った', ba:'えば', ou:'おう', potential:'える' },
+        'く':{ a:'か', i:'き', te:'いて', ta:'いた', ba:'けば', ou:'こう', potential:'ける' },
+        'ぐ':{ a:'が', i:'ぎ', te:'いで', ta:'いだ', ba:'げば', ou:'ごう', potential:'げる' },
+        'す':{ a:'さ', i:'し', te:'して', ta:'した', ba:'せば', ou:'そう', potential:'せる' },
+        'つ':{ a:'た', i:'ち', te:'って', ta:'った', ba:'てば', ou:'とう', potential:'てる' },
+        'ぬ':{ a:'な', i:'に', te:'んで', ta:'んだ', ba:'ねば', ou:'のう', potential:'ねる' },
+        'ぶ':{ a:'ば', i:'び', te:'んで', ta:'んだ', ba:'べば', ou:'ぼう', potential:'べる' },
+        'む':{ a:'ま', i:'み', te:'んで', ta:'んだ', ba:'めば', ou:'もう', potential:'める' },
+        'る':{ a:'ら', i:'り', te:'って', ta:'った', ba:'れば', ou:'ろう', potential:'れる' },
+    };
+
+    if(type === 'ichidan') {
+        return { a:base, i:base, te:base+'て', ta:base+'た', ba:base+'れば', ou:base+'よう', potential:base+'られる', base };
+    }
+    if(type === 'suru') {
+        const b = reading.slice(0, -2); // remove する
+        return { a:b+'し', i:b+'し', te:b+'して', ta:b+'した', ba:b+'すれば', ou:b+'しよう', potential:b+'できる', base:b+'し', baseFull:b+'する' };
+    }
+    if(type === 'kuru') {
+        return { a:'こ', i:'き', te:'きて', ta:'きた', ba:'くれば', ou:'こよう', potential:'こられる', base:'き' };
+    }
+    // Godan
+    const g = godanMap[last] || godanMap['う'];
+    return { a:base+g.a, i:base+g.i, te:base+g.te, ta:base+g.ta, ba:base+g.ba, ou:base+g.ou, potential:base+g.potential, base:base+g.i };
+}
+
+// ── Generate all conjugations ─────────────────────────────────────
+function conjugate(verb) {
+    const r = verb.reading;
+    const type = detectVerbType(verb.jp, r);
+    const s = getStems(r, type);
+    const dict = r; // kamus
+
+    return {
+        type,
+        dasar: [
+            { label:'Kamus (辞書形)',   jp: dict,       read: dict,       id: 'Bentuk dasar / kamus' },
+            { label:'Bentuk ます',      jp: s.i+'ます', read: s.i+'ます', id: 'Sopan, sekarang/akan' },
+            { label:'Bentuk て (Te)',   jp: s.te,       read: s.te,       id: 'Penghubung / permintaan' },
+            { label:'Bentuk た (Ta)',   jp: s.ta,       read: s.ta,       id: 'Lampau informal' },
+            { label:'Bentuk ている',    jp: s.te+'いる',read: s.te+'いる',id: 'Sedang berlangsung' },
+        ],
+        sopan: [
+            { label:'Sopan Positif',    jp: s.i+'ます',     read: s.i+'ます',     id: 'Sekarang / Akan datang' },
+            { label:'Sopan Lampau',     jp: s.i+'ました',   read: s.i+'ました',   id: 'Sudah (lampau sopan)' },
+            { label:'Sopan Negatif',    jp: s.i+'ません',   read: s.i+'ません',   id: 'Tidak (sopan)' },
+            { label:'Sopan Neg Lampau', jp: s.i+'ませんでした', read: s.i+'ませんでした', id: 'Tidak / belum (lampau sopan)' },
+            { label:'Undangan Sopan',   jp: s.i+'ましょう', read: s.i+'ましょう', id: 'Mari kita...' },
+        ],
+        negatif: [
+            { label:'Negatif (ない)',    jp: s.a+'ない',       read: s.a+'ない',       id: 'Tidak (informal)' },
+            { label:'Negatif Lampau',   jp: s.a+'なかった',   read: s.a+'なかった',   id: 'Tidak / belum (lampau)' },
+            { label:'Negatif Te',       jp: s.a+'なくて',     read: s.a+'なくて',     id: 'Tidak... dan' },
+            { label:'Negatif ないで',   jp: s.a+'ないで',     read: s.a+'ないで',     id: 'Tanpa melakukan...' },
+            { label:'Harus (なければ)', jp: s.a+'なければならない', read: s.a+'なければならない', id: 'Harus / wajib' },
+        ],
+        te: [
+            { label:'Bentuk て',        jp: s.te,             read: s.te,             id: 'Penghubung / dan' },
+            { label:'〜てください',     jp: s.te+'ください',  read: s.te+'ください',  id: 'Tolong lakukan...' },
+            { label:'〜ている',         jp: s.te+'いる',      read: s.te+'いる',      id: 'Sedang (sekarang)' },
+            { label:'〜てみる',         jp: s.te+'みる',      read: s.te+'みる',      id: 'Mencoba melakukan...' },
+            { label:'〜てもいい',       jp: s.te+'もいいです',read: s.te+'もいいです',id: 'Boleh melakukan...' },
+            { label:'〜てはいけない',   jp: s.te+'はいけない',read: s.te+'はいけない',id: 'Tidak boleh / dilarang' },
+            { label:'〜たことがある',   jp: s.ta+'ことがある',read: s.ta+'ことがある',id: 'Pernah melakukan...' },
+            { label:'Potensi (〜られる)',jp: s.potential,     read: s.potential,      id: 'Bisa / mampu' },
+            { label:'Keinginan (〜たい)',jp: s.i+'たい',      read: s.i+'たい',       id: 'Ingin melakukan...' },
+            { label:'Kondisional (〜ば)',jp: s.ba,            read: s.ba,             id: 'Jika / kalau' },
+            { label:'Volitional (〜よう)',jp:s.ou,            read: s.ou,             id: 'Ayo / bermaksud' },
+        ],
+    };
+}
+
+// ── Render list ───────────────────────────────────────────────────
+function renderKonjList() {
+    const q = (document.getElementById('konj-search')?.value || '').toLowerCase();
+    const lv = document.getElementById('konj-level')?.value || 'all';
+    let verbs = vocab.filter(v => v.cat === 'verbs');
+    if(lv !== 'all') verbs = verbs.filter(v => v.level === lv);
+    if(q) verbs = verbs.filter(v => v.jp.includes(q) || v.reading.includes(q) || v.id.toLowerCase().includes(q));
+
+    const list = document.getElementById('konj-list');
+    if(!verbs.length) { list.innerHTML = '<div style="text-align:center;color:#6b7280;padding:40px;">Kata kerja tidak ditemukan.</div>'; return; }
+
+    list.innerHTML = verbs.map((v,i) => {
+        const type = detectVerbType(v.jp, v.reading);
+        const typeLbl = type === 'ichidan' ? 'Ichidan' : type === 'suru' ? 'する' : type === 'kuru' ? 'くる' : 'Godan';
+        const typeCls = type === 'ichidan' ? 'konj-type-ichidan' : type === 'suru' || type === 'kuru' ? 'konj-type-irreg' : 'konj-type-godan';
+        return `<div class="konj-verb-card" onclick="openKonjDetail(${vocab.indexOf(v)})">
+            <div style="font-size:0.7rem;font-weight:800;color:#4b5563;min-width:22px;text-align:center;">${i+1}</div>
+            <div>
+                <div class="konj-verb-jp">${v.jp}</div>
+                <div class="konj-verb-read">${v.reading}</div>
+            </div>
+            <div class="konj-verb-id">${v.id}</div>
+            <div class="konj-verb-badges">
+                <span class="konj-type-sm ${typeCls}">${typeLbl}</span>
+                <span class="konj-lv-sm">${v.level}</span>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function openKonjDetail(vocabIdx) {
+    const v = vocab[vocabIdx];
+    if(!v) return;
+    konjCurrentVerb = v;
+    konjCurrentTab = 'dasar';
+    document.getElementById('konj-list').style.display = 'none';
+    document.getElementById('konj-search-wrap').style.display = 'none';
+    document.getElementById('konj-detail').style.display = 'block';
+
+    const type = detectVerbType(v.jp, v.reading);
+    const typeLbl = type === 'ichidan' ? '🟢 Ichidan (る動詞)' : type === 'suru' ? '🟡 Irregular (する)' : type === 'kuru' ? '🟡 Irregular (くる)' : '🟣 Godan (う動詞)';
+    document.getElementById('kd-jp').textContent = v.jp;
+    document.getElementById('kd-read').textContent = v.reading;
+    document.getElementById('kd-id').textContent = v.id;
+    document.getElementById('kd-type').textContent = typeLbl;
+    document.getElementById('kd-level').textContent = v.level;
+
+    switchKonjTab('dasar');
+}
+
+function closeKonjDetail() {
+    konjCurrentVerb = null;
+    document.getElementById('konj-detail').style.display = 'none';
+    document.getElementById('konj-list').style.display = 'flex';
+    document.getElementById('konj-search-wrap').style.display = 'flex';
+}
+
+function switchKonjTab(tab) {
+    konjCurrentTab = tab;
+    ['dasar','sopan','negatif','te'].forEach(t => {
+        document.getElementById('ktab-'+t)?.classList.toggle('active', t === tab);
+    });
+    renderKonjTable();
+}
+
+function renderKonjTable() {
+    if(!konjCurrentVerb) return;
+    const conj = conjugate(konjCurrentVerb);
+    const rows = conj[konjCurrentTab] || [];
+    const wrap = document.getElementById('konj-table-wrap');
+
+    wrap.innerHTML = `<table class="konj-table">
+        <thead><tr>
+            <th style="width:32px;text-align:center;">#</th>
+            <th>Bentuk</th>
+            <th>Jepang</th>
+            <th>Arti</th>
+            <th></th>
+        </tr></thead>
+        <tbody>
+        ${rows.map((row, i) => `<tr>
+            <td style="text-align:center;font-size:0.72rem;color:#4b5563;font-weight:700;">${i+1}</td>
+            <td><div class="konj-row-label">${row.label}</div></td>
+            <td>
+                <div class="konj-row-jp">${row.jp}</div>
+                <div class="konj-row-read">${row.read}</div>
+            </td>
+            <td><div class="konj-row-id">${row.id}</div></td>
+            <td><button class="konj-row-speak" onclick="speakText('${row.jp.replace(/'/g,"\\'")}')">🔊</button></td>
+        </tr>`).join('')}
+        </tbody>
+    </table>
+    <div style="margin-top:10px;padding:10px 14px;background:rgba(168,85,247,0.06);border-radius:10px;border:1px solid rgba(168,85,247,0.15);font-size:0.72rem;color:#6b7280;line-height:1.6;">
+        <strong style="color:var(--purple2);">Tipe:</strong> ${conj.type === 'ichidan' ? '🟢 Ichidan — hilangkan る, tambah ending' : conj.type === 'godan' ? '🟣 Godan — ubah huruf terakhir sesuai baris あいうえお' : '🟡 Irregular — hafal langsung'}
+    </div>`;
+}
+// ══════════════════════════════════════════════════════════════════
+
+// ══════════════════════════════════════════════════════════════════
 // SRS ENGINE — FUKUSHUU (復習)
 // Algoritma: SM-2 sederhana dengan 4 rating
 // Data disimpan di localStorage key: 'srs_cards'
@@ -4452,10 +5115,10 @@ function openKanjiModal(k) {
     }
     
     document.getElementById('kanji-modal-overlay').classList.add('show');
-}
-
-function closeKanjiModalDirect() { document.getElementById('kanji-modal-overlay').classList.remove('show'); }
+    loadKanjiNote(k.char);
+} { document.getElementById('kanji-modal-overlay').classList.remove('show'); }
 function closeKanjiModal(e) { if(e.target.id === 'kanji-modal-overlay') closeKanjiModalDirect(); }
+function closeKanjiModalDirect() { document.getElementById('kanji-modal-overlay').classList.remove('show'); }
 
 function toggleMastered() {
     if(currentKanjiIdx === null) return;
@@ -4654,7 +5317,7 @@ function updateTimerDisplay() {
 // ════════════════════════
 // QUIZ
 // ════════════════════════
-let qQuestions=[],qCurrent=0,qCorrect=0,qWrong=0,isMicMode=false,recognition=null;
+let qQuestions=[],qCurrent=0,qCorrect=0,qWrong=0,isMicMode=false,recognition=null,qMissed=[];
 let quizOptions = { shuffle: false, romaji: false, timer: false, sound: false, strict: false };
 
 function toggleQuizChip(opt) {
@@ -4678,7 +5341,7 @@ function startQuiz() {
     if (quizOptions.shuffle) shuffle(pool);
     qQuestions = pool.slice(0, Math.min(num, pool.length)).map(v => ({...v, qType: type === 'mixed' ? ['jp-id','id-jp','reading'][Math.floor(Math.random()*3)] : type}));
     
-    qCurrent=0; qCorrect=0; qWrong=0;
+    qCurrent=0; qCorrect=0; qWrong=0; qMissed=[]; qSkipped=0; qBookmarks=[];
     document.getElementById('quiz-setup').classList.add('hidden');
     document.getElementById('quiz-result').classList.add('hidden');
     document.getElementById('quiz-area').classList.remove('hidden');
@@ -4931,7 +5594,7 @@ function checkH100Answer(idx, selectedJp, correctJp) {
         fb.className = 'quiz-feedback correct';
         fb.innerHTML = `✅ Benar! <strong>${q.jp}</strong> = <em>${q.id}</em>`;
     } else {
-        qWrong++;
+        qWrong++; if(typeof q !== "undefined" && q && !qMissed.some(m=>m.jp===q.jp)) qMissed.push(q);
         fb.className = 'quiz-feedback wrong';
         fb.innerHTML = `❌ Salah. Jawaban benar: Kartu ${['Q1','Q2','Q3','Q4'][correctIdx]} — <strong>${q.jp}</strong> = <em>${q.id}</em>`;
     }
@@ -4975,7 +5638,7 @@ function checkAnswer(btn, selected, correct, q) {
         btn.classList.add('wrong');
         fb.classList.add('wrong-fb');
         fben.textContent = '❌ Salah!';
-        qWrong++;
+        qWrong++; if(typeof q !== "undefined" && q && !qMissed.some(m=>m.jp===q.jp)) qMissed.push(q);
     }
     
     let hint = q.qType === 'jp-id' ? q.id : (q.qType === 'id-jp' ? rubyWrap(q.jp, q.reading) : q.reading);
@@ -5100,7 +5763,7 @@ function toggleQuizMic() {
             } else {
                 fb.className = 'quiz-feedback show wrong-fb';
                 if(fben) fben.textContent = '❌ Coba Lagi.';
-                qWrong++;
+                qWrong++; if(typeof q !== "undefined" && q && !qMissed.some(m=>m.jp===q.jp)) qMissed.push(q);
             }
             if(fbnote) fbnote.innerHTML = 'Harusnya: <strong>' + (q.jp||'') + ' (' + (q.reading||'') + ')</strong>';
             var nextBtn = document.getElementById('btn-next');
@@ -5172,7 +5835,7 @@ function checkTypingAnswer() {
         inp.classList.add('typing-wrong');
         fb.className = 'quiz-feedback show wrong-fb';
         fben.textContent = '❌ Salah!';
-        qWrong++;
+        qWrong++; if(typeof q !== "undefined" && q && !qMissed.some(m=>m.jp===q.jp)) qMissed.push(q);
     }
     
     let hint = q.qType === 'typing-jpid' ? q.id : (q.qType === 'typing-idjp' ? q.jp + ' (' + q.reading + ')' : q.reading);
@@ -5186,22 +5849,87 @@ function showQuizResult() {
     stopTimer();
     document.getElementById('quiz-area').classList.add('hidden');
     document.getElementById('quiz-result').classList.remove('hidden');
-    
+
     document.getElementById('q-progress-fill').style.width = '100%';
     document.getElementById('res-correct').textContent = qCorrect;
     document.getElementById('res-wrong').textContent = qWrong;
-    
+    const skippedEl = document.getElementById('res-skipped');
+    if(skippedEl) skippedEl.textContent = qSkipped || 0;
+
     const pct = Math.round((qCorrect / qQuestions.length) * 100) || 0;
     document.getElementById('res-score').textContent = `${qCorrect}/${qQuestions.length}`;
     document.getElementById('res-pct').textContent = `${pct}%`;
-    
     document.getElementById('res-emoji').textContent = pct === 100 ? '🏆' : (pct >= 80 ? '🎉' : (pct >= 50 ? '👍' : '💪'));
+
+    // Show missed words list
+    const missedWrap = document.getElementById('result-missed-wrap');
+    const missedList = document.getElementById('result-missed-list');
+    const retryBtn = document.getElementById('btn-retry-wrong');
+    if(qMissed && qMissed.length > 0) {
+        if(missedWrap) missedWrap.style.display = 'block';
+        if(missedList) missedList.innerHTML = qMissed.map(v =>
+            `<div style="display:flex;justify-content:space-between;padding:6px 10px;background:rgba(255,77,109,0.08);border-radius:8px;margin-bottom:4px;font-size:0.82rem;">
+                <span style="font-family:'Noto Sans JP',sans-serif;color:#e2e8f0;">${v.jp} <span style="color:var(--teal);font-size:0.7rem;">${v.reading}</span></span>
+                <span style="color:var(--gold);">${v.id}</span>
+            </div>`
+        ).join('');
+        if(retryBtn) retryBtn.style.display = 'inline-flex';
+    } else {
+        if(missedWrap) missedWrap.style.display = 'none';
+        if(retryBtn) retryBtn.style.display = 'none';
+    }
 }
 
 function backToSetup() {
     stopTimer();
     document.getElementById('quiz-result').classList.add('hidden');
     document.getElementById('quiz-setup').classList.remove('hidden');
+}
+
+let qBookmarks = [];
+let qSkipped = 0;
+
+function toggleBookmark() {
+    const q = qQuestions[qCurrent > 0 ? qCurrent - 1 : 0];
+    if(!q) return;
+    const btn = document.getElementById('q-bookmark-btn');
+    const panel = document.getElementById('quiz-bookmark-panel');
+    const idx = qBookmarks.findIndex(b => b.jp === q.jp);
+    if(idx === -1) {
+        qBookmarks.push(q);
+        btn.textContent = '★';
+        btn.classList.add('bookmarked');
+    } else {
+        qBookmarks.splice(idx, 1);
+        btn.textContent = '☆';
+        btn.classList.remove('bookmarked');
+    }
+    // Update bookmark panel
+    const list = document.getElementById('bookmark-list');
+    if(list) {
+        list.innerHTML = qBookmarks.length
+            ? qBookmarks.map(b => `<div style="font-family:'Noto Sans JP',sans-serif;font-size:0.88rem;color:#e2e8f0;padding:4px 0;">${b.jp} — ${b.id}</div>`).join('')
+            : '<div style="color:#6b7280;font-size:0.8rem;">Belum ada bookmark.</div>';
+        panel.classList.toggle('show', qBookmarks.length > 0);
+    }
+}
+
+function skipQuestion() {
+    if(qCurrent >= qQuestions.length) return;
+    qSkipped = (qSkipped || 0) + 1;
+    qCurrent++;
+    const skipEl = document.getElementById('res-skipped');
+    if(skipEl) skipEl.textContent = qSkipped;
+    renderQuestion();
+}
+
+function retryWrong() {
+    if(!qMissed || !qMissed.length) return;
+    qQuestions = qMissed.map(v => ({...v, qType: 'jp-id'}));
+    qCurrent = 0; qCorrect = 0; qWrong = 0; qSkipped = 0; qMissed = [];
+    document.getElementById('quiz-result').classList.add('hidden');
+    document.getElementById('quiz-area').classList.remove('hidden');
+    renderQuestion();
 }
 
 
@@ -6624,15 +7352,6 @@ function openKamusModal(index) {
         favBtn.textContent = '♡ Tambah Favorit';
     }
     
-    // Notes logic (placeholder)
-    const notesWrap = document.getElementById('km2-notes-wrap');
-    if(v.cat === 'verbs') {
-        notesWrap.style.display = 'block';
-        document.getElementById('km2-notes').innerHTML = `Golongan Kata Kerja bergantung pada akhiran masu-form. Kata ini biasa digunakan untuk level ${v.level}.`;
-    } else {
-        notesWrap.style.display = 'none';
-    }
-    
     // Related logic (placeholder)
     const relatedWrap = document.getElementById('km2-related-wrap');
     const related = vocab.filter(x => x !== v && (x.cat === v.cat && x.level === v.level)).slice(0,2);
@@ -6649,6 +7368,7 @@ function openKamusModal(index) {
     }
     
     document.getElementById('kamus-modal-overlay').classList.add('show');
+    loadKamusNote(v.jp);
 }
 
 function closeKamusModalDirect() { document.getElementById('kamus-modal-overlay').classList.remove('show'); }
