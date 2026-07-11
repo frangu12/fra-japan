@@ -11920,5 +11920,283 @@ function closeStrokeModal() {
 }
 </script>
 
+<script>
+// ══════════════════════════════════════════════════════
+// 🖼️ QUIZ GAMBAR — Emoji-based (akurat 100%)
+// ══════════════════════════════════════════════════════
+const QG_VOCAB = [
+  // 🍱 Makanan
+  {jp:'水',read:'みず',romaji:'mizu',id:'Air',cat:'food',emoji:'💧',bg:'#0ea5e9'},
+  {jp:'パン',read:'ぱん',romaji:'pan',id:'Roti',cat:'food',emoji:'🍞',bg:'#d97706'},
+  {jp:'卵',read:'たまご',romaji:'tamago',id:'Telur',cat:'food',emoji:'🥚',bg:'#fbbf24'},
+  {jp:'肉',read:'にく',romaji:'niku',id:'Daging',cat:'food',emoji:'🥩',bg:'#dc2626'},
+  {jp:'魚',read:'さかな',romaji:'sakana',id:'Ikan',cat:'food',emoji:'🐟',bg:'#0284c7'},
+  {jp:'野菜',read:'やさい',romaji:'yasai',id:'Sayuran',cat:'food',emoji:'🥦',bg:'#16a34a'},
+  {jp:'果物',read:'くだもの',romaji:'kudamono',id:'Buah',cat:'food',emoji:'🍎',bg:'#dc2626'},
+  {jp:'米',read:'こめ',romaji:'kome',id:'Beras',cat:'food',emoji:'🌾',bg:'#ca8a04'},
+  {jp:'塩',read:'しお',romaji:'shio',id:'Garam',cat:'food',emoji:'🧂',bg:'#94a3b8'},
+  {jp:'牛乳',read:'ぎゅうにゅう',romaji:'gyuunyuu',id:'Susu',cat:'food',emoji:'🥛',bg:'#f1f5f9'},
+  {jp:'コーヒー',read:'こーひー',romaji:'koohii',id:'Kopi',cat:'food',emoji:'☕',bg:'#92400e'},
+  {jp:'お茶',read:'おちゃ',romaji:'ocha',id:'Teh',cat:'food',emoji:'🍵',bg:'#15803d'},
+  {jp:'りんご',read:'りんご',romaji:'ringo',id:'Apel',cat:'food',emoji:'🍎',bg:'#dc2626'},
+  {jp:'バナナ',read:'ばなな',romaji:'banana',id:'Pisang',cat:'food',emoji:'🍌',bg:'#eab308'},
+  {jp:'イチゴ',read:'いちご',romaji:'ichigo',id:'Stroberi',cat:'food',emoji:'🍓',bg:'#dc2626'},
+  {jp:'スープ',read:'すーぷ',romaji:'suupu',id:'Sup',cat:'food',emoji:'🍲',bg:'#b45309'},
+  {jp:'ケーキ',read:'けーき',romaji:'keeki',id:'Kue',cat:'food',emoji:'🎂',bg:'#ec4899'},
+  {jp:'ピザ',read:'ぴざ',romaji:'piza',id:'Pizza',cat:'food',emoji:'🍕',bg:'#ea580c'},
+  // 🌿 Alam
+  {jp:'山',read:'やま',romaji:'yama',id:'Gunung',cat:'nature',emoji:'🏔️',bg:'#475569'},
+  {jp:'海',read:'うみ',romaji:'umi',id:'Laut',cat:'nature',emoji:'🌊',bg:'#0369a1'},
+  {jp:'川',read:'かわ',romaji:'kawa',id:'Sungai',cat:'nature',emoji:'🏞️',bg:'#0891b2'},
+  {jp:'森',read:'もり',romaji:'mori',id:'Hutan',cat:'nature',emoji:'🌲',bg:'#15803d'},
+  {jp:'花',read:'はな',romaji:'hana',id:'Bunga',cat:'nature',emoji:'🌸',bg:'#db2777'},
+  {jp:'木',read:'き',romaji:'ki',id:'Pohon',cat:'nature',emoji:'🌳',bg:'#166534'},
+  {jp:'空',read:'そら',romaji:'sora',id:'Langit',cat:'nature',emoji:'🌤️',bg:'#0284c7'},
+  {jp:'月',read:'つき',romaji:'tsuki',id:'Bulan',cat:'nature',emoji:'🌕',bg:'#b45309'},
+  {jp:'星',read:'ほし',romaji:'hoshi',id:'Bintang',cat:'nature',emoji:'⭐',bg:'#b45309'},
+  {jp:'太陽',read:'たいよう',romaji:'taiyou',id:'Matahari',cat:'nature',emoji:'☀️',bg:'#d97706'},
+  {jp:'池',read:'いけ',romaji:'ike',id:'Kolam',cat:'nature',emoji:'🪷',bg:'#0e7490'},
+  {jp:'砂浜',read:'すなはま',romaji:'sunahama',id:'Pantai berpasir',cat:'nature',emoji:'🏖️',bg:'#b45309'},
+  // ⛅ Cuaca
+  {jp:'雨',read:'あめ',romaji:'ame',id:'Hujan',cat:'weather',emoji:'🌧️',bg:'#1e40af'},
+  {jp:'雪',read:'ゆき',romaji:'yuki',id:'Salju',cat:'weather',emoji:'❄️',bg:'#7dd3fc'},
+  {jp:'風',read:'かぜ',romaji:'kaze',id:'Angin',cat:'weather',emoji:'💨',bg:'#475569'},
+  {jp:'雲',read:'くも',romaji:'kumo',id:'Awan',cat:'weather',emoji:'☁️',bg:'#94a3b8'},
+  {jp:'雷',read:'かみなり',romaji:'kaminari',id:'Petir',cat:'weather',emoji:'⛈️',bg:'#4338ca'},
+  {jp:'晴れ',read:'はれ',romaji:'hare',id:'Cerah',cat:'weather',emoji:'🌞',bg:'#d97706'},
+  {jp:'霧',read:'きり',romaji:'kiri',id:'Kabut',cat:'weather',emoji:'🌫️',bg:'#64748b'},
+  // 🐾 Hewan
+  {jp:'犬',read:'いぬ',romaji:'inu',id:'Anjing',cat:'animals',emoji:'🐕',bg:'#92400e'},
+  {jp:'猫',read:'ねこ',romaji:'neko',id:'Kucing',cat:'animals',emoji:'🐈',bg:'#78350f'},
+  {jp:'鳥',read:'とり',romaji:'tori',id:'Burung',cat:'animals',emoji:'🐦',bg:'#0369a1'},
+  {jp:'馬',read:'うま',romaji:'uma',id:'Kuda',cat:'animals',emoji:'🐎',bg:'#78350f'},
+  {jp:'牛',read:'うし',romaji:'ushi',id:'Sapi',cat:'animals',emoji:'🐄',bg:'#f1f5f9'},
+  {jp:'豚',read:'ぶた',romaji:'buta',id:'Babi',cat:'animals',emoji:'🐷',bg:'#fda4af'},
+  {jp:'うさぎ',read:'うさぎ',romaji:'usagi',id:'Kelinci',cat:'animals',emoji:'🐰',bg:'#f1f5f9'},
+  {jp:'象',read:'ぞう',romaji:'zou',id:'Gajah',cat:'animals',emoji:'🐘',bg:'#94a3b8'},
+  {jp:'虎',read:'とら',romaji:'tora',id:'Harimau',cat:'animals',emoji:'🐯',bg:'#d97706'},
+  {jp:'サル',read:'さる',romaji:'saru',id:'Monyet',cat:'animals',emoji:'🐒',bg:'#92400e'},
+  {jp:'熊',read:'くま',romaji:'kuma',id:'Beruang',cat:'animals',emoji:'🐻',bg:'#78350f'},
+  {jp:'蛇',read:'へび',romaji:'hebi',id:'Ular',cat:'animals',emoji:'🐍',bg:'#166534'},
+  {jp:'亀',read:'かめ',romaji:'kame',id:'Kura-kura',cat:'animals',emoji:'🐢',bg:'#166534'},
+  {jp:'蜂',read:'はち',romaji:'hachi',id:'Lebah',cat:'animals',emoji:'🐝',bg:'#d97706'},
+  // 🏠 Benda sehari-hari
+  {jp:'本',read:'ほん',romaji:'hon',id:'Buku',cat:'daily',emoji:'📚',bg:'#1e40af'},
+  {jp:'時計',read:'とけい',romaji:'tokei',id:'Jam',cat:'daily',emoji:'⏰',bg:'#dc2626'},
+  {jp:'傘',read:'かさ',romaji:'kasa',id:'Payung',cat:'daily',emoji:'☂️',bg:'#6d28d9'},
+  {jp:'鍵',read:'かぎ',romaji:'kagi',id:'Kunci',cat:'daily',emoji:'🔑',bg:'#b45309'},
+  {jp:'電話',read:'でんわ',romaji:'denwa',id:'Telepon',cat:'daily',emoji:'📱',bg:'#1e40af'},
+  {jp:'財布',read:'さいふ',romaji:'saifu',id:'Dompet',cat:'daily',emoji:'👛',bg:'#92400e'},
+  {jp:'かばん',read:'かばん',romaji:'kaban',id:'Tas',cat:'daily',emoji:'🎒',bg:'#78350f'},
+  {jp:'椅子',read:'いす',romaji:'isu',id:'Kursi',cat:'daily',emoji:'🪑',bg:'#92400e'},
+  {jp:'机',read:'つくえ',romaji:'tsukue',id:'Meja',cat:'daily',emoji:'🪵',bg:'#78350f'},
+  {jp:'鏡',read:'かがみ',romaji:'kagami',id:'Cermin',cat:'daily',emoji:'🪞',bg:'#0369a1'},
+  {jp:'ベッド',read:'べっど',romaji:'beddo',id:'Kasur',cat:'daily',emoji:'🛏️',bg:'#1e40af'},
+  {jp:'コップ',read:'こっぷ',romaji:'koppu',id:'Gelas',cat:'daily',emoji:'🥤',bg:'#0284c7'},
+  {jp:'皿',read:'さら',romaji:'sara',id:'Piring',cat:'daily',emoji:'🍽️',bg:'#475569'},
+  {jp:'ハサミ',read:'はさみ',romaji:'hasami',id:'Gunting',cat:'daily',emoji:'✂️',bg:'#dc2626'},
+  {jp:'鉛筆',read:'えんぴつ',romaji:'enpitsu',id:'Pensil',cat:'daily',emoji:'✏️',bg:'#d97706'},
+  {jp:'消しゴム',read:'けしごむ',romaji:'keshigomu',id:'Penghapus',cat:'daily',emoji:'🧹',bg:'#ec4899'},
+  // 🏢 Tempat
+  {jp:'学校',read:'がっこう',romaji:'gakkou',id:'Sekolah',cat:'place',emoji:'🏫',bg:'#1e40af'},
+  {jp:'病院',read:'びょういん',romaji:'byouin',id:'Rumah sakit',cat:'place',emoji:'🏥',bg:'#dc2626'},
+  {jp:'銀行',read:'ぎんこう',romaji:'ginkou',id:'Bank',cat:'place',emoji:'🏦',bg:'#166534'},
+  {jp:'駅',read:'えき',romaji:'eki',id:'Stasiun',cat:'place',emoji:'🚉',bg:'#1e40af'},
+  {jp:'公園',read:'こうえん',romaji:'kouen',id:'Taman',cat:'place',emoji:'🌳',bg:'#166534'},
+  {jp:'図書館',read:'としょかん',romaji:'toshokan',id:'Perpustakaan',cat:'place',emoji:'📖',bg:'#92400e'},
+  {jp:'空港',read:'くうこう',romaji:'kuukou',id:'Bandara',cat:'place',emoji:'✈️',bg:'#0369a1'},
+  {jp:'レストラン',read:'れすとらん',romaji:'resutoran',id:'Restoran',cat:'place',emoji:'🍽️',bg:'#92400e'},
+  {jp:'ホテル',read:'ほてる',romaji:'hoteru',id:'Hotel',cat:'place',emoji:'🏨',bg:'#b45309'},
+  {jp:'店',read:'みせ',romaji:'mise',id:'Toko',cat:'place',emoji:'🏪',bg:'#0891b2'},
+  {jp:'郵便局',read:'ゆうびんきょく',romaji:'yuubinkyoku',id:'Kantor pos',cat:'place',emoji:'📮',bg:'#dc2626'},
+  // 🎨 Warna
+  {jp:'赤',read:'あか',romaji:'aka',id:'Merah',cat:'colors',emoji:'🔴',bg:'#dc2626'},
+  {jp:'青',read:'あお',romaji:'ao',id:'Biru',cat:'colors',emoji:'🔵',bg:'#1d4ed8'},
+  {jp:'白',read:'しろ',romaji:'shiro',id:'Putih',cat:'colors',emoji:'⬜',bg:'#94a3b8'},
+  {jp:'黒',read:'くろ',romaji:'kuro',id:'Hitam',cat:'colors',emoji:'⬛',bg:'#1e293b'},
+  {jp:'黄色',read:'きいろ',romaji:'kiiro',id:'Kuning',cat:'colors',emoji:'🟡',bg:'#ca8a04'},
+  {jp:'緑',read:'みどり',romaji:'midori',id:'Hijau',cat:'colors',emoji:'🟢',bg:'#16a34a'},
+  {jp:'紫',read:'むらさき',romaji:'murasaki',id:'Ungu',cat:'colors',emoji:'🟣',bg:'#7c3aed'},
+  {jp:'橙色',read:'だいだいいろ',romaji:'daidaiiro',id:'Oranye',cat:'colors',emoji:'🟠',bg:'#ea580c'},
+  {jp:'ピンク',read:'ぴんく',romaji:'pinku',id:'Merah muda',cat:'colors',emoji:'🌸',bg:'#db2777'},
+  // 🫀 Tubuh
+  {jp:'目',read:'め',romaji:'me',id:'Mata',cat:'body',emoji:'👁️',bg:'#0369a1'},
+  {jp:'耳',read:'みみ',romaji:'mimi',id:'Telinga',cat:'body',emoji:'👂',bg:'#92400e'},
+  {jp:'口',read:'くち',romaji:'kuchi',id:'Mulut',cat:'body',emoji:'👄',bg:'#dc2626'},
+  {jp:'鼻',read:'はな',romaji:'hana',id:'Hidung',cat:'body',emoji:'👃',bg:'#92400e'},
+  {jp:'手',read:'て',romaji:'te',id:'Tangan',cat:'body',emoji:'✋',bg:'#b45309'},
+  {jp:'足',read:'あし',romaji:'ashi',id:'Kaki',cat:'body',emoji:'🦶',bg:'#92400e'},
+  {jp:'頭',read:'あたま',romaji:'atama',id:'Kepala',cat:'body',emoji:'🗣️',bg:'#7c3aed'},
+  {jp:'歯',read:'は',romaji:'ha',id:'Gigi',cat:'body',emoji:'🦷',bg:'#f1f5f9'},
+  {jp:'髪',read:'かみ',romaji:'kami',id:'Rambut',cat:'body',emoji:'💇',bg:'#92400e'},
+  {jp:'心臓',read:'しんぞう',romaji:'shinzou',id:'Jantung',cat:'body',emoji:'❤️',bg:'#dc2626'},
+  // 🚗 Transport
+  {jp:'車',read:'くるま',romaji:'kuruma',id:'Mobil',cat:'transport',emoji:'🚗',bg:'#1e40af'},
+  {jp:'電車',read:'でんしゃ',romaji:'densha',id:'Kereta listrik',cat:'transport',emoji:'🚃',bg:'#0369a1'},
+  {jp:'バス',read:'ばす',romaji:'basu',id:'Bus',cat:'transport',emoji:'🚌',bg:'#16a34a'},
+  {jp:'飛行機',read:'ひこうき',romaji:'hikouki',id:'Pesawat',cat:'transport',emoji:'✈️',bg:'#0284c7'},
+  {jp:'船',read:'ふね',romaji:'fune',id:'Kapal',cat:'transport',emoji:'🚢',bg:'#0369a1'},
+  {jp:'自転車',read:'じてんしゃ',romaji:'jitensha',id:'Sepeda',cat:'transport',emoji:'🚲',bg:'#16a34a'},
+  {jp:'タクシー',read:'たくしー',romaji:'takushii',id:'Taksi',cat:'transport',emoji:'🚕',bg:'#eab308'},
+  {jp:'バイク',read:'ばいく',romaji:'baiku',id:'Motor',cat:'transport',emoji:'🏍️',bg:'#dc2626'},
+  {jp:'地下鉄',read:'ちかてつ',romaji:'chikatetsu',id:'Kereta bawah tanah',cat:'transport',emoji:'🚇',bg:'#7c3aed'},
+];
+
+let _qgCat = 'all', _qgMode = 'pilihan';
+let _qgQuestions = [], _qgIdx = 0, _qgCorrect = 0, _qgWrong = 0, _qgAnswered = false;
+
+function initQuizGambar() { /* page loaded */ }
+
+function qgSetCat(v) {
+  _qgCat = v;
+  ['all','food','nature','animals','daily','place','body','colors','transport','weather'].forEach(x => {
+    document.getElementById('qg-cat-'+x)?.classList.remove('active');
+  });
+  document.getElementById('qg-cat-'+v)?.classList.add('active');
+}
+
+function qgSetMode(v) {
+  _qgMode = v;
+  ['pilihan','ketik'].forEach(x => document.getElementById('qg-mode-'+x)?.classList.remove('active'));
+  document.getElementById('qg-mode-'+v)?.classList.add('active');
+}
+
+function startQuizGambar() {
+  let pool = [...QG_VOCAB];
+  if(_qgCat !== 'all') pool = pool.filter(v => v.cat === _qgCat);
+  if(pool.length < 4) pool = [...QG_VOCAB];
+  _qgQuestions = shuffleArr(pool).slice(0, 10);
+  _qgIdx = 0; _qgCorrect = 0; _qgWrong = 0; _qgAnswered = false;
+
+  document.getElementById('qg-setup').style.display = 'none';
+  document.getElementById('qg-result').style.display = 'none';
+  document.getElementById('qg-quiz').style.display = 'block';
+  document.getElementById('qg-total').textContent = _qgQuestions.length;
+  renderQgQuestion();
+}
+
+function renderQgQuestion() {
+  const q = _qgQuestions[_qgIdx];
+  _qgAnswered = false;
+
+  document.getElementById('qg-current').textContent = _qgIdx + 1;
+  document.getElementById('qg-correct').textContent = _qgCorrect;
+  document.getElementById('qg-wrong').textContent = _qgWrong;
+  document.getElementById('qg-progress-bar').style.width = ((_qgIdx / _qgQuestions.length) * 100) + '%';
+  document.getElementById('qg-feedback').style.display = 'none';
+  document.getElementById('qg-feedback').className = '';
+  document.getElementById('qg-hint-wrap').style.display = 'none';
+
+  // Render emoji display
+  const display = document.getElementById('qg-display');
+  display.innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <div style="font-size:7rem;line-height:1;filter:drop-shadow(0 4px 20px rgba(0,0,0,0.4));animation:qgPop .35s ease;">${q.emoji}</div>
+    </div>`;
+  display.style.background = `linear-gradient(135deg,${q.bg}22,${q.bg}44)`;
+
+  if(_qgMode === 'pilihan') {
+    document.getElementById('qg-options-pilihan').style.display = 'grid';
+    document.getElementById('qg-options-ketik').style.display = 'none';
+    buildQgOptions(q);
+  } else {
+    document.getElementById('qg-options-pilihan').style.display = 'none';
+    document.getElementById('qg-options-ketik').style.display = 'block';
+    const inp = document.getElementById('qg-type-input');
+    inp.value = ''; inp.disabled = false;
+    inp.style.borderColor = 'var(--border)';
+    setTimeout(() => inp.focus(), 200);
+  }
+  // Enter key
+  document.getElementById('qg-type-input').onkeydown = e => { if(e.key==='Enter') checkQgTyped(); };
+}
+
+function buildQgOptions(q) {
+  let pool = QG_VOCAB.filter(v => v.jp !== q.jp);
+  let sameCat = pool.filter(v => v.cat === q.cat);
+  const distPool = sameCat.length >= 3 ? sameCat : pool;
+  const distractors = shuffleArr(distPool).slice(0, 3);
+  const options = shuffleArr([q, ...distractors]);
+
+  document.getElementById('qg-options-pilihan').innerHTML = options.map(o => `
+    <button class="qg-option" onclick="checkQgOption(this,'${o.jp}','${q.jp}')">
+      <div style="font-size:1.6rem;margin-bottom:4px;">${o.emoji}</div>
+      <div style="font-size:1.1rem;">${o.jp}</div>
+      <div style="font-size:0.68rem;color:#9ca3af;font-family:'DM Sans',sans-serif;font-weight:400;">${o.read}</div>
+    </button>`).join('');
+}
+
+function checkQgOption(btn, chosen, correct) {
+  if(_qgAnswered) return;
+  _qgAnswered = true;
+  document.querySelectorAll('.qg-option').forEach(b => {
+    b.disabled = true;
+    const jp = b.querySelectorAll('div')[1].textContent.trim();
+    if(jp === correct) b.classList.add('correct');
+    else if(jp === chosen && chosen !== correct) b.classList.add('wrong');
+  });
+  const ok = chosen === correct;
+  if(ok) _qgCorrect++; else _qgWrong++;
+  document.getElementById('qg-correct').textContent = _qgCorrect;
+  document.getElementById('qg-wrong').textContent = _qgWrong;
+  showQgFeedback(ok, _qgQuestions[_qgIdx]);
+}
+
+function checkQgTyped() {
+  if(_qgAnswered) return;
+  const q = _qgQuestions[_qgIdx];
+  const inp = document.getElementById('qg-type-input');
+  const typed = inp.value.trim().toLowerCase().replace(/\s/g,'');
+  const ok = typed === q.romaji.toLowerCase().replace(/\s/g,'') || typed === q.id.toLowerCase() || typed === q.jp;
+  _qgAnswered = true;
+  inp.disabled = true;
+  inp.style.borderColor = ok ? '#34d399' : '#f87171';
+  if(ok) _qgCorrect++; else _qgWrong++;
+  document.getElementById('qg-correct').textContent = _qgCorrect;
+  document.getElementById('qg-wrong').textContent = _qgWrong;
+  showQgFeedback(ok, q);
+}
+
+function qgShowHint() {
+  const q = _qgQuestions[_qgIdx];
+  document.getElementById('qg-hint-wrap').style.display = 'block';
+  document.getElementById('qg-hint-text').textContent = q.romaji;
+}
+
+function showQgFeedback(ok, q) {
+  const fb = document.getElementById('qg-feedback');
+  fb.style.display = 'block';
+  fb.className = ok ? 'correct-fb' : 'wrong-fb';
+  document.getElementById('qg-feedback-icon').textContent = ok ? '✅' : '❌';
+  document.getElementById('qg-feedback-word').textContent = q.jp + '（' + q.read + '）';
+  document.getElementById('qg-feedback-read').textContent = q.romaji;
+  document.getElementById('qg-feedback-meaning').textContent = '= ' + q.id;
+  if(ok) speakText(q.jp);
+}
+
+function nextQgQuestion() {
+  _qgIdx++;
+  if(_qgIdx >= _qgQuestions.length) showQgResult();
+  else renderQgQuestion();
+}
+
+function showQgResult() {
+  document.getElementById('qg-quiz').style.display = 'none';
+  document.getElementById('qg-result').style.display = 'block';
+  const total = _qgQuestions.length;
+  const pct = Math.round((_qgCorrect / total) * 100);
+  document.getElementById('qg-res-correct').textContent = _qgCorrect;
+  document.getElementById('qg-res-wrong').textContent = _qgWrong;
+  document.getElementById('qg-res-score').textContent = pct + '%';
+  let emoji='😢', title='Tetap semangat!';
+  if(pct>=90){emoji='🏆';title='Luar biasa!';}
+  else if(pct>=70){emoji='🎉';title='Bagus sekali!';}
+  else if(pct>=50){emoji='😊';title='Lumayan!';}
+  document.getElementById('qg-result-emoji').textContent = emoji;
+  document.getElementById('qg-result-title').textContent = title;
+  document.getElementById('qg-result-sub').textContent = `Benar ${_qgCorrect} dari ${total} soal (${pct}%)`;
+}
+</script>
+
 </body>
 </html>
