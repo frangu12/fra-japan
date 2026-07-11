@@ -1313,6 +1313,19 @@
   .kana-mastered-bar .km-lbl{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
   .kana-mastered-bar .km-bar{flex:1;min-width:80px;height:6px;background:var(--border);border-radius:6px;overflow:hidden;}
   .kana-mastered-bar .km-bar-fill{height:100%;background:linear-gradient(90deg,#c47a00,#fcd34d);border-radius:6px;transition:width .5s ease;}
+  /* ── Quiz Gambar ── */
+  .qg-chip{padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:rgba(255,255,255,0.04);color:#9ca3af;font-size:0.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s;font-weight:600;}
+  .qg-chip:hover{border-color:var(--purple);color:var(--purple);}
+  .qg-chip.active{background:rgba(168,85,247,0.15);border-color:var(--purple);color:var(--purple);}
+  .qg-option{padding:14px 10px;border-radius:14px;border:1.5px solid var(--border);background:rgba(255,255,255,0.03);color:#e2e8f0;font-size:0.88rem;font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:all .15s;text-align:center;font-weight:700;line-height:1.4;}
+  .qg-option:hover:not(:disabled){border-color:var(--purple);background:rgba(168,85,247,0.1);}
+  .qg-option.correct{border-color:#34d399!important;background:rgba(52,211,153,0.15)!important;color:#34d399!important;}
+  .qg-option.wrong{border-color:#f87171!important;background:rgba(248,113,113,0.1)!important;color:#f87171!important;}
+  .qg-option:disabled{cursor:default;}
+  .qg-emoji-display{font-size:7rem;line-height:1;filter:drop-shadow(0 4px 24px rgba(0,0,0,0.4));animation:qgPop .3s ease;}
+  @keyframes qgPop{from{transform:scale(0.7);opacity:0;}to{transform:scale(1);opacity:1;}}
+  #qg-feedback.correct-fb{background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);}
+  #qg-feedback.wrong-fb{background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);}
 </style>
 </head>
 <body>
@@ -1368,6 +1381,7 @@
   <button class="bnav-item" id="bnav-harian" onclick="showPage('harian')"><span class="bnav-icon">🔥</span>60 Hari</button>
   <button class="bnav-item" id="bnav-catatan" onclick="showPage('catatan')"><span class="bnav-icon">📓</span>Catatan</button>
   <button class="bnav-item" id="bnav-dashboard" onclick="showPage('dashboard')"><span class="bnav-icon">📊</span>Dasbor</button>
+  <button class="bnav-item" id="bnav-quizgambar" onclick="showPage('quizgambar')"><span class="bnav-icon">🖼️</span>Quiz Gambar</button>
   <button class="bnav-item" id="bnav-kaiwa" onclick="showPage('kaiwa')"><span class="bnav-icon">🎤</span>Kaiwa</button>
 </nav>
 
@@ -2495,6 +2509,105 @@
 </div>
 
 <!-- KAIWA PAGE (Speech Recognition) -->
+<div id="page-quizgambar" class="page">
+  <div style="max-width:500px;margin:0 auto;padding:16px 12px 100px;">
+    <div style="text-align:center;padding:20px 0 14px;">
+      <div style="font-size:2.4rem;margin-bottom:6px;">🖼️</div>
+      <h2 style="font-size:1.5rem;font-weight:900;color:#fff;margin:0 0 4px;">Quiz Gambar</h2>
+      <p style="color:#9ca3af;font-size:0.82rem;margin:0;">Lihat gambar/emoji, tebak kata Jepangnya!</p>
+    </div>
+
+    <!-- Setup -->
+    <div id="qg-setup">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:1.5px;color:#6b7280;text-transform:uppercase;margin-bottom:10px;">Kategori</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="qg-chip active" id="qg-cat-all" onclick="qgSetCat('all')">✦ Semua</button>
+          <button class="qg-chip" id="qg-cat-food" onclick="qgSetCat('food')">🍱 Makanan</button>
+          <button class="qg-chip" id="qg-cat-nature" onclick="qgSetCat('nature')">🌿 Alam</button>
+          <button class="qg-chip" id="qg-cat-animals" onclick="qgSetCat('animals')">🐾 Hewan</button>
+          <button class="qg-chip" id="qg-cat-daily" onclick="qgSetCat('daily')">🏠 Benda</button>
+          <button class="qg-chip" id="qg-cat-place" onclick="qgSetCat('place')">🏢 Tempat</button>
+          <button class="qg-chip" id="qg-cat-body" onclick="qgSetCat('body')">🫀 Tubuh</button>
+          <button class="qg-chip" id="qg-cat-colors" onclick="qgSetCat('colors')">🎨 Warna</button>
+          <button class="qg-chip" id="qg-cat-transport" onclick="qgSetCat('transport')">🚗 Transport</button>
+          <button class="qg-chip" id="qg-cat-weather" onclick="qgSetCat('weather')">⛅ Cuaca</button>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:16px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:1.5px;color:#6b7280;text-transform:uppercase;margin-bottom:10px;">Mode Jawaban</div>
+        <div style="display:flex;gap:8px;">
+          <button class="qg-chip active" id="qg-mode-pilihan" onclick="qgSetMode('pilihan')">4 Pilihan</button>
+          <button class="qg-chip" id="qg-mode-ketik" onclick="qgSetMode('ketik')">Ketik Romaji</button>
+        </div>
+      </div>
+      <button onclick="startQuizGambar()" style="width:100%;padding:15px;background:linear-gradient(135deg,var(--purple),var(--teal));border:none;border-radius:16px;color:#fff;font-size:1rem;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;">🚀 Mulai Quiz</button>
+    </div>
+
+    <!-- Quiz -->
+    <div id="qg-quiz" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-size:0.8rem;color:#9ca3af;">Soal <span id="qg-current">1</span> / <span id="qg-total">10</span></div>
+        <div style="display:flex;gap:12px;font-size:0.82rem;">
+          <span style="color:#34d399;">✅ <span id="qg-correct">0</span></span>
+          <span style="color:#f87171;">❌ <span id="qg-wrong">0</span></span>
+        </div>
+      </div>
+      <div style="background:rgba(168,85,247,0.12);border-radius:10px;height:5px;margin-bottom:16px;overflow:hidden;">
+        <div id="qg-progress-bar" style="height:100%;background:linear-gradient(90deg,var(--purple),var(--teal));border-radius:10px;width:0%;transition:width 0.4s;"></div>
+      </div>
+
+      <!-- Gambar/Emoji Card -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:22px;overflow:hidden;margin-bottom:14px;">
+        <div id="qg-display" style="width:100%;min-height:200px;display:flex;align-items:center;justify-content:center;padding:30px 0;background:linear-gradient(135deg,rgba(168,85,247,0.06),rgba(20,184,166,0.06));"></div>
+        <div style="padding:12px 16px 14px;border-top:1px solid var(--border);">
+          <div style="font-size:0.7rem;font-weight:800;letter-spacing:1.5px;color:#6b7280;text-transform:uppercase;" id="qg-question-label">Apa kata Jepang untuk gambar ini?</div>
+          <div id="qg-hint-wrap" style="font-size:0.78rem;color:#a78bfa;margin-top:4px;display:none;">💡 Petunjuk romaji: <strong id="qg-hint-text"></strong></div>
+        </div>
+      </div>
+
+      <!-- Pilihan -->
+      <div id="qg-options-pilihan" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+      <!-- Ketik -->
+      <div id="qg-options-ketik" style="display:none;">
+        <input id="qg-type-input" type="text" placeholder="Ketik romaji di sini..." autocomplete="off"
+          style="width:100%;padding:14px 16px;background:var(--card);border:1.5px solid var(--border);border-radius:14px;color:#fff;font-size:1rem;font-family:'DM Sans',sans-serif;box-sizing:border-box;outline:none;"/>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button onclick="checkQgTyped()" style="flex:1;padding:13px;background:rgba(168,85,247,0.15);border:1.5px solid var(--purple);border-radius:14px;color:var(--purple);font-weight:700;font-size:0.9rem;cursor:pointer;font-family:'DM Sans',sans-serif;">✓ Jawab</button>
+          <button onclick="qgShowHint()" style="padding:13px 18px;background:rgba(255,255,255,0.04);border:1.5px solid var(--border);border-radius:14px;color:#9ca3af;font-size:0.9rem;cursor:pointer;">💡</button>
+        </div>
+      </div>
+
+      <!-- Feedback -->
+      <div id="qg-feedback" style="display:none;margin-top:12px;border-radius:16px;padding:18px;text-align:center;">
+        <div style="font-size:2rem;" id="qg-feedback-icon"></div>
+        <div style="font-size:1.3rem;font-weight:900;color:#fff;margin:6px 0 2px;font-family:'Noto Sans JP',sans-serif;" id="qg-feedback-word"></div>
+        <div style="font-size:0.85rem;color:#a78bfa;font-weight:600;" id="qg-feedback-read"></div>
+        <div style="font-size:0.78rem;color:#9ca3af;margin-top:3px;" id="qg-feedback-meaning"></div>
+        <button onclick="nextQgQuestion()" style="margin-top:12px;padding:10px 30px;background:linear-gradient(135deg,var(--purple),var(--teal));border:none;border-radius:20px;color:#fff;font-weight:700;font-size:0.85rem;cursor:pointer;font-family:'DM Sans',sans-serif;">Lanjut →</button>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="qg-result" style="display:none;text-align:center;padding:24px 0;">
+      <div style="font-size:4rem;margin-bottom:10px;" id="qg-result-emoji">🏆</div>
+      <div style="font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:4px;" id="qg-result-title"></div>
+      <div style="font-size:0.85rem;color:#9ca3af;margin-bottom:20px;" id="qg-result-sub"></div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px;margin-bottom:18px;">
+        <div style="display:flex;justify-content:space-around;">
+          <div><div style="font-size:2rem;font-weight:900;color:#34d399;" id="qg-res-correct">0</div><div style="font-size:0.72rem;color:#6b7280;">Benar</div></div>
+          <div><div style="font-size:2rem;font-weight:900;color:#f87171;" id="qg-res-wrong">0</div><div style="font-size:0.72rem;color:#6b7280;">Salah</div></div>
+          <div><div style="font-size:2rem;font-weight:900;color:#a78bfa;" id="qg-res-score">0%</div><div style="font-size:0.72rem;color:#6b7280;">Skor</div></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;">
+        <button onclick="startQuizGambar()" style="padding:12px 26px;background:linear-gradient(135deg,var(--purple),var(--teal));border:none;border-radius:14px;color:#fff;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔄 Main Lagi</button>
+        <button onclick="document.getElementById('qg-quiz').style.display='none';document.getElementById('qg-result').style.display='none';document.getElementById('qg-setup').style.display='block';" style="padding:12px 26px;background:rgba(255,255,255,0.05);border:1.5px solid var(--border);border-radius:14px;color:#9ca3af;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">⚙️ Pengaturan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="page-kaiwa" class="page">
   <div class="section" style="max-width:800px;margin:0 auto;text-align:center;">
     <h2 style="font-size:1.8rem;margin-bottom:8px;">🎤 Latihan <span style="color:var(--teal)">Berbicara</span> (Kaiwa)</h2>
@@ -3950,6 +4063,7 @@ function showPage(pageId) {
     if (pageId === 'hafal') { initHafalPage(); }
     if (pageId === 'konjugasi') { initKonjugasi(); }
     if (pageId === 'dashboard' && typeof updateGamificationUI === 'function') { updateGamificationUI(); }
+    if (pageId === 'quizgambar') { initQuizGambar(); }
     // Stop mic when navigating away from a page
     if (!['dokkai','kana','choukai'].includes(pageId)) stopMic();
 
