@@ -1326,6 +1326,65 @@
   @keyframes qgPop{from{transform:scale(0.7);opacity:0;}to{transform:scale(1);opacity:1;}}
   #qg-feedback.correct-fb{background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);}
   #qg-feedback.wrong-fb{background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);}
+  /* ── Quiz Dengar ── */
+  .qd-chip{padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:rgba(255,255,255,0.04);color:#9ca3af;font-size:0.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s;font-weight:600;}
+  .qd-chip:hover{border-color:#60a5fa;color:#60a5fa;}
+  .qd-chip.active{background:rgba(96,165,250,0.15);border-color:#60a5fa;color:#60a5fa;}
+  .qd-option{padding:14px;border-radius:14px;border:1.5px solid var(--border);background:rgba(255,255,255,0.03);color:#e2e8f0;font-size:1rem;font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:all .15s;text-align:center;font-weight:700;}
+  .qd-option:hover:not(:disabled){border-color:#60a5fa;background:rgba(96,165,250,0.1);}
+  .qd-option.correct{border-color:#34d399!important;background:rgba(52,211,153,0.15)!important;color:#34d399!important;}
+  .qd-option.wrong{border-color:#f87171!important;background:rgba(248,113,113,0.1)!important;color:#f87171!important;}
+  .qd-option:disabled{cursor:default;}
+  .qd-play-btn{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#60a5fa);border:none;font-size:2rem;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 20px rgba(96,165,250,0.4);}
+  .qd-play-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(96,165,250,0.6);}
+  .qd-play-btn:active{transform:scale(0.95);}
+  .qd-play-btn.playing{animation:qdPulse 1s infinite;}
+  @keyframes qdPulse{0%,100%{box-shadow:0 4px 20px rgba(96,165,250,0.4);}50%{box-shadow:0 4px 36px rgba(96,165,250,0.8);}}
+  /* ── Speed Round ── */
+  .sr-chip{padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:rgba(255,255,255,0.04);color:#9ca3af;font-size:0.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s;font-weight:600;}
+  .sr-chip:hover{border-color:#f59e0b;color:#f59e0b;}
+  .sr-chip.active{background:rgba(245,158,11,0.15);border-color:#f59e0b;color:#f59e0b;}
+  .sr-option{padding:12px;border-radius:12px;border:1.5px solid var(--border);background:rgba(255,255,255,0.03);color:#e2e8f0;font-size:0.95rem;font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:all .1s;text-align:center;font-weight:700;}
+  .sr-option:hover:not(:disabled){border-color:#f59e0b;background:rgba(245,158,11,0.1);}
+  .sr-option.correct{border-color:#34d399!important;background:rgba(52,211,153,0.2)!important;color:#34d399!important;animation:srFlash .3s ease;}
+  .sr-option.wrong{border-color:#f87171!important;background:rgba(248,113,113,0.15)!important;color:#f87171!important;animation:srShake .3s ease;}
+  @keyframes srFlash{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
+  @keyframes srShake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+  .sr-word-display{font-family:'Noto Sans JP',sans-serif;font-size:3.5rem;font-weight:900;text-align:center;line-height:1.1;transition:all .2s;animation:srWordIn .25s ease;}
+  @keyframes srWordIn{from{transform:scale(0.7);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .sr-timer-bar{height:8px;border-radius:8px;background:linear-gradient(90deg,#34d399,#f59e0b,#f87171);transition:width .1s linear;}
+  #sr-score-display{font-size:3rem;font-weight:900;font-family:'Playfair Display',serif;background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  /* ── Tata Bahasa ── */
+  .tb-cat-btn{padding:8px 16px;border-radius:20px;border:1.5px solid var(--border);background:rgba(255,255,255,0.04);color:#9ca3af;font-size:0.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s;font-weight:600;white-space:nowrap;}
+  .tb-cat-btn:hover{border-color:var(--teal);color:var(--teal);}
+  .tb-cat-btn.active{background:rgba(20,184,166,0.15);border-color:var(--teal);color:var(--teal);}
+  .tb-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:14px;transition:box-shadow .2s;}
+  .tb-card-header{padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;user-select:none;}
+  .tb-card-header:hover{background:rgba(255,255,255,0.02);}
+  .tb-level-badge{font-size:0.65rem;font-weight:800;padding:2px 8px;border-radius:6px;letter-spacing:1px;}
+  .tb-level-n5{background:rgba(168,85,247,0.15);color:#a78bfa;border:1px solid rgba(168,85,247,0.3);}
+  .tb-level-n4{background:rgba(20,184,166,0.15);color:#14b8a6;border:1px solid rgba(20,184,166,0.3);}
+  .tb-pattern{font-size:1rem;font-weight:800;color:#fff;flex:1;font-family:'Noto Sans JP',sans-serif;}
+  .tb-meaning{font-size:0.78rem;color:#9ca3af;}
+  .tb-toggle{font-size:0.8rem;color:#6b7280;transition:transform .25s;}
+  .tb-card.open .tb-toggle{transform:rotate(180deg);}
+  .tb-body{display:none;padding:0 18px 18px;border-top:1px solid var(--border);}
+  .tb-card.open .tb-body{display:block;}
+  .tb-section-label{font-size:0.68rem;font-weight:800;letter-spacing:1.5px;color:#6b7280;text-transform:uppercase;margin:14px 0 8px;}
+  .tb-explanation{font-size:0.85rem;color:#cbd5e1;line-height:1.7;margin-bottom:12px;}
+  .tb-structure{background:rgba(20,184,166,0.06);border:1px solid rgba(20,184,166,0.18);border-radius:12px;padding:12px 14px;margin-bottom:12px;font-family:'Noto Sans JP',sans-serif;font-size:0.9rem;color:#5eead4;font-weight:700;letter-spacing:0.5px;}
+  .tb-example{background:rgba(255,255,255,0.03);border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:8px;}
+  .tb-ex-jp{font-family:'Noto Sans JP',sans-serif;font-size:0.95rem;color:#e2e8f0;font-weight:600;}
+  .tb-ex-id{font-size:0.78rem;color:#9ca3af;margin-top:3px;}
+  .tb-ex-note{font-size:0.72rem;color:#a78bfa;margin-top:3px;font-style:italic;}
+  .tb-note{background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.18);border-radius:10px;padding:10px 14px;font-size:0.78rem;color:#fde68a;line-height:1.6;margin-top:10px;}
+  .tb-quiz-wrap{margin-top:14px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:14px;padding:14px;}
+  .tb-quiz-q{font-size:0.85rem;color:#cbd5e1;margin-bottom:10px;font-weight:600;}
+  .tb-quiz-opt{padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);background:rgba(255,255,255,0.03);color:#e2e8f0;font-size:0.83rem;font-family:'Noto Sans JP',sans-serif;cursor:pointer;margin-bottom:7px;display:block;width:100%;text-align:left;transition:all .15s;}
+  .tb-quiz-opt:hover{border-color:var(--teal);background:rgba(20,184,166,0.07);}
+  .tb-quiz-opt.correct{border-color:#34d399;background:rgba(52,211,153,0.12);color:#34d399;}
+  .tb-quiz-opt.wrong{border-color:#f87171;background:rgba(248,113,113,0.1);color:#f87171;}
+  .tb-quiz-opt:disabled{cursor:default;}
 </style>
 </head>
 <body>
@@ -1382,6 +1441,9 @@
   <button class="bnav-item" id="bnav-catatan" onclick="showPage('catatan')"><span class="bnav-icon">📓</span>Catatan</button>
   <button class="bnav-item" id="bnav-dashboard" onclick="showPage('dashboard')"><span class="bnav-icon">📊</span>Dasbor</button>
   <button class="bnav-item" id="bnav-quizgambar" onclick="showPage('quizgambar')"><span class="bnav-icon">🖼️</span>Quiz Gambar</button>
+  <button class="bnav-item" id="bnav-quizdengar" onclick="showPage('quizdengar')"><span class="bnav-icon">🎧</span>Quiz Dengar</button>
+  <button class="bnav-item" id="bnav-speedround" onclick="showPage('speedround')"><span class="bnav-icon">⚡</span>Speed Round</button>
+  <button class="bnav-item" id="bnav-tatabahasa" onclick="showPage('tatabahasa')"><span class="bnav-icon">📐</span>Bunpou</button>
   <button class="bnav-item" id="bnav-kaiwa" onclick="showPage('kaiwa')"><span class="bnav-icon">🎤</span>Kaiwa</button>
 </nav>
 
@@ -1414,27 +1476,50 @@
     <div id="wotd-section" style="margin-bottom:24px;">
       <div class="section-header"><span class="section-icon">🌅</span><div class="section-title">Kata <span>Hari Ini</span></div></div>
       <div class="section-sub" id="wotd-datestr">Memuat...</div>
-      <div class="wotd-card" id="wotd-card">
-        <div class="wotd-left">
-          <div class="wotd-level-badge" id="wotd-level">N5</div>
-          <div class="wotd-jp" id="wotd-jp">食べる</div>
-          <div class="wotd-reading" id="wotd-reading">たべる</div>
-          <div class="wotd-romaji" id="wotd-romaji">ta · be · ru</div>
-          <div class="wotd-id" id="wotd-id">Makan</div>
-          <div class="wotd-actions">
-            <button class="wotd-btn" onclick="wotdSpeak()">🔊 Dengar</button>
-            <button class="wotd-btn wotd-btn-quiz" onclick="wotdStartQuiz()">⚡ Quiz kata ini</button>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <!-- N5 Card -->
+        <div class="wotd-card" id="wotd-card" style="position:relative;">
+          <div style="position:absolute;top:10px;right:12px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);border-radius:8px;padding:2px 10px;font-size:0.7rem;font-weight:800;color:#a78bfa;">N5</div>
+          <div class="wotd-left">
+            <div class="wotd-jp" id="wotd-jp">食べる</div>
+            <div class="wotd-reading" id="wotd-reading">たべる</div>
+            <div class="wotd-romaji" id="wotd-romaji">ta · be · ru</div>
+            <div class="wotd-id" id="wotd-id">Makan</div>
+            <div class="wotd-actions">
+              <button class="wotd-btn" onclick="wotdSpeak('n5')">🔊</button>
+              <button class="wotd-btn wotd-btn-quiz" onclick="wotdStartQuiz('n5')">⚡ Quiz</button>
+            </div>
+          </div>
+          <div class="wotd-right">
+            <div class="wotd-example-label">Contoh kalimat:</div>
+            <div class="wotd-example-jp" id="wotd-ex-jp"></div>
+            <div class="wotd-example-id" id="wotd-ex-id"></div>
+            <div class="wotd-kanji-bg" id="wotd-kanji-bg">食</div>
+            <div class="wotd-streak">
+              <span>🔥</span>
+              <span id="wotd-streak-num">0</span>
+              <span>hari berturut-turut</span>
+            </div>
           </div>
         </div>
-        <div class="wotd-right">
-          <div class="wotd-example-label">Contoh kalimat:</div>
-          <div class="wotd-example-jp" id="wotd-ex-jp"></div>
-          <div class="wotd-example-id" id="wotd-ex-id"></div>
-          <div class="wotd-kanji-bg" id="wotd-kanji-bg">食</div>
-          <div class="wotd-streak">
-            <span>🔥</span>
-            <span id="wotd-streak-num">0</span>
-            <span>hari berturut-turut</span>
+        <!-- N4 Card -->
+        <div class="wotd-card" id="wotd-card-n4" style="position:relative;background:linear-gradient(135deg,rgba(20,184,166,0.08),rgba(20,184,166,0.03));border-color:rgba(20,184,166,0.2);">
+          <div style="position:absolute;top:10px;right:12px;background:rgba(20,184,166,0.15);border:1px solid rgba(20,184,166,0.3);border-radius:8px;padding:2px 10px;font-size:0.7rem;font-weight:800;color:#14b8a6;">N4</div>
+          <div class="wotd-left">
+            <div class="wotd-jp" id="wotd-jp-n4" style="color:#14b8a6;">勉強</div>
+            <div class="wotd-reading" id="wotd-reading-n4">べんきょう</div>
+            <div class="wotd-romaji" id="wotd-romaji-n4">ben · kyou</div>
+            <div class="wotd-id" id="wotd-id-n4">Belajar</div>
+            <div class="wotd-actions">
+              <button class="wotd-btn" onclick="wotdSpeak('n4')">🔊</button>
+              <button class="wotd-btn wotd-btn-quiz" onclick="wotdStartQuiz('n4')" style="border-color:#14b8a6;color:#14b8a6;">⚡ Quiz</button>
+            </div>
+          </div>
+          <div class="wotd-right">
+            <div class="wotd-example-label">Contoh kalimat:</div>
+            <div class="wotd-example-jp" id="wotd-ex-jp-n4"></div>
+            <div class="wotd-example-id" id="wotd-ex-id-n4"></div>
+            <div class="wotd-kanji-bg" id="wotd-kanji-bg-n4" style="color:rgba(20,184,166,0.12);">強</div>
           </div>
         </div>
       </div>
@@ -2605,6 +2690,225 @@
         <button onclick="document.getElementById('qg-quiz').style.display='none';document.getElementById('qg-result').style.display='none';document.getElementById('qg-setup').style.display='block';" style="padding:12px 26px;background:rgba(255,255,255,0.05);border:1.5px solid var(--border);border-radius:14px;color:#9ca3af;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">⚙️ Pengaturan</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ══ QUIZ DENGAR ══ -->
+<div id="page-quizdengar" class="page">
+  <div style="max-width:500px;margin:0 auto;padding:16px 12px 100px;">
+    <div style="text-align:center;padding:20px 0 14px;">
+      <div style="font-size:2.4rem;margin-bottom:6px;">🎧</div>
+      <h2 style="font-size:1.5rem;font-weight:900;color:#fff;margin:0 0 4px;">Quiz Mendengar</h2>
+      <p style="color:#9ca3af;font-size:0.82rem;margin:0;">Dengar audio, tebak kata Jepangnya!</p>
+    </div>
+    <!-- Setup -->
+    <div id="qd-setup">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:1.5px;color:#6b7280;text-transform:uppercase;margin-bottom:10px;">Level</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="qd-chip active" id="qd-lv-all" onclick="qdSet('level','all')">✦ Semua</button>
+          <button class="qd-chip" id="qd-lv-N5" onclick="qdSet('level','N5')">N5</button>
+          <button class="qd-chip" id="qd-lv-N4" onclick="qdSet('level','N4')">N4</button>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:1.5px;color:#6b7280;text-transform:uppercase;margin-bottom:10px;">Mode Jawaban</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="qd-chip active" id="qd-mode-arti" onclick="qdSet('mode','arti')">Pilih Arti (Indonesia)</button>
+          <button class="qd-chip" id="qd-mode-kanji" onclick="qdSet('mode','kanji')">Pilih Kanji/Kata</button>
+          <button class="qd-chip" id="qd-mode-romaji" onclick="qdSet('mode','romaji')">Ketik Romaji</button>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:16px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:1.5px;color:#6b7280;text-transform:uppercase;margin-bottom:10px;">Jumlah Soal</div>
+        <div style="display:flex;gap:8px;">
+          <button class="qd-chip" id="qd-n-10" onclick="qdSet('total',10)">10</button>
+          <button class="qd-chip active" id="qd-n-20" onclick="qdSet('total',20)">20</button>
+          <button class="qd-chip" id="qd-n-30" onclick="qdSet('total',30)">30</button>
+        </div>
+      </div>
+      <button onclick="startQuizDengar()" style="width:100%;padding:15px;background:linear-gradient(135deg,#3b82f6,#60a5fa);border:none;border-radius:16px;color:#fff;font-size:1rem;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;">🎧 Mulai Quiz Dengar</button>
+    </div>
+    <!-- Quiz -->
+    <div id="qd-quiz" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-size:0.8rem;color:#9ca3af;">Soal <span id="qd-current">1</span> / <span id="qd-total">20</span></div>
+        <div style="display:flex;gap:12px;font-size:0.82rem;">
+          <span style="color:#34d399;">✅ <span id="qd-correct">0</span></span>
+          <span style="color:#f87171;">❌ <span id="qd-wrong">0</span></span>
+        </div>
+      </div>
+      <div style="background:rgba(96,165,250,0.1);border-radius:10px;height:5px;margin-bottom:16px;overflow:hidden;">
+        <div id="qd-progress-bar" style="height:100%;background:linear-gradient(90deg,#3b82f6,#60a5fa);border-radius:10px;width:0%;transition:width 0.4s;"></div>
+      </div>
+      <!-- Audio Card -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:22px;padding:28px;margin-bottom:16px;text-align:center;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:1.5px;color:#6b7280;text-transform:uppercase;margin-bottom:16px;" id="qd-question-label">Dengar dan pilih artinya:</div>
+        <button class="qd-play-btn" id="qd-play-btn" onclick="qdPlayAudio()">🔊</button>
+        <div style="margin-top:14px;font-size:0.78rem;color:#6b7280;">Ketuk tombol untuk memutar audio</div>
+        <div style="margin-top:8px;font-size:0.75rem;color:#4b5563;" id="qd-play-count"></div>
+      </div>
+      <!-- Options -->
+      <div id="qd-options-pilihan" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+      <div id="qd-options-romaji" style="display:none;">
+        <input id="qd-romaji-input" type="text" placeholder="Ketik romaji..." autocomplete="off"
+          style="width:100%;padding:14px;background:var(--card);border:1.5px solid var(--border);border-radius:14px;color:#fff;font-size:1rem;font-family:'DM Sans',sans-serif;box-sizing:border-box;outline:none;"/>
+        <button onclick="qdCheckRomaji()" style="width:100%;margin-top:10px;padding:13px;background:rgba(96,165,250,0.15);border:1.5px solid #60a5fa;border-radius:14px;color:#60a5fa;font-weight:700;font-size:0.9rem;cursor:pointer;font-family:'DM Sans',sans-serif;">✓ Jawab</button>
+      </div>
+      <!-- Feedback -->
+      <div id="qd-feedback" style="display:none;margin-top:12px;border-radius:16px;padding:16px;text-align:center;">
+        <div style="font-size:1.8rem;" id="qd-fb-icon"></div>
+        <div style="font-size:1.4rem;font-weight:900;color:#fff;margin:4px 0 2px;font-family:'Noto Sans JP',sans-serif;" id="qd-fb-word"></div>
+        <div style="font-size:0.82rem;color:#60a5fa;" id="qd-fb-read"></div>
+        <div style="font-size:0.78rem;color:#9ca3af;margin-top:2px;" id="qd-fb-id"></div>
+        <button onclick="qdNext()" style="margin-top:12px;padding:10px 30px;background:linear-gradient(135deg,#3b82f6,#60a5fa);border:none;border-radius:20px;color:#fff;font-weight:700;font-size:0.85rem;cursor:pointer;font-family:'DM Sans',sans-serif;">Lanjut →</button>
+      </div>
+    </div>
+    <!-- Result -->
+    <div id="qd-result" style="display:none;text-align:center;padding:24px 0;">
+      <div style="font-size:4rem;margin-bottom:10px;" id="qd-res-emoji">🏆</div>
+      <div style="font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:4px;" id="qd-res-title"></div>
+      <div style="font-size:0.85rem;color:#9ca3af;margin-bottom:20px;" id="qd-res-sub"></div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px;margin-bottom:18px;">
+        <div style="display:flex;justify-content:space-around;">
+          <div><div style="font-size:2rem;font-weight:900;color:#34d399;" id="qd-res-c">0</div><div style="font-size:0.72rem;color:#6b7280;">Benar</div></div>
+          <div><div style="font-size:2rem;font-weight:900;color:#f87171;" id="qd-res-w">0</div><div style="font-size:0.72rem;color:#6b7280;">Salah</div></div>
+          <div><div style="font-size:2rem;font-weight:900;color:#60a5fa;" id="qd-res-s">0%</div><div style="font-size:0.72rem;color:#6b7280;">Skor</div></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;">
+        <button onclick="startQuizDengar()" style="padding:12px 26px;background:linear-gradient(135deg,#3b82f6,#60a5fa);border:none;border-radius:14px;color:#fff;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🔄 Main Lagi</button>
+        <button onclick="qdReset()" style="padding:12px 26px;background:rgba(255,255,255,0.05);border:1.5px solid var(--border);border-radius:14px;color:#9ca3af;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">⚙️ Pengaturan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SPEED ROUND ══ -->
+<div id="page-speedround" class="page">
+  <div style="max-width:500px;margin:0 auto;padding:16px 12px 100px;">
+    <div style="text-align:center;padding:20px 0 14px;">
+      <div style="font-size:2.4rem;margin-bottom:6px;">⚡</div>
+      <h2 style="font-size:1.5rem;font-weight:900;color:#fff;margin:0 0 4px;">Speed Round</h2>
+      <p style="color:#9ca3af;font-size:0.82rem;margin:0;">Jawab sebanyak mungkin dalam 60 detik!</p>
+    </div>
+    <!-- Setup -->
+    <div id="sr-setup">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:1.5px;color:#6b7280;text-transform:uppercase;margin-bottom:10px;">Level</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="sr-chip active" id="sr-lv-all" onclick="srSet('level','all')">✦ Semua</button>
+          <button class="sr-chip" id="sr-lv-N5" onclick="srSet('level','N5')">N5</button>
+          <button class="sr-chip" id="sr-lv-N4" onclick="srSet('level','N4')">N4</button>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:1.5px;color:#6b7280;text-transform:uppercase;margin-bottom:10px;">Mode</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="sr-chip active" id="sr-mode-jp2id" onclick="srSet('mode','jp2id')">Kanji → Arti</button>
+          <button class="sr-chip" id="sr-mode-id2jp" onclick="srSet('mode','id2jp')">Arti → Kanji</button>
+          <button class="sr-chip" id="sr-mode-read" onclick="srSet('mode','read')">Kanji → Romaji</button>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:1.5px;color:#6b7280;text-transform:uppercase;margin-bottom:10px;">Durasi</div>
+        <div style="display:flex;gap:8px;">
+          <button class="sr-chip" id="sr-dur-30" onclick="srSet('dur',30)">30 detik</button>
+          <button class="sr-chip active" id="sr-dur-60" onclick="srSet('dur',60)">60 detik</button>
+          <button class="sr-chip" id="sr-dur-90" onclick="srSet('dur',90)">90 detik</button>
+        </div>
+      </div>
+      <!-- High score -->
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:14px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+        <span style="font-size:1.4rem;">🏆</span>
+        <div><div style="font-size:0.7rem;color:#6b7280;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Rekor Terbaik</div>
+        <div style="font-size:1.1rem;font-weight:900;color:#f59e0b;" id="sr-highscore">0 soal</div></div>
+      </div>
+      <button onclick="startSpeedRound()" style="width:100%;padding:15px;background:linear-gradient(135deg,#d97706,#f59e0b);border:none;border-radius:16px;color:#fff;font-size:1rem;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;">⚡ Mulai Speed Round!</button>
+    </div>
+    <!-- Countdown -->
+    <div id="sr-countdown" style="display:none;text-align:center;padding:60px 0;">
+      <div style="font-size:6rem;font-weight:900;color:#f59e0b;font-family:'Playfair Display',serif;" id="sr-countdown-num">3</div>
+      <div style="font-size:1rem;color:#9ca3af;margin-top:8px;">Bersiap...</div>
+    </div>
+    <!-- Game -->
+    <div id="sr-game" style="display:none;">
+      <!-- Timer bar -->
+      <div style="margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <div style="font-size:0.8rem;color:#9ca3af;">⏱ <span id="sr-timer">60</span> detik</div>
+          <div style="font-size:0.82rem;font-weight:700;color:#f59e0b;">✅ <span id="sr-score">0</span> benar &nbsp; ❌ <span id="sr-wrongs">0</span></div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:8px;height:8px;overflow:hidden;">
+          <div class="sr-timer-bar" id="sr-timer-bar" style="width:100%;"></div>
+        </div>
+      </div>
+      <!-- Word display -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:22px;padding:28px 20px 20px;margin-bottom:14px;text-align:center;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:1.5px;color:#6b7280;text-transform:uppercase;" id="sr-question-label">Apa artinya?</div>
+        <div class="sr-word-display" id="sr-word-display" style="color:#f59e0b;"></div>
+        <div style="font-size:0.82rem;color:#6b7280;" id="sr-word-sub"></div>
+      </div>
+      <!-- Options -->
+      <div id="sr-options" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+    </div>
+    <!-- Result -->
+    <div id="sr-result" style="display:none;text-align:center;padding:20px 0;">
+      <div style="font-size:4rem;margin-bottom:8px;" id="sr-res-emoji">⚡</div>
+      <div id="sr-score-display">0</div>
+      <div style="font-size:0.9rem;color:#9ca3af;margin-top:4px;margin-bottom:6px;">kata benar!</div>
+      <div style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:20px;" id="sr-res-title"></div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:18px;margin-bottom:18px;">
+        <div style="display:flex;justify-content:space-around;">
+          <div><div style="font-size:1.8rem;font-weight:900;color:#34d399;" id="sr-res-c">0</div><div style="font-size:0.72rem;color:#6b7280;">Benar</div></div>
+          <div><div style="font-size:1.8rem;font-weight:900;color:#f87171;" id="sr-res-w">0</div><div style="font-size:0.72rem;color:#6b7280;">Salah</div></div>
+          <div><div style="font-size:1.8rem;font-weight:900;color:#f59e0b;" id="sr-res-hs">0</div><div style="font-size:0.72rem;color:#6b7280;">Rekor</div></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;">
+        <button onclick="startSpeedRound()" style="padding:12px 26px;background:linear-gradient(135deg,#d97706,#f59e0b);border:none;border-radius:14px;color:#fff;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">⚡ Main Lagi</button>
+        <button onclick="srReset()" style="padding:12px 26px;background:rgba(255,255,255,0.05);border:1.5px solid var(--border);border-radius:14px;color:#9ca3af;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">⚙️ Pengaturan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TATA BAHASA / BUNPOU ══ -->
+<div id="page-tatabahasa" class="page">
+  <div style="max-width:600px;margin:0 auto;padding:16px 12px 100px;">
+    <!-- Header -->
+    <div style="text-align:center;padding:20px 0 16px;">
+      <div style="font-size:2.2rem;margin-bottom:6px;">📐</div>
+      <h2 style="font-size:1.5rem;font-weight:900;color:#fff;margin:0 0 4px;">Tata Bahasa <span style="color:var(--teal);">文法</span></h2>
+      <p style="color:#9ca3af;font-size:0.82rem;margin:0;">Pola kalimat N5 & N4 dengan contoh dan latihan</p>
+    </div>
+
+    <!-- Filter -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;overflow-x:auto;padding-bottom:4px;">
+      <button class="tb-cat-btn active" id="tb-f-all" onclick="tbFilter('all')">✦ Semua</button>
+      <button class="tb-cat-btn" id="tb-f-N5" onclick="tbFilter('N5')">N5</button>
+      <button class="tb-cat-btn" id="tb-f-N4" onclick="tbFilter('N4')">N4</button>
+      <button class="tb-cat-btn" id="tb-f-copula" onclick="tbFilter('copula')">です/だ</button>
+      <button class="tb-cat-btn" id="tb-f-negasi" onclick="tbFilter('negasi')">Negasi</button>
+      <button class="tb-cat-btn" id="tb-f-partikel" onclick="tbFilter('partikel')">Partikel</button>
+      <button class="tb-cat-btn" id="tb-f-bentuk-te" onclick="tbFilter('bentuk-te')">Bentuk て</button>
+      <button class="tb-cat-btn" id="tb-f-waktu" onclick="tbFilter('waktu')">Waktu</button>
+      <button class="tb-cat-btn" id="tb-f-kondisi" onclick="tbFilter('kondisi')">Kondisi</button>
+      <button class="tb-cat-btn" id="tb-f-potensial" onclick="tbFilter('potensial')">Potensial</button>
+    </div>
+
+    <!-- Search -->
+    <div style="position:relative;margin-bottom:16px;">
+      <input id="tb-search" type="text" placeholder="🔍 Cari pola atau kata kunci..." autocomplete="off"
+        oninput="tbSearch(this.value)"
+        style="width:100%;padding:11px 16px;background:var(--card);border:1.5px solid var(--border);border-radius:14px;color:#fff;font-size:0.88rem;font-family:'DM Sans',sans-serif;box-sizing:border-box;outline:none;"/>
+    </div>
+
+    <!-- Stats -->
+    <div style="font-size:0.75rem;color:#6b7280;margin-bottom:12px;" id="tb-count"></div>
+
+    <!-- List -->
+    <div id="tb-list"></div>
   </div>
 </div>
 
@@ -4276,6 +4580,9 @@ function showPage(pageId) {
     if (pageId === 'konjugasi') { initKonjugasi(); }
     if (pageId === 'dashboard' && typeof updateGamificationUI === 'function') { updateGamificationUI(); }
     if (pageId === 'quizgambar') { initQuizGambar(); }
+    if (pageId === 'quizdengar') { initQuizDengar(); }
+    if (pageId === 'speedround') { initSpeedRound(); }
+    if (pageId === 'tatabahasa') { initTataBahasa(); }
     // Stop mic when navigating away from a page
     if (!['dokkai','kana','choukai'].includes(pageId)) stopMic();
 
@@ -4409,19 +4716,23 @@ function addFuriganaToSentence(sentence, word) {
 }
 
 function initWordOfTheDay() {
-    // Pilih kata berdasarkan tanggal (deterministik, ganti tiap hari)
     const today = new Date();
     const dateKey = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
-    const dayIndex = Math.abs(today.getFullYear()*10000 + (today.getMonth()+1)*100 + today.getDate()) % vocab.length;
-    const word = vocab[dayIndex];
-    if(!word) return;
+    const dayNum = Math.abs(today.getFullYear()*10000 + (today.getMonth()+1)*100 + today.getDate());
+
+    // Pilih satu kata N5 dan satu kata N4 berdasarkan tanggal
+    const vocabN5 = vocab.filter(v => v.level === 'N5');
+    const vocabN4 = vocab.filter(v => v.level === 'N4');
+    const wordN5 = vocabN5[dayNum % vocabN5.length];
+    const wordN4 = vocabN4[dayNum % vocabN4.length];
+    if(!wordN5 || !wordN4) return;
 
     // Format tanggal Indonesia
     const hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][today.getDay()];
     const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'][today.getMonth()];
     const dateStr = `${hari}, ${today.getDate()} ${bulan} ${today.getFullYear()}`;
 
-    // Romaji dari reading (spasi tiap karakter dengan titik)
+    // Romaji dari reading
     function readingToRomaji(r) {
         // Kombinasi dua karakter dulu (小さいや行)
         const combo = {
@@ -4478,7 +4789,7 @@ function initWordOfTheDay() {
         return result.join(' · ');
     }
 
-    // Streak logic — cek apakah sudah lihat hari ini
+    // Streak logic
     const streakKey = 'wotd_streak';
     const lastSeenKey = 'wotd_last_seen';
     let streak = parseInt(localStorage.getItem(streakKey)||'0');
@@ -4487,58 +4798,63 @@ function initWordOfTheDay() {
     const yesterdayKey = `${yesterday.getFullYear()}-${yesterday.getMonth()+1}-${yesterday.getDate()}`;
 
     if(lastSeen === dateKey) {
-        // Sudah lihat hari ini, streak tetap
+        // sudah lihat hari ini
     } else if(lastSeen === yesterdayKey) {
-        // Kemarin lihat, streak +1
         streak++;
         localStorage.setItem(streakKey, streak);
         localStorage.setItem(lastSeenKey, dateKey);
     } else {
-        // Putus atau baru pertama
         streak = 1;
         localStorage.setItem(streakKey, streak);
         localStorage.setItem(lastSeenKey, dateKey);
     }
 
-    // Parse contoh kalimat (format: "JP\nID")
-    let exJp = '', exId = '';
-    if(word.example) {
-        const lines = word.example.split('\n');
-        exJp = lines[0] || '';
-        exId = lines[1] || '';
+    // Render kata N5
+    function renderWotd(word, suffix) {
+        let exJp = '', exId = '';
+        if(word.example) {
+            const lines = word.example.split('\n');
+            exJp = lines[0] || '';
+            exId = lines[1] || '';
+        }
+        const suf = suffix ? '-' + suffix : '';
+        document.getElementById('wotd-jp' + suf).textContent = word.jp;
+        document.getElementById('wotd-reading' + suf).textContent = word.reading;
+        document.getElementById('wotd-romaji' + suf).textContent = readingToRomaji(word.reading);
+        document.getElementById('wotd-id' + suf).textContent = word.id;
+        document.getElementById('wotd-ex-jp' + suf).innerHTML = addFuriganaToSentence(exJp, word);
+        document.getElementById('wotd-ex-id' + suf).textContent = exId;
+        document.getElementById('wotd-kanji-bg' + suf).textContent = word.jp[0] || '語';
     }
 
-    // Isi elemen
     document.getElementById('wotd-datestr').textContent = dateStr;
-    document.getElementById('wotd-level').textContent = word.level || 'N5';
-    document.getElementById('wotd-jp').textContent = word.jp;
-    document.getElementById('wotd-reading').textContent = word.reading;
-    document.getElementById('wotd-romaji').textContent = readingToRomaji(word.reading);
-    document.getElementById('wotd-id').textContent = word.id;
-    document.getElementById('wotd-ex-jp').innerHTML = addFuriganaToSentence(exJp, word);
-    document.getElementById('wotd-ex-id').textContent = exId;
-    document.getElementById('wotd-kanji-bg').textContent = word.jp[0] || '語';
     document.getElementById('wotd-streak-num').textContent = streak;
+    renderWotd(wordN5, '');
+    renderWotd(wordN4, 'n4');
 
-    // Simpan word untuk fungsi speak & quiz
-    window._wotdWord = word;
+    window._wotdWordN5 = wordN5;
+    window._wotdWordN4 = wordN4;
+    // backward compat
+    window._wotdWord = wordN5;
 }
 
-function wotdSpeak() {
-    if(window._wotdWord) speakText(window._wotdWord.reading);
+function wotdSpeak(level) {
+    const word = level === 'n4' ? window._wotdWordN4 : window._wotdWordN5;
+    if(word) speakText(word.reading);
+}
+
+function wotdStartQuiz(level) {
+    const word = level === 'n4' ? window._wotdWordN4 : window._wotdWordN5;
+    if(!word) return;
+    document.getElementById('q-category').value = word.cat || 'all';
+    document.getElementById('q-level').value = word.level || 'all';
+    showPage('quiz');
 }
 
 function speakKamusExample() {
     // Speak the example sentence of the currently open kamus modal
     const ex = window._kamusExJp || '';
     if(ex) speakText(ex);
-}
-
-function wotdStartQuiz() {
-    if(!window._wotdWord) return;
-    document.getElementById('q-category').value = window._wotdWord.cat || 'all';
-    document.getElementById('q-level').value = window._wotdWord.level || 'all';
-    showPage('quiz');
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -12411,6 +12727,865 @@ function showQgResult() {
   document.getElementById('qg-result-emoji').textContent = emoji;
   document.getElementById('qg-result-title').textContent = title;
   document.getElementById('qg-result-sub').textContent = `Benar ${_qgCorrect} dari ${total} soal (${pct}%)`;
+}
+</script>
+
+<script>
+// ══════════════════════════════════════════════════════
+// 🎧 QUIZ DENGAR ENGINE
+// ══════════════════════════════════════════════════════
+let _qdLevel='all', _qdMode='arti', _qdTotal=20;
+let _qdQuestions=[], _qdIdx=0, _qdCorrect=0, _qdWrong=0, _qdAnswered=false, _qdPlayCount=0;
+
+function initQuizDengar() { qdLoadHighScore(); }
+
+function qdSet(key, val) {
+    if(key==='level') {
+        _qdLevel=val;
+        ['all','N5','N4'].forEach(x=>document.getElementById('qd-lv-'+x)?.classList.remove('active'));
+        document.getElementById('qd-lv-'+val)?.classList.add('active');
+    } else if(key==='mode') {
+        _qdMode=val;
+        ['arti','kanji','romaji'].forEach(x=>document.getElementById('qd-mode-'+x)?.classList.remove('active'));
+        document.getElementById('qd-mode-'+val)?.classList.add('active');
+    } else if(key==='total') {
+        _qdTotal=val;
+        [10,20,30].forEach(x=>document.getElementById('qd-n-'+x)?.classList.remove('active'));
+        document.getElementById('qd-n-'+val)?.classList.add('active');
+    }
+}
+
+function qdLoadHighScore() {}
+
+function startQuizDengar() {
+    let pool = vocab.filter(v => v.example || v.reading);
+    if(_qdLevel !== 'all') pool = pool.filter(v => v.level === _qdLevel);
+    if(pool.length < 4) pool = vocab.filter(v => v.reading);
+    _qdQuestions = shuffleArr([...pool]).slice(0, _qdTotal);
+    _qdIdx=0; _qdCorrect=0; _qdWrong=0; _qdAnswered=false;
+
+    document.getElementById('qd-setup').style.display='none';
+    document.getElementById('qd-result').style.display='none';
+    document.getElementById('qd-quiz').style.display='block';
+    document.getElementById('qd-total').textContent=_qdQuestions.length;
+
+    // Label question
+    const labels = {arti:'Dengar dan pilih artinya (Indonesia):',kanji:'Dengar dan pilih kata Jepangnya:',romaji:'Dengar dan ketik romajinya:'};
+    document.getElementById('qd-question-label').textContent = labels[_qdMode];
+
+    qdRenderQuestion();
+}
+
+function qdRenderQuestion() {
+    const q = _qdQuestions[_qdIdx];
+    _qdAnswered=false; _qdPlayCount=0;
+
+    document.getElementById('qd-current').textContent = _qdIdx+1;
+    document.getElementById('qd-correct').textContent = _qdCorrect;
+    document.getElementById('qd-wrong').textContent = _qdWrong;
+    document.getElementById('qd-progress-bar').style.width = ((_qdIdx/_qdQuestions.length)*100)+'%';
+    document.getElementById('qd-feedback').style.display='none';
+    document.getElementById('qd-play-btn').className='qd-play-btn';
+    document.getElementById('qd-play-count').textContent='';
+
+    // Auto-play first time
+    setTimeout(()=>qdPlayAudio(), 400);
+
+    if(_qdMode==='romaji') {
+        document.getElementById('qd-options-pilihan').style.display='none';
+        document.getElementById('qd-options-romaji').style.display='block';
+        const inp=document.getElementById('qd-romaji-input');
+        inp.value=''; inp.disabled=false; inp.style.borderColor='var(--border)';
+        inp.onkeydown=e=>{ if(e.key==='Enter') qdCheckRomaji(); };
+        setTimeout(()=>inp.focus(),600);
+    } else {
+        document.getElementById('qd-options-pilihan').style.display='grid';
+        document.getElementById('qd-options-romaji').style.display='none';
+        qdBuildOptions(q);
+    }
+}
+
+function qdPlayAudio() {
+    const q = _qdQuestions[_qdIdx];
+    if(!q) return;
+    _qdPlayCount++;
+    document.getElementById('qd-play-count').textContent = `Diputar ${_qdPlayCount}x`;
+    const btn = document.getElementById('qd-play-btn');
+    btn.className='qd-play-btn playing';
+    speakText(q.reading || q.jp);
+    setTimeout(()=>{ btn.className='qd-play-btn'; }, 1500);
+}
+
+function qdBuildOptions(q) {
+    let pool = vocab.filter(v => v.jp !== q.jp);
+    if(_qdLevel !== 'all') {
+        const same = pool.filter(v=>v.level===q.level);
+        if(same.length>=3) pool=same;
+    }
+    const distractors = shuffleArr(pool).slice(0,3);
+    const options = shuffleArr([q,...distractors]);
+
+    document.getElementById('qd-options-pilihan').innerHTML = options.map(o=>`
+        <button class="qd-option" data-jp="${o.jp}" data-correct="${q.jp}">
+            ${_qdMode==='kanji'
+                ? `<div style="font-size:1.2rem;">${o.jp}</div><div style="font-size:0.7rem;color:#9ca3af;font-family:'DM Sans',sans-serif;">${o.reading}</div>`
+                : `<div style="font-size:0.9rem;font-family:'DM Sans',sans-serif;font-weight:600;">${o.id}</div>`
+            }
+        </button>`).join('');
+
+    document.querySelectorAll('.qd-option').forEach(b=>{
+        b.addEventListener('click', function(){
+            qdCheckOption(this, this.dataset.jp, this.dataset.correct);
+        });
+    });
+}
+
+function qdCheckOption(btn, chosen, correct) {
+    if(_qdAnswered) return;
+    _qdAnswered=true;
+    document.querySelectorAll('.qd-option').forEach(b=>{
+        b.disabled=true;
+        if(b.dataset.jp===correct) b.classList.add('correct');
+        else if(b.dataset.jp===chosen && chosen!==correct) b.classList.add('wrong');
+    });
+    const ok = chosen===correct;
+    if(ok) _qdCorrect++; else _qdWrong++;
+    document.getElementById('qd-correct').textContent=_qdCorrect;
+    document.getElementById('qd-wrong').textContent=_qdWrong;
+    qdShowFeedback(ok, _qdQuestions[_qdIdx]);
+}
+
+function qdCheckRomaji() {
+    if(_qdAnswered) return;
+    const q=_qdQuestions[_qdIdx];
+    const inp=document.getElementById('qd-romaji-input');
+    const typed=inp.value.trim().toLowerCase().replace(/\s/g,'');
+    const correct=q.reading.replace(/\s/g,'');
+    // Simple romaji check via existing readingToRomaji if available
+    const ok = typed===correct || typed===q.jp || typed===q.id.toLowerCase();
+    _qdAnswered=true;
+    inp.disabled=true;
+    inp.style.borderColor=ok?'#34d399':'#f87171';
+    if(ok) _qdCorrect++; else _qdWrong++;
+    document.getElementById('qd-correct').textContent=_qdCorrect;
+    document.getElementById('qd-wrong').textContent=_qdWrong;
+    qdShowFeedback(ok, q);
+}
+
+function qdShowFeedback(ok, q) {
+    const fb=document.getElementById('qd-feedback');
+    fb.style.display='block';
+    fb.style.background=ok?'rgba(52,211,153,0.08)':'rgba(248,113,113,0.08)';
+    fb.style.border=ok?'1px solid rgba(52,211,153,0.2)':'1px solid rgba(248,113,113,0.2)';
+    fb.style.borderRadius='16px';
+    document.getElementById('qd-fb-icon').textContent=ok?'✅':'❌';
+    document.getElementById('qd-fb-word').textContent=q.jp;
+    document.getElementById('qd-fb-read').textContent=q.reading;
+    document.getElementById('qd-fb-id').textContent='= '+q.id;
+    if(ok) speakText(q.reading);
+}
+
+function qdNext() {
+    _qdIdx++;
+    if(_qdIdx>=_qdQuestions.length) qdShowResult();
+    else qdRenderQuestion();
+}
+
+function qdShowResult() {
+    document.getElementById('qd-quiz').style.display='none';
+    document.getElementById('qd-result').style.display='block';
+    const total=_qdQuestions.length;
+    const pct=Math.round((_qdCorrect/total)*100);
+    document.getElementById('qd-res-c').textContent=_qdCorrect;
+    document.getElementById('qd-res-w').textContent=_qdWrong;
+    document.getElementById('qd-res-s').textContent=pct+'%';
+    let emoji='😢',title='Tetap semangat!';
+    if(pct>=90){emoji='🏆';title='Pendengar Handal!';}
+    else if(pct>=70){emoji='🎉';title='Bagus sekali!';}
+    else if(pct>=50){emoji='😊';title='Lumayan!';}
+    document.getElementById('qd-res-emoji').textContent=emoji;
+    document.getElementById('qd-res-title').textContent=title;
+    document.getElementById('qd-res-sub').textContent=`Benar ${_qdCorrect} dari ${total} soal (${pct}%)`;
+}
+
+function qdReset() {
+    document.getElementById('qd-quiz').style.display='none';
+    document.getElementById('qd-result').style.display='none';
+    document.getElementById('qd-setup').style.display='block';
+}
+</script>
+
+<script>
+// ══════════════════════════════════════════════════════
+// ⚡ SPEED ROUND ENGINE
+// ══════════════════════════════════════════════════════
+let _srLevel='all', _srMode='jp2id', _srDur=60;
+let _srScore=0, _srWrong=0, _srTimer=null, _srTimeLeft=60, _srPool=[], _srCurrent=null, _srAnswered=false;
+
+function initSpeedRound() {
+    const hs = parseInt(localStorage.getItem('sr_highscore_'+_srDur)||'0');
+    document.getElementById('sr-highscore').textContent = hs + ' soal';
+}
+
+function srSet(key, val) {
+    if(key==='level') {
+        _srLevel=val;
+        ['all','N5','N4'].forEach(x=>document.getElementById('sr-lv-'+x)?.classList.remove('active'));
+        document.getElementById('sr-lv-'+val)?.classList.add('active');
+    } else if(key==='mode') {
+        _srMode=val;
+        ['jp2id','id2jp','read'].forEach(x=>document.getElementById('sr-mode-'+x)?.classList.remove('active'));
+        document.getElementById('sr-mode-'+val)?.classList.add('active');
+    } else if(key==='dur') {
+        _srDur=val;
+        [30,60,90].forEach(x=>document.getElementById('sr-dur-'+x)?.classList.remove('active'));
+        document.getElementById('sr-dur-'+val)?.classList.add('active');
+        const hs=parseInt(localStorage.getItem('sr_highscore_'+val)||'0');
+        document.getElementById('sr-highscore').textContent=hs+' soal';
+    }
+}
+
+function startSpeedRound() {
+    let pool=vocab.filter(v=>v.id && v.jp && v.reading);
+    if(_srLevel!=='all') pool=pool.filter(v=>v.level===_srLevel);
+    if(pool.length<8) pool=vocab.filter(v=>v.id&&v.jp&&v.reading);
+    _srPool=shuffleArr([...pool]);
+    _srScore=0; _srWrong=0; _srTimeLeft=_srDur; _srAnswered=false;
+
+    document.getElementById('sr-setup').style.display='none';
+    document.getElementById('sr-result').style.display='none';
+    document.getElementById('sr-game').style.display='none';
+    document.getElementById('sr-countdown').style.display='block';
+
+    // Countdown 3-2-1
+    let cnt=3;
+    document.getElementById('sr-countdown-num').textContent=cnt;
+    const cTimer=setInterval(()=>{
+        cnt--;
+        if(cnt<=0) {
+            clearInterval(cTimer);
+            document.getElementById('sr-countdown').style.display='none';
+            srStartGame();
+        } else {
+            document.getElementById('sr-countdown-num').textContent=cnt;
+        }
+    },800);
+}
+
+function srStartGame() {
+    document.getElementById('sr-game').style.display='block';
+    document.getElementById('sr-score').textContent='0';
+    document.getElementById('sr-wrongs').textContent='0';
+    document.getElementById('sr-timer').textContent=_srDur;
+    document.getElementById('sr-timer-bar').style.width='100%';
+
+    // Labels
+    const labels={jp2id:'Apa artinya? →',id2jp:'Kata Jepangnya? →',read:'Cara bacanya? →'};
+    document.getElementById('sr-question-label').textContent=labels[_srMode];
+
+    srNextQuestion();
+
+    if(_srTimer) clearInterval(_srTimer);
+    _srTimer=setInterval(()=>{
+        _srTimeLeft--;
+        document.getElementById('sr-timer').textContent=_srTimeLeft;
+        document.getElementById('sr-timer-bar').style.width=((_srTimeLeft/_srDur)*100)+'%';
+        if(_srTimeLeft<=0) {
+            clearInterval(_srTimer);
+            srEndGame();
+        }
+    },1000);
+}
+
+function srNextQuestion() {
+    if(_srPool.length===0) _srPool=shuffleArr(vocab.filter(v=>v.id&&v.jp&&v.reading));
+    _srCurrent=_srPool.shift();
+    _srAnswered=false;
+
+    // Display word
+    const wordEl=document.getElementById('sr-word-display');
+    const subEl=document.getElementById('sr-word-sub');
+    if(_srMode==='jp2id') {
+        wordEl.textContent=_srCurrent.jp;
+        subEl.textContent=_srCurrent.reading;
+    } else if(_srMode==='id2jp') {
+        wordEl.textContent=_srCurrent.id;
+        wordEl.style.fontSize='2rem';
+        subEl.textContent='';
+    } else {
+        wordEl.textContent=_srCurrent.jp;
+        subEl.textContent='';
+    }
+
+    // Build 4 options
+    const pool=vocab.filter(v=>v.jp!==_srCurrent.jp&&v.id&&v.reading);
+    const distractors=shuffleArr(pool).slice(0,3);
+    const options=shuffleArr([_srCurrent,...distractors]);
+
+    document.getElementById('sr-options').innerHTML=options.map(o=>`
+        <button class="sr-option" data-jp="${o.jp}" data-correct="${_srCurrent.jp}">
+            ${_srMode==='jp2id'
+                ? `<div style="font-size:0.88rem;font-family:'DM Sans',sans-serif;">${o.id}</div>`
+                : _srMode==='id2jp'
+                    ? `<div>${o.jp}</div><div style="font-size:0.68rem;color:#9ca3af;font-family:'DM Sans',sans-serif;">${o.reading}</div>`
+                    : `<div style="font-size:0.88rem;font-family:'DM Sans',sans-serif;">${o.reading}</div>`
+            }
+        </button>`).join('');
+
+    document.querySelectorAll('.sr-option').forEach(b=>{
+        b.addEventListener('click',function(){
+            srCheckAnswer(this, this.dataset.jp, this.dataset.correct);
+        });
+    });
+}
+
+function srCheckAnswer(btn, chosen, correct) {
+    if(_srAnswered || _srTimeLeft<=0) return;
+    _srAnswered=true;
+
+    const ok=chosen===correct;
+    btn.classList.add(ok?'correct':'wrong');
+    if(ok) {
+        _srScore++;
+        document.getElementById('sr-score').textContent=_srScore;
+    } else {
+        _srWrong++;
+        document.getElementById('sr-wrongs').textContent=_srWrong;
+        // Show correct briefly
+        document.querySelectorAll('.sr-option').forEach(b=>{
+            if(b.dataset.jp===correct) b.classList.add('correct');
+        });
+    }
+
+    setTimeout(()=>{
+        if(_srTimeLeft>0) srNextQuestion();
+    }, ok?300:600);
+}
+
+function srEndGame() {
+    document.getElementById('sr-game').style.display='none';
+    document.getElementById('sr-result').style.display='block';
+
+    document.getElementById('sr-score-display').textContent=_srScore;
+    document.getElementById('sr-res-c').textContent=_srScore;
+    document.getElementById('sr-res-w').textContent=_srWrong;
+
+    // High score
+    const hsKey='sr_highscore_'+_srDur;
+    const prev=parseInt(localStorage.getItem(hsKey)||'0');
+    const newHs=Math.max(prev,_srScore);
+    localStorage.setItem(hsKey, newHs);
+    document.getElementById('sr-res-hs').textContent=newHs;
+
+    let emoji='⚡',title='';
+    if(_srScore===0){emoji='😢';title='Ayo coba lagi!';}
+    else if(_srScore<5){emoji='🌱';title='Terus berlatih!';}
+    else if(_srScore<10){emoji='🔥';title='Semakin membaik!';}
+    else if(_srScore<20){emoji='🏅';title='Keren sekali!';}
+    else{emoji='🏆';title='Kamu luar biasa!';}
+
+    if(_srScore>prev) {
+        emoji='🎉';
+        title='Rekor baru! '+_srScore+' soal!';
+    }
+    document.getElementById('sr-res-emoji').textContent=emoji;
+    document.getElementById('sr-res-title').textContent=title;
+    document.getElementById('sr-highscore').textContent=newHs+' soal';
+}
+
+function srReset() {
+    if(_srTimer) clearInterval(_srTimer);
+    document.getElementById('sr-game').style.display='none';
+    document.getElementById('sr-result').style.display='none';
+    document.getElementById('sr-countdown').style.display='none';
+    document.getElementById('sr-setup').style.display='block';
+    initSpeedRound();
+}
+</script>
+
+<script>
+// ══════════════════════════════════════════════════════
+// 📐 TATA BAHASA / BUNPOU ENGINE
+// ══════════════════════════════════════════════════════
+const BUNPOU = [
+  // ─── COPULA (です/だ) ───────────────────────────────
+  {
+    id:'tb01', level:'N5', cat:['copula','N5'],
+    pattern:'〜は〜です', meaning:'... adalah ...',
+    explanation:'Pola dasar untuk menyatakan identitas atau sifat sesuatu. です adalah bentuk sopan dari だ (kopula/penghubung). Digunakan di akhir kalimat.',
+    structure:'[Subjek] は [Kata benda/Kata sifat-な] です',
+    examples:[
+      {jp:'私は学生です。',id:'Saya adalah mahasiswa.',note:'は dibaca "wa" sebagai partikel'},
+      {jp:'これはペンです。',id:'Ini adalah pena.'},
+      {jp:'田中さんは先生です。',id:'Tuan Tanaka adalah guru.'},
+      {jp:'東京はきれいです。',id:'Tokyo itu indah.',note:'きれいな = kata sifat-な'},
+    ],
+    note:'💡 は dibaca "wa" (bukan "ha") saat dipakai sebagai partikel topik.',
+    quiz:[
+      {q:'Cara bilang "Ini adalah buku" dalam bahasa Jepang?',opts:['これは本です。','これが本だ。','これも本です。','本はこれです。'],ans:0},
+      {q:'Partikel apa yang dipakai untuk menandai topik kalimat?',opts:['は','が','を','に'],ans:0},
+    ]
+  },
+  {
+    id:'tb02', level:'N5', cat:['copula','negasi','N5'],
+    pattern:'〜ではありません / じゃないです', meaning:'... bukan ...',
+    explanation:'Bentuk negatif dari です. ではありません adalah bentuk formal, じゃないです lebih santai dan umum dipakai.',
+    structure:'[Subjek] は [Kata benda/Sifat-な] ではありません',
+    examples:[
+      {jp:'私は先生ではありません。',id:'Saya bukan guru.',note:'Bentuk formal'},
+      {jp:'これは本じゃないです。',id:'Ini bukan buku.',note:'Bentuk informal/kasual'},
+      {jp:'田中さんは学生じゃありません。',id:'Tuan Tanaka bukan mahasiswa.'},
+    ],
+    note:'💡 じゃない lebih sering dipakai dalam percakapan sehari-hari.',
+    quiz:[
+      {q:'Bentuk negatif sopan dari です adalah?',opts:['ではありません','じゃない','ないです','ありません'],ans:0},
+    ]
+  },
+  {
+    id:'tb03', level:'N5', cat:['copula','N5'],
+    pattern:'〜ですか', meaning:'Apakah ...? (kalimat tanya)',
+    explanation:'Tambahkan か di akhir kalimat untuk membuat pertanyaan. Tidak perlu mengubah urutan kata seperti dalam bahasa Inggris.',
+    structure:'[Kalimat pernyataan] + か？',
+    examples:[
+      {jp:'これは本ですか。',id:'Apakah ini buku?'},
+      {jp:'田中さんは学生ですか。',id:'Apakah Tuan Tanaka mahasiswa?'},
+      {jp:'お名前は何ですか。',id:'Siapa nama Anda?',note:'何 = apa/siapa'},
+    ],
+    note:'💡 Dalam tulisan formal, tanda tanya (?) tidak wajib dipakai setelah か.',
+    quiz:[
+      {q:'Bagaimana cara membuat kalimat tanya dalam bahasa Jepang?',opts:['Tambah か di akhir','Balik urutan kata','Tambah の di akhir','Gunakan ですか di awal'],ans:0},
+    ]
+  },
+  // ─── PARTIKEL ───────────────────────────────────────
+  {
+    id:'tb04', level:'N5', cat:['partikel','N5'],
+    pattern:'〜が〜', meaning:'が — Penanda subjek / Penekanan',
+    explanation:'が menandai subjek kalimat, terutama saat subjek baru diperkenalkan atau ditekankan. Berbeda dengan は yang menandai topik yang sudah diketahui.',
+    structure:'[Subjek] が [Predikat]',
+    examples:[
+      {jp:'猫がいます。',id:'Ada kucing.',note:'が untuk subjek yang baru disebut'},
+      {jp:'誰が来ましたか。',id:'Siapa yang datang?',note:'が setelah kata tanya'},
+      {jp:'私が行きます。',id:'Saya yang akan pergi.',note:'Penekanan "saya, bukan orang lain"'},
+      {jp:'りんごが好きです。',id:'Saya suka apel.',note:'Objek kesukaan pakai が'},
+    ],
+    note:'💡 は = topik (sudah diketahui) | が = subjek (baru/ditekankan). Contoh: 私は学生です (topik: saya) vs 私が行く (penekanan: saya yang pergi).',
+    quiz:[
+      {q:'"Saya suka kucing" dalam bahasa Jepang adalah...',opts:['猫が好きです。','猫は好きです。','猫を好きです。','猫に好きです。'],ans:0},
+      {q:'が biasanya dipakai setelah...',opts:['Kata tanya (誰、何、どれ)','Kata benda biasa','Kata kerja','Kata sifat'],ans:0},
+    ]
+  },
+  {
+    id:'tb05', level:'N5', cat:['partikel','N5'],
+    pattern:'〜を〜', meaning:'を — Penanda objek langsung',
+    explanation:'を menandai objek yang dikenai tindakan kata kerja. Dibaca "o" (bukan "wo").',
+    structure:'[Subjek] は [Objek] を [Kata kerja]',
+    examples:[
+      {jp:'本を読みます。',id:'Saya membaca buku.'},
+      {jp:'ご飯を食べます。',id:'Saya makan nasi.'},
+      {jp:'音楽を聴きます。',id:'Saya mendengarkan musik.'},
+      {jp:'道を渡ります。',id:'Saya menyeberangi jalan.',note:'Juga dipakai untuk "melewati tempat"'},
+    ],
+    note:'💡 を juga dipakai untuk "melewati/bergerak melalui" tempat: 公園を歩く (berjalan di taman).',
+    quiz:[
+      {q:'"Saya membaca buku" dalam bahasa Jepang?',opts:['本を読みます。','本が読みます。','本は読みます。','本で読みます。'],ans:0},
+    ]
+  },
+  {
+    id:'tb06', level:'N5', cat:['partikel','N5'],
+    pattern:'〜に〜', meaning:'に — Arah, Waktu, Lokasi keberadaan',
+    examples:[
+      {jp:'学校に行きます。',id:'Saya pergi ke sekolah.',note:'に = ke (arah tujuan)'},
+      {jp:'机の上に本があります。',id:'Ada buku di atas meja.',note:'に = di (lokasi benda mati)'},
+      {jp:'三時に起きます。',id:'Saya bangun jam 3.',note:'に = pada (waktu spesifik)'},
+      {jp:'友達に手紙を書きます。',id:'Saya menulis surat kepada teman.',note:'に = kepada (penerima)'},
+    ],
+    explanation:'に memiliki banyak fungsi: (1) arah tujuan, (2) lokasi keberadaan, (3) waktu spesifik, (4) penerima tindakan.',
+    structure:'[Tempat/Waktu/Orang] に [Kata kerja]',
+    note:'💡 Bedakan に (lokasi ada/tuju) dengan で (lokasi aktivitas): 学校にいる (ada di sekolah) vs 学校で勉強する (belajar di sekolah).',
+    quiz:[
+      {q:'"Saya pergi ke toko" adalah...',opts:['店に行きます。','店で行きます。','店へ行きます。','A atau C benar'],ans:3},
+      {q:'Partikel apa untuk menyatakan waktu spesifik?',opts:['に','で','は','が'],ans:0},
+    ]
+  },
+  {
+    id:'tb07', level:'N5', cat:['partikel','N5'],
+    pattern:'〜で〜', meaning:'で — Lokasi aktivitas, Alat/cara, Sebab',
+    explanation:'で menandai tempat aktivitas berlangsung (bukan sekadar keberadaan), alat yang digunakan, atau cara melakukan sesuatu.',
+    structure:'[Tempat/Alat] で [Kata kerja aksi]',
+    examples:[
+      {jp:'図書館で勉強します。',id:'Saya belajar di perpustakaan.',note:'で = di (tempat aktivitas)'},
+      {jp:'電車で行きます。',id:'Saya pergi dengan kereta.',note:'で = dengan (alat transportasi)'},
+      {jp:'箸でご飯を食べます。',id:'Saya makan nasi dengan sumpit.',note:'で = dengan (alat)'},
+      {jp:'病気で休みました。',id:'Saya absen karena sakit.',note:'で = karena (sebab)'},
+    ],
+    note:'💡 に vs で: 部屋にいる (ada di kamar = keberadaan) | 部屋で勉強する (belajar di kamar = aktivitas).',
+    quiz:[
+      {q:'"Saya belajar di sekolah" pakai partikel apa?',opts:['で','に','は','を'],ans:0},
+      {q:'"Pergi dengan bus" dalam bahasa Jepang?',opts:['バスで行く','バスに行く','バスを行く','バスが行く'],ans:0},
+    ]
+  },
+  {
+    id:'tb08', level:'N5', cat:['partikel','N5'],
+    pattern:'〜も〜', meaning:'も — Juga, Pun',
+    explanation:'も menggantikan は/が/を untuk menyatakan "juga" atau "pun". Biasanya dipakai untuk menambahkan informasi serupa.',
+    structure:'[Kata benda] も [Predikat]',
+    examples:[
+      {jp:'私も学生です。',id:'Saya juga mahasiswa.'},
+      {jp:'猫も犬も好きです。',id:'Saya suka kucing dan anjing (keduanya).'},
+      {jp:'何も食べません。',id:'Saya tidak makan apa pun.',note:'何も + negatif = tidak sama sekali'},
+    ],
+    note:'💡 〜も〜も = "baik ... maupun ...". 何も/誰も/どこも + negatif = "tidak ada satupun".',
+    quiz:[
+      {q:'"Saya juga mahasiswa" dalam bahasa Jepang?',opts:['私も学生です。','私は学生です。','私が学生です。','私で学生です。'],ans:0},
+    ]
+  },
+  {
+    id:'tb09', level:'N5', cat:['partikel','N5'],
+    pattern:'〜の〜', meaning:'の — Kepemilikan, Keterangan benda',
+    explanation:'の menghubungkan dua kata benda, menyatakan kepemilikan atau memberikan keterangan pada kata benda berikutnya.',
+    structure:'[Kata benda A] の [Kata benda B]',
+    examples:[
+      {jp:'私の本です。',id:'Ini buku saya.',note:'kepemilikan'},
+      {jp:'日本語の先生です。',id:'Guru bahasa Jepang.',note:'keterangan jenis'},
+      {jp:'東京の大学です。',id:'Universitas di Tokyo.',note:'keterangan tempat'},
+      {jp:'これは誰のですか。',id:'Ini punya siapa?',note:'の di akhir = mengganti kata benda'},
+    ],
+    note:'💡 の bisa dipakai di akhir kalimat menggantikan kata benda: 私のです (punya saya).',
+    quiz:[
+      {q:'"Buku milik saya" dalam bahasa Jepang?',opts:['私の本','本の私','私が本','本は私'],ans:0},
+    ]
+  },
+  // ─── BENTUK て ───────────────────────────────────────
+  {
+    id:'tb10', level:'N5', cat:['bentuk-te','N5'],
+    pattern:'〜てください', meaning:'Tolong lakukan ...',
+    explanation:'Bentuk て dari kata kerja + ください digunakan untuk membuat permintaan sopan. Bentuk て sendiri adalah bentuk sambung yang penting dalam bahasa Jepang.',
+    structure:'[Kata kerja bentuk-て] + ください',
+    examples:[
+      {jp:'ゆっくり話してください。',id:'Tolong berbicara pelan-pelan.',note:'話す → 話して'},
+      {jp:'ここに座ってください。',id:'Tolong duduk di sini.',note:'座る → 座って'},
+      {jp:'名前を書いてください。',id:'Tolong tuliskan nama Anda.',note:'書く → 書いて'},
+      {jp:'ちょっと待ってください。',id:'Tolong tunggu sebentar.',note:'待つ → 待って'},
+    ],
+    note:'💡 Cara membuat bentuk て: Godan -く→いて, -ぐ→いで, -す→して, -つ/る/う→って, -む/ぶ/ぬ→んで. Ichidan: buang る + て.',
+    quiz:[
+      {q:'"Tolong buka jendela" dalam bahasa Jepang?',opts:['窓を開けてください。','窓を開くください。','窓が開けてください。','窓で開けてください。'],ans:0},
+      {q:'Bentuk て dari 食べる adalah?',opts:['食べて','食べって','食て','食います'],ans:0},
+    ]
+  },
+  {
+    id:'tb11', level:'N5', cat:['bentuk-te','N5'],
+    pattern:'〜ています', meaning:'Sedang ..., Sudah ... (hasil)',
+    explanation:'Bentuk て + います menyatakan (1) aksi yang sedang berlangsung atau (2) keadaan hasil dari aksi lampau.',
+    structure:'[Kata kerja bentuk-て] + います',
+    examples:[
+      {jp:'今、勉強しています。',id:'Sekarang sedang belajar.',note:'Aksi sedang berlangsung'},
+      {jp:'雨が降っています。',id:'Sedang hujan.',note:'Kondisi saat ini'},
+      {jp:'結婚しています。',id:'Sudah menikah.',note:'Hasil dari aksi: menikah → masih menikah'},
+      {jp:'東京に住んでいます。',id:'Saya tinggal di Tokyo.',note:'Kondisi berkelanjutan'},
+    ],
+    note:'💡 Verba seperti 知る (tahu), 住む (tinggal), 結婚する (menikah) — pakai ています untuk menyatakan keadaan saat ini.',
+    quiz:[
+      {q:'"Saya sedang makan" dalam bahasa Jepang?',opts:['食べています。','食べました。','食べます。','食べていました。'],ans:0},
+      {q:'"Saya tinggal di Osaka" dalam bahasa Jepang?',opts:['大阪に住んでいます。','大阪で住みます。','大阪に住みます。','大阪で住んでいます。'],ans:0},
+    ]
+  },
+  {
+    id:'tb12', level:'N5', cat:['bentuk-te','N5'],
+    pattern:'〜てもいいですか', meaning:'Bolehkah saya ...?',
+    explanation:'Digunakan untuk meminta izin melakukan sesuatu. Jawaban positif: はい、〜てもいいです / どうぞ. Jawaban negatif: いいえ、〜てはいけません (tidak boleh).',
+    structure:'[Kata kerja bentuk-て] + もいいですか',
+    examples:[
+      {jp:'ここに座ってもいいですか。',id:'Bolehkah saya duduk di sini?'},
+      {jp:'写真を撮ってもいいですか。',id:'Bolehkah saya mengambil foto?'},
+      {jp:'トイレに行ってもいいですか。',id:'Bolehkah saya pergi ke toilet?'},
+    ],
+    note:'💡 Kebalikannya: 〜てはいけません (tidak boleh/dilarang). Contoh: ここで食べてはいけません (tidak boleh makan di sini).',
+    quiz:[
+      {q:'"Bolehkah saya membuka jendela?" dalam bahasa Jepang?',opts:['窓を開けてもいいですか。','窓を開けますか。','窓を開けてください。','窓が開けますか。'],ans:0},
+    ]
+  },
+  // ─── BENTUK NEGATIF ─────────────────────────────────
+  {
+    id:'tb13', level:'N5', cat:['negasi','N5'],
+    pattern:'〜ません / ないです', meaning:'Tidak ... (bentuk negatif kata kerja)',
+    explanation:'Dua cara membentuk negatif kata kerja: ません (sopan) dan ない (kasual). Keduanya bermakna sama.',
+    structure:'[Kata kerja bentuk-ます] → [masubu → ません]',
+    examples:[
+      {jp:'肉を食べません。',id:'Saya tidak makan daging.',note:'食べます → 食べません'},
+      {jp:'お酒は飲みません。',id:'Saya tidak minum alkohol.',note:'飲みます → 飲みません'},
+      {jp:'日本語がわかりません。',id:'Saya tidak mengerti bahasa Jepang.'},
+      {jp:'全然わかりません。',id:'Sama sekali tidak mengerti.',note:'全然 + negatif = sama sekali tidak'},
+    ],
+    note:'💡 全然〜ません (sama sekali tidak), あまり〜ません (tidak begitu), めったに〜ません (jarang sekali).',
+    quiz:[
+      {q:'"Saya tidak makan sayuran" dalam bahasa Jepang?',opts:['野菜を食べません。','野菜が食べません。','野菜は食べません。','A atau C benar'],ans:3},
+    ]
+  },
+  // ─── WAKTU / TENSE ──────────────────────────────────
+  {
+    id:'tb14', level:'N5', cat:['waktu','N5'],
+    pattern:'〜ました / 〜でした', meaning:'Sudah ... (bentuk lampau)',
+    explanation:'Bentuk lampau sopan dari kata kerja (〜ました) dan kopula (でした). Menyatakan tindakan yang sudah selesai di masa lalu.',
+    structure:'[Kata kerja-ます] → [ます → ました]',
+    examples:[
+      {jp:'昨日、映画を見ました。',id:'Kemarin saya menonton film.',note:'見ます → 見ました'},
+      {jp:'先週、東京に行きました。',id:'Minggu lalu saya pergi ke Tokyo.',note:'行きます → 行きました'},
+      {jp:'昨日は寒かったです。',id:'Kemarin cuacanya dingin.',note:'い形容詞: 寒い → 寒かったです'},
+      {jp:'子供の時、学生でした。',id:'Waktu kecil, saya adalah pelajar.',note:'です → でした'},
+    ],
+    note:'💡 Bentuk lampau negatif: 〜ませんでした (sopan) / 〜なかった (kasual). Contoh: 食べませんでした (tidak makan).',
+    quiz:[
+      {q:'"Saya minum kopi tadi pagi" dalam bahasa Jepang?',opts:['今朝、コーヒーを飲みました。','今朝、コーヒーを飲みます。','今朝、コーヒーが飲みました。','今朝、コーヒーは飲みました。'],ans:0},
+    ]
+  },
+  {
+    id:'tb15', level:'N5', cat:['waktu','N5'],
+    pattern:'〜前に / 〜後で', meaning:'Sebelum ... / Setelah ...',
+    explanation:'〜前に menyatakan "sebelum melakukan X". 〜後で menyatakan "setelah melakukan X".',
+    structure:'[Kata kerja bentuk-kamus] + 前に / [Kata kerja-た形] + 後で',
+    examples:[
+      {jp:'寝る前に歯を磨きます。',id:'Sebelum tidur, saya menyikat gigi.',note:'寝る (bentuk kamus) + 前に'},
+      {jp:'食べた後で、散歩します。',id:'Setelah makan, saya jalan-jalan.',note:'食べた (bentuk lampau) + 後で'},
+      {jp:'授業の前に予習します。',id:'Sebelum kelas, saya belajar dulu.',note:'名詞 + の + 前に'},
+      {jp:'仕事の後で飲みに行きます。',id:'Setelah kerja, saya pergi minum.',note:'名詞 + の + 後で'},
+    ],
+    note:'💡 前に pakai bentuk kamus (bukan ます), sedangkan 後で pakai bentuk た (lampau).',
+    quiz:[
+      {q:'"Sebelum makan" dalam bahasa Jepang?',opts:['食べる前に','食べた前に','食べて前に','食べます前に'],ans:0},
+      {q:'"Setelah tidur" dalam bahasa Jepang?',opts:['寝た後で','寝る後で','寝て後で','寝ます後で'],ans:0},
+    ]
+  },
+  {
+    id:'tb16', level:'N4', cat:['waktu','N4'],
+    pattern:'〜たら', meaning:'Kalau sudah ..., Setelah ...',
+    explanation:'〜たら menyatakan kondisi atau urutan waktu: "kalau/setelah X terjadi, maka Y". Dibentuk dari bentuk lampau + ら.',
+    structure:'[Kata kerja bentuk-た] + ら',
+    examples:[
+      {jp:'家に帰ったら、電話してください。',id:'Kalau sudah pulang ke rumah, tolong telepon saya.'},
+      {jp:'春になったら、花見をしましょう。',id:'Kalau musim semi tiba, mari lihat bunga sakura.'},
+      {jp:'宿題が終わったら、遊んでいいよ。',id:'Kalau PR sudah selesai, boleh main.'},
+      {jp:'もし雨が降ったら、家にいます。',id:'Kalau hujan, saya akan di rumah.',note:'もし + たら = kondisi hipotetis'},
+    ],
+    note:'💡 たら sering dipakai dengan もし (kalau/jika) untuk kondisi hipotetis. Berbeda dengan と (otomatis/alami) dan ば (kondisi tertentu).',
+    quiz:[
+      {q:'"Kalau lapar, makan saja" dalam bahasa Jepang?',opts:['お腹が空いたら、食べていいよ。','お腹が空くと、食べていいよ。','お腹が空いたら、食べたいよ。','お腹が空いたら、食べました。'],ans:0},
+    ]
+  },
+  // ─── POTENSIAL ──────────────────────────────────────
+  {
+    id:'tb17', level:'N4', cat:['potensial','N4'],
+    pattern:'〜できる / 〜られる', meaning:'Bisa ..., Mampu ...',
+    explanation:'Bentuk potensial menyatakan kemampuan atau kemungkinan. できる untuk kata kerja する-compounds, 〜られる untuk Ichidan, dan perubahan khusus untuk Godan.',
+    structure:'Godan: [akar]+える | Ichidan: [akar]+られる | する→できる',
+    examples:[
+      {jp:'日本語が話せます。',id:'Saya bisa berbicara bahasa Jepang.',note:'話す→話せる (Godan)'},
+      {jp:'漢字が読めません。',id:'Saya tidak bisa membaca kanji.',note:'読む→読める (Godan)'},
+      {jp:'料理ができます。',id:'Saya bisa memasak.',note:'料理する→料理できる'},
+      {jp:'早く起きられますか。',id:'Apakah bisa bangun pagi?',note:'起きる→起きられる (Ichidan)'},
+    ],
+    note:'💡 Objek dari bentuk potensial biasanya pakai が (bukan を): 日本語が話せる (bisa bicara Jepang).',
+    quiz:[
+      {q:'"Saya bisa berenang" dalam bahasa Jepang?',opts:['泳げます。','泳ぎます。','泳がれます。','泳げています。'],ans:0},
+      {q:'Objek dalam kalimat potensial biasanya pakai partikel apa?',opts:['が','を','は','に'],ans:0},
+    ]
+  },
+  {
+    id:'tb18', level:'N4', cat:['potensial','negasi','N4'],
+    pattern:'〜なければなりません', meaning:'Harus ...',
+    explanation:'Menyatakan kewajiban atau keharusan. Bentuk panjangnya 〜なければなりません, bentuk pendeknya 〜なきゃ (kasual).',
+    structure:'[Kata kerja bentuk-ない] → なければなりません',
+    examples:[
+      {jp:'薬を飲まなければなりません。',id:'Saya harus minum obat.',note:'飲む→飲まない→飲まなければ'},
+      {jp:'早く寝なければなりません。',id:'Saya harus tidur lebih awal.'},
+      {jp:'宿題をしなきゃ。',id:'Harus ngerjain PR.',note:'なきゃ = bentuk kasual'},
+      {jp:'パスポートを持っていなければなりません。',id:'Harus membawa paspor.'},
+    ],
+    note:'💡 Kebalikannya: 〜なくてもいいです (tidak perlu/tidak apa-apa kalau tidak). Contoh: 来なくてもいいです (tidak apa-apa kalau tidak datang).',
+    quiz:[
+      {q:'"Harus belajar" dalam bahasa Jepang?',opts:['勉強しなければなりません。','勉強してもいいです。','勉強しなくてもいいです。','勉強しています。'],ans:0},
+    ]
+  },
+  {
+    id:'tb19', level:'N4', cat:['kondisi','N4'],
+    pattern:'〜と', meaning:'Kalau ..., Setiap kali ... (kondisi alami/otomatis)',
+    explanation:'と menyatakan kondisi yang secara alami atau otomatis menghasilkan akibat tertentu. Biasanya untuk kebenaran umum, arahan, atau kondisi berulang.',
+    structure:'[Kata kerja bentuk-kamus / ない] + と',
+    examples:[
+      {jp:'春になると、桜が咲きます。',id:'Kalau musim semi tiba, bunga sakura mekar.',note:'Kebenaran alam'},
+      {jp:'右に曲がると、駅があります。',id:'Kalau belok kanan, ada stasiun.',note:'Arahan/petunjuk'},
+      {jp:'このボタンを押すと、ドアが開きます。',id:'Kalau tekan tombol ini, pintu akan terbuka.',note:'Otomatis'},
+    ],
+    note:'💡 と tidak bisa digunakan untuk kalimat dengan keinginan, permintaan, atau larangan di klausa kedua. Gunakan たら/ば untuk kasus itu.',
+    quiz:[
+      {q:'"Kalau belajar, pasti bisa" menggunakan kondisi mana?',opts:['Bisa pakai と atau たら','Hanya と','Hanya たら','Hanya ば'],ans:0},
+    ]
+  },
+  {
+    id:'tb20', level:'N4', cat:['kondisi','N4'],
+    pattern:'〜ば', meaning:'Kalau ... (kondisi hipotetis/syarat)',
+    explanation:'ば digunakan untuk kondisi hipotetis yang lebih formal. Sering dipakai untuk nasihat atau kondisi yang diperlukan.',
+    structure:'Godan: [akar]+えば | Ichidan: [akar]+れば | する→すれば | くる→くれば',
+    examples:[
+      {jp:'勉強すれば、合格できます。',id:'Kalau belajar, bisa lulus.',note:'する→すれば'},
+      {jp:'早く起きれば、間に合います。',id:'Kalau bangun lebih awal, bisa tepat waktu.',note:'起きる→起きれば'},
+      {jp:'安ければ、買います。',id:'Kalau murah, saya beli.',note:'い形容詞: 安い→安ければ'},
+    ],
+    note:'💡 〜ばよかった = "seharusnya ...". Contoh: もっと勉強すればよかった (seharusnya belajar lebih giat).',
+    quiz:[
+      {q:'"Kalau ada waktu" dalam bahasa Jepang?',opts:['時間があれば','時間があると','時間があったら','A dan C benar'],ans:3},
+    ]
+  },
+  {
+    id:'tb21', level:'N4', cat:['N4'],
+    pattern:'〜そうです', meaning:'Kelihatannya ..., Sepertinya ...',
+    explanation:'そうです memiliki dua fungsi berbeda: (1) setelah bentuk ます/adjektif: menyatakan penampilan/dugaan dari melihat langsung. (2) setelah bentuk kamus/た: menyatakan informasi yang didengar dari orang lain.',
+    structure:'[Kata kerja-ます / Kata sifat akar] + そうです',
+    examples:[
+      {jp:'おいしそうです。',id:'Kelihatannya enak.',note:'おいしい → おいしそう (dari melihat)'},
+      {jp:'雨が降りそうです。',id:'Sepertinya akan hujan.',note:'降る → 降りそう (dugaan)'},
+      {jp:'明日は雨だそうです。',id:'Katanya besok akan hujan.',note:'だ + そう = informasi dari orang lain'},
+      {jp:'田中さんは来ないそうです。',id:'Katanya Tuan Tanaka tidak akan datang.',note:'ない + そう = info dari orang lain'},
+    ],
+    note:'💡 Bedakan: おいしそう (kelihatan enak — dari penglihatan) vs おいしいそう (katanya enak — dari orang lain).',
+    quiz:[
+      {q:'"Kelihatannya dingin" dalam bahasa Jepang?',opts:['寒そうです。','寒いそうです。','寒くそうです。','寒がります。'],ans:0},
+    ]
+  },
+  {
+    id:'tb22', level:'N4', cat:['N4'],
+    pattern:'〜てあげる / くれる / もらう', meaning:'Memberi / Menerima sesuatu untuk orang lain',
+    explanation:'Tiga kata kerja pemberian: あげる (saya → orang lain), くれる (orang lain → saya), もらう (saya menerima dari orang lain). Dipakai setelah bentuk て untuk tindakan yang dilakukan demi orang lain.',
+    structure:'[Kata kerja-て] + あげる/くれる/もらう',
+    examples:[
+      {jp:'友達に本を貸してあげました。',id:'Saya meminjamkan buku kepada teman.',note:'あげる = saya → orang lain'},
+      {jp:'先生が説明してくれました。',id:'Guru menjelaskan untuk saya.',note:'くれる = orang lain → saya'},
+      {jp:'友達に手伝ってもらいました。',id:'Saya minta tolong teman membantu.',note:'もらう = saya menerima tindakan'},
+    ],
+    note:'💡 ありがとう setelah くれる: ~してくれてありがとう (terima kasih sudah melakukan ... untukku).',
+    quiz:[
+      {q:'"Teman membantu saya" pakai kata kerja apa?',opts:['くれる','あげる','もらう','する'],ans:0},
+    ]
+  },
+  {
+    id:'tb23', level:'N4', cat:['N4'],
+    pattern:'〜ようにする / なる', meaning:'Berusaha agar ..., Menjadi ...',
+    explanation:'〜ようにする menyatakan usaha/kebiasaan yang dibuat. 〜ようになる menyatakan perubahan keadaan secara gradual.',
+    structure:'[Kata kerja] + ようにする/なる',
+    examples:[
+      {jp:'毎日運動するようにしています。',id:'Saya berusaha berolahraga setiap hari.',note:'ようにする = usaha sadar'},
+      {jp:'日本語が話せるようになりました。',id:'Saya menjadi bisa berbicara bahasa Jepang.',note:'ようになる = perubahan bertahap'},
+      {jp:'野菜を食べるようにしています。',id:'Saya berusaha makan sayuran.',note:'kebiasaan yang diusahakan'},
+    ],
+    note:'💡 ようにする = saya sengaja berusaha | ようになる = perubahan yang terjadi (bisa tanpa usaha sadar).',
+    quiz:[
+      {q:'"Saya menjadi bisa membaca kanji" dalam bahasa Jepang?',opts:['漢字が読めるようになりました。','漢字が読めるようにしました。','漢字を読むようになりました。','漢字が読めようになりました。'],ans:0},
+    ]
+  },
+];
+
+let _tbFilter = 'all';
+let _tbSearch = '';
+
+function initTataBahasa() {
+    renderTataBahasa();
+}
+
+function tbFilter(cat) {
+    _tbFilter = cat;
+    document.querySelectorAll('.tb-cat-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tb-f-' + cat)?.classList.add('active');
+    renderTataBahasa();
+}
+
+function tbSearch(q) {
+    _tbSearch = q.toLowerCase();
+    renderTataBahasa();
+}
+
+function tbGetFiltered() {
+    let data = BUNPOU;
+    if(_tbFilter !== 'all') data = data.filter(b => b.cat.includes(_tbFilter));
+    if(_tbSearch) data = data.filter(b =>
+        b.pattern.toLowerCase().includes(_tbSearch) ||
+        b.meaning.toLowerCase().includes(_tbSearch) ||
+        b.explanation.toLowerCase().includes(_tbSearch) ||
+        b.examples.some(e => e.jp.includes(_tbSearch) || e.id.toLowerCase().includes(_tbSearch))
+    );
+    return data;
+}
+
+function renderTataBahasa() {
+    const data = tbGetFiltered();
+    document.getElementById('tb-count').textContent = `Menampilkan ${data.length} pola tata bahasa`;
+    const list = document.getElementById('tb-list');
+    list.innerHTML = data.map((b, i) => `
+        <div class="tb-card" id="tb-card-${b.id}">
+            <div class="tb-card-header" onclick="tbToggle('${b.id}')">
+                <span class="tb-level-badge ${b.level==='N5'?'tb-level-n5':'tb-level-n4'}">${b.level}</span>
+                <div style="flex:1;min-width:0;">
+                    <div class="tb-pattern">${b.pattern}</div>
+                    <div class="tb-meaning">${b.meaning}</div>
+                </div>
+                <div class="tb-toggle">▼</div>
+            </div>
+            <div class="tb-body">
+                <div class="tb-section-label">Penjelasan</div>
+                <div class="tb-explanation">${b.explanation}</div>
+                <div class="tb-section-label">Struktur</div>
+                <div class="tb-structure">${b.structure}</div>
+                <div class="tb-section-label">Contoh Kalimat</div>
+                ${b.examples.map(e=>`
+                    <div class="tb-example">
+                        <div class="tb-ex-jp">${e.jp}</div>
+                        <div class="tb-ex-id">${e.id}</div>
+                        ${e.note?`<div class="tb-ex-note">※ ${e.note}</div>`:''}
+                        <button onclick="speakText('${e.jp.replace(/'/g,"\\'")}');event.stopPropagation();" style="margin-top:6px;padding:3px 10px;border-radius:8px;border:1px solid rgba(168,85,247,0.3);background:none;color:#a78bfa;font-size:0.7rem;cursor:pointer;font-family:'DM Sans',sans-serif;">🔊 Dengar</button>
+                    </div>`).join('')}
+                ${b.note?`<div class="tb-note">${b.note}</div>`:''}
+                <div class="tb-section-label">Latihan Cepat</div>
+                <div class="tb-quiz-wrap" id="tb-quiz-${b.id}">
+                    ${renderTbQuiz(b, 0)}
+                </div>
+            </div>
+        </div>`).join('');
+}
+
+function renderTbQuiz(b, qi) {
+    if(!b.quiz || b.quiz.length===0) return '<div style="color:#6b7280;font-size:0.8rem;">Tidak ada latihan untuk pola ini.</div>';
+    const q = b.quiz[qi];
+    return `
+        <div class="tb-quiz-q">❓ ${q.q}</div>
+        ${q.opts.map((opt,oi)=>`
+            <button class="tb-quiz-opt" data-bid="${b.id}" data-qi="${qi}" data-oi="${oi}" data-ans="${q.ans}"
+                onclick="tbCheckQuiz(this,'${b.id}',${qi},${oi},${q.ans},${b.quiz.length})">
+                ${String.fromCharCode(65+oi)}. ${opt}
+            </button>`).join('')}
+        <div id="tb-quiz-fb-${b.id}-${qi}" style="font-size:0.78rem;margin-top:8px;display:none;"></div>`;
+}
+
+function tbCheckQuiz(btn, bid, qi, chosen, ans, total) {
+    const wrap = document.getElementById('tb-quiz-'+bid);
+    const btns = wrap.querySelectorAll('.tb-quiz-opt');
+    btns.forEach(b=>b.disabled=true);
+    btns[ans].classList.add('correct');
+    if(chosen!==ans) btns[chosen].classList.add('wrong');
+    const fb = document.getElementById(`tb-quiz-fb-${bid}-${qi}`);
+    fb.style.display='block';
+    fb.style.color = chosen===ans?'#34d399':'#f87171';
+    fb.textContent = chosen===ans ? '✅ Benar!' : `❌ Jawaban yang benar: ${String.fromCharCode(65+ans)}`;
+    // Next question button
+    const b = BUNPOU.find(x=>x.id===bid);
+    if(b && qi+1 < total) {
+        setTimeout(()=>{
+            wrap.innerHTML = renderTbQuiz(b, qi+1);
+        }, 1200);
+    }
+}
+
+function tbToggle(id) {
+    const card = document.getElementById('tb-card-'+id);
+    card.classList.toggle('open');
 }
 </script>
 
