@@ -12288,115 +12288,136 @@ async function openStrokeModal(char, id, read, color) {
 function renderStrokeSVG(svgText, char, color) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(svgText, 'image/svg+xml');
-    const paths = Array.from(doc.querySelectorAll('path[id]'));
+    // KanjiVG paths — filter only stroke paths (have d attribute with real data)
+    const paths = Array.from(doc.querySelectorAll('path')).filter(p => p.getAttribute('d') && p.getAttribute('d').length > 5);
+    if(paths.length === 0) {
+        document.getElementById('stroke-svg-wrap').innerHTML = `<div style="text-align:center;padding:20px;color:#6b7280;"><div style="font-size:3rem;font-family:'Noto Sans JP',sans-serif;color:${color}">${char}</div><div style="font-size:0.75rem;margin-top:8px;">Tidak ada data coretan</div></div>`;
+        return;
+    }
     _strokePaths = paths;
     _strokeCurrent = 0;
 
-    // Build display SVG
     const ns = 'http://www.w3.org/2000/svg';
     const svg = document.createElementNS(ns, 'svg');
     svg.setAttribute('viewBox', '0 0 109 109');
-    svg.setAttribute('width', '180');
-    svg.setAttribute('height', '180');
+    svg.setAttribute('width', '184');
+    svg.setAttribute('height', '184');
 
-    // Grid lines for reference
+    // Background grid
     const grid = document.createElementNS(ns, 'g');
     ['54.5'].forEach(pos => {
-        const h = document.createElementNS(ns,'line');
-        h.setAttribute('x1','0'); h.setAttribute('y1',pos); h.setAttribute('x2','109'); h.setAttribute('y2',pos);
-        h.setAttribute('stroke','#eee'); h.setAttribute('stroke-width','0.5');
-        grid.appendChild(h);
-        const v = document.createElementNS(ns,'line');
-        v.setAttribute('x1',pos); v.setAttribute('y1','0'); v.setAttribute('x2',pos); v.setAttribute('y2','109');
-        v.setAttribute('stroke','#eee'); v.setAttribute('stroke-width','0.5');
-        grid.appendChild(v);
+        ['h','v'].forEach(dir => {
+            const line = document.createElementNS(ns,'line');
+            if(dir==='h'){ line.setAttribute('x1','0');line.setAttribute('y1',pos);line.setAttribute('x2','109');line.setAttribute('y2',pos); }
+            else { line.setAttribute('x1',pos);line.setAttribute('y1','0');line.setAttribute('x2',pos);line.setAttribute('y2','109'); }
+            line.setAttribute('stroke','#e5e7eb'); line.setAttribute('stroke-width','0.6');
+            grid.appendChild(line);
+        });
     });
     svg.appendChild(grid);
 
-    // Add all strokes as grey guides
-    paths.forEach((p, i) => {
-        const guide = document.createElementNS(ns, 'path');
-        guide.setAttribute('d', p.getAttribute('d'));
-        guide.setAttribute('stroke', '#ddd');
-        guide.setAttribute('stroke-width', '3');
-        guide.setAttribute('fill', 'none');
-        guide.setAttribute('stroke-linecap', 'round');
-        guide.setAttribute('stroke-linejoin', 'round');
-        svg.appendChild(guide);
+    // Ghost strokes (guide)
+    paths.forEach(p => {
+        const g = document.createElementNS(ns,'path');
+        g.setAttribute('d', p.getAttribute('d'));
+        g.setAttribute('stroke','#d1d5db');
+        g.setAttribute('stroke-width','3');
+        g.setAttribute('fill','none');
+        g.setAttribute('stroke-linecap','round');
+        g.setAttribute('stroke-linejoin','round');
+        svg.appendChild(g);
     });
 
-    // Add colored stroke paths (hidden initially, revealed per step)
+    // Colored stroke paths
     paths.forEach((p, i) => {
-        const strokeEl = document.createElementNS(ns, 'path');
-        strokeEl.setAttribute('d', p.getAttribute('d'));
-        strokeEl.setAttribute('stroke', i === 0 ? color : '#bbb');
-        strokeEl.setAttribute('stroke-width', '3.5');
-        strokeEl.setAttribute('fill', 'none');
-        strokeEl.setAttribute('stroke-linecap', 'round');
-        strokeEl.setAttribute('stroke-linejoin', 'round');
-        strokeEl.setAttribute('opacity', i === 0 ? '1' : '0.15');
-        strokeEl.id = `stroke-path-${i}`;
-        svg.appendChild(strokeEl);
+        const el = document.createElementNS(ns,'path');
+        el.setAttribute('d', p.getAttribute('d'));
+        el.setAttribute('stroke', '#d1d5db');
+        el.setAttribute('stroke-width','3.5');
+        el.setAttribute('fill','none');
+        el.setAttribute('stroke-linecap','round');
+        el.setAttribute('stroke-linejoin','round');
+        el.setAttribute('opacity','0.25');
+        el.id = `stroke-path-${i}`;
+        svg.appendChild(el);
     });
 
-    // Number for current stroke
-    const numText = document.createElementNS(ns, 'text');
-    numText.id = 'stroke-num-text';
-    numText.setAttribute('font-size','8');
-    numText.setAttribute('font-weight','bold');
-    numText.setAttribute('fill', color);
-    numText.setAttribute('font-family','sans-serif');
-    svg.appendChild(numText);
+    // Number label
+    const numLabel = document.createElementNS(ns,'text');
+    numLabel.id = 'stroke-num-label';
+    numLabel.setAttribute('font-size','9');
+    numLabel.setAttribute('font-weight','bold');
+    numLabel.setAttribute('fill', color);
+    numLabel.setAttribute('font-family','sans-serif');
+    svg.appendChild(numLabel);
 
-    document.getElementById('stroke-svg-wrap').innerHTML = '';
-    document.getElementById('stroke-svg-wrap').appendChild(svg);
+    // Mount SVG first so getTotalLength() works
+    const wrap = document.getElementById('stroke-svg-wrap');
+    wrap.innerHTML = '';
+    wrap.appendChild(svg);
 
     // Step dots
     const stepsEl = document.getElementById('stroke-steps');
-    stepsEl.innerHTML = paths.map((_, i) => 
-        `<div class="stroke-step-dot ${i===0?'current':''}" id="stroke-dot-${i}" onclick="strokeGoTo(${i})">${i+1}</div>`
+    stepsEl.innerHTML = paths.map((_,i) =>
+        `<div class="stroke-step-dot" id="stroke-dot-${i}" onclick="strokeGoTo(${i})">${i+1}</div>`
     ).join('');
 
     updateStrokeDisplay(0);
-    document.getElementById('stroke-info').textContent = `Coretan 1 dari ${paths.length} — ketuk nomor untuk lompat ke coretan tertentu`;
+    document.getElementById('stroke-info').textContent = `Coretan 1 dari ${paths.length}`;
 }
 
 function updateStrokeDisplay(idx) {
     _strokeCurrent = idx;
     const total = _strokePaths.length;
-    
+
     _strokePaths.forEach((_, i) => {
         const el = document.getElementById(`stroke-path-${i}`);
         if(!el) return;
+
         if(i < idx) {
-            el.setAttribute('stroke', '#aaa');
-            el.setAttribute('opacity', '0.5');
-            el.setAttribute('stroke-width', '3');
-        } else if(i === idx) {
-            el.setAttribute('stroke', _strokeColor);
-            el.setAttribute('opacity', '1');
-            el.setAttribute('stroke-width', '4');
-            // Animate dash
-            const len = el.getTotalLength ? el.getTotalLength() : 200;
-            el.style.strokeDasharray = len;
-            el.style.strokeDashoffset = len;
-            el.style.transition = 'stroke-dashoffset 0.6s ease';
-            requestAnimationFrame(() => { el.style.strokeDashoffset = '0'; });
-        } else {
-            el.setAttribute('stroke', '#ddd');
-            el.setAttribute('opacity', '0.2');
-            el.setAttribute('stroke-width', '3');
+            // Already drawn strokes — colored, semi-transparent
             el.style.transition = 'none';
             el.style.strokeDasharray = '';
             el.style.strokeDashoffset = '';
+            el.setAttribute('stroke', _strokeColor);
+            el.setAttribute('opacity', '0.45');
+            el.setAttribute('stroke-width', '3');
+        } else if(i === idx) {
+            // Current stroke — animate drawing
+            el.setAttribute('stroke', _strokeColor);
+            el.setAttribute('opacity', '1');
+            el.setAttribute('stroke-width', '4.5');
+
+            // Get length AFTER SVG is in DOM
+            let len = 200;
+            try { len = el.getTotalLength(); } catch(e){}
+            if(!len || len < 1) len = 200;
+
+            // Reset dash to full (invisible)
+            el.style.transition = 'none';
+            el.style.strokeDasharray = len;
+            el.style.strokeDashoffset = len;
+
+            // Force reflow then animate
+            el.getBoundingClientRect();
+            el.style.transition = 'stroke-dashoffset 0.55s cubic-bezier(0.4,0,0.2,1)';
+            el.style.strokeDashoffset = '0';
+        } else {
+            // Future strokes — ghost
+            el.style.transition = 'none';
+            el.style.strokeDasharray = '';
+            el.style.strokeDashoffset = '';
+            el.setAttribute('stroke', '#d1d5db');
+            el.setAttribute('opacity', '0.2');
+            el.setAttribute('stroke-width', '3');
         }
     });
 
-    // Update dots
+    // Dots
     for(let i=0; i<total; i++) {
         const dot = document.getElementById(`stroke-dot-${i}`);
         if(!dot) continue;
-        dot.className = 'stroke-step-dot' + (i<idx?' done':i===idx?' current':'');
+        dot.className = 'stroke-step-dot' + (i < idx ? ' done' : i === idx ? ' current' : '');
     }
 
     document.getElementById('stroke-info').textContent = `Coretan ${idx+1} dari ${total}`;
@@ -12413,38 +12434,55 @@ function strokeGoTo(idx) {
 }
 function strokeReset() {
     if(_strokeAnimTimer) { clearInterval(_strokeAnimTimer); _strokeAnimTimer=null; }
-    // Reset all strokes
     _strokePaths.forEach((_, i) => {
         const el = document.getElementById(`stroke-path-${i}`);
         if(!el) return;
         el.style.transition = 'none';
         el.style.strokeDasharray = '';
         el.style.strokeDashoffset = '';
-        el.setAttribute('stroke', '#ddd');
-        el.setAttribute('opacity', '0.2');
+        el.setAttribute('stroke','#d1d5db');
+        el.setAttribute('opacity','0.2');
         el.setAttribute('stroke-width','3');
     });
+    // Force reflow before updateStrokeDisplay so animation fires
+    document.getElementById('stroke-svg-wrap')?.getBoundingClientRect();
     updateStrokeDisplay(0);
 }
+
 function strokePlayAll() {
     if(_strokeAnimTimer) { clearInterval(_strokeAnimTimer); _strokeAnimTimer=null; }
-    strokeReset();
+    // Reset all to ghost first
+    _strokePaths.forEach((_, i) => {
+        const el = document.getElementById(`stroke-path-${i}`);
+        if(!el) return;
+        el.style.transition = 'none';
+        el.style.strokeDasharray = '';
+        el.style.strokeDashoffset = '';
+        el.setAttribute('stroke','#d1d5db');
+        el.setAttribute('opacity','0.2');
+        el.setAttribute('stroke-width','3');
+    });
+    document.getElementById('stroke-svg-wrap')?.getBoundingClientRect();
+
     let i = 0;
     const total = _strokePaths.length;
     document.getElementById('stroke-info').textContent = '▶ Animasi berjalan...';
-    _strokeAnimTimer = setInterval(() => {
+
+    const step = () => {
         updateStrokeDisplay(i);
         i++;
-        if(i >= total) {
-            clearInterval(_strokeAnimTimer);
+        if(i < total) {
+            _strokeAnimTimer = setTimeout(step, 750);
+        } else {
             _strokeAnimTimer = null;
             document.getElementById('stroke-info').textContent = `✅ Selesai! ${total} coretan.`;
         }
-    }, 700);
+    };
+    step();
 }
 function closeStrokeModal() {
     document.getElementById('stroke-modal').classList.remove('open');
-    if(_strokeAnimTimer) { clearInterval(_strokeAnimTimer); _strokeAnimTimer=null; }
+    if(_strokeAnimTimer) { clearTimeout(_strokeAnimTimer); _strokeAnimTimer=null; }
 }
 </script>
 
