@@ -4458,8 +4458,9 @@ function getVoice() {
 }
 
 if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
     window.speechSynthesis.onvoiceschanged = loadVoices;
-    loadVoices();
+    setTimeout(loadVoices, 200);
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -4482,6 +4483,7 @@ try {
 } catch(e) {}
 
 window.addEventListener('DOMContentLoaded', function() {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     if (_isMuted) {
         var btn = document.getElementById('mute-btn');
         var icon = document.getElementById('mute-icon');
