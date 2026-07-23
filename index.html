@@ -878,7 +878,7 @@
   .kanji-grid{max-width:900px;margin:0 auto;padding:0 20px 120px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
   .kanji-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 10px 12px;text-align:center;cursor:pointer;transition:all .22s;box-shadow:var(--shadow);position:relative;}
   .kanji-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 6px 24px rgba(212,160,23,0.18);}
-  .kanji-card.mastered{border-color:var(--teal2);background:#f0fbf7;}
+  .kanji-card.mastered{border-color:var(--teal2);background:rgba(0,212,170,0.12);box-shadow:0 0 0 1.5px rgba(0,212,170,0.25) inset;}
   .kanji-card.mastered::after{content:'✓';position:absolute;top:6px;right:8px;color:var(--teal2);font-size:0.7rem;font-weight:700;}
   .kc-char{font-family:'Noto Sans JP',sans-serif;font-size:2.2rem;font-weight:900;color:#ffffff;margin-bottom:4px;line-height:1;}
   .kc-level{font-size:0.62rem;font-weight:700;padding:1px 7px;border-radius:8px;display:inline-block;margin-bottom:4px;}
@@ -1986,6 +1986,7 @@
 <!-- KANJI PAGE -->
 <div id="page-kanji" class="page">
   <div class="kanji-hero">
+    <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;">漢</div>
     <h2>Kanji <em>N5 & N4</em></h2>
     <p>168 kanji wajib untuk ujian JLPT. Klik kanji untuk lihat detail lengkap — onyomi, kunyomi, arti, dan contoh kata.</p>
   </div>
@@ -2185,6 +2186,7 @@
 <!-- FLASHCARD -->
 <div id="page-flashcard" class="page">
   <div class="fc-wrap">
+    <div style="font-size:2.4rem;margin-bottom:4px;text-align:center;">🃏</div>
     <div class="section-title" style="margin-bottom:4px">🃏 Flash<span style="color:var(--red)">card</span></div>
     <div class="section-sub">Klik kartu untuk balik</div>
     <div class="settings-bar">
@@ -2222,6 +2224,7 @@
 <!-- JLPT PAGE -->
 <div id="page-jlpt" class="page">
   <div class="jlpt-hero">
+    <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;">🎌</div>
     <h2>JLPT <em>2024</em> — Simulasi Ujian</h2>
     <p>Jawab semua soal lalu tekan <strong style="color:var(--gold)">Kumpulkan Jawaban</strong> untuk melihat hasil.</p>
     <div class="jlpt-badges">
@@ -2290,6 +2293,7 @@
 <!-- MINNA NO NIHONGO PAGE -->
 <div id="page-minna" class="page">
   <div class="minna-hero">
+    <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;">📖</div>
     <h2>みんなの<em>日本語</em></h2>
     <p>Belajar bahasa Jepang langkah demi langkah dengan buku teks Minna no Nihongo. Kosakata, tata bahasa, percakapan, dan latihan soal.</p>
     <div class="minna-bab-tabs" id="minna-bab-tabs"></div>
@@ -2300,6 +2304,7 @@
 <!-- KAMUS KOSAKATA PAGE -->
 <div id="page-kamus" class="page">
   <div class="kamus-hero">
+    <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;">📚</div>
     <h2>Kamus <em>Kosakata</em> N5 & N4</h2>
     <p>500+ kata sesuai standar JLPT lengkap dengan contoh kalimat, terjemahan, dan cara baca. Klik kartu untuk detail.</p>
   </div>
@@ -2401,6 +2406,7 @@
 <!-- CHOUKAI PAGE -->
 <div id="page-choukai" class="page">
   <div class="choukai-hero">
+    <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;">🎧</div>
     <h2>聴解 <em>Choukai</em></h2>
     <p>Latihan mendengarkan bahasa Jepang untuk JLPT N5 & N4. Dengarkan audio, lalu jawab pertanyaan.</p>
     <div class="choukai-level-tabs">
@@ -2434,6 +2440,7 @@
 <!-- KANA PAGE -->
 <div id="page-kana" class="page">
   <div class="kana-hero">
+    <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;">あ</div>
     <h2>あア <em>Hiragana & Katakana</em></h2>
     <p>Pelajari 46 hiragana + 46 katakana dasar, beserta dakuten & kombinasi. Klik karakter untuk dengar suaranya.</p>
     <div class="kana-script-tabs">
@@ -2455,6 +2462,7 @@
 <!-- DOKKAI PAGE -->
 <div id="page-dokkai" class="page">
   <div class="dokkai-hero">
+    <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;">📝</div>
     <h2>読解 <em>Dokkai</em></h2>
     <p>Latihan membaca teks bahasa Jepang untuk JLPT N5 & N4. Baca teks, lalu jawab pertanyaan pemahaman.</p>
     <div class="dokkai-level-tabs">
@@ -2914,6 +2922,7 @@
 
 <div id="page-kaiwa" class="page">
   <div class="section" style="max-width:800px;margin:0 auto;text-align:center;">
+    <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;">🎤</div>
     <h2 style="font-size:1.8rem;margin-bottom:8px;">🎤 Latihan <span style="color:var(--teal)">Berbicara</span> (Kaiwa)</h2>
     <p style="color:var(--muted);margin-bottom:24px;">Ucapkan kalimat bahasa Jepang yang muncul di layar untuk melatih pelafalanmu.</p>
 
@@ -10651,6 +10660,7 @@ function updateDokkaiMicScore() {
 <!-- MENULIS PAGE -->
 <div id="page-menulis" class="page">
   <div class="section">
+    <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;" style="text-align:center;">✏️</div>
     <h2 style="text-align:center;font-size:1.6rem;margin-bottom:4px;">✏️ Latihan <span style="color:var(--red)">Menulis</span></h2>
     <p style="text-align:center;color:var(--muted);margin-bottom:20px;">Latihan menulis huruf & kanji Jepang dengan tangan</p>
 
