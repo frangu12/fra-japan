@@ -982,6 +982,101 @@
   .sec-bar-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--teal2),var(--gold));transition:width .6s ease;}
   .sec-row .spct{font-weight:700;font-size:0.88rem;}
 
+  /* ── JLPT EXAM UI ── */
+  .jlpt-setup-screen{max-width:600px;margin:0 auto;padding:0 0 60px;}
+  .jlpt-setup-card{background:var(--card);border:1.5px solid var(--border);border-radius:18px;margin:20px 16px;padding:24px 22px;box-shadow:var(--shadow);}
+  .jlpt-setup-section{margin-bottom:22px;}
+  .jlpt-setup-label{font-size:0.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+  .jlpt-level-btns{display:flex;gap:10px;flex-wrap:wrap;}
+  .jlpt-lvl-btn{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:13px;border:2px solid var(--border);background:var(--card);cursor:pointer;transition:all .2s;flex:1;min-width:140px;}
+  .jlpt-lvl-btn.active{border-color:var(--gold);background:rgba(212,160,23,0.08);}
+  .jlpt-lvl-btn:hover{border-color:var(--gold);}
+  .jlpt-lvl-badge{font-size:0.9rem;font-weight:900;padding:6px 10px;border-radius:8px;letter-spacing:1px;}
+  .jlpt-lvl-badge.n5{background:#e8f7f0;color:var(--teal);}
+  .jlpt-lvl-badge.n4{background:#e8f0ff;color:#3a5aad;}
+  .jlpt-lvl-name{font-weight:700;font-size:0.9rem;color:#fff;text-align:left;}
+  .jlpt-lvl-desc{font-size:0.72rem;color:var(--muted);text-align:left;}
+  .jlpt-dur-btns{display:flex;gap:8px;flex-wrap:wrap;}
+  .jlpt-dur-btn{padding:7px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;}
+  .jlpt-dur-btn.active{border-color:var(--teal2);background:rgba(0,212,170,0.12);color:var(--teal2);}
+  .jlpt-dur-btn:hover{border-color:var(--teal2);}
+  .jlpt-start-btn{width:100%;padding:14px;border-radius:13px;background:linear-gradient(135deg,#c0392b,#8b0000);color:#fff;font-size:1rem;font-weight:800;border:none;cursor:pointer;letter-spacing:0.5px;transition:all .2s;margin-top:4px;}
+  .jlpt-start-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(192,57,43,0.4);}
+
+  .jlpt-exam-screen{display:flex;flex-direction:column;height:calc(100vh - 60px);overflow:hidden;}
+  .jlpt-exam-header{background:#0e0e1a;border-bottom:2px solid var(--red);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0;}
+  .jex-left{display:flex;align-items:center;gap:8px;flex:1;}
+  .jex-level{font-size:0.7rem;font-weight:900;padding:4px 10px;border-radius:20px;background:var(--red);color:#fff;letter-spacing:1px;}
+  .jex-section{font-size:0.72rem;color:var(--muted);font-weight:600;}
+  .jex-timer{font-family:'DM Sans',monospace;font-size:1.3rem;font-weight:900;color:var(--gold);letter-spacing:2px;flex-shrink:0;}
+  .jex-timer.warning{color:#e67e22;animation:pulse 1s infinite;}
+  .jex-timer.danger{color:var(--red);animation:pulse 0.5s infinite;}
+  .jex-right{display:flex;align-items:center;gap:8px;flex:1;justify-content:flex-end;}
+  .jex-progress-text{font-size:0.78rem;color:var(--muted);font-weight:600;white-space:nowrap;}
+  .jex-nav-btn{padding:5px 10px;border-radius:8px;border:1.5px solid var(--border);background:transparent;color:var(--muted);font-size:0.72rem;cursor:pointer;white-space:nowrap;}
+  .jex-nav-btn:hover{border-color:var(--gold);color:var(--gold);}
+  .jex-progress-bar{height:3px;background:rgba(255,255,255,0.08);flex-shrink:0;}
+  .jex-progress-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));transition:width .4s ease;}
+  .jex-body{flex:1;overflow-y:auto;padding:20px 16px 100px;max-width:700px;margin:0 auto;width:100%;}
+  .jex-q-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:24px 20px;margin-bottom:16px;box-shadow:var(--shadow);}
+  .jex-q-num{font-size:0.65rem;font-weight:700;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+  .jex-q-text{font-size:1.05rem;font-family:'Noto Sans JP',sans-serif;color:#fff;line-height:1.9;margin-bottom:18px;white-space:pre-line;}
+  .jex-options{display:flex;flex-direction:column;gap:9px;}
+  .jex-opt{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:11px;border:1.5px solid var(--border);background:#0e0e1a;color:#fff;font-family:'Noto Sans JP',sans-serif;font-size:0.92rem;cursor:pointer;text-align:left;transition:all .18s;width:100%;}
+  .jex-opt:hover:not(:disabled){border-color:var(--teal2);background:rgba(0,212,170,0.06);}
+  .jex-opt.selected{border-color:var(--gold);background:rgba(212,160,23,0.12);color:#fff;font-weight:600;}
+  .jex-opt.correct{border-color:var(--teal2);background:rgba(0,212,170,0.15);color:var(--teal2);font-weight:700;}
+  .jex-opt.wrong{border-color:var(--red);background:rgba(192,57,43,0.12);color:var(--red);}
+  .jex-opt-num{width:28px;height:28px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0;opacity:0.7;}
+  .jex-typing-input{width:100%;padding:12px 16px;border-radius:10px;border:1.5px solid var(--border);background:#0e0e1a;color:#fff;font-size:1rem;font-family:'Noto Sans JP',sans-serif;outline:none;transition:border-color .2s;box-sizing:border-box;}
+  .jex-typing-input:focus{border-color:var(--gold);}
+  .jex-nav-row{display:flex;align-items:center;gap:10px;justify-content:space-between;}
+  .jex-nav-prev,.jex-nav-next{padding:10px 20px;border-radius:10px;border:1.5px solid var(--border);background:var(--card);color:#fff;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;}
+  .jex-nav-next{background:var(--red);border-color:var(--red);}
+  .jex-nav-prev:hover{border-color:var(--gold);color:var(--gold);}
+  .jex-nav-next:hover{background:var(--red2);}
+  .jex-flag-btn{padding:8px 14px;border-radius:10px;border:1.5px solid var(--border);background:transparent;color:var(--muted);font-size:0.8rem;cursor:pointer;transition:all .2s;}
+  .jex-flag-btn.flagged{border-color:#e67e22;color:#e67e22;background:rgba(230,126,34,0.1);}
+
+  .jlpt-nav-overlay{position:fixed;inset:0;bottom:60px;background:rgba(0,0,0,0.5);z-index:150;}
+  .jlpt-navigator{position:fixed;right:0;top:0;bottom:60px;width:280px;background:var(--card);border-left:2px solid var(--border);z-index:151;display:flex;flex-direction:column;padding:16px 16px 20px;box-shadow:-8px 0 30px rgba(0,0,0,0.3);overflow:hidden;}
+  .jnav-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-weight:700;font-size:0.95rem;}
+  .jnav-header button{background:transparent;border:none;color:var(--muted);font-size:1rem;cursor:pointer;}
+  .jnav-legend{display:flex;align-items:center;gap:12px;font-size:0.72rem;color:var(--muted);margin-bottom:12px;flex-wrap:wrap;}
+  .jnav-dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+  .jnav-dot.answered{background:var(--teal2);}
+  .jnav-dot.flagged{background:#e67e22;}
+  .jnav-dot.unanswered{background:var(--border);}
+  .jnav-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;flex:1;align-content:start;overflow-y:auto;min-height:0;}
+  .jnav-cell{aspect-ratio:1;border-radius:7px;border:1.5px solid var(--border);background:#0e0e1a;color:var(--muted);font-size:0.72rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+  .jnav-cell:hover{border-color:var(--gold);}
+  .jnav-cell.answered{background:rgba(0,212,170,0.18);border-color:var(--teal2);color:var(--teal2);}
+  .jnav-cell.flagged{background:rgba(230,126,34,0.18);border-color:#e67e22;color:#e67e22;}
+  .jnav-cell.current{border-color:var(--gold);box-shadow:0 0 0 2px rgba(212,160,23,0.3);}
+  .jnav-footer{margin-top:12px;}
+  .jnav-submit-btn{width:100%;padding:12px;border-radius:11px;background:linear-gradient(135deg,#c0392b,#8b0000);color:#fff;font-weight:800;font-size:0.88rem;border:none;cursor:pointer;}
+
+  .jlpt-review-screen{max-width:680px;margin:0 auto;padding:20px 16px 80px;}
+  .jrev-header{text-align:center;margin-bottom:20px;}
+  .jrev-header h3{font-size:1.3rem;font-weight:800;margin-bottom:4px;}
+  .jrev-header p{font-size:0.82rem;color:var(--muted);}
+  .jrev-summary{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+  .jrev-stat{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:12px 20px;text-align:center;}
+  .jrev-stat .rs-num{font-size:1.5rem;font-weight:900;color:var(--gold);}
+  .jrev-stat .rs-lbl{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+  .jrev-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+  .jrev-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;background:var(--card);border:1.5px solid var(--border);cursor:pointer;transition:border-color .2s;}
+  .jrev-item:hover{border-color:var(--gold);}
+  .jrev-item.answered{border-color:rgba(0,212,170,0.3);}
+  .jrev-item.flagged{border-color:rgba(230,126,34,0.5);}
+  .jrev-item.unanswered{border-color:rgba(192,57,43,0.4);}
+  .jrev-item-num{width:28px;height:28px;border-radius:7px;background:#0e0e1a;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0;}
+  .jrev-item-text{flex:1;font-size:0.82rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .jrev-item-status{font-size:0.72rem;font-weight:700;white-space:nowrap;}
+  .jrev-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .jrev-back-btn{padding:11px 22px;border-radius:11px;border:1.5px solid var(--border);background:transparent;color:#fff;font-weight:700;font-size:0.88rem;cursor:pointer;}
+  .jrev-submit-btn{padding:11px 28px;border-radius:11px;background:linear-gradient(135deg,#c0392b,#8b0000);color:#fff;font-weight:800;font-size:0.88rem;border:none;cursor:pointer;}
+
   @media(max-width:480px){
     .cat-grid{grid-template-columns:repeat(2,1fr);}
     .options-grid{grid-template-columns:1fr;}
@@ -1548,7 +1643,7 @@
       <div class="hfeat-card fc-gold" onclick="showPage('jlpt')">
         <div class="hfeat-icon">🎌</div>
         <h3>Simulasi JLPT</h3>
-        <p>133 soal bergaya ujian resmi JLPT 2024 N5 & N4</p>
+        <p>80+ soal bergaya ujian resmi JLPT 2024 N5 & N4</p>
         <div class="hfeat-kanji">試</div>
       </div>
     </div>
@@ -2223,50 +2318,116 @@
 
 <!-- JLPT PAGE -->
 <div id="page-jlpt" class="page">
-  <div class="jlpt-hero">
-    <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;">🎌</div>
-    <h2>JLPT <em>2024</em> — Simulasi Ujian</h2>
-    <p>Jawab semua soal lalu tekan <strong style="color:var(--gold)">Kumpulkan Jawaban</strong> untuk melihat hasil.</p>
-    <div class="jlpt-badges">
-      <button class="jlpt-badge n5 active-badge" id="jlpt-btn-n5" onclick="setJlptLevel('N5')">N5 — Pemula (65 soal)</button>
-      <button class="jlpt-badge n4" id="jlpt-btn-n4" onclick="setJlptLevel('N4')">N4 — Dasar (68 soal)</button>
+
+  <!-- SETUP SCREEN -->
+  <div id="jlpt-setup" class="jlpt-setup-screen">
+    <div class="jlpt-hero">
+      <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;">🎌</div>
+      <h2>JLPT <em>2024</em> — Simulasi Ujian</h2>
+      <p>Pilih level dan mulai ujian. Soal dikerjakan satu per satu seperti ujian JLPT asli.</p>
     </div>
-    <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;">
-        <span style="font-size:0.75rem;color:var(--muted);font-weight:600;">Mode Jawab:</span>
-        <button class="inner-tab" id="jlpt-mode-multiple" onclick="jlptQuizMode='multiple';renderJlptQuestions()" style="padding:4px 10px">Pilihan Ganda</button>
-        <button class="inner-tab" id="jlpt-mode-typing" onclick="jlptQuizMode='typing';renderJlptQuestions()" style="padding:4px 10px">✍️ Ketik Jawaban</button>
+    <div class="jlpt-setup-card">
+      <div class="jlpt-setup-section">
+        <div class="jlpt-setup-label">🎯 Pilih Level</div>
+        <div class="jlpt-level-btns">
+          <button class="jlpt-lvl-btn active" id="setup-btn-n5" onclick="jlptSelectLevel('N5')">
+            <span class="jlpt-lvl-badge n5">N5</span>
+            <div class="jlpt-lvl-info"><div class="jlpt-lvl-name">Pemula</div><div class="jlpt-lvl-desc">43 soal · 60 menit</div></div>
+          </button>
+          <button class="jlpt-lvl-btn" id="setup-btn-n4" onclick="jlptSelectLevel('N4')">
+            <span class="jlpt-lvl-badge n4">N4</span>
+            <div class="jlpt-lvl-info"><div class="jlpt-lvl-name">Dasar</div><div class="jlpt-lvl-desc">43 soal · 75 menit</div></div>
+          </button>
+        </div>
+      </div>
+      <div class="jlpt-setup-section">
+        <div class="jlpt-setup-label">⏱️ Durasi Ujian</div>
+        <div class="jlpt-dur-btns">
+          <button class="jlpt-dur-btn" onclick="jlptSelectDur(25)" id="dur-25">25 mnt</button>
+          <button class="jlpt-dur-btn active" onclick="jlptSelectDur(60)" id="dur-60">60 mnt</button>
+          <button class="jlpt-dur-btn" onclick="jlptSelectDur(75)" id="dur-75">75 mnt</button>
+          <button class="jlpt-dur-btn" onclick="jlptSelectDur(0)" id="dur-0">Tanpa Batas</button>
+        </div>
+      </div>
+      <div class="jlpt-setup-section">
+        <div class="jlpt-setup-label">✍️ Mode Jawab</div>
+        <div class="jlpt-dur-btns">
+          <button class="jlpt-dur-btn active" onclick="jlptSelectMode('multiple')" id="mode-multiple">Pilihan Ganda</button>
+          <button class="jlpt-dur-btn" onclick="jlptSelectMode('typing')" id="mode-typing">Ketik Jawaban</button>
+        </div>
+      </div>
+      <button class="jlpt-start-btn" onclick="startJlptExam()">🎌 Mulai Ujian</button>
     </div>
   </div>
-  
-  <!-- Timer Panel for JLPT -->
-  <div class="timer-panel" style="margin:20px auto;max-width:1100px;">
-    <div class="timer-display">
-      <div class="timer-icon">⏱️</div>
-      <div>
-        <div class="timer-time" id="jlpt-timer-display">00:00</div>
-        <div class="timer-mode" id="jlpt-timer-mode-label">Stopwatch</div>
+
+  <!-- EXAM SCREEN -->
+  <div id="jlpt-exam" class="jlpt-exam-screen" style="display:none;">
+    <!-- Exam Header -->
+    <div class="jlpt-exam-header">
+      <div class="jex-left">
+        <div class="jex-level" id="jex-level-badge">N5</div>
+        <div class="jex-section" id="jex-section-name">文字・語彙</div>
+      </div>
+      <div class="jex-timer" id="jex-timer">60:00</div>
+      <div class="jex-right">
+        <div class="jex-progress-text" id="jex-progress-text">1 / 43</div>
+        <button class="jex-nav-btn" onclick="jlptOpenNavigator()">☰ Navigasi</button>
       </div>
     </div>
-    <div class="timer-controls">
-      <button class="timer-btn timer-start" onclick="startJlptTimer()">▶ Mulai</button>
-      <button class="timer-btn timer-pause" onclick="pauseJlptTimer()" style="display:none;" id="jlpt-pause-btn">⏸ Jeda</button>
-      <button class="timer-btn timer-stop" onclick="stopJlptTimer()">⏹ Henti</button>
-      <button class="timer-btn timer-reset" onclick="resetJlptTimer()">↺ Reset</button>
-      <button class="timer-mode-toggle" onclick="toggleJlptTimerMode()">Ubah Mode</button>
-    </div>
-  </div>
-  
-  <div class="jlpt-section-wrap" id="jlpt-questions-wrap"></div>
-  <div class="jlpt-submit-bar">
-    <div class="jsb-left">
-      <div class="jsb-stat"><div class="sb-label">Dijawab</div><div class="sb-val" id="jsb-answered">0</div></div>
-      <div class="jsb-progress">
-        <div class="pb-info" id="jsb-label">0 / 0 soal</div>
-        <div class="pb"><div class="pb-fill" id="jsb-pb" style="width:0%"></div></div>
+    <!-- Progress bar -->
+    <div class="jex-progress-bar"><div class="jex-progress-fill" id="jex-progress-fill" style="width:0%"></div></div>
+
+    <!-- Question Area -->
+    <div class="jex-body">
+      <div class="jex-q-card" id="jex-q-card">
+        <div class="jex-q-num" id="jex-q-num">SOAL 1</div>
+        <div class="jex-q-text" id="jex-q-text"></div>
+        <div class="jex-options" id="jex-options"></div>
+        <div class="jex-typing-wrap" id="jex-typing-wrap" style="display:none;">
+          <input type="text" id="jex-typing-input" class="jex-typing-input" placeholder="Ketik jawaban di sini..." autocomplete="off">
+        </div>
+      </div>
+      <!-- Nav Buttons -->
+      <div class="jex-nav-row">
+        <button class="jex-nav-prev" id="jex-btn-prev" onclick="jlptGoTo(jlptCurrentQ-1)">← Sebelumnya</button>
+        <button class="jex-flag-btn" id="jex-flag-btn" onclick="jlptToggleFlag()">🚩 Tandai</button>
+        <button class="jex-nav-next" id="jex-btn-next" onclick="jlptGoNext()">Selanjutnya →</button>
       </div>
     </div>
-    <button class="btn-submit-jlpt" id="btn-submit-jlpt" onclick="submitJlpt()" disabled>🎌 Kumpulkan Jawaban</button>
   </div>
+
+  <!-- NAVIGATOR OVERLAY -->
+  <div class="jlpt-nav-overlay" id="jlpt-nav-overlay" onclick="jlptCloseNavigator()" style="display:none;"></div>
+  <div class="jlpt-navigator" id="jlpt-navigator" style="display:none;">
+    <div class="jnav-header">
+      <span>Navigasi Soal</span>
+      <button onclick="jlptCloseNavigator()">✕</button>
+    </div>
+    <div class="jnav-legend">
+      <span class="jnav-dot answered"></span>Dijawab
+      <span class="jnav-dot flagged"></span>Ditandai
+      <span class="jnav-dot unanswered"></span>Belum
+    </div>
+    <div class="jnav-grid" id="jnav-grid"></div>
+    <div class="jnav-footer">
+      <button class="jnav-submit-btn" onclick="jlptCloseNavigator();jlptReviewBeforeSubmit()">📋 Review &amp; Kumpulkan</button>
+    </div>
+  </div>
+
+  <!-- REVIEW SCREEN -->
+  <div id="jlpt-review" class="jlpt-review-screen" style="display:none;">
+    <div class="jrev-header">
+      <h3>📋 Review Jawaban</h3>
+      <p>Periksa kembali sebelum mengumpulkan</p>
+    </div>
+    <div class="jrev-summary" id="jrev-summary"></div>
+    <div class="jrev-list" id="jrev-list"></div>
+    <div class="jrev-actions">
+      <button class="jrev-back-btn" onclick="jlptBackToExam()">← Kembali ke Ujian</button>
+      <button class="jrev-submit-btn" id="jrev-final-btn" onclick="jlptConfirmSubmit()">🎌 Kumpulkan Jawaban</button>
+    </div>
+  </div>
+
 </div>
 
 <!-- JLPT RESULT MODAL -->
@@ -7260,75 +7421,266 @@ function retryWrong() {
 // ════════════════════════
 function setJlptLevel(lvl) {
     currentJlptLevel = lvl;
-    document.querySelectorAll('.jlpt-badge').forEach(b => b.classList.remove('active-badge'));
-    document.getElementById(`jlpt-btn-${lvl.toLowerCase()}`).classList.add('active-badge');
-    renderJlptQuestions();
 }
 
-function renderJlptQuestions() {
-    const wrap = document.getElementById('jlpt-questions-wrap');
-    wrap.innerHTML = '';
-    jlptSelections = {};
-    submitted = false;
-    
-    // Generate mock questions based on level
-    const questions = generateMockJlptQuestions(currentJlptLevel);
-    
-    let html = '';
-    questions.forEach((section, sIdx) => {
-        html += `
-        <div class="jlpt-section-label">
-            <div class="sec-icon">${section.icon}</div>
-            <div>
-                <h3>${section.title}</h3>
-                <div class="sec-sub">${section.desc}</div>
-            </div>
-            <div class="sec-count">${section.qs.length} Soal</div>
-        </div>`;
-        
-        section.qs.forEach((q, qIdx) => {
-            const globalQIdx = `${sIdx}-${qIdx}`;
-            
-            let optsHtml = '';
-            if (jlptQuizMode === 'typing') {
-                optsHtml = `
-                    <div class="quiz-typing-wrap" style="margin-top:10px;">
-                        <input type="text" id="jlpt-typing-${globalQIdx}" class="quiz-typing-input" placeholder="Ketik jawaban..." autocomplete="off" oninput="answerJlptTyping('${globalQIdx}', ${q.correct}, this.value, '${q.options[q.correct].replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">
-                    </div>
-                `;
-            } else {
-                optsHtml = q.options.map((opt, oIdx) => `
-                    <button class="jlpt-opt" id="opt-${globalQIdx}-${oIdx}" onclick="selectJlptOpt('${globalQIdx}', ${oIdx}, ${q.correct})">
-                        <div class="opt-num">${oIdx + 1}</div>
-                        ${opt}
-                    </button>
-                `).join('');
-            }
-            
-            html += `
-            <div class="jlpt-q-card" id="qcard-${globalQIdx}">
-                <div class="jlpt-q-num">Soal ${qIdx + 1}</div>
-                <div class="jlpt-q-text">${q.text}</div>
-                <div class="jlpt-options">
-                    ${optsHtml}
-                </div>
-                <div class="jlpt-explanation" id="exp-${globalQIdx}">${q.exp}</div>
-            </div>`;
-        });
-    });
-    
-    wrap.innerHTML = html;
-    updateJlptProgress();
-    
-    const mBtn = document.getElementById('jlpt-mode-multiple');
-    const tBtn = document.getElementById('jlpt-mode-typing');
-    if (mBtn && tBtn) {
-        mBtn.classList.toggle('active', jlptQuizMode === 'multiple');
-        tBtn.classList.toggle('active', jlptQuizMode === 'typing');
+// ── JLPT EXAM STATE ──
+let jlptAllQuestions = [];
+let jlptCurrentQ     = 0;
+let jlptAnswers      = {};
+let jlptFlags        = new Set();
+let jlptExamDur      = 60;
+let jlptExamTimer    = null;
+let jlptSecondsLeft  = 0;
+let jlptElapsed      = 0;
+
+function jlptSelectLevel(lvl) {
+    currentJlptLevel = lvl;
+    document.querySelectorAll('.jlpt-lvl-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('setup-btn-' + lvl.toLowerCase()).classList.add('active');
+    if (lvl === 'N4' && jlptExamDur === 60) jlptSelectDur(75);
+    if (lvl === 'N5' && jlptExamDur === 75) jlptSelectDur(60);
+}
+
+function jlptSelectDur(min) {
+    jlptExamDur = min;
+    document.querySelectorAll('.jlpt-dur-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('dur-' + min).classList.add('active');
+}
+
+function jlptSelectMode(mode) {
+    jlptQuizMode = mode;
+    document.querySelectorAll('[id^="mode-"]').forEach(b => b.classList.remove('active'));
+    document.getElementById('mode-' + mode).classList.add('active');
+}
+
+function startJlptExam() {
+    const sections = generateMockJlptQuestions(currentJlptLevel);
+    jlptAllQuestions = [];
+    sections.forEach(sec => sec.qs.forEach(q => jlptAllQuestions.push({ ...q, section: sec.title })));
+    jlptCurrentQ = 0; jlptAnswers = {}; jlptFlags = new Set(); submitted = false;
+    document.getElementById('jlpt-setup').style.display  = 'none';
+    document.getElementById('jlpt-review').style.display = 'none';
+    document.getElementById('jlpt-exam').style.display   = 'flex';
+    jlptSecondsLeft = jlptExamDur > 0 ? jlptExamDur * 60 : -1;
+    jlptElapsed = 0;
+    clearInterval(jlptExamTimer);
+    jlptExamTimer = setInterval(() => {
+        if (jlptSecondsLeft > 0) {
+            jlptSecondsLeft--;
+            jlptUpdateTimerDisplay();
+            if (jlptSecondsLeft === 0) { clearInterval(jlptExamTimer); alert('\u23F0 Waktu habis! Jawaban dikumpulkan otomatis.'); submitJlpt(); }
+        } else if (jlptSecondsLeft < 0) {
+            jlptElapsed++;
+            jlptUpdateTimerDisplay();
+        }
+    }, 1000);
+    jlptUpdateTimerDisplay();
+    jlptRenderQuestion();
+}
+
+function jlptUpdateTimerDisplay() {
+    const el = document.getElementById('jex-timer');
+    if (!el) return;
+    const secs = jlptSecondsLeft >= 0 ? jlptSecondsLeft : jlptElapsed;
+    const m = Math.floor(secs / 60).toString().padStart(2, '0');
+    const s = (secs % 60).toString().padStart(2, '0');
+    el.textContent = m + ':' + s;
+    el.className = 'jex-timer';
+    if (jlptSecondsLeft > 0) {
+        if (jlptSecondsLeft <= 60)       el.className = 'jex-timer danger';
+        else if (jlptSecondsLeft <= 300) el.className = 'jex-timer warning';
     }
 }
 
-// Sangat disederhanakan untuk contoh. Di aplikasi nyata, ini akan mengambil dari database JLPT khusus.
+function jlptRenderQuestion() {
+    const total = jlptAllQuestions.length;
+    const q     = jlptAllQuestions[jlptCurrentQ];
+    if (!q) return;
+    document.getElementById('jex-level-badge').textContent   = currentJlptLevel;
+    document.getElementById('jex-section-name').textContent  = q.section || '';
+    document.getElementById('jex-progress-text').textContent = (jlptCurrentQ + 1) + ' / ' + total;
+    document.getElementById('jex-progress-fill').style.width = ((jlptCurrentQ + 1) / total * 100) + '%';
+    document.getElementById('jex-q-num').textContent = 'SOAL ' + (jlptCurrentQ + 1);
+    document.getElementById('jex-q-text').innerHTML  = q.text;
+    const flagBtn = document.getElementById('jex-flag-btn');
+    flagBtn.className = 'jex-flag-btn' + (jlptFlags.has(jlptCurrentQ) ? ' flagged' : '');
+    document.getElementById('jex-btn-prev').disabled = jlptCurrentQ === 0;
+    const isLast = jlptCurrentQ === total - 1;
+    const nextBtn = document.getElementById('jex-btn-next');
+    nextBtn.textContent = isLast ? '\uD83D\uDCCB Review & Kumpulkan' : 'Selanjutnya \u2192';
+    if (jlptQuizMode === 'typing') {
+        document.getElementById('jex-options').style.display = 'none';
+        document.getElementById('jex-typing-wrap').style.display = 'block';
+        const inp = document.getElementById('jex-typing-input');
+        inp.value = jlptAnswers[jlptCurrentQ] || '';
+        inp.oninput = () => { jlptAnswers[jlptCurrentQ] = inp.value.trim(); };
+        setTimeout(() => inp.focus(), 50);
+    } else {
+        document.getElementById('jex-typing-wrap').style.display = 'none';
+        const optWrap = document.getElementById('jex-options');
+        optWrap.style.display = 'flex';
+        optWrap.innerHTML = '';
+        const labels = ['A','B','C','D'];
+        (q.options || []).forEach((opt, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'jex-opt' + (jlptAnswers[jlptCurrentQ] === i ? ' selected' : '');
+            btn.innerHTML = '<span class="jex-opt-num">' + (labels[i] || (i+1)) + '</span>' + opt;
+            btn.onclick = () => { jlptAnswers[jlptCurrentQ] = i; jlptRenderQuestion(); };
+            optWrap.appendChild(btn);
+        });
+    }
+}
+
+function jlptGoTo(idx) {
+    if (idx < 0 || idx >= jlptAllQuestions.length) return;
+    jlptCurrentQ = idx;
+    jlptRenderQuestion();
+}
+
+function jlptGoNext() {
+    if (jlptCurrentQ === jlptAllQuestions.length - 1) jlptReviewBeforeSubmit();
+    else jlptGoTo(jlptCurrentQ + 1);
+}
+
+function jlptToggleFlag() {
+    if (jlptFlags.has(jlptCurrentQ)) jlptFlags.delete(jlptCurrentQ);
+    else jlptFlags.add(jlptCurrentQ);
+    jlptRenderQuestion();
+}
+
+function jlptOpenNavigator() {
+    const grid = document.getElementById('jnav-grid');
+    grid.innerHTML = '';
+    jlptAllQuestions.forEach((q, i) => {
+        const cell = document.createElement('div');
+        let cls = 'jnav-cell';
+        if (jlptFlags.has(i))              cls += ' flagged';
+        else if (jlptAnswers[i] !== undefined) cls += ' answered';
+        if (i === jlptCurrentQ)            cls += ' current';
+        cell.className = cls;
+        cell.textContent = i + 1;
+        cell.onclick = () => { jlptCloseNavigator(); jlptGoTo(i); };
+        grid.appendChild(cell);
+    });
+    document.getElementById('jlpt-nav-overlay').style.display = 'block';
+    document.getElementById('jlpt-navigator').style.display   = 'flex';
+}
+
+function jlptCloseNavigator() {
+    document.getElementById('jlpt-nav-overlay').style.display = 'none';
+    document.getElementById('jlpt-navigator').style.display   = 'none';
+}
+
+function jlptReviewBeforeSubmit() {
+    const total    = jlptAllQuestions.length;
+    const answered = Object.keys(jlptAnswers).length;
+    const flagged  = jlptFlags.size;
+    const skipped  = total - answered;
+    document.getElementById('jrev-summary').innerHTML = `
+        <div class="jrev-stat"><div class="rs-num" style="color:var(--teal2)">${answered}</div><div class="rs-lbl">Dijawab</div></div>
+        <div class="jrev-stat"><div class="rs-num" style="color:#e67e22">${flagged}</div><div class="rs-lbl">Ditandai</div></div>
+        <div class="jrev-stat"><div class="rs-num" style="color:var(--red)">${skipped}</div><div class="rs-lbl">Dilewati</div></div>`;
+    const list = document.getElementById('jrev-list');
+    list.innerHTML = '';
+    jlptAllQuestions.forEach((q, i) => {
+        const isAnswered = jlptAnswers[i] !== undefined && jlptAnswers[i] !== '';
+        const isFlagged  = jlptFlags.has(i);
+        const item = document.createElement('div');
+        let cls = 'jrev-item', statusText = '', statusColor = '';
+        if (isFlagged)       { cls += ' flagged';    statusText = '\uD83D\uDEA9 Ditandai'; statusColor = '#e67e22'; }
+        else if (isAnswered) { cls += ' answered';   statusText = '\u2713 Dijawab';       statusColor = 'var(--teal2)'; }
+        else                 { cls += ' unanswered'; statusText = '\u2014 Dilewati';      statusColor = 'var(--red)'; }
+        item.className = cls;
+        const preview = (q.text || '').replace(/<[^>]+>/g,'').substring(0, 55);
+        item.innerHTML = `<div class="jrev-item-num">${i+1}</div><div class="jrev-item-text">${preview}\u2026</div><div class="jrev-item-status" style="color:${statusColor}">${statusText}</div>`;
+        item.onclick = () => jlptBackToExam(i);
+        list.appendChild(item);
+    });
+    document.getElementById('jlpt-exam').style.display   = 'none';
+    document.getElementById('jlpt-review').style.display = 'block';
+}
+
+function jlptBackToExam(goToIdx) {
+    document.getElementById('jlpt-review').style.display = 'none';
+    document.getElementById('jlpt-exam').style.display   = 'flex';
+    if (typeof goToIdx === 'number') jlptGoTo(goToIdx);
+}
+
+function jlptConfirmSubmit() {
+    const btn = document.getElementById('jrev-final-btn');
+    if (btn.dataset.confirmed === '1') {
+        submitJlpt();
+    } else {
+        btn.textContent = '✓ Yakin? Klik lagi untuk konfirmasi';
+        btn.style.background = '#e67e22';
+        btn.dataset.confirmed = '1';
+        setTimeout(() => {
+            btn.textContent = '🎌 Kumpulkan Jawaban';
+            btn.style.background = '';
+            btn.dataset.confirmed = '0';
+        }, 3000);
+    }
+}
+
+function submitJlpt() {
+    clearInterval(jlptExamTimer);
+    submitted = true;
+    let totalCorrect = 0;
+    const secMap = {};
+    jlptAllQuestions.forEach((q, i) => {
+        const sname = q.section || 'Lainnya';
+        if (!secMap[sname]) secMap[sname] = { correct: 0, total: 0 };
+        secMap[sname].total++;
+        let isCorrect = false;
+        if (jlptQuizMode === 'typing') {
+            const typed   = (jlptAnswers[i] || '').replace(/[\u3002\u3001\uff01\uff1f\s]/g,'').toLowerCase();
+            const correct = (q.options[q.correct] || '').replace(/[\u3002\u3001\uff01\uff1f\s]/g,'').toLowerCase();
+            isCorrect = !!typed && (typed === correct || correct.includes(typed) || typed.includes(correct));
+        } else {
+            isCorrect = jlptAnswers[i] === q.correct;
+        }
+        if (isCorrect) { totalCorrect++; secMap[sname].correct++; }
+    });
+    showJlptResult(totalCorrect, jlptAllQuestions.length, secMap);
+}
+
+function showJlptResult(correct, total, secMap) {
+    const pct  = total > 0 ? Math.round(correct / total * 100) : 0;
+    const pass = pct >= 60;
+    document.getElementById('modal-emoji').textContent   = pass ? '\uD83C\uDF89' : '\uD83D\uDCDA';
+    document.getElementById('modal-level').textContent   = 'JLPT ' + currentJlptLevel;
+    document.getElementById('modal-score').textContent   = correct;
+    document.getElementById('modal-score').style.color   = pass ? 'var(--teal2)' : 'var(--red)';
+    document.getElementById('modal-total').textContent   = 'dari ' + total + ' soal';
+    document.getElementById('modal-correct').textContent = correct;
+    document.getElementById('modal-wrong').textContent   = total - correct;
+    document.getElementById('modal-pct').textContent     = pct + '%';
+    document.getElementById('modal-msg').textContent     = pass
+        ? 'Selamat! Kamu lulus simulasi ini. Terus semangat belajar! \u982D\u5F35\u3063\u3066\uff01'
+        : 'Belum lulus kali ini. Pelajari bagian yang salah dan coba lagi!';
+    let bHtml = '<h4>Nilai Per Seksi</h4>';
+    Object.entries(secMap).forEach(([name, d]) => {
+        const p = d.total > 0 ? Math.round(d.correct / d.total * 100) : 0;
+        const short = name.split(' ')[0];
+        bHtml += `<div class="sec-row"><div class="sname">${short}</div><div class="sec-bar"><div class="sec-bar-fill" style="width:${p}%"></div></div><div class="spct" style="color:${p>=60?'var(--teal2)':'var(--red)'}">${d.correct}/${d.total}</div></div>`;
+    });
+    document.getElementById('modal-breakdown').innerHTML = bHtml;
+    document.getElementById('jlpt-result-overlay').classList.add('show');
+}
+
+function closeResultModal() { document.getElementById('jlpt-result-overlay').classList.remove('show'); }
+
+function resetJlpt() {
+    closeResultModal();
+    clearInterval(jlptExamTimer);
+    submitted = false;
+    document.getElementById('jlpt-exam').style.display   = 'none';
+    document.getElementById('jlpt-review').style.display = 'none';
+    document.getElementById('jlpt-setup').style.display  = 'block';
+}
+
+function renderJlptQuestions() {}  // legacy stub
+
 function generateMockJlptQuestions(lvl) {
     const isN5 = lvl === 'N5';
     const vocabPool = vocab.filter(v => v.level === lvl);
@@ -7337,6 +7689,16 @@ function generateMockJlptQuestions(lvl) {
     // Helper untuk mengambil item acak
     const getRandom = (arr, n) => shuffle([...arr]).slice(0, n);
     
+    // Guard: jika data tidak cukup, kembalikan soal kosong dengan pesan
+    if (kanjiPool.length === 0 && vocabPool.length === 0) {
+        return [{
+            title: '⚠️ Data tidak tersedia',
+            icon: '⚠️',
+            desc: `Tidak ada data untuk level ${lvl}`,
+            qs: [{text: 'Data soal belum tersedia untuk level ini.', options: ['-'], correct: 0, exp: ''}]
+        }];
+    }
+
     const sections = [
         {
             title: '文字・語彙 (Kanji & Kosakata)',
@@ -7358,50 +7720,142 @@ function generateMockJlptQuestions(lvl) {
         }
     ];
 
-    // Buat soal 文字・語彙
-    const kQs = getRandom(kanjiPool, 3);
+    // Helper: ambil reading dari kanji
+    const kReading = k => (k.on && k.on[0]) ? k.on[0] : (k.kun && k.kun[0]) ? k.kun[0] : k.char;
+
+    // Helper: buat soal pilihan ganda yang dijamin correct >= 0
+    const makeQ = (text, correctVal, distractorVals, exp) => {
+        // Pastikan correctVal string, bersih dari undefined
+        const c = String(correctVal || '?');
+        // Filter distractor agar tidak sama dengan correct & tidak undefined
+        const dists = distractorVals
+            .map(d => String(d || ''))
+            .filter(d => d && d !== c)
+            .slice(0, 3);
+        while (dists.length < 3) dists.push(`—${dists.length}`);
+        const options = [c, ...dists];
+        shuffle(options);
+        const correctIdx = options.indexOf(c);
+        return { text, options, correct: correctIdx >= 0 ? correctIdx : 0, exp };
+    };
+
+    // Buat soal 文字・語彙 — Kanji reading (10 soal)
+    const kQs = getRandom(kanjiPool.filter(k => k && k.char), Math.min(10, kanjiPool.length));
     kQs.forEach(k => {
-        const correct = k.on[0] || k.kun[0];
-        let options = [correct, ...getRandom(kanjiPool.filter(x=>x!=k), 3).map(x=>x.on[0]||x.kun[0])];
-        shuffle(options);
-        sections[0].qs.push({
-            text: `「${k.char}」の読み方はどれですか。`,
-            options: options,
-            correct: options.indexOf(correct),
-            exp: `Arti: ${k.meaning}. Cara baca: ${k.on.concat(k.kun).join(', ')}`
-        });
-    });
-    
-    const vQs = getRandom(vocabPool, 3);
-    vQs.forEach(v => {
-        let options = [v.id, ...getRandom(vocabPool.filter(x=>x!=v), 3).map(x=>x.id)];
-        shuffle(options);
-        sections[0].qs.push({
-            text: `「${rubyWrap(v.jp, v.reading)}」の意味はどれですか。`,
-            options: options,
-            correct: options.indexOf(v.id),
-            exp: `Contoh kalimat:<br>${v.example}`
-        });
+        const correct = kReading(k);
+        const dists = getRandom(kanjiPool.filter(x => x !== k), 7).map(kReading);
+        sections[0].qs.push(makeQ(
+            `「${k.char}」の読み方はどれですか。`,
+            correct, dists,
+            `Arti: ${k.meaning||'-'}. Cara baca: ${[...(k.on||[]),...(k.kun||[])].join(', ')||'-'}`
+        ));
     });
 
-    // Buat soal 文法 (Hardcoded untuk contoh)
-    if(isN5) {
-        sections[1].qs.push(
-            {text:"わたし（　）学生です。", options:["が","は","を","に"], correct:1, exp:"Partikel は (wa) digunakan untuk menandai subjek topik."},
-            {text:"りんご（　）食べます。", options:["が","は","を","に"], correct:2, exp:"Partikel を (o) digunakan untuk menandai objek langsung dari kata kerja transitif."},
-            {text:"きのう、どこへ（　）。", options:["行きます","行きました","行っています","行きません"], correct:1, exp:"きのう (kemarin) menunjukkan bentuk lampau (ました)."}
-        );
-        sections[2].qs.push(
-            {text:"【文章】\n私は毎朝７時に起きます。朝ごはんを食べて、８時に学校へ行きます。学校は午後３時に終わります。\n\n【質問】\nこの人は何時に学校へ行きますか。", options:["７時","８時","３時","９時"], correct:1, exp:"Di teks tertulis 「８時に学校へ行きます」 (pergi ke sekolah jam 8)."}
-        );
+    // Buat soal 文字・語彙 — Kanji arti (5 soal)
+    const kQs2 = getRandom(kanjiPool.filter(k => k && k.meaning), Math.min(5, kanjiPool.length));
+    kQs2.forEach(k => {
+        const dists = getRandom(kanjiPool.filter(x => x !== k && x.meaning && x.meaning !== k.meaning), 7).map(x => x.meaning);
+        sections[0].qs.push(makeQ(
+            `「${k.char}」の意味はどれですか。`,
+            k.meaning, dists,
+            `Cara baca: ${[...(k.on||[]),...(k.kun||[])].join(', ')||'-'}`
+        ));
+    });
+
+    // Buat soal 文字・語彙 — Vocab arti (10 soal)
+    const vQs = getRandom(vocabPool.filter(v => v && v.id && v.jp), Math.min(10, vocabPool.length));
+    vQs.forEach(v => {
+        const dists = getRandom(vocabPool.filter(x => x !== v && x.id && x.id !== v.id), 7).map(x => x.id);
+        sections[0].qs.push(makeQ(
+            `「${rubyWrap(v.jp, v.reading||v.jp)}」の意味はどれですか。`,
+            v.id, dists,
+            `Contoh kalimat:<br>${v.example||'-'}`
+        ));
+    });
+
+    // Buat soal 文字・語彙 — Vocab reading (5 soal)
+    const vQs2 = getRandom(vocabPool.filter(v => v && v.reading && v.jp && v.reading !== v.jp), Math.min(5, vocabPool.length));
+    vQs2.forEach(v => {
+        const dists = getRandom(vocabPool.filter(x => x !== v && x.reading && x.reading !== v.reading), 7).map(x => x.reading);
+        sections[0].qs.push(makeQ(
+            `「${v.jp}」の読み方はどれですか。`,
+            v.reading, dists,
+            `Arti: ${v.id||'-'}`
+        ));
+    });
+
+    // ── 文法 N5 (20 soal bergaya JLPT 2024) ──
+    const n5Bunpou = [
+        {text:"わたし（　）学生です。",options:["が","は","を","に"],correct:1,exp:"は = partikel topik. わたしは～です (Saya adalah~)."},
+        {text:"りんご（　）食べます。",options:["が","は","を","に"],correct:2,exp:"を = partikel objek langsung. りんごを食べます (makan apel)."},
+        {text:"きのう、図書館（　）勉強しました。",options:["に","を","で","が"],correct:2,exp:"で = tempat aktivitas berlangsung. 図書館で勉強する (belajar di perpustakaan)."},
+        {text:"学校（　）行きます。",options:["を","に","が","は"],correct:1,exp:"に = tujuan pergerakan. 学校に行く (pergi ke sekolah)."},
+        {text:"あの人（　）だれですか。",options:["は","を","に","で"],correct:0,exp:"は = partikel topik. あの人は～ですか (Siapakah orang itu?)."},
+        {text:"テレビ（　）見ながら、ごはんを食べます。",options:["が","は","を","で"],correct:2,exp:"を = objek langsung. テレビを見る (menonton TV)."},
+        {text:"毎朝７時（　）起きます。",options:["で","に","を","が"],correct:1,exp:"に = partikel waktu spesifik. ７時に起きる (bangun jam 7)."},
+        {text:"バス（　）来ませんでした。",options:["が","を","で","は"],correct:0,exp:"が = subjek intransitif. バスが来る (bus datang)."},
+        {text:"コーヒー（　）紅茶、どちらが好きですか。",options:["や","と","か","も"],correct:2,exp:"か = pilihan antara dua hal. AかB (A atau B)."},
+        {text:"部屋（　）きれいにしてください。",options:["が","は","を","で"],correct:2,exp:"を = objek. 部屋をきれいにする (membersihkan kamar)."},
+        {text:"これは田中さん（　）かさです。",options:["が","の","を","に"],correct:1,exp:"の = kepunyaan. 田中さんのかさ (payung milik Tanaka)."},
+        {text:"日本語（　）上手になりたいです。",options:["が","は","を","に"],correct:0,exp:"が = objek kemampuan/keinginan. ～が上手 (mahir dalam~)."},
+        {text:"母（　）料理を作ってもらいました。",options:["が","は","に","で"],correct:2,exp:"に = pelaku dalam ~てもらう. 母に作ってもらう (minta ibu membuatkan)."},
+        {text:"映画は３時間（　）終わりました。",options:["で","に","が","を"],correct:0,exp:"で = durasi/batas waktu. ３時間で終わる (selesai dalam 3 jam)."},
+        {text:"ちょっと待って（　）。",options:["ください","みます","あります","います"],correct:0,exp:"ください = tolong lakukan~. 待ってください (tolong tunggu)."},
+        {text:"雨が降って（　）、傘を持って行きました。",options:["いたので","いるのに","いたのに","いるので"],correct:0,exp:"～ていたので = karena sedang~. 降っていたので (karena sedang hujan)."},
+        {text:"この映画は子ども（　）見られます。",options:["も","に","が","を"],correct:1,exp:"に = partikel dalam bentuk potential pasif. 子どもにも見られる (dapat ditonton anak-anak)."},
+        {text:"（　）大学生ですか。",options:["だれの","どれが","どなたが","どちらが"],correct:2,exp:"どなた = siapa (sopan). どなたが大学生ですか (Siapakah yang mahasiswa?)."},
+        {text:"ここに名前（　）書いてください。",options:["が","は","を","で"],correct:2,exp:"を = objek langsung. 名前を書く (menulis nama)."},
+        {text:"田中さんは来年、日本（　）帰ります。",options:["で","に","が","を"],correct:1,exp:"に = tujuan pergerakan kembali. 日本に帰る (pulang ke Jepang)."}
+    ];
+    const n5Dokkai = [
+        {text:"【文章】\n私は毎朝７時に起きます。朝ごはんを食べて、８時に学校へ行きます。学校は午後３時に終わります。夕方は友達と公園で遊びます。\n\n【質問】\nこの人は何時に学校へ行きますか。",options:["７時","８時","３時","夕方"],correct:1,exp:"「８時に学校へ行きます」→ jam 8."},
+        {text:"【文章】\n田中さんのうちには犬が二匹と猫が一匹います。田中さんは毎朝、犬の散歩をします。\n\n【質問】\n田中さんのうちにいる動物は全部で何匹ですか。",options:["一匹","二匹","三匹","四匹"],correct:2,exp:"犬２匹＋猫１匹＝３匹."},
+        {text:"【文章】\nスーパーは月曜日から土曜日まで開いています。日曜日は休みです。今日は日曜日です。\n\n【質問】\nスーパーは今日、開いていますか。",options:["開いている","休みだ","午後だけ開いている","わからない"],correct:1,exp:"「日曜日は休みです」＋「今日は日曜日」→ tutup hari ini."},
+        {text:"【文章】\nやまださんへ\nあした、いっしょにえいがをみませんか。えいがは３じからです。２じ３０ふんに駅のまえであいましょう。\nたなかより\n\n【質問】\nふたりはなんじにあいますか。",options:["２時","２時30分","３時","３時30分"],correct:1,exp:"「２じ３０ふんに駅のまえであいましょう」→ bertemu jam 2:30."},
+        {text:"【文章】\n私の部屋は駅から歩いて５分です。部屋は１階にあります。家賃は月５万円です。\n\n【質問】\n部屋は何階にありますか。",options:["１階","２階","５階","わからない"],correct:0,exp:"「部屋は１階にあります」→ lantai 1."},
+        {text:"【文章】\nきょうのてんきよほうです。あさはくもりですが、ひるからはれます。かさはいりません。\n\n【質問】\nきょうのひる、そとはどうですか。",options:["雨","曇り","晴れ","雪"],correct:2,exp:"「ひるからはれます」→ siang hari cerah."},
+        {text:"【文章】\n山田さんは料理が好きです。毎週末、家族のために料理を作ります。先週は寿司を作りました。今週はカレーを作る予定です。\n\n【質問】\n山田さんは今週、何を作りますか。",options:["寿司","カレー","ラーメン","てんぷら"],correct:1,exp:"「今週はカレーを作る予定です」→ rencana masak kari."}
+    ];
+
+    // ── 文法 N4 (20 soal bergaya JLPT 2024) ──
+    const n4Bunpou = [
+        {text:"雨が（　）そうです。",options:["降る","降り","降って","降った"],correct:1,exp:"～そうです (sepertinya/kelihatannya) pakai masu-stem: 降り＋そうです."},
+        {text:"宿題を（　）から、遊びに行きます。",options:["する","して","した","しない"],correct:1,exp:"～てから = setelah melakukan~. してから (setelah melakukan PR)."},
+        {text:"この映画は（　）ことがあります。",options:["見る","見た","見て","見ない"],correct:1,exp:"～たことがある = pernah melakukan~. 見たことがある (pernah menonton)."},
+        {text:"病気（　）、学校を休みました。",options:["なので","なのに","なくて","ながら"],correct:0,exp:"なので = karena (sebab sopan). 病気なので休む (tidak masuk karena sakit)."},
+        {text:"彼女は歌（　）踊りも上手です。",options:["だけで","だけでなく","ばかり","しか"],correct:1,exp:"～だけでなく = tidak hanya~, tapi juga."},
+        {text:"この問題は難し（　）です。",options:["すぎ","すぎる","すぎて","すぎた"],correct:1,exp:"～すぎる = terlalu~. 難しすぎる (terlalu susah)."},
+        {text:"会議に（　）ように準備してください。",options:["遅れない","遅れなく","遅れず","遅れて"],correct:0,exp:"～ないように = agar tidak~. 遅れないように (agar tidak terlambat)."},
+        {text:"もっと早く起きれば（　）のに。",options:["良かった","良い","良くない","良くて"],correct:0,exp:"～ばよかったのに = seandainya saja~ (penyesalan)."},
+        {text:"田中さんは日本語（　）英語も話せます。",options:["だけ","だけでなく","しか","ばかり"],correct:1,exp:"～だけでなく = tidak hanya~, tapi juga bisa bahasa Inggris."},
+        {text:"子どもの（　）、毎日公園で遊びました。",options:["とき","ころ","ので","から"],correct:1,exp:"ころ = sekitar waktu (perkiraan). 子どものころ (sewaktu kecil)."},
+        {text:"電車が（　）しまいました。",options:["行って","行った","行き","行く"],correct:0,exp:"～てしまう = terlanjur/sudah selesai (dengan nuansa menyesal). 行ってしまった (sudah pergi)."},
+        {text:"この仕事は私（　）できません。",options:["には","にも","では","でも"],correct:0,exp:"には = untuk~(tapi tidak bisa). 私にはできない (saya tidak bisa melakukannya)."},
+        {text:"先生に作文を（　）もらいました。",options:["直して","直す","直した","直し"],correct:0,exp:"～てもらう = menerima tindakan dari orang lain. 直してもらう (dikoreksi oleh guru)."},
+        {text:"来週の試験（　）、毎日勉強しています。",options:["のために","のせいで","に対して","について"],correct:0,exp:"のために = demi/untuk. 試験のために勉強する (belajar untuk ujian)."},
+        {text:"この薬を飲（　）、すぐ寝てください。",options:["んで","みて","んだら","んだ"],correct:0,exp:"～んで = bentuk -te dari む. 飲んで寝る (minum lalu tidur)."},
+        {text:"日本に来て、もう５年（　）なります。",options:["に","が","で","も"],correct:0,exp:"～になる = menjadi. ５年になる (sudah 5 tahun)."},
+        {text:"彼は医者（　）、スポーツ選手でもある。",options:["であり","であって","ながら","だから"],correct:0,exp:"であり = dan juga (menggabungkan dua identitas)."},
+        {text:"夜遅く（　）、友達から電話がきた。",options:["寝ていると","寝たら","寝るなら","寝てから"],correct:0,exp:"～ていると = ketika sedang~. 寝ていると電話がきた (saat tidur ada telepon)."},
+        {text:"先生（　）おっしゃったとおり、練習が大切です。",options:["が","の","に","を"],correct:0,exp:"が = subjek. 先生がおっしゃる = guru berkata (bentuk hormatan)."},
+        {text:"この荷物は重（　）持てません。",options:["すぎて","すぎる","すぎに","すぎ"],correct:0,exp:"～すぎて～ない = terlalu~ sehingga tidak bisa. 重すぎて持てない (terlalu berat, tidak bisa diangkat)."}
+    ];
+    const n4Dokkai = [
+        {text:"【文章】\n日本には四季があります。春は桜が咲き、夏は海水浴が楽しめます。秋には紅葉が美しく、冬はスキーが人気です。\n\n【質問】\n冬に人気のスポーツは何ですか。",options:["サーフィン","スキー","野球","テニス"],correct:1,exp:"「冬はスキーが人気です」→ ski populer di musim dingin."},
+        {text:"【文章】\n鈴木さんは毎日バスで会社に行きます。でも、雨の日は電車を使います。今日は朝から雨が降っています。\n\n【質問】\n鈴木さんは今日、どうやって会社に行きますか。",options:["バス","電車","タクシー","自転車"],correct:1,exp:"「雨の日は電車」＋「今日は雨」→ naik kereta."},
+        {text:"【文章】\nお知らせ\n図書館は来週の月曜日から水曜日まで、工事のため休館します。木曜日から通常通り開館します。\n\n【質問】\n図書館は木曜日、どうなりますか。",options:["休みだ","午前だけ開く","通常通り開く","工事がある"],correct:2,exp:"「木曜日から通常通り開館」→ buka seperti biasa mulai Kamis."},
+        {text:"【文章】\n私は去年、日本語の試験を受けました。結果は合格でした。試験勉強はとても大変でしたが、合格できてよかったです。今年はもっと難しい試験に挑戦するつもりです。\n\n【質問】\nこの人は今年、何をするつもりですか。",options:["試験を受けない","同じ試験を受ける","難しい試験に挑戦する","日本語をやめる"],correct:2,exp:"「今年はもっと難しい試験に挑戦するつもり」→ akan coba ujian lebih sulit."},
+        {text:"【文章】\n山田：田中さん、今日の会議は何時からですか。\n田中：午後２時からです。でも、私は１時半に来る予定です。準備がありますから。\n山田：そうですか。私も早めに行きます。\n\n【質問】\n田中さんは何時に来る予定ですか。",options:["１時","１時半","２時","２時半"],correct:1,exp:"「私は１時半に来る予定です」→ rencana datang jam 1:30."},
+        {text:"【文章】\n健康のために、毎日30分歩くことが大切だと言われています。しかし、忙しい現代人にとって、まとまった時間を作ることは難しいです。そのため、電車の中で立つ、エレベーターの代わりに階段を使うなど、日常生活の中で体を動かす工夫が必要です。\n\n【質問】\nこの文章が勧めていることは何ですか。",options:["毎日30分走ること","ジムに通うこと","日常生活の中で体を動かすこと","電車に乗らないこと"],correct:2,exp:"「日常生活の中で体を動かす工夫が必要」が筆者の主張."},
+        {text:"【文章】\nメール\n件名：来週の予定について\n山田様\nお世話になっております。来週の打ち合わせについてご連絡します。当初、火曜日の午後３時を予定しておりましたが、会議室が使用できなくなりました。水曜日の午前10時はいかがでしょうか。\n\n【質問】\nメールを書いた人は何を変えたいのですか。",options:["打ち合わせの場所","打ち合わせの日時","打ち合わせの参加者","打ち合わせの内容"],correct:1,exp:"火曜午後3時→水曜午前10時に変更したい."}
+    ];
+
+    if (isN5) {
+        shuffle(n5Bunpou).slice(0, 20).forEach(q => sections[1].qs.push(q));
+        shuffle(n5Dokkai).slice(0, 7).forEach(q => sections[2].qs.push(q));
     } else {
-        sections[1].qs.push(
-            {text:"雨が（　）そうです。", options:["降る","降り","降って","降った"], correct:1, exp:"Pola ～そうです (sepertinya) menggunakan bentuk Masu tanpa masu (降り + そうです)."},
-            {text:"宿題を（　）から、遊びに行きます。", options:["する","して","した","しない"], correct:1, exp:"Pola ～てから berarti 'setelah melakukan~'."}
-        );
-        sections[2].qs.push(
-            {text:"【文章】\n日本には四季があります。春、夏、秋、冬です。春は桜が咲いてきれいです。夏はとても暑いです。秋は涼しくなります。冬は雪が降ります。\n\n【質問】\n桜が咲くのはいつですか。", options:["春","夏","秋","冬"], correct:0, exp:"Di teks tertulis 「春は桜が咲いて」 (musim semi sakura mekar)."}
-        );
+        shuffle(n4Bunpou).slice(0, 20).forEach(q => sections[1].qs.push(q));
+        shuffle(n4Dokkai).slice(0, 7).forEach(q => sections[2].qs.push(q));
     }
 
     return sections;
@@ -7455,99 +7909,7 @@ function updateJlptProgress() {
     }
 }
 
-function submitJlpt() {
-    stopJlptTimer();
-    if(!confirm("Kumpulkan jawaban sekarang?")) return;
-    submitted = true;
-    
-    let totalCorrect = 0;
-    const totalQs = document.querySelectorAll('.jlpt-q-card').length;
-    let secStats = [0,0,0]; // Assume 3 sections max for simplicity
-    let secTotals = [0,0,0];
-    
-    for (const [qIdx, data] of Object.entries(jlptSelections)) {
-        const sIdx = parseInt(qIdx.split('-')[0]);
-        secTotals[sIdx]++;
-        
-        const card = document.getElementById(`qcard-${qIdx}`);
-        const exp = document.getElementById(`exp-${qIdx}`);
-        let isCorrect = false;
-        if (jlptQuizMode === 'typing') {
-            const inp = document.getElementById(`jlpt-typing-${qIdx}`);
-            if (inp) {
-                inp.disabled = true;
-                isCorrect = data.isTypingCorrect;
-                if (isCorrect) inp.classList.add('typing-correct');
-                else inp.classList.add('typing-wrong');
-            }
-        } else {
-            const opts = document.querySelectorAll(`[id^="opt-${qIdx}-"]`);
-            opts.forEach(opt => opt.disabled = true);
-            isCorrect = data.selected === data.correct;
-            
-            if(data.selected !== undefined) {
-                const selBtn = document.getElementById(`opt-${qIdx}-${data.selected}`);
-                if (selBtn) selBtn.classList.add(isCorrect ? 'opt-correct-reveal' : 'opt-wrong-reveal');
-            }
-            if (!isCorrect) {
-                const corBtn = document.getElementById(`opt-${qIdx}-${data.correct}`);
-                if (corBtn) corBtn.classList.add('opt-correct-reveal');
-            }
-        }
-        
-        if (isCorrect) {
-            totalCorrect++;
-            secStats[sIdx]++;
-            card.classList.add('revealed-correct');
-            exp.classList.add('show', 'exp-correct');
-        } else {
-            card.classList.add('revealed-wrong');
-            exp.classList.add('show', 'exp-wrong');
-        }
-    }
-    
-    showJlptResult(totalCorrect, totalQs, secStats, secTotals);
-}
 
-function showJlptResult(correct, total, secStats, secTotals) {
-    document.getElementById('modal-level').textContent = `JLPT ${currentJlptLevel} SIMULATION`;
-    document.getElementById('modal-score').textContent = correct;
-    document.getElementById('modal-total').textContent = `dari ${total} soal`;
-    
-    document.getElementById('modal-correct').textContent = correct;
-    document.getElementById('modal-wrong').textContent = total - correct;
-    const pct = Math.round((correct/total)*100) || 0;
-    document.getElementById('modal-pct').textContent = `${pct}%`;
-    
-    document.getElementById('modal-emoji').textContent = pct >= 80 ? '🌸' : (pct >= 50 ? '👍' : '📚');
-    document.getElementById('modal-msg').innerHTML = pct >= 80 ? '<strong>Luar biasa!</strong> Anda memiliki peluang besar lulus JLPT.' : '<strong>Terus berlatih!</strong> Perbanyak latihan kosakata dan kanji.';
-    
-    const secNames = ['Kanji & Kosakata', 'Tata Bahasa', 'Membaca'];
-    let bdHtml = `<h4>Analisis Per Bagian</h4>`;
-    secTotals.forEach((t, i) => {
-        if(t === 0) return;
-        const spct = Math.round((secStats[i]/t)*100);
-        bdHtml += `
-        <div class="sec-row">
-            <div class="sname">${secNames[i]}</div>
-            <div class="sec-bar"><div class="sec-bar-fill" style="width:${spct}%"></div></div>
-            <div class="spct">${spct}%</div>
-        </div>`;
-    });
-    document.getElementById('modal-breakdown').innerHTML = bdHtml;
-    
-    document.getElementById('jlpt-result-overlay').classList.add('show');
-}
-
-function closeResultModal() {
-    stopJlptTimer();
-    document.getElementById('jlpt-result-overlay').classList.remove('show');
-}
-
-function resetJlpt() {
-    closeResultModal();
-    renderJlptQuestions();
-}
 
 // ════════════════════════
 // MINNA NO NIHONGO PAGE
