@@ -866,6 +866,14 @@
   .hfv-stat{font-size:0.78rem;font-weight:700;color:var(--teal2);white-space:nowrap;}
   .hfv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;padding:12px 0 80px;width:100%;min-height:200px;}
   #hf-vocab{width:100%;}
+  .hfv-gojuon-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;margin-top:6px;}
+  .hfv-go-btn{width:36px;height:36px;border-radius:9px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-size:0.85rem;font-family:"Noto Sans JP",sans-serif;font-weight:700;cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;}
+  .hfv-go-btn.active{border-color:var(--gold);background:rgba(212,160,23,0.15);color:var(--gold);}
+  .hfv-go-btn:hover{border-color:var(--gold);color:var(--gold);}
+  .hfv-cat-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;margin-top:0;}
+  .hfv-cat-btn{padding:5px 12px;border-radius:16px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-size:0.73rem;font-weight:600;cursor:pointer;transition:all .18s;white-space:nowrap;font-family:"DM Sans",sans-serif;}
+  .hfv-cat-btn.active{border-color:var(--purple,#9b59b6);background:rgba(155,89,182,0.15);color:#c39bd3;}
+  .hfv-cat-btn:hover{border-color:var(--purple,#9b59b6);color:#c39bd3;}
   .hfv-controls{padding:14px 0 0;}
   .hfv-card{background:#13131f;border:1.5px solid var(--border);border-radius:13px;padding:14px 12px;cursor:pointer;transition:all .18s;position:relative;text-align:center;}
   .hfv-card:hover{border-color:var(--teal2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,212,170,0.12);}
@@ -891,6 +899,52 @@
   .hfv-speak-btn{flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--border);background:transparent;color:#fff;font-weight:700;font-size:0.82rem;cursor:pointer;}
   .hfv-master-btn{flex:2;padding:10px;border-radius:10px;border:none;background:var(--teal2);color:#000;font-weight:800;font-size:0.82rem;cursor:pointer;transition:all .2s;}
   .hfv-master-btn.is-mastered{background:rgba(0,212,170,0.15);color:var(--teal2);border:1.5px solid var(--teal2);}
+
+  /* KANJI QUIZ */
+  .kanji-mode-tabs{display:flex;gap:8px;padding:12px 16px 0;max-width:1100px;margin:0 auto;}
+  .kanji-mode-tab{padding:8px 20px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-size:0.82rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:"DM Sans",sans-serif;}
+  .kanji-mode-tab.active{border-color:var(--gold);background:rgba(212,160,23,0.12);color:var(--gold);}
+  .kq-setup-card{max-width:560px;margin:20px auto;background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:24px 22px;box-shadow:var(--shadow);}
+  .kq-setup-title{font-size:1.2rem;font-weight:800;color:#fff;margin-bottom:18px;text-align:center;}
+  .kq-setup-group{margin-bottom:16px;}
+  .kq-setup-label{font-size:0.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;}
+  .kq-chip-row{display:flex;gap:7px;flex-wrap:wrap;}
+  .kq-chip{padding:6px 14px;border-radius:16px;border:1.5px solid var(--border);background:#0e0e1a;color:var(--muted);font-size:0.78rem;font-weight:600;cursor:pointer;transition:all .18s;font-family:"DM Sans",sans-serif;}
+  .kq-chip.active{border-color:var(--teal2);background:rgba(0,212,170,0.12);color:var(--teal2);}
+  .kq-chip:hover{border-color:var(--teal2);}
+  .kq-start-btn{width:100%;padding:14px;border-radius:13px;background:linear-gradient(135deg,var(--red),#8b0000);color:#fff;font-size:1rem;font-weight:800;border:none;cursor:pointer;margin-top:8px;transition:all .2s;}
+  .kq-start-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(192,57,43,0.4);}
+  #kanji-quiz-section{max-width:600px;margin:0 auto;padding:0 16px 80px;}
+  .kq-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+  .kq-progress-text{font-size:0.82rem;font-weight:700;color:var(--muted);}
+  .kq-score{font-size:0.82rem;font-weight:700;color:#fff;}
+  .kq-progress-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:4px;margin-bottom:18px;}
+  .kq-progress-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--teal2),var(--gold));transition:width .4s;}
+  .kq-card{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:28px 24px;box-shadow:var(--shadow);}
+  .kq-type-label{font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;}
+  .kq-question{font-family:"Noto Sans JP",sans-serif;font-size:3rem;font-weight:900;color:#fff;text-align:center;margin-bottom:24px;line-height:1.1;}
+  .kq-question.small{font-size:1.1rem;line-height:1.8;}
+  .kq-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  .kq-opt{padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:#0e0e1a;color:#fff;font-family:"Noto Sans JP",sans-serif;font-size:0.92rem;cursor:pointer;text-align:center;transition:all .18s;font-weight:600;}
+  .kq-opt:hover:not(:disabled){border-color:var(--teal2);background:rgba(0,212,170,0.08);}
+  .kq-opt.correct{border-color:var(--teal2);background:rgba(0,212,170,0.18);color:var(--teal2);}
+  .kq-opt.wrong{border-color:var(--red);background:rgba(192,57,43,0.18);color:var(--red);}
+  .kq-feedback{padding:12px 16px;border-radius:10px;font-size:0.85rem;margin-bottom:12px;line-height:1.6;font-family:"Noto Sans JP",sans-serif;}
+  .kq-feedback.correct{background:rgba(0,212,170,0.1);border:1.5px solid rgba(0,212,170,0.3);color:var(--teal2);}
+  .kq-feedback.wrong{background:rgba(192,57,43,0.1);border:1.5px solid rgba(192,57,43,0.3);color:#ff8a8a;}
+  .kq-next-btn{width:100%;padding:12px;border-radius:11px;background:var(--red);color:#fff;font-weight:800;font-size:0.9rem;border:none;cursor:pointer;}
+  .kq-result-card{text-align:center;padding:30px 20px;background:var(--card);border:1.5px solid var(--border);border-radius:18px;margin-top:20px;}
+  .kq-result-emoji{font-size:3rem;margin-bottom:10px;}
+  .kq-result-score{font-size:2rem;font-weight:900;color:var(--gold);margin-bottom:6px;}
+  .kq-result-msg{font-size:0.88rem;color:var(--muted);margin-bottom:16px;}
+  .kq-wrong-list{text-align:left;max-height:220px;overflow-y:auto;margin-bottom:16px;}
+  .kq-wrong-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;background:#0e0e1a;margin-bottom:6px;}
+  .kq-wrong-char{font-family:"Noto Sans JP",sans-serif;font-size:1.4rem;font-weight:900;color:var(--red);width:36px;text-align:center;}
+  .kq-wrong-info{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+  .kq-result-actions{display:flex;gap:10px;justify-content:center;}
+  .kq-retry-btn,.kq-setup-btn{padding:10px 22px;border-radius:11px;font-weight:800;font-size:0.85rem;cursor:pointer;border:none;}
+  .kq-retry-btn{background:var(--teal2);color:#000;}
+  .kq-setup-btn{background:var(--card);border:1.5px solid var(--border);color:#fff;}
 
   /* KANJI PAGE */
   .kanji-hero{background:linear-gradient(135deg,#0a0a1a 0%,#1a1a6b 60%,#c0392b 100%);padding:40px 20px 28px;text-align:center;color:var(--rice);position:relative;overflow:hidden;}
@@ -3853,6 +3907,39 @@ html>
           <button class="hfv-lv-btn" id="hfv-lv-n4" onclick="setHafalVocabFilter('level','N4')">N4</button>
           <button class="hfv-lv-btn" id="hfv-lv-mastered" onclick="setHafalVocabFilter('level','mastered')">✓ Dihafal</button>
         </div>
+        <div class="hfv-gojuon-row" id="hfv-gojuon-row">
+          <button class="hfv-go-btn active" id="hfvg-all" onclick="setHafalVocabGojuon('all')">全</button>
+          <button class="hfv-go-btn" id="hfvg-a" onclick="setHafalVocabGojuon('a')">あ</button>
+          <button class="hfv-go-btn" id="hfvg-ka" onclick="setHafalVocabGojuon('ka')">か</button>
+          <button class="hfv-go-btn" id="hfvg-sa" onclick="setHafalVocabGojuon('sa')">さ</button>
+          <button class="hfv-go-btn" id="hfvg-ta" onclick="setHafalVocabGojuon('ta')">た</button>
+          <button class="hfv-go-btn" id="hfvg-na" onclick="setHafalVocabGojuon('na')">な</button>
+          <button class="hfv-go-btn" id="hfvg-ha" onclick="setHafalVocabGojuon('ha')">は</button>
+          <button class="hfv-go-btn" id="hfvg-ma" onclick="setHafalVocabGojuon('ma')">ま</button>
+          <button class="hfv-go-btn" id="hfvg-ya" onclick="setHafalVocabGojuon('ya')">や</button>
+          <button class="hfv-go-btn" id="hfvg-ra" onclick="setHafalVocabGojuon('ra')">ら</button>
+          <button class="hfv-go-btn" id="hfvg-wa" onclick="setHafalVocabGojuon('wa')">わ</button>
+        </div>
+        <div class="hfv-cat-row" id="hfv-cat-row">
+          <button class="hfv-cat-btn active" id="hfvc-all" onclick="setHafalVocabCat('all')">🔤 Semua</button>
+          <button class="hfv-cat-btn" id="hfvc-nouns" onclick="setHafalVocabCat('nouns')">📦 Kata Benda</button>
+          <button class="hfv-cat-btn" id="hfvc-verbs" onclick="setHafalVocabCat('verbs')">⚡ Kata Kerja</button>
+          <button class="hfv-cat-btn" id="hfvc-adjectives" onclick="setHafalVocabCat('adjectives')">🎨 Kata Sifat</button>
+          <button class="hfv-cat-btn" id="hfvc-adverbs" onclick="setHafalVocabCat('adverbs')">💨 Kata Keterangan</button>
+          <button class="hfv-cat-btn" id="hfvc-pronoun" onclick="setHafalVocabCat('pronoun')">👆 Kata Ganti</button>
+          <button class="hfv-cat-btn" id="hfvc-greeting" onclick="setHafalVocabCat('greeting')">👋 Sapaan</button>
+          <button class="hfv-cat-btn" id="hfvc-daily" onclick="setHafalVocabCat('daily')">🏠 Sehari-hari</button>
+          <button class="hfv-cat-btn" id="hfvc-food" onclick="setHafalVocabCat('food')">🍱 Makanan</button>
+          <button class="hfv-cat-btn" id="hfvc-body" onclick="setHafalVocabCat('body')">🫀 Tubuh</button>
+          <button class="hfv-cat-btn" id="hfvc-nature" onclick="setHafalVocabCat('nature')">🌿 Alam</button>
+          <button class="hfv-cat-btn" id="hfvc-place" onclick="setHafalVocabCat('place')">📍 Tempat</button>
+          <button class="hfv-cat-btn" id="hfvc-people" onclick="setHafalVocabCat('people')">👥 Orang</button>
+          <button class="hfv-cat-btn" id="hfvc-numbers" onclick="setHafalVocabCat('numbers')">🔢 Angka</button>
+          <button class="hfv-cat-btn" id="hfvc-counter" onclick="setHafalVocabCat('counter')">🔣 Kata Penggolong</button>
+          <button class="hfv-cat-btn" id="hfvc-colors" onclick="setHafalVocabCat('colors')">🎨 Warna</button>
+          <button class="hfv-cat-btn" id="hfvc-study" onclick="setHafalVocabCat('study')">📚 Pelajaran</button>
+          <button class="hfv-cat-btn" id="hfvc-concept" onclick="setHafalVocabCat('concept')">💡 Konsep</button>
+        </div>
         <div class="hfv-search-row">
           <input type="text" id="hfv-search" class="hfv-search" placeholder="🔍 Cari kata..." oninput="renderHafalVocab()">
           <div class="hfv-stat"><span id="hfv-mastered-count">0</span> dihafal</div>
@@ -4006,16 +4093,104 @@ html>
     <p>168 kanji wajib untuk ujian JLPT. Klik kanji untuk lihat detail lengkap — onyomi, kunyomi, arti, dan contoh kata.</p>
   </div>
   <div class="kanji-controls">
-    <div class="kanji-filter-row">
-      <button class="kf-btn active" onclick="setKanjiFilter('all')">Semua (168)</button>
-      <button class="kf-btn n5-btn" onclick="setKanjiFilter('N5')">N5 (80)</button>
-      <button class="kf-btn n4-btn" onclick="setKanjiFilter('N4')">N4 (88)</button>
-      <button class="kf-btn" onclick="setKanjiFilter('mastered')" id="mastered-filter-btn">✓ Dikuasai (<span id="mastered-count">0</span>)</button>
-      <input class="kanji-search" type="text" id="kanji-search" placeholder="🔍 Cari kanji / arti..." oninput="renderKanji()">
+    <div class="kanji-mode-tabs">
+      <button class="kanji-mode-tab active" id="ktab-browse" onclick="switchKanjiMode('browse')">📋 Hafalan</button>
+      <button class="kanji-mode-tab" id="ktab-quiz" onclick="switchKanjiMode('quiz')">⚡ Quiz Kanji</button>
     </div>
-    <div class="kanji-stats-row" id="kanji-stats-row"></div>
+    <div id="kanji-browse-ctrl">
+      <div class="kanji-filter-row">
+        <button class="kf-btn active" onclick="setKanjiFilter('all')">Semua (168)</button>
+        <button class="kf-btn n5-btn" onclick="setKanjiFilter('N5')">N5 (80)</button>
+        <button class="kf-btn n4-btn" onclick="setKanjiFilter('N4')">N4 (88)</button>
+        <button class="kf-btn" onclick="setKanjiFilter('mastered')" id="mastered-filter-btn">✓ Dikuasai (<span id="mastered-count">0</span>)</button>
+        <input class="kanji-search" type="text" id="kanji-search" placeholder="🔍 Cari kanji / arti..." oninput="renderKanji()">
+      </div>
+      <div class="kanji-stats-row" id="kanji-stats-row"></div>
+    </div>
   </div>
   <div class="kanji-grid" id="kanji-grid"></div>
+
+  <!-- KANJI QUIZ SECTION -->
+  <div id="kanji-quiz-section" style="display:none;">
+
+    <!-- Setup -->
+    <div id="kq-setup" class="kq-setup-card">
+      <div class="kq-setup-title">⚡ Quiz Kanji</div>
+      <div class="kq-setup-group">
+        <div class="kq-setup-label">🎯 Level</div>
+        <div class="kq-chip-row">
+          <button class="kq-chip active" id="kql-n5" onclick="kqSetOpt('level','N5')">N5</button>
+          <button class="kq-chip" id="kql-n4" onclick="kqSetOpt('level','N4')">N4</button>
+          <button class="kq-chip" id="kql-all" onclick="kqSetOpt('level','all')">Semua</button>
+        </div>
+      </div>
+      <div class="kq-setup-group">
+        <div class="kq-setup-label">📂 Kategori</div>
+        <div class="kq-chip-row" style="flex-wrap:wrap;">
+          <button class="kq-chip active" id="kqc-all" onclick="kqSetOpt('cat','all')">Semua</button>
+          <button class="kq-chip" id="kqc-numbers" onclick="kqSetOpt('cat','numbers')">🔢 Angka</button>
+          <button class="kq-chip" id="kqc-time" onclick="kqSetOpt('cat','time')">🕐 Waktu</button>
+          <button class="kq-chip" id="kqc-nature" onclick="kqSetOpt('cat','nature')">🌿 Alam</button>
+          <button class="kq-chip" id="kqc-body" onclick="kqSetOpt('cat','body')">🫀 Tubuh</button>
+          <button class="kq-chip" id="kqc-people" onclick="kqSetOpt('cat','people')">👥 Orang</button>
+          <button class="kq-chip" id="kqc-place" onclick="kqSetOpt('cat','place')">📍 Tempat</button>
+          <button class="kq-chip" id="kqc-action" onclick="kqSetOpt('cat','action')">⚡ Kata Kerja</button>
+          <button class="kq-chip" id="kqc-thing" onclick="kqSetOpt('cat','thing')">📦 Benda</button>
+          <button class="kq-chip" id="kqc-adj" onclick="kqSetOpt('cat','adj')">🎨 Sifat</button>
+          <button class="kq-chip" id="kqc-direction" onclick="kqSetOpt('cat','direction')">🧭 Arah & Posisi</button>
+        </div>
+      </div>
+      <div class="kq-setup-group">
+        <div class="kq-setup-label">📝 Tipe Soal</div>
+        <div class="kq-chip-row">
+          <button class="kq-chip active" id="kqt-reading" onclick="kqSetOpt('type','reading')">Cara Baca</button>
+          <button class="kq-chip" id="kqt-meaning" onclick="kqSetOpt('type','meaning')">Arti</button>
+          <button class="kq-chip" id="kqt-kanji" onclick="kqSetOpt('type','kanji')">Pilih Kanji</button>
+          <button class="kq-chip" id="kqt-mix" onclick="kqSetOpt('type','mix')">🎲 Acak</button>
+        </div>
+      </div>
+      <div class="kq-setup-group">
+        <div class="kq-setup-label">🔢 Jumlah Soal</div>
+        <div class="kq-chip-row">
+          <button class="kq-chip" id="kqn-10" onclick="kqSetOpt('num',10)">10</button>
+          <button class="kq-chip active" id="kqn-20" onclick="kqSetOpt('num',20)">20</button>
+          <button class="kq-chip" id="kqn-30" onclick="kqSetOpt('num',30)">30</button>
+          <button class="kq-chip" id="kqn-all" onclick="kqSetOpt('num',999)">Semua</button>
+        </div>
+      </div>
+      <button class="kq-start-btn" onclick="startKanjiQuiz()">⚡ Mulai Quiz</button>
+    </div>
+
+    <!-- Quiz Active -->
+    <div id="kq-active" style="display:none;">
+      <div class="kq-header">
+        <div class="kq-progress-text" id="kq-progress-text">1 / 20</div>
+        <div class="kq-score" id="kq-score">✓ 0 &nbsp; ✗ 0</div>
+      </div>
+      <div class="kq-progress-bar"><div class="kq-progress-fill" id="kq-progress-fill" style="width:0%"></div></div>
+      <div class="kq-card">
+        <div class="kq-type-label" id="kq-type-label">Apa bacaan kanji ini?</div>
+        <div class="kq-question" id="kq-question"></div>
+        <div class="kq-options" id="kq-options"></div>
+        <div class="kq-feedback" id="kq-feedback" style="display:none;"></div>
+        <button class="kq-next-btn" id="kq-next-btn" style="display:none;" onclick="kqNext()">Lanjut →</button>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="kq-result" style="display:none;" class="kq-result-card">
+      <div class="kq-result-emoji" id="kq-result-emoji">🎉</div>
+      <div class="kq-result-score" id="kq-result-score"></div>
+      <div class="kq-result-msg" id="kq-result-msg"></div>
+      <div class="kq-wrong-list" id="kq-wrong-list"></div>
+      <div class="kq-result-actions">
+        <button class="kq-retry-btn" onclick="startKanjiQuiz()">🔄 Ulangi</button>
+        <button class="kq-setup-btn" onclick="kqBackToSetup()">⚙️ Ganti Pengaturan</button>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
 <!-- KANJI MODAL -->
@@ -8554,6 +8729,205 @@ function loadMasteredKanji() {
 }
 
 // ════════════════════════════════════
+// KANJI QUIZ
+// ════════════════════════════════════
+let kqOpts = { level:'N5', cat:'all', type:'reading', num:20 };
+let kqQuestions = [], kqCurrent = 0, kqCorrect = 0, kqWrong = [];
+
+// Kanji per kategori N5 — berdasarkan meaning/char
+const KQ_CATS_N5 = {
+    numbers: ['一','二','三','四','五','六','七','八','九','十','百','千','万','半','円','分'],
+    time:    ['年','月','日','時','分','週','朝','昼','夜','今','毎','前','後','春','夏','秋','冬','午'],
+    nature:  ['山','川','海','空','天','雨','雪','風','雲','火','水','土','花','木','森','林','石','野','池','田'],
+    body:    ['目','耳','口','手','足','頭','首','鼻','歯','顔','体'],
+    people:  ['人','父','母','子','男','女','友','私'],
+    place:   ['国','校','社','店','駅','道','家','門','橋','庭'],
+    action:  ['見','聞','読','書','食','飲','行','来','出','入','買','帰','会','立','話','休','開'],
+    thing:   ['本','紙','車','馬','牛','魚','肉','米','茶','色','形','名','文','字','語'],
+    adj:     ['大','小','高','多','少','新','古','白','黒','赤','青','安','長','安'],
+    direction:['上','下','右','左','東','西','南','北','前','後','中','外','間'],
+};
+// N4 categories — filter by meaning keywords
+const KQ_CAT_N4_KEYWORDS = {
+    numbers:  ['angka','hitung','jumlah','nomor','bilangan'],
+    time:     ['waktu','jam','hari','bulan','tahun','menit','detik','musim','minggu','pagi','siang','malam'],
+    nature:   ['alam','gunung','laut','sungai','langit','bumi','pohon','hutan','bunga','angin','api','air','tanah'],
+    body:     ['tubuh','badan','tangan','kaki','kepala','mata','telinga','mulut','hidung','gigi','leher','wajah'],
+    people:   ['orang','manusia','ayah','ibu','anak','teman','keluarga','saudara','kakak','adik'],
+    place:    ['tempat','kota','desa','jalan','toko','sekolah','rumah','stasiun','negara','kantor'],
+    action:   ['pergi','datang','makan','minum','baca','tulis','dengar','lihat','beli','kerja','belajar','berdiri','duduk','masuk','keluar'],
+    feeling:  ['senang','sedih','marah','takut','suka','cinta','perasaan','semangat','lelah'],
+};
+
+function kqMatchCat(k, cat) {
+    const lvl = kqOpts.level === 'all' ? null : kqOpts.level;
+    if (cat === 'all') return true;
+    if (!lvl || lvl === 'N5') {
+        const set = KQ_CATS_N5[cat];
+        if (set && set.includes(k.char)) return true;
+    }
+    if (!lvl || lvl === 'N4') {
+        const kw = KQ_CAT_N4_KEYWORDS[cat] || [];
+        const meaning = (k.meaning || '').toLowerCase();
+        if (kw.some(w => meaning.includes(w))) return true;
+    }
+    return false;
+}
+
+function switchKanjiMode(mode) {
+    const isBrowse = mode === 'browse';
+    document.getElementById('ktab-browse').classList.toggle('active', isBrowse);
+    document.getElementById('ktab-quiz').classList.toggle('active', !isBrowse);
+    document.getElementById('kanji-browse-ctrl').style.display = isBrowse ? 'block' : 'none';
+    document.getElementById('kanji-grid').style.display = isBrowse ? 'grid' : 'none';
+    document.getElementById('kanji-quiz-section').style.display = isBrowse ? 'none' : 'block';
+    if (!isBrowse) {
+        document.getElementById('kq-setup').style.display = 'block';
+        document.getElementById('kq-active').style.display = 'none';
+        document.getElementById('kq-result').style.display = 'none';
+    }
+}
+
+function kqSetOpt(key, val) {
+    kqOpts[key] = val;
+    // Update chip active state
+    const prefix = {level:'kql', cat:'kqc', type:'kqt', num:'kqn'}[key];
+    document.querySelectorAll(`[id^="${prefix}-"]`).forEach(b => b.classList.remove('active'));
+    const btnId = `${prefix}-${String(val).replace('999','all')}`;
+    const btn = document.getElementById(btnId);
+    if(btn) btn.classList.add('active');
+}
+
+function kqBuildQuestions() {
+    let pool = kanjiDB.filter(k => {
+        if (kqOpts.level !== 'all' && k.level !== kqOpts.level) return false;
+        if (kqOpts.cat !== 'all' && !kqMatchCat(k, kqOpts.cat)) return false;
+        return true;
+    });
+    if (pool.length < 4) pool = kanjiDB.filter(k => k.level === (kqOpts.level === 'all' ? 'N5' : kqOpts.level));
+    shuffle(pool);
+    const take = Math.min(kqOpts.num === 999 ? pool.length : kqOpts.num, pool.length);
+    return pool.slice(0, take).map(k => {
+        const types = kqOpts.type === 'mix'
+            ? ['reading','meaning','kanji']
+            : [kqOpts.type];
+        const type = types[Math.floor(Math.random() * types.length)];
+        return buildKQItem(k, type, pool);
+    });
+}
+
+function buildKQItem(k, type, pool) {
+    const distractors = pool.filter(x => x !== k);
+    shuffle(distractors);
+    const d = distractors.slice(0, 3);
+    if (type === 'reading') {
+        const correct = (k.on && k.on[0]) || (k.kun && k.kun[0]) || k.char;
+        const opts = [correct, ...d.map(x => (x.on&&x.on[0])||(x.kun&&x.kun[0])||x.char)].filter(Boolean);
+        return { type, question: k.char, correct, opts: shuffleArr([...new Set(opts)].slice(0,4)),
+            label:'Apa bacaan kanji ini?', exp:`Bacaan: ${correct} | Arti: ${k.meaning}`, k };
+    } else if (type === 'meaning') {
+        const opts = [k.meaning, ...d.map(x => x.meaning)].filter(Boolean);
+        return { type, question: k.char, correct: k.meaning, opts: shuffleArr([...new Set(opts)].slice(0,4)),
+            label:'Apa arti kanji ini?', exp:`Arti: ${k.meaning} | Bacaan: ${(k.on||[]).concat(k.kun||[]).join(', ')}`, k };
+    } else {
+        // kanji type — show reading, pick correct kanji
+        const reading = (k.on&&k.on[0])||(k.kun&&k.kun[0])||k.char;
+        const opts = [k.char, ...d.map(x => x.char)].filter(Boolean);
+        return { type, question: reading, correct: k.char, opts: shuffleArr([...new Set(opts)].slice(0,4)),
+            label:'Pilih kanji yang sesuai dengan bacaan ini', exp:`Kanji: ${k.char} | Arti: ${k.meaning}`, k };
+    }
+}
+
+function shuffleArr(arr) { return shuffle([...arr]); }
+
+function startKanjiQuiz() {
+    kqQuestions = kqBuildQuestions();
+    if (kqQuestions.length === 0) { alert('Tidak ada kanji untuk filter ini.'); return; }
+    kqCurrent = 0; kqCorrect = 0; kqWrong = [];
+    document.getElementById('kq-setup').style.display = 'none';
+    document.getElementById('kq-result').style.display = 'none';
+    document.getElementById('kq-active').style.display = 'block';
+    kqRender();
+}
+
+function kqRender() {
+    const q = kqQuestions[kqCurrent];
+    const total = kqQuestions.length;
+    document.getElementById('kq-progress-text').textContent = `${kqCurrent+1} / ${total}`;
+    document.getElementById('kq-score').innerHTML = `<span style="color:var(--teal2)">✓ ${kqCorrect}</span> &nbsp; <span style="color:var(--red)">✗ ${kqWrong.length}</span>`;
+    document.getElementById('kq-progress-fill').style.width = ((kqCurrent/total)*100) + '%';
+    document.getElementById('kq-type-label').textContent = q.label;
+    const qEl = document.getElementById('kq-question');
+    qEl.className = q.type === 'kanji' ? 'kq-question small' : 'kq-question';
+    qEl.textContent = q.question;
+    document.getElementById('kq-feedback').style.display = 'none';
+    document.getElementById('kq-next-btn').style.display = 'none';
+    const opts = document.getElementById('kq-options');
+    opts.innerHTML = '';
+    q.opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'kq-opt';
+        btn.textContent = opt;
+        btn.onclick = () => kqAnswer(opt, q, btn);
+        opts.appendChild(btn);
+    });
+}
+
+function kqAnswer(chosen, q, btn) {
+    document.querySelectorAll('.kq-opt').forEach(b => b.disabled = true);
+    const isCorrect = chosen === q.correct;
+    if (isCorrect) {
+        btn.classList.add('correct');
+        kqCorrect++;
+    } else {
+        btn.classList.add('wrong');
+        kqWrong.push(q);
+        document.querySelectorAll('.kq-opt').forEach(b => {
+            if (b.textContent === q.correct) b.classList.add('correct');
+        });
+    }
+    const fb = document.getElementById('kq-feedback');
+    fb.className = 'kq-feedback ' + (isCorrect ? 'correct' : 'wrong');
+    fb.innerHTML = (isCorrect ? '✓ Benar! ' : '✗ Salah. ') + q.exp;
+    fb.style.display = 'block';
+    document.getElementById('kq-next-btn').style.display = 'block';
+    document.getElementById('kq-next-btn').textContent =
+        kqCurrent === kqQuestions.length - 1 ? 'Lihat Hasil 🏁' : 'Lanjut →';
+    if (isCorrect) speakText(q.k.char);
+}
+
+function kqNext() {
+    kqCurrent++;
+    if (kqCurrent >= kqQuestions.length) { kqShowResult(); return; }
+    kqRender();
+}
+
+function kqShowResult() {
+    document.getElementById('kq-active').style.display = 'none';
+    document.getElementById('kq-result').style.display = 'block';
+    const total = kqQuestions.length;
+    const pct = Math.round(kqCorrect/total*100);
+    document.getElementById('kq-result-emoji').textContent = pct >= 80 ? '🌸' : pct >= 60 ? '👍' : '📚';
+    document.getElementById('kq-result-score').textContent = `${kqCorrect} / ${total} (${pct}%)`;
+    document.getElementById('kq-result-msg').textContent = pct >= 80
+        ? 'Luar biasa! Terus semangat 頑張って！'
+        : pct >= 60 ? 'Bagus! Tinggal sedikit lagi sempurna.'
+        : 'Ayo ulangi lagi! Latihan membuat sempurna.';
+    const wl = document.getElementById('kq-wrong-list');
+    wl.innerHTML = kqWrong.length ? '<div style="font-size:0.7rem;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">Perlu Dipelajari Lagi</div>' : '';
+    kqWrong.forEach(q => {
+        const r = (q.k.on&&q.k.on[0])||(q.k.kun&&q.k.kun[0])||'';
+        wl.innerHTML += `<div class="kq-wrong-item"><div class="kq-wrong-char">${q.k.char}</div><div class="kq-wrong-info"><b>${q.k.meaning}</b><br>${r}</div></div>`;
+    });
+}
+
+function kqBackToSetup() {
+    document.getElementById('kq-result').style.display = 'none';
+    document.getElementById('kq-active').style.display = 'none';
+    document.getElementById('kq-setup').style.display = 'block';
+}
+
+// ════════════════════════════════════
 // HAFAL KOSAKATA
 // ════════════════════════════════════
 let masteredVocab = new Set();
@@ -8571,6 +8945,30 @@ function saveMasteredVocab() {
     try { localStorage.setItem('masteredVocab', JSON.stringify([...masteredVocab])); } catch(e) {}
 }
 
+let hfvCat    = 'all';
+let hfvGojuon = 'all';
+
+const GOJUON_RANGES = {
+    a:  ['あ','い','う','え','お'],
+    ka: ['か','き','く','け','こ','が','ぎ','ぐ','げ','ご'],
+    sa: ['さ','し','す','せ','そ','ざ','じ','ず','ぜ','ぞ'],
+    ta: ['た','ち','つ','て','と','だ','ぢ','づ','で','ど'],
+    na: ['な','に','ぬ','ね','の'],
+    ha: ['は','ひ','ふ','へ','ほ','ば','び','ぶ','べ','ぼ','ぱ','ぴ','ぷ','ぺ','ぽ'],
+    ma: ['ま','み','む','め','も'],
+    ya: ['や','ゆ','よ'],
+    ra: ['ら','り','る','れ','ろ'],
+    wa: ['わ','を','ん'],
+};
+
+function setHafalVocabGojuon(row) {
+    hfvGojuon = row;
+    document.querySelectorAll('.hfv-go-btn').forEach(b => b.classList.remove('active'));
+    const btn = document.getElementById('hfvg-' + row);
+    if(btn) btn.classList.add('active');
+    renderHafalVocab();
+}
+
 function setHafalVocabFilter(type, val) {
     hfvLevel = val;
     ['all','n5','n4','mastered'].forEach(k => {
@@ -8580,15 +8978,41 @@ function setHafalVocabFilter(type, val) {
     renderHafalVocab();
 }
 
+function setHafalVocabCat(cat) {
+    hfvCat = cat;
+    document.querySelectorAll('.hfv-cat-btn').forEach(b => b.classList.remove('active'));
+    const btn = document.getElementById('hfvc-' + cat);
+    if(btn) btn.classList.add('active');
+    renderHafalVocab();
+}
+
 function renderHafalVocab() {
     loadMasteredVocab();
     const q = (document.getElementById('hfv-search')?.value || '').toLowerCase().trim();
     let filtered = vocab.filter(v => {
-        if (hfvLevel === 'mastered') return masteredVocab.has(v.jp);
-        if (hfvLevel === 'N5')       return v.level === 'N5';
-        if (hfvLevel === 'N4')       return v.level === 'N4';
+        // Level filter
+        if (hfvLevel === 'mastered' && !masteredVocab.has(v.jp)) return false;
+        if (hfvLevel === 'N5' && v.level !== 'N5') return false;
+        if (hfvLevel === 'N4' && v.level !== 'N4') return false;
+        // Category filter
+        if (hfvCat !== 'all' && (v.cat || '').toLowerCase() !== hfvCat) return false;
+        // Gojuon filter — match first char of reading
+        if (hfvGojuon !== 'all') {
+            const firstChar = (v.reading || v.jp || '').trim()[0] || '';
+            const allowed = GOJUON_RANGES[hfvGojuon] || [];
+            if (!allowed.includes(firstChar)) return false;
+        }
         return true;
     });
+    // Sort by gojuon order
+    if (hfvGojuon !== 'all') {
+        const order = GOJUON_RANGES[hfvGojuon] || [];
+        filtered.sort((a, b) => {
+            const ac = (a.reading || a.jp || '')[0] || '';
+            const bc = (b.reading || b.jp || '')[0] || '';
+            return order.indexOf(ac) - order.indexOf(bc);
+        });
+    }
     if (q) {
         filtered = filtered.filter(v =>
             (v.jp && v.jp.includes(q)) ||
