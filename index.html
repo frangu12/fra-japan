@@ -924,9 +924,11 @@
   .kq-type-label{font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;}
   .kq-question{font-family:"Noto Sans JP",sans-serif;font-size:3rem;font-weight:900;color:#fff;text-align:center;margin-bottom:24px;line-height:1.1;}
   .kq-question.small{font-size:1.1rem;line-height:1.8;}
+  .kq-q-sub{font-size:0.7rem;color:var(--muted);font-family:"DM Sans",sans-serif;margin-top:6px;font-weight:600;letter-spacing:0.3px;}
   .kq-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
   .kq-opt{padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:#0e0e1a;color:#fff;font-family:"Noto Sans JP",sans-serif;font-size:0.92rem;cursor:pointer;text-align:center;transition:all .18s;font-weight:600;}
   .kq-opt:hover:not(:disabled){border-color:var(--teal2);background:rgba(0,212,170,0.08);}
+  .kq-opt-kanji{font-family:"Noto Sans JP",sans-serif;font-size:1.6rem !important;font-weight:900;padding:14px 10px;}
   .kq-opt.correct{border-color:var(--teal2);background:rgba(0,212,170,0.18);color:var(--teal2);}
   .kq-opt.wrong{border-color:var(--red);background:rgba(192,57,43,0.18);color:var(--red);}
   .kq-feedback{padding:12px 16px;border-radius:10px;font-size:0.85rem;margin-bottom:12px;line-height:1.6;font-family:"Noto Sans JP",sans-serif;}
@@ -4146,7 +4148,17 @@ html>
           <button class="kq-chip active" id="kqt-reading" onclick="kqSetOpt('type','reading')">Cara Baca</button>
           <button class="kq-chip" id="kqt-meaning" onclick="kqSetOpt('type','meaning')">Arti</button>
           <button class="kq-chip" id="kqt-kanji" onclick="kqSetOpt('type','kanji')">Pilih Kanji</button>
+          <button class="kq-chip" id="kqt-alone" onclick="kqSetOpt('type','alone')">漢 Kanji Sendiri</button>
+          <button class="kq-chip" id="kqt-compound" onclick="kqSetOpt('type','compound')">漢字 Kanji Gabungan</button>
           <button class="kq-chip" id="kqt-mix" onclick="kqSetOpt('type','mix')">🎲 Acak</button>
+        </div>
+      </div>
+      <div class="kq-setup-group">
+        <div class="kq-setup-label">🔤 Aksara Jawaban</div>
+        <div class="kq-chip-row">
+          <button class="kq-chip active" id="kqs-on" onclick="kqSetOpt('script','on')">カタカナ (On'yomi)</button>
+          <button class="kq-chip" id="kqs-kun" onclick="kqSetOpt('script','kun')">ひらがな (Kun'yomi)</button>
+          <button class="kq-chip" id="kqs-mix" onclick="kqSetOpt('script','mix')">🎲 Campur</button>
         </div>
       </div>
       <div class="kq-setup-group">
@@ -8731,7 +8743,7 @@ function loadMasteredKanji() {
 // ════════════════════════════════════
 // KANJI QUIZ
 // ════════════════════════════════════
-let kqOpts = { level:'N5', cat:'all', type:'reading', num:20 };
+let kqOpts = { level:'N5', cat:'all', type:'reading', script:'on', num:20 };
 let kqQuestions = [], kqCurrent = 0, kqCorrect = 0, kqWrong = [];
 
 // Kanji per kategori N5 — berdasarkan meaning/char
@@ -8791,7 +8803,7 @@ function switchKanjiMode(mode) {
 function kqSetOpt(key, val) {
     kqOpts[key] = val;
     // Update chip active state
-    const prefix = {level:'kql', cat:'kqc', type:'kqt', num:'kqn'}[key];
+    const prefix = {level:'kql', cat:'kqc', type:'kqt', script:'kqs', num:'kqn'}[key]; if (!prefix) return;
     document.querySelectorAll(`[id^="${prefix}-"]`).forEach(b => b.classList.remove('active'));
     const btnId = `${prefix}-${String(val).replace('999','all')}`;
     const btn = document.getElementById(btnId);
@@ -8809,32 +8821,73 @@ function kqBuildQuestions() {
     const take = Math.min(kqOpts.num === 999 ? pool.length : kqOpts.num, pool.length);
     return pool.slice(0, take).map(k => {
         const types = kqOpts.type === 'mix'
-            ? ['reading','meaning','kanji']
+            ? ['reading','meaning','kanji','alone','compound']
             : [kqOpts.type];
         const type = types[Math.floor(Math.random() * types.length)];
         return buildKQItem(k, type, pool);
     });
 }
 
+function kqGetReading(k) {
+    // Returns [reading, script_label] based on kqOpts.script
+    const scr = kqOpts.script === 'mix'
+        ? (['on','kun'][Math.floor(Math.random()*2)])
+        : kqOpts.script;
+    if (scr === 'on') {
+        const r = k.on && k.on[0];
+        return r ? [r, 'カタカナ'] : [(k.kun&&k.kun[0])||k.char, 'ひらがな'];
+    } else {
+        const r = k.kun && k.kun[0];
+        return r ? [r, 'ひらがな'] : [(k.on&&k.on[0])||k.char, 'カタカナ'];
+    }
+}
+
 function buildKQItem(k, type, pool) {
     const distractors = pool.filter(x => x !== k);
     shuffle(distractors);
-    const d = distractors.slice(0, 3);
+    const d = distractors.slice(0, 5);
+
     if (type === 'reading') {
-        const correct = (k.on && k.on[0]) || (k.kun && k.kun[0]) || k.char;
-        const opts = [correct, ...d.map(x => (x.on&&x.on[0])||(x.kun&&x.kun[0])||x.char)].filter(Boolean);
-        return { type, question: k.char, correct, opts: shuffleArr([...new Set(opts)].slice(0,4)),
-            label:'Apa bacaan kanji ini?', exp:`Bacaan: ${correct} | Arti: ${k.meaning}`, k };
+        // Show kanji → pick correct reading (hiragana or katakana)
+        const [correct, scriptLabel] = kqGetReading(k);
+        const opts = [correct];
+        for (const x of d) {
+            const [r] = kqGetReading(x);
+            if (r && r !== correct && !opts.includes(r)) opts.push(r);
+            if (opts.length >= 4) break;
+        }
+        const allReadings = (k.on||[]).concat(k.kun||[]).join(', ');
+        return { type, question: k.char, correct,
+            opts: shuffleArr(opts.slice(0,4)),
+            label: `Apa bacaan kanji ini? (${scriptLabel})`,
+            exp: `✓ ${correct}　|　Semua bacaan: ${allReadings}　|　Arti: ${k.meaning}`, k };
+
     } else if (type === 'meaning') {
-        const opts = [k.meaning, ...d.map(x => x.meaning)].filter(Boolean);
-        return { type, question: k.char, correct: k.meaning, opts: shuffleArr([...new Set(opts)].slice(0,4)),
-            label:'Apa arti kanji ini?', exp:`Arti: ${k.meaning} | Bacaan: ${(k.on||[]).concat(k.kun||[]).join(', ')}`, k };
+        // Show kanji → pick correct meaning (Indonesian)
+        const opts = [k.meaning];
+        for (const x of d) {
+            if (x.meaning && x.meaning !== k.meaning && !opts.includes(x.meaning)) opts.push(x.meaning);
+            if (opts.length >= 4) break;
+        }
+        const allReadings = (k.on||[]).concat(k.kun||[]).join(', ');
+        return { type, question: k.char, correct: k.meaning,
+            opts: shuffleArr(opts.slice(0,4)),
+            label: 'Apa arti kanji ini? (Pilih terjemahan yang benar)',
+            exp: `✓ ${k.meaning}　|　Bacaan: ${allReadings}`, k };
+
     } else {
-        // kanji type — show reading, pick correct kanji
-        const reading = (k.on&&k.on[0])||(k.kun&&k.kun[0])||k.char;
-        const opts = [k.char, ...d.map(x => x.char)].filter(Boolean);
-        return { type, question: reading, correct: k.char, opts: shuffleArr([...new Set(opts)].slice(0,4)),
-            label:'Pilih kanji yang sesuai dengan bacaan ini', exp:`Kanji: ${k.char} | Arti: ${k.meaning}`, k };
+        // Show reading (hira/kata) → pick correct kanji
+        const [reading, scriptLabel] = kqGetReading(k);
+        const opts = [k.char];
+        for (const x of d) {
+            if (x.char !== k.char && !opts.includes(x.char)) opts.push(x.char);
+            if (opts.length >= 4) break;
+        }
+        return { type, question: reading, correct: k.char,
+            opts: shuffleArr(opts.slice(0,4)),
+            label: `Pilih kanji yang bacaannya "${reading}" (${scriptLabel})`,
+            exp: `✓ ${k.char}　${reading}　|　Arti: ${k.meaning}`, k,
+            isKanjiOpt: true };
     }
 }
 
@@ -8858,15 +8911,16 @@ function kqRender() {
     document.getElementById('kq-progress-fill').style.width = ((kqCurrent/total)*100) + '%';
     document.getElementById('kq-type-label').textContent = q.label;
     const qEl = document.getElementById('kq-question');
-    qEl.className = q.type === 'kanji' ? 'kq-question small' : 'kq-question';
-    qEl.textContent = q.question;
+    qEl.className = (q.type === 'kanji') ? 'kq-question small' : 'kq-question';
+    qEl.innerHTML = q.question +
+        (q.questionSub ? `<div class="kq-q-sub">${q.questionSub}</div>` : '');
     document.getElementById('kq-feedback').style.display = 'none';
     document.getElementById('kq-next-btn').style.display = 'none';
     const opts = document.getElementById('kq-options');
     opts.innerHTML = '';
     q.opts.forEach(opt => {
         const btn = document.createElement('button');
-        btn.className = 'kq-opt';
+        btn.className = 'kq-opt' + (q.isKanjiOpt ? ' kq-opt-kanji' : '');
         btn.textContent = opt;
         btn.onclick = () => kqAnswer(opt, q, btn);
         opts.appendChild(btn);
