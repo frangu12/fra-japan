@@ -1543,6 +1543,41 @@
   @keyframes srWordIn{from{transform:scale(0.7);opacity:0;}to{transform:scale(1);opacity:1;}}
   .sr-timer-bar{height:8px;border-radius:8px;background:linear-gradient(90deg,#34d399,#f59e0b,#f87171);transition:width .1s linear;}
   #sr-score-display{font-size:3rem;font-weight:900;font-family:'Playfair Display',serif;background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  /* ── Partikel ── */
+  .tb-mode-tab{padding:8px 18px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-size:0.8rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:"DM Sans",sans-serif;}
+  .tb-mode-tab.active{border-color:var(--teal2);background:rgba(0,212,170,0.12);color:var(--teal2);}
+  .ptcl-nav{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px;}
+  .ptcl-btn{padding:8px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--card);color:#fff;font-size:1rem;font-family:"Noto Sans JP",sans-serif;font-weight:700;cursor:pointer;transition:all .18s;min-width:44px;text-align:center;}
+  .ptcl-btn.active{border-color:var(--teal2);background:rgba(0,212,170,0.12);color:var(--teal2);}
+  .ptcl-btn:hover{border-color:var(--teal2);}
+  .ptcl-detail{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:20px;margin-bottom:16px;}
+  .ptcl-name{font-size:2rem;font-family:"Noto Sans JP",sans-serif;font-weight:900;color:var(--teal2);margin-bottom:4px;}
+  .ptcl-romaji{font-size:0.8rem;color:var(--muted);margin-bottom:10px;font-weight:600;}
+  .ptcl-desc{font-size:0.88rem;color:#ccc;line-height:1.7;margin-bottom:14px;}
+  .ptcl-uses{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+  .ptcl-use{background:#0e0e1a;border-radius:10px;padding:12px 14px;border-left:3px solid var(--gold);}
+  .ptcl-use-title{font-size:0.68rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+  .ptcl-use-ex{font-family:"Noto Sans JP",sans-serif;font-size:0.9rem;color:#fff;margin-bottom:3px;}
+  .ptcl-use-read{font-size:0.72rem;color:var(--teal2);margin-bottom:2px;}
+  .ptcl-use-id{font-size:0.72rem;color:var(--muted);}
+  .ptcl-compare{background:rgba(255,255,255,0.03);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:0.82rem;color:var(--muted);}
+  .ptcl-compare strong{color:#fff;}
+  .ptcl-quiz-btn{width:100%;padding:12px;border-radius:11px;background:linear-gradient(135deg,var(--red),#8b0000);color:#fff;font-weight:800;font-size:0.88rem;border:none;cursor:pointer;margin-bottom:16px;}
+  .ptcl-quiz-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:22px 18px;}
+  .ptcl-quiz-q{font-family:"Noto Sans JP",sans-serif;font-size:1.05rem;color:#fff;margin-bottom:16px;line-height:2.4;}
+  .ptcl-quiz-q ruby rt{font-size:0.55em;color:var(--teal2);font-weight:400;}
+  .ptcl-quiz-q ruby{display:inline-flex;flex-direction:column-reverse;align-items:center;line-height:1;}
+  .ptcl-use-ex ruby rt{font-size:0.55em;color:var(--teal2);}
+  .ptcl-quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+  .ptcl-quiz-opt{padding:11px;border-radius:10px;border:1.5px solid var(--border);background:#0e0e1a;color:#fff;font-family:"Noto Sans JP",sans-serif;font-size:0.95rem;cursor:pointer;text-align:center;transition:all .15s;font-weight:700;}
+  .ptcl-quiz-opt:hover:not(:disabled){border-color:var(--teal2);}
+  .ptcl-quiz-opt.correct{border-color:var(--teal2);background:rgba(0,212,170,0.15);color:var(--teal2);}
+  .ptcl-quiz-opt.wrong{border-color:var(--red);background:rgba(192,57,43,0.15);color:var(--red);}
+  .ptcl-quiz-fb{font-size:0.83rem;padding:10px 14px;border-radius:9px;margin-bottom:10px;line-height:1.6;}
+  .ptcl-quiz-fb.ok{background:rgba(0,212,170,0.1);color:var(--teal2);border:1px solid rgba(0,212,170,0.25);}
+  .ptcl-quiz-fb.ng{background:rgba(192,57,43,0.1);color:#ff8a8a;border:1px solid rgba(192,57,43,0.25);}
+  .ptcl-quiz-next{width:100%;padding:10px;border-radius:10px;background:var(--red);color:#fff;font-weight:800;border:none;cursor:pointer;font-size:0.85rem;}
+
   /* ── Tata Bahasa ── */
   .tb-cat-btn{padding:8px 16px;border-radius:20px;border:1.5px solid var(--border);background:rgba(255,255,255,0.04);color:#9ca3af;font-size:0.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s;font-weight:600;white-space:nowrap;}
   .tb-cat-btn:hover{border-color:var(--teal);color:var(--teal);}
@@ -3306,12 +3341,20 @@
 <div id="page-tatabahasa" class="page">
   <div style="max-width:600px;margin:0 auto;padding:16px 12px 100px;">
     <!-- Header -->
-    <div style="text-align:center;padding:20px 0 16px;">
+    <div style="text-align:center;padding:20px 0 12px;">
       <div style="font-size:2.2rem;margin-bottom:6px;">📐</div>
       <h2 style="font-size:1.5rem;font-weight:900;color:#fff;margin:0 0 4px;">Tata Bahasa <span style="color:var(--teal);">文法</span></h2>
       <p style="color:#9ca3af;font-size:0.82rem;margin:0;">Pola kalimat N5 & N4 dengan contoh dan latihan</p>
     </div>
 
+    <!-- Mode Tabs -->
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <button class="tb-mode-tab active" id="tbtab-grammar" onclick="switchTbMode('grammar')">📐 Pola Kalimat</button>
+      <button class="tb-mode-tab" id="tbtab-particle" onclick="switchTbMode('particle')">🔵 Partikel</button>
+    </div>
+
+    <!-- GRAMMAR MODE -->
+    <div id="tb-grammar-mode">
     <!-- Filter -->
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;overflow-x:auto;padding-bottom:4px;">
       <button class="tb-cat-btn active" id="tb-f-all" onclick="tbFilter('all')">✦ Semua</button>
@@ -3338,6 +3381,32 @@
 
     <!-- List -->
     <div id="tb-list"></div>
+    </div><!-- end grammar mode -->
+
+    <!-- PARTICLE MODE -->
+    <div id="tb-particle-mode" style="display:none;">
+
+      <!-- Particle nav -->
+      <div class="ptcl-nav" id="ptcl-nav"></div>
+
+      <!-- Particle detail -->
+      <div class="ptcl-detail" id="ptcl-detail"></div>
+
+      <!-- Global Quiz Button -->
+      <button class="ptcl-quiz-btn" id="ptcl-start-quiz-btn" onclick="startAllParticleQuiz()" style="width:100%;margin-bottom:16px;">⚡ Mulai Quiz Semua Partikel</button>
+
+      <!-- Particle Quiz -->
+      <div class="ptcl-quiz-wrap" id="ptcl-quiz-wrap" style="display:none;">
+        <div class="kq-header" style="margin-bottom:8px;">
+          <div class="kq-progress-text" id="ptcl-progress-text">1 / 20</div>
+          <div class="kq-score" id="ptcl-score-text">✓ 0 &nbsp; ✗ 0</div>
+        </div>
+        <div class="kq-progress-bar" style="margin-bottom:16px;"><div class="kq-progress-fill" id="ptcl-progress-fill" style="width:0%"></div></div>
+        <div class="ptcl-quiz-card" id="ptcl-quiz-card"></div>
+      </div>
+
+    </div><!-- end particle mode -->
+
   </div>
 </div>
 
@@ -14632,6 +14701,337 @@ let _tbSearch = '';
 
 function initTataBahasa() {
     renderTataBahasa();
+}
+
+// ════════════════════════════════════
+// PARTIKEL
+// ════════════════════════════════════
+const PARTICLES = [
+  {
+    p:'は', romaji:'wa', label:'Topik', color:'#6366f1',
+    desc:'Menandai topik kalimat. Topik adalah hal yang sedang dibicarakan, bukan selalu subjek gramatikal.',
+    uses:[
+      {title:'Menandai topik', ex:'わたしは学生です。', read:'Watashi wa gakusei desu.', id:'Saya adalah pelajar.'},
+      {title:'Kontras / membandingkan', ex:'コーヒーは好きですが、お茶は好きじゃないです。', read:'Koohii wa suki desu ga, ocha wa suki ja nai desu.', id:'Kopi saya suka, tapi teh tidak.'},
+      {title:'Topik + negatif', ex:'肉は食べません。', read:'Niku wa tabemasen.', id:'Daging tidak saya makan.'},
+    ],
+    compare:'は vs が: は menekankan predikat. が menekankan subjek. "わたしは行く" (topik). "わたしが行く" (penekanan subjek).',
+    quiz:[
+      {q:'___ は <ruby>学生<rt>がくせい</rt></ruby>です。(Saya adalah pelajar.)', opts:['は','が','を','に'], ans:0, ex:'<ruby>私<rt>わたし</rt></ruby>___ <ruby>学生<rt>がくせい</rt></ruby>です。'},
+      {q:'コーヒー___ <ruby>好<rt>す</rt></ruby>きですが、お<ruby>茶<rt>ちゃ</rt></ruby>___ <ruby>好<rt>す</rt></ruby>きじゃないです。', opts:['は・は','が・が','を・に','に・は'], ans:0, ex:'コーヒー___<ruby>好<rt>す</rt></ruby>きですが、お<ruby>茶<rt>ちゃ</rt></ruby>___<ruby>好<rt>す</rt></ruby>きじゃないです。'},
+      {q:'<ruby>田中<rt>たなか</rt></ruby>さん___ <ruby>日本人<rt>にほんじん</rt></ruby>です。(Tanaka adalah orang Jepang.)', opts:['は','を','で','へ'], ans:0, ex:'<ruby>田中<rt>たなか</rt></ruby>さん___ <ruby>日本人<rt>にほんじん</rt></ruby>です。'},
+      {q:'<ruby>私<rt>わたし</rt></ruby>___ <ruby>毎朝<rt>まいあさ</rt></ruby>コーヒーを<ruby>飲<rt>の</rt></ruby>みます。(Saya minum kopi setiap pagi.)', opts:['は','が','を','で'], ans:0, ex:'<ruby>私<rt>わたし</rt></ruby>___ <ruby>毎朝<rt>まいあさ</rt></ruby>コーヒーを<ruby>飲<rt>の</rt></ruby>みます。'},
+      {q:'これ___ <ruby>私<rt>わたし</rt></ruby>のかばんです。(Ini adalah tas saya.)', opts:['は','が','を','に'], ans:0, ex:'これ___ <ruby>私<rt>わたし</rt></ruby>のかばんです。'},
+    ]
+  },
+  {
+    p:'が', romaji:'ga', label:'Subjek', color:'#ec4899',
+    desc:'Menandai subjek gramatikal. Digunakan saat memperkenalkan informasi baru, jawaban atas "siapa/apa", dan dengan kata kemampuan/perasaan.',
+    uses:[
+      {title:'Subjek baru / jawaban "siapa"', ex:'だれが来ましたか。田中さんが来ました。', read:'Dare ga kimashita ka? Tanaka-san ga kimashita.', id:'Siapa yang datang? Tanaka yang datang.'},
+      {title:'Kemampuan (できる・わかる)', ex:'日本語が話せます。', read:'Nihongo ga hanasemasu.', id:'Saya bisa berbicara bahasa Jepang.'},
+      {title:'Perasaan / keinginan (好き・欲しい)', ex:'ラーメンが食べたい。', read:'Raamen ga tabetai.', id:'Saya ingin makan ramen.'},
+    ],
+    compare:'は vs が: は = topik (umum). が = subjek baru atau penekanan siapa yang melakukan.',
+    quiz:[
+      {q:'<ruby>日本語<rt>にほんご</rt></ruby>___ わかりますか？(Apakah kamu mengerti bahasa Jepang?)', opts:['が','は','を','に'], ans:0, ex:'<ruby>日本語<rt>にほんご</rt></ruby>___ わかりますか？'},
+      {q:'だれ___ <ruby>来<rt>き</rt></ruby>ましたか？(Siapa yang datang?)', opts:['が','は','へ','で'], ans:0, ex:'だれ___ <ruby>来<rt>き</rt></ruby>ましたか？'},
+      {q:'<ruby>水<rt>みず</rt></ruby>___ <ruby>飲<rt>の</rt></ruby>みたいです。(Saya ingin minum air.)', opts:['が','を','は','に'], ans:0, ex:'<ruby>水<rt>みず</rt></ruby>___ <ruby>飲<rt>の</rt></ruby>みたいです。'},
+      {q:'<ruby>雨<rt>あめ</rt></ruby>___ <ruby>降<rt>ふ</rt></ruby>っています。(Hujan sedang turun.)', opts:['が','は','を','で'], ans:0, ex:'<ruby>雨<rt>あめ</rt></ruby>___ <ruby>降<rt>ふ</rt></ruby>っています。'},
+      {q:'<ruby>猫<rt>ねこ</rt></ruby>___ <ruby>好<rt>す</rt></ruby>きです。(Saya suka kucing.)', opts:['が','は','を','に'], ans:0, ex:'<ruby>猫<rt>ねこ</rt></ruby>___ <ruby>好<rt>す</rt></ruby>きです。'},
+    ]
+  },
+  {
+    p:'を', romaji:'o', label:'Objek', color:'#f59e0b',
+    desc:'Menandai objek langsung dari kata kerja transitif — benda yang dikenai aksi.',
+    uses:[
+      {title:'Objek langsung', ex:'りんごを食べます。', read:'Ringo wo tabemasu.', id:'Saya makan apel.'},
+      {title:'Lewat / melalui tempat', ex:'公園を歩きます。', read:'Kouen wo arukimasu.', id:'Saya berjalan melewati taman.'},
+      {title:'Meninggalkan tempat', ex:'うちを出ました。', read:'Uchi wo demashita.', id:'Saya keluar dari rumah.'},
+    ],
+    compare:'を vs に: を = objek tindakan. に = tujuan/destinasi atau lokasi keberadaan.',
+    quiz:[
+      {q:'<ruby>本<rt>ほん</rt></ruby>___ <ruby>読<rt>よ</rt></ruby>みます。(Saya membaca buku.)', opts:['を','は','が','で'], ans:0, ex:'<ruby>本<rt>ほん</rt></ruby>___ <ruby>読<rt>よ</rt></ruby>みます。'},
+      {q:'コーヒー___ <ruby>飲<rt>の</rt></ruby>みますか？(Apakah kamu minum kopi?)', opts:['を','に','が','は'], ans:0, ex:'コーヒー___ <ruby>飲<rt>の</rt></ruby>みますか？'},
+      {q:'えいが___ <ruby>見<rt>み</rt></ruby>ました。(Saya menonton film.)', opts:['を','で','に','が'], ans:0, ex:'えいが___ <ruby>見<rt>み</rt></ruby>ました。'},
+      {q:'<ruby>音楽<rt>おんがく</rt></ruby>___ <ruby>聞<rt>き</rt></ruby>きます。(Saya mendengarkan musik.)', opts:['を','は','が','に'], ans:0, ex:'<ruby>音楽<rt>おんがく</rt></ruby>___ <ruby>聞<rt>き</rt></ruby>きます。'},
+      {q:'<ruby>公園<rt>こうえん</rt></ruby>___ <ruby>歩<rt>ある</rt></ruby>きます。(Berjalan melewati taman.)', opts:['を','で','に','へ'], ans:0, ex:'<ruby>公園<rt>こうえん</rt></ruby>___ <ruby>歩<rt>ある</rt></ruby>きます。'},
+    ]
+  },
+  {
+    p:'に', romaji:'ni', label:'Tujuan / Waktu / Lokasi', color:'#10b981',
+    desc:'Menandai tujuan pergerakan, waktu spesifik, lokasi keberadaan, dan penerima tindakan.',
+    uses:[
+      {title:'Tujuan pergerakan', ex:'学校に行きます。', read:'Gakkou ni ikimasu.', id:'Saya pergi ke sekolah.'},
+      {title:'Waktu spesifik', ex:'３時に起きます。', read:'San-ji ni okimasu.', id:'Saya bangun jam 3.'},
+      {title:'Lokasi keberadaan', ex:'猫は部屋にいます。', read:'Neko wa heya ni imasu.', id:'Kucing ada di kamar.'},
+      {title:'Penerima tindakan', ex:'友達にプレゼントをあげます。', read:'Tomodachi ni purezento wo agemasu.', id:'Memberi hadiah kepada teman.'},
+    ],
+    compare:'に vs で: に = lokasi keberadaan statis. で = lokasi aktivitas. "図書館にいます" (ada di perpus). "図書館で勉強します" (belajar di perpus).',
+    quiz:[
+      {q:'<ruby>学校<rt>がっこう</rt></ruby>___ <ruby>行<rt>い</rt></ruby>きます。(Saya pergi ke sekolah.)', opts:['に','で','を','は'], ans:0, ex:'<ruby>学校<rt>がっこう</rt></ruby>___ <ruby>行<rt>い</rt></ruby>きます。'},
+      {q:'７<ruby>時<rt>じ</rt></ruby>___ <ruby>起<rt>お</rt></ruby>きます。(Saya bangun jam 7.)', opts:['に','は','が','で'], ans:0, ex:'７<ruby>時<rt>じ</rt></ruby>___ <ruby>起<rt>お</rt></ruby>きます。'},
+      {q:'<ruby>本棚<rt>ほんだな</rt></ruby>___ <ruby>本<rt>ほん</rt></ruby>があります。(Ada buku di rak.)', opts:['に','を','で','が'], ans:0, ex:'<ruby>本棚<rt>ほんだな</rt></ruby>___ <ruby>本<rt>ほん</rt></ruby>があります。'},
+      {q:'<ruby>友達<rt>ともだち</rt></ruby>___ <ruby>手紙<rt>てがみ</rt></ruby>を<ruby>書<rt>か</rt></ruby>きます。(Saya menulis surat kepada teman.)', opts:['に','は','が','で'], ans:0, ex:'<ruby>友達<rt>ともだち</rt></ruby>___ <ruby>手紙<rt>てがみ</rt></ruby>を<ruby>書<rt>か</rt></ruby>きます。'},
+      {q:'<ruby>部屋<rt>へや</rt></ruby>___ ねこがいます。(Ada kucing di kamar.)', opts:['に','で','を','は'], ans:0, ex:'<ruby>部屋<rt>へや</rt></ruby>___ ねこがいます。'},
+    ]
+  },
+  {
+    p:'で', romaji:'de', label:'Tempat Aksi / Alat', color:'#8b5cf6',
+    desc:'Menandai tempat berlangsungnya aksi, alat/cara, dan bahan yang digunakan.',
+    uses:[
+      {title:'Tempat aktivitas', ex:'図書館で勉強します。', read:'Toshokan de benkyou shimasu.', id:'Belajar di perpustakaan.'},
+      {title:'Alat / sarana', ex:'バスで学校に行きます。', read:'Basu de gakkou ni ikimasu.', id:'Pergi ke sekolah naik bus.'},
+      {title:'Bahasa / cara', ex:'日本語で話してください。', read:'Nihongo de hanashite kudasai.', id:'Tolong berbicara dalam bahasa Jepang.'},
+      {title:'Bahan', ex:'木で作りました。', read:'Ki de tsukurimashita.', id:'Dibuat dari kayu.'},
+    ],
+    compare:'で vs に: で = tempat aksi aktif. に = lokasi keberadaan pasif.',
+    quiz:[
+      {q:'<ruby>電車<rt>でんしゃ</rt></ruby>___ <ruby>来<rt>き</rt></ruby>ました。(Saya datang naik kereta.)', opts:['で','に','を','は'], ans:0, ex:'<ruby>電車<rt>でんしゃ</rt></ruby>___ <ruby>来<rt>き</rt></ruby>ました。'},
+      {q:'<ruby>学校<rt>がっこう</rt></ruby>___ <ruby>日本語<rt>にほんご</rt></ruby>を<ruby>勉強<rt>べんきょう</rt></ruby>します。(Belajar bahasa Jepang di sekolah.)', opts:['で','に','を','が'], ans:0, ex:'<ruby>学校<rt>がっこう</rt></ruby>___ <ruby>日本語<rt>にほんご</rt></ruby>を<ruby>勉強<rt>べんきょう</rt></ruby>します。'},
+      {q:'はさみ___ <ruby>紙<rt>かみ</rt></ruby>を<ruby>切<rt>き</rt></ruby>ります。(Memotong kertas dengan gunting.)', opts:['で','を','に','は'], ans:0, ex:'はさみ___ <ruby>紙<rt>かみ</rt></ruby>を<ruby>切<rt>き</rt></ruby>ります。'},
+      {q:'<ruby>日本語<rt>にほんご</rt></ruby>___ <ruby>話<rt>はな</rt></ruby>してください。(Tolong berbicara bahasa Jepang.)', opts:['で','を','に','が'], ans:0, ex:'<ruby>日本語<rt>にほんご</rt></ruby>___ <ruby>話<rt>はな</rt></ruby>してください。'},
+      {q:'<ruby>木<rt>き</rt></ruby>___ <ruby>作<rt>つく</rt></ruby>りました。(Dibuat dari kayu.)', opts:['で','を','に','は'], ans:0, ex:'<ruby>木<rt>き</rt></ruby>___ <ruby>作<rt>つく</rt></ruby>りました。'},
+    ]
+  },
+  {
+    p:'へ', romaji:'e', label:'Arah', color:'#06b6d4',
+    desc:'Menandai arah pergerakan. Lebih menekankan arah perjalanan daripada destinasi akhir.',
+    uses:[
+      {title:'Arah / destinasi', ex:'東京へ行きます。', read:'Toukyou e ikimasu.', id:'Saya pergi ke Tokyo.'},
+      {title:'Dalam surat (kepada)', ex:'田中さんへ', read:'Tanaka-san e', id:'Kepada Tanaka'},
+    ],
+    compare:'へ vs に: へ menekankan ARAH (proses). に menekankan DESTINASI (tujuan). Keduanya sering bisa dipertukarkan.',
+    quiz:[
+      {q:'どこ___ <ruby>行<rt>い</rt></ruby>きますか？(Kamu pergi ke mana?)', opts:['へ','を','が','は'], ans:0, ex:'どこ___ <ruby>行<rt>い</rt></ruby>きますか？'},
+      {q:'うち___ <ruby>帰<rt>かえ</rt></ruby>ります。(Saya pulang ke rumah.)', opts:['へ','で','に','を'], ans:0, ex:'うち___ <ruby>帰<rt>かえ</rt></ruby>ります。'},
+      {q:'<ruby>東京<rt>とうきょう</rt></ruby>___ <ruby>行<rt>い</rt></ruby>く<ruby>電車<rt>でんしゃ</rt></ruby>はどれですか？(Kereta mana yang menuju Tokyo?)', opts:['へ','で','を','に'], ans:0, ex:'<ruby>東京<rt>とうきょう</rt></ruby>___ <ruby>行<rt>い</rt></ruby>く<ruby>電車<rt>でんしゃ</rt></ruby>はどれですか？'},
+    ]
+  },
+  {
+    p:'と', romaji:'to', label:'Dan / Bersama', color:'#f97316',
+    desc:'Menghubungkan dua kata benda (dan), atau menyatakan melakukan sesuatu bersama seseorang.',
+    uses:[
+      {title:'"Dan" — menghubungkan kata benda', ex:'りんごとみかんを買いました。', read:'Ringo to mikan wo kaimashita.', id:'Membeli apel dan jeruk.'},
+      {title:'"Bersama" seseorang', ex:'友達と映画を見ました。', read:'Tomodachi to eiga wo mimashita.', id:'Menonton film bersama teman.'},
+    ],
+    compare:'と vs や: と = daftar lengkap. や = daftar tidak lengkap (ada lainnya).',
+    quiz:[
+      {q:'<ruby>母<rt>はは</rt></ruby>___ <ruby>買<rt>か</rt></ruby>い<ruby>物<rt>もの</rt></ruby>に<ruby>行<rt>い</rt></ruby>きました。(Pergi belanja bersama ibu.)', opts:['と','を','に','が'], ans:0, ex:'<ruby>母<rt>はは</rt></ruby>___ <ruby>買<rt>か</rt></ruby>い<ruby>物<rt>もの</rt></ruby>に<ruby>行<rt>い</rt></ruby>きました。'},
+      {q:'ペン___ えんぴつがあります。(Ada pena dan pensil.)', opts:['と','や','も','か'], ans:0, ex:'ペン___ えんぴつがあります。'},
+      {q:'<ruby>友達<rt>ともだち</rt></ruby>___ <ruby>話<rt>はな</rt></ruby>しました。(Saya berbicara dengan teman.)', opts:['と','を','に','で'], ans:0, ex:'<ruby>友達<rt>ともだち</rt></ruby>___ <ruby>話<rt>はな</rt></ruby>しました。'},
+      {q:'パン___ ぎゅうにゅうを<ruby>買<rt>か</rt></ruby>いました。(Membeli roti dan susu.)', opts:['と','も','や','か'], ans:0, ex:'パン___ ぎゅうにゅうを<ruby>買<rt>か</rt></ruby>いました。'},
+    ]
+  },
+  {
+    p:'も', romaji:'mo', label:'Juga', color:'#84cc16',
+    desc:'Berarti "juga" atau "pun". Menggantikan は, が, atau を untuk menambahkan informasi serupa.',
+    uses:[
+      {title:'"Juga" (menggantikan は)', ex:'わたしも学生です。', read:'Watashi mo gakusei desu.', id:'Saya juga pelajar.'},
+      {title:'"Juga" (menggantikan が)', ex:'猫もいます。', read:'Neko mo imasu.', id:'Kucing juga ada.'},
+      {title:'Seluruhnya / keduanya', ex:'両方も好きです。', read:'Ryouhou mo suki desu.', id:'Keduanya saya suka.'},
+    ],
+    compare:'は vs も: は memperkenalkan topik baru atau kontras. も menambahkan informasi yang sama/serupa.',
+    quiz:[
+      {q:'わたし___ <ruby>学生<rt>がくせい</rt></ruby>です。(Saya juga pelajar.)', opts:['も','は','が','を'], ans:0, ex:'わたし___ <ruby>学生<rt>がくせい</rt></ruby>です。'},
+      {q:'<ruby>田中<rt>たなか</rt></ruby>さん___ <ruby>来<rt>き</rt></ruby>ますか？(Tanaka juga akan datang?)', opts:['も','は','が','に'], ans:0, ex:'<ruby>田中<rt>たなか</rt></ruby>さん___ <ruby>来<rt>き</rt></ruby>ますか？'},
+      {q:'コーヒー___ お<ruby>茶<rt>ちゃ</rt></ruby>___ <ruby>好<rt>す</rt></ruby>きです。(Saya suka kopi maupun teh.)', opts:['も・も','は・は','が・が','と・と'], ans:0, ex:'コーヒー___ お<ruby>茶<rt>ちゃ</rt></ruby>___ <ruby>好<rt>す</rt></ruby>きです。'},
+      {q:'<ruby>兄<rt>あに</rt></ruby>___ <ruby>日本語<rt>にほんご</rt></ruby>が<ruby>話<rt>はな</rt></ruby>せます。(Kakak laki-laki saya juga bisa berbicara Jepang.)', opts:['も','は','が','を'], ans:0, ex:'<ruby>兄<rt>あに</rt></ruby>___ <ruby>日本語<rt>にほんご</rt></ruby>が<ruby>話<rt>はな</rt></ruby>せます。'},
+    ]
+  },
+  {
+    p:'の', romaji:'no', label:'Kepunyaan / Penghubung', color:'#f43f5e',
+    desc:'Menandai kepemilikan atau menghubungkan dua kata benda. Juga bisa nominalisasi kata kerja.',
+    uses:[
+      {title:'Kepemilikan', ex:'田中さんの本です。', read:'Tanaka-san no hon desu.', id:'Ini buku milik Tanaka.'},
+      {title:'Penghubung kata benda', ex:'日本語の先生', read:'Nihongo no sensei', id:'Guru bahasa Jepang'},
+      {title:'Nominalisasi (kata kerja → kata benda)', ex:'日本語を話すのが好きです。', read:'Nihongo wo hanasu no ga suki desu.', id:'Saya suka berbicara bahasa Jepang.'},
+    ],
+    compare:'の nominalisasi: 話す (berbicara) → 話すの (hal berbicara). Digunakan sebelum が, を, dll.',
+    quiz:[
+      {q:'これは<ruby>田中<rt>たなか</rt></ruby>さん___ <ruby>本<rt>ほん</rt></ruby>です。(Ini buku Tanaka.)', opts:['の','は','が','を'], ans:0, ex:'これは<ruby>田中<rt>たなか</rt></ruby>さん___ <ruby>本<rt>ほん</rt></ruby>です。'},
+      {q:'<ruby>日本語<rt>にほんご</rt></ruby>___ <ruby>先生<rt>せんせい</rt></ruby>はだれですか？(Siapa guru bahasa Jepangnya?)', opts:['の','を','が','に'], ans:0, ex:'<ruby>日本語<rt>にほんご</rt></ruby>___ <ruby>先生<rt>せんせい</rt></ruby>はだれですか？'},
+      {q:'あれは<ruby>私<rt>わたし</rt></ruby>___ かばんです。(Itu tas saya.)', opts:['の','は','が','を'], ans:0, ex:'あれは<ruby>私<rt>わたし</rt></ruby>___ かばんです。'},
+      {q:'<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>話<rt>はな</rt></ruby>す___ が<ruby>好<rt>す</rt></ruby>きです。(Suka berbicara bahasa Jepang.)', opts:['の','は','が','を'], ans:0, ex:'<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>話<rt>はな</rt></ruby>す___ が<ruby>好<rt>す</rt></ruby>きです。'},
+      {q:'<ruby>東京<rt>とうきょう</rt></ruby>___ <ruby>地図<rt>ちず</rt></ruby>がありますか？(Apakah ada peta Tokyo?)', opts:['の','を','は','が'], ans:0, ex:'<ruby>東京<rt>とうきょう</rt></ruby>___ <ruby>地図<rt>ちず</rt></ruby>がありますか？'},
+    ]
+  },
+  {
+    p:'か', romaji:'ka', label:'Tanya / Atau', color:'#a78bfa',
+    desc:'Di akhir kalimat: mengubah menjadi kalimat tanya. Di tengah kalimat: berarti "atau".',
+    uses:[
+      {title:'Kalimat tanya', ex:'これはペンですか。', read:'Kore wa pen desu ka.', id:'Apakah ini pena?'},
+      {title:'"Atau" — pilihan', ex:'コーヒーか紅茶はいかがですか？', read:'Koohii ka koucha wa ikaga desu ka?', id:'Bagaimana kalau kopi atau teh?'},
+      {title:'Ketidakpastian', ex:'だれか来ましたよ。', read:'Dare ka kimashita yo.', id:'Ada seseorang yang datang.'},
+    ],
+    compare:'か vs の: か di akhir = tanya formal. の di akhir = tanya kasual. "行きますか" (formal). "行くの？" (kasual).',
+    quiz:[
+      {q:'これはあなた___ <ruby>本<rt>ほん</rt></ruby>です___？(Apakah ini buku kamu?)', opts:['の・か','は・が','が・の','を・か'], ans:0, ex:'これはあなた___ <ruby>本<rt>ほん</rt></ruby>です___？'},
+      {q:'コーヒー___ お<ruby>茶<rt>ちゃ</rt></ruby>、どちらがいいですか？(Kopi atau teh, mana yang lebih baik?)', opts:['か','と','も','や'], ans:0, ex:'コーヒー___ お<ruby>茶<rt>ちゃ</rt></ruby>、どちらがいいですか？'},
+      {q:'<ruby>明日<rt>あした</rt></ruby>、<ruby>来<rt>き</rt></ruby>ます___？(Apakah kamu akan datang besok?)', opts:['か','は','が','を'], ans:0, ex:'<ruby>明日<rt>あした</rt></ruby>、<ruby>来<rt>き</rt></ruby>ます___？'},
+      {q:'だれ___ <ruby>知<rt>し</rt></ruby>っていますか？(Apakah ada yang tahu?)', opts:['か','が','は','を'], ans:0, ex:'だれ___ <ruby>知<rt>し</rt></ruby>っていますか？'},
+    ]
+  },
+]
+
+let ptclCurrent = 0;
+let ptclQuizIdx = 0;
+let ptclQuizTotal = 0;
+let ptclQuizCorrect = 0;
+
+function switchTbMode(mode) {
+    document.getElementById('tbtab-grammar').classList.toggle('active', mode === 'grammar');
+    document.getElementById('tbtab-particle').classList.toggle('active', mode === 'particle');
+    document.getElementById('tb-grammar-mode').style.display = mode === 'grammar' ? 'block' : 'none';
+    document.getElementById('tb-particle-mode').style.display = mode === 'particle' ? 'block' : 'none';
+    if (mode === 'particle') renderParticleNav();
+}
+
+function renderParticleNav() {
+    const nav = document.getElementById('ptcl-nav');
+    nav.innerHTML = PARTICLES.map((p, i) =>
+        `<button class="ptcl-btn ${i===ptclCurrent?'active':''}" onclick="showParticle(${i})" style="${i===ptclCurrent?'border-color:'+p.color+';color:'+p.color+';background:'+p.color+'22;':''}">${p.p}</button>`
+    ).join('');
+    showParticle(ptclCurrent);
+}
+
+function showParticle(idx) {
+    ptclCurrent = idx;
+    const p = PARTICLES[idx];
+    // Update nav active
+    document.querySelectorAll('.ptcl-btn').forEach((b, i) => {
+        b.classList.toggle('active', i === idx);
+        b.style.borderColor = i === idx ? p.color : '';
+        b.style.color = i === idx ? p.color : '';
+        b.style.background = i === idx ? p.color + '22' : '';
+    });
+
+    const usesHtml = p.uses.map(u => `
+        <div class="ptcl-use">
+            <div class="ptcl-use-title">${u.title}</div>
+            <div class="ptcl-use-ex">${u.ex}</div>
+            <div class="ptcl-use-read">${u.read}</div>
+            <div class="ptcl-use-id">${u.id}</div>
+        </div>`).join('');
+
+    document.getElementById('ptcl-detail').innerHTML = `
+        <div class="ptcl-name">${p.p}</div>
+        <div class="ptcl-romaji">${p.romaji} — ${p.label}</div>
+        <div class="ptcl-desc">${p.desc}</div>
+        <div class="ptcl-uses">${usesHtml}</div>
+        ${p.compare ? `<div class="ptcl-compare"><b>💡 Perbandingan:</b><br>${p.compare}</div>` : ''}
+        <button class="ptcl-quiz-btn" onclick="startParticleQuiz(${idx})">⚡ Quiz Partikel ${p.p}</button>`;
+
+    document.getElementById('ptcl-quiz-wrap').style.display = 'none';
+}
+
+// Build flat list of all quiz items from all particles, shuffle
+let ptclAllQuiz = [];
+let ptclQCurrent = 0, ptclQCorrect = 0, ptclQWrong = [];
+
+function startAllParticleQuiz() {
+    // Flatten all quiz items and tag which particle they belong to
+    ptclAllQuiz = [];
+    PARTICLES.forEach(p => {
+        p.quiz.forEach(q => {
+            ptclAllQuiz.push({ ...q, particle: p.p, romaji: p.romaji, label: p.label, color: p.color });
+        });
+    });
+    shuffle(ptclAllQuiz);
+    ptclQCurrent = 0; ptclQCorrect = 0; ptclQWrong = [];
+    document.getElementById('ptcl-quiz-wrap').style.display = 'block';
+    document.getElementById('ptcl-start-quiz-btn').style.display = 'none';
+    document.getElementById('ptcl-quiz-wrap').scrollIntoView({behavior:'smooth', block:'start'});
+    renderAllParticleQuiz();
+}
+
+function renderAllParticleQuiz() {
+    const total = ptclAllQuiz.length;
+    if (ptclQCurrent >= total) { showParticleResult(); return; }
+    const q = ptclAllQuiz[ptclQCurrent];
+    const pct = Math.round(ptclQCurrent / total * 100);
+
+    // Update header
+    document.getElementById('ptcl-progress-text').textContent = `${ptclQCurrent+1} / ${total}`;
+    document.getElementById('ptcl-score-text').innerHTML =
+        `<span style="color:var(--teal2)">✓ ${ptclQCorrect}</span> &nbsp; <span style="color:var(--red)">✗ ${ptclQWrong.length}</span>`;
+    document.getElementById('ptcl-progress-fill').style.width = pct + '%';
+
+    const questionHtml = q.ex
+        ? q.ex.replace('___', '<span style="color:var(--gold);font-weight:900;font-size:1.1em;">＿＿</span>')
+        : q.q;
+    const optsHtml = q.opts.map((opt, i) =>
+        `<button class="ptcl-quiz-opt" onclick="answerAllParticleQuiz(${i},${q.ans})">${opt}</button>`
+    ).join('');
+
+    document.getElementById('ptcl-quiz-card').innerHTML = `
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+          <span style="font-size:1.4rem;color:${q.color};font-family:'Noto Sans JP',sans-serif;font-weight:900;">${q.particle}</span>
+          <span style="font-size:0.68rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;">${q.label}</span>
+        </div>
+        <div class="ptcl-quiz-q">${questionHtml}</div>
+        <div class="ptcl-quiz-opts">${optsHtml}</div>
+        <div id="ptcl-fb" style="display:none;" class="ptcl-quiz-fb"></div>
+        <button id="ptcl-next-btn" style="display:none;" class="ptcl-quiz-next"
+          onclick="ptclNextQ()">${ptclQCurrent === total-1 ? '🏁 Lihat Hasil' : 'Lanjut →'}</button>`;
+}
+
+function answerAllParticleQuiz(chosen, correct) {
+    document.querySelectorAll('.ptcl-quiz-opt').forEach((b, i) => {
+        b.disabled = true;
+        if (i === correct) b.classList.add('correct');
+        else if (i === chosen && chosen !== correct) b.classList.add('wrong');
+    });
+    const isOk = chosen === correct;
+    if (isOk) { ptclQCorrect++; }
+    else { ptclQWrong.push(ptclAllQuiz[ptclQCurrent]); }
+    const fb = document.getElementById('ptcl-fb');
+    fb.className = 'ptcl-quiz-fb ' + (isOk ? 'ok' : 'ng');
+    const q = ptclAllQuiz[ptclQCurrent];
+    fb.textContent = isOk
+        ? `✓ Benar! Partikel ${q.particle} (${q.romaji}) = ${q.label}`
+        : `✗ Salah. Jawaban: ${q.opts[correct]} — Partikel ${q.particle} = ${q.label}`;
+    fb.style.display = 'block';
+    document.getElementById('ptcl-next-btn').style.display = 'block';
+}
+
+function ptclNextQ() {
+    ptclQCurrent++;
+    renderAllParticleQuiz();
+}
+
+function showParticleResult() {
+    const total = ptclAllQuiz.length;
+    const pct = Math.round(ptclQCorrect / total * 100);
+    const wrongHtml = ptclQWrong.length ? `
+        <div style="text-align:left;margin-bottom:16px;">
+          <div style="font-size:0.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Perlu Diulang</div>
+          ${ptclQWrong.map(q => `
+            <div style="display:flex;gap:10px;align-items:center;padding:8px 12px;background:#0e0e1a;border-radius:8px;margin-bottom:6px;">
+              <span style="font-size:1.3rem;color:${q.color};font-family:'Noto Sans JP',sans-serif;font-weight:900;width:28px;text-align:center;">${q.particle}</span>
+              <span style="font-size:0.78rem;color:var(--muted);">${q.q}</span>
+            </div>`).join('')}
+        </div>` : '';
+    document.getElementById('ptcl-progress-fill').style.width = '100%';
+    document.getElementById('ptcl-quiz-card').innerHTML = `
+        <div style="text-align:center;padding:10px 0 16px;">
+          <div style="font-size:3rem;margin-bottom:10px;">${pct>=80?'🌸':pct>=60?'👍':'📚'}</div>
+          <div style="font-size:1.6rem;font-weight:900;color:var(--gold);margin-bottom:4px;">${ptclQCorrect} / ${total}</div>
+          <div style="font-size:1rem;color:var(--muted);margin-bottom:4px;">${pct}% benar</div>
+          <div style="font-size:0.85rem;color:#ccc;margin-bottom:20px;">
+            ${pct>=80?'Luar biasa! Kamu sudah menguasai partikel Jepang! 🎉':pct>=60?'Bagus! Pelajari lagi yang salah.':'Ayo ulangi lagi, latihan membuat sempurna!'}
+          </div>
+        </div>
+        ${wrongHtml}
+        <div style="display:flex;gap:10px;">
+          <button class="ptcl-quiz-next" style="flex:1;" onclick="startAllParticleQuiz()">🔄 Ulangi Quiz</button>
+          <button class="ptcl-quiz-next" style="flex:1;background:var(--card);border:1.5px solid var(--border);" onclick="resetParticleQuiz()">✕ Tutup</button>
+        </div>`;
+}
+
+function resetParticleQuiz() {
+    document.getElementById('ptcl-quiz-wrap').style.display = 'none';
+    document.getElementById('ptcl-start-quiz-btn').style.display = 'block';
 }
 
 function tbFilter(cat) {
