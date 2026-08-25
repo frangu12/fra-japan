@@ -854,6 +854,45 @@
   .minna-q-ans.show{display:block;}
   @media(max-width:500px){.minna-q-opts{grid-template-columns:1fr;}.minna-vocab-grid{grid-template-columns:1fr 1fr;}}
 
+  /* KONJ QUIZ */
+  .kqz-setup{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:20px;}
+  .kqz-setup-title{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:4px;}
+  .kqz-setup-sub{font-size:0.78rem;color:var(--teal2);font-weight:600;margin-bottom:16px;}
+  .kqz-group{margin-bottom:14px;}
+  .kqz-label{font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;}
+  .kqz-chips{display:flex;gap:7px;flex-wrap:wrap;}
+  .kqz-chip{padding:6px 14px;border-radius:16px;border:1.5px solid var(--border);background:#0e0e1a;color:var(--muted);font-size:0.76rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:"DM Sans",sans-serif;}
+  .kqz-chip.active{border-color:var(--teal2);background:rgba(0,212,170,0.12);color:var(--teal2);}
+  .kqz-chip:hover{border-color:var(--teal2);}
+  .kqz-start-btn{width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;font-size:0.95rem;font-weight:800;border:none;cursor:pointer;margin-top:4px;transition:all .2s;}
+  .kqz-start-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(124,58,237,0.4);}
+  .kqz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+  .kqz-progress-text{font-size:0.82rem;font-weight:700;color:var(--muted);}
+  .kqz-score{font-size:0.82rem;font-weight:700;}
+  .kqz-progress-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:4px;margin-bottom:16px;}
+  .kqz-progress-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#7c3aed,var(--teal2));transition:width .4s;}
+  .kqz-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:22px 18px;}
+  .kqz-verb-display{text-align:center;margin-bottom:16px;}
+  .kqz-verb-main{font-family:"Noto Sans JP",sans-serif;font-size:2.2rem;font-weight:900;color:#fff;}
+  .kqz-verb-read{font-size:0.8rem;color:var(--gold);margin-top:2px;}
+  .kqz-verb-id{font-size:0.78rem;color:var(--muted);}
+  .kqz-task{background:#0e0e1a;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:0.88rem;color:#ccc;line-height:1.6;border-left:3px solid #7c3aed;}
+  .kqz-task strong{color:#fff;}
+  .kqz-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+  .kqz-opt{padding:12px 16px;border-radius:11px;border:1.5px solid var(--border);background:#0e0e1a;color:#fff;font-family:"Noto Sans JP",sans-serif;font-size:0.92rem;cursor:pointer;text-align:left;transition:all .18s;font-weight:600;}
+  .kqz-opt:hover:not(:disabled){border-color:#7c3aed;background:rgba(124,58,237,0.08);}
+  .kqz-opt.correct{border-color:var(--teal2);background:rgba(0,212,170,0.15);color:var(--teal2);}
+  .kqz-opt.wrong{border-color:var(--red);background:rgba(192,57,43,0.15);color:var(--red);}
+  .kqz-input-wrap{display:flex;gap:8px;margin-bottom:12px;}
+  .kqz-input{flex:1;padding:11px 14px;border-radius:10px;border:1.5px solid var(--border);background:#0e0e1a;color:#fff;font-size:0.95rem;font-family:"Noto Sans JP",sans-serif;outline:none;}
+  .kqz-input:focus{border-color:#7c3aed;}
+  .kqz-submit{padding:10px 16px;border-radius:10px;background:#7c3aed;color:#fff;font-weight:800;border:none;cursor:pointer;}
+  .kqz-feedback{padding:11px 14px;border-radius:10px;font-size:0.85rem;margin-bottom:10px;line-height:1.6;font-family:"Noto Sans JP",sans-serif;}
+  .kqz-feedback.ok{background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.25);color:var(--teal2);}
+  .kqz-feedback.ng{background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.25);color:#ff8a8a;}
+  .kqz-next{width:100%;padding:11px;border-radius:10px;background:#7c3aed;color:#fff;font-weight:800;border:none;cursor:pointer;font-size:0.88rem;}
+  .kqz-result{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:24px;text-align:center;margin-top:16px;}
+
   /* HAFAL VOCAB */
   .hfv-controls{padding:14px 16px 0;max-width:900px;margin:0 auto;}
   .hfv-filter-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;}
@@ -1983,9 +2022,53 @@
         <button class="konj-tab" id="ktab-sopan" onclick="switchKonjTab('sopan')">🎩 Sopan</button>
         <button class="konj-tab" id="ktab-negatif" onclick="switchKonjTab('negatif')">❌ Negatif</button>
         <button class="konj-tab" id="ktab-te" onclick="switchKonjTab('te')">🔗 Bentuk て</button>
+        <button class="konj-tab" id="ktab-quiz" onclick="switchKonjTab('quiz')">⚡ Quiz Bentuk</button>
       </div>
 
       <div id="konj-table-wrap"></div>
+      <div id="konj-quiz-wrap" style="display:none;">
+        <div class="kqz-setup" id="kqz-setup">
+          <div class="kqz-setup-title">⚡ Quiz Perubahan Bentuk</div>
+          <div class="kqz-setup-sub" id="kqz-verb-info"></div>
+          <div class="kqz-group">
+            <div class="kqz-label">📂 Kelompok Bentuk</div>
+            <div class="kqz-chips">
+              <button class="kqz-chip active" id="kqzg-all" onclick="kqzSetGroup('all')">Semua</button>
+              <button class="kqz-chip" id="kqzg-dasar" onclick="kqzSetGroup('dasar')">📋 Dasar</button>
+              <button class="kqz-chip" id="kqzg-sopan" onclick="kqzSetGroup('sopan')">🎩 Sopan</button>
+              <button class="kqz-chip" id="kqzg-negatif" onclick="kqzSetGroup('negatif')">❌ Negatif</button>
+              <button class="kqz-chip" id="kqzg-te" onclick="kqzSetGroup('te')">🔗 Bentuk て</button>
+            </div>
+          </div>
+          <div class="kqz-group">
+            <div class="kqz-label">📝 Tipe Soal</div>
+            <div class="kqz-chips">
+              <button class="kqz-chip active" id="kqzt-pilih" onclick="kqzSetType('pilih')">Pilihan Ganda</button>
+              <button class="kqz-chip" id="kqzt-ketik" onclick="kqzSetType('ketik')">✍️ Ketik Jawaban</button>
+            </div>
+          </div>
+          <button class="kqz-start-btn" onclick="startKonjQuiz()">⚡ Mulai Quiz</button>
+        </div>
+        <div class="kqz-active" id="kqz-active" style="display:none;">
+          <div class="kqz-header">
+            <div class="kqz-progress-text" id="kqz-progress">1 / 10</div>
+            <div class="kqz-score" id="kqz-score">✓ 0 &nbsp; ✗ 0</div>
+          </div>
+          <div class="kqz-progress-bar"><div class="kqz-progress-fill" id="kqz-fill" style="width:0%"></div></div>
+          <div class="kqz-card">
+            <div class="kqz-verb-display" id="kqz-verb-display"></div>
+            <div class="kqz-task" id="kqz-task"></div>
+            <div class="kqz-opts" id="kqz-opts"></div>
+            <div class="kqz-input-wrap" id="kqz-input-wrap" style="display:none;">
+              <input type="text" id="kqz-input" class="kqz-input" placeholder="Ketik jawaban dalam hiragana...">
+              <button class="kqz-submit" onclick="kqzCheckTyping()">✓ Cek</button>
+            </div>
+            <div class="kqz-feedback" id="kqz-feedback" style="display:none;"></div>
+            <button class="kqz-next" id="kqz-next" style="display:none;" onclick="kqzNext()">Lanjut →</button>
+          </div>
+        </div>
+        <div class="kqz-result" id="kqz-result" style="display:none;"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -6495,10 +6578,17 @@ function closeKonjDetail() {
 
 function switchKonjTab(tab) {
     konjCurrentTab = tab;
-    ['dasar','sopan','negatif','te'].forEach(t => {
+    ['dasar','sopan','negatif','te','quiz'].forEach(t => {
         document.getElementById('ktab-'+t)?.classList.toggle('active', t === tab);
     });
-    renderKonjTable();
+    const isQuiz = tab === 'quiz';
+    document.getElementById('konj-table-wrap').style.display = isQuiz ? 'none' : 'block';
+    document.getElementById('konj-quiz-wrap').style.display = isQuiz ? 'block' : 'none';
+    if (isQuiz) {
+        kqzInitSetup();
+    } else {
+        renderKonjTable();
+    }
 }
 
 function renderKonjTable() {
@@ -6532,6 +6622,197 @@ function renderKonjTable() {
         <strong style="color:var(--purple2);">Tipe:</strong> ${conj.type === 'ichidan' ? '🟢 Ichidan — hilangkan る, tambah ending' : conj.type === 'godan' ? '🟣 Godan — ubah huruf terakhir sesuai baris あいうえお' : '🟡 Irregular — hafal langsung'}
     </div>`;
 }
+
+// ════════════════════════════════════
+// KONJ QUIZ (PERUBAHAN BENTUK)
+// ════════════════════════════════════
+let kqzGroup = 'all';
+let kqzType  = 'pilih';
+let kqzQuestions = [];
+let kqzCurrent = 0;
+let kqzCorrect = 0;
+let kqzWrong = [];
+
+function kqzSetGroup(g) {
+    kqzGroup = g;
+    document.querySelectorAll('[id^="kqzg-"]').forEach(b => b.classList.remove('active'));
+    document.getElementById('kqzg-' + g)?.classList.add('active');
+}
+
+function kqzSetType(t) {
+    kqzType = t;
+    document.querySelectorAll('[id^="kqzt-"]').forEach(b => b.classList.remove('active'));
+    document.getElementById('kqzt-' + t)?.classList.add('active');
+}
+
+function kqzInitSetup() {
+    if (!konjCurrentVerb) return;
+    const v = konjCurrentVerb;
+    const conj = conjugate(v);
+    document.getElementById('kqz-verb-info').textContent =
+        `${v.jp} (${v.reading}) — ${v.id} · Tipe: ${conj.type}`;
+    document.getElementById('kqz-setup').style.display = 'block';
+    document.getElementById('kqz-active').style.display = 'none';
+    document.getElementById('kqz-result').style.display = 'none';
+}
+
+function startKonjQuiz() {
+    if (!konjCurrentVerb) return;
+    const conj = conjugate(konjCurrentVerb);
+    const groups = kqzGroup === 'all'
+        ? ['dasar','sopan','negatif','te']
+        : [kqzGroup];
+
+    // Build all question items
+    let allItems = [];
+    groups.forEach(g => {
+        (conj[g] || []).forEach(row => {
+            allItems.push({ ...row, group: g });
+        });
+    });
+
+    if (allItems.length === 0) return;
+    shuffle(allItems);
+    kqzQuestions = allItems;
+    kqzCurrent = 0; kqzCorrect = 0; kqzWrong = [];
+
+    document.getElementById('kqz-setup').style.display = 'none';
+    document.getElementById('kqz-result').style.display = 'none';
+    document.getElementById('kqz-active').style.display = 'block';
+    kqzRender();
+}
+
+function kqzRender() {
+    const total = kqzQuestions.length;
+    if (kqzCurrent >= total) { kqzShowResult(); return; }
+    const q = kqzQuestions[kqzCurrent];
+    const v = konjCurrentVerb;
+    const conj = conjugate(v);
+
+    // Header
+    document.getElementById('kqz-progress').textContent = `${kqzCurrent+1} / ${total}`;
+    document.getElementById('kqz-score').innerHTML =
+        `<span style="color:var(--teal2)">✓ ${kqzCorrect}</span> &nbsp; <span style="color:var(--red)">✗ ${kqzWrong.length}</span>`;
+    document.getElementById('kqz-fill').style.width = (kqzCurrent/total*100) + '%';
+
+    // Verb display
+    document.getElementById('kqz-verb-display').innerHTML = `
+        <div class="kqz-verb-main">${v.jp}</div>
+        <div class="kqz-verb-read">${v.reading}</div>
+        <div class="kqz-verb-id">${v.id}</div>`;
+
+    // Task
+    document.getElementById('kqz-task').innerHTML =
+        `Ubah ke bentuk: <strong>${q.label}</strong><br>
+        <span style="font-size:0.75rem;color:var(--muted);">${q.id}</span>`;
+
+    // Reset feedback & next
+    document.getElementById('kqz-feedback').style.display = 'none';
+    document.getElementById('kqz-next').style.display = 'none';
+
+    if (kqzType === 'ketik') {
+        document.getElementById('kqz-opts').style.display = 'none';
+        document.getElementById('kqz-input-wrap').style.display = 'flex';
+        const inp = document.getElementById('kqz-input');
+        inp.value = '';
+        inp.disabled = false;
+        inp.style.borderColor = 'var(--border)';
+        setTimeout(() => inp.focus(), 50);
+        inp.onkeydown = e => { if (e.key === 'Enter') kqzCheckTyping(); };
+    } else {
+        document.getElementById('kqz-input-wrap').style.display = 'none';
+        const optsEl = document.getElementById('kqz-opts');
+        optsEl.style.display = 'flex';
+
+        // Build 4 distractors from all conjugation forms of this verb
+        const allForms = ['dasar','sopan','negatif','te']
+            .flatMap(g => conj[g] || [])
+            .map(r => r.jp)
+            .filter(f => f !== q.jp);
+        shuffle(allForms);
+        const opts = [q.jp, ...allForms.slice(0,3)];
+        shuffle(opts);
+
+        optsEl.innerHTML = opts.map(opt =>
+            `<button class="kqz-opt" onclick="kqzAnswer('${opt.replace(/'/g,"\'")}','${q.jp.replace(/'/g,"\'")}',this)">${opt}</button>`
+        ).join('');
+    }
+}
+
+function kqzAnswer(chosen, correct, btn) {
+    document.querySelectorAll('.kqz-opt').forEach(b => b.disabled = true);
+    const isOk = chosen === correct;
+    if (isOk) { kqzCorrect++; btn.classList.add('correct'); }
+    else {
+        btn.classList.add('wrong');
+        kqzWrong.push(kqzQuestions[kqzCurrent]);
+        document.querySelectorAll('.kqz-opt').forEach(b => {
+            if (b.textContent === correct) b.classList.add('correct');
+        });
+    }
+    kqzShowFeedback(isOk, correct);
+}
+
+function kqzCheckTyping() {
+    const q = kqzQuestions[kqzCurrent];
+    const inp = document.getElementById('kqz-input');
+    const typed = inp.value.trim();
+    inp.disabled = true;
+    const isOk = typed === q.jp || typed === q.read;
+    if (isOk) kqzCorrect++;
+    else kqzWrong.push(q);
+    inp.style.borderColor = isOk ? 'var(--teal2)' : 'var(--red)';
+    kqzShowFeedback(isOk, q.jp);
+}
+
+function kqzShowFeedback(isOk, correct) {
+    const q = kqzQuestions[kqzCurrent];
+    const fb = document.getElementById('kqz-feedback');
+    fb.className = 'kqz-feedback ' + (isOk ? 'ok' : 'ng');
+    fb.innerHTML = isOk
+        ? `✓ Benar! &nbsp; <strong>${correct}</strong>`
+        : `✗ Salah. Jawaban benar: &nbsp; <strong>${correct}</strong><br><span style="font-size:0.75rem">${q.label} — ${q.id}</span>`;
+    fb.style.display = 'block';
+    const nextBtn = document.getElementById('kqz-next');
+    nextBtn.textContent = kqzCurrent === kqzQuestions.length - 1 ? '🏁 Lihat Hasil' : 'Lanjut →';
+    nextBtn.style.display = 'block';
+    if (isOk) speakText(correct);
+}
+
+function kqzNext() {
+    kqzCurrent++;
+    kqzRender();
+}
+
+function kqzShowResult() {
+    document.getElementById('kqz-active').style.display = 'none';
+    const total = kqzQuestions.length;
+    const pct = Math.round(kqzCorrect / total * 100);
+    const wrongHtml = kqzWrong.length ? `
+        <div style="text-align:left;margin:14px 0 10px;">
+          <div style="font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Perlu Diulang</div>
+          ${kqzWrong.map(q => `
+            <div style="padding:8px 12px;background:#0e0e1a;border-radius:8px;margin-bottom:6px;text-align:left;">
+              <div style="font-size:0.68rem;color:var(--muted);">${q.label}</div>
+              <div style="font-family:'Noto Sans JP',sans-serif;font-size:1rem;font-weight:700;color:var(--red);">${q.jp}</div>
+              <div style="font-size:0.72rem;color:var(--muted);">${q.id}</div>
+            </div>`).join('')}
+        </div>` : '';
+
+    document.getElementById('kqz-result').innerHTML = `
+        <div style="font-size:2.5rem;margin-bottom:8px;">${pct>=80?'🌸':pct>=60?'👍':'📚'}</div>
+        <div style="font-size:1.5rem;font-weight:900;color:var(--gold);margin-bottom:4px;">${kqzCorrect} / ${total} (${pct}%)</div>
+        <div style="font-size:0.85rem;color:var(--muted);margin-bottom:16px;">
+          ${pct>=80?'Luar biasa! Kamu menguasai perubahan bentuk ini!':pct>=60?'Bagus! Pelajari lagi yang salah.':'Ayo ulangi lagi!'}
+        </div>
+        ${wrongHtml}
+        <div style="display:flex;gap:10px;justify-content:center;">
+          <button onclick="startKonjQuiz()" style="padding:10px 22px;border-radius:11px;background:#7c3aed;color:#fff;font-weight:800;border:none;cursor:pointer;">🔄 Ulangi</button>
+          <button onclick="kqzInitSetup()" style="padding:10px 22px;border-radius:11px;background:var(--card);border:1.5px solid var(--border);color:#fff;font-weight:800;cursor:pointer;">⚙️ Ubah Pengaturan</button>
+        </div>`;
+    document.getElementById('kqz-result').style.display = 'block';
+}
+
 // ══════════════════════════════════════════════════════════════════
 
 // ══════════════════════════════════════════════════════════════════
@@ -14919,8 +15200,7 @@ function showParticle(idx) {
         <div class="ptcl-romaji">${p.romaji} — ${p.label}</div>
         <div class="ptcl-desc">${p.desc}</div>
         <div class="ptcl-uses">${usesHtml}</div>
-        ${p.compare ? `<div class="ptcl-compare"><b>💡 Perbandingan:</b><br>${p.compare}</div>` : ''}
-        <button class="ptcl-quiz-btn" onclick="startParticleQuiz(${idx})">⚡ Quiz Partikel ${p.p}</button>`;
+        ${p.compare ? `<div class="ptcl-compare"><b>💡 Perbandingan:</b><br>${p.compare}</div>` : ''}`;
 
     document.getElementById('ptcl-quiz-wrap').style.display = 'none';
 }
@@ -14965,10 +15245,6 @@ function renderAllParticleQuiz() {
     ).join('');
 
     document.getElementById('ptcl-quiz-card').innerHTML = `
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
-          <span style="font-size:1.4rem;color:${q.color};font-family:'Noto Sans JP',sans-serif;font-weight:900;">${q.particle}</span>
-          <span style="font-size:0.68rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;">${q.label}</span>
-        </div>
         <div class="ptcl-quiz-q">${questionHtml}</div>
         <div class="ptcl-quiz-opts">${optsHtml}</div>
         <div id="ptcl-fb" style="display:none;" class="ptcl-quiz-fb"></div>
