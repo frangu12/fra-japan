@@ -1986,6 +1986,7 @@
     <div class="konj-hero">
       <div class="konj-hero-title">🔄 Konjugasi <span>動詞</span></div>
       <div class="konj-hero-sub">Tabel konjugasi otomatis untuk kata kerja N5 & N4</div>
+      <div style="margin-top:10px;font-size:0.75rem;color:rgba(255,255,255,0.5);">💡 Klik kata kerja → tab <strong style="color:var(--gold)">⚡ Quiz Bentuk</strong> untuk latihan perubahan bentuk</div>
     </div>
 
     <!-- Search & Filter -->
@@ -6582,8 +6583,10 @@ function switchKonjTab(tab) {
         document.getElementById('ktab-'+t)?.classList.toggle('active', t === tab);
     });
     const isQuiz = tab === 'quiz';
-    document.getElementById('konj-table-wrap').style.display = isQuiz ? 'none' : 'block';
-    document.getElementById('konj-quiz-wrap').style.display = isQuiz ? 'block' : 'none';
+    const tw = document.getElementById('konj-table-wrap');
+    const qw = document.getElementById('konj-quiz-wrap');
+    if (tw) tw.style.display = isQuiz ? 'none' : 'block';
+    if (qw) qw.style.display = isQuiz ? 'block' : 'none';
     if (isQuiz) {
         kqzInitSetup();
     } else {
