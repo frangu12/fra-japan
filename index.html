@@ -854,6 +854,46 @@
   .minna-q-ans.show{display:block;}
   @media(max-width:500px){.minna-q-opts{grid-template-columns:1fr;}.minna-vocab-grid{grid-template-columns:1fr 1fr;}}
 
+  /* TARGET HARIAN */
+  .db-countdown-badge{font-size:0.7rem;font-weight:800;padding:3px 10px;border-radius:20px;background:rgba(192,57,43,0.15);color:var(--red);letter-spacing:0.5px;}
+  .db-target-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+  .db-target-item{display:flex;align-items:center;gap:10px;padding:11px 14px;background:#0e0e1a;border-radius:11px;border:1.5px solid var(--border);cursor:pointer;transition:all .18s;}
+  .db-target-item.done{background:rgba(0,212,170,0.06);border-color:rgba(0,212,170,0.3);}
+  .db-target-item.done .db-target-name{text-decoration:line-through;color:var(--muted);}
+  .db-target-check{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;transition:all .18s;}
+  .db-target-item.done .db-target-check{background:var(--teal2);border-color:var(--teal2);color:#000;}
+  .db-target-icon{font-size:1.1rem;flex-shrink:0;}
+  .db-target-name{flex:1;font-size:0.85rem;font-weight:600;color:#fff;transition:all .18s;}
+  .db-target-tag{font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:8px;white-space:nowrap;}
+  .db-target-footer{display:flex;align-items:center;gap:10px;}
+  .db-target-progress-wrap{flex:1;display:flex;align-items:center;gap:8px;}
+  .db-target-progress-bar{flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:6px;overflow:hidden;}
+  .db-target-progress-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--teal2),var(--gold));transition:width .4s;}
+  .db-target-reset{font-size:0.72rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;}
+  .db-target-reset:hover{color:#fff;background:rgba(255,255,255,0.05);}
+
+  /* WEAK POINT TRACKER */
+  .db-weak-empty{font-size:0.82rem;color:var(--muted);text-align:center;padding:20px;background:#0e0e1a;border-radius:10px;}
+  .db-weak-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#0e0e1a;border-radius:10px;margin-bottom:6px;border-left:3px solid var(--red);}
+  .db-weak-item.kanji{border-left-color:#7c3aed;}
+  .db-weak-item.vocab{border-left-color:var(--gold);}
+  .db-weak-item.particle{border-left-color:#06b6d4;}
+  .db-weak-item.grammar{border-left-color:#10b981;}
+  .db-weak-char{font-family:"Noto Sans JP",sans-serif;font-size:1.4rem;font-weight:900;min-width:36px;text-align:center;}
+  .db-weak-info{flex:1;min-width:0;}
+  .db-weak-label{font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;}
+  .db-weak-text{font-size:0.82rem;color:#ccc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .db-weak-count{font-size:0.68rem;font-weight:700;color:var(--red);background:rgba(192,57,43,0.15);padding:2px 8px;border-radius:10px;white-space:nowrap;}
+  .db-weak-btn{padding:9px 18px;border-radius:10px;background:linear-gradient(135deg,var(--red),#8b0000);color:#fff;font-weight:800;font-size:0.8rem;border:none;cursor:pointer;}
+  .db-weak-btn.secondary{background:var(--card);border:1.5px solid var(--border);color:var(--muted);}
+
+  /* WEAK QUIZ OVERLAY */
+  .wq-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;display:flex;align-items:center;justify-content:center;padding:16px;}
+  .wq-modal{background:#1a1a2e;border:1.5px solid var(--border);border-radius:20px;padding:24px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;}
+  .wq-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+  .wq-title{font-size:1rem;font-weight:800;color:#fff;}
+  .wq-close{background:transparent;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;}
+
   /* KONJ QUIZ */
   .kqz-setup{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:20px;}
   .kqz-setup-title{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:4px;}
@@ -3095,6 +3135,34 @@
         <div class="db-stat-icon" style="background:rgba(251,191,36,0.12);border-color:rgba(251,191,36,0.25);">⭐</div>
         <div class="db-stat-val" style="color:var(--gold)" id="db-total-exp">0</div>
         <div class="db-stat-lbl">Total EXP</div>
+      </div>
+    </div>
+
+    <!-- WEAK POINT TRACKER -->
+    <div class="db-section" id="db-weak-section">
+      <div class="db-section-title">🎯 Perlu Diulang Hari Ini</div>
+      <div id="db-weak-list">
+        <div class="db-weak-empty">✨ Belum ada item. Kerjakan quiz dulu!</div>
+      </div>
+      <div id="db-weak-actions" style="display:none;margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="db-weak-btn" onclick="startWeakPointReview()">⚡ Latih Semua yang Salah</button>
+        <button class="db-weak-btn secondary" onclick="clearWeakPoints()">🗑️ Hapus Semua</button>
+      </div>
+    </div>
+
+    <!-- TARGET HARIAN N4 -->
+    <div class="db-section" id="db-target-section">
+      <div class="db-section-title" style="display:flex;justify-content:space-between;align-items:center;">
+        <span>🎯 Target Harian N4</span>
+        <span id="db-countdown-badge" class="db-countdown-badge">...</span>
+      </div>
+      <div class="db-target-list" id="db-target-list"></div>
+      <div class="db-target-footer">
+        <div class="db-target-progress-wrap">
+          <div class="db-target-progress-bar"><div id="db-target-bar" class="db-target-progress-fill" style="width:0%"></div></div>
+          <span id="db-target-pct" style="font-size:0.75rem;font-weight:700;color:var(--teal2);">0%</span>
+        </div>
+        <button class="db-target-reset" onclick="resetDailyTargets()">↺ Reset Hari Ini</button>
       </div>
     </div>
 
@@ -13427,7 +13495,308 @@ function updateGamificationUI() {
         </div>`).join('');
     }
   }
+  // Update weak point tracker
+  renderWeakPoints();
+  // Update daily targets
+  renderDailyTargets();
 }
+
+// ════════════════════════════════════
+// TARGET HARIAN N4
+// ════════════════════════════════════
+const TARGET_KEY = 'dailyTargets_v1';
+const JLPT_DATE  = new Date('2025-12-06T00:00:00');
+
+const DEFAULT_TARGETS = [
+    { id:'kanji',    icon:'漢', name:'Quiz 10 Kanji N4',        tag:'Kanji',    tagColor:'#7c3aed', xp: 20 },
+    { id:'vocab',    icon:'📚', name:'Hafal 15 Vocab N4',       tag:'Vocab',    tagColor:'var(--gold)', xp: 15 },
+    { id:'grammar',  icon:'📐', name:'Baca 3 Pola Grammar N4',  tag:'Grammar',  tagColor:'#10b981', xp: 10 },
+    { id:'particle', icon:'🔵', name:'Quiz Partikel (1 ronde)', tag:'Partikel', tagColor:'#06b6d4', xp: 15 },
+    { id:'jlpt',     icon:'🎌', name:'10 Soal Simulasi JLPT N4',tag:'JLPT',     tagColor:'var(--red)', xp: 25 },
+    { id:'listen',   icon:'🎧', name:'Latihan Choukai 1 sesi',  tag:'Listening',tagColor:'#ec4899', xp: 15 },
+];
+
+function loadDailyTargets() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(TARGET_KEY) || '{}');
+        const today = new Date().toDateString();
+        if (saved.date !== today) {
+            // New day — reset done status but keep targets
+            return { date: today, done: {} };
+        }
+        return saved;
+    } catch(e) { return { date: new Date().toDateString(), done: {} }; }
+}
+
+function saveDailyTargets(data) {
+    try { localStorage.setItem(TARGET_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function toggleTarget(id) {
+    const data = loadDailyTargets();
+    data.done[id] = !data.done[id];
+    saveDailyTargets(data);
+    if (data.done[id]) {
+        const t = DEFAULT_TARGETS.find(x => x.id === id);
+        if (t && typeof addExp === 'function') addExp(t.xp, `Target: ${t.name}`);
+    }
+    renderDailyTargets();
+}
+
+function resetDailyTargets() {
+    const data = loadDailyTargets();
+    data.done = {};
+    saveDailyTargets(data);
+    renderDailyTargets();
+}
+
+function renderDailyTargets() {
+    const data  = loadDailyTargets();
+    const list  = document.getElementById('db-target-list');
+    const bar   = document.getElementById('db-target-bar');
+    const pct   = document.getElementById('db-target-pct');
+    const badge = document.getElementById('db-countdown-badge');
+    if (!list) return;
+
+    // Countdown
+    const now   = new Date();
+    const diff  = JLPT_DATE - now;
+    if (diff > 0) {
+        const days  = Math.floor(diff / (1000*60*60*24));
+        const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+        if (badge) badge.textContent = `⏰ ${days} hari ${hours} jam lagi`;
+    } else {
+        if (badge) { badge.textContent = '🎌 Hari Ujian!'; badge.style.background = 'rgba(0,212,170,0.15)'; badge.style.color = 'var(--teal2)'; }
+    }
+
+    // Targets
+    const doneCount = Object.values(data.done).filter(Boolean).length;
+    const total = DEFAULT_TARGETS.length;
+    const pctVal = Math.round(doneCount / total * 100);
+    if (bar) bar.style.width = pctVal + '%';
+    if (pct) pct.textContent = pctVal + '%';
+
+    list.innerHTML = DEFAULT_TARGETS.map(t => {
+        const isDone = !!data.done[t.id];
+        return `<div class="db-target-item ${isDone?'done':''}" onclick="toggleTarget('${t.id}')">
+            <div class="db-target-check">${isDone?'✓':''}</div>
+            <div class="db-target-icon">${t.icon}</div>
+            <div class="db-target-name">${t.name}</div>
+            <div class="db-target-tag" style="background:${t.tagColor}22;color:${t.tagColor};">${t.tag}</div>
+            <div style="font-size:0.68rem;color:var(--gold);font-weight:700;">+${t.xp}XP</div>
+        </div>`;
+    }).join('');
+}
+
+// ════════════════════════════════════
+// WEAK POINT TRACKER
+// ════════════════════════════════════
+const WP_KEY = 'weakPoints_v1';
+
+function loadWeakPoints() {
+    try { return JSON.parse(localStorage.getItem(WP_KEY) || '[]'); } catch(e) { return []; }
+}
+
+function saveWeakPoints(items) {
+    try { localStorage.setItem(WP_KEY, JSON.stringify(items.slice(0, 100))); } catch(e) {}
+}
+
+// Called from any quiz when user answers wrong
+// type: 'kanji' | 'vocab' | 'particle' | 'grammar' | 'jlpt'
+// item: { char/jp, reading, id/meaning, source }
+function addWeakPoint(type, item) {
+    const items = loadWeakPoints();
+    const key = type + ':' + (item.char || item.jp || item.q || '');
+    const existing = items.find(x => x.key === key);
+    if (existing) {
+        existing.count = (existing.count || 1) + 1;
+        existing.lastSeen = Date.now();
+    } else {
+        items.unshift({
+            key, type,
+            char: item.char || item.jp || '',
+            reading: item.reading || item.romaji || '',
+            meaning: item.meaning || item.id || item.label || '',
+            source: item.source || '',
+            q: item.q || '',
+            opts: item.opts || [],
+            ans: item.ans !== undefined ? item.ans : 0,
+            exp: item.exp || '',
+            count: 1,
+            lastSeen: Date.now()
+        });
+    }
+    // Keep top 100, sorted by count desc
+    items.sort((a, b) => b.count - a.count);
+    saveWeakPoints(items);
+}
+
+function clearWeakPoints() {
+    if (!confirm('Hapus semua data weak point?')) return;
+    localStorage.removeItem(WP_KEY);
+    renderWeakPoints();
+}
+
+function renderWeakPoints() {
+    const listEl = document.getElementById('db-weak-list');
+    const actEl  = document.getElementById('db-weak-actions');
+    if (!listEl) return;
+    const items = loadWeakPoints();
+    if (items.length === 0) {
+        listEl.innerHTML = '<div class="db-weak-empty">✨ Belum ada item. Kerjakan quiz dulu!</div>';
+        if (actEl) actEl.style.display = 'none';
+        return;
+    }
+    if (actEl) actEl.style.display = 'flex';
+    const colors = { kanji:'#7c3aed', vocab:'var(--gold)', particle:'#06b6d4', grammar:'#10b981', jlpt:'var(--red)' };
+    listEl.innerHTML = items.slice(0, 15).map((item, i) => `
+        <div class="db-weak-item ${item.type}" style="border-left-color:${colors[item.type]||'var(--red)'}">
+          <div class="db-weak-char" style="color:${colors[item.type]||'var(--red)'}">${item.char || '?'}</div>
+          <div class="db-weak-info">
+            <div class="db-weak-label">${item.type.toUpperCase()} · ${item.source||''}</div>
+            <div class="db-weak-text">${item.reading ? item.reading+' — ' : ''}${item.meaning}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+            <div class="db-weak-count">✗ ${item.count}×</div>
+            <button onclick="removeWeakPoint(${i})" style="font-size:0.65rem;color:var(--muted);background:none;border:none;cursor:pointer;">hapus</button>
+          </div>
+        </div>`).join('');
+}
+
+function removeWeakPoint(idx) {
+    const items = loadWeakPoints();
+    items.splice(idx, 1);
+    saveWeakPoints(items);
+    renderWeakPoints();
+}
+
+function startWeakPointReview() {
+    const items = loadWeakPoints();
+    if (items.length === 0) return;
+    // Build quiz from weak points
+    const quizItems = items.slice(0, 20).filter(x => x.opts && x.opts.length > 0);
+    if (quizItems.length === 0) {
+        alert('Item weak point tidak memiliki soal quiz. Kerjakan quiz kanji/partikel dulu.');
+        return;
+    }
+    shuffle(quizItems);
+    openWeakPointQuiz(quizItems);
+}
+
+let wpqItems = [], wpqCurrent = 0, wpqCorrect = 0;
+
+function openWeakPointQuiz(items) {
+    wpqItems = items; wpqCurrent = 0; wpqCorrect = 0;
+    // Create overlay
+    let ov = document.getElementById('wp-quiz-overlay');
+    if (!ov) {
+        ov = document.createElement('div');
+        ov.id = 'wp-quiz-overlay';
+        ov.className = 'wq-overlay';
+        ov.innerHTML = `<div class="wq-modal">
+            <div class="wq-header">
+                <div class="wq-title">🎯 Latihan Weak Point</div>
+                <button class="wq-close" onclick="closeWeakPointQuiz()">✕</button>
+            </div>
+            <div class="kqz-progress-bar" style="margin-bottom:16px;"><div class="kqz-progress-fill" id="wpq-fill" style="width:0%;background:var(--red);"></div></div>
+            <div id="wpq-content"></div>
+        </div>`;
+        document.body.appendChild(ov);
+    }
+    ov.style.display = 'flex';
+    wpqRender();
+}
+
+function closeWeakPointQuiz() {
+    const ov = document.getElementById('wp-quiz-overlay');
+    if (ov) ov.style.display = 'none';
+    renderWeakPoints();
+}
+
+function wpqRender() {
+    const total = wpqItems.length;
+    if (wpqCurrent >= total) { wpqShowResult(); return; }
+    const q = wpqItems[wpqCurrent];
+    document.getElementById('wpq-fill').style.width = (wpqCurrent/total*100) + '%';
+    const colors = { kanji:'#7c3aed', vocab:'var(--gold)', particle:'#06b6d4', grammar:'#10b981', jlpt:'var(--red)' };
+    const optsHtml = q.opts.map((opt, i) =>
+        `<button class="kqz-opt" onclick="wpqAnswer(${i},${q.ans})" style="margin-bottom:8px;">${opt}</button>`
+    ).join('');
+    document.getElementById('wpq-content').innerHTML = `
+        <div style="text-align:center;margin-bottom:16px;">
+          <div style="font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">${wpqCurrent+1} / ${total} · ${q.type.toUpperCase()}</div>
+          <div style="font-family:'Noto Sans JP',sans-serif;font-size:2rem;font-weight:900;color:${colors[q.type]||'#fff'};">${q.char}</div>
+          <div style="font-size:0.75rem;color:var(--muted);margin-top:2px;">${q.reading}</div>
+        </div>
+        <div style="background:#0e0e1a;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:0.85rem;color:#ccc;border-left:3px solid ${colors[q.type]||'var(--red)'};">
+          ${q.q || 'Pilih jawaban yang benar'}
+        </div>
+        <div>${optsHtml}</div>
+        <div id="wpq-fb" style="display:none;" class="kqz-feedback"></div>
+        <button id="wpq-next" style="display:none;" class="kqz-next" onclick="wpqNext()">${wpqCurrent===total-1?'🏁 Selesai':'Lanjut →'}</button>`;
+}
+
+function wpqAnswer(chosen, correct) {
+    document.querySelectorAll('.kqz-opt').forEach((b,i) => {
+        b.disabled = true;
+        if (i === correct) b.classList.add('correct');
+        else if (i === chosen && chosen !== correct) b.classList.add('wrong');
+    });
+    const isOk = chosen === correct;
+    if (isOk) { wpqCorrect++; }
+    const fb = document.getElementById('wpq-fb');
+    fb.className = 'kqz-feedback ' + (isOk ? 'ok' : 'ng');
+    const q = wpqItems[wpqCurrent];
+    fb.textContent = isOk ? `✓ Benar! ${q.exp||''}` : `✗ Salah. Benar: ${q.opts[correct]}`;
+    fb.style.display = 'block';
+    document.getElementById('wpq-next').style.display = 'block';
+}
+
+function wpqNext() { wpqCurrent++; wpqRender(); }
+
+function wpqShowResult() {
+    const total = wpqItems.length;
+    const pct = Math.round(wpqCorrect/total*100);
+    document.getElementById('wpq-fill').style.width = '100%';
+    document.getElementById('wpq-content').innerHTML = `
+        <div style="text-align:center;padding:20px 0;">
+          <div style="font-size:2.5rem;margin-bottom:8px;">${pct>=80?'🌸':pct>=60?'👍':'📚'}</div>
+          <div style="font-size:1.5rem;font-weight:900;color:var(--gold);">${wpqCorrect}/${total} (${pct}%)</div>
+          <div style="font-size:0.85rem;color:var(--muted);margin:8px 0 20px;">${pct>=80?'Kamu sudah menguasai weak point ini!':'Terus latihan sampai hafal!'}</div>
+          <div style="display:flex;gap:10px;justify-content:center;">
+            <button onclick="openWeakPointQuiz(wpqItems)" class="kqz-next" style="flex:1;">🔄 Ulangi</button>
+            <button onclick="closeWeakPointQuiz()" class="kqz-next" style="flex:1;background:var(--card);border:1.5px solid var(--border);">✕ Tutup</button>
+          </div>
+        </div>`;
+}
+
+// ── Hook ke quiz yang ada ──
+// Kanji quiz
+const _origKqAnswer = window.kqAnswer;
+window.kqAnswer = function(chosen, q, btn) {
+    if (typeof _origKqAnswer === 'function') _origKqAnswer(chosen, q, btn);
+    if (chosen !== q.correct) {
+        addWeakPoint('kanji', {
+            char: q.k?.char || chosen, reading: (q.k?.on?.[0]||q.k?.kun?.[0]||''),
+            meaning: q.k?.meaning || '', source: 'Quiz Kanji',
+            q: q.text || q.label, opts: q.opts, ans: q.opts?.indexOf(q.correct),
+            exp: q.exp || ''
+        });
+    }
+};
+
+// Partikel quiz
+const _origAnswerAllP = window.answerAllParticleQuiz;
+window.answerAllParticleQuiz = function(chosen, correct) {
+    if (typeof _origAnswerAllP === 'function') _origAnswerAllP(chosen, correct);
+    if (chosen !== correct && ptclAllQuiz[ptclQCurrent]) {
+        const q = ptclAllQuiz[ptclQCurrent];
+        addWeakPoint('particle', {
+            char: q.particle, reading: q.romaji, meaning: q.label,
+            source: 'Quiz Partikel', q: q.q, opts: q.opts, ans: q.ans, exp: ''
+        });
+    }
+};
 
 // Intersep fungsi original untuk menambahkan EXP
 const originalNextQuestion = window.nextQuestion || function(){};
