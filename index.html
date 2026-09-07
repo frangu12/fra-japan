@@ -870,6 +870,8 @@
   .db-target-progress-bar{flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:6px;overflow:hidden;}
   .db-target-progress-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--teal2),var(--gold));transition:width .4s;}
   .db-target-reset{font-size:0.72rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;}
+  .db-target-lv-btn{flex:1;padding:7px 10px;border-radius:10px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-size:0.78rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:"DM Sans",sans-serif;}
+  .db-target-lv-btn.active{border-color:var(--teal2);background:rgba(0,212,170,0.12);color:var(--teal2);}
   .db-target-reset:hover{color:#fff;background:rgba(255,255,255,0.05);}
 
   /* WEAK POINT TRACKER */
@@ -3153,8 +3155,12 @@
     <!-- TARGET HARIAN N4 -->
     <div class="db-section" id="db-target-section">
       <div class="db-section-title" style="display:flex;justify-content:space-between;align-items:center;">
-        <span>🎯 Target Harian N4</span>
+        <span>🎯 Target Harian</span>
         <span id="db-countdown-badge" class="db-countdown-badge">...</span>
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:12px;">
+        <button class="db-target-lv-btn active" id="dbtlv-n5" onclick="setTargetLevel('N5')">N5 — Pemula</button>
+        <button class="db-target-lv-btn" id="dbtlv-n4" onclick="setTargetLevel('N4')">N4 — Dasar</button>
       </div>
       <div class="db-target-list" id="db-target-list"></div>
       <div class="db-target-footer">
@@ -13504,28 +13510,47 @@ function updateGamificationUI() {
 // ════════════════════════════════════
 // TARGET HARIAN N4
 // ════════════════════════════════════
-const TARGET_KEY = 'dailyTargets_v1';
-const JLPT_DATE  = new Date('2025-12-06T00:00:00');
+const TARGET_KEY  = 'dailyTargets_v2';
+const JLPT_DATE   = new Date('2025-12-06T00:00:00');
+let   targetLevel = localStorage.getItem('targetLevel') || 'N5';
 
-const DEFAULT_TARGETS = [
-    { id:'kanji',    icon:'漢', name:'Quiz 10 Kanji N4',        tag:'Kanji',    tagColor:'#7c3aed', xp: 20 },
-    { id:'vocab',    icon:'📚', name:'Hafal 15 Vocab N4',       tag:'Vocab',    tagColor:'var(--gold)', xp: 15 },
-    { id:'grammar',  icon:'📐', name:'Baca 3 Pola Grammar N4',  tag:'Grammar',  tagColor:'#10b981', xp: 10 },
-    { id:'particle', icon:'🔵', name:'Quiz Partikel (1 ronde)', tag:'Partikel', tagColor:'#06b6d4', xp: 15 },
-    { id:'jlpt',     icon:'🎌', name:'10 Soal Simulasi JLPT N4',tag:'JLPT',     tagColor:'var(--red)', xp: 25 },
-    { id:'listen',   icon:'🎧', name:'Latihan Choukai 1 sesi',  tag:'Listening',tagColor:'#ec4899', xp: 15 },
+const TARGETS_N5 = [
+    { id:'kanji_n5',    icon:'漢', name:'Quiz 10 Kanji N5',              tag:'Kanji',    tagColor:'#7c3aed', xp:15 },
+    { id:'vocab_n5',    icon:'📚', name:'Hafal 10 Vocab N5 baru',        tag:'Vocab',    tagColor:'var(--gold)', xp:10 },
+    { id:'kana',        icon:'あ', name:'Review Hiragana & Katakana',     tag:'Kana',     tagColor:'#06b6d4', xp:10 },
+    { id:'particle_n5', icon:'🔵', name:'Quiz Partikel (は・が・を・に)', tag:'Partikel', tagColor:'#06b6d4', xp:15 },
+    { id:'grammar_n5',  icon:'📐', name:'Pelajari 2 Pola Grammar N5',    tag:'Grammar',  tagColor:'#10b981', xp:10 },
+    { id:'jlpt_n5',     icon:'🎌', name:'10 Soal Simulasi JLPT N5',      tag:'JLPT',     tagColor:'var(--red)', xp:20 },
+    { id:'flash_n5',    icon:'🃏', name:'Flashcard 15 menit',             tag:'Review',   tagColor:'#ec4899', xp:10 },
 ];
+
+const TARGETS_N4 = [
+    { id:'kanji_n4',    icon:'漢', name:'Quiz 10 Kanji N4',               tag:'Kanji',    tagColor:'#7c3aed', xp:20 },
+    { id:'vocab_n4',    icon:'📚', name:'Hafal 15 Vocab N4 baru',         tag:'Vocab',    tagColor:'var(--gold)', xp:15 },
+    { id:'grammar_n4',  icon:'📐', name:'Baca 3 Pola Grammar N4',         tag:'Grammar',  tagColor:'#10b981', xp:10 },
+    { id:'particle_n4', icon:'🔵', name:'Quiz Partikel semua (1 ronde)',  tag:'Partikel', tagColor:'#06b6d4', xp:15 },
+    { id:'jlpt_n4',     icon:'🎌', name:'10 Soal Simulasi JLPT N4',       tag:'JLPT',     tagColor:'var(--red)', xp:25 },
+    { id:'konj_n4',     icon:'🔄', name:'Latihan Konjugasi 1 kata kerja', tag:'Konjugasi',tagColor:'#f97316', xp:10 },
+    { id:'listen_n4',   icon:'🎧', name:'Latihan Choukai 1 sesi',         tag:'Listening',tagColor:'#ec4899', xp:15 },
+];
+
+function getTargets() { return targetLevel === 'N5' ? TARGETS_N5 : TARGETS_N4; }
+
+function setTargetLevel(lv) {
+    targetLevel = lv;
+    localStorage.setItem('targetLevel', lv);
+    document.querySelectorAll('.db-target-lv-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('dbtlv-' + lv.toLowerCase())?.classList.add('active');
+    renderDailyTargets();
+}
 
 function loadDailyTargets() {
     try {
         const saved = JSON.parse(localStorage.getItem(TARGET_KEY) || '{}');
         const today = new Date().toDateString();
-        if (saved.date !== today) {
-            // New day — reset done status but keep targets
-            return { date: today, done: {} };
-        }
+        if (saved.date !== today) return { date: today, doneN5:{}, doneN4:{} };
         return saved;
-    } catch(e) { return { date: new Date().toDateString(), done: {} }; }
+    } catch(e) { return { date: new Date().toDateString(), doneN5:{}, doneN4:{} }; }
 }
 
 function saveDailyTargets(data) {
@@ -13534,18 +13559,21 @@ function saveDailyTargets(data) {
 
 function toggleTarget(id) {
     const data = loadDailyTargets();
-    data.done[id] = !data.done[id];
+    const key  = targetLevel === 'N5' ? 'doneN5' : 'doneN4';
+    if (!data[key]) data[key] = {};
+    data[key][id] = !data[key][id];
     saveDailyTargets(data);
-    if (data.done[id]) {
-        const t = DEFAULT_TARGETS.find(x => x.id === id);
-        if (t && typeof addExp === 'function') addExp(t.xp, `Target: ${t.name}`);
+    if (data[key][id]) {
+        const t = getTargets().find(x => x.id === id);
+        if (t && typeof addExp === 'function') addExp(t.xp, `[${targetLevel}] ${t.name}`);
     }
     renderDailyTargets();
 }
 
 function resetDailyTargets() {
     const data = loadDailyTargets();
-    data.done = {};
+    const key  = targetLevel === 'N5' ? 'doneN5' : 'doneN4';
+    data[key] = {};
     saveDailyTargets(data);
     renderDailyTargets();
 }
@@ -13558,26 +13586,37 @@ function renderDailyTargets() {
     const badge = document.getElementById('db-countdown-badge');
     if (!list) return;
 
+    // Sync level buttons
+    document.querySelectorAll('.db-target-lv-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('dbtlv-' + targetLevel.toLowerCase())?.classList.add('active');
+
     // Countdown
-    const now   = new Date();
-    const diff  = JLPT_DATE - now;
+    const now  = new Date();
+    const diff = JLPT_DATE - now;
     if (diff > 0) {
         const days  = Math.floor(diff / (1000*60*60*24));
         const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-        if (badge) badge.textContent = `⏰ ${days} hari ${hours} jam lagi`;
+        if (badge) badge.textContent = `⏰ ${days} hari lagi`;
     } else {
-        if (badge) { badge.textContent = '🎌 Hari Ujian!'; badge.style.background = 'rgba(0,212,170,0.15)'; badge.style.color = 'var(--teal2)'; }
+        if (badge) { badge.textContent = '🎌 Hari Ujian!'; badge.style.color = 'var(--teal2)'; }
     }
 
-    // Targets
-    const doneCount = Object.values(data.done).filter(Boolean).length;
-    const total = DEFAULT_TARGETS.length;
-    const pctVal = Math.round(doneCount / total * 100);
+    // Progress
+    const targets   = getTargets();
+    const doneMap   = data[targetLevel === 'N5' ? 'doneN5' : 'doneN4'] || {};
+    const doneCount = targets.filter(t => !!doneMap[t.id]).length;
+    const total     = targets.length;
+    const pctVal    = Math.round(doneCount / total * 100);
     if (bar) bar.style.width = pctVal + '%';
     if (pct) pct.textContent = pctVal + '%';
 
-    list.innerHTML = DEFAULT_TARGETS.map(t => {
-        const isDone = !!data.done[t.id];
+    // Semangat message
+    let msg = '';
+    if (pctVal === 100) msg = '<div style="text-align:center;font-size:0.8rem;color:var(--teal2);font-weight:700;margin-bottom:8px;">🎉 Semua target hari ini selesai! Sugoi!</div>';
+    else if (pctVal >= 50) msg = '<div style="text-align:center;font-size:0.78rem;color:var(--gold);margin-bottom:8px;">💪 Tinggal sedikit lagi, ganbatte!</div>';
+
+    list.innerHTML = msg + targets.map(t => {
+        const isDone = !!doneMap[t.id];
         return `<div class="db-target-item ${isDone?'done':''}" onclick="toggleTarget('${t.id}')">
             <div class="db-target-check">${isDone?'✓':''}</div>
             <div class="db-target-icon">${t.icon}</div>
