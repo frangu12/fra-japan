@@ -981,6 +981,36 @@
   .hfv-master-btn{flex:2;padding:10px;border-radius:10px;border:none;background:var(--teal2);color:#000;font-weight:800;font-size:0.82rem;cursor:pointer;transition:all .2s;}
   .hfv-master-btn.is-mastered{background:rgba(0,212,170,0.15);color:var(--teal2);border:1.5px solid var(--teal2);}
 
+  /* RINGKASAN */
+  .rgs-hero{background:linear-gradient(135deg,#0a0a1a,#1a2a1a,#0a1a2a);padding:32px 20px 20px;text-align:center;border-bottom:1px solid var(--border);}
+  .rgs-hero h2{font-size:1.4rem;font-weight:900;color:#fff;margin:0 0 6px;}
+  .rgs-hero p{font-size:0.78rem;color:var(--muted);margin:0 0 16px;}
+  .rgs-tabs{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;}
+  .rgs-tab{padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-size:0.78rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:"DM Sans",sans-serif;}
+  .rgs-tab.active{border-color:var(--teal2);background:rgba(0,212,170,0.12);color:var(--teal2);}
+  .rgs-content{max-width:720px;margin:0 auto;padding:16px 14px 80px;}
+  .rgs-section{margin-bottom:20px;}
+  .rgs-section-title{font-size:0.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding:6px 12px;background:#0e0e1a;border-radius:8px;display:flex;align-items:center;gap:6px;}
+  .rgs-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .rgs-card{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;}
+  .rgs-card-pattern{font-family:"Noto Sans JP",sans-serif;font-size:0.88rem;font-weight:700;color:var(--gold);margin-bottom:4px;}
+  .rgs-card-meaning{font-size:0.75rem;color:var(--muted);margin-bottom:6px;}
+  .rgs-card-ex{font-family:"Noto Sans JP",sans-serif;font-size:0.78rem;color:#ccc;line-height:1.7;}
+  .rgs-card-ex-id{font-size:0.7rem;color:var(--muted);margin-top:2px;}
+  .rgs-particle-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+  .rgs-particle-card{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:12px;}
+  .rgs-p-char{font-family:"Noto Sans JP",sans-serif;font-size:1.6rem;font-weight:900;margin-bottom:4px;}
+  .rgs-p-label{font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+  .rgs-p-uses{font-size:0.72rem;color:#ccc;line-height:1.8;}
+  .rgs-kanji-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
+  .rgs-k-card{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:10px 6px;text-align:center;}
+  .rgs-k-char{font-family:"Noto Sans JP",sans-serif;font-size:1.5rem;font-weight:900;color:#fff;}
+  .rgs-k-read{font-size:0.55rem;color:var(--teal2);margin:2px 0;line-height:1.4;}
+  .rgs-k-mean{font-size:0.58rem;color:var(--muted);}
+  .rgs-k-lv{font-size:0.5rem;font-weight:700;padding:1px 5px;border-radius:5px;margin-bottom:3px;display:inline-block;}
+  .rgs-k-lv.n5{background:rgba(0,212,170,0.15);color:var(--teal2);}
+  .rgs-k-lv.n4{background:rgba(58,90,173,0.2);color:#7ec8f5;}
+
   /* KANJI QUIZ */
   .kanji-mode-tabs{display:flex;gap:8px;padding:12px 16px 0;max-width:1100px;margin:0 auto;}
   .kanji-mode-tab{padding:8px 20px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-size:0.82rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:"DM Sans",sans-serif;}
@@ -1750,6 +1780,7 @@
   <button class="bnav-item" id="bnav-speedround" onclick="showPage('speedround')"><span class="bnav-icon">⚡</span>Speed Round</button>
   <button class="bnav-item" id="bnav-tatabahasa" onclick="showPage('tatabahasa')"><span class="bnav-icon">📐</span>Bunpou</button>
   <button class="bnav-item" id="bnav-kaiwa" onclick="showPage('kaiwa')"><span class="bnav-icon">🎤</span>Kaiwa</button>
+  <button class="bnav-item" id="bnav-ringkasan" onclick="showPage('ringkasan')"><span class="bnav-icon">📋</span>Ringkasan</button>
 </nav>
 
 <!-- HOME -->
@@ -2020,6 +2051,22 @@
     </div>
     <div style="height:16px;"></div>
   </div>
+</div>
+
+<!-- RINGKASAN PAGE -->
+<div id="page-ringkasan" class="page">
+  <div class="rgs-hero">
+    <div style="font-size:2rem;margin-bottom:4px;">📋</div>
+    <h2>Ringkasan Cepat <em>N5 → N4</em></h2>
+    <p>Semua pola penting dalam satu halaman. Screenshot sebelum ujian!</p>
+    <div class="rgs-tabs">
+      <button class="rgs-tab active" id="rgstab-n5" onclick="switchRgs('n5')">N5 Dasar</button>
+      <button class="rgs-tab" id="rgstab-n4" onclick="switchRgs('n4')">N4 Lanjutan</button>
+      <button class="rgs-tab" id="rgstab-particle" onclick="switchRgs('particle')">Partikel</button>
+      <button class="rgs-tab" id="rgstab-kanji" onclick="switchRgs('kanji')">Kanji Wajib</button>
+    </div>
+  </div>
+  <div id="rgs-content" class="rgs-content"></div>
 </div>
 
 <!-- KONJUGASI PAGE -->
@@ -5238,6 +5285,7 @@ function showPage(pageId) {
     if (pageId === 'hafal') { initHafalPage(); }
     if (pageId === 'konjugasi') { initKonjugasi(); }
     if (pageId === 'dashboard' && typeof updateGamificationUI === 'function') { updateGamificationUI(); }
+    if (pageId === 'ringkasan') { renderRgs(); }
     if (pageId === 'quizgambar') { initQuizGambar(); }
     if (pageId === 'quizdengar') { initQuizDengar(); }
     if (pageId === 'speedround') { initSpeedRound(); }
@@ -13507,6 +13555,168 @@ function updateGamificationUI() {
   renderDailyTargets();
 }
 
+// ════════════════════════════════════
+// RINGKASAN CEPAT N5 → N4
+// ════════════════════════════════════
+const RGS_DATA = {
+  n5: [
+    {
+      title: '🔤 Pola Kalimat Dasar', items: [
+        { pattern:'～は～です', meaning:'A adalah B', ex:'わたしは学生です。', exId:'Saya adalah pelajar.' },
+        { pattern:'～は～ではありません', meaning:'A bukan B', ex:'これは本ではありません。', exId:'Ini bukan buku.' },
+        { pattern:'～は～ですか', meaning:'Apakah A adalah B?', ex:'あなたは先生ですか。', exId:'Apakah kamu guru?' },
+        { pattern:'～があります/います', meaning:'Ada (benda/orang)', ex:'つくえの上に本があります。', exId:'Ada buku di atas meja.' },
+        { pattern:'～たいです', meaning:'Ingin melakukan～', ex:'ラーメンが食べたいです。', exId:'Saya ingin makan ramen.' },
+        { pattern:'～てください', meaning:'Tolong lakukan～', ex:'ここに名前を書いてください。', exId:'Tolong tulis nama di sini.' },
+        { pattern:'～ています', meaning:'Sedang～ / Keadaan～', ex:'雨が降っています。', exId:'Sedang hujan.' },
+        { pattern:'～てもいいです', meaning:'Boleh～', ex:'ここで写真を撮ってもいいです。', exId:'Boleh foto di sini.' },
+        { pattern:'～てはいけません', meaning:'Dilarang～', ex:'ここでたばこを吸ってはいけません。', exId:'Dilarang merokok di sini.' },
+        { pattern:'～ないでください', meaning:'Tolong jangan～', ex:'ここで食べないでください。', exId:'Tolong jangan makan di sini.' },
+        { pattern:'～から', meaning:'Karena～', ex:'雨が降っているから、傘を持って行きます。', exId:'Karena hujan, saya bawa payung.' },
+        { pattern:'～が好き/嫌い/上手/下手', meaning:'Suka/Benci/Pandai/Tidak pandai', ex:'日本語が好きです。', exId:'Saya suka bahasa Jepang.' },
+      ]
+    },
+    {
+      title: '⏰ Waktu & Frekuensi', items: [
+        { pattern:'毎日/毎週/毎月', meaning:'Setiap hari/minggu/bulan', ex:'毎日日本語を勉強します。', exId:'Saya belajar bahasa Jepang setiap hari.' },
+        { pattern:'～時に', meaning:'Pada jam～', ex:'7時に起きます。', exId:'Saya bangun jam 7.' },
+        { pattern:'～前に/～後で', meaning:'Sebelum/Setelah～', ex:'寝る前に歯を磨きます。', exId:'Sebelum tidur, saya sikat gigi.' },
+        { pattern:'もう/まだ', meaning:'Sudah/Belum', ex:'もう食べました。まだです。', exId:'Sudah makan. Belum.' },
+      ]
+    },
+    {
+      title: '🔢 Kata Bilangan Penting', items: [
+        { pattern:'～枚 (まい)', meaning:'Lembaran (kertas, tiket)', ex:'切符を2枚買いました。', exId:'Beli 2 lembar tiket.' },
+        { pattern:'～本 (ほん)', meaning:'Benda panjang (botol, pensil)', ex:'えんぴつが3本あります。', exId:'Ada 3 pensil.' },
+        { pattern:'～冊 (さつ)', meaning:'Buku, majalah', ex:'本を5冊読みました。', exId:'Membaca 5 buku.' },
+        { pattern:'～台 (だい)', meaning:'Mesin, kendaraan', ex:'車が2台あります。', exId:'Ada 2 mobil.' },
+      ]
+    },
+  ],
+  n4: [
+    {
+      title: '🔗 Pola て-form Lanjutan', items: [
+        { pattern:'～てしまう', meaning:'Terlanjur, menyesal', ex:'財布を忘れてしまいました。', exId:'Terlanjur lupa dompet.' },
+        { pattern:'～てみる', meaning:'Mencoba melakukan～', ex:'この料理を作ってみます。', exId:'Saya coba membuat masakan ini.' },
+        { pattern:'～ておく', meaning:'Melakukan lebih dulu (persiapan)', ex:'会議の前に資料を読んでおきます。', exId:'Baca materi sebelum rapat.' },
+        { pattern:'～てくる/ていく', meaning:'Datang melakukan/Pergi melakukan', ex:'友達が遊びに来ています。', exId:'Teman datang untuk bermain.' },
+        { pattern:'～てあげる/もらう/くれる', meaning:'Memberi/menerima tindakan', ex:'先生に教えてもらいました。', exId:'Diberi tahu oleh guru.' },
+        { pattern:'～たことがある', meaning:'Pernah melakukan～', ex:'富士山に登ったことがあります。', exId:'Pernah mendaki Gunung Fuji.' },
+      ]
+    },
+    {
+      title: '🎯 Pola Grammar N4 Penting', items: [
+        { pattern:'～ようになる', meaning:'Menjadi bisa～ (perubahan)', ex:'日本語が話せるようになりました。', exId:'Sudah bisa berbicara bahasa Jepang.' },
+        { pattern:'～ようにする', meaning:'Berusaha agar～', ex:'毎日運動するようにしています。', exId:'Berusaha olahraga setiap hari.' },
+        { pattern:'～そうだ', meaning:'Kelihatannya～ (dari penglihatan)', ex:'雨が降りそうです。', exId:'Kelihatannya akan hujan.' },
+        { pattern:'～らしい', meaning:'Sepertinya～ (dari informasi)', ex:'田中さんは来ないらしいです。', exId:'Sepertinya Tanaka tidak akan datang.' },
+        { pattern:'～はずだ', meaning:'Seharusnya～', ex:'彼はもう来ているはずです。', exId:'Seharusnya dia sudah datang.' },
+        { pattern:'～かもしれない', meaning:'Mungkin～', ex:'明日は雨かもしれません。', exId:'Mungkin besok hujan.' },
+        { pattern:'～ために', meaning:'Demi/Untuk tujuan～', ex:'JLPT合格のために勉強します。', exId:'Belajar demi lulus JLPT.' },
+        { pattern:'～ながら', meaning:'Sambil～', ex:'音楽を聞きながら勉強します。', exId:'Belajar sambil dengarkan musik.' },
+        { pattern:'～ば～ほど', meaning:'Semakin～ semakin～', ex:'練習すればするほど上手になります。', exId:'Semakin latihan semakin mahir.' },
+        { pattern:'～のに', meaning:'Padahal～ (kecewa)', ex:'一生懸命勉強したのに、落ちました。', exId:'Padahal sudah belajar keras, tapi gagal.' },
+        { pattern:'～だけ', meaning:'Hanya～', ex:'少しだけ食べました。', exId:'Hanya makan sedikit.' },
+        { pattern:'～しか～ない', meaning:'Hanya～ (penekanan)', ex:'100円しかありません。', exId:'Hanya ada 100 yen.' },
+      ]
+    },
+    {
+      title: '📎 Kata Sambung Penting', items: [
+        { pattern:'だから/ので', meaning:'Maka/Karena itu', ex:'雨だから、行きません。', exId:'Karena hujan, tidak pergi.' },
+        { pattern:'しかし/でも/けど', meaning:'Namun/Tapi', ex:'高いですが、買いました。', exId:'Mahal, tapi dibeli.' },
+        { pattern:'そして/それに', meaning:'Dan/Selain itu', ex:'安くて、それにおいしい。', exId:'Murah dan selain itu enak.' },
+        { pattern:'または/あるいは', meaning:'Atau (pilihan)', ex:'電車またはバスで来てください。', exId:'Silakan datang naik kereta atau bus.' },
+        { pattern:'ところが', meaning:'Akan tetapi (tak terduga)', ex:'雨と思った。ところが晴れた。', exId:'Kira-kira hujan. Ternyata cerah.' },
+        { pattern:'それでも', meaning:'Meskipun begitu', ex:'難しい。それでも頑張ります。', exId:'Sulit. Meskipun begitu saya berusaha.' },
+      ]
+    },
+  ],
+  particle: [
+    { char:'は', color:'#6366f1', label:'Topik', uses:'Topik kalimat\nKontras: AはBだがCはDだ\nTidak dipakai di klausa relatif' },
+    { char:'が', color:'#ec4899', label:'Subjek', uses:'Subjek (penekanan/baru)\n好き・わかる・できる + が\nKlausa relatif' },
+    { char:'を', color:'#f59e0b', label:'Objek', uses:'Objek langsung\nLewati tempat: 公園を歩く\nKeluar dari: うちを出る' },
+    { char:'に', color:'#10b981', label:'Tujuan/Waktu', uses:'Tujuan: 学校に行く\nWaktu: 7時に\nLokasi ada: ここにいる\nPenerima: 田中さんに' },
+    { char:'で', color:'#8b5cf6', label:'Tempat/Alat', uses:'Tempat aksi: 図書館で\nAlat: バスで\nBahasa: 日本語で\nBahan: 木で作る' },
+    { char:'へ', color:'#06b6d4', label:'Arah', uses:'Arah pergerakan\nMirip に tapi tekankan proses\nSurat: ～さんへ' },
+    { char:'と', color:'#f97316', label:'Dan/Bersama', uses:'Dan (lengkap): AとB\nBersama: 友達と\nKutipan: ～と言う\nKondisi: ～とき' },
+    { char:'も', color:'#84cc16', label:'Juga', uses:'Juga (ganti は/が/を)\nSeluruhnya: どれも\nNegatif: 何も～ない' },
+    { char:'の', color:'#f43f5e', label:'Kepunyaan', uses:'Milik: 田中さんの本\nPenghubung KB: 日本語の先生\nNominalisasi: 話すのが好き' },
+    { char:'から', color:'#a78bfa', label:'Dari/Karena', uses:'Dari (asal): 東京から\nSejak: 9時から\nKarena: 雨だから' },
+    { char:'まで', color:'#34d399', label:'Sampai', uses:'Sampai (tujuan): 駅まで\nSampai (waktu): 5時まで\nSering: からまで' },
+    { char:'より', color:'#fb923c', label:'Lebih dari', uses:'Perbandingan: AよりBの方が\nDari pada: これよりあれ' },
+  ],
+  kanji: null // will be built from kanjiDB
+};
+
+let rgsCurrentTab = 'n5';
+
+function switchRgs(tab) {
+    rgsCurrentTab = tab;
+    ['n5','n4','particle','kanji'].forEach(t => {
+        document.getElementById('rgstab-'+t)?.classList.toggle('active', t === tab);
+    });
+    renderRgs();
+}
+
+function renderRgs() {
+    const el = document.getElementById('rgs-content');
+    if (!el) return;
+
+    if (rgsCurrentTab === 'n5' || rgsCurrentTab === 'n4') {
+        const sections = RGS_DATA[rgsCurrentTab];
+        el.innerHTML = sections.map(sec => `
+            <div class="rgs-section">
+              <div class="rgs-section-title">${sec.title}</div>
+              <div class="rgs-cards">
+                ${sec.items.map(item => `
+                  <div class="rgs-card">
+                    <div class="rgs-card-pattern">${item.pattern}</div>
+                    <div class="rgs-card-meaning">${item.meaning}</div>
+                    <div class="rgs-card-ex">${item.ex}</div>
+                    <div class="rgs-card-ex-id">${item.exId}</div>
+                  </div>`).join('')}
+              </div>
+            </div>`).join('');
+
+    } else if (rgsCurrentTab === 'particle') {
+        const ptcls = RGS_DATA.particle;
+        el.innerHTML = `
+            <div class="rgs-section">
+              <div class="rgs-section-title">🔵 Partikel N5 & N4 Lengkap</div>
+              <div class="rgs-particle-grid">
+                ${ptcls.map(p => `
+                  <div class="rgs-particle-card" style="border-left:3px solid ${p.color};">
+                    <div class="rgs-p-char" style="color:${p.color};">${p.char}</div>
+                    <div class="rgs-p-label">${p.label}</div>
+                    <div class="rgs-p-uses">${p.uses.split('\\n').join('<br>')}</div>
+                  </div>`).join('')}
+              </div>
+            </div>`;
+
+    } else if (rgsCurrentTab === 'kanji') {
+        // Get kanji from kanjiDB grouped by level
+        const n5k = (typeof kanjiDB !== 'undefined' ? kanjiDB : []).filter(k => k.level === 'N5').slice(0, 80);
+        const n4k = (typeof kanjiDB !== 'undefined' ? kanjiDB : []).filter(k => k.level === 'N4').slice(0, 88);
+        const renderGrid = (list, lv) => list.map(k => `
+            <div class="rgs-k-card">
+              <div class="rgs-k-lv ${lv.toLowerCase()}">${lv}</div>
+              <div class="rgs-k-char">${k.char}</div>
+              <div class="rgs-k-read">${(k.on||[]).slice(0,1).concat((k.kun||[]).slice(0,1)).join('・')}</div>
+              <div class="rgs-k-mean">${k.meaning}</div>
+            </div>`).join('');
+        el.innerHTML = `
+            <div class="rgs-section">
+              <div class="rgs-section-title">漢 Kanji Wajib N5 (${n5k.length} kanji)</div>
+              <div class="rgs-kanji-grid">${renderGrid(n5k,'N5')}</div>
+            </div>
+            <div class="rgs-section" style="margin-top:20px;">
+              <div class="rgs-section-title">漢 Kanji Wajib N4 (${n4k.length} kanji)</div>
+              <div class="rgs-kanji-grid">${renderGrid(n4k,'N4')}</div>
+            </div>`;
+    }
+}
+
+// Init when page opens
 // ════════════════════════════════════
 // TARGET HARIAN N4
 // ════════════════════════════════════
