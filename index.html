@@ -935,6 +935,33 @@
   .kqz-next{width:100%;padding:11px;border-radius:10px;background:#7c3aed;color:#fff;font-weight:800;border:none;cursor:pointer;font-size:0.88rem;}
   .kqz-result{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:24px;text-align:center;margin-top:16px;}
 
+  /* BUSHU */
+  .bushu-intro{padding:0 0 4px;}
+  .bushu-search-row{display:flex;gap:8px;margin-bottom:14px;}
+  .bushu-filter-sel{padding:8px 10px;border-radius:10px;border:1.5px solid var(--border);background:#0e0e1a;color:#fff;font-size:0.8rem;outline:none;cursor:pointer;}
+  .bushu-list{display:flex;flex-direction:column;gap:12px;}
+  .bushu-group{background:var(--card);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;}
+  .bushu-group-header{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;background:#0e0e1a;border-bottom:1px solid var(--border);}
+  .bushu-group-header:hover{background:#13131f;}
+  .bushu-char{font-family:"Noto Sans JP",sans-serif;font-size:1.8rem;font-weight:900;min-width:40px;text-align:center;}
+  .bushu-info{flex:1;}
+  .bushu-name{font-size:0.85rem;font-weight:700;color:#fff;}
+  .bushu-name-jp{font-size:0.72rem;color:var(--muted);}
+  .bushu-stroke-badge{font-size:0.62rem;font-weight:700;padding:2px 8px;border-radius:8px;background:rgba(212,160,23,0.15);color:var(--gold);white-space:nowrap;}
+  .bushu-kanji-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px;padding:12px;}
+  .bushu-kanji-cell{background:#0e0e1a;border:1.5px solid var(--border);border-radius:9px;padding:8px 4px;text-align:center;cursor:pointer;transition:all .15s;}
+  .bushu-kanji-cell:hover{border-color:var(--teal2);transform:translateY(-2px);}
+  .bushu-k-char{font-family:"Noto Sans JP",sans-serif;font-size:1.3rem;font-weight:900;color:#fff;}
+  .bushu-k-read{font-size:0.55rem;color:var(--teal2);margin:2px 0;}
+  .bushu-k-mean{font-size:0.58rem;color:var(--muted);}
+  .bushu-k-lv{font-size:0.5rem;font-weight:700;padding:1px 5px;border-radius:5px;display:inline-block;margin-bottom:3px;}
+  .bushu-k-lv.n5{background:rgba(0,212,170,0.15);color:var(--teal2);}
+  .bushu-k-lv.n4{background:rgba(58,90,173,0.2);color:#7ec8f5;}
+  .bushu-arrow{font-size:0.7rem;color:var(--muted);transition:transform .2s;}
+  .bushu-group.open .bushu-arrow{transform:rotate(90deg);}
+  .bushu-kanji-wrap{display:none;}
+  .bushu-group.open .bushu-kanji-wrap{display:block;}
+
   /* HAFAL VOCAB */
   .hfv-controls{padding:14px 16px 0;max-width:900px;margin:0 auto;}
   .hfv-filter-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;}
@@ -2173,6 +2200,7 @@
         <button class="hf-tab active" id="hf-tab-kategori" onclick="switchHafal('kategori')">📋 Per Kategori</button>
         <button class="hf-tab" id="hf-tab-radikal" onclick="switchHafal('radikal')">🃏 Kartu Radikal</button>
         <button class="hf-tab" id="hf-tab-pola" onclick="switchHafal('pola')">🔗 Pola Radikal</button>
+        <button class="hf-tab" id="hf-tab-bushu" onclick="switchHafal('bushu')">部首 Bushu</button>
         <button class="hf-tab" id="hf-tab-vocab" onclick="switchHafal('vocab')">📚 Kosakata</button>
       </div>
     </div>
@@ -2261,6 +2289,25 @@
       </div>
       <div id="pola-list"></div>
     </div>
+    <!-- MODE: BUSHU (部首) -->
+    <div id="hf-bushu" class="hf-section" style="display:none;">
+      <div class="bushu-intro">
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:12px;">部首 adalah komponen utama kanji. Mengenal bushu membantu menebak arti kanji baru.</p>
+        <div class="bushu-search-row">
+          <input type="text" id="bushu-search" class="hfv-search" placeholder="🔍 Cari bushu atau arti..." oninput="renderBushu()">
+          <select id="bushu-stroke-filter" class="bushu-filter-sel" onchange="renderBushu()">
+            <option value="all">Semua Stroke</option>
+            <option value="1">1 stroke</option>
+            <option value="2">2 stroke</option>
+            <option value="3">3 stroke</option>
+            <option value="4">4 stroke</option>
+            <option value="5+">5+ stroke</option>
+          </select>
+        </div>
+      </div>
+      <div id="bushu-list" class="bushu-list"></div>
+    </div>
+
     <!-- MODE 4: KOSAKATA HAFAL -->
     <div id="hf-vocab" class="hf-section" style="display:none;">
       <div class="hfv-controls">
@@ -5668,16 +5715,13 @@ function initHafalPage() {
 }
 
 function switchHafal(mode) {
-    document.getElementById('hf-tab-kategori').classList.toggle('active', mode === 'kategori');
-    document.getElementById('hf-tab-radikal').classList.toggle('active', mode === 'radikal');
-    document.getElementById('hf-tab-pola').classList.toggle('active', mode === 'pola');
-    document.getElementById('hf-tab-vocab').classList.toggle('active', mode === 'vocab');
-    document.getElementById('hf-kategori').style.display = mode === 'kategori' ? 'block' : 'none';
-    document.getElementById('hf-radikal').style.display = mode === 'radikal' ? 'block' : 'none';
-    document.getElementById('hf-pola').style.display = mode === 'pola' ? 'block' : 'none';
-    document.getElementById('hf-vocab').style.display = mode === 'vocab' ? 'block' : 'none';
+    ['kategori','radikal','pola','bushu','vocab'].forEach(m => {
+        document.getElementById('hf-tab-'+m)?.classList.toggle('active', m === mode);
+        document.getElementById('hf-'+m)?.style && (document.getElementById('hf-'+m).style.display = m === mode ? 'block' : 'none');
+    });
     if(mode === 'pola') renderPolaRadikal();
     if(mode === 'vocab') renderHafalVocab();
+    if(mode === 'bushu') renderBushu();
 }
 
 function setHafalLevel(lv) {
@@ -7366,6 +7410,163 @@ function loadMasteredKanji() {
         const km = JSON.parse(localStorage.getItem('masteredKanji') || '[]');
         masteredSet = new Set(km);
     } catch(e) { masteredSet = new Set(); }
+}
+
+// ════════════════════════════════════
+// BUSHU (部首) ENGINE
+// ════════════════════════════════════
+const BUSHU_DATA = [
+  { char:'一', strokes:1, name:'Satu / Garis Horizontal', nameJp:'いち', color:'#f59e0b',
+    desc:'Garis horizontal tunggal. Komponen dasar banyak kanji angka dan konsep.',
+    chars:['一','二','三','七','万','上','下','丁','不','且','世','丘','丙','丘'] },
+  { char:'丨', strokes:1, name:'Garis Vertikal', nameJp:'ぼう', color:'#f59e0b',
+    desc:'Garis vertikal ke bawah. Sering jadi komponen kanji yang berkaitan dengan berdiri.',
+    chars:['中','串','丰'] },
+  { char:'人/亻', strokes:2, name:'Orang / Manusia', nameJp:'ひと・にんべん', color:'#ec4899',
+    desc:'Bentuk orang berdiri. Saat di kiri kanji berbentuk 亻 (ninben). Kanji berkaitan dengan manusia dan aktivitas manusia.',
+    chars:['人','今','休','何','仕','他','代','付','住','体','作','使','便','係','倒','借','値','働','優','保','先','兄','元','入','内','全','公'] },
+  { char:'口', strokes:3, name:'Mulut / Lubang', nameJp:'くち・くちへん', color:'#06b6d4',
+    desc:'Bentuk mulut terbuka. Kanji berkaitan dengan bicara, makan, lubang, dan benda kotak.',
+    chars:['口','右','名','合','吸','味','呼','品','員','問','喉','回','国','図','囲','固','四','因'] },
+  { char:'日', strokes:4, name:'Matahari / Hari', nameJp:'にち・ひへん', color:'#f97316',
+    desc:'Bentuk matahari. Kanji berkaitan dengan waktu, cahaya, dan hari.',
+    chars:['日','早','明','時','星','春','昨','昼','晩','暗','映','昔','景','暑','暖','曜','書','月','明'] },
+  { char:'月', strokes:4, name:'Bulan / Daging', nameJp:'つき・にくづき', color:'#8b5cf6',
+    desc:'Bentuk bulan sabit. Juga dipakai sebagai 肉 (daging). Kanji berkaitan dengan bulan dan tubuh.',
+    chars:['月','肉','胃','肩','背','胸','腕','脚','腹','朝','期','望','朗','服','脂'] },
+  { char:'木', strokes:4, name:'Pohon / Kayu', nameJp:'き・きへん', color:'#84cc16',
+    desc:'Pohon dengan akar dan cabang. Kanji berkaitan dengan pohon, kayu, dan tumbuhan.',
+    chars:['木','本','林','森','校','机','椅','橋','楽','梅','桜','様','案','末','未','村'] },
+  { char:'水/氵', strokes:4, name:'Air / Cairan', nameJp:'みず・さんずい', color:'#60a5fa',
+    desc:'Tiga titik air (氵) saat di kiri. Kanji berkaitan dengan air, cairan, dan kegiatan di air.',
+    chars:['水','海','川','池','湖','流','泳','汚','洗','波','泣','活','沈','温','漢','漁','滝','港','漂'] },
+  { char:'火/灬', strokes:4, name:'Api', nameJp:'ひ・かへん・れんが', color:'#ef4444',
+    desc:'Bentuk api menyala. Di bawah kanji berbentuk 灬 (empat titik). Kanji berkaitan dengan panas dan cahaya.',
+    chars:['火','炎','焼','熱','燃','灯','炭','煮','灰','煙','点','照','秋','暖'] },
+  { char:'土', strokes:3, name:'Tanah', nameJp:'つち・つちへん', color:'#92400e',
+    desc:'Gundukan tanah. Kanji berkaitan dengan bumi, tanah, dan tempat.',
+    chars:['土','地','場','境','型','基','城','坂','塔','増','圧','埋','境','報'] },
+  { char:'金/釒', strokes:8, name:'Logam / Emas', nameJp:'かね・かなへん', color:'#fbbf24',
+    desc:'Emas atau logam. Saat di kiri berbentuk 釒. Kanji berkaitan dengan logam dan uang.',
+    chars:['金','銀','銅','鉄','鍋','鈴','鏡','錠','針','鉛','釘','銃','銭'] },
+  { char:'手/扌', strokes:4, name:'Tangan', nameJp:'て・てへん', color:'#10b981',
+    desc:'Tangan dengan jari. Saat di kiri berbentuk 扌. Kanji berkaitan dengan tangan dan tindakan.',
+    chars:['手','持','押','拾','打','指','折','投','掃','担','拡','振','払','指','握','探'] },
+  { char:'心/忄', strokes:4, name:'Hati / Perasaan', nameJp:'こころ・りっしんべん', color:'#ec4899',
+    desc:'Hati yang berdetak. Saat di kiri berbentuk 忄. Kanji berkaitan dengan emosi dan pikiran.',
+    chars:['心','思','愛','感','悲','喜','怒','恋','怖','忘','志','忙','悩','慣','想','念','急'] },
+  { char:'目', strokes:5, name:'Mata', nameJp:'め・めへん', color:'#7c3aed',
+    desc:'Bentuk mata. Kanji berkaitan dengan penglihatan dan pengamatan.',
+    chars:['目','見','眼','眉','睡','眠','覚','親','相','省','看','真'] },
+  { char:'言/訁', strokes:7, name:'Kata / Bicara', nameJp:'ことば・ごんべん', color:'#06b6d4',
+    desc:'Mulut mengeluarkan kata. Saat di kiri berbentuk 訁. Kanji berkaitan dengan bahasa dan komunikasi.',
+    chars:['言','語','話','読','書','記','訓','説','謝','認','計','試','詩','詞','講','討','論'] },
+  { char:'女', strokes:3, name:'Wanita', nameJp:'おんな・おんなへん', color:'#ec4899',
+    desc:'Orang perempuan duduk. Kanji berkaitan dengan wanita, hubungan, dan sifat.',
+    chars:['女','母','姉','妹','妻','好','姿','婚','娘','嫌','始','委','姓','媒'] },
+  { char:'子', strokes:3, name:'Anak / Bayi', nameJp:'こ・こへん', color:'#84cc16',
+    desc:'Bayi dengan tangan terentang. Kanji berkaitan dengan anak dan belajar.',
+    chars:['子','学','好','字','孫','孤','存','季','孝'] },
+  { char:'山', strokes:3, name:'Gunung', nameJp:'やま・やまへん', color:'#92400e',
+    desc:'Tiga puncak gunung. Kanji berkaitan dengan gunung dan alam liar.',
+    chars:['山','岩','島','崖','峰','岳','崩','嵐','幽'] },
+  { char:'糸/纟', strokes:6, name:'Benang / Kain', nameJp:'いと・いとへん', color:'#a78bfa',
+    desc:'Gulungan benang. Kanji berkaitan dengan kain, warna, dan hubungan.',
+    chars:['糸','紙','緑','赤','組','線','結','続','終','絵','紹','細','絶','縫','経'] },
+  { char:'食/飠', strokes:9, name:'Makan / Makanan', nameJp:'しょく・たべもの', color:'#f97316',
+    desc:'Mangkuk makanan. Kanji berkaitan dengan makanan dan makan.',
+    chars:['食','飲','飯','館','飢','餅','養'] },
+  { char:'車', strokes:7, name:'Kendaraan', nameJp:'くるま・くるまへん', color:'#6366f1',
+    desc:'Roda kereta. Kanji berkaitan dengan kendaraan dan transportasi.',
+    chars:['車','軽','転','輸','軍','連','輪','轟'] },
+  { char:'雨', strokes:8, name:'Hujan / Cuaca', nameJp:'あめ・あめかんむり', color:'#60a5fa',
+    desc:'Awan dengan tetes hujan. Kanji berkaitan dengan cuaca.',
+    chars:['雨','雪','雷','霧','露','雲','電','震','霜'] },
+  { char:'足/⻊', strokes:7, name:'Kaki', nameJp:'あし・あしへん', color:'#10b981',
+    desc:'Kaki manusia. Kanji berkaitan dengan kaki dan pergerakan.',
+    chars:['足','路','跳','踊','蹴','距','跡','踏'] },
+  { char:'虫', strokes:6, name:'Serangga', nameJp:'むし・むしへん', color:'#84cc16',
+    desc:'Seekor ulat/serangga. Kanji berkaitan dengan hewan kecil.',
+    chars:['虫','蛇','蜂','螺','蝶','蛍','蚊'] },
+];
+
+let bushuOpenSet = new Set();
+
+function renderBushu() {
+    const q      = (document.getElementById('bushu-search')?.value || '').toLowerCase();
+    const stroke = document.getElementById('bushu-stroke-filter')?.value || 'all';
+    const list   = document.getElementById('bushu-list');
+    if (!list) return;
+
+    let filtered = BUSHU_DATA.filter(b => {
+        if (stroke !== 'all') {
+            if (stroke === '5+' && b.strokes < 5) return false;
+            if (stroke !== '5+' && b.strokes !== parseInt(stroke)) return false;
+        }
+        if (q) {
+            return b.name.toLowerCase().includes(q) ||
+                   b.nameJp.includes(q) ||
+                   b.char.includes(q) ||
+                   (b.desc||'').toLowerCase().includes(q);
+        }
+        return true;
+    });
+
+    if (!filtered.length) {
+        list.innerHTML = '<div style="text-align:center;color:var(--muted);padding:30px;">Tidak ada bushu ditemukan.</div>';
+        return;
+    }
+
+    list.innerHTML = filtered.map((b, i) => {
+        const isOpen = bushuOpenSet.has(b.char);
+        // Find kanji from kanjiDB that belong to this bushu
+        const relatedKanji = (typeof kanjiDB !== 'undefined' ? kanjiDB : [])
+            .filter(k => b.chars.includes(k.char));
+        const extraChars = b.chars.filter(c => !relatedKanji.find(k => k.char === c));
+
+        const kanjiGrid = relatedKanji.map(k => `
+            <div class="bushu-kanji-cell" onclick="openHfKanji('${k.char}')">
+                <div class="bushu-k-lv ${k.level?.toLowerCase()}">${k.level||''}</div>
+                <div class="bushu-k-char">${k.char}</div>
+                <div class="bushu-k-read">${(k.on||[])[0]||''} ${(k.kun||[])[0]?.split('.')[0]||''}</div>
+                <div class="bushu-k-mean">${k.meaning||''}</div>
+            </div>`).join('');
+
+        const extraGrid = extraChars.map(c => `
+            <div class="bushu-kanji-cell">
+                <div class="bushu-k-char">${c}</div>
+                <div class="bushu-k-read" style="color:var(--muted);">—</div>
+            </div>`).join('');
+
+        return `<div class="bushu-group ${isOpen?'open':''}" id="bushu-g-${i}">
+            <div class="bushu-group-header" onclick="toggleBushu('${b.char}', ${i})">
+                <div class="bushu-char" style="color:${b.color}">${b.char}</div>
+                <div class="bushu-info">
+                    <div class="bushu-name">${b.name}</div>
+                    <div class="bushu-name-jp">${b.nameJp} · ${b.desc}</div>
+                </div>
+                <div class="bushu-stroke-badge">${b.strokes} stroke</div>
+                <div class="bushu-arrow">▶</div>
+            </div>
+            <div class="bushu-kanji-wrap">
+                <div class="bushu-kanji-grid">${kanjiGrid}${extraGrid}</div>
+            </div>
+        </div>`;
+    }).join('');
+
+    // Re-apply open state after re-render
+    filtered.forEach((b, i) => {
+        if (bushuOpenSet.has(b.char)) {
+            document.getElementById('bushu-g-'+i)?.classList.add('open');
+        }
+    });
+}
+
+function toggleBushu(char, idx) {
+    if (bushuOpenSet.has(char)) bushuOpenSet.delete(char);
+    else bushuOpenSet.add(char);
+    const el = document.getElementById('bushu-g-'+idx);
+    if (el) el.classList.toggle('open', bushuOpenSet.has(char));
 }
 
 // ════════════════════════════════════
