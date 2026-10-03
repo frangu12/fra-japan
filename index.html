@@ -2500,7 +2500,7 @@
   <div class="kanji-hero">
     <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;">漢</div>
     <h2>Kanji <em>N5 & N4</em></h2>
-    <p>168 kanji wajib untuk ujian JLPT. Klik kanji untuk lihat detail lengkap — onyomi, kunyomi, arti, dan contoh kata.</p>
+    <p>313 kanji wajib untuk ujian JLPT N5 & N4. Klik kanji untuk lihat detail lengkap — onyomi, kunyomi, arti, dan contoh kata.</p>
   </div>
   <div class="kanji-controls">
     <div class="kanji-mode-tabs">
@@ -2509,9 +2509,9 @@
     </div>
     <div id="kanji-browse-ctrl">
       <div class="kanji-filter-row">
-        <button class="kf-btn active" onclick="setKanjiFilter('all')">Semua (168)</button>
-        <button class="kf-btn n5-btn" onclick="setKanjiFilter('N5')">N5 (80)</button>
-        <button class="kf-btn n4-btn" onclick="setKanjiFilter('N4')">N4 (88)</button>
+        <button class="kf-btn active" onclick="setKanjiFilter('all')">Semua (313)</button>
+        <button class="kf-btn n5-btn" onclick="setKanjiFilter('N5')">N5 (160)</button>
+        <button class="kf-btn n4-btn" onclick="setKanjiFilter('N4')">N4 (153)</button>
         <button class="kf-btn" onclick="setKanjiFilter('mastered')" id="mastered-filter-btn">✓ Dikuasai (<span id="mastered-count">0</span>)</button>
         <input class="kanji-search" type="text" id="kanji-search" placeholder="🔍 Cari kanji / arti..." oninput="renderKanji()">
       </div>
@@ -3699,7 +3699,7 @@
 
 <script>
 // ═══════════════════════════════════════════════
-// KANJI DATABASE — N5 (80) + N4 (88) = 168 total
+// KANJI DATABASE — N5 (160) + N4 (153) = 168 total
 // ═══════════════════════════════════════════════
 const kanjiDB = [
   {char:'一',level:'N5',strokes:1,on:['イチ','イツ'],kun:['ひと','ひとつ'],meaning:'Satu',examples:[{word:'一つ',read:'ひとつ',meaning:'Satu buah'},{word:'一人',read:'ひとり',meaning:'Satu orang'},{word:'一日',read:'ついたち',meaning:'Tanggal satu'}],sentence:{jp:'一つのりんごを食べました。',id:'Saya makan satu apel.'}},
@@ -3977,6 +3977,50 @@ const kanjiDB = [
   {char:'泳',level:'N4',strokes:8,on:['エイ'],kun:['およ'],meaning:'Berenang',examples:[{word:'泳ぐ',read:'およぐ',meaning:'Berenang'},{word:'水泳',read:'すいえい',meaning:'Renang'},{word:'背泳ぎ',read:'せおよぎ',meaning:'Renang punggung'}],sentence:{jp:'海で泳ぎました。',id:'Saya berenang di laut.'}},
   {char:'落',level:'N4',strokes:12,on:['ラク'],kun:['お','おち'],meaning:'Jatuh, Gugur',examples:[{word:'落ちる',read:'おちる',meaning:'Jatuh'},{word:'落とす',read:'おとす',meaning:'Menjatuhkan'},{word:'落ち着く',read:'おちつく',meaning:'Tenang'}],sentence:{jp:'財布が落ちました。',id:'Dompet saya jatuh.'}},
   {char:'倒',level:'N4',strokes:10,on:['トウ'],kun:['たお'],meaning:'Tumbang, Roboh',examples:[{word:'倒れる',read:'たおれる',meaning:'Roboh/pingsan'},{word:'倒す',read:'たおす',meaning:'Menjatuhkan'},{word:'圧倒',read:'あっとう',meaning:'Menguasai'}],sentence:{jp:'木が倒れました。',id:'Pohon tumbang.'}},
+
+  {char:'以',level:'N4',strokes:5,on:['イ'],kun:['もって'],meaning:'Dengan, Oleh karena',examples:[{word:'以上',read:'いじょう',meaning:'Lebih dari, Di atas'},{word:'以下',read:'いか',meaning:'Kurang dari, Di bawah'},{word:'以前',read:'いぜん',meaning:'Sebelumnya'}],sentence:{jp:'これ以上は無理です。',id:'Ini sudah tidak bisa lebih lagi.'}},
+  {char:'去',level:'N4',strokes:5,on:['キョ','コ'],kun:['さる'],meaning:'Pergi, Berlalu',examples:[{word:'去年',read:'きょねん',meaning:'Tahun lalu'},{word:'過去',read:'かこ',meaning:'Masa lalu'},{word:'去る',read:'さる',meaning:'Pergi, berlalu'}],sentence:{jp:'去年、日本に行きました。',id:'Tahun lalu saya pergi ke Jepang.'}},
+  {char:'起',level:'N4',strokes:10,on:['キ'],kun:['おきる','おこる','おこす'],meaning:'Bangun, Terjadi',examples:[{word:'起きる',read:'おきる',meaning:'Bangun'},{word:'起こす',read:'おこす',meaning:'Membangunkan'},{word:'起床',read:'きしょう',meaning:'Bangun tidur'}],sentence:{jp:'毎朝7時に起きます。',id:'Saya bangun jam 7 setiap pagi.'}},
+  {char:'央',level:'N4',strokes:5,on:['オウ'],kun:[],meaning:'Tengah, Pusat',examples:[{word:'中央',read:'ちゅうおう',meaning:'Pusat, tengah'},{word:'中央線',read:'ちゅうおうせん',meaning:'Jalur Chuo'}],sentence:{jp:'公園の中央に噴水があります。',id:'Ada air mancur di tengah taman.'}},
+  {char:'客',level:'N4',strokes:9,on:['キャク','カク'],kun:['まろうど'],meaning:'Tamu, Pelanggan',examples:[{word:'客',read:'きゃく',meaning:'Tamu'},{word:'観客',read:'かんきゃく',meaning:'Penonton'},{word:'乗客',read:'じょうきゃく',meaning:'Penumpang'}],sentence:{jp:'お客様がいらっしゃいました。',id:'Ada tamu yang datang.'}},
+  {char:'究',level:'N4',strokes:7,on:['キュウ'],kun:['きわめる'],meaning:'Meneliti, Menyelidiki',examples:[{word:'研究',read:'けんきゅう',meaning:'Penelitian'},{word:'究明',read:'きゅうめい',meaning:'Penyelidikan'}],sentence:{jp:'科学の研究をしています。',id:'Saya melakukan penelitian sains.'}},
+  {char:'強',level:'N4',strokes:11,on:['キョウ','ゴウ'],kun:['つよい','しいる'],meaning:'Kuat',examples:[{word:'強い',read:'つよい',meaning:'Kuat'},{word:'勉強',read:'べんきょう',meaning:'Belajar'},{word:'強制',read:'きょうせい',meaning:'Pemaksaan'}],sentence:{jp:'彼はとても強いです。',id:'Dia sangat kuat.'}},
+  {char:'業',level:'N4',strokes:13,on:['ギョウ','ゴウ'],kun:['わざ'],meaning:'Pekerjaan, Industri',examples:[{word:'仕事',read:'しごと',meaning:'Pekerjaan'},{word:'授業',read:'じゅぎょう',meaning:'Pelajaran'},{word:'卒業',read:'そつぎょう',meaning:'Lulus'}],sentence:{jp:'今日は授業があります。',id:'Hari ini ada pelajaran.'}},
+  {char:'局',level:'N4',strokes:7,on:['キョク'],kun:[],meaning:'Kantor, Bagian',examples:[{word:'郵便局',read:'ゆうびんきょく',meaning:'Kantor pos'},{word:'局長',read:'きょくちょう',meaning:'Kepala kantor'}],sentence:{jp:'郵便局で荷物を送りました。',id:'Saya mengirim paket di kantor pos.'}},
+  {char:'曲',level:'N4',strokes:6,on:['キョク'],kun:['まがる','まげる'],meaning:'Lagu, Bengkok',examples:[{word:'音楽',read:'おんがく',meaning:'Musik'},{word:'曲がる',read:'まがる',meaning:'Belok'},{word:'作曲',read:'さっきょく',meaning:'Komposisi musik'}],sentence:{jp:'右に曲がってください。',id:'Tolong belok ke kanan.'}},
+  {char:'係',level:'N4',strokes:9,on:['ケイ'],kun:['かかり','かかわる'],meaning:'Hubungan, Petugas',examples:[{word:'関係',read:'かんけい',meaning:'Hubungan'},{word:'係員',read:'かかりいん',meaning:'Petugas'}],sentence:{jp:'それは私には関係ありません。',id:'Itu tidak ada hubungannya dengan saya.'}},
+  {char:'刻',level:'N4',strokes:8,on:['コク'],kun:['きざむ'],meaning:'Saat, Mengukir',examples:[{word:'時刻',read:'じこく',meaning:'Waktu (jam)'},{word:'刻む',read:'きざむ',meaning:'Mengukir, mencincang'}],sentence:{jp:'出発の時刻を確認してください。',id:'Tolong periksa waktu keberangkatan.'}},
+  {char:'材',level:'N4',strokes:7,on:['ザイ'],kun:[],meaning:'Bahan, Material',examples:[{word:'材料',read:'ざいりょう',meaning:'Bahan'},{word:'教材',read:'きょうざい',meaning:'Materi pelajaran'},{word:'木材',read:'もくざい',meaning:'Kayu material'}],sentence:{jp:'料理の材料を買いました。',id:'Saya membeli bahan masakan.'}},
+  {char:'次',level:'N4',strokes:6,on:['ジ','シ'],kun:['つぎ','つぐ'],meaning:'Berikutnya',examples:[{word:'次',read:'つぎ',meaning:'Berikutnya'},{word:'次第',read:'しだい',meaning:'Tergantung'},{word:'目次',read:'もくじ',meaning:'Daftar isi'}],sentence:{jp:'次の電車は何時ですか。',id:'Kereta berikutnya jam berapa?'}},
+  {char:'失',level:'N4',strokes:5,on:['シツ'],kun:['うしなう'],meaning:'Kehilangan, Gagal',examples:[{word:'失敗',read:'しっぱい',meaning:'Kegagalan'},{word:'失礼',read:'しつれい',meaning:'Tidak sopan'},{word:'紛失',read:'ふんしつ',meaning:'Kehilangan'}],sentence:{jp:'失礼しました。',id:'Maaf (sudah tidak sopan).'}},
+  {char:'取',level:'N4',strokes:8,on:['シュ'],kun:['とる'],meaning:'Mengambil',examples:[{word:'取る',read:'とる',meaning:'Mengambil'},{word:'取り出す',read:'とりだす',meaning:'Mengeluarkan'},{word:'受け取る',read:'うけとる',meaning:'Menerima'}],sentence:{jp:'写真を取ってもいいですか。',id:'Boleh ambil foto?'}},
+  {char:'受',level:'N4',strokes:8,on:['ジュ'],kun:['うける','うかる'],meaning:'Menerima',examples:[{word:'受ける',read:'うける',meaning:'Menerima, mengikuti'},{word:'受付',read:'うけつけ',meaning:'Resepsionis'},{word:'受験',read:'じゅけん',meaning:'Mengikuti ujian'}],sentence:{jp:'試験を受けます。',id:'Saya akan mengikuti ujian.'}},
+  {char:'授',level:'N4',strokes:11,on:['ジュ'],kun:['さずける'],meaning:'Mengajarkan, Memberikan',examples:[{word:'授業',read:'じゅぎょう',meaning:'Pelajaran'},{word:'教授',read:'きょうじゅ',meaning:'Profesor'},{word:'授与',read:'じゅよ',meaning:'Pemberian'}],sentence:{jp:'授業は9時から始まります。',id:'Pelajaran dimulai dari jam 9.'}},
+  {char:'縦',level:'N4',strokes:16,on:['ジュウ'],kun:['たて'],meaning:'Vertikal, Memanjang',examples:[{word:'縦',read:'たて',meaning:'Vertikal'},{word:'縦横',read:'たてよこ',meaning:'Panjang dan lebar'}],sentence:{jp:'縦に切ってください。',id:'Tolong potong secara vertikal.'}},
+  {char:'重',level:'N4',strokes:9,on:['ジュウ','チョウ'],kun:['おもい','かさねる'],meaning:'Berat, Bertumpuk',examples:[{word:'重い',read:'おもい',meaning:'Berat'},{word:'大重要',read:'じゅうよう',meaning:'Penting'},{word:'重なる',read:'かさなる',meaning:'Bertumpuk'}],sentence:{jp:'この荷物はとても重いです。',id:'Barang bawaan ini sangat berat.'}},
+  {char:'勝',level:'N4',strokes:12,on:['ショウ'],kun:['かつ','まさる'],meaning:'Menang',examples:[{word:'勝つ',read:'かつ',meaning:'Menang'},{word:'勝負',read:'しょうぶ',meaning:'Pertandingan'},{word:'優勝',read:'ゆうしょう',meaning:'Juara'}],sentence:{jp:'試合に勝ちました。',id:'Menang dalam pertandingan.'}},
+  {char:'成',level:'N4',strokes:6,on:['セイ','ジョウ'],kun:['なる','なす'],meaning:'Menjadi, Berhasil',examples:[{word:'成功',read:'せいこう',meaning:'Sukses'},{word:'完成',read:'かんせい',meaning:'Selesai'},{word:'成長',read:'せいちょう',meaning:'Pertumbuhan'}],sentence:{jp:'試験に合格して成功しました。',id:'Berhasil lulus ujian.'}},
+  {char:'整',level:'N4',strokes:16,on:['セイ'],kun:['ととのえる','ととのう'],meaning:'Merapikan, Teratur',examples:[{word:'整理',read:'せいり',meaning:'Merapikan'},{word:'整備',read:'せいび',meaning:'Perawatan'},{word:'調整',read:'ちょうせい',meaning:'Penyesuaian'}],sentence:{jp:'部屋を整理しました。',id:'Saya merapikan kamar.'}},
+  {char:'清',level:'N4',strokes:11,on:['セイ','ショウ'],kun:['きよい','きよめる'],meaning:'Bersih, Jernih',examples:[{word:'清潔',read:'せいけつ',meaning:'Bersih'},{word:'清書',read:'せいしょ',meaning:'Salinan bersih'},{word:'清水',read:'しみず',meaning:'Air bersih'}],sentence:{jp:'部屋を清潔にしてください。',id:'Tolong jaga kamar tetap bersih.'}},
+  {char:'静',level:'N4',strokes:14,on:['セイ','ジョウ'],kun:['しずか','しずまる'],meaning:'Tenang, Diam',examples:[{word:'静か',read:'しずか',meaning:'Tenang'},{word:'静止',read:'せいし',meaning:'Diam, berhenti'},{word:'安静',read:'あんせい',meaning:'Istirahat total'}],sentence:{jp:'図書館は静かです。',id:'Perpustakaan itu tenang.'}},
+  {char:'席',level:'N4',strokes:10,on:['セキ'],kun:[],meaning:'Tempat duduk, Kursi',examples:[{word:'席',read:'せき',meaning:'Tempat duduk'},{word:'出席',read:'しゅっせき',meaning:'Hadir'},{word:'欠席',read:'けっせき',meaning:'Absen'}],sentence:{jp:'席はまだ空いていますか。',id:'Apakah masih ada kursi kosong?'}},
+  {char:'絶',level:'N4',strokes:12,on:['ゼツ'],kun:['たえる','たやす','たつ'],meaning:'Putus, Mutlak',examples:[{word:'絶対',read:'ぜったい',meaning:'Mutlak, pasti'},{word:'絶える',read:'たえる',meaning:'Putus, habis'},{word:'中絶',read:'ちゅうぜつ',meaning:'Penghentian'}],sentence:{jp:'絶対に遅れないでください。',id:'Tolong jangan sampai terlambat.'}},
+  {char:'存',level:'N4',strokes:6,on:['ソン','ゾン'],kun:[],meaning:'Ada, Eksis',examples:[{word:'存在',read:'そんざい',meaning:'Keberadaan'},{word:'保存',read:'ほぞん',meaning:'Penyimpanan'},{word:'存知',read:'ぞんじ',meaning:'Mengetahui (sopan)'}],sentence:{jp:'ご存知ですか。',id:'Apakah Anda tahu?'}},
+  {char:'短',level:'N4',strokes:12,on:['タン'],kun:['みじかい'],meaning:'Pendek',examples:[{word:'短い',read:'みじかい',meaning:'Pendek'},{word:'短所',read:'たんしょ',meaning:'Kelemahan'},{word:'短期',read:'たんき',meaning:'Jangka pendek'}],sentence:{jp:'この映画は短いです。',id:'Film ini pendek.'}},
+  {char:'置',level:'N4',strokes:13,on:['チ'],kun:['おく'],meaning:'Meletakkan',examples:[{word:'置く',read:'おく',meaning:'Meletakkan'},{word:'位置',read:'いち',meaning:'Posisi'},{word:'装置',read:'そうち',meaning:'Perangkat'}],sentence:{jp:'荷物をここに置いてください。',id:'Tolong letakkan barang di sini.'}},
+  {char:'調',level:'N4',strokes:15,on:['チョウ'],kun:['しらべる','ととのう'],meaning:'Menyelidiki, Menyesuaikan',examples:[{word:'調べる',read:'しらべる',meaning:'Menyelidiki'},{word:'調子',read:'ちょうし',meaning:'Kondisi'},{word:'調整',read:'ちょうせい',meaning:'Penyesuaian'}],sentence:{jp:'辞書で調べました。',id:'Saya mencari di kamus.'}},
+  {char:'直',level:'N4',strokes:8,on:['チョク','ジキ'],kun:['なおす','なおる','ただちに'],meaning:'Langsung, Memperbaiki',examples:[{word:'直接',read:'ちょくせつ',meaning:'Langsung'},{word:'直す',read:'なおす',meaning:'Memperbaiki'},{word:'正直',read:'しょうじき',meaning:'Jujur'}],sentence:{jp:'直接話しましょう。',id:'Mari bicara langsung.'}},
+  {char:'追',level:'N4',strokes:9,on:['ツイ'],kun:['おう'],meaning:'Mengejar',examples:[{word:'追う',read:'おう',meaning:'Mengejar'},{word:'追加',read:'ついか',meaning:'Tambahan'},{word:'追い越す',read:'おいこす',meaning:'Mendahului'}],sentence:{jp:'バスを追いかけました。',id:'Saya mengejar bus.'}},
+  {char:'徒',level:'N4',strokes:10,on:['ト'],kun:[],meaning:'Murid, Berjalan kaki',examples:[{word:'生徒',read:'せいと',meaning:'Murid'},{word:'徒歩',read:'とほ',meaning:'Berjalan kaki'},{word:'徒競走',read:'ときょうそう',meaning:'Lomba lari'}],sentence:{jp:'生徒は80人います。',id:'Ada 80 murid.'}},
+  {char:'難',level:'N4',strokes:18,on:['ナン','ニン'],kun:['むずかしい','かたい'],meaning:'Sulit, Kesulitan',examples:[{word:'難しい',read:'むずかしい',meaning:'Sulit'},{word:'困難',read:'こんなん',meaning:'Kesulitan'},{word:'難問',read:'なんもん',meaning:'Soal sulit'}],sentence:{jp:'この問題はとても難しいです。',id:'Soal ini sangat sulit.'}},
+  {char:'梅',level:'N4',strokes:10,on:['バイ'],kun:['うめ'],meaning:'Pohon plum',examples:[{word:'梅',read:'うめ',meaning:'Buah/pohon plum'},{word:'梅雨',read:'つゆ',meaning:'Musim hujan'},{word:'梅干し',read:'うめぼし',meaning:'Asinan plum'}],sentence:{jp:'梅の花が咲きました。',id:'Bunga plum mekar.'}},
+  {char:'物',level:'N4',strokes:8,on:['ブツ','モツ'],kun:['もの'],meaning:'Benda, Barang',examples:[{word:'物',read:'もの',meaning:'Benda'},{word:'買い物',read:'かいもの',meaning:'Belanja'},{word:'食べ物',read:'たべもの',meaning:'Makanan'}],sentence:{jp:'買い物に行きます。',id:'Saya pergi belanja.'}},
+  {char:'別',level:'N4',strokes:7,on:['ベツ'],kun:['わかれる'],meaning:'Terpisah, Berbeda',examples:[{word:'別',read:'べつ',meaning:'Terpisah, berbeda'},{word:'別れる',read:'わかれる',meaning:'Berpisah'},{word:'特別',read:'とくべつ',meaning:'Spesial'}],sentence:{jp:'それは別の話です。',id:'Itu cerita yang berbeda.'}},
+  {char:'由',level:'N4',strokes:5,on:['ユ','ユウ','ユイ'],kun:['よし'],meaning:'Alasan, Berasal dari',examples:[{word:'理由',read:'りゆう',meaning:'Alasan'},{word:'自由',read:'じゆう',meaning:'Bebas'},{word:'由来',read:'ゆらい',meaning:'Asal-usul'}],sentence:{jp:'理由を教えてください。',id:'Tolong beritahu alasannya.'}},
+  {char:'予',level:'N4',strokes:4,on:['ヨ'],kun:['あらかじめ'],meaning:'Sebelumnya, Rencana',examples:[{word:'予定',read:'よてい',meaning:'Rencana, jadwal'},{word:'予約',read:'よやく',meaning:'Reservasi'},{word:'予習',read:'よしゅう',meaning:'Belajar sebelum kelas'}],sentence:{jp:'レストランを予約しました。',id:'Saya memesan restoran.'}},
+  {char:'流',level:'N4',strokes:10,on:['リュウ','ル'],kun:['ながれる','ながす'],meaning:'Mengalir, Arus',examples:[{word:'流れる',read:'ながれる',meaning:'Mengalir'},{word:'流行',read:'りゅうこう',meaning:'Tren, mode'},{word:'交流',read:'こうりゅう',meaning:'Pertukaran'}],sentence:{jp:'川が流れています。',id:'Sungai mengalir.'}},
+  {char:'両',level:'N4',strokes:6,on:['リョウ'],kun:[],meaning:'Keduanya, Dua',examples:[{word:'両方',read:'りょうほう',meaning:'Keduanya'},{word:'両親',read:'りょうしん',meaning:'Kedua orang tua'},{word:'両手',read:'りょうて',meaning:'Kedua tangan'}],sentence:{jp:'両親に連絡しました。',id:'Saya menghubungi kedua orang tua.'}},
+  {char:'練',level:'N4',strokes:14,on:['レン'],kun:['ねる'],meaning:'Berlatih, Melatih',examples:[{word:'練習',read:'れんしゅう',meaning:'Latihan'},{word:'訓練',read:'くんれん',meaning:'Pelatihan'},{word:'練る',read:'ねる',meaning:'Melatih, menguleni'}],sentence:{jp:'毎日練習しています。',id:'Saya berlatih setiap hari.'}},
 ];
 
 // ══════════════════════════════════════════════════════════
