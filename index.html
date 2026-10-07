@@ -935,6 +935,42 @@
   .kqz-next{width:100%;padding:11px;border-radius:10px;background:#7c3aed;color:#fff;font-weight:800;border:none;cursor:pointer;font-size:0.88rem;}
   .kqz-result{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:24px;text-align:center;margin-top:16px;}
 
+  /* KOTOBA HARIAN */
+  .ktb-header{text-align:center;padding:4px 0 12px;}
+  .ktb-title{font-size:1rem;font-weight:800;color:#fff;margin-bottom:2px;}
+  .ktb-sub{font-size:0.75rem;color:var(--muted);}
+  .ktb-progress-wrap{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+  .ktb-progress-bar{flex:1;height:7px;background:rgba(255,255,255,0.08);border-radius:7px;overflow:hidden;}
+  .ktb-progress-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,var(--teal2),var(--gold));transition:width .4s;}
+  .ktb-pct{font-size:0.78rem;font-weight:700;color:var(--teal2);white-space:nowrap;}
+  .ktb-filter-row{display:flex;gap:7px;margin-bottom:14px;align-items:center;}
+  .ktb-lv-btn{padding:5px 14px;border-radius:16px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-size:0.76rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:"DM Sans",sans-serif;}
+  .ktb-lv-btn.active{border-color:var(--teal2);background:rgba(0,212,170,0.12);color:var(--teal2);}
+  .ktb-shuffle-btn{margin-left:auto;padding:5px 12px;border-radius:16px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-size:0.74rem;font-weight:700;cursor:pointer;transition:all .18s;}
+  .ktb-shuffle-btn:hover{border-color:var(--gold);color:var(--gold);}
+  .ktb-cards{display:flex;flex-direction:column;gap:8px;}
+  .ktb-card{background:var(--card);border:1.5px solid var(--border);border-radius:13px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s;position:relative;}
+  .ktb-card.done{background:rgba(0,212,170,0.06);border-color:rgba(0,212,170,0.3);}
+  .ktb-card.done .ktb-card-jp{text-decoration:line-through;color:var(--muted);}
+  .ktb-card.flipped{background:#1a1a2e;border-color:var(--gold);}
+  .ktb-card-num{font-size:0.65rem;font-weight:700;color:var(--muted);min-width:20px;}
+  .ktb-card-main{flex:1;min-width:0;}
+  .ktb-card-jp{font-family:"Noto Sans JP",sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:2px;}
+  .ktb-card-read{font-size:0.72rem;color:var(--gold);margin-bottom:2px;}
+  .ktb-card-id{font-size:0.82rem;color:var(--muted);}
+  .ktb-card-ex{font-size:0.72rem;color:#aaa;margin-top:4px;font-family:"Noto Sans JP",sans-serif;line-height:1.6;display:none;}
+  .ktb-card.flipped .ktb-card-ex{display:block;}
+  .ktb-card-lv{font-size:0.55rem;font-weight:700;padding:2px 6px;border-radius:6px;flex-shrink:0;}
+  .ktb-card-lv.n5{background:rgba(0,212,170,0.15);color:var(--teal2);}
+  .ktb-card-lv.n4{background:rgba(58,90,173,0.2);color:#7ec8f5;}
+  .ktb-check{width:24px;height:24px;border-radius:7px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0;transition:all .18s;}
+  .ktb-card.done .ktb-check{background:var(--teal2);border-color:var(--teal2);color:#000;font-weight:900;}
+  .ktb-done-msg{text-align:center;padding:30px 20px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;margin-top:8px;}
+  .ktb-done-title{font-size:1.1rem;font-weight:800;color:#fff;margin:8px 0 4px;}
+  .ktb-done-sub{font-size:0.82rem;color:var(--muted);margin-bottom:16px;}
+  .ktb-new-btn{padding:11px 24px;border-radius:11px;background:linear-gradient(135deg,var(--teal2),var(--gold));color:#000;font-weight:800;font-size:0.88rem;border:none;cursor:pointer;}
+  .ktb-speak-btn{background:none;border:none;cursor:pointer;font-size:0.9rem;color:var(--muted);padding:2px 4px;flex-shrink:0;}
+
   /* BUSHU */
   .bushu-intro{padding:0 0 4px;}
   .bushu-search-row{display:flex;gap:8px;margin-bottom:14px;}
@@ -1905,7 +1941,7 @@
       <div class="hfeat-card fc-blue" onclick="showPage('kanji')">
         <div class="hfeat-icon">漢</div>
         <h3>Kamus Kanji</h3>
-        <p>188 kanji N5+N4 lengkap onyomi, kunyomi & contoh</p>
+        <p>313 kanji N5+N4 lengkap onyomi, kunyomi & contoh</p>
         <div class="hfeat-kanji">字</div>
       </div>
       <div class="hfeat-card fc-gold" onclick="showPage('jlpt')">
@@ -1985,7 +2021,7 @@
         <div class="cat-emoji">🔰</div>
         <div class="cat-jp">漢字 N5</div>
         <div class="cat-id">100 Kanji Dasar</div>
-        <div class="cat-count">100 kanji</div>
+        <div class="cat-count">160 kanji</div>
         <div class="cat-actions">
           <button onclick="showPage('kanji');setKanjiFilter('N5')" style="flex:1;background:rgba(168,85,247,0.12);border-color:rgba(168,85,247,0.3);color:var(--purple2);font-size:0.65rem;font-weight:700;padding:6px 2px;border-radius:7px;cursor:pointer;">📚 Belajar</button>
         </div>
@@ -1995,7 +2031,7 @@
         <div class="cat-emoji">⛩️</div>
         <div class="cat-jp">漢字 N4</div>
         <div class="cat-id">88 Kanji Lanjutan</div>
-        <div class="cat-count">88 kanji</div>
+        <div class="cat-count">153 kanji</div>
         <div class="cat-actions">
           <button onclick="showPage('kanji');setKanjiFilter('N4')" style="flex:1;background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.3);color:var(--blue2);font-size:0.65rem;font-weight:700;padding:6px 2px;border-radius:7px;cursor:pointer;">📚 Belajar</button>
         </div>
@@ -2202,14 +2238,15 @@
         <button class="hf-tab" id="hf-tab-pola" onclick="switchHafal('pola')">🔗 Pola Radikal</button>
         <button class="hf-tab" id="hf-tab-bushu" onclick="switchHafal('bushu')">部首 Bushu</button>
         <button class="hf-tab" id="hf-tab-vocab" onclick="switchHafal('vocab')">📚 Kosakata</button>
+        <button class="hf-tab" id="hf-tab-kotoba" onclick="switchHafal('kotoba')">🗓️ 今日の20語</button>
       </div>
     </div>
 
     <!-- MODE 1: KATEGORI LIST -->
     <div id="hf-kategori" class="hf-section">
       <div class="hf-level-row">
-        <button class="hf-lv-btn active" id="hflv-N5" onclick="setHafalLevel('N5')">N5 — 100 Kanji</button>
-        <button class="hf-lv-btn" id="hflv-N4" onclick="setHafalLevel('N4')">N4 — 88 Kanji</button>
+        <button class="hf-lv-btn active" id="hflv-N5" onclick="setHafalLevel('N5')">N5 — 160 Kanji</button>
+        <button class="hf-lv-btn" id="hflv-N4" onclick="setHafalLevel('N4')">N4 — 153 Kanji</button>
       </div>
       <div id="hf-cat-list"></div>
     </div>
@@ -2306,6 +2343,31 @@
         </div>
       </div>
       <div id="bushu-list" class="bushu-list"></div>
+    </div>
+
+    <!-- MODE: KOTOBA HARIAN 20 -->
+    <div id="hf-kotoba" class="hf-section" style="display:none;">
+      <div class="ktb-header">
+        <div class="ktb-title">🗓️ 今日の20語 — Hafal Hari Ini</div>
+        <div class="ktb-sub" id="ktb-date"></div>
+      </div>
+      <div class="ktb-progress-wrap">
+        <div class="ktb-progress-bar"><div class="ktb-progress-fill" id="ktb-fill" style="width:0%"></div></div>
+        <span class="ktb-pct" id="ktb-pct">0 / 20</span>
+      </div>
+      <div class="ktb-filter-row">
+        <button class="ktb-lv-btn active" id="ktblv-all" onclick="setKotobaLevel('all')">Semua</button>
+        <button class="ktb-lv-btn" id="ktblv-n5" onclick="setKotobaLevel('N5')">N5</button>
+        <button class="ktb-lv-btn" id="ktblv-n4" onclick="setKotobaLevel('N4')">N4</button>
+        <button class="ktb-shuffle-btn" onclick="reshuffleKotoba()">🔀 Kata Baru</button>
+      </div>
+      <div id="ktb-cards" class="ktb-cards"></div>
+      <div id="ktb-done-msg" class="ktb-done-msg" style="display:none;">
+        <div style="font-size:2.5rem;">🎉</div>
+        <div class="ktb-done-title">Semua 20 kata selesai!</div>
+        <div class="ktb-done-sub">Bagus sekali! Kamu telah menghafal kata-kata hari ini.</div>
+        <button onclick="reshuffleKotoba()" class="ktb-new-btn">🔀 Mulai 20 Kata Baru</button>
+      </div>
     </div>
 
     <!-- MODE 4: KOSAKATA HAFAL -->
@@ -3272,7 +3334,7 @@
       <div class="db-progress-list">
         <div class="db-prog-item">
           <div class="db-prog-head">
-            <span>漢字 N5</span><span id="db-prog-n5-txt">0 / 100</span>
+            <span>漢字 N5</span><span id="db-prog-n5-txt">0 / 160</span>
           </div>
           <div class="db-prog-track"><div class="db-prog-fill" id="db-prog-n5" style="--accent:var(--purple);width:0%"></div></div>
         </div>
@@ -5760,13 +5822,15 @@ function initHafalPage() {
 }
 
 function switchHafal(mode) {
-    ['kategori','radikal','pola','bushu','vocab'].forEach(m => {
+    ['kategori','radikal','pola','bushu','vocab','kotoba'].forEach(m => {
         document.getElementById('hf-tab-'+m)?.classList.toggle('active', m === mode);
-        document.getElementById('hf-'+m)?.style && (document.getElementById('hf-'+m).style.display = m === mode ? 'block' : 'none');
+        const el = document.getElementById('hf-'+m);
+        if(el) el.style.display = m === mode ? 'block' : 'none';
     });
-    if(mode === 'pola') renderPolaRadikal();
-    if(mode === 'vocab') renderHafalVocab();
-    if(mode === 'bushu') renderBushu();
+    if(mode === 'pola')   renderPolaRadikal();
+    if(mode === 'vocab')  renderHafalVocab();
+    if(mode === 'bushu')  renderBushu();
+    if(mode === 'kotoba') renderKotobaHarian();
 }
 
 function setHafalLevel(lv) {
@@ -7455,6 +7519,147 @@ function loadMasteredKanji() {
         const km = JSON.parse(localStorage.getItem('masteredKanji') || '[]');
         masteredSet = new Set(km);
     } catch(e) { masteredSet = new Set(); }
+}
+
+// ════════════════════════════════════
+// KOTOBA HARIAN — 20 KATA SEHARI
+// ════════════════════════════════════
+const KOTOBA_KEY    = 'kotobaHarian_v1';
+let   kotobaLevel   = 'all';
+let   kotobaFlipped = new Set();
+
+function getTodayStr() {
+    return new Date().toDateString();
+}
+
+function loadKotobaState() {
+    try {
+        const s = JSON.parse(localStorage.getItem(KOTOBA_KEY) || '{}');
+        if (s.date !== getTodayStr() || s.level !== kotobaLevel) return null;
+        return s;
+    } catch(e) { return null; }
+}
+
+function saveKotobaState(words, done) {
+    try {
+        localStorage.setItem(KOTOBA_KEY, JSON.stringify({
+            date:  getTodayStr(),
+            level: kotobaLevel,
+            words: words.map(w => w.jp),
+            done:  Array.from(done)
+        }));
+    } catch(e) {}
+}
+
+function setKotobaLevel(lv) {
+    kotobaLevel = lv;
+    document.querySelectorAll('.ktb-lv-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('ktblv-' + lv)?.classList.add('active');
+    renderKotobaHarian();
+}
+
+function reshuffleKotoba() {
+    // Clear today's state for current level
+    try {
+        const s = JSON.parse(localStorage.getItem(KOTOBA_KEY) || '{}');
+        if (s.level === kotobaLevel) {
+            s.words = null; // force regenerate
+            localStorage.setItem(KOTOBA_KEY, JSON.stringify({...s, words:null, done:[]}));
+        }
+    } catch(e) {}
+    kotobaFlipped = new Set();
+    renderKotobaHarian();
+}
+
+function renderKotobaHarian() {
+    const dateEl = document.getElementById('ktb-date');
+    if (dateEl) {
+        const d = new Date();
+        dateEl.textContent = d.toLocaleDateString('id-ID', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+    }
+
+    // Get or generate today's 20 words
+    let state = loadKotobaState();
+    let words, doneSet;
+
+    if (state && state.words && state.words.length > 0) {
+        // Restore from saved
+        words = state.words.map(jp => vocab.find(v => v.jp === jp)).filter(Boolean);
+        doneSet = new Set(state.done || []);
+    } else {
+        // Generate new 20 random words for today
+        let pool = vocab;
+        if (kotobaLevel !== 'all') pool = vocab.filter(v => v.level === kotobaLevel);
+        const shuffled = shuffle([...pool]);
+        words = shuffled.slice(0, 20);
+        doneSet = new Set();
+        saveKotobaState(words, doneSet);
+    }
+
+    // Update progress
+    const done = doneSet.size;
+    const total = words.length;
+    const pct = total > 0 ? Math.round(done/total*100) : 0;
+    document.getElementById('ktb-fill').style.width = pct + '%';
+    document.getElementById('ktb-pct').textContent = done + ' / ' + total;
+
+    // Show done message if all complete
+    const doneMsg  = document.getElementById('ktb-done-msg');
+    const cardsEl  = document.getElementById('ktb-cards');
+    if (done >= total && total > 0) {
+        doneMsg.style.display  = 'block';
+        cardsEl.style.display  = 'none';
+        return;
+    } else {
+        doneMsg.style.display  = 'none';
+        cardsEl.style.display  = 'flex';
+    }
+
+    // Render cards
+    cardsEl.innerHTML = words.map((v, i) => {
+        const isDone    = doneSet.has(v.jp);
+        const isFlipped = kotobaFlipped.has(i);
+        const exLine    = v.example ? v.example.split('\n').join(' — ') : '';
+        return `<div class="ktb-card ${isDone?'done':''} ${isFlipped&&!isDone?'flipped':''}" id="ktbc-${i}">
+            <div class="ktb-card-num">${i+1}</div>
+            <div class="ktb-card-main" onclick="flipKotobaCard(${i})">
+                <div class="ktb-card-jp">${v.jp}</div>
+                <div class="ktb-card-read">${v.reading && v.reading !== v.jp ? v.reading : ''}</div>
+                <div class="ktb-card-id">${v.id || ''}</div>
+                <div class="ktb-card-ex">${exLine}</div>
+            </div>
+            <button class="ktb-speak-btn" onclick="speakText('${v.jp.replace(/'/g,"\'")}')">🔊</button>
+            <div class="ktb-card-lv ${(v.level||'n5').toLowerCase()}">${v.level||'N5'}</div>
+            <div class="ktb-check" onclick="toggleKotobaCheck(${i}, '${v.jp.replace(/'/g,"\'")}', ${JSON.stringify(words.map(w=>w.jp))})">${isDone?'✓':''}</div>
+        </div>`;
+    }).join('');
+}
+
+function flipKotobaCard(idx) {
+    if (kotobaFlipped.has(idx)) kotobaFlipped.delete(idx);
+    else kotobaFlipped.add(idx);
+    const card = document.getElementById('ktbc-'+idx);
+    if (card && !card.classList.contains('done')) {
+        card.classList.toggle('flipped', kotobaFlipped.has(idx));
+    }
+}
+
+function toggleKotobaCheck(idx, jp, wordJpList) {
+    // Rebuild doneSet from current state
+    let state = loadKotobaState();
+    const doneSet = new Set(state?.done || []);
+
+    if (doneSet.has(jp)) doneSet.delete(jp);
+    else {
+        doneSet.add(jp);
+        speakText(jp);
+        if (typeof addExp === 'function') addExp(2, '語彙: ' + jp);
+    }
+
+    // Save updated state
+    const words = wordJpList.map(j => vocab.find(v => v.jp === j)).filter(Boolean);
+    saveKotobaState(words, doneSet);
+    renderKotobaHarian();
 }
 
 // ════════════════════════════════════
@@ -13723,8 +13928,8 @@ function updateGamificationUI() {
   const dbMastered = document.getElementById('db-mastered');
   if(dbMastered) dbMastered.textContent = masteredCount;
 
-  const totalN5 = (typeof kanjiDB !== 'undefined') ? kanjiDB.filter(k=>k.level==='N5').length : 100;
-  const totalN4 = (typeof kanjiDB !== 'undefined') ? kanjiDB.filter(k=>k.level==='N4').length : 88;
+  const totalN5 = (typeof kanjiDB !== 'undefined') ? kanjiDB.filter(k=>k.level==='N5').length : 160;
+  const totalN4 = (typeof kanjiDB !== 'undefined') ? kanjiDB.filter(k=>k.level==='N4').length : 153;
   const progN5El = document.getElementById('db-prog-n5');
   const progN5Txt = document.getElementById('db-prog-n5-txt');
   if(progN5El) progN5El.style.width = Math.min(100, (masteredN5/totalN5*100)) + '%';
@@ -13941,8 +14146,8 @@ function renderRgs() {
 
     } else if (rgsCurrentTab === 'kanji') {
         // Get kanji from kanjiDB grouped by level
-        const n5k = (typeof kanjiDB !== 'undefined' ? kanjiDB : []).filter(k => k.level === 'N5').slice(0, 80);
-        const n4k = (typeof kanjiDB !== 'undefined' ? kanjiDB : []).filter(k => k.level === 'N4').slice(0, 88);
+        const n5k = (typeof kanjiDB !== 'undefined' ? kanjiDB : []).filter(k => k.level === 'N5');
+        const n4k = (typeof kanjiDB !== 'undefined' ? kanjiDB : []).filter(k => k.level === 'N4');
         const renderGrid = (list, lv) => list.map(k => `
             <div class="rgs-k-card">
               <div class="rgs-k-lv ${lv.toLowerCase()}">${lv}</div>
