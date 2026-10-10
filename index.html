@@ -2359,14 +2359,12 @@
         <button class="ktb-lv-btn active" id="ktblv-all" onclick="setKotobaLevel('all')">Semua</button>
         <button class="ktb-lv-btn" id="ktblv-n5" onclick="setKotobaLevel('N5')">N5</button>
         <button class="ktb-lv-btn" id="ktblv-n4" onclick="setKotobaLevel('N4')">N4</button>
-        <button class="ktb-shuffle-btn" onclick="reshuffleKotoba()">🔀 Kata Baru</button>
       </div>
       <div id="ktb-cards" class="ktb-cards"></div>
       <div id="ktb-done-msg" class="ktb-done-msg" style="display:none;">
         <div style="font-size:2.5rem;">🎉</div>
         <div class="ktb-done-title">Semua 20 kata selesai!</div>
-        <div class="ktb-done-sub">Bagus sekali! Kamu telah menghafal kata-kata hari ini.</div>
-        <button onclick="reshuffleKotoba()" class="ktb-new-btn">🔀 Mulai 20 Kata Baru</button>
+        <div class="ktb-done-sub">Bagus sekali! 20 kata baru akan tersedia besok. Sampai jumpa! 頑張って！</div>
       </div>
     </div>
 
@@ -7524,49 +7522,62 @@ function loadMasteredKanji() {
 // ════════════════════════════════════
 // KOTOBA HARIAN — 20 KATA SEHARI
 // ════════════════════════════════════
-const KOTOBA_KEY    = 'kotobaHarian_v1';
-let   kotobaLevel   = 'all';
+const KOTOBA_DONE_KEY  = 'kotobaDone_v2';
+const KOTOBA_LEVEL_KEY = 'kotobaLevel_v2';
+let   kotobaLevel   = localStorage.getItem(KOTOBA_LEVEL_KEY) || 'all';
 let   kotobaFlipped = new Set();
+let   kotobaToday   = [];
 
-function getTodayStr() {
-    return new Date().toDateString();
+function kotobaDayIndex() {
+    const d = new Date();
+    return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
 }
 
-function loadKotobaState() {
+function kotobaDateKey() {
+    const d = new Date();
+    return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+}
+
+// Deterministic shuffle (seeded) so the pool order never changes between refreshes
+function kotobaSeededOrder(arr, seed) {
+    const a = arr.slice();
+    let s = seed;
+    const rnd = () => { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296; };
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(rnd() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+// Same 20 words all day; tomorrow moves to the next block of 20 (no repeats until the pool is used up)
+function getKotobaToday() {
+    let pool = vocab.filter(v => v && v.jp);
+    if (kotobaLevel !== 'all') pool = pool.filter(v => v.level === kotobaLevel);
+    if (pool.length === 0) return [];
+    const seed = kotobaLevel === 'N5' ? 5 : kotobaLevel === 'N4' ? 4 : 1;
+    const ordered = kotobaSeededOrder(pool, seed * 7919);
+    const perDay = Math.min(20, ordered.length);
+    const blocks = Math.max(1, Math.floor(ordered.length / perDay));
+    const block = kotobaDayIndex() % blocks;
+    return ordered.slice(block * perDay, block * perDay + perDay);
+}
+
+function loadKotobaDone() {
     try {
-        const s = JSON.parse(localStorage.getItem(KOTOBA_KEY) || '{}');
-        if (s.date !== getTodayStr() || s.level !== kotobaLevel) return null;
+        const s = JSON.parse(localStorage.getItem(KOTOBA_DONE_KEY) || '{}');
+        if (s.date !== kotobaDateKey()) return { date: kotobaDateKey(), done: {} };
         return s;
-    } catch(e) { return null; }
+    } catch(e) { return { date: kotobaDateKey(), done: {} }; }
 }
 
-function saveKotobaState(words, done) {
-    try {
-        localStorage.setItem(KOTOBA_KEY, JSON.stringify({
-            date:  getTodayStr(),
-            level: kotobaLevel,
-            words: words.map(w => w.jp),
-            done:  Array.from(done)
-        }));
-    } catch(e) {}
+function saveKotobaDone(s) {
+    try { localStorage.setItem(KOTOBA_DONE_KEY, JSON.stringify(s)); } catch(e) {}
 }
 
 function setKotobaLevel(lv) {
     kotobaLevel = lv;
-    document.querySelectorAll('.ktb-lv-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('ktblv-' + lv)?.classList.add('active');
-    renderKotobaHarian();
-}
-
-function reshuffleKotoba() {
-    // Clear today's state for current level
-    try {
-        const s = JSON.parse(localStorage.getItem(KOTOBA_KEY) || '{}');
-        if (s.level === kotobaLevel) {
-            s.words = null; // force regenerate
-            localStorage.setItem(KOTOBA_KEY, JSON.stringify({...s, words:null, done:[]}));
-        }
-    } catch(e) {}
+    try { localStorage.setItem(KOTOBA_LEVEL_KEY, lv); } catch(e) {}
     kotobaFlipped = new Set();
     renderKotobaHarian();
 }
@@ -7574,91 +7585,77 @@ function reshuffleKotoba() {
 function renderKotobaHarian() {
     const dateEl = document.getElementById('ktb-date');
     if (dateEl) {
-        const d = new Date();
-        dateEl.textContent = d.toLocaleDateString('id-ID', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+        dateEl.textContent = new Date().toLocaleDateString('id-ID', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
     }
+    document.querySelectorAll('.ktb-lv-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('ktblv-' + (kotobaLevel === 'all' ? 'all' : kotobaLevel.toLowerCase()))?.classList.add('active');
 
-    // Get or generate today's 20 words
-    let state = loadKotobaState();
-    let words, doneSet;
+    kotobaToday = getKotobaToday();
+    const state = loadKotobaDone();
+    const doneList = state.done[kotobaLevel] || [];
+    const doneSet = new Set(doneList);
 
-    if (state && state.words && state.words.length > 0) {
-        // Restore from saved
-        words = state.words.map(jp => vocab.find(v => v.jp === jp)).filter(Boolean);
-        doneSet = new Set(state.done || []);
-    } else {
-        // Generate new 20 random words for today
-        let pool = vocab;
-        if (kotobaLevel !== 'all') pool = vocab.filter(v => v.level === kotobaLevel);
-        const shuffled = shuffle([...pool]);
-        words = shuffled.slice(0, 20);
-        doneSet = new Set();
-        saveKotobaState(words, doneSet);
-    }
-
-    // Update progress
-    const done = doneSet.size;
-    const total = words.length;
-    const pct = total > 0 ? Math.round(done/total*100) : 0;
-    document.getElementById('ktb-fill').style.width = pct + '%';
+    const total = kotobaToday.length;
+    const done = kotobaToday.filter(v => doneSet.has(v.jp)).length;
+    document.getElementById('ktb-fill').style.width = (total ? Math.round(done/total*100) : 0) + '%';
     document.getElementById('ktb-pct').textContent = done + ' / ' + total;
 
-    // Show done message if all complete
-    const doneMsg  = document.getElementById('ktb-done-msg');
-    const cardsEl  = document.getElementById('ktb-cards');
-    if (done >= total && total > 0) {
-        doneMsg.style.display  = 'block';
-        cardsEl.style.display  = 'none';
-        return;
+    const doneMsg = document.getElementById('ktb-done-msg');
+    const cardsEl = document.getElementById('ktb-cards');
+    if (total > 0 && done >= total) {
+        doneMsg.style.display = 'block';
     } else {
-        doneMsg.style.display  = 'none';
-        cardsEl.style.display  = 'flex';
+        doneMsg.style.display = 'none';
     }
+    cardsEl.style.display = 'flex';
 
-    // Render cards
-    cardsEl.innerHTML = words.map((v, i) => {
-        const isDone    = doneSet.has(v.jp);
+    cardsEl.innerHTML = kotobaToday.map((v, i) => {
+        const isDone = doneSet.has(v.jp);
         const isFlipped = kotobaFlipped.has(i);
-        const exLine    = v.example ? v.example.split('\n').join(' — ') : '';
-        return `<div class="ktb-card ${isDone?'done':''} ${isFlipped&&!isDone?'flipped':''}" id="ktbc-${i}">
-            <div class="ktb-card-num">${i+1}</div>
-            <div class="ktb-card-main" onclick="flipKotobaCard(${i})">
-                <div class="ktb-card-jp">${v.jp}</div>
-                <div class="ktb-card-read">${v.reading && v.reading !== v.jp ? v.reading : ''}</div>
-                <div class="ktb-card-id">${v.id || ''}</div>
-                <div class="ktb-card-ex">${exLine}</div>
-            </div>
-            <button class="ktb-speak-btn" onclick="speakText('${v.jp.replace(/'/g,"\'")}')">🔊</button>
-            <div class="ktb-card-lv ${(v.level||'n5').toLowerCase()}">${v.level||'N5'}</div>
-            <div class="ktb-check" onclick="toggleKotobaCheck(${i}, '${v.jp.replace(/'/g,"\'")}', ${JSON.stringify(words.map(w=>w.jp))})">${isDone?'✓':''}</div>
-        </div>`;
+        const exLine = v.example ? v.example.split('\n').join(' — ') : '';
+        return '<div class="ktb-card ' + (isDone ? 'done' : '') + ' ' + (isFlipped && !isDone ? 'flipped' : '') + '" id="ktbc-' + i + '">' +
+            '<div class="ktb-card-num">' + (i+1) + '</div>' +
+            '<div class="ktb-card-main" onclick="flipKotobaCard(' + i + ')">' +
+                '<div class="ktb-card-jp">' + v.jp + '</div>' +
+                '<div class="ktb-card-read">' + (v.reading && v.reading !== v.jp ? v.reading : '') + '</div>' +
+                '<div class="ktb-card-id">' + (v.id || '') + '</div>' +
+                '<div class="ktb-card-ex">' + exLine + '</div>' +
+            '</div>' +
+            '<button class="ktb-speak-btn" onclick="speakKotoba(' + i + ')">🔊</button>' +
+            '<div class="ktb-card-lv ' + (v.level || 'N5').toLowerCase() + '">' + (v.level || 'N5') + '</div>' +
+            '<div class="ktb-check" onclick="toggleKotobaCheck(' + i + ')">' + (isDone ? '✓' : '') + '</div>' +
+        '</div>';
     }).join('');
+}
+
+function speakKotoba(idx) {
+    const v = kotobaToday[idx];
+    if (v) speakText(v.reading && v.reading !== v.jp ? v.reading : v.jp);
 }
 
 function flipKotobaCard(idx) {
     if (kotobaFlipped.has(idx)) kotobaFlipped.delete(idx);
     else kotobaFlipped.add(idx);
-    const card = document.getElementById('ktbc-'+idx);
+    const card = document.getElementById('ktbc-' + idx);
     if (card && !card.classList.contains('done')) {
         card.classList.toggle('flipped', kotobaFlipped.has(idx));
     }
 }
 
-function toggleKotobaCheck(idx, jp, wordJpList) {
-    // Rebuild doneSet from current state
-    let state = loadKotobaState();
-    const doneSet = new Set(state?.done || []);
-
-    if (doneSet.has(jp)) doneSet.delete(jp);
-    else {
-        doneSet.add(jp);
-        speakText(jp);
-        if (typeof addExp === 'function') addExp(2, '語彙: ' + jp);
+function toggleKotobaCheck(idx) {
+    const v = kotobaToday[idx];
+    if (!v) return;
+    const state = loadKotobaDone();
+    const set = new Set(state.done[kotobaLevel] || []);
+    if (set.has(v.jp)) {
+        set.delete(v.jp);
+    } else {
+        set.add(v.jp);
+        speakKotoba(idx);
+        if (typeof addExp === 'function') addExp(2, '語彙: ' + v.jp);
     }
-
-    // Save updated state
-    const words = wordJpList.map(j => vocab.find(v => v.jp === j)).filter(Boolean);
-    saveKotobaState(words, doneSet);
+    state.done[kotobaLevel] = Array.from(set);
+    saveKotobaDone(state);
     renderKotobaHarian();
 }
 
