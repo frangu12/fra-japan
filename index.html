@@ -1783,6 +1783,55 @@
   .tb-quiz-opt.correct{border-color:#34d399;background:rgba(52,211,153,0.12);color:#34d399;}
   .tb-quiz-opt.wrong{border-color:#f87171;background:rgba(248,113,113,0.1);color:#f87171;}
   .tb-quiz-opt:disabled{cursor:default;}
+
+  /* ── HAFAL: RESPONSIVE HP ── */
+  .hf-mode-tabs{flex-wrap:wrap;}
+  @media(max-width:560px){
+    .hf-wrap{padding:10px 10px 90px;}
+    .hf-hero{padding:14px 6px 8px;}
+    .hf-hero-title{font-size:1.35rem;}
+    .hf-hero-sub{font-size:0.74rem;margin-bottom:12px;}
+    .hf-mode-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+    .hf-tab{padding:9px 4px;font-size:0.7rem;border-radius:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;}
+    .hf-level-row{gap:6px;}
+    .hf-lv-btn{padding:6px 12px;font-size:0.72rem;}
+
+    /* Kosakata */
+    .hfv-controls{padding-top:10px;}
+    .hfv-filter-row,.hfv-cat-row,.hfv-gojuon-row{gap:5px;}
+    .hfv-lv-btn{padding:5px 11px;font-size:0.72rem;}
+    .hfv-cat-btn{padding:5px 9px;font-size:0.68rem;}
+    .hfv-go-btn{width:32px;height:32px;font-size:0.8rem;}
+    .hfv-search-row{gap:8px;}
+    .hfv-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+    .hfv-card{padding:12px 8px;}
+    .hfv-card-jp{font-size:1.05rem;word-break:break-word;}
+    .hfv-modal{padding:22px 16px;}
+    .hfv-modal-jp{font-size:1.7rem;}
+
+    /* 今日の20語 */
+    .ktb-title{font-size:0.92rem;}
+    .ktb-filter-row{gap:6px;flex-wrap:wrap;}
+    .ktb-lv-btn{padding:5px 12px;font-size:0.72rem;}
+    .ktb-card{padding:11px 10px;gap:8px;border-radius:12px;}
+    .ktb-card-num{display:none;}
+    .ktb-card-jp{font-size:1rem;word-break:break-word;}
+    .ktb-card-id{font-size:0.78rem;}
+    .ktb-card-ex{font-size:0.7rem;}
+    .ktb-card-lv{display:none;}
+    .ktb-speak-btn{font-size:1rem;padding:4px;}
+    .ktb-check{width:28px;height:28px;}
+
+    /* Bushu */
+    .bushu-search-row{flex-wrap:wrap;}
+    .bushu-filter-sel{flex:1;min-width:120px;}
+    .bushu-group-header{padding:10px 10px;gap:8px;}
+    .bushu-char{font-size:1.5rem;min-width:34px;}
+    .bushu-name{font-size:0.8rem;}
+    .bushu-name-jp{font-size:0.66rem;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .bushu-stroke-badge{display:none;}
+    .bushu-kanji-grid{grid-template-columns:repeat(auto-fill,minmax(62px,1fr));padding:10px 8px;gap:5px;}
+  }
 </style>
 </head>
 <body>
