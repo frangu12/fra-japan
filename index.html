@@ -1832,6 +1832,28 @@
     .bushu-stroke-badge{display:none;}
     .bushu-kanji-grid{grid-template-columns:repeat(auto-fill,minmax(62px,1fr));padding:10px 8px;gap:5px;}
   }
+
+  /* KAMUS — TAMPILAN SIMPLE */
+  .kamus-view-toggle{display:inline-flex;gap:3px;margin-left:auto;background:#0e0e1a;border:1.5px solid var(--border);border-radius:12px;padding:3px;}
+  .kamus-view-btn{padding:5px 12px;border-radius:9px;border:none;background:transparent;color:var(--muted);font-size:0.74rem;font-weight:700;cursor:pointer;font-family:"DM Sans",sans-serif;white-space:nowrap;}
+  .kamus-view-btn.active{background:rgba(0,212,170,0.15);color:var(--teal2);}
+  .kamus-grid.simple{grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:8px;}
+  .kamus-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#13131f;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:border-color .15s;}
+  .kamus-row:hover{border-color:var(--teal2);}
+  .kr-main{flex:1;min-width:0;}
+  .kr-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+  .kr-jp{font-family:"Noto Sans JP",sans-serif;font-size:1.15rem;font-weight:800;color:#fff;line-height:1.3;}
+  .kr-read{font-size:0.74rem;color:var(--gold);font-family:"Noto Sans JP",sans-serif;}
+  .kr-mean{font-size:0.8rem;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .kr-lv{font-size:0.58rem;font-weight:800;padding:2px 7px;border-radius:7px;flex-shrink:0;letter-spacing:0.5px;}
+  .kr-lv.n5{background:rgba(0,212,170,0.15);color:var(--teal2);}
+  .kr-lv.n4{background:rgba(58,90,173,0.22);color:#7ec8f5;}
+  .kr-btn{background:none;border:none;cursor:pointer;font-size:1rem;color:var(--muted);padding:4px 5px;flex-shrink:0;line-height:1;}
+  .kr-btn:hover{color:#fff;}
+  @media(max-width:560px){
+    .kamus-view-toggle{margin-left:0;}
+    .kamus-row{padding:9px 10px;gap:8px;}
+  }
 </style>
 </head>
 <body>
@@ -3138,6 +3160,10 @@
     <span id="kamus-count-label">Menampilkan <strong>0</strong> kata</span>
     <span style="opacity:0.4">·</span>
     <span id="kamus-fav-label">❤️ <strong>0</strong> favorit</span>
+    <div class="kamus-view-toggle">
+      <button class="kamus-view-btn active" id="kv-card" onclick="setKamusView('card')">🗂️ Kartu</button>
+      <button class="kamus-view-btn" id="kv-simple" onclick="setKamusView('simple')">☰ Simple</button>
+    </div>
   </div>
 
   <div class="kamus-grid" id="kamus-grid"></div>
@@ -10349,7 +10375,24 @@ function toggleKamusFav() {
 
 function getWordId(v) { return v.jp + v.reading; }
 
+let kamusView = 'card';
+try { kamusView = localStorage.getItem('kamusView') || 'card'; } catch(e) {}
+
+function syncKamusViewUI() {
+    const grid = document.getElementById('kamus-grid');
+    if (grid) grid.classList.toggle('simple', kamusView === 'simple');
+    document.getElementById('kv-card')?.classList.toggle('active', kamusView === 'card');
+    document.getElementById('kv-simple')?.classList.toggle('active', kamusView === 'simple');
+}
+
+function setKamusView(mode) {
+    kamusView = mode;
+    try { localStorage.setItem('kamusView', mode); } catch(e) {}
+    renderKamus();
+}
+
 function renderKamus() {
+    syncKamusViewUI();
     const query = document.getElementById('kamus-search').value.toLowerCase();
     const sort = document.getElementById('kamus-sort').value;
     const grid = document.getElementById('kamus-grid');
@@ -10432,12 +10475,12 @@ function renderKamus() {
                 <div class="kamus-hira-line"></div>`;
             fragment.appendChild(header);
             grp.words.forEach(v => {
-                fragment.appendChild(buildKamusCard(v));
+                fragment.appendChild(buildKamusItem(v));
             });
         });
     } else {
         result.forEach(v => {
-            fragment.appendChild(buildKamusCard(v));
+            fragment.appendChild(buildKamusItem(v));
         });
     }
 
@@ -10488,6 +10531,35 @@ function buildKamusCard(v) {
         <div id="kamus-mic-status-${idx}" style="display:none;padding:6px 18px 10px;font-size:0.8rem;border-top:1px dashed var(--border);"></div>
     `;
     return card;
+}
+
+function buildKamusItem(v) {
+    return kamusView === 'simple' ? buildKamusRow(v) : buildKamusCard(v);
+}
+
+function buildKamusRow(v) {
+    const isFav = kamusFavorites.has(getWordId(v));
+    const idx = vocab.indexOf(v);
+    const row = document.createElement('div');
+    row.className = 'kamus-row';
+    row.onclick = () => openKamusModal(idx);
+    const showRead = v.reading && v.reading !== v.jp;
+    row.innerHTML =
+        '<div class="kr-main">' +
+            '<div class="kr-top"><span class="kr-jp">' + v.jp + '</span>' +
+            (showRead ? '<span class="kr-read">' + v.reading + '</span>' : '') + '</div>' +
+            '<div class="kr-mean">' + v.id + '</div>' +
+        '</div>' +
+        '<span class="kr-lv ' + v.level.toLowerCase() + '">' + v.level + '</span>' +
+        '<button class="kr-btn" onclick="kamusRowSpeak(' + idx + ', event)">🔊</button>' +
+        '<button class="kr-btn" onclick="toggleFavFromCard(\'' + getWordId(v).replace(/'/g, "\\'") + '\', event)">' + (isFav ? '❤️' : '♡') + '</button>';
+    return row;
+}
+
+function kamusRowSpeak(idx, event) {
+    event.stopPropagation();
+    const v = vocab[idx];
+    if (v) speakText(v.reading || v.jp);
 }
 
 // Mapping huruf pertama reading ke grup あいうえお
