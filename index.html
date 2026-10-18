@@ -1854,6 +1854,68 @@
     .kamus-view-toggle{margin-left:0;}
     .kamus-row{padding:9px 10px;gap:8px;}
   }
+
+  /* MINNA — MODE VIDEO */
+  .mv-open-btn{margin-top:14px;padding:11px 18px;border-radius:12px;border:none;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;font-weight:800;font-size:0.85rem;cursor:pointer;font-family:"DM Sans",sans-serif;}
+  .mv-open-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,58,237,0.4);}
+  .mv-overlay{position:fixed;inset:0;height:100vh;height:100dvh;z-index:500;display:flex;flex-direction:column;background:#0a0a1a;color:#fff;transition:background .6s;}
+  .mv-overlay[data-sec="intro"]{background:linear-gradient(160deg,#120a2e,#1e1b4b 60%,#0a0a1a);}
+  .mv-overlay[data-sec="pola"]{background:linear-gradient(160deg,#0a1a2a,#0f2a3d 60%,#0a0a1a);}
+  .mv-overlay[data-sec="grammar"]{background:linear-gradient(160deg,#06221f,#0b3b36 60%,#0a0a1a);}
+  .mv-overlay[data-sec="vocab"]{background:linear-gradient(160deg,#2a1c06,#3d2a0b 60%,#0a0a1a);}
+  .mv-overlay[data-sec="dialog"]{background:linear-gradient(160deg,#2a0a18,#3d0f26 60%,#0a0a1a);}
+  .mv-overlay[data-sec="end"]{background:linear-gradient(160deg,#120a2e,#2a1065 60%,#0a0a1a);}
+  .mv-top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 6px;}
+  .mv-top-title{font-size:1rem;font-weight:800;}
+  .mv-top-sub{font-size:0.72rem;color:rgba(255,255,255,0.6);}
+  .mv-close{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.08);color:#fff;font-size:1rem;cursor:pointer;}
+  .mv-chapters{display:flex;gap:6px;padding:4px 16px 8px;overflow-x:auto;scrollbar-width:none;}
+  .mv-chapters::-webkit-scrollbar{display:none;}
+  .mv-chap{padding:5px 13px;border-radius:14px;border:1.5px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.7);font-size:0.72rem;font-weight:700;cursor:pointer;white-space:nowrap;font-family:"DM Sans",sans-serif;}
+  .mv-chap.active{background:rgba(255,255,255,0.16);color:#fff;border-color:rgba(255,255,255,0.5);}
+  .mv-stage{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px 22px;}
+  .mv-slide{width:100%;max-width:760px;}
+  .mv-label{font-size:0.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:14px;}
+  .mv-big{font-family:"Noto Sans JP",sans-serif;font-weight:900;line-height:1.25;}
+  .mv-title-num{font-size:clamp(1.2rem,5vw,1.7rem);color:var(--gold);font-weight:800;font-family:"Noto Sans JP",sans-serif;margin-bottom:10px;}
+  .mv-title-main{font-size:clamp(1.8rem,7vw,2.8rem);font-weight:900;margin-bottom:8px;}
+  .mv-title-sub{font-size:1rem;color:var(--teal2);font-weight:600;}
+  .mv-pola-box{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.15);border-radius:16px;padding:18px 16px;font-size:clamp(0.95rem,3.6vw,1.2rem);line-height:2;font-family:"Noto Sans JP",sans-serif;text-align:left;}
+  .mv-pattern{font-size:clamp(1.6rem,7vw,2.6rem);color:var(--gold);}
+  .mv-meaning{font-size:clamp(0.95rem,3.8vw,1.2rem);color:rgba(255,255,255,0.8);margin:8px 0 18px;}
+  .mv-jp{font-family:"Noto Sans JP",sans-serif;font-size:clamp(1.3rem,5.6vw,2.1rem);font-weight:700;line-height:2;}
+  .mv-jp ruby rt{font-size:0.42em;color:var(--teal2);font-weight:500;}
+  .mv-trans{font-size:clamp(0.9rem,3.6vw,1.15rem);color:rgba(255,255,255,0.65);margin-top:10px;font-style:italic;}
+  .mv-vocab-jp{font-size:clamp(2.6rem,13vw,4.6rem);}
+  .mv-vocab-read{font-size:clamp(1.1rem,4.5vw,1.5rem);color:var(--gold);margin:6px 0 14px;font-family:"Noto Sans JP",sans-serif;}
+  .mv-vocab-id{font-size:clamp(1.1rem,4.6vw,1.6rem);font-weight:700;color:var(--teal2);}
+  .mv-vocab-cat{display:inline-block;margin-top:12px;font-size:0.68rem;font-weight:800;padding:3px 12px;border-radius:10px;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);}
+  .mv-dlg{display:flex;flex-direction:column;gap:10px;text-align:left;}
+  .mv-line{display:flex;gap:10px;align-items:flex-start;opacity:0.4;transition:opacity .4s;}
+  .mv-line.cur{opacity:1;}
+  .mv-who{flex-shrink:0;min-width:52px;font-size:0.72rem;font-weight:800;padding:4px 8px;border-radius:9px;text-align:center;margin-top:6px;}
+  .mv-who.s0{background:rgba(96,165,250,0.25);color:#93c5fd;}
+  .mv-who.s1{background:rgba(244,114,182,0.25);color:#f9a8d4;}
+  .mv-line .mv-jp{font-size:clamp(1.05rem,4.6vw,1.6rem);line-height:1.9;}
+  .mv-line .mv-trans{margin-top:0;font-size:clamp(0.82rem,3.4vw,1rem);}
+  .mv-end-emoji{font-size:3.2rem;margin-bottom:8px;}
+  .mv-end-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px;}
+  .mv-end-btn{padding:11px 20px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);color:#fff;font-weight:800;font-size:0.85rem;cursor:pointer;font-family:"DM Sans",sans-serif;}
+  .mv-end-btn.primary{background:var(--teal2);border-color:var(--teal2);color:#000;}
+  .mv-bottom{padding:6px 16px calc(14px + env(safe-area-inset-bottom,0px));}
+  .mv-progress{height:6px;border-radius:6px;background:rgba(255,255,255,0.15);cursor:pointer;margin-bottom:12px;overflow:hidden;}
+  .mv-progress-fill{height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--teal2),var(--gold));transition:width .35s;}
+  .mv-controls{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  .mv-count{font-size:0.74rem;color:rgba(255,255,255,0.6);font-weight:700;min-width:64px;}
+  .mv-ctrl-main{display:flex;align-items:center;gap:10px;}
+  .mv-btn{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.08);color:#fff;font-size:1.05rem;cursor:pointer;}
+  .mv-btn.play{width:56px;height:56px;font-size:1.4rem;background:var(--teal2);border-color:var(--teal2);color:#000;}
+  .mv-ctrl-side{display:flex;gap:6px;min-width:64px;justify-content:flex-end;}
+  .mv-chip{padding:6px 10px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.08);color:#fff;font-size:0.72rem;font-weight:800;cursor:pointer;font-family:"DM Sans",sans-serif;}
+  @keyframes mvUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  .mv-a{opacity:0;animation:mvUp .6s ease forwards;}
+  .mv-a1{animation-delay:.1s;}.mv-a2{animation-delay:.6s;}.mv-a3{animation-delay:1.2s;}.mv-a4{animation-delay:2.4s;}
+  @media(max-width:560px){.mv-stage{padding:8px 14px;}.mv-btn{width:42px;height:42px;}.mv-btn.play{width:54px;height:54px;}}
 </style>
 </head>
 <body>
@@ -3106,6 +3168,34 @@
     <div class="minna-bab-tabs" id="minna-bab-tabs"></div>
   </div>
   <div class="minna-wrap" id="minna-wrap"></div>
+</div>
+
+<!-- MINNA VIDEO PLAYER -->
+<div id="mv-overlay" class="mv-overlay" style="display:none;" data-sec="intro">
+  <div class="mv-top">
+    <div class="mv-top-info">
+      <div class="mv-top-title" id="mv-title">第1課</div>
+      <div class="mv-top-sub" id="mv-sec">Intro</div>
+    </div>
+    <button class="mv-close" onclick="closeMinnaVideo()" aria-label="Tutup">✕</button>
+  </div>
+  <div class="mv-chapters" id="mv-chapters"></div>
+  <div class="mv-stage" id="mv-stage"></div>
+  <div class="mv-bottom">
+    <div class="mv-progress" id="mv-progress" onclick="mvSeek(event)"><div class="mv-progress-fill" id="mv-progress-fill"></div></div>
+    <div class="mv-controls">
+      <div class="mv-count" id="mv-count">1 / 1</div>
+      <div class="mv-ctrl-main">
+        <button class="mv-btn" onclick="mvPrev()" aria-label="Sebelumnya">⏮</button>
+        <button class="mv-btn play" id="mv-play" onclick="mvTogglePlay()" aria-label="Putar/Jeda">⏸</button>
+        <button class="mv-btn" onclick="mvNext()" aria-label="Berikutnya">⏭</button>
+      </div>
+      <div class="mv-ctrl-side">
+        <button class="mv-chip" id="mv-speed" onclick="mvCycleSpeed()">1x</button>
+        <button class="mv-chip" id="mv-narr" onclick="mvToggleNarr()" style="display:none;">🇮🇩 ON</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- KAMUS KOSAKATA PAGE -->
@@ -10201,6 +10291,7 @@ function renderMinnaBab(idx) {
             <div class="bab-title">${d.title}</div>
             <div class="bab-sub">${d.sub}</div>
             <div class="bab-pola">${d.pola}</div>
+            <button class="mv-open-btn" onclick="openMinnaVideo(${idx})">🎬 Mode Video — belajar otomatis dengan suara</button>
         </div>
         
         <div class="minna-section">
@@ -10279,6 +10370,264 @@ function renderMinnaBab(idx) {
             </div>
         </div>
     `;
+}
+
+// ════════════════════════════════════
+// MINNA — MODE VIDEO (slide otomatis + suara)
+// ════════════════════════════════════
+const mv = { bab:0, slides:[], i:0, playing:false, speed:1, narr:true, token:0, timer:null, open:false };
+try {
+    const p = JSON.parse(localStorage.getItem('mvPrefs') || '{}');
+    if (p.speed) mv.speed = p.speed;
+    if (typeof p.narr === 'boolean') mv.narr = p.narr;
+} catch(e) {}
+
+function mvSavePrefs() {
+    try { localStorage.setItem('mvPrefs', JSON.stringify({ speed: mv.speed, narr: mv.narr })); } catch(e) {}
+}
+
+function mvHasIdVoice() {
+    if (!('speechSynthesis' in window)) return false;
+    return speechSynthesis.getVoices().some(v => (v.lang || '').toLowerCase().startsWith('id'));
+}
+
+function mvStripTilde(s) { return String(s || '').split('～').join('').split('〜').join(''); }
+
+function mvBuildSlides(d) {
+    const S = [];
+    S.push({ sec:'intro', chap:'Intro', hold:3500,
+        html: '<div class="mv-slide"><div class="mv-label mv-a mv-a1">Minna no Nihongo</div>' +
+              '<div class="mv-title-num mv-a mv-a1">第' + d.bab + '課 · Bab ' + d.bab + '</div>' +
+              '<div class="mv-title-main mv-a mv-a2">' + d.title + '</div>' +
+              '<div class="mv-title-sub mv-a mv-a3">' + d.sub + '</div></div>',
+        speak: [ { lang:'ja', text:'第' + d.bab + '課' }, { lang:'id', text:d.title } ] });
+
+    S.push({ sec:'pola', chap:'Pola', hold:7000,
+        html: '<div class="mv-slide"><div class="mv-label mv-a mv-a1">Pola Kalimat Bab ' + d.bab + '</div>' +
+              '<div class="mv-pola-box mv-a mv-a2">' + d.pola + '</div></div>',
+        speak: [] });
+
+    d.grammar.forEach((g, gi) => {
+        S.push({ sec:'grammar', chap:'文法', hold:7500,
+            html: '<div class="mv-slide"><div class="mv-label mv-a mv-a1">文法 · Pola ' + (gi+1) + ' / ' + d.grammar.length + '</div>' +
+                  '<div class="mv-big mv-pattern mv-a mv-a1">' + g.p + '</div>' +
+                  '<div class="mv-meaning mv-a mv-a2">' + g.a + '</div>' +
+                  '<div class="mv-jp mv-a mv-a3">' + (g.exJpRuby || g.exJp) + '</div>' +
+                  '<div class="mv-trans mv-a mv-a4">' + g.exId + '</div></div>',
+            speak: [ { lang:'id', text:g.a }, { lang:'ja', text:g.exJp }, { lang:'id', text:g.exId } ] });
+    });
+
+    d.vocab.forEach((v, vi) => {
+        S.push({ sec:'vocab', chap:'語彙', hold:3600,
+            html: '<div class="mv-slide"><div class="mv-label mv-a mv-a1">語彙 · ' + (vi+1) + ' / ' + d.vocab.length + '</div>' +
+                  '<div class="mv-big mv-vocab-jp mv-a mv-a1">' + v.jp + '</div>' +
+                  '<div class="mv-vocab-read mv-a mv-a2">' + v.read + '</div>' +
+                  '<div class="mv-vocab-id mv-a mv-a3">' + v.id + '</div>' +
+                  '<div class="mv-vocab-cat mv-a mv-a3">' + v.cat + '</div></div>',
+            speak: [ { lang:'ja', text: mvStripTilde(v.read) || mvStripTilde(v.jp) }, { lang:'id', text:v.id } ] });
+    });
+
+    const whoIdx = {};
+    d.dialog.forEach(l => { if (!(l.who in whoIdx)) whoIdx[l.who] = Object.keys(whoIdx).length % 2; });
+    d.dialog.forEach((line, di) => {
+        let lines = '';
+        for (let k = 0; k <= di; k++) {
+            const L = d.dialog[k];
+            lines += '<div class="mv-line ' + (k === di ? 'cur' : '') + '">' +
+                '<div class="mv-who s' + whoIdx[L.who] + '">' + L.who + '</div>' +
+                '<div><div class="mv-jp">' + (L.jpRuby || L.jp) + '</div>' +
+                (k === di ? '<div class="mv-trans mv-a mv-a3">' + L.id + '</div>' : '') + '</div></div>';
+        }
+        S.push({ sec:'dialog', chap:'会話', hold:4500,
+            html: '<div class="mv-slide"><div class="mv-label">会話 · ' + (di+1) + ' / ' + d.dialog.length + '</div><div class="mv-dlg">' + lines + '</div></div>',
+            speak: [ { lang:'ja', text:L_text(d.dialog[di]), pitch: whoIdx[d.dialog[di].who] ? 1.3 : 1.0 }, { lang:'id', text:d.dialog[di].id } ] });
+    });
+
+    S.push({ sec:'end', chap:'Selesai', hold:0, kind:'end', html:'', speak:[] });
+    return S;
+}
+function L_text(line) { return line.jp; }
+
+function mvCanSpeak(it) {
+    if (typeof _isMuted !== 'undefined' && _isMuted) return false;
+    if (!('speechSynthesis' in window)) return false;
+    if (it.lang === 'id') return mv.narr && mvHasIdVoice();
+    return true;
+}
+
+function mvStopSpeech() {
+    if ('speechSynthesis' in window) { try { speechSynthesis.cancel(); } catch(e) {} }
+}
+
+function mvSpeakItem(it, tok, done) {
+    const u = new SpeechSynthesisUtterance(it.text);
+    u.lang = it.lang === 'id' ? 'id-ID' : 'ja-JP';
+    u.rate = (it.lang === 'id' ? 1 : 0.9) * mv.speed;
+    if (it.pitch) u.pitch = it.pitch;
+    if (it.lang === 'id') {
+        const v = speechSynthesis.getVoices().find(x => (x.lang || '').toLowerCase().startsWith('id'));
+        if (v) u.voice = v;
+    } else if (typeof getVoice === 'function') {
+        const v = getVoice();
+        if (v) u.voice = v;
+    }
+    let finished = false;
+    let guard = null;
+    const fin = () => {
+        if (finished) return;
+        finished = true;
+        clearTimeout(guard);
+        done();
+    };
+    u.onend = fin;
+    u.onerror = fin;
+    const est = it.text.length * (it.lang === 'id' ? 90 : 260) / mv.speed + 2500;
+    guard = setTimeout(fin, est);
+    speechSynthesis.speak(u);
+}
+
+function mvRenderSlide() {
+    const s = mv.slides[mv.i];
+    const ov = document.getElementById('mv-overlay');
+    ov.setAttribute('data-sec', s.sec);
+    const stage = document.getElementById('mv-stage');
+    if (s.kind === 'end') {
+        const d = minnaData[mv.bab];
+        const hasNext = mv.bab + 1 < minnaData.length;
+        stage.innerHTML = '<div class="mv-slide"><div class="mv-end-emoji">🎉</div>' +
+            '<div class="mv-big" style="font-size:clamp(1.6rem,7vw,2.4rem);">お疲れ様でした！</div>' +
+            '<div class="mv-trans" style="font-style:normal;">Bab ' + d.bab + ' — ' + d.title + ' selesai</div>' +
+            '<div class="mv-end-actions">' +
+            '<button class="mv-end-btn" onclick="mvReplay()">↻ Ulangi Bab</button>' +
+            (hasNext ? '<button class="mv-end-btn primary" onclick="openMinnaVideo(' + (mv.bab + 1) + ')">▶ Bab ' + (d.bab + 1) + '</button>' : '') +
+            '<button class="mv-end-btn" onclick="closeMinnaVideo()">✕ Tutup</button></div></div>';
+    } else {
+        stage.innerHTML = s.html;
+    }
+    stage.scrollTop = 0;
+    document.getElementById('mv-sec').textContent = s.chap + (s.kind === 'end' ? '' : '');
+    document.getElementById('mv-count').textContent = (mv.i + 1) + ' / ' + mv.slides.length;
+    document.getElementById('mv-progress-fill').style.width = ((mv.i + 1) / mv.slides.length * 100) + '%';
+    document.querySelectorAll('.mv-chap').forEach(b => b.classList.toggle('active', b.getAttribute('data-chap') === s.chap));
+}
+
+function mvRun() {
+    clearTimeout(mv.timer);
+    mv.token++;
+    const tok = mv.token;
+    mvStopSpeech();
+    mvRenderSlide();
+    mvUpdatePlayBtn();
+    if (!mv.playing) return;
+    const s = mv.slides[mv.i];
+    if (s.kind === 'end') { mv.playing = false; mvUpdatePlayBtn(); return; }
+    const started = Date.now();
+    const advance = () => {
+        if (tok !== mv.token || !mv.playing) return;
+        const wait = Math.max(0, s.hold / mv.speed - (Date.now() - started)) + 900 / mv.speed;
+        mv.timer = setTimeout(() => { if (tok === mv.token && mv.playing) mvGo(mv.i + 1); }, wait);
+    };
+    const items = (s.speak || []).filter(mvCanSpeak);
+    if (!items.length) { advance(); return; }
+    let k = 0;
+    const next = () => {
+        if (tok !== mv.token || !mv.playing) return;
+        if (k >= items.length) { advance(); return; }
+        mvSpeakItem(items[k++], tok, next);
+    };
+    mv.timer = setTimeout(next, 120);
+}
+
+function mvGo(n) {
+    if (n < 0) n = 0;
+    if (n >= mv.slides.length) n = mv.slides.length - 1;
+    mv.i = n;
+    mvRun();
+}
+function mvPrev() { mvGo(mv.i - 1); }
+function mvNext() { mvGo(mv.i + 1); }
+
+function mvTogglePlay() {
+    if (mv.slides[mv.i] && mv.slides[mv.i].kind === 'end') { mv.i = 0; mv.playing = true; mvRun(); return; }
+    mv.playing = !mv.playing;
+    if (mv.playing) { mvRun(); }
+    else { mv.token++; clearTimeout(mv.timer); mvStopSpeech(); mvUpdatePlayBtn(); }
+}
+
+function mvUpdatePlayBtn() {
+    const b = document.getElementById('mv-play');
+    if (b) b.textContent = mv.playing ? '⏸' : '▶';
+}
+
+function mvReplay() { mv.i = 0; mv.playing = true; mvRun(); }
+
+function mvCycleSpeed() {
+    const steps = [0.75, 1, 1.25, 1.5];
+    mv.speed = steps[(steps.indexOf(mv.speed) + 1) % steps.length];
+    document.getElementById('mv-speed').textContent = mv.speed + 'x';
+    mvSavePrefs();
+    if (mv.playing) mvRun();
+}
+
+function mvToggleNarr() {
+    mv.narr = !mv.narr;
+    mvSavePrefs();
+    mvUpdateNarrBtn();
+    if (mv.playing) mvRun();
+}
+
+function mvUpdateNarrBtn() {
+    const b = document.getElementById('mv-narr');
+    if (!b) return;
+    b.style.display = mvHasIdVoice() ? 'inline-block' : 'none';
+    b.textContent = '🇮🇩 ' + (mv.narr ? 'ON' : 'OFF');
+}
+
+function mvSeek(e) {
+    const bar = document.getElementById('mv-progress');
+    const r = bar.getBoundingClientRect();
+    const frac = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+    mvGo(Math.round(frac * (mv.slides.length - 1)));
+}
+
+function mvKey(e) {
+    if (!mv.open) return;
+    if (e.key === 'Escape') closeMinnaVideo();
+    else if (e.key === ' ') { e.preventDefault(); mvTogglePlay(); }
+    else if (e.key === 'ArrowRight') mvNext();
+    else if (e.key === 'ArrowLeft') mvPrev();
+}
+
+function openMinnaVideo(idx) {
+    const d = minnaData[idx];
+    if (!d) return;
+    mv.bab = idx;
+    mv.slides = mvBuildSlides(d);
+    mv.i = 0;
+    mv.playing = true;
+    mv.open = true;
+    document.getElementById('mv-title').textContent = '第' + d.bab + '課 · ' + d.title;
+    const chaps = [];
+    mv.slides.forEach((s, n) => { if (!chaps.find(c => c.chap === s.chap)) chaps.push({ chap: s.chap, n: n }); });
+    document.getElementById('mv-chapters').innerHTML = chaps.map(c =>
+        '<button class="mv-chap" data-chap="' + c.chap + '" onclick="mvGo(' + c.n + ')">' + c.chap + '</button>').join('');
+    document.getElementById('mv-speed').textContent = mv.speed + 'x';
+    mvUpdateNarrBtn();
+    document.getElementById('mv-overlay').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', mvKey);
+    mvRun();
+}
+
+function closeMinnaVideo() {
+    mv.playing = false;
+    mv.open = false;
+    mv.token++;
+    clearTimeout(mv.timer);
+    mvStopSpeech();
+    document.getElementById('mv-overlay').style.display = 'none';
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', mvKey);
 }
 
 function toggleMinnaSec(header) {
