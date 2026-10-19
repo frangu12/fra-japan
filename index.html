@@ -1916,6 +1916,96 @@
   .mv-a{opacity:0;animation:mvUp .6s ease forwards;}
   .mv-a1{animation-delay:.1s;}.mv-a2{animation-delay:.6s;}.mv-a3{animation-delay:1.2s;}.mv-a4{animation-delay:2.4s;}
   @media(max-width:560px){.mv-stage{padding:8px 14px;}.mv-btn{width:42px;height:42px;}.mv-btn.play{width:54px;height:54px;}}
+
+  /* RENCANA BELAJAR JLPT */
+  .pl-banner{display:flex;align-items:center;gap:12px;margin:0 0 18px;padding:14px 16px;border-radius:16px;background:linear-gradient(135deg,#7c3aed,#4f46e5 60%,#0ea5e9);cursor:pointer;box-shadow:0 8px 24px rgba(79,70,229,0.35);}
+  .pl-banner-ico{font-size:1.8rem;}
+  .pl-banner-txt{flex:1;min-width:0;}
+  .pl-banner-t{font-size:0.95rem;font-weight:800;color:#fff;}
+  .pl-banner-s{font-size:0.74rem;color:rgba(255,255,255,0.8);margin-top:2px;}
+  .pl-banner-go{font-size:0.78rem;font-weight:800;color:#fff;white-space:nowrap;background:rgba(255,255,255,0.18);padding:6px 12px;border-radius:10px;}
+  .pl-hero{padding:22px 18px 16px;background:linear-gradient(160deg,#120a2e,#1e1b4b 55%,#0a0a1a);border-bottom:1px solid var(--border);}
+  .pl-hero-top{display:flex;justify-content:space-between;align-items:center;gap:12px;max-width:760px;margin:0 auto;}
+  .pl-hero-title{font-size:1.25rem;font-weight:900;color:#fff;}
+  .pl-hero-sub{font-size:0.76rem;color:rgba(255,255,255,0.65);margin-top:3px;}
+  .pl-count{text-align:center;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.18);border-radius:16px;padding:8px 16px;min-width:78px;}
+  .pl-count-num{font-size:1.9rem;font-weight:900;color:var(--gold);line-height:1;}
+  .pl-count-lbl{font-size:0.62rem;font-weight:700;color:rgba(255,255,255,0.6);margin-top:3px;letter-spacing:0.5px;}
+  .pl-phase{max-width:760px;margin:14px auto 8px;font-size:0.78rem;font-weight:800;color:var(--teal2);}
+  .pl-bar{max-width:760px;margin:0 auto;height:7px;border-radius:7px;background:rgba(255,255,255,0.12);overflow:hidden;}
+  .pl-bar-fill{height:100%;width:0;border-radius:7px;background:linear-gradient(90deg,var(--teal2),var(--gold));transition:width .5s;}
+  .pl-stats{max-width:760px;margin:12px auto 0;display:flex;gap:8px;flex-wrap:wrap;}
+  .pl-stat{font-size:0.7rem;font-weight:700;padding:5px 11px;border-radius:12px;background:rgba(255,255,255,0.08);color:#fff;}
+  .pl-wrap{max-width:760px;margin:0 auto;padding:14px 14px 100px;}
+  .pl-days{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:none;}
+  .pl-days::-webkit-scrollbar{display:none;}
+  .pl-day{flex:0 0 auto;min-width:46px;padding:6px 4px;border-radius:12px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);text-align:center;cursor:pointer;font-family:"DM Sans",sans-serif;}
+  .pl-day b{display:block;font-size:0.95rem;color:#fff;}
+  .pl-day span{font-size:0.56rem;font-weight:700;}
+  .pl-day.full{border-color:var(--teal2);background:rgba(0,212,170,0.12);}
+  .pl-day.part{border-color:var(--gold);background:rgba(212,160,23,0.1);}
+  .pl-day.miss{border-color:rgba(192,57,43,0.5);}
+  .pl-day.today{box-shadow:0 0 0 2px rgba(124,58,237,0.7);}
+  .pl-day.sel{background:rgba(124,58,237,0.25);border-color:#a78bfa;}
+  .pl-day.lock{opacity:0.35;cursor:default;}
+  .pl-day-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin:6px 0 12px;}
+  .pl-day-title{font-size:1.05rem;font-weight:800;color:#fff;}
+  .pl-day-sub{font-size:0.74rem;color:var(--muted);margin-top:2px;}
+  .pl-day-prog{font-size:0.78rem;font-weight:800;color:var(--teal2);white-space:nowrap;}
+  .pl-task{display:flex;align-items:center;gap:11px;padding:12px 12px;margin-bottom:8px;background:var(--card);border:1.5px solid var(--border);border-radius:14px;}
+  .pl-task.done{background:rgba(0,212,170,0.06);border-color:rgba(0,212,170,0.3);}
+  .pl-check{flex-shrink:0;width:28px;height:28px;border-radius:8px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:900;cursor:pointer;color:transparent;}
+  .pl-task.done .pl-check{background:var(--teal2);border-color:var(--teal2);color:#000;}
+  .pl-task-main{flex:1;min-width:0;}
+  .pl-task-title{font-size:0.88rem;font-weight:800;color:#fff;}
+  .pl-task.done .pl-task-title{color:var(--muted);text-decoration:line-through;}
+  .pl-task-desc{font-size:0.72rem;color:var(--muted);margin-top:3px;line-height:1.5;word-break:break-word;}
+  .pl-go{flex-shrink:0;padding:8px 14px;border-radius:10px;border:none;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;font-weight:800;font-size:0.76rem;cursor:pointer;font-family:"DM Sans",sans-serif;}
+  .pl-task.done .pl-go{background:var(--card);border:1.5px solid var(--border);color:var(--muted);}
+  .pl-box{margin-top:14px;padding:13px 15px;border-radius:14px;background:#0e0e1a;border:1.5px solid var(--border);font-size:0.78rem;color:#cfd2e0;line-height:1.7;}
+  .pl-box b{color:#fff;}
+  .pl-foot{text-align:center;margin-top:18px;}
+  .pl-reset{background:none;border:1.5px solid var(--border);color:var(--muted);padding:8px 16px;border-radius:10px;font-size:0.74rem;cursor:pointer;font-family:"DM Sans",sans-serif;}
+  .pl-overlay{position:fixed;inset:0;z-index:520;background:rgba(0,0,0,0.82);display:flex;align-items:flex-end;justify-content:center;}
+  .pl-modal{width:100%;max-width:640px;max-height:92vh;max-height:92dvh;display:flex;flex-direction:column;background:#14142a;border:1.5px solid var(--border);border-radius:20px 20px 0 0;}
+  .pl-modal-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 8px;}
+  .pl-modal-title{font-size:0.98rem;font-weight:800;color:#fff;}
+  .pl-x{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:0.95rem;}
+  .pl-modal-body{flex:1;min-height:0;overflow-y:auto;padding:6px 16px 12px;}
+  .pl-modal-foot{padding:10px 16px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--border);display:flex;gap:8px;}
+  .pl-primary{flex:1;padding:13px;border-radius:12px;border:none;background:var(--teal2);color:#000;font-weight:900;font-size:0.9rem;cursor:pointer;font-family:"DM Sans",sans-serif;}
+  .pl-secondary{flex:1;padding:13px;border-radius:12px;border:1.5px solid var(--border);background:transparent;color:#fff;font-weight:800;font-size:0.88rem;cursor:pointer;font-family:"DM Sans",sans-serif;}
+  .pl-card{display:flex;gap:12px;align-items:flex-start;padding:12px;margin-bottom:8px;background:#0e0e1a;border:1.5px solid var(--border);border-radius:14px;}
+  .pl-card-l{flex-shrink:0;min-width:58px;text-align:center;}
+  .pl-kanji{font-family:"Noto Sans JP",sans-serif;font-size:2.4rem;font-weight:900;color:#fff;line-height:1.1;}
+  .pl-kanji-meta{font-size:0.6rem;color:var(--muted);margin-top:2px;}
+  .pl-card-r{flex:1;min-width:0;}
+  .pl-card-mean{font-size:0.95rem;font-weight:800;color:var(--teal2);}
+  .pl-card-jp{font-family:"Noto Sans JP",sans-serif;font-size:1.25rem;font-weight:800;color:#fff;}
+  .pl-card-read{font-size:0.76rem;color:var(--gold);margin-top:2px;font-family:"Noto Sans JP",sans-serif;}
+  .pl-card-ex{font-size:0.74rem;color:#b8bccd;margin-top:6px;line-height:1.7;font-family:"Noto Sans JP",sans-serif;}
+  .pl-speak{flex-shrink:0;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--muted);padding:2px 4px;}
+  .pl-qbar{height:5px;background:rgba(255,255,255,0.1);margin:0 16px;border-radius:5px;overflow:hidden;}
+  .pl-qbar-fill{height:100%;background:linear-gradient(90deg,var(--teal2),var(--gold));transition:width .3s;}
+  .pl-qmeta{font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin:10px 0 12px;}
+  .pl-qlabel{font-size:0.82rem;color:#cfd2e0;margin-bottom:8px;}
+  .pl-qprompt{font-family:"Noto Sans JP",sans-serif;font-size:1.35rem;font-weight:800;color:#fff;line-height:1.6;margin-bottom:6px;}
+  .pl-qprompt.big{font-size:3.2rem;text-align:center;line-height:1.2;margin:6px 0 10px;}
+  .pl-qsub{font-size:0.78rem;color:var(--gold);margin-bottom:12px;text-align:center;}
+  .pl-opts{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+  .pl-opt{padding:13px 14px;border-radius:12px;border:1.5px solid var(--border);background:#0e0e1a;color:#fff;font-size:0.92rem;font-weight:700;text-align:left;cursor:pointer;font-family:"Noto Sans JP","DM Sans",sans-serif;}
+  .pl-opt:hover:not(:disabled){border-color:#a78bfa;}
+  .pl-opt.correct{border-color:var(--teal2);background:rgba(0,212,170,0.16);color:var(--teal2);}
+  .pl-opt.wrong{border-color:var(--red);background:rgba(192,57,43,0.16);color:#ff8a8a;}
+  .pl-fb{margin-top:12px;padding:11px 13px;border-radius:11px;font-size:0.8rem;line-height:1.65;font-family:"Noto Sans JP","DM Sans",sans-serif;}
+  .pl-fb.ok{background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);color:var(--teal2);}
+  .pl-fb.ng{background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.3);color:#ffb0b0;}
+  .pl-res{text-align:center;padding:10px 0 4px;}
+  .pl-res-emoji{font-size:2.8rem;}
+  .pl-res-score{font-size:1.8rem;font-weight:900;color:var(--gold);margin:4px 0;}
+  .pl-res-msg{font-size:0.82rem;color:var(--muted);margin-bottom:12px;}
+  .pl-wrong-item{text-align:left;padding:9px 12px;background:#0e0e1a;border-radius:10px;margin-bottom:6px;font-size:0.76rem;color:#cfd2e0;line-height:1.6;font-family:"Noto Sans JP","DM Sans",sans-serif;}
+  @media(min-width:700px){.pl-overlay{align-items:center;}.pl-modal{border-radius:20px;}}
 </style>
 </head>
 <body>
@@ -1955,6 +2045,7 @@
 <!-- BOTTOM NAVIGATION -->
 <nav class="bottom-nav" id="bottom-nav">
   <button class="bnav-item active" id="bnav-home" onclick="showPage('home')"><span class="bnav-icon">🏠</span>Home</button>
+  <button class="bnav-item" id="bnav-rencana" onclick="showPage('rencana')"><span class="bnav-icon">🎯</span>Rencana</button>
   <button class="bnav-item" id="bnav-minna" onclick="showPage('minna')"><span class="bnav-icon">📖</span>Minna</button>
   <button class="bnav-item" id="bnav-kanji" onclick="showPage('kanji')"><span class="bnav-icon">漢</span>Kanji</button>
   <button class="bnav-item" id="bnav-kamus" onclick="showPage('kamus')"><span class="bnav-icon">📚</span>Kamus</button>
@@ -2074,7 +2165,7 @@
       <div class="hfeat-card fc-blue" onclick="showPage('kanji')">
         <div class="hfeat-icon">漢</div>
         <h3>Kamus Kanji</h3>
-        <p>313 kanji N5+N4 lengkap onyomi, kunyomi & contoh</p>
+        <p>290 kanji N5+N4 lengkap onyomi, kunyomi & contoh</p>
         <div class="hfeat-kanji">字</div>
       </div>
       <div class="hfeat-card fc-gold" onclick="showPage('jlpt')">
@@ -2154,7 +2245,7 @@
         <div class="cat-emoji">🔰</div>
         <div class="cat-jp">漢字 N5</div>
         <div class="cat-id">100 Kanji Dasar</div>
-        <div class="cat-count">160 kanji</div>
+        <div class="cat-count">146 kanji</div>
         <div class="cat-actions">
           <button onclick="showPage('kanji');setKanjiFilter('N5')" style="flex:1;background:rgba(168,85,247,0.12);border-color:rgba(168,85,247,0.3);color:var(--purple2);font-size:0.65rem;font-weight:700;padding:6px 2px;border-radius:7px;cursor:pointer;">📚 Belajar</button>
         </div>
@@ -2164,7 +2255,7 @@
         <div class="cat-emoji">⛩️</div>
         <div class="cat-jp">漢字 N4</div>
         <div class="cat-id">88 Kanji Lanjutan</div>
-        <div class="cat-count">153 kanji</div>
+        <div class="cat-count">144 kanji</div>
         <div class="cat-actions">
           <button onclick="showPage('kanji');setKanjiFilter('N4')" style="flex:1;background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.3);color:var(--blue2);font-size:0.65rem;font-weight:700;padding:6px 2px;border-radius:7px;cursor:pointer;">📚 Belajar</button>
         </div>
@@ -2182,6 +2273,16 @@
         </div>
       </div>
 
+    </div>
+
+    <!-- RENCANA BELAJAR JLPT -->
+    <div class="pl-banner" onclick="showPage('rencana')">
+      <div class="pl-banner-ico">🎯</div>
+      <div class="pl-banner-txt">
+        <div class="pl-banner-t">Rencana Belajar JLPT — 6 Desember</div>
+        <div class="pl-banner-s" id="pl-banner-s">Misi harian terstruktur sampai hari ujian</div>
+      </div>
+      <div class="pl-banner-go">Buka →</div>
     </div>
 
     <!-- SEMUA MODUL -->
@@ -2378,8 +2479,8 @@
     <!-- MODE 1: KATEGORI LIST -->
     <div id="hf-kategori" class="hf-section">
       <div class="hf-level-row">
-        <button class="hf-lv-btn active" id="hflv-N5" onclick="setHafalLevel('N5')">N5 — 160 Kanji</button>
-        <button class="hf-lv-btn" id="hflv-N4" onclick="setHafalLevel('N4')">N4 — 153 Kanji</button>
+        <button class="hf-lv-btn active" id="hflv-N5" onclick="setHafalLevel('N5')">N5 — 146 Kanji</button>
+        <button class="hf-lv-btn" id="hflv-N4" onclick="setHafalLevel('N4')">N4 — 144 Kanji</button>
       </div>
       <div id="hf-cat-list"></div>
     </div>
@@ -2693,7 +2794,7 @@
   <div class="kanji-hero">
     <div style="font-size:2.4rem;margin-bottom:6px;line-height:1;">漢</div>
     <h2>Kanji <em>N5 & N4</em></h2>
-    <p>313 kanji wajib untuk ujian JLPT N5 & N4. Klik kanji untuk lihat detail lengkap — onyomi, kunyomi, arti, dan contoh kata.</p>
+    <p>290 kanji wajib untuk ujian JLPT N5 & N4. Klik kanji untuk lihat detail lengkap — onyomi, kunyomi, arti, dan contoh kata.</p>
   </div>
   <div class="kanji-controls">
     <div class="kanji-mode-tabs">
@@ -2702,9 +2803,9 @@
     </div>
     <div id="kanji-browse-ctrl">
       <div class="kanji-filter-row">
-        <button class="kf-btn active" onclick="setKanjiFilter('all')">Semua (313)</button>
-        <button class="kf-btn n5-btn" onclick="setKanjiFilter('N5')">N5 (160)</button>
-        <button class="kf-btn n4-btn" onclick="setKanjiFilter('N4')">N4 (153)</button>
+        <button class="kf-btn active" onclick="setKanjiFilter('all')">Semua (290)</button>
+        <button class="kf-btn n5-btn" onclick="setKanjiFilter('N5')">N5 (146)</button>
+        <button class="kf-btn n4-btn" onclick="setKanjiFilter('N4')">N4 (144)</button>
         <button class="kf-btn" onclick="setKanjiFilter('mastered')" id="mastered-filter-btn">✓ Dikuasai (<span id="mastered-count">0</span>)</button>
         <input class="kanji-search" type="text" id="kanji-search" placeholder="🔍 Cari kanji / arti..." oninput="renderKanji()">
       </div>
@@ -3170,6 +3271,30 @@
   <div class="minna-wrap" id="minna-wrap"></div>
 </div>
 
+<!-- RENCANA BELAJAR PAGE -->
+<div id="page-rencana" class="page">
+  <div class="pl-hero">
+    <div class="pl-hero-top">
+      <div>
+        <div class="pl-hero-title">🎯 Rencana Belajar JLPT</div>
+        <div class="pl-hero-sub" id="pl-sub"></div>
+      </div>
+      <div class="pl-count"><div class="pl-count-num" id="pl-count-num">–</div><div class="pl-count-lbl">hari lagi</div></div>
+    </div>
+    <div class="pl-phase" id="pl-phase"></div>
+    <div class="pl-bar"><div class="pl-bar-fill" id="pl-bar"></div></div>
+    <div class="pl-stats" id="pl-stats"></div>
+  </div>
+  <div class="pl-wrap">
+    <div class="pl-days" id="pl-days"></div>
+    <div id="pl-day-head"></div>
+    <div id="pl-tasks"></div>
+    <div id="pl-tips"></div>
+    <div class="pl-foot"><button class="pl-reset" id="pl-reset" onclick="planReset()">↺ Mulai ulang rencana dari hari ini</button></div>
+  </div>
+</div>
+<div id="pl-overlay" class="pl-overlay" style="display:none;"></div>
+
 <!-- MINNA VIDEO PLAYER -->
 <div id="mv-overlay" class="mv-overlay" style="display:none;" data-sec="intro">
   <div class="mv-top">
@@ -3497,7 +3622,7 @@
       <div class="db-progress-list">
         <div class="db-prog-item">
           <div class="db-prog-head">
-            <span>漢字 N5</span><span id="db-prog-n5-txt">0 / 160</span>
+            <span>漢字 N5</span><span id="db-prog-n5-txt">0 / 146</span>
           </div>
           <div class="db-prog-track"><div class="db-prog-fill" id="db-prog-n5" style="--accent:var(--purple);width:0%"></div></div>
         </div>
@@ -3924,7 +4049,7 @@
 
 <script>
 // ═══════════════════════════════════════════════
-// KANJI DATABASE — N5 (160) + N4 (153) = 168 total
+// KANJI DATABASE — N5 (146) + N4 (144) = 168 total
 // ═══════════════════════════════════════════════
 const kanjiDB = [
   {char:'一',level:'N5',strokes:1,on:['イチ','イツ'],kun:['ひと','ひとつ'],meaning:'Satu',examples:[{word:'一つ',read:'ひとつ',meaning:'Satu buah'},{word:'一人',read:'ひとり',meaning:'Satu orang'},{word:'一日',read:'ついたち',meaning:'Tanggal satu'}],sentence:{jp:'一つのりんごを食べました。',id:'Saya makan satu apel.'}},
@@ -3958,11 +4083,6 @@ const kanjiDB = [
   {char:'耳',level:'N5',strokes:6,on:['ジ'],kun:['みみ'],meaning:'Telinga',examples:[{word:'耳鳴り',read:'みみなり',meaning:'Telinga berdenging'},{word:'耳元',read:'みみもと',meaning:'Dekat telinga'},{word:'中耳炎',read:'ちゅうじえん',meaning:'Radang telinga tengah'}],sentence:{jp:'耳が聞こえません。',id:'Telinga saya tidak bisa mendengar.'}},
   {char:'力',level:'N5',strokes:2,on:['リョク','リキ'],kun:['ちから'],meaning:'Kekuatan, Tenaga',examples:[{word:'力強い',read:'ちからづよい',meaning:'Kuat'},{word:'努力',read:'どりょく',meaning:'Usaha/kerja keras'},{word:'電力',read:'でんりょく',meaning:'Tenaga listrik'}],sentence:{jp:'もっと力を入れてください。',id:'Tolong masukkan lebih banyak tenaga.'}},
   {char:'気',level:'N5',strokes:6,on:['キ','ケ'],kun:[''],meaning:'Udara, Semangat, Perasaan',examples:[{word:'天気',read:'てんき',meaning:'Cuaca'},{word:'気持ち',read:'きもち',meaning:'Perasaan'},{word:'元気',read:'げんき',meaning:'Sehat/bersemangat'}],sentence:{jp:'元気ですか。',id:'Apa kabar?'}},
-  {char:'大',level:'N5',strokes:3,on:['ダイ','タイ'],kun:['おお'],meaning:'Besar',examples:[{word:'大学',read:'だいがく',meaning:'Universitas'},{word:'大切',read:'たいせつ',meaning:'Penting/berharga'},{word:'大きい',read:'おおきい',meaning:'Besar'}],sentence:{jp:'この荷物は大きすぎます。',id:'Barang bawaan ini terlalu besar.'}},
-  {char:'小',level:'N5',strokes:3,on:['ショウ'],kun:['ちい','こ','お'],meaning:'Kecil',examples:[{word:'小学校',read:'しょうがっこう',meaning:'Sekolah dasar'},{word:'小説',read:'しょうせつ',meaning:'Novel'},{word:'小さい',read:'ちいさい',meaning:'Kecil'}],sentence:{jp:'小さい猫がいます。',id:'Ada kucing kecil.'}},
-  {char:'中',level:'N5',strokes:4,on:['チュウ'],kun:['なか'],meaning:'Tengah, Dalam',examples:[{word:'中学校',read:'ちゅうがっこう',meaning:'SMP'},{word:'中心',read:'ちゅうしん',meaning:'Pusat'},{word:'中国',read:'ちゅうごく',meaning:'China'}],sentence:{jp:'かばんの中に何がありますか。',id:'Apa yang ada di dalam tas?'}},
-  {char:'上',level:'N5',strokes:3,on:['ジョウ','ショウ'],kun:['うえ','うわ','かみ','あ','のぼ'],meaning:'Atas',examples:[{word:'上手',read:'じょうず',meaning:'Pandai/terampil'},{word:'以上',read:'いじょう',meaning:'Lebih dari/di atas'},{word:'上がる',read:'あがる',meaning:'Naik'}],sentence:{jp:'テーブルの上に本があります。',id:'Ada buku di atas meja.'}},
-  {char:'下',level:'N5',strokes:3,on:['カ','ゲ'],kun:['した','しも','もと','さ','くだ','お'],meaning:'Bawah',examples:[{word:'地下',read:'ちか',meaning:'Bawah tanah'},{word:'下手',read:'へた',meaning:'Tidak pandai'},{word:'下がる',read:'さがる',meaning:'Turun'}],sentence:{jp:'椅子の下に猫がいます。',id:'Ada kucing di bawah kursi.'}},
   {char:'左',level:'N5',strokes:5,on:['サ'],kun:['ひだり'],meaning:'Kiri',examples:[{word:'左折',read:'させつ',meaning:'Belok kiri'},{word:'左右',read:'さゆう',meaning:'Kiri kanan'},{word:'左手',read:'ひだりて',meaning:'Tangan kiri'}],sentence:{jp:'左の建物が学校です。',id:'Gedung di sebelah kiri adalah sekolah.'}},
   {char:'右',level:'N5',strokes:5,on:['ウ','ユウ'],kun:['みぎ'],meaning:'Kanan',examples:[{word:'右折',read:'うせつ',meaning:'Belok kanan'},{word:'右側',read:'みぎがわ',meaning:'Sisi kanan'},{word:'右手',read:'みぎて',meaning:'Tangan kanan'}],sentence:{jp:'右に曲がってください。',id:'Tolong belok kanan.'}},
   {char:'本',level:'N5',strokes:5,on:['ホン'],kun:['もと'],meaning:'Buku, Asal',examples:[{word:'日本',read:'にほん',meaning:'Jepang'},{word:'本当',read:'ほんとう',meaning:'Benar-benar'},{word:'基本',read:'きほん',meaning:'Dasar'}],sentence:{jp:'図書館で本を借りました。',id:'Saya meminjam buku di perpustakaan.'}},
@@ -3977,11 +4097,6 @@ const kanjiDB = [
   {char:'間',level:'N5',strokes:12,on:['カン','ケン'],kun:['あいだ','ま'],meaning:'Antara, Ruang',examples:[{word:'時間',read:'じかん',meaning:'Waktu'},{word:'人間',read:'にんげん',meaning:'Manusia'},{word:'間違い',read:'まちがい',meaning:'Kesalahan'}],sentence:{jp:'二時間かかりました。',id:'Membutuhkan waktu dua jam.'}},
   {char:'分',level:'N5',strokes:4,on:['ブン','フン','ブ'],kun:['わ'],meaning:'Menit, Bagian',examples:[{word:'十分',read:'じゅっぷん',meaning:'Sepuluh menit'},{word:'自分',read:'じぶん',meaning:'Diri sendiri'},{word:'半分',read:'はんぶん',meaning:'Setengah'}],sentence:{jp:'五分後に出発します。',id:'Kami berangkat lima menit lagi.'}},
   {char:'何',level:'N5',strokes:7,on:['カ'],kun:['なに','なん'],meaning:'Apa, Berapa',examples:[{word:'何時',read:'なんじ',meaning:'Jam berapa'},{word:'何人',read:'なんにん',meaning:'Berapa orang'},{word:'何日',read:'なんにち',meaning:'Tanggal/hari berapa'}],sentence:{jp:'今日は何を食べますか。',id:'Hari ini makan apa?'}},
-  {char:'一',level:'N5',strokes:1,on:['イチ','イツ'],kun:['ひと'],meaning:'Satu',examples:[{word:'一つ',read:'ひとつ',meaning:'Satu (buah)'},{word:'一人',read:'ひとり',meaning:'Satu orang'},{word:'一番',read:'いちばん',meaning:'Nomor satu/paling'}],sentence:{jp:'一つのりんごを食べました。',id:'Saya makan satu apel.'}},
-  {char:'二',level:'N5',strokes:2,on:['ニ'],kun:['ふた'],meaning:'Dua',examples:[{word:'二つ',read:'ふたつ',meaning:'Dua (buah)'},{word:'二人',read:'ふたり',meaning:'Dua orang'},{word:'二月',read:'にがつ',meaning:'Februari'}],sentence:{jp:'二人で映画を見ました。',id:'Kami berdua menonton film.'}},
-  {char:'三',level:'N5',strokes:3,on:['サン'],kun:['み'],meaning:'Tiga',examples:[{word:'三つ',read:'みっつ',meaning:'Tiga (buah)'},{word:'三月',read:'さんがつ',meaning:'Maret'},{word:'三角',read:'さんかく',meaning:'Segitiga'}],sentence:{jp:'三日後に会いましょう。',id:'Mari bertemu tiga hari lagi.'}},
-  {char:'四',level:'N5',strokes:5,on:['シ'],kun:['よ','よん'],meaning:'Empat',examples:[{word:'四つ',read:'よっつ',meaning:'Empat (buah)'},{word:'四月',read:'しがつ',meaning:'April'},{word:'四角',read:'しかく',meaning:'Persegi'}],sentence:{jp:'四時に起きました。',id:'Saya bangun jam empat.'}},
-  {char:'五',level:'N5',strokes:4,on:['ゴ'],kun:['いつ'],meaning:'Lima',examples:[{word:'五つ',read:'いつつ',meaning:'Lima (buah)'},{word:'五月',read:'ごがつ',meaning:'Mei'},{word:'五感',read:'ごかん',meaning:'Lima indera'}],sentence:{jp:'五分待ってください。',id:'Tolong tunggu lima menit.'}},
   {char:'六',level:'N5',strokes:4,on:['ロク'],kun:['む'],meaning:'Enam',examples:[{word:'六つ',read:'むっつ',meaning:'Enam (buah)'},{word:'六月',read:'ろくがつ',meaning:'Juni'},{word:'六角',read:'ろっかく',meaning:'Segi enam'}],sentence:{jp:'六人で旅行しました。',id:'Kami berenam pergi wisata.'}},
   {char:'七',level:'N5',strokes:2,on:['シチ'],kun:['なな'],meaning:'Tujuh',examples:[{word:'七つ',read:'ななつ',meaning:'Tujuh (buah)'},{word:'七月',read:'しちがつ',meaning:'Juli'},{word:'七夕',read:'たなばた',meaning:'Festival Tanabata'}],sentence:{jp:'七時に学校へ行きます。',id:'Saya pergi ke sekolah jam tujuh.'}},
   {char:'八',level:'N5',strokes:2,on:['ハチ'],kun:['や'],meaning:'Delapan',examples:[{word:'八つ',read:'やっつ',meaning:'Delapan (buah)'},{word:'八月',read:'はちがつ',meaning:'Agustus'},{word:'八百屋',read:'やおや',meaning:'Toko sayur'}],sentence:{jp:'八月は暑いです。',id:'Bulan Agustus panas.'}},
@@ -4057,7 +4172,6 @@ const kanjiDB = [
   {char:'立',level:'N5',strokes:5,on:['リツ','リュウ'],kun:['た','たつ'],meaning:'Berdiri',examples:[{word:'立つ',read:'たつ',meaning:'Berdiri'},{word:'立場',read:'たちば',meaning:'Posisi / Sudut pandang'},{word:'国立',read:'こくりつ',meaning:'Nasional / Negeri'}],sentence:{jp:'バスを待ちながら立っています。',id:'Saya berdiri sambil menunggu bus.'}},
   {char:'開',level:'N5',strokes:12,on:['カイ'],kun:['あ','あける','ひら'],meaning:'Buka, Membuka',examples:[{word:'開ける',read:'あける',meaning:'Membuka'},{word:'開く',read:'ひらく',meaning:'Terbuka'},{word:'開店',read:'かいてん',meaning:'Pembukaan toko'}],sentence:{jp:'窓を開けてもいいですか。',id:'Bolehkah saya membuka jendela?'}},
   {char:'悪',level:'N4',strokes:11,on:['アク','オ'],kun:['わる','あ'],meaning:'Jahat, Buruk',examples:[{word:'悪い',read:'わるい',meaning:'Buruk/jahat'},{word:'最悪',read:'さいあく',meaning:'Paling buruk'},{word:'悪化',read:'あっか',meaning:'Memburuk'}],sentence:{jp:'今日は気分が悪いです。',id:'Hari ini saya merasa tidak enak badan.'}},
-  {char:'安',level:'N4',strokes:6,on:['アン'],kun:['やす'],meaning:'Murah, Aman, Tenang',examples:[{word:'安心',read:'あんしん',meaning:'Tenang/lega'},{word:'安全',read:'あんぜん',meaning:'Aman'},{word:'安い',read:'やすい',meaning:'Murah'}],sentence:{jp:'このレストランは安いです。',id:'Restoran ini murah.'}},
   {char:'暗',level:'N4',strokes:13,on:['アン'],kun:['くら'],meaning:'Gelap',examples:[{word:'暗い',read:'くらい',meaning:'Gelap'},{word:'暗記',read:'あんき',meaning:'Menghafal'},{word:'暗号',read:'あんごう',meaning:'Kode/sandi'}],sentence:{jp:'暗い部屋で本を読まないでください。',id:'Jangan membaca buku di ruangan gelap.'}},
   {char:'医',level:'N4',strokes:7,on:['イ'],kun:[''],meaning:'Dokter, Pengobatan',examples:[{word:'医者',read:'いしゃ',meaning:'Dokter'},{word:'医院',read:'いいん',meaning:'Klinik'},{word:'医学',read:'いがく',meaning:'Ilmu kedokteran'}],sentence:{jp:'医者に診てもらいました。',id:'Saya diperiksa dokter.'}},
   {char:'意',level:'N4',strokes:13,on:['イ'],kun:[''],meaning:'Maksud, Pikiran',examples:[{word:'意味',read:'いみ',meaning:'Arti/makna'},{word:'意見',read:'いけん',meaning:'Pendapat'},{word:'注意',read:'ちゅうい',meaning:'Perhatian/hati-hati'}]},
@@ -4066,13 +4180,11 @@ const kanjiDB = [
   {char:'院',level:'N4',strokes:10,on:['イン'],kun:[''],meaning:'Gedung, Institusi',examples:[{word:'病院',read:'びょういん',meaning:'Rumah sakit'},{word:'大学院',read:'だいがくいん',meaning:'Pascasarjana'},{word:'美容院',read:'びよういん',meaning:'Salon kecantikan'}]},
   {char:'運',level:'N4',strokes:12,on:['ウン'],kun:['はこ'],meaning:'Nasib, Mengangkut',examples:[{word:'運動',read:'うんどう',meaning:'Olahraga'},{word:'運転',read:'うんてん',meaning:'Menyetir'},{word:'運命',read:'うんめい',meaning:'Nasib/takdir'}]},
   {char:'映',level:'N4',strokes:9,on:['エイ'],kun:['うつ','は'],meaning:'Memantul, Film',examples:[{word:'映画',read:'えいが',meaning:'Film'},{word:'映す',read:'うつす',meaning:'Memproyeksikan'},{word:'上映',read:'じょうえい',meaning:'Penayangan film'}]},
-  {char:'駅',level:'N4',strokes:14,on:['エキ'],kun:[''],meaning:'Stasiun',examples:[{word:'駅前',read:'えきまえ',meaning:'Depan stasiun'},{word:'終点駅',read:'しゅうてんえき',meaning:'Stasiun akhir'},{word:'地下鉄駅',read:'ちかてつえき',meaning:'Stasiun metro'}],sentence:{jp:'駅はここから遠いですか。',id:'Apakah stasiun jauh dari sini?'}},
   {char:'横',level:'N4',strokes:15,on:['オウ'],kun:['よこ'],meaning:'Samping, Horizontal',examples:[{word:'横断',read:'おうだん',meaning:'Menyeberang'},{word:'横断歩道',read:'おうだんほどう',meaning:'Zebra cross'},{word:'横',read:'よこ',meaning:'Samping'}]},
   {char:'屋',level:'N4',strokes:9,on:['オク'],kun:['や'],meaning:'Toko, Atap',examples:[{word:'八百屋',read:'やおや',meaning:'Toko sayur'},{word:'部屋',read:'へや',meaning:'Kamar'},{word:'屋根',read:'やね',meaning:'Atap'}]},
   {char:'温',level:'N4',strokes:12,on:['オン'],kun:['あたた'],meaning:'Hangat, Suhu',examples:[{word:'温度',read:'おんど',meaning:'Suhu'},{word:'温泉',read:'おんせん',meaning:'Onsen/pemandian air panas'},{word:'気温',read:'きおん',meaning:'Suhu udara'}]},
   {char:'化',level:'N4',strokes:4,on:['カ','ケ'],kun:['ば'],meaning:'Berubah, Transformasi',examples:[{word:'文化',read:'ぶんか',meaning:'Budaya'},{word:'変化',read:'へんか',meaning:'Perubahan'},{word:'化学',read:'かがく',meaning:'Kimia'}],sentence:{jp:'日本の文化を勉強しています。',id:'Saya mempelajari budaya Jepang.'}},
   {char:'界',level:'N4',strokes:9,on:['カイ'],kun:[''],meaning:'Dunia, Batas',examples:[{word:'世界',read:'せかい',meaning:'Dunia'},{word:'限界',read:'げんかい',meaning:'Batas'},{word:'業界',read:'ぎょうかい',meaning:'Industri/sektor'}]},
-  {char:'開',level:'N4',strokes:12,on:['カイ'],kun:['あ','ひら'],meaning:'Membuka',examples:[{word:'開く',read:'あく',meaning:'Terbuka'},{word:'開発',read:'かいはつ',meaning:'Pengembangan'},{word:'公開',read:'こうかい',meaning:'Membuka untuk umum'}],sentence:{jp:'窓を開けてください。',id:'Tolong buka jendelanya.'}},
   {char:'漢',level:'N4',strokes:13,on:['カン'],kun:[''],meaning:'Kanji, Tiongkok',examples:[{word:'漢字',read:'かんじ',meaning:'Huruf kanji'},{word:'漢語',read:'かんご',meaning:'Kata serapan dari China'},{word:'漢方',read:'かんぽう',meaning:'Pengobatan tradisional China'}]},
   {char:'館',level:'N4',strokes:16,on:['カン'],kun:['やかた'],meaning:'Gedung, Aula',examples:[{word:'図書館',read:'としょかん',meaning:'Perpustakaan'},{word:'体育館',read:'たいいくかん',meaning:'Gym/aula olahraga'},{word:'旅館',read:'りょかん',meaning:'Penginapan Jepang'}],sentence:{jp:'美術館へ行きました。',id:'Saya pergi ke museum seni.'}},
   {char:'急',level:'N4',strokes:9,on:['キュウ'],kun:['いそ'],meaning:'Terburu-buru, Darurat',examples:[{word:'急ぐ',read:'いそぐ',meaning:'Terburu-buru'},{word:'急行',read:'きゅうこう',meaning:'Kereta ekspres'},{word:'救急車',read:'きゅうきゅうしゃ',meaning:'Ambulans'}]},
@@ -4128,8 +4240,6 @@ const kanjiDB = [
 
   // ── N5 Kanji Tambahan ──────────────────────────────
   {char:'石',level:'N5',strokes:5,on:['セキ','シャク'],kun:['いし'],meaning:'Batu',examples:[{word:'石',read:'いし',meaning:'Batu'},{word:'石鹸',read:'せっけん',meaning:'Sabun'},{word:'宝石',read:'ほうせき',meaning:'Permata'}],sentence:{jp:'石を拾いました。',id:'Saya memungut batu.'}},
-  {char:'森',level:'N5',strokes:12,on:['シン'],kun:['もり'],meaning:'Hutan besar',examples:[{word:'森',read:'もり',meaning:'Hutan'},{word:'森林',read:'しんりん',meaning:'Hutan belantara'},{word:'森の中',read:'もりのなか',meaning:'Di dalam hutan'}],sentence:{jp:'森の中は静かです。',id:'Di dalam hutan sunyi.'}},
-  {char:'海',level:'N5',strokes:9,on:['カイ'],kun:['うみ'],meaning:'Laut',examples:[{word:'海',read:'うみ',meaning:'Laut'},{word:'海外',read:'かいがい',meaning:'Luar negeri'},{word:'海岸',read:'かいがん',meaning:'Pantai'}],sentence:{jp:'海で泳ぎました。',id:'Saya berenang di laut.'}},
   {char:'池',level:'N5',strokes:6,on:['チ'],kun:['いけ'],meaning:'Kolam',examples:[{word:'池',read:'いけ',meaning:'Kolam'},{word:'池の鯉',read:'いけのこい',meaning:'Ikan koi di kolam'},{word:'電池',read:'でんち',meaning:'Baterai'}],sentence:{jp:'池に鯉がいます。',id:'Ada ikan koi di kolam.'}},
   {char:'風',level:'N5',strokes:9,on:['フウ','フ'],kun:['かぜ','かざ'],meaning:'Angin, Cara',examples:[{word:'風',read:'かぜ',meaning:'Angin'},{word:'台風',read:'たいふう',meaning:'Topan'},{word:'風景',read:'ふうけい',meaning:'Pemandangan'}],sentence:{jp:'今日は風が強いです。',id:'Anginnya kencang hari ini.'}},
   {char:'雪',level:'N5',strokes:11,on:['セツ'],kun:['ゆき'],meaning:'Salju',examples:[{word:'雪',read:'ゆき',meaning:'Salju'},{word:'雪山',read:'ゆきやま',meaning:'Gunung bersalju'},{word:'大雪',read:'おおゆき',meaning:'Salju lebat'}],sentence:{jp:'冬に雪が降ります。',id:'Salju turun di musim dingin.'}},
@@ -4153,21 +4263,16 @@ const kanjiDB = [
   {char:'紙',level:'N5',strokes:10,on:['シ'],kun:['かみ'],meaning:'Kertas',examples:[{word:'紙',read:'かみ',meaning:'Kertas'},{word:'折り紙',read:'おりがみ',meaning:'Origami'},{word:'新聞紙',read:'しんぶんし',meaning:'Kertas koran'}],sentence:{jp:'紙に書きます。',id:'Saya menulis di kertas.'}},
   {char:'色',level:'N5',strokes:6,on:['ショク','シキ'],kun:['いろ'],meaning:'Warna',examples:[{word:'色',read:'いろ',meaning:'Warna'},{word:'色々',read:'いろいろ',meaning:'Bermacam-macam'},{word:'茶色',read:'ちゃいろ',meaning:'Cokelat'}],sentence:{jp:'好きな色は何ですか。',id:'Warna favorit Anda apa?'}},
   {char:'形',level:'N5',strokes:7,on:['ケイ','ギョウ'],kun:['かたち','かた'],meaning:'Bentuk',examples:[{word:'形',read:'かたち',meaning:'Bentuk'},{word:'人形',read:'にんぎょう',meaning:'Boneka'},{word:'三角形',read:'さんかくけい',meaning:'Segitiga'}],sentence:{jp:'丸い形です。',id:'Bentuknya bulat.'}},
-  {char:'道',level:'N5',strokes:12,on:['ドウ','トウ'],kun:['みち'],meaning:'Jalan',examples:[{word:'道',read:'みち',meaning:'Jalan'},{word:'道路',read:'どうろ',meaning:'Jalan raya'},{word:'近道',read:'ちかみち',meaning:'Jalan pintas'}],sentence:{jp:'道に迷いました。',id:'Saya tersesat di jalan.'}},
   {char:'橋',level:'N5',strokes:16,on:['キョウ'],kun:['はし'],meaning:'Jembatan',examples:[{word:'橋',read:'はし',meaning:'Jembatan'},{word:'陸橋',read:'りっきょう',meaning:'Jembatan darat'},{word:'橋を渡る',read:'はしをわたる',meaning:'Menyeberangi jembatan'}],sentence:{jp:'橋を渡ります。',id:'Saya menyeberangi jembatan.'}},
-  {char:'駅',level:'N5',strokes:14,on:['エキ'],kun:[''],meaning:'Stasiun',examples:[{word:'駅',read:'えき',meaning:'Stasiun'},{word:'駅前',read:'えきまえ',meaning:'Depan stasiun'},{word:'終点駅',read:'しゅうてんえき',meaning:'Stasiun akhir'}],sentence:{jp:'駅まで歩きます。',id:'Saya berjalan ke stasiun.'}},
   {char:'門',level:'N5',strokes:8,on:['モン'],kun:['かど'],meaning:'Gerbang, Pintu',examples:[{word:'門',read:'もん',meaning:'Gerbang'},{word:'正門',read:'せいもん',meaning:'Pintu utama'},{word:'専門',read:'せんもん',meaning:'Spesialisasi'}],sentence:{jp:'学校の門を入ります。',id:'Saya masuk gerbang sekolah.'}},
   {char:'庭',level:'N5',strokes:10,on:['テイ'],kun:['にわ'],meaning:'Halaman, Taman',examples:[{word:'庭',read:'にわ',meaning:'Halaman/taman'},{word:'庭園',read:'ていえん',meaning:'Taman'},{word:'家庭',read:'かてい',meaning:'Rumah tangga'}],sentence:{jp:'庭に花を植えました。',id:'Saya menanam bunga di halaman.'}},
   {char:'角',level:'N5',strokes:7,on:['カク'],kun:['かど','つの'],meaning:'Sudut, Tanduk',examples:[{word:'角',read:'かど',meaning:'Sudut/pojok'},{word:'三角',read:'さんかく',meaning:'Segitiga'},{word:'角を曲がる',read:'かどをまがる',meaning:'Belok di pojok'}],sentence:{jp:'角を右に曲がります。',id:'Belok kanan di pojok.'}},
 
   // ── N4 Kanji Tambahan ──────────────────────────────
   {char:'愛',level:'N4',strokes:13,on:['アイ'],kun:['あい'],meaning:'Cinta, Kasih',examples:[{word:'愛',read:'あい',meaning:'Cinta'},{word:'愛する',read:'あいする',meaning:'Mencintai'},{word:'恋愛',read:'れんあい',meaning:'Percintaan'}],sentence:{jp:'家族を愛しています。',id:'Saya mencintai keluarga saya.'}},
-  {char:'悲',level:'N4',strokes:12,on:['ヒ'],kun:['かな'],meaning:'Sedih, Duka',examples:[{word:'悲しい',read:'かなしい',meaning:'Sedih'},{word:'悲劇',read:'ひげき',meaning:'Tragedi'},{word:'悲鳴',read:'ひめい',meaning:'Jeritan'}],sentence:{jp:'別れは悲しいです。',id:'Perpisahan itu menyedihkan.'}},
   {char:'怒',level:'N4',strokes:9,on:['ド','ヌ'],kun:['おこ','いか'],meaning:'Marah',examples:[{word:'怒る',read:'おこる',meaning:'Marah'},{word:'怒鳴る',read:'どなる',meaning:'Berteriak marah'},{word:'憤怒',read:'ふんぬ',meaning:'Kemarahan'}],sentence:{jp:'先生が怒りました。',id:'Guru itu marah.'}},
   {char:'笑',level:'N4',strokes:10,on:['ショウ'],kun:['わら','え'],meaning:'Tertawa, Senyum',examples:[{word:'笑う',read:'わらう',meaning:'Tertawa'},{word:'笑顔',read:'えがお',meaning:'Wajah tersenyum'},{word:'微笑',read:'びしょう',meaning:'Senyuman'}],sentence:{jp:'笑顔が素敵です。',id:'Senyumannya indah.'}},
   {char:'泣',level:'N4',strokes:8,on:['キュウ'],kun:['な'],meaning:'Menangis',examples:[{word:'泣く',read:'なく',meaning:'Menangis'},{word:'泣き声',read:'なきごえ',meaning:'Suara tangis'},{word:'号泣',read:'ごうきゅう',meaning:'Menangis tersedu'}],sentence:{jp:'子供が泣いています。',id:'Anak itu sedang menangis.'}},
-  {char:'困',level:'N4',strokes:7,on:['コン'],kun:['こま'],meaning:'Kesulitan, Repot',examples:[{word:'困る',read:'こまる',meaning:'Kesulitan/repot'},{word:'困難',read:'こんなん',meaning:'Kesulitan'},{word:'困惑',read:'こんわく',meaning:'Kebingungan'}],sentence:{jp:'どうしたら困りません。',id:'Dengan begitu tidak akan repot.'}},
-  {char:'安',level:'N4',strokes:6,on:['アン'],kun:['やす'],meaning:'Murah, Aman, Tenang',examples:[{word:'安い',read:'やすい',meaning:'Murah'},{word:'安全',read:'あんぜん',meaning:'Aman'},{word:'安心',read:'あんしん',meaning:'Tenang/lega'}],sentence:{jp:'この店は安いです。',id:'Toko ini murah.'}},
   {char:'危',level:'N4',strokes:6,on:['キ'],kun:['あぶ','あや'],meaning:'Bahaya',examples:[{word:'危ない',read:'あぶない',meaning:'Berbahaya'},{word:'危険',read:'きけん',meaning:'Bahaya'},{word:'危機',read:'きき',meaning:'Krisis'}],sentence:{jp:'危ない！気をつけて！',id:'Berbahaya! Hati-hati!'}},
   {char:'痛',level:'N4',strokes:12,on:['ツウ'],kun:['いた'],meaning:'Sakit, Nyeri',examples:[{word:'痛い',read:'いたい',meaning:'Sakit'},{word:'頭痛',read:'ずつう',meaning:'Sakit kepala'},{word:'痛み',read:'いたみ',meaning:'Rasa sakit'}],sentence:{jp:'お腹が痛いです。',id:'Perut saya sakit.'}},
   {char:'楽',level:'N4',strokes:13,on:['ガク','ラク'],kun:['たの','らく'],meaning:'Musik, Menyenangkan, Santai',examples:[{word:'楽しい',read:'たのしい',meaning:'Menyenangkan'},{word:'音楽',read:'おんがく',meaning:'Musik'},{word:'楽な',read:'らくな',meaning:'Santai/mudah'}],sentence:{jp:'音楽を聴くのが楽しいです。',id:'Mendengarkan musik itu menyenangkan.'}},
@@ -4186,10 +4291,7 @@ const kanjiDB = [
   {char:'歳',level:'N4',strokes:13,on:['サイ','セイ'],kun:['とし'],meaning:'Umur, Tahun',examples:[{word:'二十歳',read:'はたち',meaning:'20 tahun'},{word:'何歳',read:'なんさい',meaning:'Berapa umur'},{word:'年歳',read:'ねんさい',meaning:'Usia tahun'}],sentence:{jp:'何歳ですか。',id:'Berapa umur Anda?'}},
   {char:'末',level:'N4',strokes:5,on:['マツ','バツ'],kun:['すえ'],meaning:'Ujung, Akhir',examples:[{word:'週末',read:'しゅうまつ',meaning:'Akhir pekan'},{word:'月末',read:'げつまつ',meaning:'Akhir bulan'},{word:'年末',read:'ねんまつ',meaning:'Akhir tahun'}],sentence:{jp:'週末に何をしますか。',id:'Apa yang kamu lakukan di akhir pekan?'}},
   {char:'初',level:'N4',strokes:7,on:['ショ','ソ'],kun:['はじ','うい','はつ'],meaning:'Pertama, Awal',examples:[{word:'初めて',read:'はじめて',meaning:'Pertama kali'},{word:'最初',read:'さいしょ',meaning:'Pertama/awal'},{word:'初心者',read:'しょしんしゃ',meaning:'Pemula'}],sentence:{jp:'初めて日本に来ました。',id:'Saya pertama kali datang ke Jepang.'}},
-  {char:'急',level:'N4',strokes:9,on:['キュウ'],kun:['いそ'],meaning:'Tergesa, Mendadak',examples:[{word:'急ぐ',read:'いそぐ',meaning:'Terburu-buru'},{word:'急に',read:'きゅうに',meaning:'Tiba-tiba'},{word:'救急',read:'きゅうきゅう',meaning:'Pertolongan darurat'}],sentence:{jp:'急いでください。',id:'Tolong cepat.'}},
   {char:'降',level:'N4',strokes:10,on:['コウ'],kun:['お','ふ'],meaning:'Turun, Jatuh',examples:[{word:'降りる',read:'おりる',meaning:'Turun'},{word:'雨が降る',read:'あめがふる',meaning:'Hujan turun'},{word:'降参',read:'こうさん',meaning:'Menyerah'}],sentence:{jp:'電車を降ります。',id:'Saya turun dari kereta.'}},
-  {char:'乗',level:'N4',strokes:9,on:['ジョウ'],kun:['の'],meaning:'Naik, Menaiki',examples:[{word:'乗る',read:'のる',meaning:'Naik'},{word:'乗客',read:'じょうきゃく',meaning:'Penumpang'},{word:'乗り換え',read:'のりかえ',meaning:'Transit/ganti kendaraan'}],sentence:{jp:'電車に乗ります。',id:'Saya naik kereta.'}},
-  {char:'集',level:'N4',strokes:12,on:['シュウ'],kun:['あつ'],meaning:'Mengumpulkan, Berkumpul',examples:[{word:'集める',read:'あつめる',meaning:'Mengumpulkan'},{word:'集まる',read:'あつまる',meaning:'Berkumpul'},{word:'集中',read:'しゅうちゅう',meaning:'Konsentrasi'}],sentence:{jp:'切手を集めています。',id:'Saya mengumpulkan perangko.'}},
   {char:'決',level:'N4',strokes:7,on:['ケツ'],kun:['き'],meaning:'Memutuskan',examples:[{word:'決める',read:'きめる',meaning:'Memutuskan'},{word:'決定',read:'けってい',meaning:'Keputusan'},{word:'解決',read:'かいけつ',meaning:'Penyelesaian'}],sentence:{jp:'もう決めましたか。',id:'Apakah sudah memutuskan?'}},
   {char:'続',level:'N4',strokes:13,on:['ゾク'],kun:['つづ'],meaning:'Melanjutkan, Berlanjut',examples:[{word:'続ける',read:'つづける',meaning:'Melanjutkan'},{word:'続く',read:'つづく',meaning:'Berlanjut'},{word:'手続き',read:'てつづき',meaning:'Prosedur'}],sentence:{jp:'練習を続けます。',id:'Saya melanjutkan latihan.'}},
   {char:'変',level:'N4',strokes:9,on:['ヘン'],kun:['か','へん'],meaning:'Berubah, Aneh',examples:[{word:'変える',read:'かえる',meaning:'Mengubah'},{word:'変化',read:'へんか',meaning:'Perubahan'},{word:'大変',read:'たいへん',meaning:'Luar biasa/susah'}],sentence:{jp:'計画を変えました。',id:'Saya mengubah rencana.'}},
@@ -4834,23 +4936,17 @@ const vocab = [
 
   // -- N5 Tambahan: Bagian Tubuh & Alam --
   {jp:'\u982d',reading:'\u3042\u305f\u307e',id:'Kepala',level:'N5',cat:'body',example:'\u982d\u304c\u75db\u3044\u3067\u3059\u3002\nKepala saya sakit.'},
-  {jp:'\u9854',reading:'\u304b\u304a',id:'Wajah',level:'N5',cat:'body',example:'\u304d\u308c\u3044\u306a\u9854\u3067\u3059\u306d\u3002\nWajah yang cantik ya.'},
   {jp:'\u4f53',reading:'\u304b\u3089\u3060',id:'Tubuh / Badan',level:'N5',cat:'body',example:'\u4f53\u3092\u5927\u5207\u306b\u3057\u3066\u304f\u3060\u3055\u3044\u3002\nTolong jaga badan Anda.'},
   {jp:'\u9996',reading:'\u304f\u3073',id:'Leher',level:'N5',cat:'body',example:'\u9996\u304c\u75db\u3044\u3067\u3059\u3002\nLeher saya sakit.'},
-  {jp:'\u9f3b',reading:'\u306f\u306a',id:'Hidung',level:'N5',cat:'body',example:'\u9f3b\u304c\u9ad8\u3044\u3067\u3059\u306d\u3002\nHidungnya mancung ya.'},
-  {jp:'\u82b1',reading:'\u306f\u306a',id:'Bunga',level:'N5',cat:'nature',example:'\u304d\u308c\u3044\u306a\u82b1\u3067\u3059\u306d\u3002\nBunga yang indah ya.'},
   {jp:'\u9aea',reading:'\u304b\u307f',id:'Rambut',level:'N5',cat:'body',example:'\u9aea\u304c\u9577\u3044\u3067\u3059\u3002\nRambutnya panjang.'},
   {jp:'\u7a7a',reading:'\u305d\u3089',id:'Langit',level:'N5',cat:'nature',example:'\u7a7a\u304c\u9752\u3044\u3067\u3059\u3002\nLangitnya biru.'},
   {jp:'\u6d77',reading:'\u3046\u307f',id:'Laut / Pantai',level:'N5',cat:'nature',example:'\u590f\u306f\u6d77\u3078\u884c\u304d\u307e\u3059\u3002\nMusim panas pergi ke laut.'},
   {jp:'\u5c71',reading:'\u3084\u307e',id:'Gunung',level:'N5',cat:'nature',example:'\u5c71\u306b\u767b\u308a\u305f\u3044\u3067\u3059\u3002\nIngin mendaki gunung.'},
   {jp:'\u6728',reading:'\u304d',id:'Pohon / Kayu',level:'N5',cat:'nature',example:'\u5927\u304d\u306a\u6728\u306e\u4e0b\u3067\u4f11\u3080\u3002\nBeristirahat di bawah pohon besar.'},
   {jp:'\u77f3',reading:'\u3044\u3057',id:'Batu',level:'N5',cat:'nature',example:'\u77f3\u3092\u62fe\u3046\u3002\nMemungut batu.'},
-  {jp:'\u96ea',reading:'\u3086\u304d',id:'Salju',level:'N5',cat:'nature',example:'\u96ea\u304c\u964d\u3063\u3066\u3044\u307e\u3059\u3002\nSalju sedang turun.'},
   {jp:'\u661f',reading:'\u307b\u3057',id:'Bintang',level:'N5',cat:'nature',example:'\u661f\u304c\u304d\u308c\u3044\u3067\u3059\u3002\nBintangnya indah.'},
   {jp:'\u6708',reading:'\u3064\u304d',id:'Bulan (benda langit)',level:'N5',cat:'nature',example:'\u6708\u304c\u51fa\u3066\u3044\u307e\u3059\u3002\nBulan sedang terbit.'},
   {jp:'\u592a\u967d',reading:'\u305f\u3044\u3088\u3046',id:'Matahari',level:'N5',cat:'body',example:'\u592a\u967d\u304c\u307e\u3076\u3057\u3044\u3067\u3059\u3002\nMatahari silau.'},
-  {jp:'\u6625',reading:'\u306f\u308b',id:'Musim Semi',level:'N5',cat:'nature',example:'\u6625\u306f\u6696\u304b\u3044\u3067\u3059\u3002\nMusim semi hangat.'},
-  {jp:'\u51ac',reading:'\u3075\u3086',id:'Musim Dingin',level:'N5',cat:'nature',example:'\u51ac\u306f\u5bd2\u3044\u3067\u3059\u3002\nMusim dingin itu dingin.'},
 
   // -- N5 Tambahan: Makanan & Minuman --
   {jp:'\u30d1\u30f3',reading:'\u3071\u3093',id:'Roti',level:'N5',cat:'food',example:'\u671d\u3054\u306f\u3093\u306f\u30d1\u30f3\u3092\u98df\u3079\u307e\u3059\u3002\nSarapan makan roti.'},
@@ -4859,48 +4955,33 @@ const vocab = [
   {jp:'\u304a\u9152',reading:'\u304a\u3055\u3051',id:'Minuman Alkohol / Sake',level:'N5',cat:'food',example:'\u304a\u9152\u306f\u98f2\u307f\u307e\u305b\u3093\u3002\nSaya tidak minum alkohol.'},
 
   // -- N5 Tambahan: Tempat --
-  {jp:'\u90f5\u4fbf\u5c40',reading:'\u3086\u3046\u3073\u3093\u304d\u3087\u304f',id:'Kantor Pos',level:'N5',cat:'place',example:'\u90f5\u4fbf\u5c40\u306b\u884c\u304d\u307e\u3059\u3002\nPergi ke kantor pos.'},
-  {jp:'\u30db\u30c6\u30eb',reading:'\u307b\u3066\u308b',id:'Hotel',level:'N5',cat:'place',example:'\u30db\u30c6\u30eb\u306b\u6cca\u307e\u308a\u307e\u3059\u3002\nMenginap di hotel.'},
   {jp:'\u7a7a\u6e2f',reading:'\u304f\u3046\u3053\u3046',id:'Bandara',level:'N5',cat:'place',example:'\u7a7a\u6e2f\u307e\u3067\u884c\u304d\u307e\u3059\u3002\nPergi ke bandara.'},
-  {jp:'\u30d7\u30fc\u30eb',reading:'\u3077\u30fc\u308b',id:'Kolam Renang',level:'N5',cat:'place',example:'\u30d7\u30fc\u30eb\u3067\u6cf3\u3050\u3002\nBerenang di kolam renang.'},
 
   // -- N5 Tambahan: Benda Sehari-hari --
   {jp:'\u96fb\u8a71',reading:'\u3067\u3093\u308f',id:'Telepon',level:'N5',cat:'daily',example:'\u96fb\u8a71\u3092\u304b\u3051\u307e\u3059\u3002\nMenelepon.'},
   {jp:'\u643a\u5e2f',reading:'\u3051\u3044\u305f\u3044',id:'Ponsel',level:'N5',cat:'daily',example:'\u643a\u5e2f\u3092\u5fd8\u308c\u305f\u3002\nLupa ponsel.'},
   {jp:'\u8ca1\u5e03',reading:'\u3055\u3044\u3075',id:'Dompet',level:'N5',cat:'daily',example:'\u8ca1\u5e03\u3092\u843d\u3068\u3057\u305f\u3002\nDompet terjatuh.'},
-  {jp:'\u9375',reading:'\u304b\u304e',id:'Kunci',level:'N5',cat:'daily',example:'\u9375\u3092\u304b\u3051\u308b\u3002\nMengunci pintu.'},
   {jp:'\u96fb\u6c17',reading:'\u3067\u3093\u304d',id:'Listrik / Lampu',level:'N5',cat:'people',example:'\u96fb\u6c17\u3092\u3064\u3051\u308b\u3002\nMenyalakan lampu.'},
   {jp:'\u51b7\u8535\u5eab',reading:'\u308c\u3044\u305e\u3046\u3053',id:'Kulkas',level:'N5',cat:'daily',example:'\u51b7\u8535\u5eab\u306b\u5165\u308c\u308b\u3002\nMemasukkan ke kulkas.'},
-  {jp:'\u53f0\u6240',reading:'\u3060\u3044\u3069\u3053\u308d',id:'Dapur',level:'N5',cat:'daily',example:'\u53f0\u6240\u3067\u6599\u7406\u3059\u308b\u3002\nMemasak di dapur.'},
   {jp:'\u5207\u624b',reading:'\u304d\u3063\u3066',id:'Perangko',level:'N5',cat:'daily',example:'\u5207\u624b\u3092\u8cbc\u308b\u3002\nMenempelkan perangko.'},
-  {jp:'\u5c01\u7b52',reading:'\u3075\u3046\u3068\u3046',id:'Amplop',level:'N5',cat:'daily',example:'\u5c01\u7b52\u306b\u5165\u308c\u308b\u3002\nMemasukkan ke amplop.'},
-  {jp:'\u85ac',reading:'\u304f\u3059\u308a',id:'Obat',level:'N5',cat:'daily',example:'\u85ac\u3092\u98f2\u3080\u3002\nMinum obat.'},
   {jp:'\u71b1',reading:'\u306d\u3064',id:'Demam / Panas (suhu)',level:'N5',cat:'nouns',example:'\u71b1\u304c\u3042\u308a\u307e\u3059\u3002\nSaya demam.'},
   {jp:'\u98a8\u90aa',reading:'\u304b\u305c',id:'Flu / Masuk Angin',level:'N5',cat:'nouns',example:'\u98a8\u90aa\u3092\u3072\u3044\u305f\u3002\nKena flu.'},
-  {jp:'\u75c5\u6c17',reading:'\u3073\u3087\u3046\u304d',id:'Sakit / Penyakit',level:'N5',cat:'nouns',example:'\u75c5\u6c17\u3067\u4f11\u3080\u3002\nLibur karena sakit.'},
-  {jp:'\u7d19',reading:'\u304b\u307f',id:'Kertas',level:'N5',cat:'daily',example:'\u7d19\u3092\u6298\u308b\u3002\nMelipat kertas.'},
-  {jp:'\u30da\u30f3',reading:'\u3071\u3093',id:'Pulpen',level:'N5',cat:'daily',example:'\u30da\u30f3\u3067\u66f8\u304f\u3002\nMenulis dengan pulpen.'},
   {jp:'\u6d88\u3057\u30b4\u30e0',reading:'\u3051\u3057\u3054\u3080',id:'Penghapus',level:'N5',cat:'daily',example:'\u6d88\u3057\u30b4\u30e0\u3067\u6d88\u3059\u3002\nMenghapus dengan penghapus.'},
 
   // -- N5 Tambahan: Pelajaran & Kegiatan --
   {jp:'\u8a66\u9a13',reading:'\u3057\u3051\u3093',id:'Ujian',level:'N5',cat:'study',example:'\u660e\u65e5\u306f\u8a66\u9a13\u3067\u3059\u3002\nBesok ada ujian.'},
   {jp:'\u6388\u696d',reading:'\u3058\u3085\u304e\u3087\u3046',id:'Pelajaran / Kelas',level:'N5',cat:'people',example:'\u6388\u696d\u304c\u59cb\u307e\u308b\u3002\nPelajaran dimulai.'},
-  {jp:'\u554f\u984c',reading:'\u3082\u3093\u3060\u3044',id:'Soal / Masalah',level:'N5',cat:'study',example:'\u554f\u984c\u3092\u89e3\u304f\u3002\nMenyelesaikan soal.'},
   {jp:'\u7b54\u3048',reading:'\u3053\u305f\u3048',id:'Jawaban',level:'N5',cat:'study',example:'\u7b54\u3048\u3092\u66f8\u304f\u3002\nMenulis jawaban.'},
   {jp:'\u65c5\u884c',reading:'\u308a\u3087\u3053\u3046',id:'Perjalanan / Wisata',level:'N5',cat:'study',example:'\u65e5\u672c\u306b\u65c5\u884c\u3059\u308b\u3002\nBerwisata ke Jepang.'},
   {jp:'\u97f3\u697d',reading:'\u304a\u3093\u304c\u304f',id:'Musik',level:'N5',cat:'study',example:'\u97f3\u697d\u3092\u8074\u304f\u3002\nMendengarkan musik.'},
   {jp:'\u6b4c',reading:'\u3046\u305f',id:'Lagu',level:'N5',cat:'study',example:'\u6b4c\u3092\u6b4c\u3046\u3002\nMenyanyikan lagu.'},
-  {jp:'\u30b9\u30dd\u30fc\u30c4',reading:'\u3059\u307d\u30fc\u3064',id:'Olahraga',level:'N5',cat:'study',example:'\u30b9\u30dd\u30fc\u30c4\u304c\u597d\u304d\u3067\u3059\u3002\nSaya suka olahraga.'},
 
   // -- N5 Tambahan: Kata Keterangan --
   {jp:'\u672c\u5f53\u306b',reading:'\u307b\u3093\u3068\u3046\u306b',id:'Sungguh / Benar-benar',level:'N5',cat:'adjectives',example:'\u672c\u5f53\u306b\u3042\u308a\u304c\u3068\u3046\u3002\nSungguh terima kasih.'},
-  {jp:'\u3082\u3063\u3068',reading:'\u3082\u3063\u3068',id:'Lebih (lagi)',level:'N5',cat:'adjectives',example:'\u3082\u3063\u3068\u30f3\u3086\u3063\u304f\u308a\u8a71\u3057\u3066\u304f\u3060\u3055\u3044\u3002\nTolong bicara lebih pelan.'},
   {jp:'\u3086\u3063\u304f\u308a',reading:'\u3086\u3063\u304f\u308a',id:'Pelan-pelan / Santai',level:'N5',cat:'adverbs',example:'\u3086\u3063\u304f\u308a\u4f11\u3093\u3067\u304f\u3060\u3055\u3044\u3002\nTolong beristirahatlah dengan santai.'},
   {jp:'\u3061\u3087\u3046\u3069',reading:'\u3061\u3087\u3046\u3069',id:'Tepat / Pas',level:'N5',cat:'adverbs',example:'\u3061\u3087\u3046\u3069\u4e09\u6642\u3067\u3059\u3002\nTepat jam tiga.'},
   {jp:'\u5168\u7136',reading:'\u305c\u3093\u305c\u3093',id:'Sama sekali tidak',level:'N5',cat:'adverbs',example:'\u5168\u7136\u5206\u304b\u3089\u306a\u3044\u3002\nSama sekali tidak mengerti.'},
   {jp:'\u305c\u3063\u305f\u3044',reading:'\u305c\u3063\u305f\u3044',id:'Pasti / Tentu',level:'N5',cat:'adverbs',example:'\u305c\u3063\u305f\u3044\u306b\u884c\u304d\u307e\u3059\u3002\nPasti akan pergi.'},
-  {jp:'\u672c\u5f53',reading:'\u307b\u3093\u3068\u3046',id:'Sungguhan / Benar',level:'N5',cat:'adjectives',example:'\u672c\u5f53\u3067\u3059\u304b\u3002\nBenarkah itu?'},
-  {jp:'\u3069\u3046\u305e',reading:'\u3069\u3046\u305e',id:'Silakan / Tolong (beri)',level:'N5',cat:'greeting',example:'\u3069\u3046\u305e\u304a\u4e0a\u304c\u308a\u304f\u3060\u3055\u3044\u3002\nSilakan masuk.'},
   {jp:'\u305d\u308c\u3067\u306f',reading:'\u305d\u308c\u3067\u306f',id:'Kalau begitu',level:'N5',cat:'adverbs',example:'\u305d\u308c\u3067\u306f\u3001\u59cb\u3081\u307e\u3057\u3087\u3046\u3002\nKalau begitu, mari kita mulai.'},
 
   // -- N5 Tambahan: Kata Sifat --
@@ -4924,14 +5005,12 @@ const vocab = [
   {jp:'\u5371\u306a\u3044',reading:'\u3042\u3076\u306a\u3044',id:'Berbahaya',level:'N5',cat:'adjectives',example:'\u5371\u306a\u3044\uff01\nBerbahaya!'},
   {jp:'\u540c\u3058',reading:'\u304a\u306a\u3058',id:'Sama',level:'N5',cat:'adjectives',example:'\u540c\u3058\u30af\u30e9\u30b9\u3067\u3059\u3002\nSatu kelas yang sama.'},
   {jp:'\u5927\u597d\u304d',reading:'\u3060\u3044\u3059\u304d',id:'Sangat suka / Cinta',level:'N5',cat:'adverbs',example:'\u65e5\u672c\u8a9e\u304c\u5927\u597d\u304d\u3067\u3059\u3002\nSaya sangat suka bahasa Jepang.'},
-  {jp:'\u6709\u540d',reading:'\u3086\u3046\u3081\u3044',id:'Terkenal / Populer',level:'N5',cat:'adjectives',example:'\u6709\u540d\u306a\u6b4c\u624b\u3067\u3059\u3002\nPenyanyi yang terkenal.'},
 
   // -- N5 Tambahan: Warna --
   {jp:'\u8d64',reading:'\u3042\u304b',id:'Merah',level:'N5',cat:'colors',example:'\u8d64\u3044\u30d0\u30e9\u3002\nMawar merah.'},
   {jp:'\u9752',reading:'\u3042\u304a',id:'Biru / Hijau (lampu lalu lintas)',level:'N5',cat:'place',example:'\u9752\u3044\u7a7a\u3002\nLangit biru.'},
   {jp:'\u767d',reading:'\u3057\u308d',id:'Putih',level:'N5',cat:'colors',example:'\u767d\u3044\u30b7\u30e3\u30c4\u3002\nKemeja putih.'},
   {jp:'\u9ec4\u8272',reading:'\u304d\u3044\u308d',id:'Kuning',level:'N5',cat:'colors',example:'\u9ec4\u8272\u3044\u82b1\u3002\nBunga kuning.'},
-  {jp:'\u7dd1',reading:'\u307f\u3069\u308a',id:'Hijau',level:'N5',cat:'colors',example:'\u7dd1\u306e\u8449\u3002\nDaun hijau.'},
   {jp:'\u7d2b',reading:'\u3080\u3089\u3055\u304d',id:'Ungu',level:'N5',cat:'colors',example:'\u7d2b\u306e\u82b1\u3002\nBunga ungu.'},
   {jp:'\u706f\u8272',reading:'\u306f\u3044\u3044\u308d',id:'Abu-abu',level:'N5',cat:'colors',example:'\u706f\u8272\u306e\u7a7a\u3002\nLangit abu-abu.'},
   {jp:'\u8c6c\u8089',reading:'\u3076\u305f\u306b\u304f',id:'Daging Babi',level:'N5',cat:'food',example:'\u8c6c\u8089\u3092\u98f2\u307f\u307e\u3059\u3002\nMakan daging babi.'},
@@ -4991,18 +5070,11 @@ const vocab = [
   {jp:'驚く',reading:'おどろく',id:'Terkejut',level:'N4',cat:'verbs',example:'サプライズに驚く。\nTerkejut dengan kejutan.'},
   {jp:'急に',reading:'きゅうに',id:'Tiba-tiba',level:'N4',cat:'verbs',example:'急に雨が降る。\nTiba-tiba hujan turun.'},
   {jp:'習う',reading:'ならう',id:'Belajar dari guru',level:'N4',cat:'people',example:'ピアノを習う。\nBelajar piano dari guru.'},
-  {jp:'練習する',reading:'れんしゅうする',id:'Berlatih',level:'N4',cat:'verbs',example:'毎日練習する。\nBerlatih setiap hari.'},
-  {jp:'電話',reading:'でんわ',id:'Telepon',level:'N5',cat:'daily',example:'電話する。\nMenelepon.'},
-  {jp:'音楽',reading:'おんがく',id:'Musik',level:'N5',cat:'study',example:'音楽を聞く。\nMendengarkan musik.'},
   {jp:'食べ物',reading:'たべもの',id:'Makanan',level:'N5',cat:'food',example:'食べ物が好き。\nSuka makanan.'},
-  {jp:'空港',reading:'くうこう',id:'Bandara',level:'N5',cat:'place',example:'空港に行く。\nPergi ke bandara.'},
-  {jp:'海',reading:'うみ',id:'Laut / Pantai',level:'N5',cat:'nature',example:'海で泳ぐ。\nBerenang di laut.'},
-  {jp:'山',reading:'やま',id:'Gunung',level:'N5',cat:'nature',example:'山に登る。\nMendaki gunung.'},
   {jp:'理由',reading:'りゆう',id:'Alasan',level:'N4',cat:'concept',example:'理由を教えてください。\nTolong beritahu alasannya.'},
   {jp:'計画',reading:'けいかく',id:'Rencana',level:'N4',cat:'concept',example:'旅行の計画を立てる。\nMembuat rencana perjalanan.'},
   {jp:'予定',reading:'よてい',id:'Jadwal / Rencana',level:'N4',cat:'concept',example:'今週の予定は何ですか？\nApa jadwal minggu ini?'},
   {jp:'機会',reading:'きかい',id:'Kesempatan',level:'N4',cat:'numbers',example:'いい機会だ。\nIni kesempatan yang baik.'},
-  {jp:'答え',reading:'こたえ',id:'Jawaban',level:'N4',cat:'study',example:'答えを書く。\nMenulis jawaban.'},
   {jp:'説明',reading:'せつめい',id:'Penjelasan',level:'N4',cat:'concept',example:'説明を聞く。\nMendengarkan penjelasan.'},
   {jp:'経験',reading:'けいけん',id:'Pengalaman',level:'N4',cat:'concept',example:'いい経験になる。\nJadi pengalaman yang baik.'},
   {jp:'生活',reading:'せいかつ',id:'Kehidupan / Cara hidup',level:'N4',cat:'concept',example:'毎日の生活を楽しむ。\nMenikmati kehidupan sehari-hari.'},
@@ -5015,19 +5087,12 @@ const vocab = [
   {jp:'予約',reading:'よやく',id:'Reservasi / Pemesanan',level:'N4',cat:'concept',example:'ホテルを予約する。\nMemesan hotel.'},
   {jp:'連絡',reading:'れんらく',id:'Kontak / Kabar',level:'N4',cat:'concept',example:'連絡してください。\nTolong hubungi saya.'},
   {jp:'場所',reading:'ばしょ',id:'Tempat',level:'N4',cat:'numbers',example:'待ち合わせの場所を決める。\nMenentukan tempat pertemuan.'},
-  {jp:'体',reading:'からだ',id:'Tubuh / Badan',level:'N4',cat:'body',example:'体が痛い。\nBadan sakit.'},
   {jp:'気持ち',reading:'きもち',id:'Perasaan',level:'N4',cat:'body',example:'気持ちが分かる。\nMengerti perasaannya.'},
   {jp:'おいしい',reading:'おいしい',id:'Enak / Lezat',level:'N5',cat:'adjectives',example:'このラーメンはおいしい。\nRamen ini enak.'},
   {jp:'まずい',reading:'まずい',id:'Tidak enak',level:'N5',cat:'adjectives',example:'この料理はまずい。\nMasakan ini tidak enak.'},
-  {jp:'かわいい',reading:'かわいい',id:'Lucu / Imut',level:'N5',cat:'adjectives',example:'赤ちゃんがかわいい。\nBayinya lucu.'},
   {jp:'きれい',reading:'きれい',id:'Cantik / Bersih',level:'N5',cat:'adjectives',example:'花がきれいだ。\nBunganya cantik.'},
   {jp:'熱い',reading:'あつい',id:'Panas (benda)',level:'N5',cat:'adjectives',example:'お茶が熱い。\nTehnya panas.'},
-  {jp:'冷たい',reading:'つめたい',id:'Dingin (benda)',level:'N5',cat:'adjectives',example:'水が冷たい。\nAirnya dingin.'},
-  {jp:'多い',reading:'おおい',id:'Banyak',level:'N5',cat:'adjectives',example:'人が多い。\nOrangnya banyak.'},
-  {jp:'少ない',reading:'すくない',id:'Jarang/Sedikit',level:'N5',cat:'adjectives',example:'時間が少ない。\nWaktunya sedikit.'},
-  {jp:'悲しい',reading:'かなしい',id:'Sedih',level:'N4',cat:'adjectives',example:'別れが悲しい。\nPerpisahannya menyedihkan.'},
   {jp:'うれしい',reading:'うれしい',id:'Senang / Gembira',level:'N4',cat:'adjectives',example:'プレゼントがうれしい。\nSenang menerima hadiah.'},
-  {jp:'怖い',reading:'こわい',id:'Menakutkan / Takut',level:'N4',cat:'adjectives',example:'お化けが怖い。\nHantu itu menakutkan.'},
   {jp:'恥ずかしい',reading:'はずかしい',id:'Malu',level:'N4',cat:'adjectives',example:'間違えて恥ずかしい。\nMalu karena salah.'},
   {jp:'寂しい',reading:'さびしい',id:'Kesepian / Sepi',level:'N4',cat:'adjectives',example:'一人で寂しい。\nKesepian sendiri.'},
   {jp:'眠い',reading:'ねむい',id:'Mengantuk',level:'N4',cat:'adjectives',example:'とても眠い。\nSangat mengantuk.'},
@@ -5044,7 +5109,6 @@ const vocab = [
   {jp:'ぜんぜん',reading:'ぜんぜん',id:'Sama sekali tidak',level:'N5',cat:'adverbs',example:'ぜんぜん分からない。\nSama sekali tidak mengerti.'},
   {jp:'だいたい',reading:'だいたい',id:'Kira-kira / Umumnya',level:'N5',cat:'adverbs',example:'だいたい30分かかる。\nKira-kira membutuhkan 30 menit.'},
   {jp:'はやく',reading:'はやく',id:'Cepat / Segera',level:'N5',cat:'adverbs',example:'はやく来て。\nCepat datang.'},
-  {jp:'ゆっくり',reading:'ゆっくり',id:'Pelan-pelan / Santai',level:'N5',cat:'adverbs',example:'ゆっくり話してください。\nTolong bicara pelan-pelan.'},
   {jp:'一人で',reading:'ひとりで',id:'Sendiri',level:'N5',cat:'adverbs',example:'一人で旅行する。\nBerwisata sendiri.'},
   {jp:'やっと',reading:'やっと',id:'Akhirnya',level:'N4',cat:'adverbs',example:'やっと終わった。\nAkhirnya selesai.'},
   {jp:'まず',reading:'まず',id:'Pertama-tama',level:'N4',cat:'adverbs',example:'まず手を洗ってください。\nPertama-tama cuci tangan.'},
@@ -5092,13 +5156,9 @@ const vocab = [
   {jp:'～ヶ月',reading:'かげつ',id:'...bulan (durasi)',level:'N4',cat:'numbers',example:'3ヶ月勉強した。\nBelajar selama 3 bulan.'},
   {jp:'～年間',reading:'ねんかん',id:'...tahun (durasi)',level:'N4',cat:'numbers',example:'5年間働いた。\nBekerja selama 5 tahun.'},
   {jp:'朝ごはん',reading:'あさごはん',id:'Sarapan',level:'N5',cat:'food',example:'毎朝、朝ごはんを食べます。\nSetiap pagi saya makan sarapan.'},
-  {jp:'晩ごはん',reading:'ばんごはん',id:'Makan malam',level:'N5',cat:'food',example:'晩ごはんは何ですか。\nMakan malamnya apa?'},
   {jp:'昼ごはん',reading:'ひるごはん',id:'Makan siang',level:'N5',cat:'food',example:'昼ごはんを一緒に食べましょう。\nMari makan siang bersama.'},
-  {jp:'財布',reading:'さいふ',id:'Dompet',level:'N5',cat:'daily',example:'財布をなくしました。\nSaya kehilangan dompet.'},
   {jp:'靴',reading:'くつ',id:'Sepatu',level:'N5',cat:'daily',example:'新しい靴を買いました。\nSaya beli sepatu baru.'},
   {jp:'洗濯',reading:'せんたく',id:'Mencuci pakaian',level:'N5',cat:'daily',example:'洗濯をします。\nSaya mencuci pakaian.'},
-  {jp:'歌',reading:'うた',id:'Lagu',level:'N5',cat:'study',example:'歌を歌いましょう。\nMari bernyanyi.'},
-  {jp:'旅行',reading:'りょこう',id:'Perjalanan / Wisata',level:'N5',cat:'study',example:'旅行が大好きです。\nSaya sangat suka berwisata.'},
   {jp:'休み',reading:'やすみ',id:'Istirahat / Libur',level:'N5',cat:'nouns',example:'明日は休みです。\nBesok libur.'},
   {jp:'意見',reading:'いけん',id:'Pendapat',level:'N4',cat:'pronoun',example:'あなたの意見を聞かせてください。\nTolong ceritakan pendapat Anda.'},
   {jp:'方法',reading:'ほうほう',id:'Cara / Metode',level:'N4',cat:'concept',example:'もっといい方法があります。\nAda cara yang lebih baik.'},
@@ -5106,31 +5166,20 @@ const vocab = [
   {jp:'注意',reading:'ちゅうい',id:'Perhatian / Hati-hati',level:'N4',cat:'greeting',example:'注意してください。\nTolong hati-hati.'},
   {jp:'諦める',reading:'あきらめる',id:'Menyerah / Melepaskan',level:'N4',cat:'concept',example:'諦めないでください。\nJangan menyerah.'},
   {jp:'楽しむ',reading:'たのしむ',id:'Menikmati',level:'N4',cat:'concept',example:'旅行を楽しみましょう。\nMari nikmati perjalanan.'},
-  {jp:'赤',reading:'あか',id:'Merah',level:'N5',cat:'colors',example:'赤いりんご\nApel merah'},
-  {jp:'青',reading:'あお',id:'Biru',level:'N5',cat:'colors',example:'青い空\nLangit biru'},
-  {jp:'白',reading:'しろ',id:'Putih',level:'N5',cat:'colors',example:'白い犬\nAnjing putih'},
-  {jp:'黄色',reading:'きいろ',id:'Kuning',level:'N5',cat:'colors',example:'黄色のシャツ\nKemeja kuning'},
   {jp:'上',reading:'うえ',id:'Atas',level:'N5',cat:'daily',example:'机の上\nDi atas meja'},
   {jp:'隣',reading:'となり',id:'Sebelah',level:'N5',cat:'nouns',example:'隣の人\nOrang sebelah'},
   {jp:'近く',reading:'ちかく',id:'Dekat',level:'N5',cat:'nouns',example:'近くのスーパー\nSupermarket dekat sini'},
-  {jp:'空',reading:'そら',id:'Langit',level:'N5',cat:'nature',example:'空が青いです。\nLangit biru.'},
   {jp:'船',reading:'ふね',id:'Kapal',level:'N5',cat:'pronoun',example:'大きい船\nKapal besar'},
   {jp:'鞄',reading:'かばん',id:'Tas',level:'N5',cat:'daily',example:'新しい鞄\nTas baru'},
-  {jp:'パン',reading:'ぱん',id:'Roti',level:'N5',cat:'food',example:'パンを買う。\nMembeli roti.'},
-  {jp:'頭',reading:'あたま',id:'Kepala',level:'N5',cat:'body',example:'頭が痛い。\nSakit kepala.'},
   {jp:'男',reading:'おとこ',id:'Laki-laki',level:'N5',cat:'people',example:'男の人\nOrang laki-laki'},
   {jp:'女',reading:'おんな',id:'Perempuan',level:'N5',cat:'people',example:'女の人\nOrang perempuan'},
   {jp:'勉強する',reading:'べんきょうする',id:'Belajar',level:'N5',cat:'verbs',example:'毎日日本語を勉強します。\nSaya belajar bahasa Jepang setiap hari.'},
-  {jp:'掃除する',reading:'そうじする',id:'Membersihkan',level:'N5',cat:'verbs',example:'毎週末部屋を掃除します。\nSaya membersihkan kamar setiap akhir minggu.'},
-  {jp:'料理する',reading:'りょうりする',id:'Memasak',level:'N5',cat:'verbs',example:'母は毎日料理します。\nIbu memasak setiap hari.'},
   {jp:'運転する',reading:'うんてんする',id:'Mengemudi',level:'N5',cat:'verbs',example:'車を運転できますか。\nApakah kamu bisa mengemudi?'},
   {jp:'踊る',reading:'おどる',id:'Menari',level:'N5',cat:'verbs',example:'パーティーで踊りました。\nSaya menari di pesta.'},
   {jp:'描く',reading:'かく',id:'Menggambar',level:'N5',cat:'verbs',example:'絵を描くのが好きです。\nSaya suka menggambar.'},
   {jp:'貼る',reading:'はる',id:'Menempel',level:'N5',cat:'verbs',example:'壁にポスターを貼りました。\nSaya menempel poster di dinding.'},
   {jp:'壊す',reading:'こわす',id:'Merusak',level:'N5',cat:'verbs',example:'うっかり皿を壊しました。\nTanpa sengaja saya memecahkan piring.'},
-  {jp:'電話する',reading:'でんわする',id:'Menelepon',level:'N5',cat:'verbs',example:'後で電話します。\nSaya akan menelepon nanti.'},
   {jp:'払う',reading:'はらう',id:'Membayar',level:'N5',cat:'verbs',example:'カードで払えますか。\nApakah bisa bayar dengan kartu?'},
-  {jp:'くれる',reading:'くれる',id:'Memberi (ke saya)',level:'N5',cat:'verbs',example:'友達が本をくれました。\nTeman memberikan buku kepada saya.'},
   {jp:'思う',reading:'おもう',id:'Merasa / Berpikir',level:'N5',cat:'verbs',example:'日本語は難しいと思います。\nSaya pikir bahasa Jepang sulit.'},
   {jp:'できる',reading:'できる',id:'Bisa / Mampu',level:'N5',cat:'verbs',example:'日本語が少しできます。\nSaya bisa sedikit bahasa Jepang.'},
   {jp:'メールする',reading:'めーるする',id:'Mengirim email',level:'N5',cat:'verbs',example:'後でメールします。\nSaya akan kirim email nanti.'},
@@ -5144,23 +5193,16 @@ const vocab = [
   {jp:'バス',reading:'ばす',id:'Bus',level:'N5',cat:'daily',example:'バスで学校へ行きます。\nSaya pergi ke sekolah naik bus.'},
   {jp:'動物',reading:'どうぶつ',id:'Hewan / Binatang',level:'N5',cat:'daily',example:'動物園に動物がたくさんいます。\nDi kebun binatang ada banyak hewan.'},
   {jp:'かばん',reading:'かばん',id:'Tas',level:'N5',cat:'daily',example:'かばんの中に何がありますか。\nApa yang ada di dalam tas?'},
-  {jp:'携帯',reading:'けいたい',id:'Ponsel / HP',level:'N5',cat:'daily',example:'携帯を忘れました。\nSaya lupa membawa HP.'},
   {jp:'カメラ',reading:'かめら',id:'Kamera',level:'N5',cat:'daily',example:'カメラで写真を撮りました。\nSaya memotret dengan kamera.'},
   {jp:'気温',reading:'きおん',id:'Suhu udara',level:'N5',cat:'nature',example:'今日の気温は何度ですか。\nBerapa suhu hari ini?'},
   {jp:'店',reading:'みせ',id:'Toko',level:'N5',cat:'place',example:'あの店は安くておいしいです。\nToko itu murah dan enak.'},
   {jp:'厚い',reading:'あつい',id:'Tebal',level:'N5',cat:'adjectives',example:'この本はとても厚いです。\nBuku ini sangat tebal.'},
   {jp:'薄い',reading:'うすい',id:'Tipis',level:'N5',cat:'adjectives',example:'薄い財布を買いました。\nSaya membeli dompet tipis.'},
   {jp:'速い',reading:'はやい',id:'Cepat',level:'N5',cat:'adjectives',example:'新幹線はとても速いです。\nShinkansen sangat cepat.'},
-  {jp:'暖かい',reading:'あたたかい',id:'Hangat',level:'N5',cat:'adjectives',example:'春は暖かくて気持ちいいです。\nMusim semi hangat dan menyenangkan.'},
-  {jp:'涼しい',reading:'すずしい',id:'Sejuk',level:'N5',cat:'adjectives',example:'秋になると涼しいです。\nKetika musim gugur tiba, udaranya sejuk.'},
-  {jp:'汚い',reading:'きたない',id:'Kotor',level:'N5',cat:'adjectives',example:'手が汚いので洗います。\nTangan saya kotor jadi saya cuci.'},
   {jp:'嬉しい',reading:'うれしい',id:'Senang / Gembira',level:'N5',cat:'adjectives',example:'合格して嬉しいです。\nSaya senang karena lulus.'},
-  {jp:'同じ',reading:'おなじ',id:'Sama',level:'N5',cat:'adjectives',example:'二人は同じ学校です。\nKeduanya bersekolah di tempat yang sama.'},
 
   // ── N5 Kosakata Tambahan ──────────────────────────────
   // Kata Benda
-  {jp:'石',reading:'いし',id:'Batu',level:'N5',cat:'nature',example:'石を拾いました。\nSaya memungut batu.'},
-  {jp:'首',reading:'くび',id:'Leher',level:'N5',cat:'body',example:'首が痛いです。\nLeher saya sakit.'},
   {jp:'背',reading:'せ',id:'Punggung / Tinggi badan',level:'N5',cat:'body',example:'背が高いです。\nTinggi badannya tinggi.'},
   {jp:'腕',reading:'うで',id:'Lengan',level:'N5',cat:'body',example:'腕を怪我しました。\nLengan saya terluka.'},
   {jp:'指',reading:'ゆび',id:'Jari',level:'N5',cat:'body',example:'指が痛いです。\nJari saya sakit.'},
@@ -5567,6 +5609,7 @@ function showPage(pageId) {
     if (pageId === 'konjugasi') { initKonjugasi(); }
     if (pageId === 'dashboard' && typeof updateGamificationUI === 'function') { updateGamificationUI(); }
     if (pageId === 'ringkasan') { renderRgs(); }
+    if (pageId === 'rencana') { renderRencana(); }
     if (pageId === 'quizgambar') { initQuizGambar(); }
     if (pageId === 'quizdengar') { initQuizDengar(); }
     if (pageId === 'speedround') { initSpeedRound(); }
@@ -10373,6 +10416,596 @@ function renderMinnaBab(idx) {
 }
 
 // ════════════════════════════════════
+// RENCANA BELAJAR JLPT — 6 DESEMBER 2026
+// ════════════════════════════════════
+const PLAN_KEY = 'planJlpt_v1';
+const PLAN_EXAM = Date.UTC(2026, 11, 6);
+const PLAN_MONTHS = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+const PLAN_DOW = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+const PLAN_BOX_DAYS = [1, 2, 4, 8, 15];
+const PLAN_VOCAB_PER_DAY = 20;
+const PLAN_VOCAB_CAT_ORDER = ['pronoun','greeting','numbers','counter','people','body','food','place','daily','nature','colors','study','nouns','verbs','adjectives','adverbs','concept'];
+let planViewDay = null, planFollowToday = true, planPoolsCache = null, planQuiz = null, planStudyTexts = [], planResetArmed = false;
+
+function planEsc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function planTodayUtc() { const n = new Date(); return Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()); }
+function planDiff(a, b) { return Math.round((b - a) / 86400000); }
+function planDateLabel(utc) { const d = new Date(utc); return PLAN_DOW[d.getUTCDay()] + ', ' + d.getUTCDate() + ' ' + PLAN_MONTHS[d.getUTCMonth()]; }
+function planShuffle(a) { const r = a.slice(); for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = r[i]; r[i] = r[j]; r[j] = t; } return r; }
+function planSample(a, n) { return planShuffle(a).slice(0, n); }
+
+function planState() {
+    let s = null;
+    try { s = JSON.parse(localStorage.getItem(PLAN_KEY) || 'null'); } catch (e) {}
+    if (!s || !s.start) { s = { start: planTodayUtc(), days: {}, srs: {} }; planSave(s); }
+    if (!s.days) s.days = {};
+    if (!s.srs) s.srs = {};
+    return s;
+}
+function planSave(s) { try { localStorage.setItem(PLAN_KEY, JSON.stringify(s)); } catch (e) {} }
+
+function planInfo() {
+    const s = planState();
+    const today = planTodayUtc();
+    const total = Math.max(1, planDiff(s.start, PLAN_EXAM));
+    const dayNum = planDiff(s.start, today) + 1;
+    const R = total >= 25 ? 10 : Math.floor(total * 0.35);
+    const L = Math.max(0, total - R);
+    return { s: s, today: today, total: total, dayNum: dayNum, R: R, L: L, daysLeft: planDiff(today, PLAN_EXAM) };
+}
+
+// ---------- Materi: urutan belajar ----------
+function planPools() {
+    if (planPoolsCache) return planPoolsCache;
+    const seen = new Set(), order = [];
+    [HAFAL_CATS_N5, HAFAL_CATS_N4].forEach(function (cats) {
+        cats.forEach(function (c) { c.chars.forEach(function (ch) { if (!seen.has(ch)) { seen.add(ch); order.push(ch); } }); });
+    });
+    const byChar = {};
+    kanjiDB.forEach(function (k) { if (!byChar[k.char]) byChar[k.char] = k; });
+    const kanji = [];
+    order.forEach(function (ch) { if (byChar[ch]) kanji.push(byChar[ch]); });
+    kanjiDB.forEach(function (k) { if (!seen.has(k.char)) { seen.add(k.char); kanji.push(k); } });
+    kanji.sort(function (a, b) { return (a.level === 'N5' ? 0 : 1) - (b.level === 'N5' ? 0 : 1); });
+
+    const rank = function (c) { const r = PLAN_VOCAB_CAT_ORDER.indexOf(normalizeCat(c)); return r < 0 ? 99 : r; };
+    const vo = vocab.filter(function (v) { return v && v.jp; }).map(function (v, i) { return { v: v, i: i }; });
+    vo.sort(function (a, b) {
+        return ((a.v.level === 'N5' ? 0 : 1) - (b.v.level === 'N5' ? 0 : 1)) || (rank(a.v.cat) - rank(b.v.cat)) || (a.i - b.i);
+    });
+    const vocabSeq = vo.map(function (x) { return x.v; });
+
+    const gram = [];
+    PARTICLES.forEach(function (p) {
+        gram.push({ key: 'g:' + p.p, kind: 'particle', pattern: p.p + ' — ' + p.label, short: p.p, meaning: p.label, detail: p.desc, ex: p.uses[0].ex, exId: p.uses[0].id });
+    });
+    ['n5', 'n4'].forEach(function (lv) {
+        RGS_DATA[lv].forEach(function (sec) {
+            sec.items.forEach(function (it) {
+                gram.push({ key: 'g:' + it.pattern, kind: 'pattern', pattern: it.pattern, short: it.pattern, meaning: it.meaning, detail: '', ex: it.ex, exId: it.exId });
+            });
+        });
+    });
+
+    const byKey = {};
+    kanji.forEach(function (k) { byKey['k:' + k.char] = { type: 'kanji', ref: k }; });
+    vocabSeq.forEach(function (v) { byKey['v:' + v.jp] = { type: 'vocab', ref: v }; });
+    gram.forEach(function (g) { byKey[g.key] = { type: 'gram', ref: g }; });
+    planPoolsCache = { kanji: kanji, vocab: vocabSeq, gram: gram, byKey: byKey };
+    return planPoolsCache;
+}
+
+function planDayContent(d, info) {
+    if (d < 1 || d > info.L) return null;
+    const P = planPools();
+    const kPer = Math.min(12, Math.ceil(P.kanji.length / info.L));
+    const gPer = Math.min(3, Math.ceil(P.gram.length / info.L));
+    const vPer = PLAN_VOCAB_PER_DAY;
+    return {
+        kanji: P.kanji.slice((d - 1) * kPer, d * kPer),
+        vocab: P.vocab.slice((d - 1) * vPer, d * vPer),
+        gram: P.gram.slice((d - 1) * gPer, d * gPer)
+    };
+}
+
+function planPhase(d, info) {
+    if (d > info.total) return { name: 'Hari Ujian', ico: '🎌' };
+    if (d > info.L) return { name: 'Fase 3 · Simulasi & Review', ico: '🏁', n: 3 };
+    if (d <= Math.ceil(info.L * 0.55)) return { name: 'Fase 1 · Fondasi N5', ico: '🌱', n: 1 };
+    return { name: 'Fase 2 · Naik ke N4', ico: '🚀', n: 2 };
+}
+
+function planTasks(d, info) {
+    const t = [];
+    if (d > info.total) return t;
+    if (d <= info.L) {
+        const c = planDayContent(d, info);
+        t.push({ id: 'review', ico: '🔁', title: 'Ulang materi kemarin & titik lemah', min: 8, kind: 'quiz', qkind: 'review', desc: d === 1 ? 'Mulai besok — hari ini belum ada yang diulang.' : '10 soal dari item yang jadwal ulangnya jatuh hari ini.' });
+        if (c.kanji.length) t.push({ id: 'kanji', ico: '漢', title: 'Kanji baru (' + c.kanji.length + ')', min: 20, kind: 'study', list: 'kanji', desc: c.kanji.map(function (k) { return k.char; }).join(' ') });
+        if (c.vocab.length) t.push({ id: 'vocab', ico: '📚', title: 'Kosakata baru (' + c.vocab.length + ')', min: 20, kind: 'study', list: 'vocab', desc: c.vocab.slice(0, 5).map(function (v) { return v.jp; }).join('、') + ' …' });
+        if (c.gram.length) t.push({ id: 'gram', ico: '📐', title: 'Tata bahasa (' + c.gram.length + ' pola)', min: 15, kind: 'study', list: 'gram', desc: c.gram.map(function (g) { return g.short; }).join('  ·  ') });
+        t.push({ id: 'listen', ico: '🎧', title: 'Latihan listening (Choukai)', min: 10, kind: 'link', page: 'choukai', desc: 'Dengarkan 1 sesi. Listening wajib dilatih setiap hari.' });
+        t.push({ id: 'test', ico: '✅', title: 'Tes harian (15 soal)', min: 12, kind: 'quiz', qkind: 'test', desc: 'Materi hari ini + ulangan materi sebelumnya. Yang salah akan muncul lagi.' });
+        if (d % 7 === 0) t.push({ id: 'sim', ico: '🎌', title: 'Mini simulasi JLPT', min: 12, kind: 'link', page: 'jlpt', desc: 'Kerjakan simulasi untuk mengukur kemajuan mingguan.' });
+    } else if (d < info.total) {
+        t.push({ id: 'big', ico: '🔁', title: 'Review besar (20 soal)', min: 15, kind: 'quiz', qkind: 'big', desc: 'Campuran dari semua materi, prioritas yang paling sering salah.' });
+        t.push({ id: 'weak', ico: '🎯', title: 'Drill titik lemah', min: 10, kind: 'weak', desc: 'Latih semua soal yang tercatat salah.' });
+        if (d <= info.total - 2) t.push({ id: 'sim', ico: '🎌', title: 'Simulasi JLPT (pakai timer)', min: 30, kind: 'link', page: 'jlpt', desc: 'Kerjakan penuh atau satu bagian, lalu cek yang salah.' });
+        t.push({ id: 'ringkas', ico: '📋', title: 'Baca ringkasan N5 → N4', min: 10, kind: 'link', page: 'ringkasan', desc: 'Pola kalimat, partikel, dan kanji wajib dalam satu halaman.' });
+        t.push({ id: 'listen', ico: '🎧', title: 'Latihan listening (Choukai)', min: 10, kind: 'link', page: 'choukai', desc: 'Satu sesi per hari.' });
+    } else {
+        t.push({ id: 'light', ico: '🔁', title: 'Review ringan (10 soal)', min: 8, kind: 'quiz', qkind: 'light', desc: 'Santai saja, jangan menambah materi baru.' });
+        t.push({ id: 'ringkas', ico: '📋', title: 'Baca ringkasan sekilas', min: 10, kind: 'link', page: 'ringkasan', desc: 'Cukup dibaca, tidak perlu dihafal ulang.' });
+        t.push({ id: 'prep', ico: '🎒', title: 'Siapkan perlengkapan ujian', min: 5, kind: 'manual', desc: 'Kartu peserta, pensil hitam & penghapus, rute ke lokasi ujian.' });
+        t.push({ id: 'sleep', ico: '😴', title: 'Tidur cukup malam ini', min: 0, kind: 'manual', desc: 'Jangan begadang. Otak butuh tidur untuk menyimpan hafalan.' });
+    }
+    return t;
+}
+
+function planRec(s, d) { if (!s.days[d]) s.days[d] = { done: {}, xp: {}, score: 0 }; if (!s.days[d].done) s.days[d].done = {}; if (!s.days[d].xp) s.days[d].xp = {}; return s.days[d]; }
+
+function planFrac(d, info) {
+    const t = planTasks(d, info);
+    const rec = (info.s.days[d] && info.s.days[d].done) || {};
+    let k = 0; t.forEach(function (x) { if (rec[x.id]) k++; });
+    return { k: k, n: t.length };
+}
+
+function planMarkDone(d, id, val) {
+    const s = planState();
+    planRec(s, d).done[id] = !!val;
+    planSave(s);
+}
+
+function planAward(d, id, amount, reason) {
+    const s = planState();
+    const rec = planRec(s, d);
+    if (rec.xp[id]) return;
+    rec.xp[id] = true;
+    planSave(s);
+    if (typeof addExp === 'function') addExp(amount, reason);
+}
+
+// ---------- Ulang terjadwal (spaced repetition) ----------
+function planSrsUpdate(key, ok, dayNum) {
+    const s = planState();
+    const cur = s.srs[key] || { box: 0, due: dayNum };
+    cur.box = ok ? Math.min(cur.box + 1, PLAN_BOX_DAYS.length - 1) : 0;
+    cur.due = dayNum + PLAN_BOX_DAYS[cur.box];
+    s.srs[key] = cur;
+    planSave(s);
+}
+
+function planLearnedKeys(info, upTo) {
+    const keys = [];
+    for (let d = 1; d <= Math.min(upTo, info.L); d++) {
+        const c = planDayContent(d, info);
+        if (!c) continue;
+        c.kanji.forEach(function (k) { keys.push('k:' + k.char); });
+        c.vocab.forEach(function (v) { keys.push('v:' + v.jp); });
+        c.gram.forEach(function (g) { keys.push(g.key); });
+    }
+    return keys;
+}
+
+function planPickReview(info, upToDay, n, exclude) {
+    const P = planPools();
+    const learned = planLearnedKeys(info, upToDay);
+    const learnedSet = new Set(learned);
+    const s = info.s;
+    const picked = [];
+    const add = function (key) {
+        if (picked.length < n && !exclude.has(key) && P.byKey[key] && picked.indexOf(key) < 0) picked.push(key);
+    };
+    Object.keys(s.srs).filter(function (k) { return s.srs[k].due <= info.dayNum && learnedSet.has(k); })
+        .sort(function (a, b) { return (s.srs[a].box - s.srs[b].box) || (s.srs[a].due - s.srs[b].due); }).forEach(add);
+    try {
+        loadWeakPoints().forEach(function (w) {
+            const key = w.type === 'kanji' ? 'k:' + w.char : (w.type === 'vocab' ? 'v:' + w.char : null);
+            if (key && learnedSet.has(key)) add(key);
+        });
+    } catch (e) {}
+    planShuffle(learned.filter(function (k) { return !s.srs[k]; })).forEach(add);
+    planShuffle(learned).forEach(add);
+    return picked.map(function (k) { return { key: k, type: P.byKey[k].type, ref: P.byKey[k].ref }; });
+}
+
+// ---------- Pembuat soal ----------
+function planOptions(correct, pool, n) {
+    const set = [correct];
+    planShuffle(pool).forEach(function (c) { if (set.length < n && c && c !== correct && set.indexOf(c) < 0) set.push(c); });
+    const opts = planShuffle(set);
+    return { options: opts, answer: opts.indexOf(correct) };
+}
+
+function planQKanji(k) {
+    const P = planPools();
+    const others = P.kanji.filter(function (x) { return x.char !== k.char; });
+    const on = (k.on || []).filter(Boolean), kun = (k.kun || []).filter(Boolean);
+    const readings = on.concat(kun);
+    let q = null;
+    if (readings.length && Math.random() < 0.5) {
+        const useOn = on.length && (!kun.length || Math.random() < 0.5);
+        const correct = useOn ? on[0] : kun[0];
+        const pool = []; others.forEach(function (x) { const arr = useOn ? (x.on || []) : (x.kun || []); const r0 = arr.filter(Boolean)[0]; if (r0 && readings.indexOf(r0) < 0) pool.push(r0); });
+        const o = planOptions(correct, pool, 4);
+        if (o.options.length >= 3) q = { label: 'Salah satu bacaan kanji ini?', prompt: k.char, big: true, sub: '', options: o.options, answer: o.answer };
+    }
+    if (!q) {
+        const pool = others.map(function (x) { return x.meaning; }).filter(function (m) { return m && m !== k.meaning; });
+        const o = planOptions(k.meaning, pool, 4);
+        q = { label: 'Apa arti kanji ini?', prompt: k.char, big: true, sub: '', options: o.options, answer: o.answer };
+    }
+    q.key = 'k:' + k.char; q.tag = 'Kanji'; q.wtype = 'kanji';
+    q.exp = k.char + ' = ' + k.meaning + '. On: ' + (on.join('・') || '-') + ' · Kun: ' + (kun.join('・') || '-');
+    q.weak = { char: k.char, reading: readings[0] || '', meaning: k.meaning };
+    return q;
+}
+
+function planQVocab(v) {
+    const P = planPools();
+    const others = P.vocab.filter(function (x) { return x.jp !== v.jp; });
+    const same = others.filter(function (x) { return x.level === v.level && normalizeCat(x.cat) === normalizeCat(v.cat); });
+    const base = same.length >= 3 ? same : others;
+    const hasKanji = /[\u4e00-\u9fff]/.test(v.jp) && v.reading && v.reading !== v.jp;
+    let q;
+    if (hasKanji && Math.random() < 0.4) {
+        const o = planOptions(v.reading, base.map(function (x) { return x.reading; }), 4);
+        q = { label: 'Bagaimana cara membaca kata ini?', prompt: v.jp, big: true, sub: '', options: o.options, answer: o.answer };
+    } else {
+        const o = planOptions(v.id, base.map(function (x) { return x.id; }), 4);
+        q = { label: 'Apa arti kata ini?', prompt: v.jp, big: true, sub: (v.reading && v.reading !== v.jp) ? v.reading : '', options: o.options, answer: o.answer };
+    }
+    q.key = 'v:' + v.jp; q.tag = 'Kosakata'; q.wtype = 'vocab';
+    q.exp = v.jp + (v.reading && v.reading !== v.jp ? ' (' + v.reading + ')' : '') + ' = ' + v.id;
+    q.weak = { char: v.jp, reading: v.reading || '', meaning: v.id };
+    return q;
+}
+
+function planQGram(g) {
+    const P = planPools();
+    const same = P.gram.filter(function (x) { return x.key !== g.key && x.kind === g.kind; });
+    const pool = same.length >= 3 ? same : P.gram.filter(function (x) { return x.key !== g.key; });
+    let q;
+    if (g.kind === 'particle') {
+        const o = planOptions(g.meaning, pool.map(function (x) { return x.meaning; }), 4);
+        q = { label: 'Fungsi utama partikel ini?', prompt: g.short, big: true, sub: '', options: o.options, answer: o.answer };
+    } else if (Math.random() < 0.5) {
+        const o = planOptions(g.meaning, pool.map(function (x) { return x.meaning; }), 4);
+        q = { label: 'Apa arti pola ini?', prompt: g.pattern, big: false, sub: '', options: o.options, answer: o.answer };
+    } else {
+        const o = planOptions(g.pattern, pool.map(function (x) { return x.pattern; }), 4);
+        q = { label: 'Pola apa yang dipakai kalimat ini?', prompt: g.ex, big: false, sub: g.exId, options: o.options, answer: o.answer };
+    }
+    q.key = g.key; q.tag = 'Grammar'; q.wtype = 'grammar';
+    q.exp = g.pattern + ' = ' + g.meaning + '. Contoh: ' + g.ex + ' (' + g.exId + ')';
+    q.weak = { char: g.short, reading: '', meaning: g.meaning };
+    return q;
+}
+
+function planMakeQ(item) {
+    if (item.type === 'kanji') return planQKanji(item.ref);
+    if (item.type === 'vocab') return planQVocab(item.ref);
+    return planQGram(item.ref);
+}
+
+// ---------- Overlay ----------
+function planOverlay(html) {
+    const ov = document.getElementById('pl-overlay');
+    ov.innerHTML = html;
+    ov.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+function planCloseOverlay() {
+    const ov = document.getElementById('pl-overlay');
+    ov.style.display = 'none';
+    ov.innerHTML = '';
+    document.body.style.overflow = '';
+    planQuiz = null;
+    renderRencana();
+}
+function planSpeakIdx(i) { if (planStudyTexts[i]) speakText(planStudyTexts[i]); }
+
+function planOpenStudy(list) {
+    const info = planInfo();
+    const c = planDayContent(planViewDay, info);
+    if (!c) return;
+    planStudyTexts = [];
+    let title = '', body = '';
+    if (list === 'kanji') {
+        title = '漢 Kanji hari ini';
+        c.kanji.forEach(function (k, i) {
+            const ex = (k.examples || []).slice(0, 3).map(function (e) { return planEsc(e.word) + ' (' + planEsc(e.read) + ') ' + planEsc(e.meaning); }).join('<br>');
+            planStudyTexts.push((k.examples && k.examples[0] && k.examples[0].read) || (k.kun || []).filter(Boolean)[0] || (k.on || []).filter(Boolean)[0] || k.char);
+            body += '<div class="pl-card"><div class="pl-card-l"><div class="pl-kanji">' + planEsc(k.char) + '</div><div class="pl-kanji-meta">' + (k.strokes || '') + ' goresan</div></div>' +
+                '<div class="pl-card-r"><div class="pl-card-mean">' + planEsc(k.meaning) + '</div>' +
+                '<div class="pl-card-read">On: ' + planEsc((k.on || []).filter(Boolean).join('・') || '-') + '　Kun: ' + planEsc((k.kun || []).filter(Boolean).join('・') || '-') + '</div>' +
+                '<div class="pl-card-ex">' + ex + '</div></div>' +
+                '<button class="pl-speak" onclick="planSpeakIdx(' + i + ')">🔊</button></div>';
+        });
+    } else if (list === 'vocab') {
+        title = '📚 Kosakata hari ini';
+        c.vocab.forEach(function (v, i) {
+            planStudyTexts.push(String(v.reading || v.jp).split('～').join('').split('〜').join(''));
+            const exs = v.example ? planEsc(v.example).split('\n').join('<br>') : '';
+            body += '<div class="pl-card"><div class="pl-card-r"><div class="pl-card-jp">' + planEsc(v.jp) + '</div>' +
+                '<div class="pl-card-read">' + planEsc(v.reading && v.reading !== v.jp ? v.reading : '') + '</div>' +
+                '<div class="pl-card-mean" style="margin-top:3px;">' + planEsc(v.id) + '</div>' +
+                (exs ? '<div class="pl-card-ex">' + exs + '</div>' : '') + '</div>' +
+                '<button class="pl-speak" onclick="planSpeakIdx(' + i + ')">🔊</button></div>';
+        });
+    } else {
+        title = '📐 Tata bahasa hari ini';
+        c.gram.forEach(function (g, i) {
+            planStudyTexts.push(g.ex);
+            body += '<div class="pl-card"><div class="pl-card-r"><div class="pl-card-jp">' + planEsc(g.pattern) + '</div>' +
+                '<div class="pl-card-mean" style="margin-top:3px;">' + planEsc(g.meaning) + '</div>' +
+                (g.detail ? '<div class="pl-card-read">' + planEsc(g.detail) + '</div>' : '') +
+                '<div class="pl-card-ex">' + planEsc(g.ex) + '<br>' + planEsc(g.exId) + '</div></div>' +
+                '<button class="pl-speak" onclick="planSpeakIdx(' + i + ')">🔊</button></div>';
+        });
+    }
+    planOverlay('<div class="pl-modal"><div class="pl-modal-head"><div class="pl-modal-title">' + title + '</div><button class="pl-x" onclick="planCloseOverlay()">✕</button></div>' +
+        '<div class="pl-modal-body">' + body + '</div>' +
+        '<div class="pl-modal-foot"><button class="pl-primary" onclick="planFinishStudy(\'' + list + '\')">✓ Sudah saya pelajari</button></div></div>');
+}
+
+function planFinishStudy(list) {
+    const id = list === 'gram' ? 'gram' : list;
+    planMarkDone(planViewDay, id, true);
+    planAward(planViewDay, id, 3, 'Belajar: ' + id);
+    planCloseOverlay();
+}
+
+function planStartQuiz(task) {
+    const info = planInfo();
+    const d = planViewDay;
+    let items = [], title = '';
+    if (task.qkind === 'review') {
+        title = '🔁 Ulang materi';
+        items = planPickReview(info, d - 1, 10, new Set());
+    } else if (task.qkind === 'test') {
+        title = '✅ Tes harian';
+        const c = planDayContent(d, info);
+        const today = [];
+        planSample(c.kanji, 5).forEach(function (k) { today.push({ key: 'k:' + k.char, type: 'kanji', ref: k }); });
+        planSample(c.vocab, 5).forEach(function (v) { today.push({ key: 'v:' + v.jp, type: 'vocab', ref: v }); });
+        planSample(c.gram, 3).forEach(function (g) { today.push({ key: g.key, type: 'gram', ref: g }); });
+        const ex = new Set(today.map(function (x) { return x.key; }));
+        items = today.concat(planPickReview(info, d - 1, Math.max(0, 15 - today.length), ex));
+    } else if (task.qkind === 'big') {
+        title = '🔁 Review besar';
+        items = planPickReview(info, info.L, 20, new Set());
+    } else {
+        title = '🔁 Review ringan';
+        items = planPickReview(info, info.L, 10, new Set());
+    }
+    if (!items.length) {
+        planMarkDone(d, task.id, true);
+        planOverlay('<div class="pl-modal"><div class="pl-modal-head"><div class="pl-modal-title">' + title + '</div><button class="pl-x" onclick="planCloseOverlay()">✕</button></div>' +
+            '<div class="pl-modal-body"><div class="pl-res"><div class="pl-res-emoji">🌱</div><div class="pl-res-msg">Belum ada materi yang perlu diulang. Mulai besok, materi hari ini akan muncul di sini.</div></div></div>' +
+            '<div class="pl-modal-foot"><button class="pl-primary" onclick="planCloseOverlay()">OK</button></div></div>');
+        return;
+    }
+    planQuiz = { task: task, day: d, title: title, qs: planShuffle(items).map(planMakeQ), i: 0, correct: 0, wrong: [], answered: false };
+    planQuizRender();
+}
+
+function planQuizRender() {
+    const Q = planQuiz;
+    if (Q.i >= Q.qs.length) { planQuizResult(); return; }
+    const q = Q.qs[Q.i];
+    Q.answered = false;
+    const opts = q.options.map(function (o, i) { return '<button class="pl-opt" onclick="planAnswer(' + i + ')">' + planEsc(o) + '</button>'; }).join('');
+    planOverlay('<div class="pl-modal"><div class="pl-modal-head"><div class="pl-modal-title">' + Q.title + '</div><button class="pl-x" onclick="planCloseOverlay()">✕</button></div>' +
+        '<div class="pl-qbar"><div class="pl-qbar-fill" style="width:' + Math.round(Q.i / Q.qs.length * 100) + '%"></div></div>' +
+        '<div class="pl-modal-body"><div class="pl-qmeta">Soal ' + (Q.i + 1) + ' / ' + Q.qs.length + ' · ' + q.tag + '</div>' +
+        '<div class="pl-qlabel">' + planEsc(q.label) + '</div>' +
+        '<div class="pl-qprompt ' + (q.big ? 'big' : '') + '">' + planEsc(q.prompt) + '</div>' +
+        (q.sub ? '<div class="pl-qsub">' + planEsc(q.sub) + '</div>' : '') +
+        '<div class="pl-opts">' + opts + '</div><div class="pl-fb" id="pl-fb" style="display:none;"></div></div>' +
+        '<div class="pl-modal-foot"><button class="pl-primary" id="pl-next" style="display:none;" onclick="planNextQ()">' + (Q.i === Q.qs.length - 1 ? 'Lihat hasil 🏁' : 'Lanjut →') + '</button></div></div>');
+}
+
+function planAnswer(i) {
+    const Q = planQuiz;
+    if (!Q || Q.answered) return;
+    Q.answered = true;
+    const q = Q.qs[Q.i];
+    const ok = i === q.answer;
+    document.querySelectorAll('#pl-overlay .pl-opt').forEach(function (b, idx) {
+        b.disabled = true;
+        if (idx === q.answer) b.classList.add('correct');
+        else if (idx === i) b.classList.add('wrong');
+    });
+    if (ok) Q.correct++; else Q.wrong.push(q);
+    planSrsUpdate(q.key, ok, planInfo().dayNum);
+    if (!ok && typeof addWeakPoint === 'function') {
+        addWeakPoint(q.wtype, { char: q.weak.char, reading: q.weak.reading, meaning: q.weak.meaning, source: 'Rencana Harian', q: q.label + ' ' + q.prompt, opts: q.options, ans: q.answer, exp: q.exp });
+    }
+    const fb = document.getElementById('pl-fb');
+    fb.className = 'pl-fb ' + (ok ? 'ok' : 'ng');
+    fb.textContent = (ok ? '✓ Benar. ' : '✗ Salah. ') + q.exp;
+    fb.style.display = 'block';
+    document.getElementById('pl-next').style.display = 'block';
+}
+
+function planNextQ() { planQuiz.i++; planQuizRender(); }
+
+function planQuizResult() {
+    const Q = planQuiz;
+    const total = Q.qs.length;
+    const pct = Math.round(Q.correct / total * 100);
+    planMarkDone(Q.day, Q.task.id, true);
+    const s = planState();
+    const rec = planRec(s, Q.day);
+    if (Q.task.qkind === 'test' && pct > (rec.score || 0)) { rec.score = pct; planSave(s); }
+    planAward(Q.day, Q.task.id, 10 + (pct >= 80 ? 10 : 0), 'Rencana: ' + Q.title);
+    const wrong = Q.wrong.map(function (q) { return '<div class="pl-wrong-item">' + planEsc(q.exp) + '</div>'; }).join('');
+    planOverlay('<div class="pl-modal"><div class="pl-modal-head"><div class="pl-modal-title">' + Q.title + '</div><button class="pl-x" onclick="planCloseOverlay()">✕</button></div>' +
+        '<div class="pl-modal-body"><div class="pl-res"><div class="pl-res-emoji">' + (pct >= 80 ? '🌸' : pct >= 60 ? '👍' : '📚') + '</div>' +
+        '<div class="pl-res-score">' + Q.correct + ' / ' + total + ' (' + pct + '%)</div>' +
+        '<div class="pl-res-msg">' + (pct >= 80 ? 'Mantap! Materi ini sudah menempel.' : pct >= 60 ? 'Lumayan. Yang salah akan muncul lagi besok.' : 'Tidak apa-apa. Yang salah dijadwalkan ulang otomatis — itu cara kerjanya.') + '</div></div>' +
+        (wrong ? '<div class="pl-qmeta" style="text-align:left;">Perlu diulang</div>' + wrong : '') + '</div>' +
+        '<div class="pl-modal-foot"><button class="pl-secondary" onclick="planStartQuiz(planQuiz.task)">↻ Ulangi</button><button class="pl-primary" onclick="planCloseOverlay()">Selesai ✓</button></div></div>');
+}
+
+// ---------- Halaman ----------
+function planToggle(id) {
+    const s = planState();
+    const rec = planRec(s, planViewDay);
+    rec.done[id] = !rec.done[id];
+    planSave(s);
+    if (rec.done[id]) planAward(planViewDay, id, 4, 'Rencana: ' + id);
+    renderRencana();
+}
+
+function planStart(id) {
+    const info = planInfo();
+    const task = planTasks(planViewDay, info).filter(function (x) { return x.id === id; })[0];
+    if (!task) return;
+    if (task.kind === 'study') planOpenStudy(task.list);
+    else if (task.kind === 'quiz') planStartQuiz(task);
+    else if (task.kind === 'link') showPage(task.page);
+    else if (task.kind === 'weak') { if (typeof startWeakPointReview === 'function') startWeakPointReview(); }
+    else planToggle(id);
+}
+
+function planSelectDay(d) {
+    const info = planInfo();
+    if (d > info.dayNum) return;
+    planViewDay = d;
+    planFollowToday = (d === info.dayNum);
+    renderRencana();
+}
+
+function planReset() {
+    const b = document.getElementById('pl-reset');
+    if (!planResetArmed) {
+        planResetArmed = true;
+        b.textContent = 'Yakin? Semua progres rencana dihapus — klik lagi untuk konfirmasi';
+        setTimeout(function () { planResetArmed = false; b.textContent = '↺ Mulai ulang rencana dari hari ini'; }, 4000);
+        return;
+    }
+    planResetArmed = false;
+    planSave({ start: planTodayUtc(), days: {}, srs: {} });
+    planViewDay = null;
+    planFollowToday = true;
+    renderRencana();
+}
+
+function planTips(phase) {
+    if (phase.n === 1) return '<b>Fase 1 — Fondasi.</b> Pastikan hiragana & katakana lancar, lalu bangun kosakata dan partikel. <b>Jangan lewati tes harian</b>: mengingat-ingat (bukan membaca ulang) yang membuat hafalan menempel.';
+    if (phase.n === 2) return '<b>Fase 2 — Naik ke N4.</b> Mulai ada banyak pola N4 dan bentuk kata kerja (latih di menu Konjugasi). Listening tetap setiap hari — bagian ini tidak boleh dikosongkan karena ada batas nilai minimum per bagian.';
+    if (phase.n === 3) return '<b>Fase 3 — Simulasi & review.</b> Tidak ada materi baru. Kerjakan simulasi dengan timer, lalu telusuri soal yang salah lewat Drill titik lemah.';
+    return '<b>Hari ujian.</b> Bawa kartu peserta, pensil hitam dan penghapus. Sarapan, datang lebih awal, dan jangan belajar materi baru. Kamu sudah mempersiapkan ini — tenang dan jawab yang kamu tahu dulu. 頑張って！';
+}
+
+function renderRencana() {
+    const info = planInfo();
+    const s = info.s;
+    const finished = info.dayNum > info.total + 1;
+    if (planViewDay === null || planFollowToday || planViewDay > info.dayNum) planViewDay = Math.min(info.dayNum, info.total + 1);
+    if (planViewDay < 1) planViewDay = 1;
+    const d = planViewDay;
+
+    document.getElementById('pl-sub').textContent = 'Ujian JLPT N4 · ' + planDateLabel(PLAN_EXAM) + ' 2026';
+    document.getElementById('pl-count-num').textContent = Math.max(0, info.daysLeft);
+    const ph = planPhase(Math.min(info.dayNum, info.total + 1), info);
+    document.getElementById('pl-phase').textContent = finished ? 'Ujian sudah lewat' : ph.ico + ' ' + ph.name + ' · Hari ke-' + Math.min(info.dayNum, info.total) + ' dari ' + info.total;
+    document.getElementById('pl-bar').style.width = Math.min(100, Math.max(0, (info.dayNum - 1) / info.total * 100)) + '%';
+
+    // statistik
+    let kLearn = 0, vLearn = 0, active = 0;
+    for (let x = 1; x <= Math.min(info.dayNum, info.total); x++) {
+        const rec = s.days[x];
+        const f = planFrac(x, info);
+        if (f.n && f.k / f.n >= 0.5) active++;
+        if (rec && rec.done && x <= info.L) {
+            const c = planDayContent(x, info);
+            if (c) { if (rec.done.kanji) kLearn += c.kanji.length; if (rec.done.vocab) vLearn += c.vocab.length; }
+        }
+    }
+    let streak = 0;
+    for (let x = Math.min(info.dayNum, info.total); x >= 1; x--) {
+        const f = planFrac(x, info);
+        const on = f.n && f.k / f.n >= 0.5;
+        if (on) streak++;
+        else if (x !== info.dayNum) break;
+    }
+    document.getElementById('pl-stats').innerHTML =
+        '<span class="pl-stat">🔥 ' + streak + ' hari beruntun</span><span class="pl-stat">漢 ' + kLearn + ' kanji dipelajari</span><span class="pl-stat">📚 ' + vLearn + ' kata dipelajari</span><span class="pl-stat">✅ ' + active + ' hari aktif</span>';
+
+    if (finished) {
+        document.getElementById('pl-days').innerHTML = '';
+        document.getElementById('pl-day-head').innerHTML = '';
+        document.getElementById('pl-tasks').innerHTML = '<div class="pl-box"><b>Rencana selesai.</b> Tanggal ujian sudah lewat. Kalau kamu mau lanjut belajar untuk ujian berikutnya, mulai ulang rencana dari tombol di bawah.</div>';
+        document.getElementById('pl-tips').innerHTML = '';
+        planUpdateBanner();
+        return;
+    }
+
+    // strip hari
+    let chips = '';
+    for (let x = 1; x <= info.total + 1; x++) {
+        let cls = 'pl-day';
+        if (x === info.total + 1) cls += ' exam';
+        if (x > info.dayNum) cls += ' lock';
+        else {
+            const f = planFrac(x, info);
+            if (f.n && f.k === f.n) cls += ' full';
+            else if (f.k > 0) cls += ' part';
+            else if (x < info.dayNum) cls += ' miss';
+        }
+        if (x === info.dayNum) cls += ' today';
+        if (x === d) cls += ' sel';
+        const dateLabel = planDateLabel(s.start + (x - 1) * 86400000).split(', ')[1];
+        chips += '<button class="' + cls + '" id="pl-chip-' + x + '" onclick="planSelectDay(' + x + ')"><b>' + (x === info.total + 1 ? '🎌' : x) + '</b><span>' + dateLabel + '</span></button>';
+    }
+    const strip = document.getElementById('pl-days');
+    strip.innerHTML = chips;
+    const chip = document.getElementById('pl-chip-' + d);
+    if (chip) strip.scrollLeft = chip.offsetLeft - strip.clientWidth / 2 + chip.clientWidth / 2;
+
+    // kepala hari + misi
+    const phase = planPhase(d, info);
+    const tasks = planTasks(d, info);
+    const rec = (s.days[d] && s.days[d].done) || {};
+    const doneN = tasks.filter(function (t) { return rec[t.id]; }).length;
+    const mins = tasks.reduce(function (a, t) { return a + t.min; }, 0);
+    document.getElementById('pl-day-head').innerHTML =
+        '<div class="pl-day-head"><div><div class="pl-day-title">' + (d > info.total ? 'Hari Ujian 🎌' : 'Hari ' + d + (d === info.dayNum ? ' · Hari ini' : '')) + '</div>' +
+        '<div class="pl-day-sub">' + planDateLabel(s.start + (d - 1) * 86400000) + ' · ' + phase.ico + ' ' + phase.name + (mins ? ' · ± ' + mins + ' menit' : '') + '</div></div>' +
+        (tasks.length ? '<div class="pl-day-prog">' + doneN + '/' + tasks.length + ' misi</div>' : '') + '</div>';
+
+    document.getElementById('pl-tasks').innerHTML = tasks.map(function (t) {
+        const done = !!rec[t.id];
+        const btn = t.kind === 'manual' ? '' : '<button class="pl-go" onclick="planStart(\'' + t.id + '\')">' + (done ? 'Ulangi' : 'Mulai') + '</button>';
+        return '<div class="pl-task ' + (done ? 'done' : '') + '"><div class="pl-check" onclick="planToggle(\'' + t.id + '\')">✓</div>' +
+            '<div class="pl-task-main"><div class="pl-task-title">' + t.ico + ' ' + planEsc(t.title) + '</div>' +
+            '<div class="pl-task-desc">' + planEsc(t.desc) + (t.min ? ' · ~' + t.min + ' mnt' : '') + '</div></div>' + btn + '</div>';
+    }).join('');
+
+    let tips = '<div class="pl-box">' + planTips(phase) + '</div>';
+    if (d <= info.L && s.days[d] && s.days[d].score) tips = '<div class="pl-box">Skor tes harian terbaikmu: <b>' + s.days[d].score + '%</b></div>' + tips;
+    document.getElementById('pl-tips').innerHTML = tips;
+    planUpdateBanner();
+}
+
+function planUpdateBanner() {
+    const el = document.getElementById('pl-banner-s');
+    if (!el) return;
+    try {
+        const info = planInfo();
+        if (info.dayNum > info.total + 1) { el.textContent = 'Ujian sudah lewat'; return; }
+        const d = Math.min(info.dayNum, info.total + 1);
+        const f = planFrac(d, info);
+        el.textContent = '⏰ ' + Math.max(0, info.daysLeft) + ' hari lagi' + (f.n ? ' · Misi hari ini ' + f.k + '/' + f.n : '');
+    } catch (e) {}
+}
+setTimeout(planUpdateBanner, 0);
+
+// ════════════════════════════════════
 // MINNA — MODE VIDEO (slide otomatis + suara)
 // ════════════════════════════════════
 const mv = { bab:0, slides:[], i:0, playing:false, speed:1, narr:true, token:0, timer:null, open:false };
@@ -14604,7 +15237,7 @@ function renderRgs() {
 // TARGET HARIAN N4
 // ════════════════════════════════════
 const TARGET_KEY  = 'dailyTargets_v2';
-const JLPT_DATE   = new Date('2025-12-06T00:00:00');
+const JLPT_DATE   = new Date('2026-12-06T00:00:00');
 let   targetLevel = localStorage.getItem('targetLevel') || 'N5';
 
 const TARGETS_N5 = [
