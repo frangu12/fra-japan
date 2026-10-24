@@ -2006,6 +2006,14 @@
   .pl-res-msg{font-size:0.82rem;color:var(--muted);margin-bottom:12px;}
   .pl-wrong-item{text-align:left;padding:9px 12px;background:#0e0e1a;border-radius:10px;margin-bottom:6px;font-size:0.76rem;color:#cfd2e0;line-height:1.6;font-family:"Noto Sans JP","DM Sans",sans-serif;}
   @media(min-width:700px){.pl-overlay{align-items:center;}.pl-modal{border-radius:20px;}}
+
+  /* SUARA CONTOH KALIMAT */
+  .ktb-ex-speak,.pl-ex-speak,.fc-ex-speak,.km-sentence-btn{display:inline-block;margin-top:6px;padding:4px 11px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.28);background:rgba(255,255,255,0.08);color:#fff;font-size:0.72rem;font-weight:800;cursor:pointer;font-family:"DM Sans",sans-serif;}
+  .ktb-ex-speak:hover,.pl-ex-speak:hover,.fc-ex-speak:hover,.km-sentence-btn:hover{border-color:var(--teal2);color:var(--teal2);}
+  .fc-ex-speak{margin-top:10px;}
+  .km-sentence-box{background:#0e0e1a;border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;}
+  .km-sentence-jp{font-family:"Noto Sans JP",sans-serif;font-size:1.05rem;font-weight:700;color:#fff;line-height:1.7;}
+  .km-sentence-id{font-size:0.8rem;color:var(--muted);margin-top:3px;font-style:italic;}
 </style>
 </head>
 <body>
@@ -2663,7 +2671,8 @@
         <div class="hfv-modal-cat" id="hfv-modal-cat"></div>
         <div class="hfv-modal-ex" id="hfv-modal-ex"></div>
         <div class="hfv-modal-actions">
-          <button class="hfv-speak-btn" onclick="speakText(document.getElementById('hfv-modal-jp').textContent)">🔊 Dengar</button>
+          <button class="hfv-speak-btn" onclick="speakText(document.getElementById('hfv-modal-jp').textContent)">🔊 Kata</button>
+          <button class="hfv-speak-btn" onclick="speakExampleLine(hfvCurrentVocab && hfvCurrentVocab.example)">🔊 Kalimat</button>
           <button class="hfv-master-btn" id="hfv-master-btn" onclick="toggleHafalVocab()">☐ Tandai Dihafal</button>
         </div>
       </div>
@@ -2918,6 +2927,9 @@
     <div class="km-section"><h4 style="color:#fb923c;">訓読み (Kun'yomi) <span style="font-size:0.65rem;color:#6b7280;font-weight:500;">— Hiragana</span></h4><div id="km-kun"></div></div>
     <div class="km-section"><h4>Arti</h4><div class="km-meaning-list" id="km-meaning"></div></div>
     <div class="km-section"><h4>Contoh Kata</h4><ul class="km-examples" id="km-examples"></ul></div>
+    <div class="km-section" id="km-sentence-sec" style="display:none;"><h4>💬 Contoh Kalimat</h4>
+      <div class="km-sentence-box"><div class="km-sentence-jp" id="km-sentence-jp"></div><div class="km-sentence-id" id="km-sentence-id"></div>
+      <button class="km-sentence-btn" onclick="event.stopPropagation();kmSpeakSentence()">🔊 Dengar kalimat</button></div></div>
     <div class="km-section">
       <h4>✏️ Catatan Pribadi</h4>
       <div class="catatan-box" id="km-catatan-box">
@@ -3102,7 +3114,7 @@
     <div class="flashcard" id="flashcard" onclick="flipCard()">
       <div class="flashcard-inner">
         <div class="fc-face fc-front"><div class="fc-jp" id="fc-jp">食べる</div><div class="fc-hint">👆 Klik untuk lihat arti</div></div>
-        <div class="fc-face fc-back"><div class="fc-meaning" id="fc-meaning">Makan</div><div class="fc-example" id="fc-example"></div></div>
+        <div class="fc-face fc-back"><div class="fc-meaning" id="fc-meaning">Makan</div><div class="fc-example" id="fc-example"></div><button class="fc-ex-speak" id="fc-ex-btn" style="display:none;" onclick="event.stopPropagation();speakFlashExample()">🔊 Kalimat</button></div>
       </div>
     </div>
     <div class="fc-controls">
@@ -7651,7 +7663,15 @@ function openKanjiModal(k) {
     document.getElementById('km-meaning').textContent = k.meaning;
     
     const exList = document.getElementById('km-examples');
-    exList.innerHTML = k.examples.map(ex => `<li>${rubyWrap(ex.word, ex.read)} - <em>${ex.meaning}</em></li>`).join('');
+    exList.innerHTML = k.examples.map((ex, i) => `<li>${rubyWrap(ex.word, ex.read)} - <em>${ex.meaning}</em> <button class="km-read-speak" onclick="event.stopPropagation();kmSpeakExample(${i})">🔊</button></li>`).join('');
+    const sentSec = document.getElementById('km-sentence-sec');
+    if (sentSec) {
+        if (k.sentence && k.sentence.jp) {
+            document.getElementById('km-sentence-jp').textContent = k.sentence.jp;
+            document.getElementById('km-sentence-id').textContent = k.sentence.id || '';
+            sentSec.style.display = 'block';
+        } else { sentSec.style.display = 'none'; }
+    }
     
     const btn = document.getElementById('km-mastered-btn');
     if(masteredSet.has(k.char)) {
@@ -7792,7 +7812,7 @@ function renderKotobaHarian() {
                 '<div class="ktb-card-jp">' + v.jp + '</div>' +
                 '<div class="ktb-card-read">' + (v.reading && v.reading !== v.jp ? v.reading : '') + '</div>' +
                 '<div class="ktb-card-id">' + (v.id || '') + '</div>' +
-                '<div class="ktb-card-ex">' + exLine + '</div>' +
+                '<div class="ktb-card-ex">' + exLine + (v.example ? ' <button class="ktb-ex-speak" onclick="event.stopPropagation();speakKotobaEx(' + i + ')">🔊 Kalimat</button>' : '') + '</div>' +
             '</div>' +
             '<button class="ktb-speak-btn" onclick="speakKotoba(' + i + ')">🔊</button>' +
             '<div class="ktb-card-lv ' + (v.level || 'N5').toLowerCase() + '">' + (v.level || 'N5') + '</div>' +
@@ -8423,7 +8443,7 @@ function renderFc(){
   if(!fcFiltered.length)return;const c=fcFiltered[fcIndex];
   document.getElementById('fc-jp').innerHTML=rubyWrap(c.jp,c.reading);
   document.getElementById('fc-meaning').textContent=c.id;
-  const parts=c.example.split('\n');document.getElementById('fc-example').innerHTML=parts[0]+(parts[1]?'<br><em>'+parts[1]+'</em>':'');
+  const parts=c.example.split('\n');document.getElementById('fc-example').innerHTML=parts[0]+(parts[1]?'<br><em>'+parts[1]+'</em>':'');window._fcExJp=exampleJpLine(parts[0]);const fcBtn=document.getElementById('fc-ex-btn');if(fcBtn)fcBtn.style.display=window._fcExJp?'inline-block':'none';
   document.getElementById('fc-counter').textContent=`${fcIndex+1} / ${fcFiltered.length}`;
   document.getElementById('flashcard').classList.remove('flipped');
 }
@@ -10416,6 +10436,28 @@ function renderMinnaBab(idx) {
 }
 
 // ════════════════════════════════════
+// SUARA CONTOH KALIMAT
+// ════════════════════════════════════
+function exampleJpLine(raw) {
+    return String(raw == null ? '' : raw).split('\n')[0].replace(/<rt>.*?<\/rt>/g, '').replace(/<[^>]+>/g, '').trim();
+}
+function speakExampleLine(raw) {
+    const t = exampleJpLine(raw);
+    if (t) speakText(t);
+}
+function speakKotobaEx(i) { const v = kotobaToday[i]; if (v) speakExampleLine(v.example); }
+function speakFlashExample() { if (window._fcExJp) speakText(window._fcExJp); }
+function kmSpeakExample(i) {
+    const k = window._currentKanji;
+    const ex = k && k.examples && k.examples[i];
+    if (ex) speakText(ex.read || ex.word);
+}
+function kmSpeakSentence() {
+    const k = window._currentKanji;
+    if (k && k.sentence) speakText(k.sentence.jp);
+}
+
+// ════════════════════════════════════
 // RENCANA BELAJAR JLPT — 6 DESEMBER 2026
 // ════════════════════════════════════
 const PLAN_KEY = 'planJlpt_v1';
@@ -10425,7 +10467,7 @@ const PLAN_DOW = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
 const PLAN_BOX_DAYS = [1, 2, 4, 8, 15];
 const PLAN_VOCAB_PER_DAY = 20;
 const PLAN_VOCAB_CAT_ORDER = ['pronoun','greeting','numbers','counter','people','body','food','place','daily','nature','colors','study','nouns','verbs','adjectives','adverbs','concept'];
-let planViewDay = null, planFollowToday = true, planPoolsCache = null, planQuiz = null, planStudyTexts = [], planResetArmed = false;
+let planViewDay = null, planFollowToday = true, planPoolsCache = null, planQuiz = null, planStudyTexts = [], planStudyEx = [], planResetArmed = false;
 
 function planEsc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 function planTodayUtc() { const n = new Date(); return Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()); }
@@ -10705,43 +10747,48 @@ function planCloseOverlay() {
     renderRencana();
 }
 function planSpeakIdx(i) { if (planStudyTexts[i]) speakText(planStudyTexts[i]); }
+function planSpeakEx(i) { if (planStudyEx[i]) speakText(planStudyEx[i]); }
+function planExBtn(i) { return planStudyEx[i] ? '<button class="pl-ex-speak" onclick="planSpeakEx(' + i + ')">🔊 Kalimat</button>' : ''; }
 
 function planOpenStudy(list) {
     const info = planInfo();
     const c = planDayContent(planViewDay, info);
     if (!c) return;
-    planStudyTexts = [];
+    planStudyTexts = []; planStudyEx = [];
     let title = '', body = '';
     if (list === 'kanji') {
         title = '漢 Kanji hari ini';
         c.kanji.forEach(function (k, i) {
             const ex = (k.examples || []).slice(0, 3).map(function (e) { return planEsc(e.word) + ' (' + planEsc(e.read) + ') ' + planEsc(e.meaning); }).join('<br>');
             planStudyTexts.push((k.examples && k.examples[0] && k.examples[0].read) || (k.kun || []).filter(Boolean)[0] || (k.on || []).filter(Boolean)[0] || k.char);
+            planStudyEx.push(k.sentence && k.sentence.jp ? k.sentence.jp : '');
             body += '<div class="pl-card"><div class="pl-card-l"><div class="pl-kanji">' + planEsc(k.char) + '</div><div class="pl-kanji-meta">' + (k.strokes || '') + ' goresan</div></div>' +
                 '<div class="pl-card-r"><div class="pl-card-mean">' + planEsc(k.meaning) + '</div>' +
                 '<div class="pl-card-read">On: ' + planEsc((k.on || []).filter(Boolean).join('・') || '-') + '　Kun: ' + planEsc((k.kun || []).filter(Boolean).join('・') || '-') + '</div>' +
-                '<div class="pl-card-ex">' + ex + '</div></div>' +
+                '<div class="pl-card-ex">' + ex + (k.sentence && k.sentence.jp ? '<br>💬 ' + planEsc(k.sentence.jp) + '<br>' + planEsc(k.sentence.id || '') : '') + '</div>' + planExBtn(i) + '</div>' +
                 '<button class="pl-speak" onclick="planSpeakIdx(' + i + ')">🔊</button></div>';
         });
     } else if (list === 'vocab') {
         title = '📚 Kosakata hari ini';
         c.vocab.forEach(function (v, i) {
             planStudyTexts.push(String(v.reading || v.jp).split('～').join('').split('〜').join(''));
+            planStudyEx.push(exampleJpLine(v.example));
             const exs = v.example ? planEsc(v.example).split('\n').join('<br>') : '';
             body += '<div class="pl-card"><div class="pl-card-r"><div class="pl-card-jp">' + planEsc(v.jp) + '</div>' +
                 '<div class="pl-card-read">' + planEsc(v.reading && v.reading !== v.jp ? v.reading : '') + '</div>' +
                 '<div class="pl-card-mean" style="margin-top:3px;">' + planEsc(v.id) + '</div>' +
-                (exs ? '<div class="pl-card-ex">' + exs + '</div>' : '') + '</div>' +
+                (exs ? '<div class="pl-card-ex">' + exs + '</div>' : '') + planExBtn(i) + '</div>' +
                 '<button class="pl-speak" onclick="planSpeakIdx(' + i + ')">🔊</button></div>';
         });
     } else {
         title = '📐 Tata bahasa hari ini';
         c.gram.forEach(function (g, i) {
             planStudyTexts.push(g.ex);
+            planStudyEx.push(g.ex);
             body += '<div class="pl-card"><div class="pl-card-r"><div class="pl-card-jp">' + planEsc(g.pattern) + '</div>' +
                 '<div class="pl-card-mean" style="margin-top:3px;">' + planEsc(g.meaning) + '</div>' +
                 (g.detail ? '<div class="pl-card-read">' + planEsc(g.detail) + '</div>' : '') +
-                '<div class="pl-card-ex">' + planEsc(g.ex) + '<br>' + planEsc(g.exId) + '</div></div>' +
+                '<div class="pl-card-ex">' + planEsc(g.ex) + '<br>' + planEsc(g.exId) + '</div>' + planExBtn(i) + '</div>' +
                 '<button class="pl-speak" onclick="planSpeakIdx(' + i + ')">🔊</button></div>';
         });
     }
