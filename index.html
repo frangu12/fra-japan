@@ -2014,6 +2014,35 @@
   .km-sentence-box{background:#0e0e1a;border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;}
   .km-sentence-jp{font-family:"Noto Sans JP",sans-serif;font-size:1.05rem;font-weight:700;color:#fff;line-height:1.7;}
   .km-sentence-id{font-size:0.8rem;color:var(--muted);margin-top:3px;font-style:italic;}
+
+  .rate-btn{display:inline-flex;align-items:center;padding:5px 11px;border-radius:20px;border:1px solid var(--border);background:rgba(255,255,255,0.05);color:#9ca3af;font-size:0.75rem;font-weight:700;cursor:pointer;font-family:"DM Sans",sans-serif;white-space:nowrap;}
+  .rate-btn:hover{border-color:var(--teal2);color:var(--teal2);}
+
+  /* UJIAN MINGGUAN */
+  .pl-day.wk b::after{content:' 📝';font-size:0.6rem;}
+  .pe-timer{font-size:1.05rem;font-weight:900;color:var(--gold);padding:5px 11px;border-radius:12px;background:rgba(255,255,255,0.08);margin-right:8px;font-variant-numeric:tabular-nums;}
+  .pe-timer.warn{color:#ff6b6b;animation:pulse 1s infinite;}
+  .pe-hint{font-size:0.68rem;color:var(--muted);margin-top:2px;}
+  .pl-modal-head{gap:8px;}
+  .pl-opt.sel{border-color:#a78bfa;background:rgba(124,58,237,0.22);color:#fff;}
+  .pe-grid{display:flex;flex-wrap:wrap;gap:5px;margin-top:16px;}
+  .pe-n{width:30px;height:30px;border-radius:8px;border:1.5px solid var(--border);background:#0e0e1a;color:var(--muted);font-size:0.7rem;font-weight:800;cursor:pointer;font-family:"DM Sans",sans-serif;}
+  .pe-n.ans{background:rgba(0,212,170,0.16);border-color:rgba(0,212,170,0.5);color:var(--teal2);}
+  .pe-n.cur{border-color:#a78bfa;box-shadow:0 0 0 2px rgba(167,139,250,0.4);}
+  .pe-submit-link{display:block;margin:14px auto 4px;background:none;border:none;color:#a78bfa;font-size:0.78rem;font-weight:800;cursor:pointer;text-decoration:underline;font-family:"DM Sans",sans-serif;}
+  .pl-secondary:disabled{opacity:0.35;cursor:default;}
+  .pe-bars{margin:10px 0 14px;}
+  .pe-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .pe-bar-lbl{width:42px;font-size:0.78rem;font-weight:800;color:#fff;font-family:"Noto Sans JP",sans-serif;}
+  .pe-bar{flex:1;height:8px;border-radius:8px;background:rgba(255,255,255,0.1);overflow:hidden;}
+  .pe-bar-fill{height:100%;background:linear-gradient(90deg,var(--teal2),var(--gold));}
+  .pe-bar-val{width:44px;text-align:right;font-size:0.74rem;font-weight:800;color:var(--muted);}
+  .pe-hist{margin-top:8px;}
+  .pe-hist-row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.76rem;}
+  .pe-hist-row:last-child{border-bottom:none;}
+  .pe-hist-score{font-weight:800;}
+  .pe-hist-score.ok{color:var(--teal2);}
+  .pe-hist-score.ng{color:#ff8a8a;}
 </style>
 </head>
 <body>
@@ -2041,6 +2070,7 @@
         <option value="">Suara Default</option>
       </select>
     </div>
+    <button class="rate-btn" id="rate-btn" onclick="cycleSentenceRate()" title="Kecepatan baca kalimat (klik untuk ganti)">🐢 0.7x</button>
     <button class="mute-btn" id="mute-btn" onclick="toggleMute()" title="Matikan/Hidupkan Suara">
       <span class="mute-icon" id="mute-icon">🔊</span><span id="mute-label">Suara</span>
     </button>
@@ -5559,13 +5589,31 @@ function toggleMute() {
     }
 }
 
-function speakText(text) {
+var _sentenceRate = 0.7;   // kecepatan baca KALIMAT (kata tunggal tetap normal)
+try { var _srSaved = parseFloat(localStorage.getItem('sentenceRate')); if (_srSaved >= 0.4 && _srSaved <= 1.2) _sentenceRate = _srSaved; } catch(e) {}
+function speakSentence(text) { speakText(text, _sentenceRate); }
+var SENTENCE_RATE_STEPS = [0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
+function updateRateBtn() {
+    var b = document.getElementById('rate-btn');
+    if (b) b.textContent = '🐢 ' + _sentenceRate.toFixed(1) + 'x';
+}
+function cycleSentenceRate() {
+    var i = SENTENCE_RATE_STEPS.indexOf(_sentenceRate);
+    _sentenceRate = SENTENCE_RATE_STEPS[(i + 1) % SENTENCE_RATE_STEPS.length];
+    try { localStorage.setItem('sentenceRate', String(_sentenceRate)); } catch(e) {}
+    updateRateBtn();
+    speakSentence('これは、私の本です。');
+}
+setTimeout(updateRateBtn, 0);
+
+function speakText(text, rate) {
     if (_isMuted) return; // ← Cek mute dulu
     if (!text || text.trim() === '') return;
     if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         let msg = new SpeechSynthesisUtterance(text);
         msg.lang = 'ja-JP';
+        if (rate) msg.rate = rate;
         var voice = getVoice();
         if (voice) msg.voice = voice;
         window.speechSynthesis.speak(msg);
@@ -5897,7 +5945,7 @@ function wotdStartQuiz(level) {
 function speakKamusExample() {
     // Speak the example sentence of the currently open kamus modal
     const ex = window._kamusExJp || '';
-    if(ex) speakText(ex);
+    if(ex) speakSentence(ex);
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -6171,7 +6219,7 @@ function renderHafalRadikal() {
         const safeJp = k.sentence.jp.replace(/'/g, "\\'");
         sentEl.innerHTML = `
             <div class="hf-rad-sentence-box">
-                <button class="hf-sent-speak" onclick="speakText('${safeJp}')">🔊 Dengar</button>
+                <button class="hf-sent-speak" onclick="speakSentence('${safeJp}')">🔊 Dengar</button>
                 <div class="hf-sent-texts">
                     <div class="hf-sent-jp">${k.sentence.jp}</div>
                     <div class="hf-sent-id">${k.sentence.id}</div>
@@ -10372,7 +10420,7 @@ function renderMinnaBab(idx) {
                                 <div class="gi-jp">${g.exJpRuby || g.exJp}</div>
                                 <div class="gi-id">${g.exId}</div>
                                 <div style="margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                                    <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.75rem; border-color: var(--teal); color: var(--teal);" onclick="speakText('${g.exJp}')">🔊 Dengar</button>
+                                    <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.75rem; border-color: var(--teal); color: var(--teal);" onclick="speakSentence('${g.exJp}')">🔊 Dengar</button>
                                     <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.75rem; border-color: var(--red); color: var(--red);" id="mic-g-${idx}-${gIdx}" onclick="practiceMinnaMic('mic-g-${idx}-${gIdx}', '${g.exJp}')">🎤 Latih</button>
                                     <span id="res-mic-g-${idx}-${gIdx}" style="font-size: 0.75rem; color: var(--muted); margin-left: 5px;"></span>
                                 </div>
@@ -10421,7 +10469,7 @@ function renderMinnaBab(idx) {
                                     <div class="dl-jp">${line.jpRuby || line.jp}</div>
                                     <div class="dl-id">${line.id}</div>
                                     <div style="margin-top: 6px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                                        <button class="btn btn-outline" style="padding: 2px 8px; font-size: 0.7rem; border-color: var(--teal); color: var(--teal);" onclick="speakText('${line.jp}')">🔊 Dengar</button>
+                                        <button class="btn btn-outline" style="padding: 2px 8px; font-size: 0.7rem; border-color: var(--teal); color: var(--teal);" onclick="speakSentence('${line.jp}')">🔊 Dengar</button>
                                         <button class="btn btn-outline" style="padding: 2px 8px; font-size: 0.7rem; border-color: var(--red); color: var(--red);" id="mic-d-${idx}-${dIdx}" onclick="practiceMinnaMic('mic-d-${idx}-${dIdx}', '${line.jp}')">🎤 Latih</button>
                                         <span id="res-mic-d-${idx}-${dIdx}" style="font-size: 0.7rem; color: var(--muted); margin-left: 5px;"></span>
                                     </div>
@@ -10443,10 +10491,10 @@ function exampleJpLine(raw) {
 }
 function speakExampleLine(raw) {
     const t = exampleJpLine(raw);
-    if (t) speakText(t);
+    if (t) speakSentence(t);
 }
 function speakKotobaEx(i) { const v = kotobaToday[i]; if (v) speakExampleLine(v.example); }
-function speakFlashExample() { if (window._fcExJp) speakText(window._fcExJp); }
+function speakFlashExample() { if (window._fcExJp) speakSentence(window._fcExJp); }
 function kmSpeakExample(i) {
     const k = window._currentKanji;
     const ex = k && k.examples && k.examples[i];
@@ -10454,7 +10502,7 @@ function kmSpeakExample(i) {
 }
 function kmSpeakSentence() {
     const k = window._currentKanji;
-    if (k && k.sentence) speakText(k.sentence.jp);
+    if (k && k.sentence) speakSentence(k.sentence.jp);
 }
 
 // ════════════════════════════════════
@@ -10467,7 +10515,7 @@ const PLAN_DOW = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
 const PLAN_BOX_DAYS = [1, 2, 4, 8, 15];
 const PLAN_VOCAB_PER_DAY = 20;
 const PLAN_VOCAB_CAT_ORDER = ['pronoun','greeting','numbers','counter','people','body','food','place','daily','nature','colors','study','nouns','verbs','adjectives','adverbs','concept'];
-let planViewDay = null, planFollowToday = true, planPoolsCache = null, planQuiz = null, planStudyTexts = [], planStudyEx = [], planResetArmed = false;
+let planViewDay = null, planFollowToday = true, planPoolsCache = null, planQuiz = null, planStudyTexts = [], planStudyEx = [], planStudySent = false, planResetArmed = false;
 
 function planEsc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 function planTodayUtc() { const n = new Date(); return Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()); }
@@ -10482,6 +10530,7 @@ function planState() {
     if (!s || !s.start) { s = { start: planTodayUtc(), days: {}, srs: {} }; planSave(s); }
     if (!s.days) s.days = {};
     if (!s.srs) s.srs = {};
+    if (!s.weekly) s.weekly = {};
     return s;
 }
 function planSave(s) { try { localStorage.setItem(PLAN_KEY, JSON.stringify(s)); } catch (e) {} }
@@ -10567,10 +10616,11 @@ function planTasks(d, info) {
         if (c.vocab.length) t.push({ id: 'vocab', ico: '📚', title: 'Kosakata baru (' + c.vocab.length + ')', min: 20, kind: 'study', list: 'vocab', desc: c.vocab.slice(0, 5).map(function (v) { return v.jp; }).join('、') + ' …' });
         if (c.gram.length) t.push({ id: 'gram', ico: '📐', title: 'Tata bahasa (' + c.gram.length + ' pola)', min: 15, kind: 'study', list: 'gram', desc: c.gram.map(function (g) { return g.short; }).join('  ·  ') });
         t.push({ id: 'listen', ico: '🎧', title: 'Latihan listening (Choukai)', min: 10, kind: 'link', page: 'choukai', desc: 'Dengarkan 1 sesi. Listening wajib dilatih setiap hari.' });
-        t.push({ id: 'test', ico: '✅', title: 'Tes harian (15 soal)', min: 12, kind: 'quiz', qkind: 'test', desc: 'Materi hari ini + ulangan materi sebelumnya. Yang salah akan muncul lagi.' });
-        if (d % 7 === 0) t.push({ id: 'sim', ico: '🎌', title: 'Mini simulasi JLPT', min: 12, kind: 'link', page: 'jlpt', desc: 'Kerjakan simulasi untuk mengukur kemajuan mingguan.' });
+        if (planIsExamDay(d, info)) t.push({ id: 'weekly', ico: '📝', title: 'Ujian Mingguan — rekap minggu ke-' + planWeekNo(d), min: 25, kind: 'exam', desc: '30 soal dari materi 7 hari terakhir. Pakai timer dan tanpa kunci jawaban sampai dikumpulkan, seperti ujian sungguhan.' });
+        else t.push({ id: 'test', ico: '✅', title: 'Tes harian (15 soal)', min: 12, kind: 'quiz', qkind: 'test', desc: 'Materi hari ini + ulangan materi sebelumnya. Yang salah akan muncul lagi.' });
     } else if (d < info.total) {
-        t.push({ id: 'big', ico: '🔁', title: 'Review besar (20 soal)', min: 15, kind: 'quiz', qkind: 'big', desc: 'Campuran dari semua materi, prioritas yang paling sering salah.' });
+        if (planIsExamDay(d, info)) t.push({ id: 'weekly', ico: '📝', title: 'Ujian Mingguan — rekap besar', min: 30, kind: 'exam', desc: '40 soal dari seluruh materi yang sudah dipelajari. Pakai timer dan tanpa kunci jawaban sampai dikumpulkan.' });
+        else t.push({ id: 'big', ico: '🔁', title: 'Review besar (20 soal)', min: 15, kind: 'quiz', qkind: 'big', desc: 'Campuran dari semua materi, prioritas yang paling sering salah.' });
         t.push({ id: 'weak', ico: '🎯', title: 'Drill titik lemah', min: 10, kind: 'weak', desc: 'Latih semua soal yang tercatat salah.' });
         if (d <= info.total - 2) t.push({ id: 'sim', ico: '🎌', title: 'Simulasi JLPT (pakai timer)', min: 30, kind: 'link', page: 'jlpt', desc: 'Kerjakan penuh atau satu bagian, lalu cek yang salah.' });
         t.push({ id: 'ringkas', ico: '📋', title: 'Baca ringkasan N5 → N4', min: 10, kind: 'link', page: 'ringkasan', desc: 'Pola kalimat, partikel, dan kanji wajib dalam satu halaman.' });
@@ -10744,17 +10794,19 @@ function planCloseOverlay() {
     ov.innerHTML = '';
     document.body.style.overflow = '';
     planQuiz = null;
+    if (planExam && planExam.timer) clearInterval(planExam.timer);
+    planExam = null;
     renderRencana();
 }
-function planSpeakIdx(i) { if (planStudyTexts[i]) speakText(planStudyTexts[i]); }
-function planSpeakEx(i) { if (planStudyEx[i]) speakText(planStudyEx[i]); }
+function planSpeakIdx(i) { if (planStudyTexts[i]) { if (planStudySent) speakSentence(planStudyTexts[i]); else speakText(planStudyTexts[i]); } }
+function planSpeakEx(i) { if (planStudyEx[i]) speakSentence(planStudyEx[i]); }
 function planExBtn(i) { return planStudyEx[i] ? '<button class="pl-ex-speak" onclick="planSpeakEx(' + i + ')">🔊 Kalimat</button>' : ''; }
 
 function planOpenStudy(list) {
     const info = planInfo();
     const c = planDayContent(planViewDay, info);
     if (!c) return;
-    planStudyTexts = []; planStudyEx = [];
+    planStudyTexts = []; planStudyEx = []; planStudySent = (list === 'gram');
     let title = '', body = '';
     if (list === 'kanji') {
         title = '漢 Kanji hari ini';
@@ -10897,6 +10949,215 @@ function planQuizResult() {
         '<div class="pl-modal-foot"><button class="pl-secondary" onclick="planStartQuiz(planQuiz.task)">↻ Ulangi</button><button class="pl-primary" onclick="planCloseOverlay()">Selesai ✓</button></div></div>');
 }
 
+// ---------- Ujian mingguan ----------
+const PLAN_SECTION = { kanji: '漢字', vocab: '語彙', gram: '文法' };
+let planExam = null;
+
+function planWeekNo(d) { return Math.ceil(d / 7); }
+function planIsExamDay(d, info) { return d % 7 === 0 && d < info.total; }
+function planFmtTime(ms) {
+    const s = Math.max(0, Math.ceil(ms / 1000));
+    return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+}
+
+function planWeekItems(d, info) {
+    const P = planPools();
+    const items = [], seen = new Set();
+    const add = function (key) {
+        if (!seen.has(key) && P.byKey[key]) { seen.add(key); items.push({ key: key, type: P.byKey[key].type, ref: P.byKey[key].ref }); }
+    };
+    if (d <= info.L) {
+        for (let x = Math.max(1, d - 6); x <= d; x++) {
+            const c = planDayContent(x, info);
+            if (!c) continue;
+            c.kanji.forEach(function (k) { add('k:' + k.char); });
+            c.vocab.forEach(function (v) { add('v:' + v.jp); });
+            c.gram.forEach(function (g) { add(g.key); });
+        }
+    } else {
+        planLearnedKeys(info, info.L).forEach(add);
+    }
+    return items;
+}
+
+function planExamSelect(items, N) {
+    const by = { kanji: [], vocab: [], gram: [] };
+    planShuffle(items).forEach(function (i) { by[i.type].push(i); });
+    const qk = Math.round(N * 0.34), qv = Math.round(N * 0.4);
+    const quota = { kanji: qk, vocab: qv, gram: N - qk - qv };
+    const picked = [];
+    ['kanji', 'vocab', 'gram'].forEach(function (t) { by[t].splice(0, quota[t]).forEach(function (i) { picked.push(i); }); });
+    const left = planShuffle([].concat(by.kanji, by.vocab, by.gram));
+    while (picked.length < N && left.length) picked.push(left.shift());
+    return picked;
+}
+
+function planStartExam() {
+    const info = planInfo();
+    const d = planViewDay;
+    const items = planWeekItems(d, info);
+    if (!items.length) {
+        planOverlay('<div class="pl-modal"><div class="pl-modal-head"><div class="pl-modal-title">📝 Ujian Mingguan</div><button class="pl-x" onclick="planCloseOverlay()">✕</button></div>' +
+            '<div class="pl-modal-body"><div class="pl-res"><div class="pl-res-emoji">🌱</div><div class="pl-res-msg">Belum ada materi untuk diujikan.</div></div></div>' +
+            '<div class="pl-modal-foot"><button class="pl-primary" onclick="planCloseOverlay()">OK</button></div></div>');
+        return;
+    }
+    const big = d > info.L;
+    const N = big ? 40 : 30;
+    const qs = planShuffle(planExamSelect(items, N)).map(function (it) { const q = planMakeQ(it); q.section = it.type; return q; });
+    const minutes = Math.max(5, Math.ceil(qs.length * 2 / 3));
+    planExam = {
+        day: d, week: planWeekNo(d), big: big, qs: qs, answers: qs.map(function () { return -1; }), i: 0,
+        title: big ? '📝 Ujian Mingguan · Rekap Besar' : '📝 Ujian Minggu ke-' + planWeekNo(d),
+        endAt: Date.now() + minutes * 60000, quitArmed: false, submitArmed: false, timer: null
+    };
+    planExam.timer = setInterval(planExamTick, 1000);
+    planExamRender();
+}
+
+function planExamTick() {
+    const E = planExam;
+    if (!E) return;
+    const left = E.endAt - Date.now();
+    const el = document.getElementById('pe-timer');
+    if (el) { el.textContent = planFmtTime(left); el.className = 'pe-timer' + (left < 120000 ? ' warn' : ''); }
+    if (left <= 0) planExamSubmit(true);
+}
+
+function planExamRender() {
+    const E = planExam;
+    const q = E.qs[E.i];
+    const N = E.qs.length;
+    const answered = E.answers.filter(function (a) { return a >= 0; }).length;
+    const opts = q.options.map(function (o, i) {
+        return '<button class="pl-opt' + (E.answers[E.i] === i ? ' sel' : '') + '" onclick="planExamAnswer(' + i + ')">' + planEsc(o) + '</button>';
+    }).join('');
+    const grid = E.qs.map(function (_, i) {
+        return '<button class="pe-n' + (i === E.i ? ' cur' : '') + (E.answers[i] >= 0 ? ' ans' : '') + '" onclick="planExamGo(' + i + ')">' + (i + 1) + '</button>';
+    }).join('');
+    const last = E.i === N - 1;
+    planOverlay('<div class="pl-modal">' +
+        '<div class="pl-modal-head"><div><div class="pl-modal-title">' + E.title + '</div><div class="pe-hint" id="pe-hint">' + answered + ' / ' + N + ' terjawab</div></div>' +
+        '<div class="pe-timer" id="pe-timer">' + planFmtTime(E.endAt - Date.now()) + '</div><button class="pl-x" onclick="planExamQuit()">✕</button></div>' +
+        '<div class="pl-qbar"><div class="pl-qbar-fill" style="width:' + Math.round(answered / N * 100) + '%"></div></div>' +
+        '<div class="pl-modal-body"><div class="pl-qmeta">Soal ' + (E.i + 1) + ' / ' + N + ' · ' + PLAN_SECTION[q.section] + '</div>' +
+        '<div class="pl-qlabel">' + planEsc(q.label) + '</div>' +
+        '<div class="pl-qprompt ' + (q.big ? 'big' : '') + '">' + planEsc(q.prompt) + '</div>' +
+        (q.sub ? '<div class="pl-qsub">' + planEsc(q.sub) + '</div>' : '') +
+        '<div class="pl-opts">' + opts + '</div>' +
+        '<div class="pe-grid">' + grid + '</div>' +
+        '<button class="pe-submit-link" onclick="planExamSubmit(false)">Kumpulkan sekarang</button></div>' +
+        '<div class="pl-modal-foot"><button class="pl-secondary" ' + (E.i === 0 ? 'disabled' : '') + ' onclick="planExamGo(' + (E.i - 1) + ')">← Sebelumnya</button>' +
+        (last ? '<button class="pl-primary" onclick="planExamSubmit(false)">Kumpulkan ✓</button>' : '<button class="pl-primary" onclick="planExamGo(' + (E.i + 1) + ')">Lanjut →</button>') + '</div></div>');
+}
+
+function planExamAnswer(i) {
+    if (!planExam) return;
+    planExam.answers[planExam.i] = i;
+    planExam.submitArmed = false;
+    planExamRender();
+}
+
+function planExamGo(n) {
+    if (!planExam) return;
+    if (n < 0 || n >= planExam.qs.length) return;
+    planExam.i = n;
+    planExamRender();
+}
+
+function planExamQuit() {
+    const E = planExam;
+    if (!E) { planCloseOverlay(); return; }
+    if (!E.quitArmed) {
+        E.quitArmed = true;
+        const h = document.getElementById('pe-hint');
+        if (h) h.textContent = 'Klik ✕ sekali lagi untuk keluar — jawaban tidak tersimpan';
+        setTimeout(function () { if (planExam === E) { E.quitArmed = false; } }, 3500);
+        return;
+    }
+    planCloseOverlay();
+}
+
+function planExamSubmit(force) {
+    const E = planExam;
+    if (!E) return;
+    const empty = E.answers.filter(function (a) { return a < 0; }).length;
+    if (!force && empty > 0 && !E.submitArmed) {
+        E.submitArmed = true;
+        const h = document.getElementById('pe-hint');
+        if (h) h.textContent = 'Masih ' + empty + ' soal kosong — tekan Kumpulkan lagi untuk memastikan';
+        setTimeout(function () { if (planExam === E) E.submitArmed = false; }, 4000);
+        return;
+    }
+    clearInterval(E.timer);
+    planExam = null;
+
+    const info = planInfo();
+    let correct = 0;
+    const parts = { kanji: [0, 0], vocab: [0, 0], gram: [0, 0] };
+    const wrong = [];
+    E.qs.forEach(function (q, idx) {
+        const my = E.answers[idx];
+        const ok = my === q.answer;
+        parts[q.section][1]++;
+        if (ok) { correct++; parts[q.section][0]++; } else wrong.push({ q: q, my: my });
+        planSrsUpdate(q.key, ok, info.dayNum);
+        if (!ok && typeof addWeakPoint === 'function') {
+            addWeakPoint(q.wtype, { char: q.weak.char, reading: q.weak.reading, meaning: q.weak.meaning, source: 'Ujian Mingguan', q: q.label + ' ' + q.prompt, opts: q.options, ans: q.answer, exp: q.exp });
+        }
+    });
+    const total = E.qs.length;
+    const pct = Math.round(correct / total * 100);
+
+    const s = planState();
+    const prevWeek = s.weekly[E.week - 1];
+    const prev = s.weekly[E.week];
+    s.weekly[E.week] = { day: E.day, last: pct, best: prev ? Math.max(prev.best, pct) : pct, attempts: (prev ? prev.attempts : 0) + 1, parts: parts, correct: correct, total: total, date: planTodayUtc() };
+    planSave(s);
+    planMarkDone(E.day, 'weekly', true);
+    planAward(E.day, 'weekly', 25 + (pct >= 80 ? 15 : 0), 'Ujian mingguan ke-' + E.week);
+
+    const pass = pct >= 60;
+    const bars = ['kanji', 'vocab', 'gram'].filter(function (t) { return parts[t][1] > 0; }).map(function (t) {
+        const p = Math.round(parts[t][0] / parts[t][1] * 100);
+        return '<div class="pe-bar-row"><div class="pe-bar-lbl">' + PLAN_SECTION[t] + '</div><div class="pe-bar"><div class="pe-bar-fill" style="width:' + p + '%"></div></div><div class="pe-bar-val">' + parts[t][0] + '/' + parts[t][1] + '</div></div>';
+    }).join('');
+    let cmp = '';
+    if (prevWeek && !E.big) {
+        const diff = pct - prevWeek.last;
+        cmp = '<div class="pl-res-msg">' + (diff > 0 ? '📈 Naik ' + diff + '% dari minggu lalu (' + prevWeek.last + '%).' : diff < 0 ? '📉 Turun ' + Math.abs(diff) + '% dari minggu lalu (' + prevWeek.last + '%).' : 'Sama dengan minggu lalu (' + prevWeek.last + '%).') + '</div>';
+    }
+    const wrongHtml = wrong.map(function (w) {
+        return '<div class="pl-wrong-item"><b>' + PLAN_SECTION[w.q.section] + ' · ' + planEsc(String(w.q.prompt).slice(0, 40)) + '</b><br>Jawabanmu: ' +
+            planEsc(w.my >= 0 ? w.q.options[w.my] : '(kosong)') + ' → Benar: <b>' + planEsc(w.q.options[w.q.answer]) + '</b><br>' + planEsc(w.q.exp) + '</div>';
+    }).join('');
+    planOverlay('<div class="pl-modal"><div class="pl-modal-head"><div class="pl-modal-title">' + E.title + '</div><button class="pl-x" onclick="planCloseOverlay()">✕</button></div>' +
+        '<div class="pl-modal-body"><div class="pl-res"><div class="pl-res-emoji">' + (pct >= 80 ? '🌸' : pass ? '👍' : '📚') + '</div>' +
+        '<div class="pl-res-score">' + correct + ' / ' + total + ' (' + pct + '%)</div>' +
+        '<div class="pl-res-msg"><b>' + (pass ? 'Lulus' : 'Belum lulus') + '</b> — batas lulus latihan ini 60%. ' + (pass ? 'Pertahankan!' : 'Yang salah dijadwalkan ulang otomatis, jadi tidak perlu panik.') + '</div>' + cmp + '</div>' +
+        '<div class="pe-bars">' + bars + '</div>' +
+        (wrongHtml ? '<div class="pl-qmeta" style="text-align:left;">Pembahasan soal yang salah (' + wrong.length + ')</div>' + wrongHtml : '<div class="pl-res-msg">Semua benar. Luar biasa!</div>') + '</div>' +
+        '<div class="pl-modal-foot"><button class="pl-secondary" onclick="planStartExam()">↻ Coba lagi (soal baru)</button><button class="pl-primary" onclick="planCloseOverlay()">Selesai ✓</button></div></div>');
+}
+
+function planWeeklyBox(info) {
+    const s = info.s;
+    const weeks = Object.keys(s.weekly || {}).map(Number).sort(function (a, b) { return a - b; });
+    let nextD = 0;
+    for (let x = Math.max(7, Math.ceil(info.dayNum / 7) * 7); x < info.total; x += 7) { nextD = x; break; }
+    let h = '<div class="pl-box"><b>📝 Ujian Mingguan</b>';
+    if (weeks.length) {
+        h += '<div class="pe-hist">' + weeks.map(function (w) {
+            const r = s.weekly[w];
+            return '<div class="pe-hist-row"><span>Minggu ' + w + ' · Hari ' + r.day + '</span><span class="pe-hist-score ' + (r.last >= 60 ? 'ok' : 'ng') + '">' + r.last + '%' + (r.best > r.last ? ' (terbaik ' + r.best + '%)' : '') + '</span></div>';
+        }).join('') + '</div>';
+    } else {
+        h += '<div style="margin-top:6px;color:var(--muted);">Belum ada ujian yang dikerjakan.</div>';
+    }
+    if (nextD) h += '<div style="margin-top:8px;">Ujian berikutnya: <b>Hari ' + nextD + '</b> · ' + planDateLabel(s.start + (nextD - 1) * 86400000) + '</div>';
+    return h + '</div>';
+}
+
 // ---------- Halaman ----------
 function planToggle(id) {
     const s = planState();
@@ -10913,6 +11174,7 @@ function planStart(id) {
     if (!task) return;
     if (task.kind === 'study') planOpenStudy(task.list);
     else if (task.kind === 'quiz') planStartQuiz(task);
+    else if (task.kind === 'exam') planStartExam();
     else if (task.kind === 'link') showPage(task.page);
     else if (task.kind === 'weak') { if (typeof startWeakPointReview === 'function') startWeakPointReview(); }
     else planToggle(id);
@@ -11004,6 +11266,7 @@ function renderRencana() {
             else if (f.k > 0) cls += ' part';
             else if (x < info.dayNum) cls += ' miss';
         }
+        if (planIsExamDay(x, info)) cls += ' wk';
         if (x === info.dayNum) cls += ' today';
         if (x === d) cls += ' sel';
         const dateLabel = planDateLabel(s.start + (x - 1) * 86400000).split(', ')[1];
@@ -11035,7 +11298,7 @@ function renderRencana() {
 
     let tips = '<div class="pl-box">' + planTips(phase) + '</div>';
     if (d <= info.L && s.days[d] && s.days[d].score) tips = '<div class="pl-box">Skor tes harian terbaikmu: <b>' + s.days[d].score + '%</b></div>' + tips;
-    document.getElementById('pl-tips').innerHTML = tips;
+    document.getElementById('pl-tips').innerHTML = tips + planWeeklyBox(info);
     planUpdateBanner();
 }
 
@@ -11094,7 +11357,7 @@ function mvBuildSlides(d) {
                   '<div class="mv-meaning mv-a mv-a2">' + g.a + '</div>' +
                   '<div class="mv-jp mv-a mv-a3">' + (g.exJpRuby || g.exJp) + '</div>' +
                   '<div class="mv-trans mv-a mv-a4">' + g.exId + '</div></div>',
-            speak: [ { lang:'id', text:g.a }, { lang:'ja', text:g.exJp }, { lang:'id', text:g.exId } ] });
+            speak: [ { lang:'id', text:g.a }, { lang:'ja', text:g.exJp, sentence:true }, { lang:'id', text:g.exId } ] });
     });
 
     d.vocab.forEach((v, vi) => {
@@ -11120,7 +11383,7 @@ function mvBuildSlides(d) {
         }
         S.push({ sec:'dialog', chap:'会話', hold:4500,
             html: '<div class="mv-slide"><div class="mv-label">会話 · ' + (di+1) + ' / ' + d.dialog.length + '</div><div class="mv-dlg">' + lines + '</div></div>',
-            speak: [ { lang:'ja', text:L_text(d.dialog[di]), pitch: whoIdx[d.dialog[di].who] ? 1.3 : 1.0 }, { lang:'id', text:d.dialog[di].id } ] });
+            speak: [ { lang:'ja', text:L_text(d.dialog[di]), pitch: whoIdx[d.dialog[di].who] ? 1.3 : 1.0, sentence:true }, { lang:'id', text:d.dialog[di].id } ] });
     });
 
     S.push({ sec:'end', chap:'Selesai', hold:0, kind:'end', html:'', speak:[] });
@@ -11142,7 +11405,7 @@ function mvStopSpeech() {
 function mvSpeakItem(it, tok, done) {
     const u = new SpeechSynthesisUtterance(it.text);
     u.lang = it.lang === 'id' ? 'id-ID' : 'ja-JP';
-    u.rate = (it.lang === 'id' ? 1 : 0.9) * mv.speed;
+    u.rate = (it.lang === 'id' ? 1 : (it.sentence ? _sentenceRate : 0.9)) * mv.speed;
     if (it.pitch) u.pitch = it.pitch;
     if (it.lang === 'id') {
         const v = speechSynthesis.getVoices().find(x => (x.lang || '').toLowerCase().startsWith('id'));
@@ -11161,7 +11424,7 @@ function mvSpeakItem(it, tok, done) {
     };
     u.onend = fin;
     u.onerror = fin;
-    const est = it.text.length * (it.lang === 'id' ? 90 : 260) / mv.speed + 2500;
+    const est = it.text.length * (it.lang === 'id' ? 90 : (it.sentence ? 260 / _sentenceRate : 260)) / mv.speed + 2500;
     guard = setTimeout(fin, est);
     speechSynthesis.speak(u);
 }
