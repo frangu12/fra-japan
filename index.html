@@ -2043,6 +2043,20 @@
   .pe-hist-score{font-weight:800;}
   .pe-hist-score.ok{color:var(--teal2);}
   .pe-hist-score.ng{color:#ff8a8a;}
+
+  /* SUSUN KALIMAT */
+  .pb-prompt{font-size:1.1rem;font-weight:800;color:#fff;line-height:1.6;margin:4px 0 12px;}
+  .pb-answer{min-height:58px;display:flex;flex-wrap:wrap;gap:6px;padding:10px;border:2px dashed rgba(167,139,250,0.5);border-radius:14px;background:rgba(124,58,237,0.08);margin-bottom:12px;align-content:flex-start;}
+  .pb-answer.ok{border-color:var(--teal2);border-style:solid;background:rgba(0,212,170,0.1);}
+  .pb-answer.ng{border-color:var(--red);border-style:solid;background:rgba(192,57,43,0.1);}
+  .pb-ph{color:var(--muted);font-size:0.78rem;align-self:center;}
+  .pb-pool{display:flex;flex-wrap:wrap;gap:8px;}
+  .pb-tile{padding:9px 13px;border-radius:12px;border:1.5px solid var(--border);background:#0e0e1a;color:#fff;font-family:"Noto Sans JP",sans-serif;font-size:1rem;font-weight:700;cursor:pointer;}
+  .pb-tile:hover:not(:disabled){border-color:#a78bfa;}
+  .pb-tile.in{background:rgba(124,58,237,0.28);border-color:#a78bfa;}
+  .pb-tile.used{opacity:0.22;cursor:default;}
+  .pb-tile:disabled{cursor:default;}
+  .pb-speak{margin-left:6px;padding:3px 10px;border-radius:10px;border:1.5px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);color:#fff;font-size:0.72rem;font-weight:800;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -10582,7 +10596,10 @@ function planPools() {
     kanji.forEach(function (k) { byKey['k:' + k.char] = { type: 'kanji', ref: k }; });
     vocabSeq.forEach(function (v) { byKey['v:' + v.jp] = { type: 'vocab', ref: v }; });
     gram.forEach(function (g) { byKey[g.key] = { type: 'gram', ref: g }; });
-    planPoolsCache = { kanji: kanji, vocab: vocabSeq, gram: gram, byKey: byKey };
+    const sents = planSentBank();
+    const sentsByG = {};
+    sents.forEach(function (s) { byKey[s.key] = { type: 'sent', ref: s }; (sentsByG[s.g] = sentsByG[s.g] || []).push(s); });
+    planPoolsCache = { kanji: kanji, vocab: vocabSeq, gram: gram, sents: sents, sentsByG: sentsByG, byKey: byKey };
     return planPoolsCache;
 }
 
@@ -10592,10 +10609,14 @@ function planDayContent(d, info) {
     const kPer = Math.min(12, Math.ceil(P.kanji.length / info.L));
     const gPer = Math.min(3, Math.ceil(P.gram.length / info.L));
     const vPer = PLAN_VOCAB_PER_DAY;
+    const gramToday = P.gram.slice((d - 1) * gPer, d * gPer);
+    let sentToday = [];
+    gramToday.forEach(function (g) { sentToday = sentToday.concat(P.sentsByG[g.key] || []); });
     return {
         kanji: P.kanji.slice((d - 1) * kPer, d * kPer),
         vocab: P.vocab.slice((d - 1) * vPer, d * vPer),
-        gram: P.gram.slice((d - 1) * gPer, d * gPer)
+        gram: gramToday,
+        sent: sentToday.slice(0, 8)
     };
 }
 
@@ -10615,12 +10636,14 @@ function planTasks(d, info) {
         if (c.kanji.length) t.push({ id: 'kanji', ico: '漢', title: 'Kanji baru (' + c.kanji.length + ')', min: 20, kind: 'study', list: 'kanji', desc: c.kanji.map(function (k) { return k.char; }).join(' ') });
         if (c.vocab.length) t.push({ id: 'vocab', ico: '📚', title: 'Kosakata baru (' + c.vocab.length + ')', min: 20, kind: 'study', list: 'vocab', desc: c.vocab.slice(0, 5).map(function (v) { return v.jp; }).join('、') + ' …' });
         if (c.gram.length) t.push({ id: 'gram', ico: '📐', title: 'Tata bahasa (' + c.gram.length + ' pola)', min: 15, kind: 'study', list: 'gram', desc: c.gram.map(function (g) { return g.short; }).join('  ·  ') });
+        t.push({ id: 'sent', ico: '✍️', title: 'Susun kalimat (Indonesia → Jepang)', min: 10, kind: 'quiz', qkind: 'sent', desc: '5 soal: susun potongan kata menjadi kalimat Jepang dari terjemahan Indonesia.' });
         t.push({ id: 'listen', ico: '🎧', title: 'Latihan listening (Choukai)', min: 10, kind: 'link', page: 'choukai', desc: 'Dengarkan 1 sesi. Listening wajib dilatih setiap hari.' });
-        if (planIsExamDay(d, info)) t.push({ id: 'weekly', ico: '📝', title: 'Ujian Mingguan — rekap minggu ke-' + planWeekNo(d), min: 25, kind: 'exam', desc: '30 soal dari materi 7 hari terakhir. Pakai timer dan tanpa kunci jawaban sampai dikumpulkan, seperti ujian sungguhan.' });
+        if (planIsExamDay(d, info)) t.push({ id: 'weekly', ico: '📝', title: 'Ujian Mingguan — rekap minggu ke-' + planWeekNo(d), min: 25, kind: 'exam', desc: '30 soal pilihan ganda + 6 soal susun kalimat dari materi 7 hari terakhir. Pakai timer dan tanpa kunci jawaban sampai dikumpulkan.' });
         else t.push({ id: 'test', ico: '✅', title: 'Tes harian (15 soal)', min: 12, kind: 'quiz', qkind: 'test', desc: 'Materi hari ini + ulangan materi sebelumnya. Yang salah akan muncul lagi.' });
     } else if (d < info.total) {
-        if (planIsExamDay(d, info)) t.push({ id: 'weekly', ico: '📝', title: 'Ujian Mingguan — rekap besar', min: 30, kind: 'exam', desc: '40 soal dari seluruh materi yang sudah dipelajari. Pakai timer dan tanpa kunci jawaban sampai dikumpulkan.' });
+        if (planIsExamDay(d, info)) t.push({ id: 'weekly', ico: '📝', title: 'Ujian Mingguan — rekap besar', min: 30, kind: 'exam', desc: '40 soal pilihan ganda + 8 soal susun kalimat dari seluruh materi. Pakai timer dan tanpa kunci jawaban sampai dikumpulkan.' });
         else t.push({ id: 'big', ico: '🔁', title: 'Review besar (20 soal)', min: 15, kind: 'quiz', qkind: 'big', desc: 'Campuran dari semua materi, prioritas yang paling sering salah.' });
+        if (!planIsExamDay(d, info)) t.push({ id: 'sent', ico: '✍️', title: 'Susun kalimat (8 soal)', min: 12, kind: 'quiz', qkind: 'sent', desc: 'Susun kalimat Jepang dari terjemahan Indonesia, diambil dari semua pola yang sudah dipelajari.' });
         t.push({ id: 'weak', ico: '🎯', title: 'Drill titik lemah', min: 10, kind: 'weak', desc: 'Latih semua soal yang tercatat salah.' });
         if (d <= info.total - 2) t.push({ id: 'sim', ico: '🎌', title: 'Simulasi JLPT (pakai timer)', min: 30, kind: 'link', page: 'jlpt', desc: 'Kerjakan penuh atau satu bagian, lalu cek yang salah.' });
         t.push({ id: 'ringkas', ico: '📋', title: 'Baca ringkasan N5 → N4', min: 10, kind: 'link', page: 'ringkasan', desc: 'Pola kalimat, partikel, dan kanji wajib dalam satu halaman.' });
@@ -10676,13 +10699,15 @@ function planLearnedKeys(info, upTo) {
         c.kanji.forEach(function (k) { keys.push('k:' + k.char); });
         c.vocab.forEach(function (v) { keys.push('v:' + v.jp); });
         c.gram.forEach(function (g) { keys.push(g.key); });
+        c.sent.forEach(function (s) { keys.push(s.key); });
     }
     return keys;
 }
 
-function planPickReview(info, upToDay, n, exclude) {
+function planPickReview(info, upToDay, n, exclude, want) {
     const P = planPools();
-    const learned = planLearnedKeys(info, upToDay);
+    const isSent = function (k) { return k.indexOf('s:') === 0; };
+    const learned = planLearnedKeys(info, upToDay).filter(function (k) { return want === 'sent' ? isSent(k) : !isSent(k); });
     const learnedSet = new Set(learned);
     const s = info.s;
     const picked = [];
@@ -10775,9 +10800,217 @@ function planQGram(g) {
     return q;
 }
 
+// ---------- Susun kalimat (Indonesia → Jepang) ----------
+const SENT_BANK_RAW = [
+  // Partikel
+  ['g:は', 'わたし|は|学生|です。', 'Saya adalah pelajar.'],
+  ['g:は', '田中さん|は|日本人|です。', 'Tanaka adalah orang Jepang.'],
+  ['g:は', '肉|は|食べません。', 'Daging tidak saya makan.'],
+  ['g:は', 'これ|は|私|の|かばん|です。', 'Ini adalah tas saya.'],
+  ['g:が', 'だれ|が|来ましたか。', 'Siapa yang datang?'],
+  ['g:が', '田中さん|が|来ました。', 'Tanaka yang datang.'],
+  ['g:が', '日本語|が|話せます。', 'Saya bisa berbicara bahasa Jepang.'],
+  ['g:が', 'ラーメン|が|食べたい。', 'Saya ingin makan ramen.'],
+  ['g:を', 'りんご|を|食べます。', 'Saya makan apel.'],
+  ['g:を', '本|を|読みます。', 'Saya membaca buku.'],
+  ['g:を', '公園|を|歩きます。', 'Saya berjalan melewati taman.'],
+  ['g:に', '学校|に|行きます。', 'Saya pergi ke sekolah.'],
+  ['g:に', '友達|に|プレゼント|を|あげます。', 'Saya memberi hadiah kepada teman.', 'プレゼント|を|友達|に|あげます。'],
+  ['g:に', '猫|は|部屋|に|います。', 'Kucing ada di kamar.', '部屋|に|猫|は|います。'],
+  ['g:で', '図書館|で|勉強します。', 'Saya belajar di perpustakaan.'],
+  ['g:で', 'バス|で|学校|に|行きます。', 'Saya pergi ke sekolah naik bus.', '学校|に|バス|で|行きます。'],
+  ['g:で', '日本語|で|話してください。', 'Tolong berbicara dalam bahasa Jepang.'],
+  ['g:へ', '東京|へ|行きます。', 'Saya pergi ke Tokyo.'],
+  ['g:へ', 'うち|へ|帰ります。', 'Saya pulang ke rumah.'],
+  ['g:と', 'りんご|と|みかん|を|買いました。', 'Saya membeli apel dan jeruk.'],
+  ['g:と', '友達|と|映画|を|見ました。', 'Saya menonton film bersama teman.', '映画|を|友達|と|見ました。'],
+  ['g:も', 'わたし|も|学生|です。', 'Saya juga pelajar.'],
+  ['g:も', '猫|も|います。', 'Kucing juga ada.'],
+  ['g:も', '田中さん|も|来ます|か。', 'Apakah Tanaka juga datang?'],
+  ['g:の', '田中さん|の|本|です。', 'Ini buku milik Tanaka.'],
+  ['g:の', '日本語|の|先生|は|だれ|ですか。', 'Siapa guru bahasa Jepang itu?'],
+  ['g:の', 'あれ|は|私|の|傘|です。', 'Itu payung saya.'],
+  ['g:か', 'これ|は|ペン|ですか。', 'Apakah ini pena?'],
+  ['g:か', 'コーヒー|か|紅茶|は|いかがですか。', 'Bagaimana kalau kopi atau teh?'],
+  ['g:か', '明日|も|来ます|か。', 'Apakah kamu datang besok juga?'],
+  // N5
+  ['g:～は～です', 'これ|は|本|です。', 'Ini adalah buku.'],
+  ['g:～は～です', '私|は|マイク|です。', 'Saya adalah Mike.'],
+  ['g:～は～ではありません', 'これ|は|本|では|ありません。', 'Ini bukan buku.'],
+  ['g:～は～ではありません', '私|は|先生|では|ありません。', 'Saya bukan guru.'],
+  ['g:～は～ですか', 'あなた|は|先生|ですか。', 'Apakah kamu guru?'],
+  ['g:～は～ですか', '田中さん|は|学生|ですか。', 'Apakah Tanaka pelajar?'],
+  ['g:～があります/います', 'つくえ|の|上|に|本|が|あります。', 'Ada buku di atas meja.', '本|が|つくえ|の|上|に|あります。'],
+  ['g:～があります/います', '公園|に|犬|が|います。', 'Ada anjing di taman.', '犬|が|公園|に|います。'],
+  ['g:～たいです', 'ラーメン|が|食べたいです。', 'Saya ingin makan ramen.'],
+  ['g:～たいです', '日本|へ|行きたいです。', 'Saya ingin pergi ke Jepang.'],
+  ['g:～てください', 'ここ|に|名前|を|書いてください。', 'Tolong tulis nama di sini.', '名前|を|ここ|に|書いてください。'],
+  ['g:～てください', 'ここ|で|少し|待ってください。', 'Tolong tunggu sebentar di sini.'],
+  ['g:～ています', '雨|が|降っています。', 'Sedang hujan.'],
+  ['g:～ています', '私|は|本|を|読んでいます。', 'Saya sedang membaca buku.'],
+  ['g:～てもいいです', 'ここ|で|写真|を|撮っても|いいです。', 'Boleh foto di sini.', '写真|を|ここ|で|撮っても|いいです。'],
+  ['g:～てもいいです', 'この|部屋|に|入っても|いいですか。', 'Bolehkah masuk ke ruangan ini?'],
+  ['g:～てはいけません', 'ここ|で|たばこ|を|吸っては|いけません。', 'Dilarang merokok di sini.', 'たばこ|を|ここ|で|吸っては|いけません。'],
+  ['g:～てはいけません', '教室|で|食べては|いけません。', 'Dilarang makan di kelas.'],
+  ['g:～ないでください', 'ここ|で|食べないでください。', 'Tolong jangan makan di sini.'],
+  ['g:～ないでください', '大きい|声|で|話さないでください。', 'Tolong jangan bicara dengan suara keras.'],
+  ['g:～から', '雨|が|降っている|から、|傘|を|持って|行きます。', 'Karena hujan, saya bawa payung.'],
+  ['g:～から', '今日|は|忙しい|から、|行きません。', 'Karena hari ini sibuk, saya tidak pergi.'],
+  ['g:～が好き/嫌い/上手/下手', '日本語|が|好き|です。', 'Saya suka bahasa Jepang.'],
+  ['g:～が好き/嫌い/上手/下手', '私|は|料理|が|上手|です。', 'Saya pandai memasak.'],
+  ['g:毎日/毎週/毎月', '毎日|日本語|を|勉強します。', 'Saya belajar bahasa Jepang setiap hari.', '日本語|を|毎日|勉強します。'],
+  ['g:毎日/毎週/毎月', '毎週|映画|を|見ます。', 'Setiap minggu saya menonton film.', '映画|を|毎週|見ます。'],
+  ['g:～時に', '7時|に|起きます。', 'Saya bangun jam 7.'],
+  ['g:～時に', '9時|に|学校|へ|行きます。', 'Saya pergi ke sekolah jam 9.', '学校|へ|9時|に|行きます。'],
+  ['g:～前に/～後で', '寝る|前|に|歯|を|磨きます。', 'Sebelum tidur, saya sikat gigi.', '歯|を|寝る|前|に|磨きます。'],
+  ['g:～前に/～後で', '食べた|後|で|薬|を|飲みます。', 'Setelah makan, saya minum obat.', '薬|を|食べた|後|で|飲みます。'],
+  ['g:もう/まだ', '私|は|もう|食べました。', 'Saya sudah makan.'],
+  ['g:もう/まだ', 'まだ|宿題|を|していません。', 'Saya belum mengerjakan PR.'],
+  ['g:～枚 (まい)', '切符|を|2枚|買いました。', 'Saya membeli 2 lembar tiket.'],
+  ['g:～枚 (まい)', '紙|が|3枚|あります。', 'Ada 3 lembar kertas.'],
+  ['g:～本 (ほん)', 'えんぴつ|が|3本|あります。', 'Ada 3 pensil.'],
+  ['g:～本 (ほん)', 'ジュース|を|2本|買いました。', 'Saya membeli 2 botol jus.'],
+  ['g:～冊 (さつ)', '本|を|5冊|読みました。', 'Saya membaca 5 buku.'],
+  ['g:～冊 (さつ)', '辞書|を|1冊|買いました。', 'Saya membeli 1 kamus.'],
+  ['g:～台 (だい)', '車|が|2台|あります。', 'Ada 2 mobil.'],
+  ['g:～台 (だい)', 'パソコン|を|1台|買いました。', 'Saya membeli 1 komputer.'],
+  // N4
+  ['g:～てしまう', '財布|を|忘れてしまいました。', 'Saya terlanjur lupa dompet.'],
+  ['g:～てしまう', 'ケーキ|を|全部|食べてしまいました。', 'Saya sampai menghabiskan semua kue.'],
+  ['g:～てみる', 'この|料理|を|作ってみます。', 'Saya coba membuat masakan ini.'],
+  ['g:～てみる', '日本語|で|話してみました。', 'Saya mencoba berbicara dalam bahasa Jepang.'],
+  ['g:～ておく', '会議|の|前|に|資料|を|読んでおきます。', 'Sebelum rapat, saya baca materi lebih dulu.', '資料|を|会議|の|前|に|読んでおきます。'],
+  ['g:～ておく', 'ホテル|を|予約しておきました。', 'Saya sudah memesan hotel lebih dulu.'],
+  ['g:～てくる/ていく', '友達|が|遊び|に|来ています。', 'Teman datang untuk bermain.'],
+  ['g:～てくる/ていく', 'コンビニ|で|水|を|買ってきます。', 'Saya beli air di minimarket lalu kembali.', '水|を|コンビニ|で|買ってきます。'],
+  ['g:～てあげる/もらう/くれる', '先生|に|教えてもらいました。', 'Saya diberi tahu oleh guru.'],
+  ['g:～てあげる/もらう/くれる', '友達|が|写真|を|送ってくれました。', 'Teman mengirimkan foto untuk saya.', '写真|を|友達|が|送ってくれました。'],
+  ['g:～たことがある', '富士山|に|登った|ことが|あります。', 'Saya pernah mendaki Gunung Fuji.'],
+  ['g:～たことがある', '日本|へ|行った|ことが|ありません。', 'Saya belum pernah pergi ke Jepang.'],
+  ['g:～ようになる', '日本語|が|話せる|ように|なりました。', 'Saya sudah bisa berbicara bahasa Jepang.'],
+  ['g:～ようになる', '私|は|泳げる|ように|なりました。', 'Saya sudah bisa berenang.'],
+  ['g:～ようにする', '毎日|運動する|ように|しています。', 'Saya berusaha berolahraga setiap hari.'],
+  ['g:～ようにする', '野菜|を|食べる|ように|しています。', 'Saya berusaha makan sayur.'],
+  ['g:～そうだ', '雨|が|降り|そうです。', 'Kelihatannya akan hujan.'],
+  ['g:～そうだ', 'この|ケーキ|は|おいし|そうです。', 'Kue ini kelihatannya enak.'],
+  ['g:～らしい', '田中さん|は|来ない|らしいです。', 'Sepertinya Tanaka tidak akan datang.'],
+  ['g:～らしい', '明日|は|雨|らしいです。', 'Katanya besok hujan.'],
+  ['g:～はずだ', '彼|は|もう|来ている|はずです。', 'Seharusnya dia sudah datang.'],
+  ['g:～はずだ', '鍵|は|ここ|に|ある|はずです。', 'Seharusnya kuncinya ada di sini.'],
+  ['g:～かもしれない', '明日|は|雨|かもしれません。', 'Mungkin besok hujan.'],
+  ['g:～かもしれない', '彼|は|病気|かもしれません。', 'Mungkin dia sakit.'],
+  ['g:～ために', 'JLPT|合格|の|ために|勉強します。', 'Saya belajar demi lulus JLPT.'],
+  ['g:～ために', '家族|の|ために|働きます。', 'Saya bekerja demi keluarga.'],
+  ['g:～ながら', '音楽|を|聞き|ながら|勉強します。', 'Saya belajar sambil mendengarkan musik.'],
+  ['g:～ながら', '歩き|ながら|電話|を|します。', 'Saya menelepon sambil berjalan.'],
+  ['g:～ば～ほど', '練習すれば|する|ほど|上手に|なります。', 'Semakin berlatih semakin mahir.'],
+  ['g:～ば～ほど', '食べれば|食べる|ほど|太ります。', 'Semakin banyak makan semakin gemuk.'],
+  ['g:～のに', '一生懸命|勉強した|のに、|落ちました。', 'Padahal sudah belajar keras, saya gagal.'],
+  ['g:～のに', '春|な|のに、|寒いです。', 'Padahal musim semi, tapi dingin.'],
+  ['g:～だけ', '少し|だけ|食べました。', 'Saya hanya makan sedikit.'],
+  ['g:～だけ', '水|だけ|飲みました。', 'Saya hanya minum air.'],
+  ['g:～しか～ない', '100円|しか|ありません。', 'Saya hanya punya 100 yen.'],
+  ['g:～しか～ない', '今日|は|水|しか|飲んでいません。', 'Hari ini saya hanya minum air.'],
+  ['g:だから/ので', '雨|だから、|行きません。', 'Karena hujan, saya tidak pergi.'],
+  ['g:だから/ので', '病気|なので、|学校|を|休みました。', 'Karena sakit, saya tidak masuk sekolah.'],
+  ['g:しかし/でも/けど', '少し|高いですが、|買いました。', 'Agak mahal, tapi saya beli.'],
+  ['g:しかし/でも/けど', '日本語|は|難しい|けど、|おもしろいです。', 'Bahasa Jepang sulit, tapi menarik.'],
+  ['g:そして/それに', 'この|店|は|安くて、|それに|おいしいです。', 'Toko ini murah, dan selain itu enak.'],
+  ['g:そして/それに', '彼|は|親切で、|そして|頭|が|いいです。', 'Dia baik hati dan juga pintar.'],
+  ['g:または/あるいは', '電車|または|バス|で|来てください。', 'Silakan datang naik kereta atau bus.'],
+  ['g:または/あるいは', 'コーヒー|または|お茶|を|どうぞ。', 'Silakan, kopi atau teh.'],
+  ['g:ところが', '雨|と|思った。|ところが|晴れた。', 'Saya kira hujan. Ternyata cerah.'],
+  ['g:ところが', '行く|つもり|でした。|ところが、|病気|に|なりました。', 'Saya berniat pergi. Ternyata saya sakit.'],
+  ['g:それでも', '難しい。|それでも|頑張ります。', 'Sulit. Meskipun begitu saya berusaha.'],
+  ['g:それでも', '疲れて|います。|それでも|仕事|を|続けます。', 'Saya lelah. Meskipun begitu saya lanjut bekerja.']
+];
+let planSentCache = null;
+function planSentBank() {
+    if (planSentCache) return planSentCache;
+    // Tanda baca (。、) dibuang dari potongan kata: tanda itu membocorkan potongan terakhir / batas klausa.
+    const strip = function (t) { return t.replace(/[。、，．！？]/g, ''); };
+    planSentCache = SENT_BANK_RAW.map(function (r) {
+        const rawTokens = r[1].split('|');
+        const tokens = rawTokens.map(strip);
+        return {
+            key: 's:' + rawTokens.join(''), g: r[0], tokens: tokens, jp: tokens.join(''), idn: r[2],
+            alts: r[3] ? r[3].split('||').map(function (a) { return a.split('|').map(strip); }) : []
+        };
+    });
+    return planSentCache;
+}
+
+function planBuildMatches(q, toks) {
+    const s = toks.join('|');
+    if (s === q.correct.join('|')) return true;
+    return (q.alts || []).some(function (a) { return a.join('|') === s; });
+}
+
+function planQSent(s) {
+    const P = planPools();
+    let tiles = planShuffle(s.tokens);
+    for (let k = 0; k < 8 && tiles.join('|') === s.tokens.join('|'); k++) tiles = planShuffle(s.tokens);
+    const others = P.sents.filter(function (x) { return x.key !== s.key; });
+    const o = planOptions(s.jp, planShuffle(others).slice(0, 14).map(function (x) { return x.jp; }), 4);
+    return {
+        kind: 'build', key: s.key, tag: 'Susun Kalimat', section: 'sent', wtype: 'grammar',
+        label: 'Susun kata-kata menjadi kalimat Jepang yang sesuai', prompt: s.idn, big: false, sub: '',
+        tiles: tiles, correct: s.tokens, alts: s.alts, correctText: s.jp, picked: [],
+        options: [], answer: -1,
+        exp: s.jp + ' = ' + s.idn,
+        weak: { char: s.jp, reading: '', meaning: s.idn, q: 'Pilih kalimat Jepang yang tepat untuk: ' + s.idn, opts: o.options, ans: o.answer }
+    };
+}
+
+function planBuildAdd(ti) {
+    const Q = planQuiz;
+    if (!Q || Q.answered) return;
+    const q = Q.qs[Q.i];
+    if (q.picked.indexOf(ti) >= 0) return;
+    q.picked.push(ti);
+    planQuizPaint();
+}
+function planBuildRemove(pos) {
+    const Q = planQuiz;
+    if (!Q || Q.answered) return;
+    Q.qs[Q.i].picked.splice(pos, 1);
+    planQuizPaint();
+}
+function planBuildClear() {
+    const Q = planQuiz;
+    if (!Q || Q.answered) return;
+    Q.qs[Q.i].picked = [];
+    planQuizPaint();
+}
+function planBuildSpeak() {
+    const Q = planQuiz;
+    if (Q) speakSentence(Q.qs[Q.i].correctText);
+}
+function planBuildCheck() {
+    const Q = planQuiz;
+    if (!Q || Q.answered) return;
+    const q = Q.qs[Q.i];
+    if (q.picked.length < q.tiles.length) {
+        const h = document.getElementById('pb-hint');
+        if (h) { h.textContent = 'Pakai semua kata dulu, baru periksa.'; h.className = 'pl-fb ng'; h.style.display = 'block'; }
+        return;
+    }
+    const ok = planBuildMatches(q, q.picked.map(function (i) { return q.tiles[i]; }));
+    Q.answered = true;
+    q.lastOk = ok;
+    if (ok) Q.correct++; else Q.wrong.push(q);
+    planSrsUpdate(q.key, ok, planInfo().dayNum);
+    if (!ok && typeof addWeakPoint === 'function') {
+        addWeakPoint(q.wtype, { char: q.weak.char, reading: '', meaning: q.weak.meaning, source: 'Susun Kalimat', q: q.weak.q, opts: q.weak.opts, ans: q.weak.ans, exp: q.exp });
+    }
+    planQuizPaint();
+    if (ok) speakSentence(q.correctText);
+}
+
 function planMakeQ(item) {
     if (item.type === 'kanji') return planQKanji(item.ref);
     if (item.type === 'vocab') return planQVocab(item.ref);
+    if (item.type === 'sent') return planQSent(item.ref);
     return planQGram(item.ref);
 }
 
@@ -10872,6 +11105,17 @@ function planStartQuiz(task) {
         planSample(c.gram, 3).forEach(function (g) { today.push({ key: g.key, type: 'gram', ref: g }); });
         const ex = new Set(today.map(function (x) { return x.key; }));
         items = today.concat(planPickReview(info, d - 1, Math.max(0, 15 - today.length), ex));
+    } else if (task.qkind === 'sent') {
+        title = '✍️ Susun kalimat';
+        const c = d <= info.L ? planDayContent(d, info) : null;
+        const nTot = d <= info.L ? 5 : 8;
+        const fresh = c ? planSample(c.sent, 3).map(function (s) { return { key: s.key, type: 'sent', ref: s }; }) : [];
+        const ex = new Set(fresh.map(function (x) { return x.key; }));
+        items = fresh.concat(planPickReview(info, d <= info.L ? d - 1 : info.L, Math.max(0, nTot - fresh.length), ex, 'sent'));
+        if (c && items.length < nTot) {
+            const have = new Set(items.map(function (x) { return x.key; }));
+            planShuffle(c.sent).forEach(function (s) { if (items.length < nTot && !have.has(s.key)) { have.add(s.key); items.push({ key: s.key, type: 'sent', ref: s }); } });
+        }
     } else if (task.qkind === 'big') {
         title = '🔁 Review besar';
         items = planPickReview(info, info.L, 20, new Set());
@@ -10893,17 +11137,50 @@ function planStartQuiz(task) {
 function planQuizRender() {
     const Q = planQuiz;
     if (Q.i >= Q.qs.length) { planQuizResult(); return; }
-    const q = Q.qs[Q.i];
     Q.answered = false;
+    const q = Q.qs[Q.i];
+    if (q.kind === 'build') q.picked = [];
+    planQuizPaint();
+}
+
+function planQuizPaint() {
+    const Q = planQuiz;
+    const q = Q.qs[Q.i];
+    const total = Q.qs.length;
+    const head = '<div class="pl-modal-head"><div class="pl-modal-title">' + Q.title + '</div><button class="pl-x" onclick="planCloseOverlay()">✕</button></div>' +
+        '<div class="pl-qbar"><div class="pl-qbar-fill" style="width:' + Math.round(Q.i / total * 100) + '%"></div></div>';
+    const nextLabel = Q.i === total - 1 ? 'Lihat hasil 🏁' : 'Lanjut →';
+    if (q.kind === 'build') {
+        const done = Q.answered;
+        const ansTiles = q.picked.map(function (ti, pos) {
+            return '<button class="pb-tile in"' + (done ? ' disabled' : ' onclick="planBuildRemove(' + pos + ')"') + '>' + planEsc(q.tiles[ti]) + '</button>';
+        }).join('');
+        const pool = q.tiles.map(function (t, ti) {
+            const used = q.picked.indexOf(ti) >= 0;
+            return '<button class="pb-tile' + (used ? ' used' : '') + '"' + (used || done ? ' disabled' : ' onclick="planBuildAdd(' + ti + ')"') + '>' + planEsc(t) + '</button>';
+        }).join('');
+        const fb = done
+            ? '<div class="pl-fb ' + (q.lastOk ? 'ok' : 'ng') + '">' + (q.lastOk ? '✓ Benar!' : '✗ Belum tepat. Jawaban yang benar:') + ' <b>' + planEsc(q.correctText) + '</b> <button class="pb-speak" onclick="planBuildSpeak()">🔊 Dengar</button></div>'
+            : '<div class="pl-fb" id="pb-hint" style="display:none;"></div>';
+        const foot = done
+            ? '<button class="pl-primary" onclick="planNextQ()">' + nextLabel + '</button>'
+            : '<button class="pl-secondary" onclick="planBuildClear()">Hapus</button><button class="pl-primary" onclick="planBuildCheck()">Periksa ✓</button>';
+        planOverlay('<div class="pl-modal">' + head +
+            '<div class="pl-modal-body"><div class="pl-qmeta">Soal ' + (Q.i + 1) + ' / ' + total + ' · ' + q.tag + '</div>' +
+            '<div class="pl-qlabel">' + planEsc(q.label) + '</div><div class="pb-prompt">' + planEsc(q.prompt) + '</div>' +
+            '<div class="pb-answer' + (done ? (q.lastOk ? ' ok' : ' ng') : '') + '">' + (ansTiles || '<span class="pb-ph">Ketuk kata di bawah untuk menyusun kalimat</span>') + '</div>' +
+            '<div class="pb-pool">' + pool + '</div>' + fb + '</div>' +
+            '<div class="pl-modal-foot">' + foot + '</div></div>');
+        return;
+    }
     const opts = q.options.map(function (o, i) { return '<button class="pl-opt" onclick="planAnswer(' + i + ')">' + planEsc(o) + '</button>'; }).join('');
-    planOverlay('<div class="pl-modal"><div class="pl-modal-head"><div class="pl-modal-title">' + Q.title + '</div><button class="pl-x" onclick="planCloseOverlay()">✕</button></div>' +
-        '<div class="pl-qbar"><div class="pl-qbar-fill" style="width:' + Math.round(Q.i / Q.qs.length * 100) + '%"></div></div>' +
-        '<div class="pl-modal-body"><div class="pl-qmeta">Soal ' + (Q.i + 1) + ' / ' + Q.qs.length + ' · ' + q.tag + '</div>' +
+    planOverlay('<div class="pl-modal">' + head +
+        '<div class="pl-modal-body"><div class="pl-qmeta">Soal ' + (Q.i + 1) + ' / ' + total + ' · ' + q.tag + '</div>' +
         '<div class="pl-qlabel">' + planEsc(q.label) + '</div>' +
         '<div class="pl-qprompt ' + (q.big ? 'big' : '') + '">' + planEsc(q.prompt) + '</div>' +
         (q.sub ? '<div class="pl-qsub">' + planEsc(q.sub) + '</div>' : '') +
         '<div class="pl-opts">' + opts + '</div><div class="pl-fb" id="pl-fb" style="display:none;"></div></div>' +
-        '<div class="pl-modal-foot"><button class="pl-primary" id="pl-next" style="display:none;" onclick="planNextQ()">' + (Q.i === Q.qs.length - 1 ? 'Lihat hasil 🏁' : 'Lanjut →') + '</button></div></div>');
+        '<div class="pl-modal-foot"><button class="pl-primary" id="pl-next" style="display:none;" onclick="planNextQ()">' + nextLabel + '</button></div></div>');
 }
 
 function planAnswer(i) {
@@ -10950,7 +11227,7 @@ function planQuizResult() {
 }
 
 // ---------- Ujian mingguan ----------
-const PLAN_SECTION = { kanji: '漢字', vocab: '語彙', gram: '文法' };
+const PLAN_SECTION = { kanji: '漢字', vocab: '語彙', gram: '文法', sent: '作文' };
 let planExam = null;
 
 function planWeekNo(d) { return Math.ceil(d / 7); }
@@ -10973,6 +11250,7 @@ function planWeekItems(d, info) {
             c.kanji.forEach(function (k) { add('k:' + k.char); });
             c.vocab.forEach(function (v) { add('v:' + v.jp); });
             c.gram.forEach(function (g) { add(g.key); });
+            c.sent.forEach(function (s) { add(s.key); });
         }
     } else {
         planLearnedKeys(info, info.L).forEach(add);
@@ -10980,34 +11258,47 @@ function planWeekItems(d, info) {
     return items;
 }
 
-function planExamSelect(items, N) {
-    const by = { kanji: [], vocab: [], gram: [] };
+function planExamSelect(items, N, nS) {
+    const by = { kanji: [], vocab: [], gram: [], sent: [] };
     planShuffle(items).forEach(function (i) { by[i.type].push(i); });
     const qk = Math.round(N * 0.34), qv = Math.round(N * 0.4);
-    const quota = { kanji: qk, vocab: qv, gram: N - qk - qv };
+    const quota = { kanji: qk, vocab: qv, gram: N - qk - qv, sent: nS };
     const picked = [];
-    ['kanji', 'vocab', 'gram'].forEach(function (t) { by[t].splice(0, quota[t]).forEach(function (i) { picked.push(i); }); });
+    ['kanji', 'vocab', 'gram', 'sent'].forEach(function (t) { by[t].splice(0, quota[t]).forEach(function (i) { picked.push(i); }); });
+    const sc = picked.filter(function (i) { return i.type === 'sent'; }).length;
     const left = planShuffle([].concat(by.kanji, by.vocab, by.gram));
-    while (picked.length < N && left.length) picked.push(left.shift());
+    while (picked.length < N + sc && left.length) picked.push(left.shift());
     return picked;
 }
 
 function planStartExam() {
     const info = planInfo();
     const d = planViewDay;
+    const P = planPools();
     const items = planWeekItems(d, info);
+    const big = d > info.L;
+    const nS = big ? 8 : 6;
+    const haveSent = items.filter(function (x) { return x.type === 'sent'; }).length;
+    if (haveSent < nS) {
+        const have = new Set(items.map(function (x) { return x.key; }));
+        planShuffle(planLearnedKeys(info, Math.min(d, info.L)).filter(function (k) { return k.indexOf('s:') === 0 && !have.has(k); }))
+            .slice(0, nS - haveSent).forEach(function (k) { items.push({ key: k, type: 'sent', ref: P.byKey[k].ref }); });
+    }
     if (!items.length) {
         planOverlay('<div class="pl-modal"><div class="pl-modal-head"><div class="pl-modal-title">📝 Ujian Mingguan</div><button class="pl-x" onclick="planCloseOverlay()">✕</button></div>' +
             '<div class="pl-modal-body"><div class="pl-res"><div class="pl-res-emoji">🌱</div><div class="pl-res-msg">Belum ada materi untuk diujikan.</div></div></div>' +
             '<div class="pl-modal-foot"><button class="pl-primary" onclick="planCloseOverlay()">OK</button></div></div>');
         return;
     }
-    const big = d > info.L;
     const N = big ? 40 : 30;
-    const qs = planShuffle(planExamSelect(items, N)).map(function (it) { const q = planMakeQ(it); q.section = it.type; return q; });
-    const minutes = Math.max(5, Math.ceil(qs.length * 2 / 3));
+    const order = { kanji: 0, vocab: 1, gram: 2, sent: 3 };
+    const qs = planShuffle(planExamSelect(items, N, nS)).map(function (it) { const q = planMakeQ(it); q.section = it.type; return q; })
+        .sort(function (a, b) { return order[a.section] - order[b.section]; });
+    let mc = 0, bd = 0;
+    qs.forEach(function (q) { if (q.kind === 'build') bd++; else mc++; });
+    const minutes = Math.max(5, Math.ceil((mc * 40 + bd * 90) / 60));
     planExam = {
-        day: d, week: planWeekNo(d), big: big, qs: qs, answers: qs.map(function () { return -1; }), i: 0,
+        day: d, week: planWeekNo(d), big: big, qs: qs, answers: qs.map(function () { return -1; }), picks: qs.map(function () { return []; }), i: 0,
         title: big ? '📝 Ujian Mingguan · Rekap Besar' : '📝 Ujian Minggu ke-' + planWeekNo(d),
         endAt: Date.now() + minutes * 60000, quitArmed: false, submitArmed: false, timer: null
     };
@@ -11024,31 +11315,71 @@ function planExamTick() {
     if (left <= 0) planExamSubmit(true);
 }
 
+function planExamIsAnswered(E, i) {
+    return E.qs[i].kind === 'build' ? E.picks[i].length > 0 : E.answers[i] >= 0;
+}
+
 function planExamRender() {
     const E = planExam;
     const q = E.qs[E.i];
     const N = E.qs.length;
-    const answered = E.answers.filter(function (a) { return a >= 0; }).length;
-    const opts = q.options.map(function (o, i) {
-        return '<button class="pl-opt' + (E.answers[E.i] === i ? ' sel' : '') + '" onclick="planExamAnswer(' + i + ')">' + planEsc(o) + '</button>';
-    }).join('');
+    let answered = 0;
+    for (let k = 0; k < N; k++) if (planExamIsAnswered(E, k)) answered++;
+    let main = '';
+    if (q.kind === 'build') {
+        const picks = E.picks[E.i];
+        const ansTiles = picks.map(function (ti, pos) { return '<button class="pb-tile in" onclick="planExamBuildRemove(' + pos + ')">' + planEsc(q.tiles[ti]) + '</button>'; }).join('');
+        const pool = q.tiles.map(function (t, ti) {
+            const used = picks.indexOf(ti) >= 0;
+            return '<button class="pb-tile' + (used ? ' used' : '') + '"' + (used ? ' disabled' : ' onclick="planExamBuildAdd(' + ti + ')"') + '>' + planEsc(t) + '</button>';
+        }).join('');
+        main = '<div class="pl-qlabel">' + planEsc(q.label) + '</div><div class="pb-prompt">' + planEsc(q.prompt) + '</div>' +
+            '<div class="pb-answer">' + (ansTiles || '<span class="pb-ph">Ketuk kata di bawah untuk menyusun kalimat</span>') + '</div>' +
+            '<div class="pb-pool">' + pool + '</div><button class="pe-submit-link" onclick="planExamBuildClear()">Hapus susunan</button>';
+    } else {
+        const opts = q.options.map(function (o, i) {
+            return '<button class="pl-opt' + (E.answers[E.i] === i ? ' sel' : '') + '" onclick="planExamAnswer(' + i + ')">' + planEsc(o) + '</button>';
+        }).join('');
+        main = '<div class="pl-qlabel">' + planEsc(q.label) + '</div>' +
+            '<div class="pl-qprompt ' + (q.big ? 'big' : '') + '">' + planEsc(q.prompt) + '</div>' +
+            (q.sub ? '<div class="pl-qsub">' + planEsc(q.sub) + '</div>' : '') +
+            '<div class="pl-opts">' + opts + '</div>';
+    }
     const grid = E.qs.map(function (_, i) {
-        return '<button class="pe-n' + (i === E.i ? ' cur' : '') + (E.answers[i] >= 0 ? ' ans' : '') + '" onclick="planExamGo(' + i + ')">' + (i + 1) + '</button>';
+        return '<button class="pe-n' + (i === E.i ? ' cur' : '') + (planExamIsAnswered(E, i) ? ' ans' : '') + '" onclick="planExamGo(' + i + ')">' + (i + 1) + '</button>';
     }).join('');
     const last = E.i === N - 1;
     planOverlay('<div class="pl-modal">' +
         '<div class="pl-modal-head"><div><div class="pl-modal-title">' + E.title + '</div><div class="pe-hint" id="pe-hint">' + answered + ' / ' + N + ' terjawab</div></div>' +
         '<div class="pe-timer" id="pe-timer">' + planFmtTime(E.endAt - Date.now()) + '</div><button class="pl-x" onclick="planExamQuit()">✕</button></div>' +
         '<div class="pl-qbar"><div class="pl-qbar-fill" style="width:' + Math.round(answered / N * 100) + '%"></div></div>' +
-        '<div class="pl-modal-body"><div class="pl-qmeta">Soal ' + (E.i + 1) + ' / ' + N + ' · ' + PLAN_SECTION[q.section] + '</div>' +
-        '<div class="pl-qlabel">' + planEsc(q.label) + '</div>' +
-        '<div class="pl-qprompt ' + (q.big ? 'big' : '') + '">' + planEsc(q.prompt) + '</div>' +
-        (q.sub ? '<div class="pl-qsub">' + planEsc(q.sub) + '</div>' : '') +
-        '<div class="pl-opts">' + opts + '</div>' +
+        '<div class="pl-modal-body"><div class="pl-qmeta">Soal ' + (E.i + 1) + ' / ' + N + ' · ' + PLAN_SECTION[q.section] + '</div>' + main +
         '<div class="pe-grid">' + grid + '</div>' +
         '<button class="pe-submit-link" onclick="planExamSubmit(false)">Kumpulkan sekarang</button></div>' +
         '<div class="pl-modal-foot"><button class="pl-secondary" ' + (E.i === 0 ? 'disabled' : '') + ' onclick="planExamGo(' + (E.i - 1) + ')">← Sebelumnya</button>' +
         (last ? '<button class="pl-primary" onclick="planExamSubmit(false)">Kumpulkan ✓</button>' : '<button class="pl-primary" onclick="planExamGo(' + (E.i + 1) + ')">Lanjut →</button>') + '</div></div>');
+}
+
+function planExamBuildAdd(ti) {
+    const E = planExam;
+    if (!E) return;
+    const p = E.picks[E.i];
+    if (p.indexOf(ti) >= 0) return;
+    p.push(ti);
+    E.submitArmed = false;
+    planExamRender();
+}
+function planExamBuildRemove(pos) {
+    const E = planExam;
+    if (!E) return;
+    E.picks[E.i].splice(pos, 1);
+    planExamRender();
+}
+function planExamBuildClear() {
+    const E = planExam;
+    if (!E) return;
+    E.picks[E.i] = [];
+    planExamRender();
 }
 
 function planExamAnswer(i) {
@@ -11081,7 +11412,8 @@ function planExamQuit() {
 function planExamSubmit(force) {
     const E = planExam;
     if (!E) return;
-    const empty = E.answers.filter(function (a) { return a < 0; }).length;
+    let empty = 0;
+    for (let k = 0; k < E.qs.length; k++) if (!planExamIsAnswered(E, k)) empty++;
     if (!force && empty > 0 && !E.submitArmed) {
         E.submitArmed = true;
         const h = document.getElementById('pe-hint');
@@ -11094,16 +11426,26 @@ function planExamSubmit(force) {
 
     const info = planInfo();
     let correct = 0;
-    const parts = { kanji: [0, 0], vocab: [0, 0], gram: [0, 0] };
+    const parts = { kanji: [0, 0], vocab: [0, 0], gram: [0, 0], sent: [0, 0] };
     const wrong = [];
     E.qs.forEach(function (q, idx) {
-        const my = E.answers[idx];
-        const ok = my === q.answer;
+        let ok, myText, myAnswered;
+        if (q.kind === 'build') {
+            const toks = E.picks[idx].map(function (i) { return q.tiles[i]; });
+            ok = toks.length > 0 && planBuildMatches(q, toks);
+            myAnswered = toks.length > 0;
+            myText = toks.join('');
+        } else {
+            ok = E.answers[idx] === q.answer;
+            myAnswered = E.answers[idx] >= 0;
+            myText = myAnswered ? q.options[E.answers[idx]] : '';
+        }
         parts[q.section][1]++;
-        if (ok) { correct++; parts[q.section][0]++; } else wrong.push({ q: q, my: my });
+        if (ok) { correct++; parts[q.section][0]++; } else wrong.push({ q: q, myText: myAnswered ? myText : '' });
         planSrsUpdate(q.key, ok, info.dayNum);
         if (!ok && typeof addWeakPoint === 'function') {
-            addWeakPoint(q.wtype, { char: q.weak.char, reading: q.weak.reading, meaning: q.weak.meaning, source: 'Ujian Mingguan', q: q.label + ' ' + q.prompt, opts: q.options, ans: q.answer, exp: q.exp });
+            const w = q.weak;
+            addWeakPoint(q.wtype, { char: w.char, reading: w.reading, meaning: w.meaning, source: 'Ujian Mingguan', q: w.q || (q.label + ' ' + q.prompt), opts: w.opts || q.options, ans: w.ans !== undefined ? w.ans : q.answer, exp: q.exp });
         }
     });
     const total = E.qs.length;
@@ -11118,7 +11460,7 @@ function planExamSubmit(force) {
     planAward(E.day, 'weekly', 25 + (pct >= 80 ? 15 : 0), 'Ujian mingguan ke-' + E.week);
 
     const pass = pct >= 60;
-    const bars = ['kanji', 'vocab', 'gram'].filter(function (t) { return parts[t][1] > 0; }).map(function (t) {
+    const bars = ['kanji', 'vocab', 'gram', 'sent'].filter(function (t) { return parts[t][1] > 0; }).map(function (t) {
         const p = Math.round(parts[t][0] / parts[t][1] * 100);
         return '<div class="pe-bar-row"><div class="pe-bar-lbl">' + PLAN_SECTION[t] + '</div><div class="pe-bar"><div class="pe-bar-fill" style="width:' + p + '%"></div></div><div class="pe-bar-val">' + parts[t][0] + '/' + parts[t][1] + '</div></div>';
     }).join('');
@@ -11128,8 +11470,10 @@ function planExamSubmit(force) {
         cmp = '<div class="pl-res-msg">' + (diff > 0 ? '📈 Naik ' + diff + '% dari minggu lalu (' + prevWeek.last + '%).' : diff < 0 ? '📉 Turun ' + Math.abs(diff) + '% dari minggu lalu (' + prevWeek.last + '%).' : 'Sama dengan minggu lalu (' + prevWeek.last + '%).') + '</div>';
     }
     const wrongHtml = wrong.map(function (w) {
-        return '<div class="pl-wrong-item"><b>' + PLAN_SECTION[w.q.section] + ' · ' + planEsc(String(w.q.prompt).slice(0, 40)) + '</b><br>Jawabanmu: ' +
-            planEsc(w.my >= 0 ? w.q.options[w.my] : '(kosong)') + ' → Benar: <b>' + planEsc(w.q.options[w.q.answer]) + '</b><br>' + planEsc(w.q.exp) + '</div>';
+        const right = w.q.kind === 'build' ? w.q.correctText : w.q.options[w.q.answer];
+        const head = w.q.kind === 'build' ? 'Susun: ' + w.q.prompt : String(w.q.prompt).slice(0, 40);
+        return '<div class="pl-wrong-item"><b>' + PLAN_SECTION[w.q.section] + ' · ' + planEsc(head) + '</b><br>Jawabanmu: ' +
+            planEsc(w.myText || '(kosong)') + ' → Benar: <b>' + planEsc(right) + '</b><br>' + planEsc(w.q.exp) + '</div>';
     }).join('');
     planOverlay('<div class="pl-modal"><div class="pl-modal-head"><div class="pl-modal-title">' + E.title + '</div><button class="pl-x" onclick="planCloseOverlay()">✕</button></div>' +
         '<div class="pl-modal-body"><div class="pl-res"><div class="pl-res-emoji">' + (pct >= 80 ? '🌸' : pass ? '👍' : '📚') + '</div>' +
