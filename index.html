@@ -2057,6 +2057,16 @@
   .pb-tile.used{opacity:0.22;cursor:default;}
   .pb-tile:disabled{cursor:default;}
   .pb-speak{margin-left:6px;padding:3px 10px;border-radius:10px;border:1.5px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);color:#fff;font-size:0.72rem;font-weight:800;cursor:pointer;}
+
+  /* JUMLAH SOAL LATIHAN */
+  .pl-qty{margin:2px 0 12px;padding:12px 14px;border-radius:14px;background:#0e0e1a;border:1.5px solid var(--border);}
+  .pl-qty-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:0.8rem;color:#fff;}
+  .pl-qty-top span{font-size:0.68rem;color:var(--muted);}
+  .pl-qty-chips{display:flex;gap:6px;margin-top:9px;}
+  .pl-qty-chip{flex:1;padding:8px 6px;border-radius:10px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-size:0.78rem;font-weight:800;cursor:pointer;font-family:"DM Sans",sans-serif;}
+  .pl-qty-chip.on{border-color:var(--teal2);background:rgba(0,212,170,0.14);color:var(--teal2);}
+  .pl-qty-note{font-size:0.66rem;color:var(--muted);margin-top:8px;}
+  .pl-more{display:block;width:100%;margin:6px 0 12px;padding:12px;border-radius:12px;border:1.5px dashed rgba(0,212,170,0.6);background:rgba(0,212,170,0.08);color:var(--teal2);font-weight:800;font-size:0.85rem;cursor:pointer;font-family:"DM Sans",sans-serif;}
 </style>
 </head>
 <body>
@@ -3344,6 +3354,7 @@
   <div class="pl-wrap">
     <div class="pl-days" id="pl-days"></div>
     <div id="pl-day-head"></div>
+    <div id="pl-qty"></div>
     <div id="pl-tasks"></div>
     <div id="pl-tips"></div>
     <div class="pl-foot"><button class="pl-reset" id="pl-reset" onclick="planReset()">↺ Mulai ulang rencana dari hari ini</button></div>
@@ -10528,6 +10539,17 @@ const PLAN_MONTHS = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt'
 const PLAN_DOW = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
 const PLAN_BOX_DAYS = [1, 2, 4, 8, 15];
 const PLAN_VOCAB_PER_DAY = 20;
+let planQty = 1;
+try { const _pq = parseFloat(localStorage.getItem('planQty')); if ([1, 1.5, 2, 3].indexOf(_pq) >= 0) planQty = _pq; } catch (e) {}
+function planN(base) { return Math.max(1, Math.round(base * planQty)); }
+function planSetQty(x) { planQty = x; try { localStorage.setItem('planQty', String(x)); } catch (e) {} renderRencana(); }
+function planQtyBox() {
+    const opts = [[1, 'Standar'], [1.5, '+50%'], [2, '2×'], [3, '3×']];
+    const chips = opts.map(function (o) { return '<button class="pl-qty-chip' + (planQty === o[0] ? ' on' : '') + '" onclick="planSetQty(' + o[0] + ')">' + o[1] + '</button>'; }).join('');
+    return '<div class="pl-qty"><div class="pl-qty-top"><b>Jumlah soal latihan</b><span>tes harian ' + planN(15) + ' · ulangan ' + planN(10) + ' · susun kalimat ' + planN(5) + '</span></div>' +
+        '<div class="pl-qty-chips">' + chips + '</div>' +
+        '<div class="pl-qty-note">Ujian Mingguan tetap jumlah standar. Di akhir tiap latihan ada tombol “Tambah soal”.</div></div>';
+}
 const PLAN_VOCAB_CAT_ORDER = ['pronoun','greeting','numbers','counter','people','body','food','place','daily','nature','colors','study','nouns','verbs','adjectives','adverbs','concept'];
 let planViewDay = null, planFollowToday = true, planPoolsCache = null, planQuiz = null, planStudyTexts = [], planStudyEx = [], planStudySent = false, planResetArmed = false;
 
@@ -10632,24 +10654,24 @@ function planTasks(d, info) {
     if (d > info.total) return t;
     if (d <= info.L) {
         const c = planDayContent(d, info);
-        t.push({ id: 'review', ico: '🔁', title: 'Ulang materi kemarin & titik lemah', min: 8, kind: 'quiz', qkind: 'review', desc: d === 1 ? 'Mulai besok — hari ini belum ada yang diulang.' : '10 soal dari item yang jadwal ulangnya jatuh hari ini.' });
+        t.push({ id: 'review', ico: '🔁', title: 'Ulang materi kemarin & titik lemah', min: planN(8), kind: 'quiz', qkind: 'review', desc: d === 1 ? 'Mulai besok — hari ini belum ada yang diulang.' : planN(10) + ' soal dari item yang jadwal ulangnya jatuh hari ini.' });
         if (c.kanji.length) t.push({ id: 'kanji', ico: '漢', title: 'Kanji baru (' + c.kanji.length + ')', min: 20, kind: 'study', list: 'kanji', desc: c.kanji.map(function (k) { return k.char; }).join(' ') });
         if (c.vocab.length) t.push({ id: 'vocab', ico: '📚', title: 'Kosakata baru (' + c.vocab.length + ')', min: 20, kind: 'study', list: 'vocab', desc: c.vocab.slice(0, 5).map(function (v) { return v.jp; }).join('、') + ' …' });
         if (c.gram.length) t.push({ id: 'gram', ico: '📐', title: 'Tata bahasa (' + c.gram.length + ' pola)', min: 15, kind: 'study', list: 'gram', desc: c.gram.map(function (g) { return g.short; }).join('  ·  ') });
-        t.push({ id: 'sent', ico: '✍️', title: 'Susun kalimat (Indonesia → Jepang)', min: 10, kind: 'quiz', qkind: 'sent', desc: '5 soal: susun potongan kata menjadi kalimat Jepang dari terjemahan Indonesia.' });
+        t.push({ id: 'sent', ico: '✍️', title: 'Susun kalimat (Indonesia → Jepang)', min: planN(10), kind: 'quiz', qkind: 'sent', desc: planN(5) + ' soal: susun potongan kata menjadi kalimat Jepang dari terjemahan Indonesia.' });
         t.push({ id: 'listen', ico: '🎧', title: 'Latihan listening (Choukai)', min: 10, kind: 'link', page: 'choukai', desc: 'Dengarkan 1 sesi. Listening wajib dilatih setiap hari.' });
         if (planIsExamDay(d, info)) t.push({ id: 'weekly', ico: '📝', title: 'Ujian Mingguan — rekap minggu ke-' + planWeekNo(d), min: 25, kind: 'exam', desc: '30 soal pilihan ganda + 6 soal susun kalimat dari materi 7 hari terakhir. Pakai timer dan tanpa kunci jawaban sampai dikumpulkan.' });
-        else t.push({ id: 'test', ico: '✅', title: 'Tes harian (15 soal)', min: 12, kind: 'quiz', qkind: 'test', desc: 'Materi hari ini + ulangan materi sebelumnya. Yang salah akan muncul lagi.' });
+        else t.push({ id: 'test', ico: '✅', title: 'Tes harian (' + planN(15) + ' soal)', min: planN(12), kind: 'quiz', qkind: 'test', desc: 'Materi hari ini + ulangan materi sebelumnya. Yang salah akan muncul lagi.' });
     } else if (d < info.total) {
         if (planIsExamDay(d, info)) t.push({ id: 'weekly', ico: '📝', title: 'Ujian Mingguan — rekap besar', min: 30, kind: 'exam', desc: '40 soal pilihan ganda + 8 soal susun kalimat dari seluruh materi. Pakai timer dan tanpa kunci jawaban sampai dikumpulkan.' });
-        else t.push({ id: 'big', ico: '🔁', title: 'Review besar (20 soal)', min: 15, kind: 'quiz', qkind: 'big', desc: 'Campuran dari semua materi, prioritas yang paling sering salah.' });
-        if (!planIsExamDay(d, info)) t.push({ id: 'sent', ico: '✍️', title: 'Susun kalimat (8 soal)', min: 12, kind: 'quiz', qkind: 'sent', desc: 'Susun kalimat Jepang dari terjemahan Indonesia, diambil dari semua pola yang sudah dipelajari.' });
+        else t.push({ id: 'big', ico: '🔁', title: 'Review besar (' + planN(20) + ' soal)', min: planN(15), kind: 'quiz', qkind: 'big', desc: 'Campuran dari semua materi, prioritas yang paling sering salah.' });
+        if (!planIsExamDay(d, info)) t.push({ id: 'sent', ico: '✍️', title: 'Susun kalimat (' + planN(8) + ' soal)', min: planN(12), kind: 'quiz', qkind: 'sent', desc: 'Susun kalimat Jepang dari terjemahan Indonesia, diambil dari semua pola yang sudah dipelajari.' });
         t.push({ id: 'weak', ico: '🎯', title: 'Drill titik lemah', min: 10, kind: 'weak', desc: 'Latih semua soal yang tercatat salah.' });
         if (d <= info.total - 2) t.push({ id: 'sim', ico: '🎌', title: 'Simulasi JLPT (pakai timer)', min: 30, kind: 'link', page: 'jlpt', desc: 'Kerjakan penuh atau satu bagian, lalu cek yang salah.' });
         t.push({ id: 'ringkas', ico: '📋', title: 'Baca ringkasan N5 → N4', min: 10, kind: 'link', page: 'ringkasan', desc: 'Pola kalimat, partikel, dan kanji wajib dalam satu halaman.' });
         t.push({ id: 'listen', ico: '🎧', title: 'Latihan listening (Choukai)', min: 10, kind: 'link', page: 'choukai', desc: 'Satu sesi per hari.' });
     } else {
-        t.push({ id: 'light', ico: '🔁', title: 'Review ringan (10 soal)', min: 8, kind: 'quiz', qkind: 'light', desc: 'Santai saja, jangan menambah materi baru.' });
+        t.push({ id: 'light', ico: '🔁', title: 'Review ringan (' + planN(10) + ' soal)', min: planN(8), kind: 'quiz', qkind: 'light', desc: 'Santai saja, jangan menambah materi baru.' });
         t.push({ id: 'ringkas', ico: '📋', title: 'Baca ringkasan sekilas', min: 10, kind: 'link', page: 'ringkasan', desc: 'Cukup dibaca, tidak perlu dihafal ulang.' });
         t.push({ id: 'prep', ico: '🎒', title: 'Siapkan perlengkapan ujian', min: 5, kind: 'manual', desc: 'Kartu peserta, pensil hitam & penghapus, rute ke lokasi ujian.' });
         t.push({ id: 'sleep', ico: '😴', title: 'Tidur cukup malam ini', min: 0, kind: 'manual', desc: 'Jangan begadang. Otak butuh tidur untuk menyimpan hafalan.' });
@@ -11095,21 +11117,21 @@ function planStartQuiz(task) {
     let items = [], title = '';
     if (task.qkind === 'review') {
         title = '🔁 Ulang materi';
-        items = planPickReview(info, d - 1, 10, new Set());
+        items = planPickReview(info, d - 1, planN(10), new Set());
     } else if (task.qkind === 'test') {
         title = '✅ Tes harian';
         const c = planDayContent(d, info);
         const today = [];
-        planSample(c.kanji, 5).forEach(function (k) { today.push({ key: 'k:' + k.char, type: 'kanji', ref: k }); });
-        planSample(c.vocab, 5).forEach(function (v) { today.push({ key: 'v:' + v.jp, type: 'vocab', ref: v }); });
-        planSample(c.gram, 3).forEach(function (g) { today.push({ key: g.key, type: 'gram', ref: g }); });
+        planSample(c.kanji, planN(5)).forEach(function (k) { today.push({ key: 'k:' + k.char, type: 'kanji', ref: k }); });
+        planSample(c.vocab, planN(5)).forEach(function (v) { today.push({ key: 'v:' + v.jp, type: 'vocab', ref: v }); });
+        planSample(c.gram, planN(3)).forEach(function (g) { today.push({ key: g.key, type: 'gram', ref: g }); });
         const ex = new Set(today.map(function (x) { return x.key; }));
-        items = today.concat(planPickReview(info, d - 1, Math.max(0, 15 - today.length), ex));
+        items = today.concat(planPickReview(info, d - 1, Math.max(0, planN(15) - today.length), ex));
     } else if (task.qkind === 'sent') {
         title = '✍️ Susun kalimat';
         const c = d <= info.L ? planDayContent(d, info) : null;
-        const nTot = d <= info.L ? 5 : 8;
-        const fresh = c ? planSample(c.sent, 3).map(function (s) { return { key: s.key, type: 'sent', ref: s }; }) : [];
+        const nTot = planN(d <= info.L ? 5 : 8);
+        const fresh = c ? planSample(c.sent, Math.min(planN(3), nTot)).map(function (s) { return { key: s.key, type: 'sent', ref: s }; }) : [];
         const ex = new Set(fresh.map(function (x) { return x.key; }));
         items = fresh.concat(planPickReview(info, d <= info.L ? d - 1 : info.L, Math.max(0, nTot - fresh.length), ex, 'sent'));
         if (c && items.length < nTot) {
@@ -11118,10 +11140,10 @@ function planStartQuiz(task) {
         }
     } else if (task.qkind === 'big') {
         title = '🔁 Review besar';
-        items = planPickReview(info, info.L, 20, new Set());
+        items = planPickReview(info, info.L, planN(20), new Set());
     } else {
         title = '🔁 Review ringan';
-        items = planPickReview(info, info.L, 10, new Set());
+        items = planPickReview(info, info.L, planN(10), new Set());
     }
     if (!items.length) {
         planMarkDone(d, task.id, true);
@@ -11208,6 +11230,23 @@ function planAnswer(i) {
 
 function planNextQ() { planQuiz.i++; planQuizRender(); }
 
+function planMoreQuiz() {
+    const Q = planQuiz;
+    if (!Q) return;
+    const info = planInfo();
+    const isSent = Q.task.qkind === 'sent';
+    const asked = new Set(Q.qs.map(function (q) { return q.key; }));
+    const upTo = Q.day <= info.L ? Q.day : info.L;
+    const more = planPickReview(info, upTo, isSent ? 5 : 10, asked, isSent ? 'sent' : null);
+    if (!more.length) {
+        const h = document.getElementById('pl-more-hint');
+        if (h) { h.textContent = 'Tidak ada soal baru lagi untuk sesi ini. Coba “Ulangi” atau kembali besok.'; h.style.display = 'block'; }
+        return;
+    }
+    planShuffle(more).map(planMakeQ).forEach(function (q) { Q.qs.push(q); });
+    planQuizRender();
+}
+
 function planQuizResult() {
     const Q = planQuiz;
     const total = Q.qs.length;
@@ -11222,6 +11261,7 @@ function planQuizResult() {
         '<div class="pl-modal-body"><div class="pl-res"><div class="pl-res-emoji">' + (pct >= 80 ? '🌸' : pct >= 60 ? '👍' : '📚') + '</div>' +
         '<div class="pl-res-score">' + Q.correct + ' / ' + total + ' (' + pct + '%)</div>' +
         '<div class="pl-res-msg">' + (pct >= 80 ? 'Mantap! Materi ini sudah menempel.' : pct >= 60 ? 'Lumayan. Yang salah akan muncul lagi besok.' : 'Tidak apa-apa. Yang salah dijadwalkan ulang otomatis — itu cara kerjanya.') + '</div></div>' +
+        '<button class="pl-more" onclick="planMoreQuiz()">➕ Tambah ' + (Q.task.qkind === 'sent' ? 5 : 10) + ' soal lagi</button><div class="pl-fb ng" id="pl-more-hint" style="display:none;"></div>' +
         (wrong ? '<div class="pl-qmeta" style="text-align:left;">Perlu diulang</div>' + wrong : '') + '</div>' +
         '<div class="pl-modal-foot"><button class="pl-secondary" onclick="planStartQuiz(planQuiz.task)">↻ Ulangi</button><button class="pl-primary" onclick="planCloseOverlay()">Selesai ✓</button></div></div>');
 }
@@ -11594,6 +11634,7 @@ function renderRencana() {
         document.getElementById('pl-day-head').innerHTML = '';
         document.getElementById('pl-tasks').innerHTML = '<div class="pl-box"><b>Rencana selesai.</b> Tanggal ujian sudah lewat. Kalau kamu mau lanjut belajar untuk ujian berikutnya, mulai ulang rencana dari tombol di bawah.</div>';
         document.getElementById('pl-tips').innerHTML = '';
+        document.getElementById('pl-qty').innerHTML = '';
         planUpdateBanner();
         return;
     }
@@ -11640,6 +11681,7 @@ function renderRencana() {
             '<div class="pl-task-desc">' + planEsc(t.desc) + (t.min ? ' · ~' + t.min + ' mnt' : '') + '</div></div>' + btn + '</div>';
     }).join('');
 
+    document.getElementById('pl-qty').innerHTML = (tasks.length && d <= info.dayNum) ? planQtyBox() : '';
     let tips = '<div class="pl-box">' + planTips(phase) + '</div>';
     if (d <= info.L && s.days[d] && s.days[d].score) tips = '<div class="pl-box">Skor tes harian terbaikmu: <b>' + s.days[d].score + '%</b></div>' + tips;
     document.getElementById('pl-tips').innerHTML = tips + planWeeklyBox(info);
